@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demon Castle", "Demon Castle.csproj", "{90160368-FD5B-4951-B644-610ED4053CD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle", "DemonCastle.csproj", "{90160368-FD5B-4951-B644-610ED4053CD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

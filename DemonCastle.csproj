@@ -2,5 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>DemonCastle</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 </Project>
