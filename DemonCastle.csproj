@@ -4,4 +4,10 @@
     <RootNamespace>DemonCastle</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DemonCastle.ProjectFiles\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="DemonCastle.ProjectFiles\**" />
+  </ItemGroup>
 </Project>
