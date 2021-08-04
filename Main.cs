@@ -1,5 +1,4 @@
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using Godot;
 
@@ -12,25 +11,20 @@ namespace DemonCastle {
             AddChild(DownloadButton = new Button {
                 Text = "Download"
             });
-            DownloadButton.Connect("pressed", this, nameof(X));
+            DownloadButton.Connect("pressed", this, nameof(DownloadProjects));
         }
 
-        protected void X() {
-            GD.Print("working");
+        protected void DownloadProjects() {
             var url = "https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip";
             var dest = System.IO.Path.GetTempFileName();
-            GD.Print(dest);
             using (var wc = new WebClient()) {
                 wc.DownloadFile(url, dest);
             }
 
             var localPath = "user://Games/";
             var userLoc = ProjectSettings.GlobalizePath(localPath);
-            GD.Print(userLoc);
             System.IO.Directory.Delete(userLoc, true);
             ZipFile.ExtractToDirectory(dest, userLoc);
-
-            GD.Print(System.IO.Directory.GetDirectories(userLoc).FirstOrDefault());
         }
     }
 }
