@@ -1,11 +1,10 @@
-using System.IO.Compression;
-using System.Net;
 using Godot;
 
 namespace DemonCastle {
     public class Main : Node2D
     {
         protected Button DownloadButton { get; }
+        protected ProjectManager ProjectManager { get; } = new ProjectManager();
 
         public Main() {
             AddChild(DownloadButton = new Button {
@@ -15,16 +14,10 @@ namespace DemonCastle {
         }
 
         protected void DownloadProjects() {
-            var url = "https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip";
-            var dest = System.IO.Path.GetTempFileName();
-            using (var wc = new WebClient()) {
-                wc.DownloadFile(url, dest);
+            ProjectManager.DownloadProjects();
+            foreach (var project in ProjectManager.GetProjects()) {
+                GD.Print(project.Name);
             }
-
-            var localPath = "user://Games/";
-            var userLoc = ProjectSettings.GlobalizePath(localPath);
-            System.IO.Directory.Delete(userLoc, true);
-            ZipFile.ExtractToDirectory(dest, userLoc);
         }
     }
 }

@@ -2,12 +2,17 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>DemonCastle</RootNamespace>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="DemonCastle.ProjectFiles\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="DemonCastle.ProjectFiles\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 </Project>
