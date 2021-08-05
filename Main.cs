@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace DemonCastle {
@@ -7,6 +8,9 @@ namespace DemonCastle {
         protected ProjectManager ProjectManager { get; } = new ProjectManager();
 
         public Main() {
+            if (!ProjectManager.GetProjects().Any()) {
+                ProjectManager.DownloadProjects();
+            }
             AddChild(DownloadButton = new Button {
                 Text = "Download"
             });
