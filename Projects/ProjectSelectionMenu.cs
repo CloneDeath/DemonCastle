@@ -1,8 +1,11 @@
+using System;
 using Godot;
 
 namespace DemonCastle.Projects {
 	public partial class ProjectSelectionMenu : Container {
 		protected ProjectManager ProjectManager { get; } = new ProjectManager();
+
+		public event Action<ProjectInfo> ProjectLoaded;
 
 		public override void _Ready() {
 			base._Ready();
@@ -26,7 +29,7 @@ namespace DemonCastle.Projects {
 
 		protected void LaunchSelectedProject() {
 			var project = ProjectInfoList.SelectedProject;
-			GD.Print(project.Name);
+			ProjectLoaded?.Invoke(project);
 		}
 	}
 }

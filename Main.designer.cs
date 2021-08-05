@@ -7,6 +7,7 @@ namespace DemonCastle {
 
 		public Main() {
 			AddChild(ProjectSelectionMenu = new ProjectSelectionMenu());
+			ProjectSelectionMenu.ProjectLoaded += OnProjectLoaded;
 		}
 	}
 }
