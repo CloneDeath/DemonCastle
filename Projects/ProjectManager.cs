@@ -3,10 +3,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using DemonCastle.ProjectFiles;
-using Newtonsoft.Json;
 
-namespace DemonCastle {
+namespace DemonCastle.Projects {
 	public class ProjectManager {
 		protected string GodotPath => "user://Projects/";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
@@ -27,14 +25,9 @@ namespace DemonCastle {
 
 		public bool ProjectsExist => GetProjects().Any();
 
-		public IEnumerable<ProjectFile> GetProjects() {
+		public IEnumerable<ProjectInfo> GetProjects() {
 			var projectFiles = GetProjectFiles(GlobalPath);
-			return projectFiles.Select(AsProjectFile);
-		}
-
-		protected ProjectFile AsProjectFile(string arg) {
-			var contents = File.ReadAllText(arg);
-			return JsonConvert.DeserializeObject<ProjectFile>(contents);
+			return projectFiles.Select(f => new ProjectInfo(f));
 		}
 
 		protected IEnumerable<string> GetProjectFiles(string path) {
