@@ -25,6 +25,8 @@ namespace DemonCastle {
 			ZipFile.ExtractToDirectory(dest, GlobalPath);
 		}
 
+		public bool ProjectsExist => GetProjects().Any();
+
 		public IEnumerable<ProjectFile> GetProjects() {
 			var projectFiles = GetProjectFiles(GlobalPath);
 			return projectFiles.Select(AsProjectFile);
