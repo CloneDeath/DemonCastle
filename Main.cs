@@ -16,9 +16,19 @@ namespace DemonCastle {
             }
         }
 
+        public override void _Process(float delta) {
+            base._Process(delta);
+            LaunchButton.Disabled = !ProjectInfoList.IsProjectSelected;
+        }
+
         protected void DownloadProjects() {
             ProjectManager.DownloadProjects();
             ProjectInfoList.Load(ProjectManager.GetProjects());
+        }
+
+        protected void LaunchSelectedProject() {
+            var project = ProjectInfoList.SelectedProject;
+            GD.Print(project.Name);
         }
     }
 }
