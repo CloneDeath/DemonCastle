@@ -19,8 +19,7 @@ namespace DemonCastle.Projects {
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
 				RectPosition = DownloadButton.RectPosition + new Vector2(0, 30),
 				AnchorBottom = 1,
-				AnchorRight = 1,
-				RectSize = new Vector2(300, 300)
+				AnchorRight = 1
 			});
 			
 			AddChild(LaunchButton = new Button {
