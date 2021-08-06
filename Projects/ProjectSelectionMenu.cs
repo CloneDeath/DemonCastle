@@ -14,22 +14,22 @@ namespace DemonCastle.Projects {
 			if (!ProjectManager.ProjectsExist) {
 				ProjectManager.DownloadProjects();
 			} else {
-				ProjectInfoList.Load(ProjectManager.GetProjects());
+				ProjectList.Load(ProjectManager.GetProjects());
 			}
 		}
 
 		public override void _Process(float delta) {
 			base._Process(delta);
-			LaunchButton.Disabled = !ProjectInfoList.IsProjectSelected;
+			LaunchButton.Disabled = !ProjectList.IsItemSelected;
 		}
 
 		protected void DownloadProjects() {
 			ProjectManager.DownloadProjects();
-			ProjectInfoList.Load(ProjectManager.GetProjects());
+			ProjectList.Load(ProjectManager.GetProjects());
 		}
 
 		protected void LaunchSelectedProject() {
-			var project = ProjectInfoList.SelectedProject;
+			var project = ProjectList.SelectedItem;
 			ProjectLoaded?.Invoke(project);
 		}
 	}

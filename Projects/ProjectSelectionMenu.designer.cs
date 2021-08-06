@@ -1,10 +1,11 @@
+using DemonCastle.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Projects {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
 		
-		protected ProjectInfoList ProjectInfoList { get; }
+		protected InfoItemList<ProjectInfo> ProjectList { get; }
 		
 		protected Button LaunchButton { get; }
 		
@@ -15,7 +16,7 @@ namespace DemonCastle.Projects {
 			});
 			DownloadButton.Connect("pressed", this, nameof(DownloadProjects));
 
-			AddChild(ProjectInfoList = new ProjectInfoList {
+			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
 				RectPosition = DownloadButton.RectPosition + new Vector2(0, 30),
 				AnchorBottom = 1,
 				AnchorRight = 1,
@@ -24,7 +25,7 @@ namespace DemonCastle.Projects {
 			
 			AddChild(LaunchButton = new Button {
 				Text = "Launch",
-				RectPosition = ProjectInfoList.RectPosition + new Vector2(0, 310)
+				RectPosition = ProjectList.RectPosition + new Vector2(0, 310)
 			});
 			LaunchButton.Connect("pressed", this, nameof(LaunchSelectedProject));
 		}
