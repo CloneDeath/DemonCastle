@@ -1,3 +1,4 @@
+using DemonCastle.Game;
 using DemonCastle.Projects.Data;
 using DemonCastle.SetupScreen;
 using Godot;
@@ -16,8 +17,8 @@ namespace DemonCastle {
 
         private void OnGameStart(LevelInfo level, CharacterInfo character) {
             GameSetup.QueueFree();
-            
-            
+
+            AddChild(new GameRunner(level, character));
         }
     }
 }
