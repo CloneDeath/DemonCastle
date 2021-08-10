@@ -6,6 +6,8 @@ namespace DemonCastle.Game {
 		protected LevelInfo Level { get; }
 		protected CharacterInfo Character { get; }
 		
+		protected PlayerAnimation Animation { get; }
+		
 		public GamePlayer(LevelInfo level, CharacterInfo character) {
 			Level = level;
 			Character = character;
@@ -13,6 +15,8 @@ namespace DemonCastle.Game {
 				RectSize = new Vector2(16, 16),
 				RectPosition = new Vector2(-8, -16)
 			});
+
+			AddChild(Animation = new PlayerAnimation(character));
 		}
 	}
 }

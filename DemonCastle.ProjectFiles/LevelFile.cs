@@ -14,7 +14,7 @@ namespace DemonCastle.ProjectFiles {
 	public class TileInfo {
 		public string Name { get; set; } = string.Empty;
 		public bool Solid { get; set; } = true;
-		public List<FrameInfo> Frames { get; set; } = new List<FrameInfo>();
+		public List<FrameData> Frames { get; set; } = new List<FrameData>();
 	}
 
 	public class AreaInfo {
