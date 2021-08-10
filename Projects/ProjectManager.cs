@@ -10,18 +10,20 @@ namespace DemonCastle.Projects {
 		protected string GodotPath => "user://Projects/";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 		protected FileCollection Files => new FileCollection(GlobalPath);
-		
+
 		public void DownloadProjects() {
-			const string url = "https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip";
+			if (Directory.Exists(GlobalPath)) {
+				Directory.Delete(GlobalPath, true);
+			}
+			DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
+			DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
+		}
+		
+		public void DownloadProject(string url) {
 			var dest = Path.GetTempFileName();
 			using (var wc = new WebClient()) {
 				wc.DownloadFile(url, dest);
 			}
-
-			if (Directory.Exists(GlobalPath)) {
-				Directory.Delete(GlobalPath, true);
-			}
-
 			ZipFile.ExtractToDirectory(dest, GlobalPath);
 		}
 

@@ -16,6 +16,7 @@ namespace DemonCastle.Projects {
 		}
 
 		public bool IsItemSelected => IsAnythingSelected();
+		public bool NoItemSelected => !IsAnythingSelected();
 		public TInfo SelectedItem => _infoItems[GetSelectedItems()[0]];
 	}
 }

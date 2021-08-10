@@ -9,5 +9,8 @@ namespace DemonCastle.Projects.Data {
 		public string Name => Resource.Name;
 		protected IEnumerable<string> CharacterFiles => Resource.Characters.Select(Files.GetFile);
 		public IEnumerable<CharacterInfo> Characters => CharacterFiles.Select(cf => new CharacterInfo(cf));
+
+		protected IEnumerable<string> LevelFiles => Resource.Levels.Select(Files.GetFile);
+		public IEnumerable<LevelInfo> Levels => LevelFiles.Select(lf => new LevelInfo(lf));
 	}
 }
