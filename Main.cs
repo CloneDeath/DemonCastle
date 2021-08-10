@@ -7,7 +7,13 @@ namespace DemonCastle {
     public partial class Main : Node2D
     {
         protected GameSetup GameSetup { get; set; }
-        
+
+        public override void _Ready() {
+            base._Ready();
+            
+            InputActions.RegisterActions();
+        }
+
         protected void OnProjectLoaded(ProjectInfo project) {
             ProjectSelectionMenu.QueueFree();
 
