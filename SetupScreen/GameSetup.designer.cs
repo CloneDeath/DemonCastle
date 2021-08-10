@@ -32,7 +32,8 @@ namespace DemonCastle.SetupScreen {
 			LevelInfoList.Load(project.Levels);
 			
 			AddChild(LaunchButton = new Button {
-				Text = "Start Chapter"
+				Text = "Start Chapter",
+				RectPosition = CharacterInfoList.RectPosition + new Vector2(0, 310)
 			});
 			LaunchButton.Connect("pressed", this, nameof(OnLaunchButtonClicked));
 		}
