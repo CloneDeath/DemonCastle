@@ -7,7 +7,7 @@ namespace DemonCastle.Game {
 		protected GamePlayer Player { get; }
 		public GameRunner(LevelInfo level, CharacterInfo player) {
 			AddChild(Level = new GameLevel(level));
-			AddChild(Player = new GamePlayer(player) {
+			AddChild(Player = new GamePlayer(level, player) {
 				Position = new Vector2(300, 300)
 			});
 		}

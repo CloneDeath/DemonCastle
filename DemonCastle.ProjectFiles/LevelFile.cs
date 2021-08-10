@@ -3,6 +3,8 @@ using System.Collections.Generic;
 namespace DemonCastle.ProjectFiles {
 	public class LevelFile {
 		public string Name { get; set; } = string.Empty;
+		public int TileWidth { get; set; } = 16;
+		public int TileHeight { get; set; } = 16;
 		public int AreaWidth { get; set; } = 16;
 		public int AreaHeight { get; set; } = 9;
 		public List<TileInfo> Tiles { get; set; } = new List<TileInfo>();
