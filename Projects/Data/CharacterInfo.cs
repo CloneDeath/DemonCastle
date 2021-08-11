@@ -9,5 +9,7 @@ namespace DemonCastle.Projects.Data {
 		public string Name => Resource.Name;
 		public float WalkSpeed => Resource.WalkSpeed;
 		public IEnumerable<AnimationInfo> Animations => Resource.Animations.Select(data => new AnimationInfo(FilePath, data));
+		public string IdleAnimation => Resource.IdleAnimation;
+		public string WalkAnimation => Resource.WalkAnimation;
 	}
 }

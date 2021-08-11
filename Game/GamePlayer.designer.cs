@@ -1,3 +1,4 @@
+using DemonCastle.Game.Animations;
 using DemonCastle.Projects.Data;
 using Godot;
 

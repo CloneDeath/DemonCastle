@@ -10,6 +10,13 @@ namespace DemonCastle.Game {
 			var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
 			var deltaX = (right - left) * WalkSpeed;
 			MoveAndSlide(new Vector2(deltaX, 0));
+
+			if (right - left == 0) {
+				Animation.PlayIdle();
+			}
+			else {
+				Animation.PlayWalk();
+			}
 		}
 	}
 }
