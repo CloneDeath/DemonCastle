@@ -13,7 +13,6 @@ namespace DemonCastle.Game.Animations {
 		public string AnimationName => Animation.Name;
 
 		public void Play() {
-			throw new NotImplementedException();
 		}
 	}
 }

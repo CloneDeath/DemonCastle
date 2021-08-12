@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using DemonCastle.Projects.Data;
 using Godot;
-using Godot.Collections;
 
 namespace DemonCastle.Game.Animations {
 	public class PlayerAnimation : Node2D {
@@ -11,7 +11,7 @@ namespace DemonCastle.Game.Animations {
 			Character = character;
 			foreach (var animation in character.Animations) {
 				var animationNode = new AnimationNode(animation);
-				Animations[animationNode.Name] = animationNode;
+				Animations[animationNode.AnimationName] = animationNode;
 				AddChild(animationNode);
 			}
 		}

@@ -1,16 +1,20 @@
 using System.Collections.Generic;
-using System.Linq;
 using DemonCastle.ProjectFiles;
+using DemonCastle.Projects.Resources;
 
 namespace DemonCastle.Projects.Data {
-	public class ProjectInfo : ResourceInfo<ProjectFile>, IListableInfo {
-		public ProjectInfo(string filePath) : base(filePath) { }
+	public class ProjectInfo : IListableInfo {
+		protected FileNavigator<ProjectFile> File { get; }
+		protected ProjectFile Project => File.Resource;
+		
+		public ProjectInfo(FileNavigator<ProjectFile> file) {
+			File = file;
+		}
 
-		public string Name => Resource.Name;
-		protected IEnumerable<string> CharacterFiles => Resource.Characters.Select(Files.GetFile);
-		public IEnumerable<CharacterInfo> Characters => CharacterFiles.Select(cf => new CharacterInfo(cf));
+		public string Name => Project.Name;
+		
+		public IEnumerable<CharacterInfo> Characters => File.GetCharacters(Project.Characters);
 
-		protected IEnumerable<string> LevelFiles => Resource.Levels.Select(Files.GetFile);
-		public IEnumerable<LevelInfo> Levels => LevelFiles.Select(lf => new LevelInfo(lf));
+		public IEnumerable<LevelInfo> Levels => File.GetLevels(Project.Levels);
 	}
 }

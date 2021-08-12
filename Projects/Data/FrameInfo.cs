@@ -1,15 +1,17 @@
 using DemonCastle.ProjectFiles;
+using DemonCastle.Projects.Resources;
 
 namespace DemonCastle.Projects.Data {
 	public class FrameInfo {
-		protected string LocalFile { get; }
+		protected DirectoryNavigator Directory { get; }
 		protected FrameData FrameData { get; }
 
-		public FrameInfo(string localFile, FrameData frameData) {
-			LocalFile = localFile;
+		public FrameInfo(DirectoryNavigator directory, FrameData frameData) {
+			Directory = directory;
 			FrameData = frameData;
 		}
 
 		public float Duration => FrameData.Duration;
+		protected ISpriteInfo Source => Directory.GetSprite(FrameData.Source);
 	}
 }

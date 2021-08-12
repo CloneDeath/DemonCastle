@@ -3,7 +3,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Data;
+using DemonCastle.Projects.Resources;
 
 namespace DemonCastle.Projects {
 	public class ProjectManager {
@@ -31,7 +33,10 @@ namespace DemonCastle.Projects {
 
 		public IEnumerable<ProjectInfo> GetProjects() {
 			var projectFiles = Files.ProjectFiles;
-			return projectFiles.Select(f => new ProjectInfo(f));
+			foreach (var projectFile in projectFiles) {
+				var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
+				yield return new ProjectInfo(fileNavigator);
+			}
 		}
 	}
 }
