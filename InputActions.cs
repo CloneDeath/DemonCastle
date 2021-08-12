@@ -17,6 +17,7 @@ namespace DemonCastle {
 			}).ToArray());
 		}
 		
+		// ReSharper disable once UnusedMember.Local
 		private static void RegisterAction(string actionName, params ButtonList[] mouseButtons) {
 			RegisterAction(actionName, mouseButtons.Select(button => (InputEvent)new InputEventMouseButton {
 				ButtonIndex = (int) button

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DemonCastle.Exceptions;
-using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Data;
 
 namespace DemonCastle.Projects.Resources {
