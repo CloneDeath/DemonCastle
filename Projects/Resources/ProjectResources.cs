@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Data;
+using Godot;
 
 namespace DemonCastle.Projects.Resources {
 	public class ProjectResources {
@@ -14,6 +15,16 @@ namespace DemonCastle.Projects.Resources {
 
 			SpriteGrids = new ResourceCache<SpriteGridInfo>(path
 				=> new SpriteGridInfo(GetFile<SpriteGridFile>(path)));
+
+			Textures = new ResourceCache<Texture>(path
+				=> {
+				var image = new Image();
+				image.Load(path);
+
+				var texture = new ImageTexture();
+				texture.CreateFromImage(image);
+				return texture;
+			});
 		}
 		protected ResourceCache<CharacterInfo> Characters { get; } 
 		public CharacterInfo GetCharacter(string path) => Characters.Get(path);
@@ -23,5 +34,8 @@ namespace DemonCastle.Projects.Resources {
 
 		protected ResourceCache<SpriteGridInfo> SpriteGrids { get; }
 		public SpriteGridInfo GetSpriteGrid(string path) => SpriteGrids.Get(path);
+
+		protected ResourceCache<Texture> Textures { get; }
+		public Texture GetTexture(string path) => Textures.Get(path);
 	}
 }

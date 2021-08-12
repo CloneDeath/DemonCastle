@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using DemonCastle.Exceptions;
 using DemonCastle.Projects.Data;
+using Godot;
+using Path = System.IO.Path;
 
 namespace DemonCastle.Projects.Resources {
 	public class DirectoryNavigator {
@@ -38,6 +39,11 @@ namespace DemonCastle.Projects.Resources {
 				return ProjectResources.GetSpriteGrid(path);
 			}
 			throw new UnknownSpriteFileFormatException(path);
+		}
+
+		public Texture GetTexture(string localPath) {
+			var path = Path.Combine(Directory, localPath);
+			return ProjectResources.GetTexture(path);
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace DemonCastle.Game.Animations {
 		public void PlayWalk() => Play(Character.WalkAnimation);
 
 		protected void Play(string animationName) {
-			if (CurrentAnimation?.Name == animationName) return;
+			if (CurrentAnimation?.AnimationName == animationName) return;
 			if (CurrentAnimation != null) {
 				CurrentAnimation.Visible = false;
 			}
