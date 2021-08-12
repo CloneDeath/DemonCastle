@@ -6,8 +6,8 @@ namespace DemonCastle.Game.Animations {
 		private List<TemporalNode> Nodes { get; } = new List<TemporalNode>();
 
 		public float Duration { get; set; } = 1;
-		public float CurrentTime { get; set; } = 0;
-		public bool Playing { get; set; } = false;
+		public float CurrentTime { get; set; }
+		public bool Playing { get; set; }
 
 		public override void _Process(float delta) {
 			base._Process(delta);
