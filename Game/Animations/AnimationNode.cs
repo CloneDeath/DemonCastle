@@ -1,23 +1,21 @@
+using System.Linq;
 using DemonCastle.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Game.Animations {
 	public class AnimationNode : Node2D {
 		protected AnimationInfo Animation { get; }
-		protected Tween Tween { get; }
+		protected PhasingNode Frames { get; }
 
 		public AnimationNode(AnimationInfo animation) {
 			Animation = animation;
 
-			AddChild(Tween = new Tween {
-				Repeat = true
+			AddChild(Frames = new PhasingNode {
+				Duration = Animation.Frames.Sum(f => f.Duration)
 			});
 			float totalOffset = 0;
 			foreach (var frame in Animation.Frames) {
-				var sprite = frame.Sprite;
-				AddChild(sprite);
-				Tween.InterpolateProperty(sprite, "visible", true, false, frame.Duration
-					, Tween.TransitionType.Linear, Tween.EaseType.OutIn, totalOffset);
+				Frames.AddPhase(frame.Sprite, totalOffset, totalOffset + frame.Duration);
 				totalOffset += frame.Duration;
 			}
 		}
@@ -25,8 +23,8 @@ namespace DemonCastle.Game.Animations {
 		public string AnimationName => Animation.Name;
 
 		public void Play() {
-			Tween.StopAll();
-			Tween.Start();
+			Frames.CurrentTime = 0;
+			Frames.Play();
 		}
 	}
 }
