@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.Projects.Data {
 	public class LevelInfo : IListableInfo {
@@ -12,5 +13,6 @@ namespace DemonCastle.Projects.Data {
 		
 		public string Name => Level.Name;
 		public int TileWidth => Level.TileWidth;
+		public TileSet TileSet => new LevelTileSet(Level);
 	}
 }

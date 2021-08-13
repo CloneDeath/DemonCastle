@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Game {
-	public partial class GameLevel : Node2D {
+	public partial class GameLevel : TileMap {
 		
 	}
 }
