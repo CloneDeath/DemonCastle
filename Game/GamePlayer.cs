@@ -3,6 +3,7 @@ using Godot;
 namespace DemonCastle.Game {
 	public partial class GamePlayer : KinematicBody2D {
 		protected float WalkSpeed => Character.WalkSpeed * Level.TileWidth;
+		protected int Facing { get; set; } = 1;
 		public override void _Process(float delta) {
 			base._Process(delta);
 
@@ -16,7 +17,10 @@ namespace DemonCastle.Game {
 			}
 			else {
 				Animation.PlayWalk();
+				Facing = right - left;
 			}
+
+			Animation.Scale = new Vector2(Facing, 1);
 		}
 	}
 }
