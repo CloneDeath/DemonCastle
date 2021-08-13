@@ -7,26 +7,26 @@ namespace DemonCastle.ProjectFiles {
 		public int TileHeight { get; set; } = 16;
 		public int AreaWidth { get; set; } = 16;
 		public int AreaHeight { get; set; } = 9;
-		public List<TileInfo> Tiles { get; set; } = new List<TileInfo>();
-		public List<AreaInfo> Areas { get; set; } = new List<AreaInfo>();
+		public List<TileData> Tiles { get; set; } = new List<TileData>();
+		public List<AreaData> Areas { get; set; } = new List<AreaData>();
 	}
 
-	public class TileInfo {
+	public class TileData {
 		public string Name { get; set; } = string.Empty;
 		public bool Solid { get; set; } = true;
 		public List<FrameData> Frames { get; set; } = new List<FrameData>();
 	}
 
-	public class AreaInfo {
+	public class AreaData {
 		public string Name { get; set; } = string.Empty;
 		public int X { get; set; } = 0;
 		public int Y { get; set; } = 0;
 		public int Width { get; set; } = 1;
 		public int Height { get; set; } = 1;
-		public List<TileMapInfo> TileMap { get; set; } = new List<TileMapInfo>();
+		public List<TileMapData> TileMap { get; set; } = new List<TileMapData>();
 	}
 
-	public class TileMapInfo {
+	public class TileMapData {
 		public int X { get; set; } = 0;
 		public int Y { get; set; } = 0;
 		public string Tile { get; set; }
