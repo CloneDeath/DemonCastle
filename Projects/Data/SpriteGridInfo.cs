@@ -18,11 +18,11 @@ namespace DemonCastle.Projects.Data {
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
 		
 		public SpriteInfoNode GetSprite(string spriteName) {
-			return new SpriteInfoNode(Texture, GetSpriteRegion(spriteName));
+			var spriteData = GetSpriteData(spriteName);
+			var region = GetSpriteRegion(spriteData);
+			return new SpriteInfoNode(Texture, region, spriteData.FlipHorizontal);
 		}
-
-		public Rect2 GetSpriteRegion(string spriteName) => GetSpriteRegion(GetSpriteData(spriteName));
-
+		
 		private Rect2 GetSpriteRegion(SpriteData spriteData) {
 			return new Rect2 {
 				Position = Offset + Span * new Vector2(spriteData.X, spriteData.Y),
