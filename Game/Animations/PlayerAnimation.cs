@@ -10,10 +10,13 @@ namespace DemonCastle.Game.Animations {
 		public PlayerAnimation(CharacterInfo character) {
 			Character = character;
 			foreach (var animation in character.Animations) {
-				var animationNode = new AnimationNode(animation);
+				var animationNode = new AnimationNode(animation) {
+					Visible = false
+				};
 				Animations[animationNode.AnimationName] = animationNode;
 				AddChild(animationNode);
 			}
+			PlayIdle();
 		}
 		
 		public void PlayIdle() => Play(Character.IdleAnimation);
