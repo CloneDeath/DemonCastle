@@ -28,6 +28,15 @@ namespace DemonCastle.Projects {
 			ProjectList.Load(ProjectManager.GetProjects());
 		}
 
+		protected void OpenImportProject() {
+			OpenFileDialog.Popup_();
+		}
+
+		protected void ImportProject(string filePath) {
+			ProjectManager.ImportProject(filePath);
+			ProjectList.Load(ProjectManager.GetProjects());
+		}
+
 		protected void LaunchSelectedProject() {
 			var project = ProjectList.SelectedItem;
 			ProjectLoaded?.Invoke(project);

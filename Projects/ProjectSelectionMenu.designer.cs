@@ -4,6 +4,8 @@ using Godot;
 namespace DemonCastle.Projects {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
+		protected Button ImportButton { get; }
+		protected FileDialog OpenFileDialog { get; }
 		
 		protected InfoItemList<ProjectInfo> ProjectList { get; }
 		
@@ -15,6 +17,23 @@ namespace DemonCastle.Projects {
 				RectPosition = new Vector2(10, 10)
 			});
 			DownloadButton.Connect("pressed", this, nameof(DownloadProjects));
+			
+			AddChild(ImportButton = new Button {
+				Text = "Import Project",
+				RectPosition = DownloadButton.RectPosition + new Vector2(310, 0)
+			});
+			ImportButton.Connect("pressed", this, nameof(OpenImportProject));
+			
+			AddChild(OpenFileDialog = new FileDialog {
+				Filters = new []{"*.dcp; Demon Castle Project"},
+				Mode = FileDialog.ModeEnum.OpenFile,
+				PopupExclusive = true,
+				Access = FileDialog.AccessEnum.Filesystem,
+				RectSize = new Vector2(800, 600),
+				Resizable = true,
+				WindowTitle = "Import Project"
+			});
+			OpenFileDialog.Connect("file_selected", this, nameof(ImportProject));
 
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
 				RectPosition = DownloadButton.RectPosition + new Vector2(0, 30),

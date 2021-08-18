@@ -12,6 +12,7 @@ namespace DemonCastle.Projects {
 		protected string GodotPath => "user://Projects/";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 		protected FileCollection Files => new FileCollection(GlobalPath);
+		protected LocalProjectList LocalProjects => new LocalProjectList();
 
 		public void DownloadProjects() {
 			if (Directory.Exists(GlobalPath)) {
@@ -37,6 +38,14 @@ namespace DemonCastle.Projects {
 				var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
 				yield return new ProjectInfo(fileNavigator);
 			}
+		}
+
+		protected IEnumerable<string> GetProjectFiles() {
+			return Files.ProjectFiles.Concat(LocalProjects.ProjectFiles);
+		}
+
+		public void ImportProject(string filePath) {
+			LocalProjects.AddProject(filePath);
 		}
 	}
 }
