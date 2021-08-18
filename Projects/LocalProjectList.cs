@@ -26,5 +26,11 @@ namespace DemonCastle.Projects {
 			var content = JsonConvert.SerializeObject(project);
 			File.WriteAllText(GlobalPath, content);
 		}
+
+		public void RemoveProject(string projectFilePath) {
+			var project = GetProjectList();
+			project.Projects.Remove(projectFilePath);
+			SaveProjectList(project);
+		}
 	}
 }

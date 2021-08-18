@@ -47,5 +47,9 @@ namespace DemonCastle.Projects {
 		public void ImportProject(string filePath) {
 			LocalProjects.AddProject(filePath);
 		}
+
+		public void RemoveProject(ProjectInfo project) {
+			LocalProjects.RemoveProject(project.FilePath);
+		}
 	}
 }

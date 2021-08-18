@@ -21,6 +21,7 @@ namespace DemonCastle.Projects {
 		public override void _Process(float delta) {
 			base._Process(delta);
 			LaunchButton.Disabled = !ProjectList.IsItemSelected;
+			RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
 		}
 
 		protected void DownloadProjects() {
@@ -34,6 +35,11 @@ namespace DemonCastle.Projects {
 
 		protected void ImportProject(string filePath) {
 			ProjectManager.ImportProject(filePath);
+			ProjectList.Load(ProjectManager.GetProjects());
+		}
+
+		protected void RemoveProject() {
+			ProjectManager.RemoveProject(ProjectList.SelectedItem);
 			ProjectList.Load(ProjectManager.GetProjects());
 		}
 

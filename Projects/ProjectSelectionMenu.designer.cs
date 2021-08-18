@@ -5,6 +5,7 @@ namespace DemonCastle.Projects {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
 		protected Button ImportButton { get; }
+		protected Button RemoveButton { get; }
 		protected FileDialog OpenFileDialog { get; }
 		
 		protected InfoItemList<ProjectInfo> ProjectList { get; }
@@ -23,6 +24,12 @@ namespace DemonCastle.Projects {
 				RectPosition = DownloadButton.RectPosition + new Vector2(310, 0)
 			});
 			ImportButton.Connect("pressed", this, nameof(OpenImportProject));
+			
+			AddChild(RemoveButton = new Button {
+				Text = "Remove Project",
+				RectPosition = ImportButton.RectPosition + new Vector2(0, 30)
+			});
+			RemoveButton.Connect("pressed", this, nameof(RemoveProject));
 			
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new []{"*.dcp; Demon Castle Project"},
