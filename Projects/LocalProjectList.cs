@@ -9,7 +9,7 @@ namespace DemonCastle.Projects {
 
 		protected ProjectListFile GetProjectList() {
 			if (!File.Exists(GlobalPath)) return new ProjectListFile();
-			
+
 			var contents = File.ReadAllText(GlobalPath);
 			return JsonConvert.DeserializeObject<ProjectListFile>(contents);
 		}

@@ -33,7 +33,7 @@ namespace DemonCastle.Projects {
 		public bool ProjectsExist => GetProjects().Any();
 
 		public IEnumerable<ProjectInfo> GetProjects() {
-			var projectFiles = Files.ProjectFiles;
+			var projectFiles = GetProjectFiles();
 			foreach (var projectFile in projectFiles) {
 				var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
 				yield return new ProjectInfo(fileNavigator);
