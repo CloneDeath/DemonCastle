@@ -12,6 +12,12 @@ namespace DemonCastle.Game {
 		public GamePlayer(LevelInfo level, CharacterInfo character) {
 			Level = level;
 			Character = character;
+			AddChild(new CollisionShape2D {
+				Shape = new RectangleShape2D {
+					Extents = new Vector2(12, 12)
+				}
+			});
+			CollisionLayer = (uint) CollisionLayers.Player;
 			AddChild(Animation = new PlayerAnimation(character));
 		}
 	}

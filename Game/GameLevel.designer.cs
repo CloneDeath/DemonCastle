@@ -8,6 +8,7 @@ namespace DemonCastle.Game {
 			Level = level;
 			TileSet = level.TileSet;
 			CellSize = level.TileSize;
+			CollisionLayer = (uint) CollisionLayers.World;
 
 			LoadLevel();
 		}

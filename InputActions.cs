@@ -5,14 +5,16 @@ namespace DemonCastle {
 	public static class InputActions {
 		public const string PlayerMoveLeft = nameof(PlayerMoveLeft);
 		public const string PlayerMoveRight = nameof(PlayerMoveRight);
+		public const string PlayerJump = nameof(PlayerJump);
 		
 		public static void RegisterActions() {
 			RegisterAction(PlayerMoveLeft, KeyList.Left, KeyList.A);
 			RegisterAction(PlayerMoveRight, KeyList.Right, KeyList.D);
+			RegisterAction(PlayerJump, KeyList.Up, KeyList.W);
 		}
 
-		private static void RegisterAction(string actionName, params KeyList[] keyButtons) {
-			RegisterAction(actionName, keyButtons.Select(key => (InputEvent)new InputEventKey {
+		private static void RegisterAction(string actionName, params KeyList[] keyList) {
+			RegisterAction(actionName, keyList.Select(key => (InputEvent)new InputEventKey {
 				Scancode = (uint) key
 			}).ToArray());
 		}
