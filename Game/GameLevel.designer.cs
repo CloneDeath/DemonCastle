@@ -8,6 +8,8 @@ namespace DemonCastle.Game {
 			Level = level;
 			TileSet = level.TileSet;
 			CellSize = level.TileSize;
+
+			LoadLevel();
 		}
 	}
 }
