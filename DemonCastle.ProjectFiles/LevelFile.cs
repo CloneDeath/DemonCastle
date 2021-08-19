@@ -13,8 +13,8 @@ namespace DemonCastle.ProjectFiles {
 
 	public class TileData {
 		public string Name { get; set; } = string.Empty;
-		public bool Solid { get; set; } = true;
-		public List<FrameData> Frames { get; set; } = new List<FrameData>();
+		public string Source { get; set; } = string.Empty;
+		public string Sprite { get; set; } = string.Empty;
 	}
 
 	public class AreaData {

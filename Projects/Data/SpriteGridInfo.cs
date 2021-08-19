@@ -7,7 +7,7 @@ namespace DemonCastle.Projects.Data {
 	public class SpriteGridInfo : ISpriteInfo {
 		protected FileNavigator<SpriteGridFile> File { get; }
 		protected SpriteGridFile Sprite => File.Resource;
-		protected Texture Texture => File.GetTexture(Sprite.File);
+		public Texture Texture => File.GetTexture(Sprite.File);
 
 		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) {
 			File = file;
@@ -22,7 +22,12 @@ namespace DemonCastle.Projects.Data {
 			var region = GetSpriteRegion(spriteData);
 			return new SpriteInfoNode(Texture, region, spriteData.FlipHorizontal);
 		}
-		
+
+		public Rect2 GetRegion(string spriteName) {
+			var spriteData = GetSpriteData(spriteName);
+			return GetSpriteRegion(spriteData);
+		}
+
 		private Rect2 GetSpriteRegion(SpriteData spriteData) {
 			return new Rect2 {
 				Position = Offset + Span * new Vector2(spriteData.X, spriteData.Y),
