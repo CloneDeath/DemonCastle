@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
 using Godot;
@@ -26,14 +27,11 @@ namespace DemonCastle.Projects.Data {
 			TileSetName(tileInfo.Index, tileInfo.Name);
 			TileSetTexture(tileInfo.Index, tileInfo.Texture);
 			TileSetRegion(tileInfo.Index, tileInfo.Region);
-			TileSetShape(tileInfo.Index, 0, new ConvexPolygonShape2D {
-				Points = new [] {
-					Vector2.Zero * tileInfo.Region.Size,
-					Vector2.Right* tileInfo.Region.Size,
-					Vector2.One* tileInfo.Region.Size,
-					Vector2.Down* tileInfo.Region.Size
-				}
-			});
+			if (tileInfo.Collision.Any()) {
+				TileSetShape(tileInfo.Index, 0, new ConvexPolygonShape2D {
+					Points = tileInfo.Collision
+				});
+			}
 		}
 	}
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
 using Godot;
@@ -18,5 +20,6 @@ namespace DemonCastle.Projects.Data {
 		protected ISpriteInfo Sprite => Level.GetSprite(TileData.Source);
 		public Texture Texture => Sprite.Texture;
 		public Rect2 Region => Sprite.GetRegion(TileData.Sprite);
+		public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
 	}
 }

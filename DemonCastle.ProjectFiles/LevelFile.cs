@@ -15,6 +15,12 @@ namespace DemonCastle.ProjectFiles {
 		public string Name { get; set; } = string.Empty;
 		public string Source { get; set; } = string.Empty;
 		public string Sprite { get; set; } = string.Empty;
+		public List<CollisionData> Collision { get; set; } = new List<CollisionData>();
+	}
+
+	public class CollisionData {
+		public float X { get; set; }
+		public float Y { get; set; }
 	}
 
 	public class AreaData {
