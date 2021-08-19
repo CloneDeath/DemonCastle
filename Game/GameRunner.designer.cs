@@ -8,7 +8,7 @@ namespace DemonCastle.Game {
 		public GameRunner(LevelInfo level, CharacterInfo player) {
 			AddChild(Level = new GameLevel(level));
 			AddChild(Player = new GamePlayer(level, player) {
-				Position = new Vector2(300, 300)
+				Position = new Vector2(300, 13 * 18 - 12)
 			});
 		}
 	}
