@@ -13,6 +13,8 @@ namespace DemonCastle.Projects.Data {
 		
 		public string Name => Character.Name;
 		public float WalkSpeed => Character.WalkSpeed;
+		public float JumpHeight => Character.JumpHeight;
+		public float Gravity => Character.Gravity;
 		public IEnumerable<AnimationInfo> Animations => Character.Animations.Select(data => new AnimationInfo(File, data));
 		public string IdleAnimation => Character.IdleAnimation;
 		public string WalkAnimation => Character.WalkAnimation;

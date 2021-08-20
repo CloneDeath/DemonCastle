@@ -17,6 +17,7 @@ namespace DemonCastle.Projects.Data {
 		
 		public string Name => Level.Name;
 		public int TileWidth => Level.TileWidth;
+		public int TileHeight => Level.TileHeight;
 		public Vector2 TileSize => new Vector2(Level.TileWidth, Level.TileHeight);
 		public TileSet TileSet => LevelTileSet;
 
