@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Sprites {
 	public class SpriteGridInfo : ISpriteInfo {
 		protected FileNavigator<SpriteGridFile> File { get; }
 		protected SpriteGridFile Sprite => File.Resource;
@@ -28,13 +28,13 @@ namespace DemonCastle.Projects.Data {
 			return GetSpriteRegion(spriteData);
 		}
 
-		private Rect2 GetSpriteRegion(SpriteData spriteData) {
+		private Rect2 GetSpriteRegion(SpriteGridData spriteGridData) {
 			return new Rect2 {
-				Position = Offset + Span * new Vector2(spriteData.X, spriteData.Y),
+				Position = Offset + Span * new Vector2(spriteGridData.X, spriteGridData.Y),
 				Size = Size
 			};
 		}
 
-		protected SpriteData GetSpriteData(string spriteName) => Sprite.Sprites.First(s => s.Name == spriteName);
+		protected SpriteGridData GetSpriteData(string spriteName) => Sprite.Sprites.First(s => s.Name == spriteName);
 	}
 }

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Sprites {
 	public class SpriteInfoNode : Sprite {
 		public SpriteInfoNode(Texture texture, Rect2 region, bool flipH) {
 			Texture = texture;

@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Levels {
 	public class LevelTileSet : TileSet {
 		protected LevelFile Level { get; }
 		protected FileNavigator<LevelFile> File { get; }

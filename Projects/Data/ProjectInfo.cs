@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles;
+using DemonCastle.Projects.Data.Levels;
 using DemonCastle.Projects.Resources;
 
 namespace DemonCastle.Projects.Data {

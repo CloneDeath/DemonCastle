@@ -9,10 +9,10 @@ namespace DemonCastle.ProjectFiles {
 		public int YSeparation { get; set; } = 0;
 		public int XOffset { get; set; } = 0;
 		public int YOffset { get; set; } = 0;
-		public List<SpriteData> Sprites { get; set; } = new List<SpriteData>();
+		public List<SpriteGridData> Sprites { get; set; } = new List<SpriteGridData>();
 	}
 
-	public class SpriteData {
+	public class SpriteGridData {
 		public int X { get; set; }
 		public int Y { get; set; }
 		public string Name { get; set; } = string.Empty;

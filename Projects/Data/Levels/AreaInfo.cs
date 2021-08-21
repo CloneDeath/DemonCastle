@@ -3,7 +3,7 @@ using System.Linq;
 using DemonCastle.ProjectFiles;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Levels {
 	public class AreaInfo {
 		protected AreaData Area { get; }
 		public LevelInfo LevelInfo { get; }

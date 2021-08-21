@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Exceptions;
 using DemonCastle.Projects.Data;
+using DemonCastle.Projects.Data.Levels;
+using DemonCastle.Projects.Data.Sprites;
 using Godot;
 using Path = System.IO.Path;
 
@@ -33,10 +35,13 @@ namespace DemonCastle.Projects.Resources {
 			return ProjectResources.GetLevel(path);
 		}
 
-		public SpriteGridInfo GetSprite(string localPath) {
+		public ISpriteInfo GetSprite(string localPath) {
 			var path = Path.Combine(Directory, localPath);
 			if (path.ToLower().EndsWith(".dcsg")) {
 				return ProjectResources.GetSpriteGrid(path);
+			}
+			if (path.ToLower().EndsWith(".dcsa")) {
+				return ProjectResources.GetSpriteAtlas(path);
 			}
 			throw new UnknownSpriteFileFormatException(path);
 		}

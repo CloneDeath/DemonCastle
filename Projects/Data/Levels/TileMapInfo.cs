@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Levels {
 	public class TileMapInfo {
 		protected TileMapData TileMapData { get; }
 		protected AreaInfo AreaInfo { get; }

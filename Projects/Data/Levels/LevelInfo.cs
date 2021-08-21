@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Levels {
 	public class LevelInfo : IListableInfo {
 		protected FileNavigator<LevelFile> File { get; }
 		protected LevelFile Level => File.Resource;

@@ -1,4 +1,5 @@
 using DemonCastle.ProjectFiles;
+using DemonCastle.Projects.Data.Sprites;
 using DemonCastle.Projects.Resources;
 
 namespace DemonCastle.Projects.Data {

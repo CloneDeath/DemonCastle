@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.ProjectFiles;
+using DemonCastle.Projects.Data.Sprites;
 using DemonCastle.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.Projects.Data.Levels {
 	public class TileInfo {
 		public int Index { get; }
 		protected TileData TileData { get; }

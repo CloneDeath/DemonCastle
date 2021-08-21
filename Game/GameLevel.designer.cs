@@ -1,4 +1,5 @@
 using DemonCastle.Projects.Data;
+using DemonCastle.Projects.Data.Levels;
 
 namespace DemonCastle.Game {
 	public partial class GameLevel {
