@@ -14,6 +14,7 @@ namespace DemonCastle.Game {
 			Level = level;
 			Character = character;
 			AddChild(new CollisionShape2D {
+				Position = new Vector2(0, -Character.Size.y/2),
 				Shape = new RectangleShape2D {
 					Extents = Character.Size / 2
 				}

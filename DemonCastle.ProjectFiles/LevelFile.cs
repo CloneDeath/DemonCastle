@@ -7,8 +7,15 @@ namespace DemonCastle.ProjectFiles {
 		public int TileHeight { get; set; } = 16;
 		public int AreaWidth { get; set; } = 16;
 		public int AreaHeight { get; set; } = 9;
+		public StartingData StartingPosition { get; set; } = new StartingData();
 		public List<TileData> Tiles { get; set; } = new List<TileData>();
 		public List<AreaData> Areas { get; set; } = new List<AreaData>();
+	}
+
+	public class StartingData {
+		public string Area { get; set; } = string.Empty;
+		public float X { get; set; }
+		public float Y { get; set; }
 	}
 
 	public class TileData {

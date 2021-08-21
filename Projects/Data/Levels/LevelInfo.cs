@@ -22,5 +22,15 @@ namespace DemonCastle.Projects.Data.Levels {
 		public TileSet TileSet => LevelTileSet;
 
 		public IEnumerable<AreaInfo> Areas => Level.Areas.Select(area => new AreaInfo(area, this));
+
+		private AreaInfo GetAreaByName(string name) {
+			var area = Level.Areas.First(a => a.Name == name);
+			return new AreaInfo(area, this);
+		}
+
+		public Vector2 StartingLocation => TileSize * (
+			GetAreaByName(Level.StartingPosition.Area).TilePosition
+			+ new Vector2(Level.StartingPosition.X, Level.StartingPosition.Y)
+		) + new Vector2(TileWidth/2f, TileHeight);
 	}
 }

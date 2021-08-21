@@ -12,6 +12,7 @@ namespace DemonCastle.Projects.Data.Sprites {
 				TransparentColor = definition.TransparentColor,
 				Threshold = definition.TransparentColorThreshold
 			};
+			Offset = new Vector2(0, -definition.Region.Size.y/2);
 		}
 	}
 }
