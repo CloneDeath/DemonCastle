@@ -1,5 +1,4 @@
 using Godot;
-using Godot.LocalResources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class TransparentColorSpriteShader : ShaderMaterial {
@@ -14,7 +13,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		}
 		
 		public TransparentColorSpriteShader() {
-			Shader = LocalResource<TransparentColorSpriteShader>.Load<Shader>($"{nameof(TransparentColorSpriteShader)}.shader");
+			Shader = ResourceLoader.Load<Shader>($"res://DemonCastle.ProjectFiles/Projects/Data/Sprites/{nameof(TransparentColorSpriteShader)}.shader");
 		}
 	}
 }
