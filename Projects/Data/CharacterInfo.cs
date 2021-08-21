@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.ProjectFiles;
 using DemonCastle.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.Projects.Data {
 	public class CharacterInfo : IListableInfo {
@@ -18,5 +19,6 @@ namespace DemonCastle.Projects.Data {
 		public IEnumerable<AnimationInfo> Animations => Character.Animations.Select(data => new AnimationInfo(File, data));
 		public string IdleAnimation => Character.IdleAnimation;
 		public string WalkAnimation => Character.WalkAnimation;
+		public Vector2 Size => new Vector2(Character.Width, Character.Height);
 	}
 }
