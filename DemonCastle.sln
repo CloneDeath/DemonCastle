@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle", "DemonCastle.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle.ProjectFiles", "DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj", "{25C570A0-9950-4026-9F4F-AA9D68E9A0F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle.Game", "DemonCastle.Game\DemonCastle.Game.csproj", "{43622112-EFF8-4508-A86B-EC873C321CAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,11 @@ Global
 		{25C570A0-9950-4026-9F4F-AA9D68E9A0F4}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
 		{25C570A0-9950-4026-9F4F-AA9D68E9A0F4}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
 		{25C570A0-9950-4026-9F4F-AA9D68E9A0F4}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{43622112-EFF8-4508-A86B-EC873C321CAC}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

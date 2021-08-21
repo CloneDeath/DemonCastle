@@ -1,0 +1,10 @@
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<RootNamespace>DemonCastle.Game</RootNamespace>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
+	</ItemGroup>
+</Project>
