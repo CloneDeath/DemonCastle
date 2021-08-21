@@ -2,11 +2,16 @@ using Godot;
 
 namespace DemonCastle.Projects.Data.Sprites {
 	public class SpriteInfoNode : Sprite {
-		public SpriteInfoNode(Texture texture, Rect2 region, bool flipH) {
+		protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
+		public SpriteInfoNode(Texture texture, SpriteDefinition definition) {
 			Texture = texture;
 			RegionEnabled = true;
-			RegionRect = region;
-			FlipH = flipH;
+			RegionRect = definition.Region;
+			FlipH = definition.FlipHorizontal;
+			Material = TransparentColorSpriteShader = new TransparentColorSpriteShader {
+				TransparentColor = definition.TransparentColor,
+				Threshold = definition.TransparentColorThreshold
+			};
 		}
 	}
 }

@@ -20,7 +20,10 @@ namespace DemonCastle.Projects.Data.Sprites {
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
 			var region = GetSpriteRegion(spriteData);
-			return new SpriteInfoNode(Texture, region, spriteData.FlipHorizontal);
+			return new SpriteInfoNode(Texture, new SpriteDefinition {
+				Region = region,
+				FlipHorizontal = spriteData.FlipHorizontal
+			});
 		}
 
 		public Rect2 GetRegion(string spriteName) {

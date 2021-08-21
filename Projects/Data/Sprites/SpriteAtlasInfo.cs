@@ -8,6 +8,11 @@ namespace DemonCastle.Projects.Data.Sprites {
 		protected FileNavigator<SpriteAtlasFile> File { get; }
 		protected SpriteAtlasFile Sprite => File.Resource;
 
+		protected Color TransparentColor => Color.Color8(
+			(byte) Sprite.TransparentColor.Red,
+			(byte) Sprite.TransparentColor.Green,
+			(byte) Sprite.TransparentColor.Blue);
+
 		public Texture Texture => File.GetTexture(Sprite.File);
 
 		public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) {
@@ -16,7 +21,12 @@ namespace DemonCastle.Projects.Data.Sprites {
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
 			var region = GetSpriteRegion(spriteData);
-			return new SpriteInfoNode(Texture, region, spriteData.FlipHorizontal);
+			return new SpriteInfoNode(Texture, new SpriteDefinition {
+				Region = region,
+				FlipHorizontal = spriteData.FlipHorizontal,
+				TransparentColor = TransparentColor,
+				TransparentColorThreshold = 0.001f
+			});
 		}
 
 		public Rect2 GetRegion(string spriteName) {
