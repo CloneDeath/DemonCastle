@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DemonCastle.Projects.Resources {
+namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class ResourceCache<T> {
 		protected Func<string, T> ResourceFactory { get; }
 

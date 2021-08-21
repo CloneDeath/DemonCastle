@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace DemonCastle.Projects {
+namespace DemonCastle.ProjectFiles.Projects {
 	public class FileCollection {
 		private readonly string _directory;
 

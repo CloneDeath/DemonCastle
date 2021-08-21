@@ -3,11 +3,10 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Data;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.Projects {
+namespace DemonCastle.ProjectFiles.Projects {
 	public class ProjectManager {
 		protected string GodotPath => "user://Projects/";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);

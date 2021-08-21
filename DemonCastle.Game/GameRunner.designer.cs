@@ -1,5 +1,5 @@
-using DemonCastle.Projects.Data;
-using DemonCastle.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle.Game {

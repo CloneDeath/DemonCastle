@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.Exceptions;
-using DemonCastle.Projects.Data;
-using DemonCastle.Projects.Data.Levels;
-using DemonCastle.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Exceptions;
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using Path = System.IO.Path;
 
-namespace DemonCastle.Projects.Resources {
+namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class DirectoryNavigator {
 		protected string Directory { get; }
 		protected ProjectResources ProjectResources { get; }

@@ -1,7 +1,7 @@
 using Godot;
 using Godot.LocalResources;
 
-namespace DemonCastle.Projects.Data.Sprites {
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class TransparentColorSpriteShader : ShaderMaterial {
 		public float Threshold {
 			get => (float)GetShaderParam("threshold");

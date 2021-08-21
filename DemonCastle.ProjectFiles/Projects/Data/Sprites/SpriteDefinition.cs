@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Projects.Data.Sprites {
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteDefinition {
 		public Rect2 Region { get; set; }
 		public bool FlipHorizontal { get; set; } = false;

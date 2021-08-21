@@ -1,10 +1,9 @@
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Data;
-using DemonCastle.Projects.Data.Levels;
-using DemonCastle.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Projects.Resources {
+namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class ProjectResources {
 		protected FileNavigator<T> GetFile<T>(string path) => new FileNavigator<T>(path, this);
 

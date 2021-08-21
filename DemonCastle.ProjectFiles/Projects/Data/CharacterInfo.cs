@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class CharacterInfo : IListableInfo {
 		protected FileNavigator<CharacterFile> File { get; }
 		protected CharacterFile Character => File.Resource;

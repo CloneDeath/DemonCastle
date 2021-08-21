@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Data.Levels;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class ProjectInfo : IListableInfo {
 		protected FileNavigator<ProjectFile> File { get; }
 		protected ProjectFile Project => File.Resource;

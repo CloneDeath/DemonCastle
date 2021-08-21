@@ -1,8 +1,8 @@
 using System;
-using DemonCastle.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Projects {
+namespace DemonCastle.ProjectFiles.Projects {
 	public partial class ProjectSelectionMenu : Container {
 		protected ProjectManager ProjectManager { get; } = new ProjectManager();
 

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data.Levels {
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 	public class LevelInfo : IListableInfo {
 		protected FileNavigator<LevelFile> File { get; }
 		protected LevelFile Level => File.Resource;

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Projects.Data.Sprites {
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public interface ISpriteInfo {
 		SpriteInfoNode GetSprite(string spriteName);
 		Rect2 GetRegion(string spriteName);

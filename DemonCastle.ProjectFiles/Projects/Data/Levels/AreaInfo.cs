@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles;
 using Godot;
 
-namespace DemonCastle.Projects.Data.Levels {
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 	public class AreaInfo {
 		protected AreaData Area { get; }
 		public LevelInfo LevelInfo { get; }

@@ -1,9 +1,8 @@
 using System.Linq;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Projects.Data.Sprites {
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteGridInfo : ISpriteInfo {
 		protected FileNavigator<SpriteGridFile> File { get; }
 		protected SpriteGridFile Sprite => File.Resource;

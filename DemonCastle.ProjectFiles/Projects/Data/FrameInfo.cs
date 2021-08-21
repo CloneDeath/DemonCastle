@@ -1,8 +1,7 @@
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Data.Sprites;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class FrameInfo {
 		protected DirectoryNavigator Directory { get; }
 		protected FrameData FrameData { get; }

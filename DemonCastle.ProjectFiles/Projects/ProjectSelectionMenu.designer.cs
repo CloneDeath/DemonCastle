@@ -1,7 +1,7 @@
-using DemonCastle.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Projects {
+namespace DemonCastle.ProjectFiles.Projects {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
 		protected Button ImportButton { get; }

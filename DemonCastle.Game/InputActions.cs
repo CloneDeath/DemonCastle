@@ -1,7 +1,7 @@
 using System.Linq;
 using Godot;
 
-namespace DemonCastle {
+namespace DemonCastle.Game {
 	public static class InputActions {
 		public const string PlayerMoveLeft = nameof(PlayerMoveLeft);
 		public const string PlayerMoveRight = nameof(PlayerMoveRight);

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles;
-using DemonCastle.Projects.Resources;
+using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.Projects.Data {
+namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class AnimationInfo {
 		protected DirectoryNavigator Directory { get; }
 		protected AnimationData Animation { get; }

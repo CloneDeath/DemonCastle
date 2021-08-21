@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Projects.Data.Sprites {
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteInfoNode : Sprite {
 		protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 		public SpriteInfoNode(Texture texture, SpriteDefinition definition) {
