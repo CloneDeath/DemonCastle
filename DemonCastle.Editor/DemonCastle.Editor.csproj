@@ -7,4 +7,33 @@
 	<ItemGroup>
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Icons\AtlasIcon.aseprite" />
+	  <Content Include="Icons\AtlasIcon.png" />
+	  <Content Include="Icons\AtlasIcon.png.import" />
+	  <Content Include="Icons\CharacterIcon.aseprite" />
+	  <Content Include="Icons\CharacterIcon.png" />
+	  <Content Include="Icons\CharacterIcon.png.import" />
+	  <Content Include="Icons\FolderIcon.aseprite" />
+	  <Content Include="Icons\FolderIcon.png" />
+	  <Content Include="Icons\FolderIcon.png.import" />
+	  <Content Include="Icons\LevelIcon.aseprite" />
+	  <Content Include="Icons\LevelIcon.png" />
+	  <Content Include="Icons\LevelIcon.png.import" />
+	  <Content Include="Icons\ProjectIcon.aseprite" />
+	  <Content Include="Icons\ProjectIcon.png" />
+	  <Content Include="Icons\ProjectIcon.png.import" />
+	  <Content Include="Icons\SpriteGridIcon.aseprite" />
+	  <Content Include="Icons\SpriteGridIcon.png" />
+	  <Content Include="Icons\SpriteGridIcon.png.import" />
+	  <Content Include="Icons\TextFileIcon.aseprite" />
+	  <Content Include="Icons\TextFileIcon.png" />
+	  <Content Include="Icons\TextFileIcon.png.import" />
+	  <Content Include="Icons\TextureIcon.aseprite" />
+	  <Content Include="Icons\TextureIcon.png" />
+	  <Content Include="Icons\TextureIcon.png.import" />
+	  <Content Include="Icons\UnknownIcon.aseprite" />
+	  <Content Include="Icons\UnknownIcon.png" />
+	  <Content Include="Icons\UnknownIcon.png.import" />
+	</ItemGroup>
 </Project>
