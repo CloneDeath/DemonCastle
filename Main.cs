@@ -34,7 +34,7 @@ namespace DemonCastle {
             ProjectSelectionMenu.QueueFree();
 
             OS.SetWindowTitle($"DemonCastle - {project.Name}");
-            AddChild(EditorSpace = new EditorSpace());
+            AddChild(EditorSpace = new EditorSpace(project));
         }
     }
 }

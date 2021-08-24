@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class ProjectInfo : IListableInfo {
-		protected FileNavigator<ProjectFile> File { get; }
+		public FileNavigator<ProjectFile> File { get; }
 		protected ProjectFile Project => File.Resource;
 		
 		public ProjectInfo(FileNavigator<ProjectFile> file) {
@@ -18,7 +18,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		public IEnumerable<LevelInfo> Levels => File.GetLevels(Project.Levels);
 		public string FilePath => File.FilePath;
 
-		
+
 		protected string GodotLocal => "user://";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotLocal);
 

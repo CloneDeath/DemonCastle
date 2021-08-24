@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -11,6 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class DirectoryNavigator {
 		protected string Directory { get; }
 		protected ProjectResources ProjectResources { get; }
+		public string DirectoryName => new DirectoryInfo(Directory).Name;
 
 		public DirectoryNavigator(string directory) 
 			: this(directory, new ProjectResources())
@@ -49,6 +51,16 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public Texture GetTexture(string localPath) {
 			var path = Path.Combine(Directory, localPath);
 			return ProjectResources.GetTexture(path);
+		}
+
+		public IEnumerable<DirectoryNavigator> GetDirectories() {
+			var directories = System.IO.Directory.GetDirectories(Directory).OrderBy(s => s);
+			return directories.Select(dir => new DirectoryNavigator(dir, ProjectResources));
+		}
+
+		public IEnumerable<FileNavigator> GetFiles() {
+			var files = System.IO.Directory.GetFiles(Directory).OrderBy(s => s);
+			return files.Select(file => new FileNavigator(file, ProjectResources));
 		}
 	}
 }
