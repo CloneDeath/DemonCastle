@@ -1,11 +1,13 @@
+using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects {
+namespace DemonCastle {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
 		protected Button ImportButton { get; }
 		protected Button RemoveButton { get; }
+		protected Button EditButton { get; }
 		protected FileDialog OpenFileDialog { get; }
 		
 		protected InfoItemList<ProjectInfo> ProjectList { get; }
@@ -30,6 +32,12 @@ namespace DemonCastle.ProjectFiles.Projects {
 				RectPosition = ImportButton.RectPosition + new Vector2(0, 30)
 			});
 			RemoveButton.Connect("pressed", this, nameof(RemoveProject));
+			
+			AddChild(EditButton = new Button {
+				Text = "Edit Project",
+				RectPosition = RemoveButton.RectPosition + new Vector2(0, 90)
+			});
+			EditButton.Connect("pressed", this, nameof(EditProject));
 			
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new []{"*.dcp; Demon Castle Project"},

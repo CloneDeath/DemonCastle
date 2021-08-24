@@ -1,3 +1,4 @@
+using DemonCastle.Editor;
 using DemonCastle.ProjectFiles.Projects;
 using Godot;
 
@@ -8,6 +9,7 @@ namespace DemonCastle {
 		public Main() {
 			AddChild(ProjectSelectionMenu = new ProjectSelectionMenu());
 			ProjectSelectionMenu.ProjectLoaded += OnProjectLoaded;
+			ProjectSelectionMenu.ProjectEdit += OnProjectEdit;
 		}
 	}
 }
