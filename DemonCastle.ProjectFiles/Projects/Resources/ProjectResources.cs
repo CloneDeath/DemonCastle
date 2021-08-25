@@ -6,6 +6,7 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class ProjectResources {
 		protected FileNavigator<T> GetFile<T>(string path) => new FileNavigator<T>(path, this);
+		protected TextFileNavigator GetTextFile(string path) => new TextFileNavigator(path, this);
 
 		public ProjectResources() {
 			Characters = new ResourceCache<CharacterInfo>(path
@@ -29,6 +30,9 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 				texture.CreateFromImage(image);
 				return texture;
 			});
+
+			Texts = new ResourceCache<TextInfo>(path
+				=> new TextInfo(GetTextFile(path)));
 		}
 		protected ResourceCache<CharacterInfo> Characters { get; } 
 		public CharacterInfo GetCharacter(string path) => Characters.Get(path);
@@ -44,5 +48,8 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 
 		protected ResourceCache<SpriteAtlasInfo> SpriteAtlases { get; }
 		public SpriteAtlasInfo GetSpriteAtlas(string path) => SpriteAtlases.Get(path);
+
+		protected ResourceCache<TextInfo> Texts { get; }
+		public TextInfo GetText(string path) => Texts.Get(path);
 	}
 }

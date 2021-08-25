@@ -5,6 +5,7 @@ namespace DemonCastle.Editor {
 	public partial class EditorSpace {
 		protected HSplitContainer SplitContainer { get; }
 		protected FileTree FileTree { get; }
+		protected WindowContainer WindowContainer { get; }
 		
 		public EditorSpace(ProjectInfo project) {
 			AddChild(SplitContainer = new HSplitContainer {
@@ -16,7 +17,7 @@ namespace DemonCastle.Editor {
 				RectMinSize = new Vector2(250, 0)
 			});
 			FileTree.OnItemActivated += FileTreeOnOnItemActivated;
-			SplitContainer.AddChild(new Control());
+			SplitContainer.AddChild(WindowContainer = new WindowContainer());
 		}
 	}
 }

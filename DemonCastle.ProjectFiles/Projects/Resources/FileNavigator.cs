@@ -1,4 +1,5 @@
 using System.IO;
+using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class FileNavigator : DirectoryNavigator {
@@ -11,5 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			: base(Path.GetDirectoryName(filePath), resources) {
 			FilePath = filePath;
 		}
+
+		public TextInfo ToTextFile() => ProjectResources.GetText(FilePath);
 	}
 }

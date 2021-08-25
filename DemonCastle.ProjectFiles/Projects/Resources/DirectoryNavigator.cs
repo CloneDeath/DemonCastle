@@ -53,6 +53,11 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			return ProjectResources.GetTexture(path);
 		}
 
+		public TextInfo GetText(string localPath) {
+			var path = Path.Combine(Directory, localPath);
+			return ProjectResources.GetText(path);
+		}
+
 		public IEnumerable<DirectoryNavigator> GetDirectories() {
 			var directories = System.IO.Directory.GetDirectories(Directory).OrderBy(s => s);
 			return directories.Select(dir => new DirectoryNavigator(dir, ProjectResources));
