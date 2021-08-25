@@ -21,7 +21,8 @@ namespace DemonCastle.Editor {
 
 		protected WindowDialog GetWindow(FileNavigator file) {
 			switch (file.Extension) {
-				case ".txt": return new TextFileWindow(file.ToTextFile());
+				case ".txt": return new TextFileWindow(file.ToTextInfo());
+				case ".png": return new ImageWindow(file);
 				default: return new WindowDialog();
 			}
 		}

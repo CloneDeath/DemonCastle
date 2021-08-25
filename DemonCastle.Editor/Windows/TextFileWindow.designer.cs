@@ -5,13 +5,10 @@ using Godot;
 namespace DemonCastle.Editor.Windows {
 	public partial class TextFileWindow {
 		protected TextEdit TextEdit { get; }
-		protected TextureRect ProgramIcon { get; }
 		
 		public TextFileWindow(TextInfo textInfo) {
-			RectSize = new Vector2(300, 300);
 			WindowTitle = textInfo.FileName;
-			Resizable = true;
-
+			RectSize = new Vector2(300, 300);
 			AddChild(TextEdit = new TextEdit {
 				AnchorRight = 1,
 				AnchorBottom = 1,

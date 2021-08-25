@@ -1,5 +1,6 @@
-using System.IO;
 using DemonCastle.ProjectFiles.Projects.Data;
+using Godot;
+using Path = System.IO.Path;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class FileNavigator : DirectoryNavigator {
@@ -13,6 +14,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			FilePath = filePath;
 		}
 
-		public TextInfo ToTextFile() => ProjectResources.GetText(FilePath);
+		public TextInfo ToTextInfo() => ProjectResources.GetText(FilePath);
+		public Texture ToTexture() => ProjectResources.GetTexture(FilePath);
 	}
 }
