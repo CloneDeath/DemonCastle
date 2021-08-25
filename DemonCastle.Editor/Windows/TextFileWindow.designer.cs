@@ -11,13 +11,7 @@ namespace DemonCastle.Editor.Windows {
 			RectSize = new Vector2(300, 300);
 			WindowTitle = textInfo.FileName;
 			Resizable = true;
-			AddChild(ProgramIcon = new TextureRect {
-				Texture = IconTextures.TextFileIcon,
-				MarginTop = -18,
-				MarginLeft = 2,
-				Expand = true
-			});
-			
+
 			AddChild(TextEdit = new TextEdit {
 				AnchorRight = 1,
 				AnchorBottom = 1,
