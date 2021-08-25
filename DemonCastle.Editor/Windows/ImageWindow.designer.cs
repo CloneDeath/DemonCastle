@@ -9,6 +9,7 @@ namespace DemonCastle.Editor.Windows {
 		public ImageWindow(FileNavigator texture) {
 			WindowTitle = texture.FileName;
 			RectSize = new Vector2(300, 300);
+			
 			AddChild(ScrollContainer = new ScrollContainer {
 				AnchorRight = 1,
 				AnchorBottom = 1,

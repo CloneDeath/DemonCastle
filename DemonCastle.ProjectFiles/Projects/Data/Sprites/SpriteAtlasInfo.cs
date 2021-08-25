@@ -5,7 +5,9 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteAtlasInfo : ISpriteInfo {
 		protected FileNavigator<SpriteAtlasFile> File { get; }
+		public string FileName => File.FileName;
 		protected SpriteAtlasFile Sprite => File.Resource;
+
 
 		protected Color TransparentColor => Color.Color8(
 			(byte) Sprite.TransparentColor.Red,

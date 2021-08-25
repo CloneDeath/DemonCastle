@@ -6,6 +6,7 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class CharacterInfo : IListableInfo {
 		protected FileNavigator<CharacterFile> File { get; }
+		public string FileName => File.FileName;
 		protected CharacterFile Character => File.Resource;
 		public CharacterInfo(FileNavigator<CharacterFile> file) {
 			File = file;
