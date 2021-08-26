@@ -21,8 +21,11 @@ namespace DemonCastle.Editor {
 
 		protected WindowDialog GetWindow(FileNavigator file) {
 			switch (file.Extension) {
+				case ".dcp": return new ProjectWindow(file.ToProjectInfo());
 				case ".dcc": return new CharacterWindow(file.ToCharacterInfo());
+				case ".dcl": return new LevelWindow(file.ToLevelInfo());
 				case ".dcsa": return new SpriteAtlasWindow(file.ToSpriteAtlasInfo());
+				case ".dcsg": return new SpriteGridWindow(file.ToSpriteGridInfo());
 				case ".txt": return new TextFileWindow(file.ToTextInfo());
 				case ".png": return new ImageWindow(file);
 				default: return new WindowDialog();

@@ -15,6 +15,7 @@ namespace DemonCastle {
             base._Ready();
             
             InputActions.RegisterActions();
+            OS.WindowMaximized = true;
         }
 
         protected void OnProjectLoaded(ProjectInfo project) {

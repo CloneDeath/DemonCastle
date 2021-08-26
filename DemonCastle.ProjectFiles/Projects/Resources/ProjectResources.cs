@@ -33,6 +33,9 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 
 			Texts = new ResourceCache<TextInfo>(path
 				=> new TextInfo(GetTextFile(path)));
+
+			Projects = new ResourceCache<ProjectInfo>(path
+				=> new ProjectInfo(GetFile<ProjectFile>(path)));
 		}
 		protected ResourceCache<CharacterInfo> Characters { get; } 
 		public CharacterInfo GetCharacter(string path) => Characters.Get(path);
@@ -51,5 +54,8 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 
 		protected ResourceCache<TextInfo> Texts { get; }
 		public TextInfo GetText(string path) => Texts.Get(path);
+
+		protected ResourceCache<ProjectInfo> Projects { get; }
+		public ProjectInfo GetProject(string path) => Projects.Get(path);
 	}
 }

@@ -22,5 +22,6 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public SpriteGridInfo ToSpriteGridInfo() => ProjectResources.GetSpriteGrid(FilePath);
 		public CharacterInfo ToCharacterInfo() => ProjectResources.GetCharacter(FilePath);
 		public LevelInfo ToLevelInfo() => ProjectResources.GetLevel(FilePath);
+		public ProjectInfo ToProjectInfo() => ProjectResources.GetProject(FilePath);
 	}
 }

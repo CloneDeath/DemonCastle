@@ -5,6 +5,8 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteGridInfo : ISpriteInfo {
 		protected FileNavigator<SpriteGridFile> File { get; }
+		public string FileName => File.FileName;
+
 		protected SpriteGridFile Sprite => File.Resource;
 		public Texture Texture => File.GetTexture(Sprite.File);
 
@@ -15,7 +17,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
 		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
-		
+
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
 			var region = GetSpriteRegion(spriteData);

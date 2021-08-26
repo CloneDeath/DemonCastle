@@ -6,6 +6,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class ProjectInfo : IListableInfo {
 		public FileNavigator<ProjectFile> File { get; }
 		protected ProjectFile Project => File.Resource;
+		public string FileName => File.FileName;
 		
 		public ProjectInfo(FileNavigator<ProjectFile> file) {
 			File = file;
