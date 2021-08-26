@@ -7,9 +7,9 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		protected FileNavigator<SpriteAtlasFile> File { get; }
 		public string FileName => File.FileName;
 		protected SpriteAtlasFile Sprite => File.Resource;
+		public string SpriteFile => Sprite.File;
 
-
-		protected Color TransparentColor => Color.Color8(
+		public Color TransparentColor => Color.Color8(
 			(byte) Sprite.TransparentColor.Red,
 			(byte) Sprite.TransparentColor.Green,
 			(byte) Sprite.TransparentColor.Blue);
