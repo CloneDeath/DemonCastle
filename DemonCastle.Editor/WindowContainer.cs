@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Windows;
+using DemonCastle.Editor.Windows.SpriteAtlas;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
