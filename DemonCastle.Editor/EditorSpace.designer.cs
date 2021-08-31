@@ -8,7 +8,10 @@ namespace DemonCastle.Editor {
 		protected WindowContainer WindowContainer { get; }
 		
 		public EditorSpace(ProjectInfo project) {
+			Name = nameof(EditorSpace);
+			
 			AddChild(SplitContainer = new HSplitContainer {
+				Name = nameof(HSplitContainer),
 				AnchorRight = 1,
 				AnchorBottom = 1,
 			});

@@ -9,6 +9,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 
 		protected SpriteGridFile Sprite => File.Resource;
 		public Texture Texture => File.GetTexture(Sprite.File);
+		public string SpriteFile => Sprite.File;
 
 		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) {
 			File = file;
@@ -17,6 +18,12 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
 		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
+		public int Width => Sprite.Width;
+		public int Height => Sprite.Height;
+		public int XOffset => Sprite.XOffset;
+		public int YOffset => Sprite.YOffset;
+		public int XSeparation => Sprite.XSeparation;
+		public int YSeparation => Sprite.YSeparation;
 
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);

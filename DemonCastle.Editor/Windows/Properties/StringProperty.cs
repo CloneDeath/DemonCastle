@@ -2,16 +2,20 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
 	public class StringProperty : BaseProperty {
-		protected TextEdit TextEdit { get; }
+		protected LineEdit LineEdit { get; }
 
 		public string PropertyValue {
-			get => TextEdit.Text;
-			set => TextEdit.Text = value;
+			get => LineEdit.Text;
+			set => LineEdit.Text = value;
 		}
 		
 		public StringProperty() {
-			AddChild(TextEdit = new TextEdit {
-				RectMinSize = new Vector2(200, 20)
+			Name = nameof(StringProperty);
+			
+			AddChild(LineEdit = new LineEdit {
+				RectMinSize = new Vector2(20, 20),
+				Editable = false,
+				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand)
 			});
 		}
 	}

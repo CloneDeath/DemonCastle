@@ -10,6 +10,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 		}
 		
 		public BaseProperty() {
+			Name = nameof(BaseProperty);
 			AddChild(Label = new Label());
 		}
 	}

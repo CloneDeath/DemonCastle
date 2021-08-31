@@ -10,8 +10,12 @@ namespace DemonCastle.Editor.Windows.Properties {
 		}
 		
 		public IntegerProperty() {
+			Name = nameof(IntegerProperty);
+			
 			AddChild(SpinBox = new SpinBox {
-				RectMinSize = new Vector2(200, 20)
+				RectMinSize = new Vector2(20, 20),
+				Editable = false,
+				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand)
 			});
 		}
 	}

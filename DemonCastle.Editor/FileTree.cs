@@ -12,6 +12,7 @@ namespace DemonCastle.Editor {
 		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new Dictionary<TreeItem, FileNavigator>();
 
 		public FileTree(DirectoryNavigator rootDirectory) {
+			Name = nameof(FileTree);
 			Root = rootDirectory;
 			HideRoot = true;
 			CreateTree();

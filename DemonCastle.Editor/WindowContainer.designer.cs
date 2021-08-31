@@ -7,6 +7,8 @@ namespace DemonCastle.Editor {
 		protected Dictionary<FileNavigator, WindowDialog> WindowFileMap { get; } =
 			new Dictionary<FileNavigator, WindowDialog>();
 
-
+		public WindowContainer() {
+			Name = nameof(WindowContainer);
+		}
 	}
 }

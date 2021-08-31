@@ -10,6 +10,8 @@ namespace DemonCastle.Editor.Windows.Properties {
 		}
 		
 		public ColorProperty() {
+			Name = nameof(ColorProperty);
+			
 			AddChild(ColorRect = new ColorRect {
 				RectMinSize = new Vector2(16, 16)
 			});
