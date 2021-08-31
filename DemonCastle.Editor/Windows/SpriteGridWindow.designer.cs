@@ -1,12 +1,12 @@
 using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Windows.Textures;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.Editor.Windows {
 	public partial class SpriteGridWindow {
 		protected PropertyCollection PropertyCollection { get; }
-		protected ScrollContainer ScrollContainer { get; }
-		protected TextureRect TextureRect { get; }
+		protected SpriteGridTextureView TextureView { get; }
 
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
@@ -56,17 +56,12 @@ namespace DemonCastle.Editor.Windows {
 				MarginBottom = -5,
 				AnchorBottom = 1
 			});
-			AddChild(ScrollContainer = new ScrollContainer {
-				Name = nameof(ScrollContainer),
+			AddChild(TextureView = new SpriteGridTextureView(spriteGridInfo) {
 				RectPosition = new Vector2(215, 5),
 				MarginRight = -5,
 				MarginBottom = -5,
 				AnchorRight = 1,
 				AnchorBottom = 1
-			});
-			ScrollContainer.AddChild(TextureRect = new TextureRect {
-				Name = nameof(TextureRect),
-				Texture = spriteGridInfo.Texture,
 			});
 		}
 	}
