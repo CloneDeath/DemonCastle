@@ -11,5 +11,10 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			var fileContents = File.ReadAllText(filePath);
 			Resource = JsonConvert.DeserializeObject<T>(fileContents);
 		}
+
+		public void Save() {
+			var contents = JsonConvert.SerializeObject(Resource);
+			File.WriteAllText(FilePath, contents);
+		}
 	}
 }

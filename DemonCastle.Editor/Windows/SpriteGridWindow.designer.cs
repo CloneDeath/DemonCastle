@@ -25,9 +25,10 @@ namespace DemonCastle.Editor.Windows {
 				PropertyName = "File",
 				PropertyValue = spriteGridInfo.SpriteFile
 			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "Width",
-				PropertyValue = spriteGridInfo.Width
+			PropertyCollection.AddChild(new IntegerProperty(
+				() => spriteGridInfo.Width,
+				(value) => spriteGridInfo.Width = value) {
+				PropertyName = "Width"
 			});
 			PropertyCollection.AddChild(new IntegerProperty {
 				PropertyName = "Height",

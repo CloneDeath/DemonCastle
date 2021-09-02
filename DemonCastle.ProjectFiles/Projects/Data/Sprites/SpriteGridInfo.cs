@@ -18,12 +18,36 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
 		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
-		public int Width => Sprite.Width;
-		public int Height => Sprite.Height;
-		public int XOffset => Sprite.XOffset;
-		public int YOffset => Sprite.YOffset;
-		public int XSeparation => Sprite.XSeparation;
-		public int YSeparation => Sprite.YSeparation;
+		
+		public int Width {
+			get => Sprite.Width;
+			set { Sprite.Width = value; Save(); }
+		}
+
+		public int Height {
+			get => Sprite.Height;
+			set { Sprite.Height = value; Save(); }
+		}
+
+		public int XOffset {
+			get => Sprite.XOffset;
+			set { Sprite.XOffset = value; Save(); }
+		}
+
+		public int YOffset {
+			get => Sprite.YOffset;
+			set { Sprite.YOffset = value; Save(); }
+		}
+
+		public int XSeparation {
+			get => Sprite.XSeparation;
+			set { Sprite.XSeparation = value; Save(); }
+		}
+
+		public int YSeparation {
+			get => Sprite.YSeparation;
+			set { Sprite.YSeparation = value; Save(); }
+		}
 
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
@@ -47,5 +71,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		}
 
 		protected SpriteGridData GetSpriteData(string spriteName) => Sprite.Sprites.First(s => s.Name == spriteName);
+
+		protected void Save() => File.Save();
 	}
 }
