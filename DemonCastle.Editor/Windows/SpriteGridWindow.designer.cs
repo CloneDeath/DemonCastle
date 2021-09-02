@@ -25,32 +25,13 @@ namespace DemonCastle.Editor.Windows {
 				PropertyName = "File",
 				PropertyValue = spriteGridInfo.SpriteFile
 			});
-			PropertyCollection.AddChild(new IntegerProperty(
-				() => spriteGridInfo.Width,
-				(value) => spriteGridInfo.Width = value) {
-				PropertyName = "Width"
-			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "Height",
-				PropertyValue = spriteGridInfo.Height
-			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "X Offset",
-				PropertyValue = spriteGridInfo.XOffset
-			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "Y Offset",
-				PropertyValue = spriteGridInfo.YOffset
-			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "X Separation",
-				PropertyValue = spriteGridInfo.XSeparation
-			});
-			PropertyCollection.AddChild(new IntegerProperty {
-				PropertyName = "Y Separation",
-				PropertyValue = spriteGridInfo.YSeparation
-			});
-			
+			PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
+			PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
+			PropertyCollection.AddInteger("X Offset", spriteGridInfo, x => x.XOffset);
+			PropertyCollection.AddInteger("Y Offset", spriteGridInfo, x => x.YOffset);
+			PropertyCollection.AddInteger("X Separation", spriteGridInfo, x => x.XSeparation);
+			PropertyCollection.AddInteger("Y Separation", spriteGridInfo, x => x.YSeparation);
+
 			AddChild(new VSeparator {
 				Name = nameof(VSeparator),
 				RectPosition = new Vector2(210, 5),

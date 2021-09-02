@@ -15,6 +15,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(LineEdit = new LineEdit {
 				RectMinSize = new Vector2(20, 20),
 				Editable = false,
+				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
 				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand)
 			});
 		}

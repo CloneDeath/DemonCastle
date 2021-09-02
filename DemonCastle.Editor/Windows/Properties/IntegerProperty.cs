@@ -1,9 +1,8 @@
-using System;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
 	public class IntegerProperty : BaseProperty {
-		private Action<int> _setValue;
+		protected IPropertyBinding<int> Binding { get; }
 		protected SpinBox SpinBox { get; }
 
 		public int PropertyValue {
@@ -11,22 +10,22 @@ namespace DemonCastle.Editor.Windows.Properties {
 			set => SpinBox.Value = value;
 		}
 		
-		public IntegerProperty(Func<int> getValue, Action<int> setValue) {
-			_setValue = setValue;
+		public IntegerProperty(IPropertyBinding<int> binding) {
 			Name = nameof(IntegerProperty);
+			Binding = binding;
 			
 			AddChild(SpinBox = new SpinBox {
 				RectMinSize = new Vector2(20, 20),
-				Editable = false,
+				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
 				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand),
-				Value = getValue()
+				Value = Binding.Get()
 			});
 
 			SpinBox.Connect("value_changed", this, nameof(OnValueChange));
 		}
 
 		protected void OnValueChange(float value) {
-			_setValue((int)value);
+			Binding.Set((int)value);
 		}
 	}
 }

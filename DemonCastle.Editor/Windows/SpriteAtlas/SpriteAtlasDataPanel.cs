@@ -11,22 +11,10 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 				PropertyName = "Name",
 				PropertyValue = spriteData.Name
 			});
-			Properties.AddChild(new IntegerProperty {
-				PropertyName = "X",
-				PropertyValue = spriteData.X
-			});
-			Properties.AddChild(new IntegerProperty {
-				PropertyName = "Y",
-				PropertyValue = spriteData.Y
-			});
-			Properties.AddChild(new IntegerProperty {
-				PropertyName = "Width",
-				PropertyValue = spriteData.Width
-			});
-			Properties.AddChild(new IntegerProperty {
-				PropertyName = "Height",
-				PropertyValue = spriteData.Height
-			});
+			Properties.AddInteger("X", spriteData, x => x.X);
+			Properties.AddInteger("Y", spriteData, x => x.Y);
+			Properties.AddInteger("Width", spriteData, x => x.Width);
+			Properties.AddInteger("Height", spriteData, x => x.Height);
 		}
 	}
 }
