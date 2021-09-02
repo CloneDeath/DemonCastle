@@ -19,5 +19,10 @@ namespace DemonCastle.Editor.Windows.Textures {
 				}
 			}
 		}
+
+		public override void _Process(float delta) {
+			base._Process(delta);
+			Update();
+		}
 	}
 }
