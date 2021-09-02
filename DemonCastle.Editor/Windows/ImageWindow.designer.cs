@@ -7,7 +7,7 @@ namespace DemonCastle.Editor.Windows {
 		protected TextureRect TextureRect { get; }
 		
 		public ImageWindow(FileNavigator texture) {
-			WindowTitle = texture.FileName;
+			WindowTitle = $"Image - {texture.FileName}";
 			RectSize = new Vector2(300, 300);
 			
 			AddChild(ScrollContainer = new ScrollContainer {

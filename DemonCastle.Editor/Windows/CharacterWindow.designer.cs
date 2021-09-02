@@ -4,7 +4,7 @@ using Godot;
 namespace DemonCastle.Editor.Windows {
 	public partial class CharacterWindow {
 		public CharacterWindow(CharacterInfo characterInfo) {
-			WindowTitle = characterInfo.FileName;
+			WindowTitle = $"Character - {characterInfo.FileName}";
 			RectSize = new Vector2(300, 300);
 
 			var charName = new HBoxContainer {

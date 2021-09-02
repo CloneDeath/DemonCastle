@@ -10,8 +10,8 @@ namespace DemonCastle.Editor.Windows {
 
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
-			
-			WindowTitle = spriteGridInfo.FileName;
+
+			WindowTitle = $"Sprite Grid - {spriteGridInfo.FileName}";
 			RectSize = new Vector2(600, 300);
 			
 			AddChild(PropertyCollection = new PropertyCollection {

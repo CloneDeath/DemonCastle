@@ -12,7 +12,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 		protected SpriteAtlasDataCollection DataCollection { get; }
 
 		public SpriteAtlasWindow(SpriteAtlasInfo spriteAtlasInfo) {
-			WindowTitle = spriteAtlasInfo.FileName;
+			WindowTitle = $"Sprite Atlas - {spriteAtlasInfo.FileName}";
 			RectSize = new Vector2(600, 300);
 
 			AddChild(SplitContainer = new HSplitContainer {
