@@ -1,0 +1,34 @@
+using Godot;
+
+namespace DemonCastle.Editor.Windows.Properties {
+	public class FloatProperty : BaseProperty {
+		protected IPropertyBinding<float> Binding { get; }
+		protected SpinBox SpinBox { get; }
+
+		public int PropertyValue {
+			get => (int)SpinBox.Value;
+			set => SpinBox.Value = value;
+		}
+		
+		public FloatProperty(IPropertyBinding<float> binding) {
+			Name = nameof(FloatProperty);
+			Binding = binding;
+			
+			AddChild(SpinBox = new SpinBox {
+				RectMinSize = new Vector2(20, 20),
+				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
+				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand),
+				Value = Binding.Get(),
+				Step = 0.01,
+				Rounded = false
+			});
+
+			SpinBox.Connect("value_changed", this, nameof(OnValueChange));
+		}
+
+		protected void OnValueChange(float value) {
+			Binding.Set(value);
+		}
+		
+	}
+}

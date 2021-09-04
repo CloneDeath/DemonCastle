@@ -9,6 +9,9 @@ namespace DemonCastle.Editor.Windows.Properties {
 		public FileProperty(IPropertyBinding<string> binding, string directory)
 			: base(binding) {
 			Directory = directory;
+
+			LineEdit.Editable = false;
+			
 			AddChild(LoadButton = new Button {
 				Text = "..."
 			});

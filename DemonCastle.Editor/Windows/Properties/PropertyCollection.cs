@@ -27,5 +27,11 @@ namespace DemonCastle.Editor.Windows.Properties {
 				PropertyName = name
 			});
 		}
+		
+		public void AddFloat<T>(string name, T target, Expression<Func<T, float>> propertyExpression) {
+			AddChild(new FloatProperty(new PropertyBinding<T,float>(target, propertyExpression)) {
+				PropertyName = name
+			});
+		}
 	}
 }

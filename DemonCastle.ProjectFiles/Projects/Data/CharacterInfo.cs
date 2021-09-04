@@ -12,13 +12,31 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			File = file;
 		}
 		
-		public string Name => Character.Name;
-		public float WalkSpeed => Character.WalkSpeed;
-		public float JumpHeight => Character.JumpHeight;
-		public float Gravity => Character.Gravity;
+		public string Name {
+			get => Character.Name;
+			set { Character.Name = value; Save(); }
+		}
+
+		public float WalkSpeed {
+			get => Character.WalkSpeed;
+			set { Character.WalkSpeed = value; Save(); }
+		}
+
+		public float JumpHeight {
+			get => Character.JumpHeight;
+			set { Character.JumpHeight = value; Save(); }
+		}
+
+		public float Gravity {
+			get => Character.Gravity;
+			set { Character.Gravity = value; Save(); }
+		}
+
 		public IEnumerable<AnimationInfo> Animations => Character.Animations.Select(data => new AnimationInfo(File, data));
 		public string IdleAnimation => Character.IdleAnimation;
 		public string WalkAnimation => Character.WalkAnimation;
 		public Vector2 Size => new Vector2(Character.Width, Character.Height);
+		
+		protected void Save() => File.Save();
 	}
 }
