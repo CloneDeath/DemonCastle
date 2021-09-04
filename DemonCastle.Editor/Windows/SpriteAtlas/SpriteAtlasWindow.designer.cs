@@ -33,10 +33,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 				AnchorRight = 1,
 				RectMinSize = new Vector2(200, 0)
 			});
-			PropertyCollection.AddChild(new StringProperty {
-				PropertyName = "File",
-				PropertyValue = spriteAtlasInfo.SpriteFile
-			});
+			PropertyCollection.AddString("File", spriteAtlasInfo, x => x.SpriteFile);
 			PropertyCollection.AddChild(new ColorProperty {
 				PropertyName = "Transparent Color",
 				PropertyValue = spriteAtlasInfo.TransparentColor

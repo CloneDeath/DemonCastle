@@ -10,7 +10,7 @@ using Path = System.IO.Path;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class DirectoryNavigator {
-		protected string Directory { get; }
+		public string Directory { get; }
 		protected ProjectResources ProjectResources { get; }
 		public string DirectoryName => new DirectoryInfo(Directory).Name;
 

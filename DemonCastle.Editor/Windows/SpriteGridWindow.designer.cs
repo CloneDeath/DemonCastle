@@ -21,10 +21,7 @@ namespace DemonCastle.Editor.Windows {
 				MarginRight = 205,
 				AnchorBottom = 1
 			});
-			PropertyCollection.AddChild(new StringProperty {
-				PropertyName = "File",
-				PropertyValue = spriteGridInfo.SpriteFile
-			});
+			PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile);
 			PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
 			PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
 			PropertyCollection.AddInteger("X Offset", spriteGridInfo, x => x.XOffset);

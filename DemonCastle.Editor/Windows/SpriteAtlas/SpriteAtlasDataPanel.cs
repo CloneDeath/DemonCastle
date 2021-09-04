@@ -7,10 +7,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 		protected PropertyCollection Properties { get; }
 		public SpriteAtlasDataPanel(SpriteAtlasData spriteData) {
 			AddChild(Properties = new PropertyCollection());
-			Properties.AddChild(new StringProperty {
-				PropertyName = "Name",
-				PropertyValue = spriteData.Name
-			});
+			Properties.AddString("Name", spriteData, x => x.Name);
 			Properties.AddInteger("X", spriteData, x => x.X);
 			Properties.AddInteger("Y", spriteData, x => x.Y);
 			Properties.AddInteger("Width", spriteData, x => x.Width);

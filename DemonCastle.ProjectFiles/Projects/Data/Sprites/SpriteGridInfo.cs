@@ -6,19 +6,23 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public class SpriteGridInfo : ISpriteInfo {
 		protected FileNavigator<SpriteGridFile> File { get; }
 		public string FileName => File.FileName;
+		public string Directory => File.Directory;
 
 		protected SpriteGridFile Sprite => File.Resource;
 		public Texture Texture => File.GetTexture(Sprite.File);
-		public string SpriteFile => Sprite.File;
 
 		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) {
 			File = file;
 		}
-
+		
 		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
 		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
-		
+		public string SpriteFile {
+			get => Sprite.File;
+			set { Sprite.File = value; Save(); }
+		}
+
 		public int Width {
 			get => Sprite.Width;
 			set { Sprite.Width = value; Save(); }
@@ -48,7 +52,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			get => Sprite.YSeparation;
 			set { Sprite.YSeparation = value; Save(); }
 		}
-
+		
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
 			var region = GetSpriteRegion(spriteData);
