@@ -7,9 +7,12 @@ namespace DemonCastle.Editor.Windows.Properties {
 
 		public string PropertyValue {
 			get => LineEdit.Text;
-			set => LineEdit.Text = value;
+			set { 
+				LineEdit.Text = value;
+				OnValueChange(value);
+			}
 		}
-		
+
 		public StringProperty(IPropertyBinding<string> binding) {
 			Name = nameof(StringProperty);
 			Binding = binding;

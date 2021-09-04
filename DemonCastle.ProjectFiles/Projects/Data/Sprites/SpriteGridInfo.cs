@@ -18,6 +18,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
 		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
 		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
+		
 		public string SpriteFile {
 			get => Sprite.File;
 			set { Sprite.File = value; Save(); }

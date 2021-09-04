@@ -5,8 +5,7 @@ namespace DemonCastle.Editor.Windows.Textures {
 	public partial class SpriteGridTextureView {
 		protected SpriteGridInfo SpriteGridInfo { get; }
 
-		public SpriteGridTextureView(SpriteGridInfo spriteGridInfo)
-			: base(spriteGridInfo.Texture) {
+		public SpriteGridTextureView(SpriteGridInfo spriteGridInfo) {
 			SpriteGridInfo = spriteGridInfo;
 		}
 	}

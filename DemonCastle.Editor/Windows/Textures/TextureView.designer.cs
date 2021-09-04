@@ -4,12 +4,16 @@ namespace DemonCastle.Editor.Windows.Textures {
 	public partial class TextureView {
 		protected TextureRect TextureRect { get; }
 
-		public TextureView(Texture texture) {
+		public Texture Texture {
+			get => TextureRect.Texture;
+			set => TextureRect.Texture = value;
+		}
+
+		public TextureView() {
 			Name = nameof(TextureView);
 			
 			AddChild(TextureRect = new TextureRect {
-				Name = nameof(TextureRect),
-				Texture = texture,
+				Name = nameof(TextureRect)
 			});
 		}
 	}
