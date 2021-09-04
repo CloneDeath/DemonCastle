@@ -18,9 +18,9 @@ namespace DemonCastle.Editor.Windows.Properties {
 				RectMinSize = new Vector2(20, 20),
 				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
 				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand),
-				Value = Binding.Get(),
 				Step = 0.01,
-				Rounded = false
+				Rounded = false,
+				Value = Binding.Get()
 			});
 
 			SpinBox.Connect("value_changed", this, nameof(OnValueChange));

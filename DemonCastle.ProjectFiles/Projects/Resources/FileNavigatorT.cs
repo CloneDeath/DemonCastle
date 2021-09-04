@@ -13,7 +13,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		}
 
 		public void Save() {
-			var contents = JsonConvert.SerializeObject(Resource);
+			var contents = JsonConvert.SerializeObject(Resource, Formatting.Indented);
 			File.WriteAllText(FilePath, contents);
 		}
 	}
