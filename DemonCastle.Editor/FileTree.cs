@@ -7,22 +7,39 @@ using Godot;
 namespace DemonCastle.Editor {
 	public class FileTree : Tree {
 		protected DirectoryNavigator Root { get; }
+		protected DirectoryPopupMenu DirectoryPopupMenu { get; }
+		
 		public event Action<FileNavigator> OnItemActivated;
 
 		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new Dictionary<TreeItem, FileNavigator>();
+		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new Dictionary<TreeItem, DirectoryNavigator>();
 
 		public FileTree(DirectoryNavigator rootDirectory) {
 			Name = nameof(FileTree);
 			Root = rootDirectory;
 			HideRoot = true;
+			AllowRmbSelect = true;
+
+			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
+			
 			CreateTree();
 			Connect("item_activated", this, nameof(ItemActivated));
+			Connect("item_rmb_selected", this, nameof(ItemRmbSelected));
 		}
 
 		protected void ItemActivated() {
 			var selected = GetSelected();
 			if (!FileMap.ContainsKey(selected)) return;
+			
 			OnItemActivated?.Invoke(FileMap[selected]);
+		}
+
+		protected void ItemRmbSelected(Vector2 position) {
+			var selected = GetSelected();
+			if (!DirectoryMap.ContainsKey(selected)) return;
+			
+			DirectoryPopupMenu.RectPosition = position;
+			DirectoryPopupMenu.Popup_();
 		}
 
 		protected void CreateTree() {
@@ -37,6 +54,7 @@ namespace DemonCastle.Editor {
 			var dir = CreateItem(parent);
 			dir.SetText(0, directory.DirectoryName);
 			dir.SetIcon(0, IconTextures.FolderIcon);
+			DirectoryMap[dir] = directory;
 
 			foreach (var subDirectory in directory.GetDirectories()) {
 				CreateDirectory(dir, subDirectory);

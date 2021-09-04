@@ -4,39 +4,32 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public class CharacterInfo : IListableInfo {
-		protected FileNavigator<CharacterFile> File { get; }
-		public string FileName => File.FileName;
-		protected CharacterFile Character => File.Resource;
-		public CharacterInfo(FileNavigator<CharacterFile> file) {
-			File = file;
-		}
+	public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
+		public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) { }
 		
 		public string Name {
-			get => Character.Name;
-			set { Character.Name = value; Save(); }
+			get => Resource.Name;
+			set { Resource.Name = value; Save(); }
 		}
 
 		public float WalkSpeed {
-			get => Character.WalkSpeed;
-			set { Character.WalkSpeed = value; Save(); }
+			get => Resource.WalkSpeed;
+			set { Resource.WalkSpeed = value; Save(); }
 		}
 
 		public float JumpHeight {
-			get => Character.JumpHeight;
-			set { Character.JumpHeight = value; Save(); }
+			get => Resource.JumpHeight;
+			set { Resource.JumpHeight = value; Save(); }
 		}
 
 		public float Gravity {
-			get => Character.Gravity;
-			set { Character.Gravity = value; Save(); }
+			get => Resource.Gravity;
+			set { Resource.Gravity = value; Save(); }
 		}
 
-		public IEnumerable<AnimationInfo> Animations => Character.Animations.Select(data => new AnimationInfo(File, data));
-		public string IdleAnimation => Character.IdleAnimation;
-		public string WalkAnimation => Character.WalkAnimation;
-		public Vector2 Size => new Vector2(Character.Width, Character.Height);
-		
-		protected void Save() => File.Save();
+		public IEnumerable<AnimationInfo> Animations => Resource.Animations.Select(data => new AnimationInfo(File, data));
+		public string IdleAnimation => Resource.IdleAnimation;
+		public string WalkAnimation => Resource.WalkAnimation;
+		public Vector2 Size => new Vector2(Resource.Width, Resource.Height);
 	}
 }

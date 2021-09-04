@@ -3,55 +3,49 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteGridInfo : ISpriteInfo {
-		protected FileNavigator<SpriteGridFile> File { get; }
-		public string FileName => File.FileName;
-		public string Directory => File.Directory;
-
-		protected SpriteGridFile Sprite => File.Resource;
-		public Texture Texture => File.GetTexture(Sprite.File);
-
-		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) {
-			File = file;
-		}
+	public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteInfo {
+		public Texture Texture => File.GetTexture(Resource.File);
 		
-		protected Vector2 Offset => new Vector2(Sprite.XOffset, Sprite.YOffset);
-		protected Vector2 Span => new Vector2(Sprite.Width + Sprite.XSeparation, Sprite.Height + Sprite.YSeparation);
-		protected Vector2 Size => new Vector2(Sprite.Width, Sprite.Height);
+		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) { }
+
+		
+		protected Vector2 Offset => new Vector2(Resource.XOffset, Resource.YOffset);
+		protected Vector2 Span => new Vector2(Resource.Width + Resource.XSeparation, Resource.Height + Resource.YSeparation);
+		protected Vector2 Size => new Vector2(Resource.Width, Resource.Height);
 		
 		public string SpriteFile {
-			get => Sprite.File;
-			set { Sprite.File = value; Save(); }
+			get => Resource.File;
+			set { Resource.File = value; Save(); }
 		}
 
 		public int Width {
-			get => Sprite.Width;
-			set { Sprite.Width = value; Save(); }
+			get => Resource.Width;
+			set { Resource.Width = value; Save(); }
 		}
 
 		public int Height {
-			get => Sprite.Height;
-			set { Sprite.Height = value; Save(); }
+			get => Resource.Height;
+			set { Resource.Height = value; Save(); }
 		}
 
 		public int XOffset {
-			get => Sprite.XOffset;
-			set { Sprite.XOffset = value; Save(); }
+			get => Resource.XOffset;
+			set { Resource.XOffset = value; Save(); }
 		}
 
 		public int YOffset {
-			get => Sprite.YOffset;
-			set { Sprite.YOffset = value; Save(); }
+			get => Resource.YOffset;
+			set { Resource.YOffset = value; Save(); }
 		}
 
 		public int XSeparation {
-			get => Sprite.XSeparation;
-			set { Sprite.XSeparation = value; Save(); }
+			get => Resource.XSeparation;
+			set { Resource.XSeparation = value; Save(); }
 		}
 
 		public int YSeparation {
-			get => Sprite.YSeparation;
-			set { Sprite.YSeparation = value; Save(); }
+			get => Resource.YSeparation;
+			set { Resource.YSeparation = value; Save(); }
 		}
 		
 		public SpriteInfoNode GetSprite(string spriteName) {
@@ -75,8 +69,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			};
 		}
 
-		protected SpriteGridData GetSpriteData(string spriteName) => Sprite.Sprites.First(s => s.Name == spriteName);
-
-		protected void Save() => File.Save();
+		protected SpriteGridData GetSpriteData(string spriteName) => Resource.Sprites.First(s => s.Name == spriteName);
 	}
 }
