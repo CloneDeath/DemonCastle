@@ -4,6 +4,7 @@ namespace DemonCastle.Editor {
 	public partial class FileTree {
 		protected DirectoryNavigator Root { get; }
 		protected DirectoryPopupMenu DirectoryPopupMenu { get; }
+		protected FilePopupMenu FilePopupMenu { get; }
 		
 		public FileTree(DirectoryNavigator rootDirectory) {
 			Name = nameof(FileTree);
@@ -13,6 +14,9 @@ namespace DemonCastle.Editor {
 
 			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
 			DirectoryPopupMenu.CreateCharacter += OnCreateCharacterSelected;
+
+			AddChild(FilePopupMenu = new FilePopupMenu());
+			FilePopupMenu.DeleteFile += OnDeleteFile;
 			
 			CreateTree();
 			Connect("item_activated", this, nameof(ItemActivated));

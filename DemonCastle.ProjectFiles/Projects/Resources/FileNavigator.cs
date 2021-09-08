@@ -3,6 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using Path = System.IO.Path;
+using File = System.IO.File;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
 	public class FileNavigator : DirectoryNavigator {
@@ -15,6 +16,8 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			: base(Path.GetDirectoryName(filePath), resources) {
 			FilePath = filePath;
 		}
+
+		public void DeleteFile() => File.Delete(FilePath);
 
 		public TextInfo ToTextInfo() => ProjectResources.GetText(FilePath);
 		public Texture ToTexture() => ProjectResources.GetTexture(FilePath);

@@ -20,10 +20,13 @@ namespace DemonCastle.Editor {
 
 		protected void ItemRmbSelected(Vector2 position) {
 			var selected = GetSelected();
-			if (!DirectoryMap.ContainsKey(selected)) return;
-			
-			DirectoryPopupMenu.RectPosition = position;
-			DirectoryPopupMenu.Popup_();
+			if (DirectoryMap.ContainsKey(selected)) {
+				DirectoryPopupMenu.RectPosition = position;
+				DirectoryPopupMenu.Popup_();
+			} else if (FileMap.ContainsKey(selected)) {
+				FilePopupMenu.RectPosition = position;
+				FilePopupMenu.Popup_();
+			}
 		}
 
 		protected void CreateTree() {
@@ -76,6 +79,16 @@ namespace DemonCastle.Editor {
 			if (!DirectoryMap.ContainsKey(selected)) return;
 			var dirNav = DirectoryMap[selected];
 			dirNav.CreateFile("character", "dcc");
+			
+			CreateTree();
+		}
+
+		protected void OnDeleteFile() {
+			var selected = GetSelected();
+			if (!FileMap.ContainsKey(selected)) return;
+
+			var fileNav = FileMap[selected];
+			fileNav.DeleteFile();
 			
 			CreateTree();
 		}
