@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
+using File = System.IO.File;
 using Path = System.IO.Path;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
@@ -66,6 +67,39 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public IEnumerable<FileNavigator> GetFiles() {
 			var files = System.IO.Directory.GetFiles(Directory).OrderBy(s => s);
 			return files.Select(file => new FileNavigator(file, ProjectResources));
+		}
+
+		public void CreateFile(string fileName, string extension) {
+			var file = $"{fileName}.{extension}";
+			if (FileExists(file)) {
+				CreateFile(fileName, 0, extension);
+			}
+			else {
+				CreateEmptyFile(file);
+			}
+		}
+
+		protected void CreateFile(string fileName, int index, string extension) {
+			while (true) {
+				var file = $"{fileName}{index}.{extension}";
+				if (FileExists(file)) {
+					index += 1;
+					continue;
+				}
+
+				CreateEmptyFile(file);
+				break;
+			}
+		}
+
+		protected void CreateEmptyFile(string fileName) {
+			var fullPath = Path.Combine(Directory, fileName);
+			File.WriteAllText(fullPath, string.Empty);
+		}
+
+		public bool FileExists(string fileName) {
+			var fullPath = Path.Combine(Directory, fileName);
+			return File.Exists(fullPath);
 		}
 	}
 }

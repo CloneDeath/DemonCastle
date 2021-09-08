@@ -5,28 +5,12 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor {
-	public class FileTree : Tree {
-		protected DirectoryNavigator Root { get; }
-		protected DirectoryPopupMenu DirectoryPopupMenu { get; }
-		
+	public partial class FileTree : Tree {
 		public event Action<FileNavigator> OnItemActivated;
 
 		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new Dictionary<TreeItem, FileNavigator>();
 		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new Dictionary<TreeItem, DirectoryNavigator>();
-
-		public FileTree(DirectoryNavigator rootDirectory) {
-			Name = nameof(FileTree);
-			Root = rootDirectory;
-			HideRoot = true;
-			AllowRmbSelect = true;
-
-			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
-			
-			CreateTree();
-			Connect("item_activated", this, nameof(ItemActivated));
-			Connect("item_rmb_selected", this, nameof(ItemRmbSelected));
-		}
-
+		
 		protected void ItemActivated() {
 			var selected = GetSelected();
 			if (!FileMap.ContainsKey(selected)) return;
@@ -45,6 +29,7 @@ namespace DemonCastle.Editor {
 		protected void CreateTree() {
 			Clear();
 			FileMap.Clear();
+			DirectoryMap.Clear();
 			CreateDirectory(null, Root);
 		}
 
@@ -84,6 +69,15 @@ namespace DemonCastle.Editor {
 				default:
 					return IconTextures.UnknownIcon;
 			}
+		}
+
+		public void OnCreateCharacterSelected() {
+			var selected = GetSelected();
+			if (!DirectoryMap.ContainsKey(selected)) return;
+			var dirNav = DirectoryMap[selected];
+			dirNav.CreateFile("character", "dcc");
+			
+			CreateTree();
 		}
 	}
 }
