@@ -10,6 +10,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public string FilePath { get; }
 		public string FileName => Path.GetFileName(FilePath);
 		public string Extension => Path.GetExtension(FilePath);
+		public string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(FileName);
 
 		public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
 		public FileNavigator(string filePath, ProjectResources resources) 
@@ -26,5 +27,10 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public CharacterInfo ToCharacterInfo() => ProjectResources.GetCharacter(FilePath);
 		public LevelInfo ToLevelInfo() => ProjectResources.GetLevel(FilePath);
 		public ProjectInfo ToProjectInfo() => ProjectResources.GetProject(FilePath);
+
+		public void Rename(string newName) {
+			var newPath = Path.Combine(Directory, newName);
+			File.Move(FilePath, newPath);
+		}
 	}
 }

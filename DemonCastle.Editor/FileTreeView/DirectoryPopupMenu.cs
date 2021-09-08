@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace DemonCastle.Editor {
+namespace DemonCastle.Editor.FileTreeView {
 	public class DirectoryPopupMenu : PopupMenu {
 		public event Action CreateCharacter;
 		

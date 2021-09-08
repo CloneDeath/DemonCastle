@@ -4,7 +4,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor {
+namespace DemonCastle.Editor.FileTreeView {
 	public partial class FileTree : Tree {
 		public event Action<FileNavigator> OnItemActivated;
 
@@ -83,13 +83,34 @@ namespace DemonCastle.Editor {
 			CreateTree();
 		}
 
-		protected void OnDeleteFile() {
-			var selected = GetSelected();
-			if (!FileMap.ContainsKey(selected)) return;
+		protected FileNavigator SelectedFile {
+			get {
+				var selected = GetSelected();
+				return FileMap.ContainsKey(selected) ? FileMap[selected] : null;
+			}
+		}
 
-			var fileNav = FileMap[selected];
-			fileNav.DeleteFile();
+		protected void OnRenameFile() {
+			if (SelectedFile == null) return;
+			ConfirmRename.Text = SelectedFile.FileNameWithoutExtension;
+			ConfirmRename.Popup_();
+		}
+
+		protected void OnRenameConfirmed() {
+			if (SelectedFile == null) return;
+
+			SelectedFile.Rename($"{ConfirmRename.Text}{SelectedFile.Extension}");
+			CreateTree();
+		}
+
+		protected void OnDeleteFile() {
+			ConfirmDelete.Popup_();
+		}
+
+		protected void OnDeleteConfirmed() {
+			if (SelectedFile == null) return;
 			
+			SelectedFile.DeleteFile();
 			CreateTree();
 		}
 	}
