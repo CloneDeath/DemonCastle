@@ -13,7 +13,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			Name = nameof(RenameDialog);
 			DialogText = "Enter a new name:";
 			PopupExclusive = true;
-			RectSize += new Vector2(0, 20);
+			RectMinSize += new Vector2(0, 10);
 			
 			AddChild(LineEdit = new LineEdit());
 			Connect("about_to_show", this, nameof(OnAboutToShow));
