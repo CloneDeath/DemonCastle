@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using DemonCastle.Editor.Windows;
 using DemonCastle.Editor.Windows.SpriteAtlas;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -13,11 +15,21 @@ namespace DemonCastle.Editor {
 				return;
 			}
 
-			var window = GetWindow(file);
-			WindowFileMap[file] = window;
-			AddChild(window);
-			window.RectPosition = RectGlobalPosition + GetNextWindowLocation();
-			window.Show();
+			try {
+				var window = GetWindow(file);
+				WindowFileMap[file] = window;
+				AddChild(window);
+				window.RectPosition = RectGlobalPosition + GetNextWindowLocation();
+				window.Show();
+			}
+			catch (TargetInvocationException ex) {
+				ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.InnerException?.Message}";
+				ErrorWindow.PopupCentered();
+			}
+			catch (Exception ex) {
+				ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.Message}";
+				ErrorWindow.PopupCentered();
+			}
 		}
 
 		protected WindowDialog GetWindow(FileNavigator file) {
