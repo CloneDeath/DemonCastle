@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -47,7 +48,9 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			get => Resource.YSeparation;
 			set { Resource.YSeparation = value; Save(); }
 		}
-		
+
+		public IEnumerable<SpriteGridData> SpriteData => Resource.Sprites;
+
 		public SpriteInfoNode GetSprite(string spriteName) {
 			var spriteData = GetSpriteData(spriteName);
 			var region = GetSpriteRegion(spriteData);

@@ -7,6 +7,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 	public partial class SpriteGridWindow {
 		protected PropertyCollection PropertyCollection { get; }
 		protected SpriteGridTextureView TextureView { get; }
+		protected SpriteGridDataCollection DataCollection { get; }
 
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
@@ -28,7 +29,13 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			PropertyCollection.AddInteger("Y Offset", spriteGridInfo, x => x.YOffset);
 			PropertyCollection.AddInteger("X Separation", spriteGridInfo, x => x.XSeparation);
 			PropertyCollection.AddInteger("Y Separation", spriteGridInfo, x => x.YSeparation);
-
+			PropertyCollection.AddChild(DataCollection = new SpriteGridDataCollection(spriteGridInfo.SpriteData) {
+				AnchorRight = 1,
+				AnchorBottom = 1,
+				MarginBottom = 0,
+				RectMinSize = new Vector2(100, 100)
+			});
+			
 			AddChild(new VSeparator {
 				Name = nameof(VSeparator),
 				RectPosition = new Vector2(210, 5),
