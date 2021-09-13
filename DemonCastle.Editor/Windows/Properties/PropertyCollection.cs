@@ -33,5 +33,11 @@ namespace DemonCastle.Editor.Windows.Properties {
 				PropertyName = name
 			});
 		}
+
+		public void AddBoolean<T>(string name, T target, Expression<Func<T, bool>> propertyExpression) {
+			AddChild(new BooleanProperty(new PropertyBinding<T,bool>(target, propertyExpression)) {
+				PropertyName = name
+			});
+		}
 	}
 }

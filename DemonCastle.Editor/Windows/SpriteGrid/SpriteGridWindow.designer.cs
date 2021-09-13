@@ -3,7 +3,7 @@ using DemonCastle.Editor.Windows.Textures;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Windows {
+namespace DemonCastle.Editor.Windows.SpriteGrid {
 	public partial class SpriteGridWindow {
 		protected PropertyCollection PropertyCollection { get; }
 		protected SpriteGridTextureView TextureView { get; }

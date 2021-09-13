@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using DemonCastle.Editor.Windows;
 using DemonCastle.Editor.Windows.SpriteAtlas;
+using DemonCastle.Editor.Windows.SpriteGrid;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
