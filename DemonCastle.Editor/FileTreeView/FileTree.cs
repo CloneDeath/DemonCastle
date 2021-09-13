@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Editor.Icons;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -78,7 +79,9 @@ namespace DemonCastle.Editor.FileTreeView {
 			var selected = GetSelected();
 			if (!DirectoryMap.ContainsKey(selected)) return;
 			var dirNav = DirectoryMap[selected];
-			dirNav.CreateFile("character", "dcc");
+			dirNav.CreateFile("character", "dcc", new CharacterFile {
+				Name = "character"
+			});
 			
 			CreateTree();
 		}
@@ -93,7 +96,8 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected void OnRenameFile() {
 			if (SelectedFile == null) return;
 			ConfirmRename.Text = SelectedFile.FileNameWithoutExtension;
-			ConfirmRename.Popup_();
+			ConfirmRename.PopupCentered();
+			ConfirmRename.FocusLineEdit();
 		}
 
 		protected void OnRenameConfirmed() {
@@ -104,7 +108,7 @@ namespace DemonCastle.Editor.FileTreeView {
 		}
 
 		protected void OnDeleteFile() {
-			ConfirmDelete.Popup_();
+			ConfirmDelete.PopupCentered();
 		}
 
 		protected void OnDeleteConfirmed() {

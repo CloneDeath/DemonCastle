@@ -5,6 +5,7 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\DemonCastle.Game\DemonCastle.Game.csproj" />
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
 	<ItemGroup>

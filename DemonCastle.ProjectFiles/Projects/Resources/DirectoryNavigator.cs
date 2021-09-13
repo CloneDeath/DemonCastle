@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
+using Newtonsoft.Json;
 using File = System.IO.File;
 using Path = System.IO.Path;
 
@@ -69,17 +70,18 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			return files.Select(file => new FileNavigator(file, ProjectResources));
 		}
 
-		public void CreateFile(string fileName, string extension) {
+		public void CreateFile<TFile>(string fileName, string extension, TFile data) {
 			var file = $"{fileName}.{extension}";
+			var contents = JsonConvert.SerializeObject(data);
 			if (FileExists(file)) {
-				CreateFile(fileName, 0, extension);
+				CreateFile(fileName, 0, extension, contents);
 			}
 			else {
-				CreateEmptyFile(file);
+				CreateFileWithContents(file, contents);
 			}
 		}
 
-		protected void CreateFile(string fileName, int index, string extension) {
+		protected void CreateFile(string fileName, int index, string extension, string contents) {
 			while (true) {
 				var file = $"{fileName}{index}.{extension}";
 				if (FileExists(file)) {
@@ -87,14 +89,14 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 					continue;
 				}
 
-				CreateEmptyFile(file);
+				CreateFileWithContents(file, contents);
 				break;
 			}
 		}
 
-		protected void CreateEmptyFile(string fileName) {
+		protected void CreateFileWithContents(string fileName, string contents) {
 			var fullPath = Path.Combine(Directory, fileName);
-			File.WriteAllText(fullPath, string.Empty);
+			File.WriteAllText(fullPath, contents);
 		}
 
 		public bool FileExists(string fileName) {
