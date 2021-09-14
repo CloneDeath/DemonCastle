@@ -29,7 +29,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			PropertyCollection.AddInteger("Y Offset", spriteGridInfo, x => x.YOffset);
 			PropertyCollection.AddInteger("X Separation", spriteGridInfo, x => x.XSeparation);
 			PropertyCollection.AddInteger("Y Separation", spriteGridInfo, x => x.YSeparation);
-			PropertyCollection.AddChild(DataCollection = new SpriteGridDataCollection(spriteGridInfo.SpriteData) {
+			PropertyCollection.AddChild(DataCollection = new SpriteGridDataCollection(spriteGridInfo) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
 				MarginBottom = 0,
