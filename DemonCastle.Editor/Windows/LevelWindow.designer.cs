@@ -6,6 +6,7 @@ namespace DemonCastle.Editor.Windows {
 		public LevelWindow(LevelInfo levelInfo) {
 			WindowTitle = $"Level - {levelInfo.FileName}";
 			RectSize = new Vector2(300, 300);
+			RectMinSize = RectSize;
 		}
 	}
 }

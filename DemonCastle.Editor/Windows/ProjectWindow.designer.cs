@@ -6,6 +6,7 @@ namespace DemonCastle.Editor.Windows {
 		public ProjectWindow(ProjectInfo projectInfo) {
 			WindowTitle = $"Project - {projectInfo.FileName}";
 			RectSize = new Vector2(300, 300);
+			RectMinSize = RectSize;
 		}
 	}
 }

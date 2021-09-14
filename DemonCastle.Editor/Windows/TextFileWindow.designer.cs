@@ -9,6 +9,8 @@ namespace DemonCastle.Editor.Windows {
 		public TextFileWindow(TextInfo textInfo) {
 			WindowTitle = $"Text - {textInfo.FileName}";
 			RectSize = new Vector2(300, 300);
+			RectMinSize = RectSize;
+			
 			AddChild(TextEdit = new TextEdit {
 				AnchorRight = 1,
 				AnchorBottom = 1,

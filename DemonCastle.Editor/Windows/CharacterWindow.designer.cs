@@ -8,6 +8,7 @@ namespace DemonCastle.Editor.Windows {
 		public CharacterWindow(CharacterInfo characterInfo) {
 			WindowTitle = $"Character - {characterInfo.FileName}";
 			RectSize = new Vector2(300, 300);
+			RectMinSize = RectSize;
 
 			AddChild(Properties = new PropertyCollection {
 				MarginLeft = 5,

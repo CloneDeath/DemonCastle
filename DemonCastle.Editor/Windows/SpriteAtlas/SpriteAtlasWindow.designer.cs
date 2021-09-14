@@ -14,6 +14,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 		public SpriteAtlasWindow(SpriteAtlasInfo spriteAtlasInfo) {
 			WindowTitle = $"Sprite Atlas - {spriteAtlasInfo.FileName}";
 			RectSize = new Vector2(600, 300);
+			RectMinSize = RectSize;
 
 			AddChild(SplitContainer = new HSplitContainer {
 				AnchorRight = 1,
