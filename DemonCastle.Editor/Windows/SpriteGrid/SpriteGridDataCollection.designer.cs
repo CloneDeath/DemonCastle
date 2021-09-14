@@ -30,7 +30,8 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			}
 			
 			Contents.AddChild(new Button {
-				Text = "Add Sprite Data"
+				Text = "Add Sprite Data",
+				Disabled = true
 			});
 		}
 	}
