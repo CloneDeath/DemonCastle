@@ -1,11 +1,11 @@
 using DemonCastle.Editor.Windows.Properties;
-using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.SpriteGrid {
 	public class SpriteGridDataPanel : PanelContainer {
 		protected PropertyCollection Properties { get; }
-		public SpriteGridDataPanel(SpriteGridData spriteData) {
+		public SpriteGridDataPanel(SpriteGridDataInfo spriteData) {
 			AddChild(Properties = new PropertyCollection());
 			Properties.AddString("Name", spriteData, x => x.Name);
 			Properties.AddInteger("X", spriteData, x => x.X);

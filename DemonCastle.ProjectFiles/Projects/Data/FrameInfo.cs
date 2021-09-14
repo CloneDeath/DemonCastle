@@ -12,8 +12,8 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		}
 
 		public float Duration => FrameData.Duration;
-		protected ISpriteInfo Source => Directory.GetSprite(FrameData.Source);
+		protected ISpriteSource Source => Directory.GetSprite(FrameData.Source);
 
-		public SpriteInfoNode Sprite => Source.GetSprite(FrameData.Sprite);
+		public SpriteInfoNode Sprite => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite));
 	}
 }

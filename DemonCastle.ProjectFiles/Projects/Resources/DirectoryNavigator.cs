@@ -39,7 +39,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			return ProjectResources.GetLevel(path);
 		}
 
-		public ISpriteInfo GetSprite(string localPath) {
+		public ISpriteSource GetSprite(string localPath) {
 			var path = Path.Combine(Directory, localPath);
 			if (path.ToLower().EndsWith(".dcsg")) {
 				return ProjectResources.GetSpriteGrid(path);

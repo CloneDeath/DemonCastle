@@ -12,6 +12,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			File = file;
 		}
 		
-		protected void Save() => File.Save();
+		public void Save() => File.Save();
 	}
 }

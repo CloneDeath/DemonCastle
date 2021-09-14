@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteInfo {
-		public Texture Texture => File.GetTexture(Resource.File);
-		
-		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) { }
+	public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
+		public List<SpriteGridDataInfo> SpriteData { get; }
 
+		public Texture Texture => File.GetTexture(Resource.File);
+
+		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
+			SpriteData = Resource.Sprites.Select(s => new SpriteGridDataInfo(this, s)).ToList();
+		}
 		
-		protected Vector2 Offset => new Vector2(Resource.XOffset, Resource.YOffset);
-		protected Vector2 Span => new Vector2(Resource.Width + Resource.XSeparation, Resource.Height + Resource.YSeparation);
-		protected Vector2 Size => new Vector2(Resource.Width, Resource.Height);
+		public Vector2 Offset => new Vector2(Resource.XOffset, Resource.YOffset);
+		public Vector2 Span => new Vector2(Resource.Width + Resource.XSeparation, Resource.Height + Resource.YSeparation);
+		public Vector2 Size => new Vector2(Resource.Width, Resource.Height);
 		
 		public string SpriteFile {
 			get => Resource.File;
@@ -48,30 +52,9 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			get => Resource.YSeparation;
 			set { Resource.YSeparation = value; Save(); }
 		}
-
-		public IEnumerable<SpriteGridData> SpriteData => Resource.Sprites;
-
-		public SpriteInfoNode GetSprite(string spriteName) {
-			var spriteData = GetSpriteData(spriteName);
-			var region = GetSpriteRegion(spriteData);
-			return new SpriteInfoNode(Texture, new SpriteDefinition {
-				Region = region,
-				FlipHorizontal = spriteData.FlipHorizontal
-			});
+		
+		public ISpriteDefinition GetSpriteDefinition(string spriteName) {
+			return SpriteData.FirstOrDefault(s => s.Name == spriteName);
 		}
-
-		public Rect2 GetRegion(string spriteName) {
-			var spriteData = GetSpriteData(spriteName);
-			return GetSpriteRegion(spriteData);
-		}
-
-		private Rect2 GetSpriteRegion(SpriteGridData spriteGridData) {
-			return new Rect2 {
-				Position = Offset + Span * new Vector2(spriteGridData.X, spriteGridData.Y),
-				Size = Size
-			};
-		}
-
-		protected SpriteGridData GetSpriteData(string spriteName) => Resource.Sprites.First(s => s.Name == spriteName);
 	}
 }

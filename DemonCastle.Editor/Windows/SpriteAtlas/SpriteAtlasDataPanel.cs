@@ -1,11 +1,11 @@
 using DemonCastle.Editor.Windows.Properties;
-using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.SpriteAtlas {
 	public class SpriteAtlasDataPanel : PanelContainer {
 		protected PropertyCollection Properties { get; }
-		public SpriteAtlasDataPanel(SpriteAtlasData spriteData) {
+		public SpriteAtlasDataPanel(SpriteAtlasDataInfo spriteData) {
 			AddChild(Properties = new PropertyCollection());
 			Properties.AddString("Name", spriteData, x => x.Name);
 			Properties.AddInteger("X", spriteData, x => x.X);

@@ -1,5 +1,6 @@
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -16,9 +17,10 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		}
 		
 		public string Name => TileData.Name;
-		protected ISpriteInfo Sprite => Level.GetSprite(TileData.Source);
+		protected ISpriteSource Source => Level.GetSprite(TileData.Source);
+		protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(TileData.Sprite);
 		public Texture Texture => Sprite.Texture;
-		public Rect2 Region => Sprite.GetRegion(TileData.Sprite);
+		public Rect2 Region => Sprite.Region;
 		public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
 	}
 }
