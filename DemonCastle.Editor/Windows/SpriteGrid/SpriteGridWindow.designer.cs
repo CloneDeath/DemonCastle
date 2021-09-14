@@ -13,12 +13,12 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Name = nameof(SpriteGridWindow);
 
 			WindowTitle = $"Sprite Grid - {spriteGridInfo.FileName}";
-			RectSize = new Vector2(600, 300);
+			RectSize = new Vector2(600, 350);
 			
 			AddChild(PropertyCollection = new PropertyCollection {
 				MarginLeft = 5,
 				MarginTop = 5,
-				MarginBottom = 5,
+				MarginBottom = -5,
 				MarginRight = 205,
 				AnchorBottom = 1
 			});
