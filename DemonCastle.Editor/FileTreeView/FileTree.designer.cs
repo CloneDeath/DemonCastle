@@ -6,7 +6,7 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected DirectoryNavigator Root { get; }
 		protected DirectoryPopupMenu DirectoryPopupMenu { get; }
 		protected FilePopupMenu FilePopupMenu { get; }
-		protected ConfirmationDialog ConfirmDelete { get; }
+		protected DeleteDialog ConfirmDelete { get; }
 		protected RenameDialog ConfirmRename { get; }
 
 		
@@ -19,10 +19,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			AddChild(ConfirmRename = new RenameDialog());
 			ConfirmRename.Connect("confirmed", this, nameof(OnRenameConfirmed));
 			
-			AddChild(ConfirmDelete = new ConfirmationDialog {
-				DialogText = "Are you sure you wish to delete this file?",
-				PopupExclusive = true
-			});
+			AddChild(ConfirmDelete = new DeleteDialog());
 			ConfirmDelete.Connect("confirmed", this, nameof(OnDeleteConfirmed));
 
 			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
