@@ -5,6 +5,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 	public partial class SpriteGridDataCollection {
 		protected VBoxContainer SpriteCollection { get; }
 		protected VBoxContainer Contents { get; }
+		protected Button AddSpriteDataButton { get; }
 
 		public SpriteGridDataCollection(SpriteGridInfo spriteGrid) {
 			SpriteGrid = spriteGrid;
@@ -25,14 +26,12 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
 				SizeFlagsHorizontal = (int) (SizeFlags.Fill | SizeFlags.Expand)
 			});
-			foreach (var data in spriteGrid.SpriteData) {
-				SpriteCollection.AddChild(new SpriteGridDataPanel(data));
-			}
+			ReloadSpriteData();
 			
-			Contents.AddChild(new Button {
-				Text = "Add Sprite Data",
-				Disabled = true
+			Contents.AddChild(AddSpriteDataButton = new Button {
+				Text = "Add Sprite Data"
 			});
+			AddSpriteDataButton.Connect("pressed", this, nameof(OnAddSpriteDataButtonPressed));
 		}
 	}
 }

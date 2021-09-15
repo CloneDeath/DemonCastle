@@ -56,5 +56,11 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		public ISpriteDefinition GetSpriteDefinition(string spriteName) {
 			return SpriteData.FirstOrDefault(s => s.Name == spriteName);
 		}
+
+		public void AddNewSpriteData() {
+			var spriteData = new SpriteGridData();
+			Resource.Sprites.Add(spriteData);
+			SpriteData.Add(new SpriteGridDataInfo(this, spriteData));
+		}
 	}
 }
