@@ -5,10 +5,10 @@ namespace DemonCastle.ProjectFiles {
 		public string File { get; set; } = string.Empty;
 		public int Width { get; set; } = 16;
 		public int Height { get; set; } = 16;
-		public int XSeparation { get; set; } = 0;
-		public int YSeparation { get; set; } = 0;
-		public int XOffset { get; set; } = 0;
-		public int YOffset { get; set; } = 0;
+		public int XSeparation { get; set; }
+		public int YSeparation { get; set; }
+		public int XOffset { get; set; }
+		public int YOffset { get; set; }
 		public List<SpriteGridData> Sprites { get; set; } = new List<SpriteGridData>();
 	}
 
