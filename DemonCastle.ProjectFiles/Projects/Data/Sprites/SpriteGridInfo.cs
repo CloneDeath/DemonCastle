@@ -61,6 +61,13 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			var spriteData = new SpriteGridData();
 			Resource.Sprites.Add(spriteData);
 			SpriteData.Add(new SpriteGridDataInfo(this, spriteData));
+			Save();
+		}
+
+		public void Remove(SpriteGridData data, SpriteGridDataInfo spriteGridDataInfo) {
+			Resource.Sprites.Remove(data);
+			SpriteData.Remove(spriteGridDataInfo);
+			Save();
 		}
 	}
 }

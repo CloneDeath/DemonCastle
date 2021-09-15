@@ -42,5 +42,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
 		protected Vector2 Size => SpriteGrid.Size;
 
 		public void Save() => SpriteGrid.Save();
+		public void Remove() => SpriteGrid.Remove(Data, this);
 	}
 }
