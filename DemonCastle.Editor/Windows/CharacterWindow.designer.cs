@@ -22,7 +22,11 @@ namespace DemonCastle.Editor.Windows {
 			Properties.AddFloat("Walk Speed", characterInfo, x => x.WalkSpeed);
 			Properties.AddFloat("Jump Height", characterInfo, x => x.JumpHeight);
 			Properties.AddFloat("Gravity", characterInfo, x => x.Gravity);
-			
+			Properties.AddFloat("Width", characterInfo, x => x.Width);
+			Properties.AddFloat("Height", characterInfo, x => x.Height);
+			Properties.AddString("Idle Animation", characterInfo, x => x.IdleAnimation);
+			Properties.AddString("Walk Animation", characterInfo, x => x.WalkAnimation);
+			Properties.AddString("Jump Animation", characterInfo, x => x.JumpAnimation);
 		}
 	}
 }

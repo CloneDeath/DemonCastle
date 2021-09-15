@@ -27,9 +27,33 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			set { Resource.Gravity = value; Save(); }
 		}
 
+		public float Width {
+			get => Resource.Width;
+			set { Resource.Width = value; Save(); }
+		}
+
+		public float Height {
+			get => Resource.Height;
+			set { Resource.Height = value; Save(); }
+		}
+
+		public string IdleAnimation {
+			get => Resource.IdleAnimation;
+			set { Resource.IdleAnimation = value; Save(); }
+		}
+
+		public string WalkAnimation {
+			get => Resource.WalkAnimation;
+			set { Resource.WalkAnimation = value; Save(); }
+		}
+
+		public string JumpAnimation {
+			get => Resource.JumpAnimation;
+			set { Resource.JumpAnimation = value; Save(); }
+		}
+
 		public IEnumerable<AnimationInfo> Animations => Resource.Animations.Select(data => new AnimationInfo(File, data));
-		public string IdleAnimation => Resource.IdleAnimation;
-		public string WalkAnimation => Resource.WalkAnimation;
+		
 		public Vector2 Size => new Vector2(Resource.Width, Resource.Height);
 	}
 }
