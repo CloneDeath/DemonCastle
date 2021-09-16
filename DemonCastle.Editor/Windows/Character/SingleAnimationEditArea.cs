@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Windows.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character {
