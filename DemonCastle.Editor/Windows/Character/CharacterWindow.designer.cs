@@ -2,7 +2,7 @@ using DemonCastle.Editor.Windows.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows {
+namespace DemonCastle.Editor.Windows.Character {
 	public partial class CharacterWindow {
 		protected PropertyCollection Properties { get; }
 		public CharacterWindow(CharacterInfo characterInfo) {
@@ -34,7 +34,7 @@ namespace DemonCastle.Editor.Windows {
 				AnchorBottom = 1
 			});
 			
-			AddChild(new Panel {
+			AddChild(new AnimationArea(characterInfo) {
 				RectPosition = new Vector2(215, 5),
 				MarginRight = -5,
 				MarginBottom = -5,
