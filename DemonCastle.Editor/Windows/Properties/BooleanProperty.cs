@@ -16,8 +16,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			
 			AddChild(CheckBox = new CheckBox {
 				RectMinSize = new Vector2(20, 20),
-				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-				SizeFlagsHorizontal = (int)(SizeFlags.Fill | SizeFlags.Expand),
+				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
 				Pressed = Binding.Get()
 			});
 

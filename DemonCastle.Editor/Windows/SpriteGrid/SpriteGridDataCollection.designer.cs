@@ -12,19 +12,15 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			
 			Name = nameof(SpriteGridDataCollection);
 			AnchorBottom = 1;
-			// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-			SizeFlagsVertical = (int) (SizeFlags.Fill | SizeFlags.Expand);
+			SizeFlagsVertical = (int)SizeFlags.ExpandFill;
 			
 			AddChild(Contents = new VBoxContainer {
-				//AnchorRight = 1,
-				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-				SizeFlagsHorizontal = (int) (SizeFlags.Fill | SizeFlags.Expand)
+				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
 			});
 
 			Contents.AddChild(SpriteCollection = new VBoxContainer {
 				AnchorRight = 1,
-				// ReSharper disable once BitwiseOperatorOnEnumWithoutFlags
-				SizeFlagsHorizontal = (int) (SizeFlags.Fill | SizeFlags.Expand)
+				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
 			});
 			ReloadSpriteData();
 			
