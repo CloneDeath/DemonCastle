@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Properties;
 using Godot;
 using Path = System.IO.Path;
 

@@ -55,4 +55,7 @@
 	  <Content Include="Icons\UnknownIcon.png" />
 	  <Content Include="Icons\UnknownIcon.png.import" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Controls" />
+	</ItemGroup>
 </Project>

@@ -2,11 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace DemonCastle.Editor.Windows.Properties {
-	public interface IPropertyBinding<TProperty> {
-		TProperty Get();
-		void Set(TProperty value);
-	}
+namespace DemonCastle.Editor.Properties {
 	public class PropertyBinding<TObject, TProperty> : IPropertyBinding<TProperty> {
 		protected TObject Target { get; }
 		protected Expression<Func<TObject, TProperty>> PropertyExpression { get; }
