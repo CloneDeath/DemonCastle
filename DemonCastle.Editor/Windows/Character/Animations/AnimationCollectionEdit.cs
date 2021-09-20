@@ -1,15 +1,14 @@
-using DemonCastle.ProjectFiles.Projects.Data;
+using System.Linq;
+using DemonCastle.ProjectFiles;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
-	public class AnimationCollectionEdit : VBoxContainer {
-		protected AnimationItemList AnimationItems { get; }
-		
-		public AnimationCollectionEdit(AnimationInfoCollection animations) {
-			AddChild(AnimationItems = new AnimationItemList {
-				SizeFlagsVertical = (int)SizeFlags.ExpandFill
+	public partial class AnimationCollectionEdit : VBoxContainer {
+		protected void OnAddPressed() {
+			var animationInfo = Animations.Add(new AnimationData {
+				Name = "animation" + Animations.Count()
 			});
-			AnimationItems.AddAnimations(animations);
+			AnimationItems.AddAnimation(animationInfo);
 		}
 	}
 }
