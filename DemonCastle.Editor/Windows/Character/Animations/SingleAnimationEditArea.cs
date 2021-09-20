@@ -1,8 +1,11 @@
+using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Character {
+namespace DemonCastle.Editor.Windows.Character.Animations {
 	public class SingleAnimationEditArea : VBoxContainer {
 		protected GridContainer GridContainer { get; }
+		public AnimationInfo CurrentAnimation { get; set; }
+
 		public SingleAnimationEditArea() {
 			AddChild(new LineEdit());
 			AddChild(GridContainer = new GridContainer {

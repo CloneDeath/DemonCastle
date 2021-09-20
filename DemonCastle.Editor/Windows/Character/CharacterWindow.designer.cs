@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Windows.Character.Animations;
 using DemonCastle.Editor.Windows.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;

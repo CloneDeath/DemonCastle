@@ -19,11 +19,21 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			FileAnimations.Add(animationData);
 			var animInfo = new AnimationInfo(File, animationData);
 			Animations.Add(animInfo);
-			File.Save();
+			Save();
 			return animInfo;
 		}
 
 		public IEnumerator<AnimationInfo> GetEnumerator() => Animations.GetEnumerator();
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+		public void RemoveAt(int animationIndex) {
+			Animations.RemoveAt(animationIndex);
+			FileAnimations.RemoveAt(animationIndex);
+			Save();
+		}
+
+		protected void Save() => File.Save();
+
+		public AnimationInfo this[int index] => Animations[index];
 	}
 }

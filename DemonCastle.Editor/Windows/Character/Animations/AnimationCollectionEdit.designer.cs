@@ -19,12 +19,13 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(AnimationItems = new AnimationItemList {
 				SizeFlagsVertical = (int)SizeFlags.ExpandFill
 			});
+			AnimationItems.Connect("item_selected", this, nameof(OnAnimationSelected));
 			AnimationItems.AddAnimations(animations);
 			
 			AddChild(RemoveButton = new Button {
-				Text = "Remove",
-				Disabled = true
+				Text = "Remove"
 			});
+			RemoveButton.Connect("pressed", this, nameof(OnRemovePressed));
 		}
 	}
 }
