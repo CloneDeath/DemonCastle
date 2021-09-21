@@ -1,33 +1,24 @@
+using DemonCastle.Editor.Controls;
 using DemonCastle.Editor.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
 	public class StringProperty : BaseProperty {
-		protected IPropertyBinding<string> Binding { get; }
-		protected LineEdit LineEdit { get; }
+		protected BindingLineEdit LineEdit { get; }
 
 		public string PropertyValue {
 			get => LineEdit.Text;
-			set { 
-				LineEdit.Text = value;
-				OnValueChange(value);
-			}
+			set => LineEdit.Text = value;
 		}
 
 		public StringProperty(IPropertyBinding<string> binding) {
 			Name = nameof(StringProperty);
-			Binding = binding;
 
-			AddChild(LineEdit = new LineEdit {
-				RectMinSize = new Vector2(20, 20),
+			AddChild(LineEdit = new BindingLineEdit {
+				Binding = binding,
 				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
-				Text = binding.Get()
+				RectMinSize = new Vector2(0, 24)
 			});
-			LineEdit.Connect("text_changed", this, nameof(OnValueChange));
-		}
-		
-		protected void OnValueChange(string value) {
-			Binding.Set(value);
 		}
 	}
 }
