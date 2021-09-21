@@ -4,15 +4,21 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class AnimationInfo {
-		protected DirectoryNavigator Directory { get; }
+		protected FileNavigator<CharacterFile> File { get; }
 		protected AnimationData Animation { get; }
 
-		public AnimationInfo(DirectoryNavigator directory, AnimationData animation) {
-			Directory = directory;
+		public AnimationInfo(FileNavigator<CharacterFile> file, AnimationData animation) {
+			File = file;
 			Animation = animation;
 		}
 
-		public string Name => Animation.Name;
-		public IEnumerable<FrameInfo> Frames => Animation.Frames.Select(f => new FrameInfo(Directory, f));
+		public string Name {
+			get => Animation.Name;
+			set { Animation.Name = value; Save(); }
+		}
+
+		public IEnumerable<FrameInfo> Frames => Animation.Frames.Select(f => new FrameInfo(File, f));
+
+		protected void Save() => File.Save();
 	}
 }

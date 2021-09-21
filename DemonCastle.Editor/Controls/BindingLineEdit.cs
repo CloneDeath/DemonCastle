@@ -27,6 +27,7 @@ namespace DemonCastle.Editor.Controls {
 
 		public BindingLineEdit() {
 			Inner.Connect("text_changed", this, nameof(OnValueChange));
+			RectMinSize = new Vector2(0, 24);
 		}
 
 		protected void OnValueChange(string value) {
