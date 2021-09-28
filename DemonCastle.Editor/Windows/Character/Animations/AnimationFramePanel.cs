@@ -9,6 +9,8 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(new Label {
 				Text = frameInfo.Index.ToString()
 			});
+			
+			AddChild(frameInfo.Sprite);
 		}
 	}
 }
