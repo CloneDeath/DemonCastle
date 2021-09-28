@@ -17,7 +17,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			set { Animation.Name = value; Save(); }
 		}
 
-		public IEnumerable<FrameInfo> Frames => Animation.Frames.Select(f => new FrameInfo(File, f));
+		public IEnumerable<FrameInfo> Frames => Animation.Frames.Select((f, i) => new FrameInfo(File, f, i));
 
 		protected void Save() => File.Save();
 	}

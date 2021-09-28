@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
 	public class SingleAnimationEditArea : VBoxContainer {
-		protected GridContainer GridContainer { get; }
+		protected AnimationFrameGridContainer GridContainer { get; }
 		protected BindingLineEdit LineEdit { get; }
 
 		protected AnimationInfo Current;
@@ -13,19 +13,24 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			get => Current;
 			set {
 				Current = value;
-				LineEdit.Binding = new PropertyBinding<AnimationInfo, string>(Current, animation => animation.Name);
+				BindAnimation();
 			}
 		}
 
 		public SingleAnimationEditArea() {
 			AddChild(LineEdit = new BindingLineEdit());
-			AddChild(GridContainer = new GridContainer {
+			AddChild(GridContainer = new AnimationFrameGridContainer {
 				Columns = 3
 			});
-			GridContainer.AddChild(new Panel{RectMinSize = new Vector2(50, 50)});
-			GridContainer.AddChild(new Panel{RectMinSize = new Vector2(50, 50)});
-			GridContainer.AddChild(new Panel{RectMinSize = new Vector2(50, 50)});
-			GridContainer.AddChild(new Panel{RectMinSize = new Vector2(50, 50)});
+		}
+
+		protected void BindAnimation() {
+			LineEdit.Binding = new PropertyBinding<AnimationInfo, string>(Current, animation => animation.Name);
+
+			GridContainer.ClearChildren();
+			foreach (var frame in Current.Frames) {
+				GridContainer.AddChild(new AnimationFramePanel(frame));
+			}
 		}
 	}
 }
