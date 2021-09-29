@@ -9,8 +9,13 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(new Label {
 				Text = frameInfo.Index.ToString()
 			});
-			
-			AddChild(frameInfo.Sprite);
+
+			var texture = frameInfo.TextureRect;
+			AddChild(texture);
+			texture.AnchorRight = texture.AnchorBottom = 1;
+			texture.MarginRight = texture.MarginBottom = 0;
+			texture.MarginTop = 15;
+			texture.StretchMode = TextureRect.StretchModeEnum.KeepCentered;
 		}
 	}
 }

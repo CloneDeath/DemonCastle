@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class FrameInfo {
@@ -17,5 +18,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		protected ISpriteSource Source => Directory.GetSprite(FrameData.Source);
 
 		public SpriteInfoNode Sprite => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite));
+		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
 	}
 }
