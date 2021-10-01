@@ -15,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		}
 
 		public float Duration => FrameData.Duration;
-		protected ISpriteSource Source => Directory.GetSprite(FrameData.Source);
+		protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : Directory.GetSprite(FrameData.Source);
 
 		public SpriteInfoNode Sprite => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite));
 		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));

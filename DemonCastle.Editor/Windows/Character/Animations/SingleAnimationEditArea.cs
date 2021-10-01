@@ -1,13 +1,9 @@
-using DemonCastle.Editor.Controls;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
-	public class SingleAnimationEditArea : VBoxContainer {
-		protected AnimationFrameGridContainer GridContainer { get; }
-		protected BindingLineEdit LineEdit { get; }
-
+	public partial class SingleAnimationEditArea : VBoxContainer {
 		protected AnimationInfo Current;
 		public AnimationInfo CurrentAnimation {
 			get => Current;
@@ -17,13 +13,6 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			}
 		}
 
-		public SingleAnimationEditArea() {
-			AddChild(LineEdit = new BindingLineEdit());
-			AddChild(GridContainer = new AnimationFrameGridContainer {
-				Columns = 3
-			});
-		}
-
 		protected void BindAnimation() {
 			LineEdit.Binding = new PropertyBinding<AnimationInfo, string>(Current, animation => animation.Name);
 
@@ -31,6 +20,11 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			foreach (var frame in Current.Frames) {
 				GridContainer.AddChild(new AnimationFramePanel(frame));
 			}
+		}
+
+		protected void OnAddFrameButtonPressed() {
+			CurrentAnimation.AddFrame();
+			BindAnimation();
 		}
 	}
 }
