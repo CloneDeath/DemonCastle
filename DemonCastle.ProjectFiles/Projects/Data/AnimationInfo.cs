@@ -11,7 +11,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		public AnimationInfo(FileNavigator<CharacterFile> file, AnimationData animation) {
 			File = file;
 			Animation = animation;
-			Frames = Animation.Frames.Select((f, i) => new FrameInfo(File, f, i)).ToList();
+			Frames = Animation.Frames.Select((f, i) => new FrameInfo(this, File, f, i)).ToList();
 		}
 
 		public string Name {
@@ -24,7 +24,13 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		public void AddFrame() {
 			var frame = new FrameData();
 			Animation.Frames.Add(frame);
-			Frames.Add(new FrameInfo(File, frame, Frames.Count));
+			Frames.Add(new FrameInfo(this, File, frame, Frames.Count));
+			Save();
+		}
+
+		public void RemoveFrame(FrameInfo frameInfo, FrameData frameData) {
+			Animation.Frames.Remove(frameData);
+			Frames.Remove(frameInfo);
 			Save();
 		}
 	}

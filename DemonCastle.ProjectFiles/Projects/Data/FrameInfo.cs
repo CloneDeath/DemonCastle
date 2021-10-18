@@ -4,13 +4,14 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class FrameInfo {
+		protected AnimationInfo Animation { get; }
 		protected FileNavigator<CharacterFile> File { get; }
 		public string Directory => File.Directory;
 		protected FrameData FrameData { get; }
 		public int Index { get; }
 
-
-		public FrameInfo(FileNavigator<CharacterFile> file, FrameData frameData, int index) {
+		public FrameInfo(AnimationInfo animation, FileNavigator<CharacterFile> file, FrameData frameData, int index) {
+			Animation = animation;
 			File = file;
 			FrameData = frameData;
 			Index = index;
@@ -37,5 +38,9 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
 
 		protected void Save() => File.Save();
+
+		public void Delete() {
+			Animation.RemoveFrame(this, FrameData);
+		}
 	}
 }

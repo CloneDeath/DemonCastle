@@ -7,6 +7,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 		protected Label DurationLabel { get; }
 		protected VBoxContainer Items { get; }
 		protected Button EditButton { get; }
+		protected Button DeleteButton { get; }
 		protected CenterContainer TextureContainer { get; }
 		
 		protected EditFrameWindow EditWindow { get; }
@@ -34,6 +35,11 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 				Text = "Edit"
 			});
 			EditButton.Connect("pressed", this, nameof(OnEditButtonClicked));
+			
+			Items.AddChild(DeleteButton = new Button {
+				Text = "Delete"
+			});
+			DeleteButton.Connect("pressed", this, nameof(OnDeleteButtonClicked));
 
 			AddChild(EditWindow = new EditFrameWindow(frameInfo));
 			EditWindow.Connect("confirmed", this, nameof(OnEditWindowClosed));
@@ -58,6 +64,11 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 
 		protected void OnEditButtonClicked() {
 			EditWindow.PopupCentered();
+		}
+
+		protected void OnDeleteButtonClicked() {
+			FrameInfo.Delete();
+			QueueFree();
 		}
 	}
 }
