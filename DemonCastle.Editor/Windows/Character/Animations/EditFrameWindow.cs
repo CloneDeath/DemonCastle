@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
-	public class EditFrameWindow : WindowDialog {
+	public class EditFrameWindow : AcceptDialog {
 		protected PropertyCollection Properties { get; }
 		
 		public EditFrameWindow(FrameInfo frameInfo) {
