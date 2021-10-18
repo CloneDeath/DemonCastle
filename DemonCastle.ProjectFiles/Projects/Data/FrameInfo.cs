@@ -4,20 +4,38 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
 	public class FrameInfo {
-		protected DirectoryNavigator Directory { get; }
+		protected FileNavigator<CharacterFile> File { get; }
+		public string Directory => File.Directory;
 		protected FrameData FrameData { get; }
 		public int Index { get; }
 
-		public FrameInfo(DirectoryNavigator directory, FrameData frameData, int index) {
-			Directory = directory;
+
+		public FrameInfo(FileNavigator<CharacterFile> file, FrameData frameData, int index) {
+			File = file;
 			FrameData = frameData;
 			Index = index;
 		}
 
-		public float Duration => FrameData.Duration;
-		protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : Directory.GetSprite(FrameData.Source);
+		public float Duration {
+			get => FrameData.Duration;
+			set { FrameData.Duration = value; Save(); }
+		}
+
+		public string SourceFile {
+			get => FrameData.Source;
+			set { FrameData.Source = value; Save(); }
+		}
+
+		public string SpriteName {
+			get => FrameData.Sprite;
+			set { FrameData.Sprite = value; Save(); }
+		}
+
+		protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : File.GetSprite(FrameData.Source);
 
 		public SpriteInfoNode Sprite => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite));
 		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
+
+		protected void Save() => File.Save();
 	}
 }
