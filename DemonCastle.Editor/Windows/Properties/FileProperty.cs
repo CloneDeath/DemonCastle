@@ -19,7 +19,10 @@ namespace DemonCastle.Editor.Windows.Properties {
 			LoadButton.Connect("pressed", this, nameof(OnClick));
 
 			AddChild(OpenFileDialog = new FileDialog {
-				Filters = new []{"*.png; Portable Network Graphic"},
+				Filters = new [] {
+					"*.png; Portable Network Graphic",
+					"*.dcsg; Demon Castle Sprite Grid"
+				},
 				Mode = FileDialog.ModeEnum.OpenFile,
 				PopupExclusive = true,
 				Access = FileDialog.AccessEnum.Filesystem,
