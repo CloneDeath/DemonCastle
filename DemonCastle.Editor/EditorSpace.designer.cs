@@ -1,27 +1,23 @@
 using DemonCastle.Editor.FileTreeView;
+using DemonCastle.Editor.TopBar;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor {
 	public partial class EditorSpace {
-		protected HSplitContainer SplitContainer { get; }
-		protected FileTree FileTree { get; }
-		protected WindowContainer WindowContainer { get; }
-		
 		public EditorSpace(ProjectInfo project) {
-			Name = nameof(EditorSpace);
-			
-			AddChild(SplitContainer = new HSplitContainer {
-				Name = nameof(HSplitContainer),
+			AddChild(new EditorTopBar {
+				AnchorRight = 1,
+				MarginRight = 0,
+				MarginBottom = 25
+			});
+			AddChild(new EditorWorkspace(project) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
+				MarginRight = 0,
+				MarginBottom = 0,
+				MarginTop = 25
 			});
-
-			SplitContainer.AddChild(FileTree = new FileTree(project.File) {
-				RectMinSize = new Vector2(250, 0)
-			});
-			FileTree.OnItemActivated += FileTreeOnOnItemActivated;
-			SplitContainer.AddChild(WindowContainer = new WindowContainer());
 		}
 	}
 }
