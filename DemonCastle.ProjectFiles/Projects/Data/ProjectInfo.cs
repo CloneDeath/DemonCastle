@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
@@ -14,7 +15,9 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 
 		public string Name => Project.Name;
 		
-		public IEnumerable<CharacterInfo> Characters => File.GetCharacters(Project.Characters);
+		public IEnumerable<CharacterInfo> Characters => File.GetFilesAndSubFiles()
+			.Where(f => f.Extension == ".dcc")
+			.Select(f => f.ToCharacterInfo());
 
 		public IEnumerable<LevelInfo> Levels => File.GetLevels(Project.Levels);
 		public string FilePath => File.FilePath;

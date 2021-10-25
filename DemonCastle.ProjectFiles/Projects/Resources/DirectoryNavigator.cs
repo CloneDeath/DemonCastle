@@ -60,6 +60,11 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			return ProjectResources.GetText(path);
 		}
 
+		public IEnumerable<FileNavigator> GetFilesAndSubFiles() {
+			var childSubFiles = GetDirectories().SelectMany(d => d.GetFilesAndSubFiles());
+			return GetFiles().Concat(childSubFiles);
+		}
+
 		public IEnumerable<DirectoryNavigator> GetDirectories() {
 			var directories = System.IO.Directory.GetDirectories(Directory).OrderBy(s => s);
 			return directories.Select(dir => new DirectoryNavigator(dir, ProjectResources));

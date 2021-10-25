@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace DemonCastle.ProjectFiles {
 	public class CharacterFile {
 		public string Name { get; set; } = string.Empty;
+		public bool Enabled { get; set; } = true;
 		public float WalkSpeed { get; set; } = 3;
 		public float JumpHeight { get; set; } = 6;
 		public float Gravity { get; set; } = 10;
