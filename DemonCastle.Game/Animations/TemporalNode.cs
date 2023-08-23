@@ -2,11 +2,11 @@ using Godot;
 
 namespace DemonCastle.Game.Animations {
 	public partial class TemporalNode : Node2D {
-		public float StartTime { get; set; }
-		public float EndTime { get; set; }
-		public float CurrentTime { get; set; }
+		public double StartTime { get; set; }
+		public double EndTime { get; set; }
+		public double CurrentTime { get; set; }
 
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			Visible = StartTime <= CurrentTime && CurrentTime < EndTime;

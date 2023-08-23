@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DemonCastle.Editor {
 	// see: https://stackoverflow.com/a/32113484
-	public partial class RelativePath {
+	public class RelativePath {
 		/// <summary>
 		/// Creates a relative path from one file or folder to another.
 		/// </summary>
@@ -38,7 +38,7 @@ namespace DemonCastle.Editor {
 
 			if (string.Equals(toUri.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
 			{
-				relativePath = relativePath.Replace(Path3D.AltDirectorySeparatorChar, Path3D.DirectorySeparatorChar);
+				relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 			}
 
 			return relativePath;
@@ -47,10 +47,10 @@ namespace DemonCastle.Editor {
 		private static string AppendDirectorySeparatorChar(string path)
 		{
 			// Append a slash only if the path is a directory and does not have a slash.
-			if (!Path3D.HasExtension(path) &&
-			    !path.EndsWith(Path3D.DirectorySeparatorChar.ToString()))
+			if (!Path.HasExtension(path) &&
+			    !path.EndsWith(Path.DirectorySeparatorChar.ToString()))
 			{
-				return path + Path3D.DirectorySeparatorChar;
+				return path + Path.DirectorySeparatorChar;
 			}
 
 			return path;

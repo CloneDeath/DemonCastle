@@ -7,9 +7,9 @@ namespace DemonCastle.Game {
 		protected float JumpHeight => Character.JumpHeight * Level.TileHeight;
 		protected int Facing { get; set; } = 1;
 		
-		protected float VSpeed { get; set; }
+		protected double VSpeed { get; set; }
 		
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			var left = Input.IsActionPressed(InputActions.PlayerMoveLeft) ? 1 : 0;

@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Game.Animations {
 	public partial class PlayerAnimation : Node2D {
 		protected readonly CharacterInfo Character;
-		protected Dictionary<string, AnimationNode> Animations { get; } = new Dictionary<string, AnimationNode>();
+		protected Dictionary<string, AnimationNode> Animations { get; } = new();
 		protected AnimationNode CurrentAnimation;
 		public PlayerAnimation(CharacterInfo character) {
 			Character = character;

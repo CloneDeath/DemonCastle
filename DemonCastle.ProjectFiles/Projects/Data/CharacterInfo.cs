@@ -2,7 +2,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public partial class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
+	public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
 		public AnimationInfoCollection Animations { get; }
 
 		public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) {
@@ -54,6 +54,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 			set { Resource.JumpAnimation = value; Save(); }
 		}
 
-		public Vector2 Size => new Vector2(Resource.Width, Resource.Height);
+		public Vector2 Size => new(Resource.Width, Resource.Height);
 	}
 }

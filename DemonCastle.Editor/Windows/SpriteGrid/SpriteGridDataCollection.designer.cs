@@ -12,15 +12,15 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			
 			Name = nameof(SpriteGridDataCollection);
 			AnchorBottom = 1;
-			SizeFlagsVertical = (int)SizeFlags.ExpandFill;
+			SizeFlagsVertical = SizeFlags.ExpandFill;
 			
 			AddChild(Contents = new VBoxContainer {
-				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
+				SizeFlagsHorizontal = SizeFlags.ExpandFill
 			});
 
 			Contents.AddChild(SpriteCollection = new VBoxContainer {
 				AnchorRight = 1,
-				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill
+				SizeFlagsHorizontal = SizeFlags.ExpandFill
 			});
 			ReloadSpriteData();
 			

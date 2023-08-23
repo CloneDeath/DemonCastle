@@ -1,7 +1,7 @@
 using System;
 
 namespace DemonCastle.Editor.Properties {
-	public partial class CallbackBinding<TProperty> : IPropertyBinding<TProperty> {
+	public class CallbackBinding<TProperty> : IPropertyBinding<TProperty> {
 		protected Func<TProperty> GetFunction { get; }
 		protected Action<TProperty> SetFunction { get; }
 		

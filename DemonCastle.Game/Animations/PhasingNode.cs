@@ -3,13 +3,13 @@ using Godot;
 
 namespace DemonCastle.Game.Animations {
 	public partial class PhasingNode : Node2D {
-		private List<TemporalNode> Nodes { get; } = new List<TemporalNode>();
+		private List<TemporalNode> Nodes { get; } = new();
 
-		public float Duration { get; set; } = 1;
-		public float CurrentTime { get; set; }
+		public double Duration { get; set; } = 1;
+		public double CurrentTime { get; set; }
 		public bool Playing { get; set; }
 
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			if (!Playing) return;

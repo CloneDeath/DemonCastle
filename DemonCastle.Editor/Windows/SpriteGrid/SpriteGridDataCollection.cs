@@ -1,4 +1,3 @@
-using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
@@ -7,7 +6,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 		protected SpriteGridInfo SpriteGrid { get; }
 
 		protected void ReloadSpriteData() {
-			foreach (var child in SpriteCollection.GetChildren().Cast<Node>()) {
+			foreach (var child in SpriteCollection.GetChildren()) {
 				child.QueueFree();
 			}
 			foreach (var data in SpriteGrid.SpriteData) {

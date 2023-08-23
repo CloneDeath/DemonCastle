@@ -17,7 +17,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddButton.Connect("pressed", new Callable(this, nameof(OnAddPressed)));
 			
 			AddChild(AnimationItems = new AnimationItemList {
-				SizeFlagsVertical = (int)SizeFlags.ExpandFill
+				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
 			AnimationItems.Connect("item_selected", new Callable(this, nameof(OnAnimationSelected)));
 			AnimationItems.AddAnimations(animations);

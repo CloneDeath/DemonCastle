@@ -3,10 +3,10 @@ using Godot;
 namespace DemonCastle.Editor.Windows {
 	public partial class BaseWindow : Window {
 		public BaseWindow() {
-			Resizable = true;
+			Unresizable = false;
 		}
 		
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			if (GlobalPosition.x < GetParentControl().GlobalPosition.x) {

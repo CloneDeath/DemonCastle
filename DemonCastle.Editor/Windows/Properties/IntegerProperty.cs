@@ -17,7 +17,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			
 			AddChild(SpinBox = new SpinBox {
 				CustomMinimumSize = new Vector2(20, 20),
-				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
+				SizeFlagsHorizontal = SizeFlags.ExpandFill,
 				Value = Binding.Get()
 			});
 

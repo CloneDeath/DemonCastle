@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 
 namespace DemonCastle.ProjectFiles {
-	public partial class SpriteAtlasFile {
+	public class SpriteAtlasFile {
 		public string File { get; set; } = string.Empty;
-		public ColorData TransparentColor { get; set; } = new ColorData();
-		public List<SpriteAtlasData> Sprites { get; set; } = new List<SpriteAtlasData>();
+		public ColorData TransparentColor { get; set; } = new();
+		public List<SpriteAtlasData> Sprites { get; set; } = new();
 	}
 
-	public partial class ColorData {
+	public class ColorData {
 		public int Red { get; set; }
 		public int Green { get; set; }
 		public int Blue { get; set; }
 	}
 
-	public partial class SpriteAtlasData {
+	public class SpriteAtlasData {
 		public string Name { get; set; } = string.Empty;
 		public int X { get; set; }
 		public int Y { get; set; }

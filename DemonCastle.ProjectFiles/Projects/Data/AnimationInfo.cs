@@ -3,7 +3,7 @@ using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public partial class AnimationInfo {
+	public class AnimationInfo {
 		protected FileNavigator<CharacterFile> File { get; }
 		protected AnimationData Animation { get; }
 		public List<FrameInfo> Frames { get; }

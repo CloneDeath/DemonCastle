@@ -19,7 +19,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 			}
 		}
 
-		protected Dictionary<int, TileInfo> Tiles { get; } = new Dictionary<int, TileInfo>();
+		protected Dictionary<int, TileInfo> Tiles { get; } = new();
 		
 		private void RegisterTile(TileInfo tileInfo) {
 			CreateTile(tileInfo.Index);

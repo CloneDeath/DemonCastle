@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public partial class ProjectInfo : IListableInfo {
+	public class ProjectInfo : IListableInfo {
 		public FileNavigator<ProjectFile> File { get; }
 		protected ProjectFile Project => File.Resource;
 		public string FileName => File.FileName;

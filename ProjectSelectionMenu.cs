@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle {
 	public partial class ProjectSelectionMenu : Container {
-		protected ProjectManager ProjectManager { get; } = new ProjectManager();
+		protected ProjectManager ProjectManager { get; } = new();
 
 		public event Action<ProjectInfo> ProjectLoaded;
 		public event Action<ProjectInfo> ProjectEdit;

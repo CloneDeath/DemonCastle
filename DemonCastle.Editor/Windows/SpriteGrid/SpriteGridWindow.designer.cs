@@ -12,9 +12,9 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
 
-			WindowTitle = $"Sprite2D Grid - {spriteGridInfo.FileName}";
-			Size = new Vector2(600, 550);
-			CustomMinimumSize = new Vector2(500, 350);
+			Title = $"Sprite2D Grid - {spriteGridInfo.FileName}";
+			Size = new Vector2I(600, 550);
+			MinSize = new Vector2(500, 350);
 			
 			AddChild(PropertyCollection = new PropertyCollection {
 				OffsetLeft = 5,
@@ -23,7 +23,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 				OffsetRight = 205,
 				AnchorBottom = 1
 			});
-			PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.DirAccess, x => x.SpriteFile);
+			PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile);
 			PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
 			PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
 			PropertyCollection.AddInteger("X Offset", spriteGridInfo, x => x.XOffset);

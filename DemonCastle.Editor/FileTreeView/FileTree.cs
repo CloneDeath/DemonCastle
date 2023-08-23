@@ -9,8 +9,8 @@ namespace DemonCastle.Editor.FileTreeView {
 	public partial class FileTree : Tree {
 		public event Action<FileNavigator> OnItemActivated;
 
-		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new Dictionary<TreeItem, FileNavigator>();
-		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new Dictionary<TreeItem, DirectoryNavigator>();
+		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
+		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 		
 		protected void ItemActivated() {
 			var selected = GetSelected();
@@ -19,14 +19,14 @@ namespace DemonCastle.Editor.FileTreeView {
 			OnItemActivated?.Invoke(FileMap[selected]);
 		}
 
-		protected void ItemRmbSelected(Vector2 position) {
+		protected void ItemRmbSelected(Vector2I position) {
 			var selected = GetSelected();
 			if (DirectoryMap.ContainsKey(selected)) {
 				DirectoryPopupMenu.Position = position;
-				DirectoryPopupMenu.Popup_();
+				DirectoryPopupMenu.Popup();
 			} else if (FileMap.ContainsKey(selected)) {
 				FilePopupMenu.Position = position;
-				FilePopupMenu.Popup_();
+				FilePopupMenu.Popup();
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected FileNavigator SelectedFile {
 			get {
 				var selected = GetSelected();
-				return FileMap.ContainsKey(selected) ? FileMap[selected] : null;
+				return FileMap.TryGetValue(selected, out var value) ? value : null;
 			}
 		}
 

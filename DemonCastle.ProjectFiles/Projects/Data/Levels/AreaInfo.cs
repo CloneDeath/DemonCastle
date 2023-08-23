@@ -3,7 +3,7 @@ using System.Linq;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
-	public partial class AreaInfo {
+	public class AreaInfo {
 		protected AreaData Area3D { get; }
 		public LevelInfo LevelInfo { get; }
 
@@ -15,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		public LevelTileSet LevelTileSet => LevelInfo.LevelTileSet;
 
 		public IEnumerable<TileMapInfo> TileMap => Area3D.TileMap.Select(tm => new TileMapInfo(tm, this));
-		public Vector2 AreaPosition => new Vector2(Area3D.X, Area3D.Y);
+		public Vector2 AreaPosition => new(Area3D.X, Area3D.Y);
 		public Vector2 TilePosition => LevelInfo.TileSize * AreaPosition;
 	}
 }

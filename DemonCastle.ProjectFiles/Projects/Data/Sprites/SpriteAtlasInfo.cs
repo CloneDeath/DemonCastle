@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public partial class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
+	public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 		public List<SpriteAtlasDataInfo> SpriteData { get; }
 
 		public string SpriteFile => Resource.File;

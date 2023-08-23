@@ -8,13 +8,13 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 		
 		public EditFrameWindow(FrameInfo frameInfo) {
 			Name = nameof(EditFrameWindow);
-			WindowTitle = "Edit Frame";
-			CustomMinimumSize = new Vector2(200, 200);
+			Title = "Edit Frame";
+			MinSize = new Vector2I(200, 200);
 			Exclusive = true;
 
 			AddChild(Properties = new PropertyCollection());
 			
-			Properties.AddFile("Source", frameInfo, frameInfo.DirAccess, f => f.SourceFile);
+			Properties.AddFile("Source", frameInfo, frameInfo.Directory, f => f.SourceFile);
 			Properties.AddString("Sprite2D", frameInfo, f => f.SpriteName);
 			Properties.AddFloat("Duration", frameInfo, f => f.Duration);
 		}

@@ -6,7 +6,7 @@ namespace DemonCastle.Editor.Windows.Textures {
 
 		public Texture2D Texture2D {
 			get => TextureRect.Texture2D;
-			set => TextureRect.Texture2D = value;
+			set => TextureRect.Texture = value;
 		}
 
 		public TextureView() {

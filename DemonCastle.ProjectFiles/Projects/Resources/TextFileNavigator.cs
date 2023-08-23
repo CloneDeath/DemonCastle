@@ -1,7 +1,7 @@
 using System.IO;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
-	public partial class TextFileNavigator : FileNavigator {
+	public class TextFileNavigator : FileNavigator {
 		public string Resource { get; }
 		
 		public TextFileNavigator(string filePath) : this(filePath, new ProjectResources()) { }

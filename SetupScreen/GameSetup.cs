@@ -7,7 +7,7 @@ namespace DemonCastle.SetupScreen {
 	public partial class GameSetup : Container {
 		public event Action<LevelInfo, CharacterInfo> GameStart;
 
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			LaunchButton.Disabled = LevelInfoList.NoItemSelected || CharacterInfoList.NoItemSelected;

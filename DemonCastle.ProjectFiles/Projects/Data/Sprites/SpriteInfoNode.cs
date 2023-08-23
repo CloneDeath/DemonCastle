@@ -5,7 +5,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public partial class SpriteInfoNode : Sprite2D {
 		protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 		public SpriteInfoNode(ISpriteDefinition definition) {
-			Texture2D = definition.Texture2D;
+			Texture = definition.Texture2D;
 			RegionEnabled = true;
 			RegionRect = definition.Region;
 			FlipH = definition.FlipHorizontal;
@@ -13,7 +13,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 				TransparentColor = definition.TransparentColor,
 				Threshold = definition.TransparentColorThreshold
 			};
-			Offset = new Vector2(0, -definition.Region.Size.y/2);
+			Offset = new Vector2(0, -definition.Region.Size.Y/2);
 		}
 	}
 }

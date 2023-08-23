@@ -4,7 +4,7 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public partial class SpriteDefinitionTextureRect : TextureRect {
 		public SpriteDefinitionTextureRect(ISpriteDefinition definition) {
-			Texture2D = new AtlasTexture {
+			Texture = new AtlasTexture {
 				Atlas = definition.Texture2D,
 				Region = definition.Region,
 				FilterClip = true

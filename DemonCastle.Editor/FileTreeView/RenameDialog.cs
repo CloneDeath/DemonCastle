@@ -14,7 +14,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			Name = nameof(RenameDialog);
 			DialogText = "Enter a new name:";
 			Exclusive = true;
-			CustomMinimumSize += new Vector2(0, 10);
+			MinSize += new Vector2I(0, 10);
 
 			Connect("about_to_show", new Callable(this, nameof(OnAboutToShow)));
 			

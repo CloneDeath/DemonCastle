@@ -4,9 +4,9 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
-	public partial class ProjectResources {
-		protected FileNavigator<T> GetFile<T>(string path) => new FileNavigator<T>(path, this);
-		protected TextFileNavigator GetTextFile(string path) => new TextFileNavigator(path, this);
+	public class ProjectResources {
+		protected FileNavigator<T> GetFile<T>(string path) => new(path, this);
+		protected TextFileNavigator GetTextFile(string path) => new(path, this);
 
 		public ProjectResources() {
 			Characters = new ResourceCache<CharacterInfo>(path
@@ -26,9 +26,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 				var image = new Image();
 				image.Load(path);
 
-				var texture = new ImageTexture();
-				texture.CreateFromImage(image);
-				return texture;
+				return ImageTexture.CreateFromImage(image);
 			});
 
 			Texts = new ResourceCache<TextInfo>(path

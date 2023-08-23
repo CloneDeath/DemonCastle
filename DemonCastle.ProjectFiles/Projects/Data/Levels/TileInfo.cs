@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
-	public partial class TileInfo {
+	public class TileInfo {
 		public int Index { get; }
 		protected TileData TileData { get; }
 		protected FileNavigator<LevelFile> Level { get; }

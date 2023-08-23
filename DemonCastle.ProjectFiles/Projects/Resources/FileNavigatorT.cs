@@ -2,7 +2,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
-	public partial class FileNavigator<T> : FileNavigator {
+	public class FileNavigator<T> : FileNavigator {
 		public T Resource { get; }
 		
 		public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }

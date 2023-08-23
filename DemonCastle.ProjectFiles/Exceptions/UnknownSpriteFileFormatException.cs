@@ -1,7 +1,7 @@
 using System;
 
 namespace DemonCastle.ProjectFiles.Exceptions {
-	public partial class UnknownSpriteFileFormatException : Exception {
+	public class UnknownSpriteFileFormatException : Exception {
 		public string File { get; }
 
 		public UnknownSpriteFileFormatException(string file)

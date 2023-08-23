@@ -12,9 +12,9 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 		protected SpriteAtlasDataCollection DataCollection { get; }
 
 		public SpriteAtlasWindow(SpriteAtlasInfo spriteAtlasInfo) {
-			WindowTitle = $"Sprite2D Atlas - {spriteAtlasInfo.FileName}";
-			Size = new Vector2(600, 300);
-			CustomMinimumSize = Size;
+			Title = $"Sprite2D Atlas - {spriteAtlasInfo.FileName}";
+			Size = new Vector2I(600, 300);
+			MinSize = Size;
 
 			AddChild(SplitContainer = new HSplitContainer {
 				AnchorRight = 1,
@@ -48,7 +48,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 
 			SplitContainer.AddChild(ScrollContainer = new ScrollContainer());
 			ScrollContainer.AddChild(TextureRect = new TextureRect {
-				Texture2D = spriteAtlasInfo.Texture2D
+				Texture = spriteAtlasInfo.Texture2D
 			});
 		}
 	}

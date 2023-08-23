@@ -19,7 +19,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Properties.AddInteger("Y", spriteData, x => x.Y);
 			Properties.AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
 			Properties.AddChild(Preview = new TextureRect {
-				Texture2D = PreviewTexture = new AtlasTexture {
+				Texture = PreviewTexture = new AtlasTexture {
 					Atlas = spriteData.Texture2D,
 					Region = spriteData.Region
 				},
@@ -35,7 +35,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 		}
 
 		protected void OnDeleteButtonPressed() {
-			DeleteConfirmation.Popup_();
+			DeleteConfirmation.Popup();
 		}
 
 		protected void OnDeleteConfirmed() {
@@ -43,7 +43,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			QueueFree();
 		}
 
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			Preview.FlipH = SpriteData.FlipHorizontal;

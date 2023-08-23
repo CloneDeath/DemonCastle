@@ -7,8 +7,8 @@ namespace DemonCastle.Editor.Windows.Properties {
 		protected CheckBox CheckBox { get; }
 
 		public bool PropertyValue {
-			get => CheckBox.Pressed;
-			set => CheckBox.Pressed = value;
+			get => CheckBox.ButtonPressed;
+			set => CheckBox.ButtonPressed = value;
 		}
 		
 		public BooleanProperty(IPropertyBinding<bool> binding) {
@@ -17,8 +17,8 @@ namespace DemonCastle.Editor.Windows.Properties {
 			
 			AddChild(CheckBox = new CheckBox {
 				CustomMinimumSize = new Vector2(20, 20),
-				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
-				Pressed = Binding.Get()
+				SizeFlagsHorizontal = SizeFlags.ExpandFill,
+				ButtonPressed = Binding.Get()
 			});
 
 			CheckBox.Connect("toggled", new Callable(this, nameof(OnValueChange)));

@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 	public partial class AnimationCollectionEdit : VBoxContainer {
 		public event Action<AnimationInfo> AnimationSelected; 
 		
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 
 			RemoveButton.Disabled = !AnimationItems.IsAnythingSelected();

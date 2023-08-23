@@ -9,11 +9,11 @@ using Godot;
 
 namespace DemonCastle.Editor {
 	public partial class WindowContainer : Control {
-		protected Vector2 NextWindow = new Vector2(50, 50);
+		protected Vector2 NextWindow = new(50, 50);
 		
 		public void ShowWindowFor(FileNavigator file) {
-			if (WindowFileMap.ContainsKey(file)) {
-				WindowFileMap[file].Show();
+			if (WindowFileMap.TryGetValue(file, out var value)) {
+				value.Show();
 				return;
 			}
 

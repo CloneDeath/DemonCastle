@@ -7,9 +7,9 @@ namespace DemonCastle.Editor.Windows {
 		protected TextEdit TextEdit { get; }
 		
 		public TextFileWindow(TextInfo textInfo) {
-			WindowTitle = $"Text - {textInfo.FileName}";
-			Size = new Vector2(300, 300);
-			CustomMinimumSize = Size;
+			Title = $"Text - {textInfo.FileName}";
+			Size = new Vector2I(300, 300);
+			MinSize = Size;
 			
 			AddChild(TextEdit = new TextEdit {
 				AnchorRight = 1,

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 namespace DemonCastle.ProjectFiles {
-	public partial class LevelFile {
+	public class LevelFile {
 		public string Name { get; set; } = string.Empty;
 		public int TileWidth { get; set; } = 16;
 		public int TileHeight { get; set; } = 16;
@@ -12,25 +12,25 @@ namespace DemonCastle.ProjectFiles {
 		public List<AreaData> Areas { get; set; } = new();
 	}
 
-	public partial class StartingData {
+	public class StartingData {
 		public string Area3D { get; set; } = string.Empty;
 		public float X { get; set; }
 		public float Y { get; set; }
 	}
 
-	public partial class TileData {
+	public class TileData {
 		public string Name { get; set; } = string.Empty;
 		public string Source { get; set; } = string.Empty;
 		public string Sprite2D { get; set; } = string.Empty;
 		public List<CollisionData> Collision { get; set; } = new();
 	}
 
-	public partial class CollisionData {
+	public class CollisionData {
 		public float X { get; set; }
 		public float Y { get; set; }
 	}
 
-	public partial class AreaData {
+	public class AreaData {
 		public string Name { get; set; } = string.Empty;
 		public int X { get; set; } = 0;
 		public int Y { get; set; } = 0;
@@ -39,7 +39,7 @@ namespace DemonCastle.ProjectFiles {
 		public List<TileMapData> TileMap { get; set; } = new();
 	}
 
-	public partial class TileMapData {
+	public class TileMapData {
 		public int X { get; set; } = 0;
 		public int Y { get; set; } = 0;
 		public string Tile { get; set; }

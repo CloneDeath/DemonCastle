@@ -22,7 +22,7 @@ namespace DemonCastle.Editor.Windows.Textures {
 
 		public override void _Process(float delta) {
 			base._Process(delta);
-			Texture2D = SpriteGridInfo.Texture2D;
+			Texture = SpriteGridInfo.Texture2D;
 			Update();
 		}
 	}

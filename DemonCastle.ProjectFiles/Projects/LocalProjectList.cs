@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 namespace DemonCastle.ProjectFiles.Projects {
-	public partial class LocalProjectList {
+	public class LocalProjectList {
 		protected string GodotPath => "user://ProjectList.json";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 
