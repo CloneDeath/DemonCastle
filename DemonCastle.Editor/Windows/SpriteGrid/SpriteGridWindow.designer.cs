@@ -14,7 +14,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 
 			Title = $"Sprite2D Grid - {spriteGridInfo.FileName}";
 			Size = new Vector2I(600, 550);
-			MinSize = new Vector2(500, 350);
+			MinSize = new Vector2I(500, 350);
 			
 			AddChild(PropertyCollection = new PropertyCollection {
 				OffsetLeft = 5,

@@ -10,22 +10,22 @@ namespace DemonCastle.Game {
 		public const string EditorSubmit = nameof(EditorSubmit);
 		
 		public static void RegisterActions() {
-			RegisterAction(PlayerMoveLeft, KeyList.Left, KeyList.A);
-			RegisterAction(PlayerMoveRight, KeyList.Right, KeyList.D);
-			RegisterAction(PlayerJump, KeyList.Up, KeyList.W);
-			RegisterAction(EditorSubmit, KeyList.Enter, KeyList.KpEnter);
+			RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
+			RegisterAction(PlayerMoveRight, Key.Right, Key.D);
+			RegisterAction(PlayerJump, Key.Up, Key.W);
+			RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
 		}
 
-		private static void RegisterAction(string actionName, params KeyList[] keyList) {
+		private static void RegisterAction(string actionName, params Key[] keyList) {
 			RegisterAction(actionName, keyList.Select(key => (InputEvent)new InputEventKey {
-				Keycode = (uint) key
+				Keycode = key
 			}).ToArray());
 		}
 		
 		// ReSharper disable once UnusedMember.Local
-		private static void RegisterAction(string actionName, params ButtonList[] mouseButtons) {
+		private static void RegisterAction(string actionName, params MouseButton[] mouseButtons) {
 			RegisterAction(actionName, mouseButtons.Select(button => (InputEvent)new InputEventMouseButton {
-				ButtonIndex = (int) button
+				ButtonIndex = button
 			}).ToArray());
 		}
 
