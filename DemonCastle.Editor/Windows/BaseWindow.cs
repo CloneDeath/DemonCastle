@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Editor.Windows {
-	public class BaseWindow : WindowDialog {
+	public partial class BaseWindow : Window {
 		public BaseWindow() {
 			Resizable = true;
 		}
@@ -9,12 +9,12 @@ namespace DemonCastle.Editor.Windows {
 		public override void _Process(float delta) {
 			base._Process(delta);
 
-			if (RectGlobalPosition.x < GetParentControl().RectGlobalPosition.x) {
-				RectGlobalPosition = new Vector2(GetParentControl().RectGlobalPosition.x, RectGlobalPosition.y);
+			if (GlobalPosition.x < GetParentControl().GlobalPosition.x) {
+				GlobalPosition = new Vector2(GetParentControl().GlobalPosition.x, GlobalPosition.y);
 			}
 
-			if (RectGlobalPosition.y < GetParentControl().RectGlobalPosition.y + 20) {
-				RectGlobalPosition = new Vector2(RectGlobalPosition.x, GetParentControl().RectGlobalPosition.y + 20);
+			if (GlobalPosition.y < GetParentControl().GlobalPosition.y + 20) {
+				GlobalPosition = new Vector2(GlobalPosition.x, GetParentControl().GlobalPosition.y + 20);
 			}
 		}
 	}

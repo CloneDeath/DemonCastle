@@ -2,7 +2,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
+	public partial class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
 		public AnimationInfoCollection Animations { get; }
 
 		public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) {

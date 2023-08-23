@@ -22,10 +22,10 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected void ItemRmbSelected(Vector2 position) {
 			var selected = GetSelected();
 			if (DirectoryMap.ContainsKey(selected)) {
-				DirectoryPopupMenu.RectPosition = position;
+				DirectoryPopupMenu.Position = position;
 				DirectoryPopupMenu.Popup_();
 			} else if (FileMap.ContainsKey(selected)) {
-				FilePopupMenu.RectPosition = position;
+				FilePopupMenu.Position = position;
 				FilePopupMenu.Popup_();
 			}
 		}
@@ -61,7 +61,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			FileMap[node] = file;
 		}
 
-		protected Texture GetIconForFile(string extension) {
+		protected Texture2D GetIconForFile(string extension) {
 			switch (extension) {
 				case ".dcp": return IconTextures.ProjectIcon;
 				case ".dcl": return IconTextures.LevelIcon;

@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.SpriteAtlas {
-	public class SpriteAtlasDataCollection : ScrollContainer {
+	public partial class SpriteAtlasDataCollection : ScrollContainer {
 		protected VBoxContainer SpriteCollection { get; }
 		public SpriteAtlasDataCollection(IEnumerable<SpriteAtlasDataInfo> spriteData) {
 			AddChild(SpriteCollection = new VBoxContainer());

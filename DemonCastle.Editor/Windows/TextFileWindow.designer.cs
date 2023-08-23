@@ -8,16 +8,16 @@ namespace DemonCastle.Editor.Windows {
 		
 		public TextFileWindow(TextInfo textInfo) {
 			WindowTitle = $"Text - {textInfo.FileName}";
-			RectSize = new Vector2(300, 300);
-			RectMinSize = RectSize;
+			Size = new Vector2(300, 300);
+			CustomMinimumSize = Size;
 			
 			AddChild(TextEdit = new TextEdit {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginLeft = 5,
-				MarginTop = 5,
-				MarginBottom = -5,
-				MarginRight = -5,
+				OffsetLeft = 5,
+				OffsetTop = 5,
+				OffsetBottom = -5,
+				OffsetRight = -5,
 				Text = textInfo.Contents
 			});
 		}

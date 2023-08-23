@@ -2,10 +2,10 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteDefinitionTextureRect : TextureRect {
+	public partial class SpriteDefinitionTextureRect : TextureRect {
 		public SpriteDefinitionTextureRect(ISpriteDefinition definition) {
-			Texture = new AtlasTexture {
-				Atlas = definition.Texture,
+			Texture2D = new AtlasTexture {
+				Atlas = definition.Texture2D,
 				Region = definition.Region,
 				FilterClip = true
 			};

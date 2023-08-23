@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
-	public class ResourceCache<T> {
+	public partial class ResourceCache<T> {
 		protected Func<string, T> ResourceFactory { get; }
 
 		public ResourceCache(Func<string, T> resourceFactory) {

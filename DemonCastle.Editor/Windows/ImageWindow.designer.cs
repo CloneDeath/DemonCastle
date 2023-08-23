@@ -8,19 +8,19 @@ namespace DemonCastle.Editor.Windows {
 		
 		public ImageWindow(FileNavigator texture) {
 			WindowTitle = $"Image - {texture.FileName}";
-			RectSize = new Vector2(300, 300);
-			RectMinSize = RectSize;
+			Size = new Vector2(300, 300);
+			CustomMinimumSize = Size;
 			
 			AddChild(ScrollContainer = new ScrollContainer {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginLeft = 5,
-				MarginTop = 5,
-				MarginBottom = -5,
-				MarginRight = -5,
+				OffsetLeft = 5,
+				OffsetTop = 5,
+				OffsetBottom = -5,
+				OffsetRight = -5,
 			});
 			ScrollContainer.AddChild(TextureRect = new TextureRect {
-				Texture = texture.ToTexture()
+				Texture2D = texture.ToTexture()
 			});
 		}
 	}

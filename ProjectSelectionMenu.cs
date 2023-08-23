@@ -20,7 +20,7 @@ namespace DemonCastle {
 			}
 		}
 
-		public override void _Process(float delta) {
+		public override void _Process(double delta) {
 			base._Process(delta);
 			LaunchButton.Disabled = !ProjectList.IsItemSelected;
 			RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
@@ -33,7 +33,7 @@ namespace DemonCastle {
 		}
 
 		protected void OpenImportProject() {
-			OpenFileDialog.Popup_();
+			OpenFileDialog.Popup();
 		}
 
 		protected void ImportProject(string filePath) {

@@ -2,7 +2,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
-	public class AnimationFramePanel : PanelContainer {
+	public partial class AnimationFramePanel : PanelContainer {
 		protected FrameInfo FrameInfo { get; }
 		protected Label DurationLabel { get; }
 		protected VBoxContainer Items { get; }
@@ -14,13 +14,13 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 		
 		public AnimationFramePanel(FrameInfo frameInfo) {
 			FrameInfo = frameInfo;
-			RectMinSize = new Vector2(50, 50);
+			CustomMinimumSize = new Vector2(50, 50);
 			
 			AddChild(Items = new VBoxContainer {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginRight = 0,
-				MarginBottom = 0,
+				OffsetRight = 0,
+				OffsetBottom = 0,
 			});
 			
 			Items.AddChild(new Label {
@@ -34,15 +34,15 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			Items.AddChild(EditButton = new Button {
 				Text = "Edit"
 			});
-			EditButton.Connect("pressed", this, nameof(OnEditButtonClicked));
+			EditButton.Connect("pressed", new Callable(this, nameof(OnEditButtonClicked)));
 			
 			Items.AddChild(DeleteButton = new Button {
 				Text = "Delete"
 			});
-			DeleteButton.Connect("pressed", this, nameof(OnDeleteButtonClicked));
+			DeleteButton.Connect("pressed", new Callable(this, nameof(OnDeleteButtonClicked)));
 
 			AddChild(EditWindow = new EditFrameWindow(frameInfo));
-			EditWindow.Connect("confirmed", this, nameof(OnEditWindowClosed));
+			EditWindow.Connect("confirmed", new Callable(this, nameof(OnEditWindowClosed)));
 			
 			LoadFrameInfo();
 		}

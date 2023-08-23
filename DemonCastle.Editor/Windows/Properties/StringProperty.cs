@@ -3,7 +3,7 @@ using DemonCastle.Editor.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
-	public class StringProperty : BaseProperty {
+	public partial class StringProperty : BaseProperty {
 		protected BindingLineEdit LineEdit { get; }
 
 		public string PropertyValue {
@@ -17,7 +17,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(LineEdit = new BindingLineEdit {
 				Binding = binding,
 				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
-				RectMinSize = new Vector2(0, 24)
+				CustomMinimumSize = new Vector2(0, 24)
 			});
 		}
 	}

@@ -12,18 +12,18 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
 
-			WindowTitle = $"Sprite Grid - {spriteGridInfo.FileName}";
-			RectSize = new Vector2(600, 550);
-			RectMinSize = new Vector2(500, 350);
+			WindowTitle = $"Sprite2D Grid - {spriteGridInfo.FileName}";
+			Size = new Vector2(600, 550);
+			CustomMinimumSize = new Vector2(500, 350);
 			
 			AddChild(PropertyCollection = new PropertyCollection {
-				MarginLeft = 5,
-				MarginTop = 5,
-				MarginBottom = -5,
-				MarginRight = 205,
+				OffsetLeft = 5,
+				OffsetTop = 5,
+				OffsetBottom = -5,
+				OffsetRight = 205,
 				AnchorBottom = 1
 			});
-			PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile);
+			PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.DirAccess, x => x.SpriteFile);
 			PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
 			PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
 			PropertyCollection.AddInteger("X Offset", spriteGridInfo, x => x.XOffset);
@@ -33,20 +33,20 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			PropertyCollection.AddChild(DataCollection = new SpriteGridDataCollection(spriteGridInfo) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginBottom = 0,
-				RectMinSize = new Vector2(100, 100)
+				OffsetBottom = 0,
+				CustomMinimumSize = new Vector2(100, 100)
 			});
 			
 			AddChild(new VSeparator {
 				Name = nameof(VSeparator),
-				RectPosition = new Vector2(210, 5),
-				MarginBottom = -5,
+				Position = new Vector2(210, 5),
+				OffsetBottom = -5,
 				AnchorBottom = 1
 			});
 			AddChild(TextureView = new SpriteGridTextureView(spriteGridInfo) {
-				RectPosition = new Vector2(215, 5),
-				MarginRight = -5,
-				MarginBottom = -5,
+				Position = new Vector2(215, 5),
+				OffsetRight = -5,
+				OffsetBottom = -5,
 				AnchorRight = 1,
 				AnchorBottom = 1
 			});

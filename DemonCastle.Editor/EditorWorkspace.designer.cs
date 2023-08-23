@@ -19,7 +19,7 @@ namespace DemonCastle.Editor {
 			});
 
 			SplitContainer.AddChild(FileTree = new FileTree(project.File) {
-				RectMinSize = new Vector2(250, 0)
+				CustomMinimumSize = new Vector2(250, 0)
 			});
 			FileTree.OnItemActivated += FileTreeOnOnItemActivated;
 			SplitContainer.AddChild(WindowContainer = new WindowContainer());

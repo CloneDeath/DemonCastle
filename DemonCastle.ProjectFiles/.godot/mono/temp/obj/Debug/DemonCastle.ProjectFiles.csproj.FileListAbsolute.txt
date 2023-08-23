@@ -1,0 +1,5 @@
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.csproj.AssemblyReference.cache
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.GeneratedMSBuildEditorConfig.editorconfig
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.AssemblyInfoInputs.cache
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.AssemblyInfo.cs
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.csproj.CoreCompileInputs.cache

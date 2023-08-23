@@ -8,14 +8,14 @@ namespace DemonCastle.Editor.Windows.Character {
 		protected PropertyCollection Properties { get; }
 		public CharacterWindow(CharacterInfo characterInfo) {
 			WindowTitle = $"Character - {characterInfo.FileName}";
-			RectSize = new Vector2(600, 300);
-			RectMinSize = RectSize;
+			Size = new Vector2(600, 300);
+			CustomMinimumSize = Size;
 
 			AddChild(Properties = new PropertyCollection {
-				MarginLeft = 5,
-				MarginTop = 5,
-				MarginRight = 205,
-				MarginBottom = -5,
+				OffsetLeft = 5,
+				OffsetTop = 5,
+				OffsetRight = 205,
+				OffsetBottom = -5,
 				AnchorBottom = 1
 			});
 			Properties.AddString("Name", characterInfo, x => x.Name);
@@ -30,15 +30,15 @@ namespace DemonCastle.Editor.Windows.Character {
 			
 			AddChild(new VSeparator {
 				Name = nameof(VSeparator),
-				RectPosition = new Vector2(210, 5),
-				MarginBottom = -5,
+				Position = new Vector2(210, 5),
+				OffsetBottom = -5,
 				AnchorBottom = 1
 			});
 			
 			AddChild(new AnimationArea(characterInfo) {
-				RectPosition = new Vector2(215, 5),
-				MarginRight = -5,
-				MarginBottom = -5,
+				Position = new Vector2(215, 5),
+				OffsetRight = -5,
+				OffsetBottom = -5,
 				AnchorRight = 1,
 				AnchorBottom = 1
 			});

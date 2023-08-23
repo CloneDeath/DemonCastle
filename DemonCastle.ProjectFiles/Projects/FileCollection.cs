@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 
 namespace DemonCastle.ProjectFiles.Projects {
-	public class FileCollection {
+	public partial class FileCollection {
 		private readonly string _directory;
 
 		public FileCollection(string directory) {
@@ -14,15 +14,15 @@ namespace DemonCastle.ProjectFiles.Projects {
 		public IEnumerable<string> ProjectFiles => AllFiles.Where(file => file.EndsWith(".dcp"));
 
 		protected IEnumerable<string> GetAllFiles(string directory) {
-			if (!Directory.Exists(directory)) return new string[0];
+			if (!DirAccess.Exists(directory)) return new string[0];
 			
-			IEnumerable<string> files = Directory.GetFiles(directory);
-			var subFiles = Directory.GetDirectories(directory).SelectMany(GetAllFiles);
+			IEnumerable<string> files = DirAccess.GetFiles(directory);
+			var subFiles = DirAccess.GetDirectories(directory).SelectMany(GetAllFiles);
 			return files.Concat(subFiles);
 		}
 
 		public string GetFile(string file) {
-			return Path.Combine(_directory, file);
+			return Path3D.Combine(_directory, file);
 		}
 	}
 }

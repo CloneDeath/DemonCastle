@@ -3,10 +3,10 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public class FrameInfo {
+	public partial class FrameInfo {
 		protected AnimationInfo Animation { get; }
 		protected FileNavigator<CharacterFile> File { get; }
-		public string Directory => File.Directory;
+		public string DirAccess => File.DirAccess;
 		protected FrameData FrameData { get; }
 		public int Index { get; }
 
@@ -28,14 +28,14 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		}
 
 		public string SpriteName {
-			get => FrameData.Sprite;
-			set { FrameData.Sprite = value; Save(); }
+			get => FrameData.Sprite2D;
+			set { FrameData.Sprite2D = value; Save(); }
 		}
 
 		protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : File.GetSprite(FrameData.Source);
 
-		public SpriteInfoNode Sprite => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite));
-		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
+		public SpriteInfoNode Sprite2D => new SpriteInfoNode(Source.GetSpriteDefinition(FrameData.Sprite2D));
+		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite2D));
 
 		protected void Save() => File.Save();
 

@@ -8,15 +8,15 @@ namespace DemonCastle.Editor {
 		public EditorSpace(ProjectInfo project) {
 			AddChild(new EditorTopBar {
 				AnchorRight = 1,
-				MarginRight = 0,
-				MarginBottom = 25
+				OffsetRight = 0,
+				OffsetBottom = 25
 			});
 			AddChild(new EditorWorkspace(project) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginRight = 0,
-				MarginBottom = 0,
-				MarginTop = 25
+				OffsetRight = 0,
+				OffsetBottom = 0,
+				OffsetTop = 25
 			});
 		}
 	}

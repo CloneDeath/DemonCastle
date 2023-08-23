@@ -2,15 +2,15 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Textures {
 	public partial class SpriteGridTextureView : TextureView {
-		protected int TextureWidth => Texture.GetWidth();
-		protected int TextureHeight => Texture.GetHeight();
+		protected int TextureWidth => Texture2D.GetWidth();
+		protected int TextureHeight => Texture2D.GetHeight();
 		protected int StartX => SpriteGridInfo.XOffset;
 		protected int StartY => SpriteGridInfo.YOffset;
 		protected int DeltaX => SpriteGridInfo.Width + SpriteGridInfo.XSeparation;
 		protected int DeltaY => SpriteGridInfo.Height + SpriteGridInfo.YSeparation;
 		public override void _Draw() {
 			base._Draw();
-			if (Texture == null) return;
+			if (Texture2D == null) return;
 
 			for (var x = StartX; x <= TextureWidth; x += DeltaX) {
 				for (var y = StartY; y <= TextureHeight; y += DeltaY) {
@@ -22,7 +22,7 @@ namespace DemonCastle.Editor.Windows.Textures {
 
 		public override void _Process(float delta) {
 			base._Process(delta);
-			Texture = SpriteGridInfo.Texture;
+			Texture2D = SpriteGridInfo.Texture2D;
 			Update();
 		}
 	}

@@ -15,7 +15,7 @@ namespace DemonCastle {
             base._Ready();
             
             InputActions.RegisterActions();
-            OS.WindowMaximized = true;
+            GetWindow().Mode = Window.ModeEnum.Maximized;
         }
 
         protected void OnProjectLoaded(ProjectInfo project) {
@@ -34,7 +34,7 @@ namespace DemonCastle {
         private void OnProjectEdit(ProjectInfo project) {
             ProjectSelectionMenu.QueueFree();
 
-            OS.SetWindowTitle($"DemonCastle - {project.Name}");
+            GetWindow().Title = $"DemonCastle - {project.Name}";
             AddChild(EditorSpace = new EditorSpace(project));
         }
     }

@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.SpriteGrid {
-	public class SpriteGridDataPanel : PanelContainer {
+	public partial class SpriteGridDataPanel : PanelContainer {
 		protected SpriteGridDataInfo SpriteData { get; }
 		protected PropertyCollection Properties { get; }
 		protected TextureRect Preview { get; }
@@ -19,8 +19,8 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Properties.AddInteger("Y", spriteData, x => x.Y);
 			Properties.AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
 			Properties.AddChild(Preview = new TextureRect {
-				Texture = PreviewTexture = new AtlasTexture {
-					Atlas = spriteData.Texture,
+				Texture2D = PreviewTexture = new AtlasTexture {
+					Atlas = spriteData.Texture2D,
 					Region = spriteData.Region
 				},
 				FlipH = spriteData.FlipHorizontal
@@ -28,10 +28,10 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Properties.AddChild(DeleteButton = new Button {
 				Text = "Delete"
 			});
-			DeleteButton.Connect("pressed", this, nameof(OnDeleteButtonPressed));
+			DeleteButton.Connect("pressed", new Callable(this, nameof(OnDeleteButtonPressed)));
 			
 			AddChild(DeleteConfirmation = new DeleteSpriteDataDialog());
-			DeleteConfirmation.Connect("confirmed", this, nameof(OnDeleteConfirmed));
+			DeleteConfirmation.Connect("confirmed", new Callable(this, nameof(OnDeleteConfirmed)));
 		}
 
 		protected void OnDeleteButtonPressed() {
@@ -47,7 +47,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			base._Process(delta);
 
 			Preview.FlipH = SpriteData.FlipHorizontal;
-			PreviewTexture.Atlas = SpriteData.Texture;
+			PreviewTexture.Atlas = SpriteData.Texture2D;
 			PreviewTexture.Region = SpriteData.Region;
 		}
 	}

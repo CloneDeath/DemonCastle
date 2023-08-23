@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 namespace DemonCastle.ProjectFiles {
-	public class SpriteGridFile {
+	public partial class SpriteGridFile {
 		public string File { get; set; } = string.Empty;
 		public int Width { get; set; } = 16;
 		public int Height { get; set; } = 16;
@@ -12,7 +12,7 @@ namespace DemonCastle.ProjectFiles {
 		public List<SpriteGridData> Sprites { get; set; } = new List<SpriteGridData>();
 	}
 
-	public class SpriteGridData {
+	public partial class SpriteGridData {
 		public int X { get; set; }
 		public int Y { get; set; }
 		public string Name { get; set; } = string.Empty;

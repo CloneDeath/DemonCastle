@@ -7,22 +7,22 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects {
-	public class ProjectManager {
+	public partial class ProjectManager {
 		protected string GodotPath => "user://Projects/";
 		protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 		protected FileCollection Files => new FileCollection(GlobalPath);
 		protected LocalProjectList LocalProjects => new LocalProjectList();
 
 		public void DownloadProjects() {
-			if (Directory.Exists(GlobalPath)) {
-				Directory.Delete(GlobalPath, true);
+			if (DirAccess.Exists(GlobalPath)) {
+				DirAccess.Delete(GlobalPath, true);
 			}
 			DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
 			DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
 		}
 		
 		public void DownloadProject(string url) {
-			var dest = Path.GetTempFileName();
+			var dest = Path3D.GetTempFileName();
 			using (var wc = new WebClient()) {
 				wc.DownloadFile(url, dest);
 			}

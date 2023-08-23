@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Game {
-	public partial class GamePlayer : KinematicBody2D {
+	public partial class GamePlayer : CharacterBody2D {
 		protected float WalkSpeed => Character.WalkSpeed * Level.TileWidth;
 		protected float Gravity => Character.Gravity * Level.TileHeight;
 		protected float JumpHeight => Character.JumpHeight * Level.TileHeight;

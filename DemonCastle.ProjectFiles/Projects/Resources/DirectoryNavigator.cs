@@ -8,39 +8,39 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using Newtonsoft.Json;
 using File = System.IO.File;
-using Path = System.IO.Path;
+using Path3D = System.IO.Path3D;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources {
-	public class DirectoryNavigator {
-		public string Directory { get; }
+	public partial class DirectoryNavigator {
+		public string DirAccess { get; }
 		protected ProjectResources ProjectResources { get; }
-		public string DirectoryName => new DirectoryInfo(Directory).Name;
+		public string DirectoryName => new DirectoryInfo(DirAccess).Name;
 
 		public DirectoryNavigator(string directory) 
 			: this(directory, new ProjectResources())
 		{ }
 
 		public DirectoryNavigator(string directory, ProjectResources resources) {
-			Directory = directory;
+			DirAccess = directory;
 			ProjectResources = resources;
 		}
 
 		public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
 
 		public CharacterInfo GetCharacter(string localPath) {
-			var path = Path.Combine(Directory, localPath);
+			var path = Path3D.Combine(DirAccess, localPath);
 			return ProjectResources.GetCharacter(path);
 		}
 
 		public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);
 
 		public LevelInfo GetLevel(string localPath) {
-			var path = Path.Combine(Directory, localPath);
+			var path = Path3D.Combine(DirAccess, localPath);
 			return ProjectResources.GetLevel(path);
 		}
 
 		public ISpriteSource GetSprite(string localPath) {
-			var path = Path.Combine(Directory, localPath);
+			var path = Path3D.Combine(DirAccess, localPath);
 			if (path.ToLower().EndsWith(".dcsg")) {
 				return ProjectResources.GetSpriteGrid(path);
 			}
@@ -50,13 +50,13 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			throw new UnknownSpriteFileFormatException(path);
 		}
 
-		public Texture GetTexture(string localPath) {
-			var path = Path.Combine(Directory, localPath);
+		public Texture2D GetTexture(string localPath) {
+			var path = Path3D.Combine(DirAccess, localPath);
 			return ProjectResources.GetTexture(path);
 		}
 
 		public TextInfo GetText(string localPath) {
-			var path = Path.Combine(Directory, localPath);
+			var path = Path3D.Combine(DirAccess, localPath);
 			return ProjectResources.GetText(path);
 		}
 
@@ -66,12 +66,12 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		}
 
 		public IEnumerable<DirectoryNavigator> GetDirectories() {
-			var directories = System.IO.Directory.GetDirectories(Directory).OrderBy(s => s);
+			var directories = System.IO.DirAccess.GetDirectories(DirAccess).OrderBy(s => s);
 			return directories.Select(dir => new DirectoryNavigator(dir, ProjectResources));
 		}
 
 		public IEnumerable<FileNavigator> GetFiles() {
-			var files = System.IO.Directory.GetFiles(Directory).OrderBy(s => s);
+			var files = System.IO.DirAccess.GetFiles(DirAccess).OrderBy(s => s);
 			return files.Select(file => new FileNavigator(file, ProjectResources));
 		}
 
@@ -100,12 +100,12 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		}
 
 		protected void CreateFileWithContents(string fileName, string contents) {
-			var fullPath = Path.Combine(Directory, fileName);
+			var fullPath = Path3D.Combine(DirAccess, fileName);
 			File.WriteAllText(fullPath, contents);
 		}
 
 		public bool FileExists(string fileName) {
-			var fullPath = Path.Combine(Directory, fileName);
+			var fullPath = Path3D.Combine(DirAccess, fileName);
 			return File.Exists(fullPath);
 		}
 	}

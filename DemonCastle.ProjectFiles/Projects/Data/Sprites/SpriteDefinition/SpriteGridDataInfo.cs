@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
-	public class SpriteGridDataInfo : ISpriteDefinition {
+	public partial class SpriteGridDataInfo : ISpriteDefinition {
 		protected SpriteGridData Data { get; }
 		protected SpriteGridInfo SpriteGrid { get; }
 
@@ -24,7 +24,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
 			get => Data.Y;
 			set { Data.Y = value; Save(); }
 		}
-		public Texture Texture => SpriteGrid.Texture;
+		public Texture2D Texture2D => SpriteGrid.Texture2D;
 		public Rect2 Region => new Rect2 {
 			Position = Offset + Span * new Vector2(Data.X, Data.Y),
 			Size = Size

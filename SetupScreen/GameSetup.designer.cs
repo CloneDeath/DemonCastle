@@ -16,27 +16,27 @@ namespace DemonCastle.SetupScreen {
 		public GameSetup(ProjectInfo project) {
 			AddChild(CharactersLabel = new Label {
 				Text = "Characters:",
-				RectPosition = new Vector2(10, 10)
+				Position = new Vector2(10, 10)
 			});
 			AddChild(CharacterInfoList = new InfoItemList<CharacterInfo> {
-				RectPosition = CharactersLabel.RectPosition + new Vector2(0, 20)
+				Position = CharactersLabel.Position + new Vector2(0, 20)
 			});
 			CharacterInfoList.Load(project.Characters);
 			
 			AddChild(LevelsLabel = new Label {
 				Text = "Levels:",
-				RectPosition = CharactersLabel.RectPosition + new Vector2(310, 0)
+				Position = CharactersLabel.Position + new Vector2(310, 0)
 			});
 			AddChild(LevelInfoList = new InfoItemList<LevelInfo> {
-				RectPosition = LevelsLabel.RectPosition + new Vector2(0, 20)
+				Position = LevelsLabel.Position + new Vector2(0, 20)
 			});
 			LevelInfoList.Load(project.Levels);
 			
 			AddChild(LaunchButton = new Button {
 				Text = "Start Chapter",
-				RectPosition = CharacterInfoList.RectPosition + new Vector2(0, 310)
+				Position = CharacterInfoList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Connect("pressed", this, nameof(OnLaunchButtonClicked));
+			LaunchButton.Connect("pressed", new Callable(this, nameof(OnLaunchButtonClicked)));
 		}
 	}
 }

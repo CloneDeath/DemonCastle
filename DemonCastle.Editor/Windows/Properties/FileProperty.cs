@@ -1,48 +1,48 @@
 using DemonCastle.Editor.Properties;
 using Godot;
-using Path = System.IO.Path;
+using Path3D = System.IO.Path3D;
 
 namespace DemonCastle.Editor.Windows.Properties {
-	public class FileProperty : StringProperty {
-		protected string Directory { get; }
+	public partial class FileProperty : StringProperty {
+		protected string DirAccess { get; }
 		protected Button LoadButton { get; }
 		protected FileDialog OpenFileDialog { get; }
 		public FileProperty(IPropertyBinding<string> binding, string directory)
 			: base(binding) {
-			Directory = directory;
+			DirAccess = directory;
 
 			LineEdit.Editable = false;
 			
 			AddChild(LoadButton = new Button {
 				Text = "..."
 			});
-			LoadButton.Connect("pressed", this, nameof(OnClick));
+			LoadButton.Connect("pressed", new Callable(this, nameof(OnClick)));
 
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new [] {
 					"*.png; Portable Network Graphic",
-					"*.dcsg; Demon Castle Sprite Grid"
+					"*.dcsg; Demon Castle Sprite2D Grid"
 				},
 				Mode = FileDialog.ModeEnum.OpenFile,
-				PopupExclusive = true,
+				Exclusive = true,
 				Access = FileDialog.AccessEnum.Filesystem,
-				RectSize = new Vector2(800, 600),
+				Size = new Vector2(800, 600),
 				Resizable = true,
-				WindowTitle = "Reference Image"
+				WindowTitle = "RefCounted Image"
 			});
-			OpenFileDialog.Connect("file_selected", this, nameof(FileSelected));
+			OpenFileDialog.Connect("file_selected", new Callable(this, nameof(FileSelected)));
 		}
 
 		protected void OnClick() {
-			var fullPath = Path.Combine(Directory, PropertyValue);
-			var directory = Path.GetDirectoryName(fullPath);
+			var fullPath = Path3D.Combine(DirAccess, PropertyValue);
+			var directory = Path3D.GetDirectoryName(fullPath);
 			OpenFileDialog.CurrentDir = directory;
 			OpenFileDialog.CurrentFile = fullPath;
 			OpenFileDialog.Popup_();
 		}
 
 		protected void FileSelected(string filePath) {
-			PropertyValue = RelativePath.GetRelativePath(Directory, filePath);
+			PropertyValue = RelativePath.GetRelativePath(DirAccess, filePath);
 		}
 	}
 }

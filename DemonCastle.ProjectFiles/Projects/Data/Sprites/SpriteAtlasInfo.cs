@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
+	public partial class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 		public List<SpriteAtlasDataInfo> SpriteData { get; }
 
 		public string SpriteFile => Resource.File;
@@ -15,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			(byte) Resource.TransparentColor.Green,
 			(byte) Resource.TransparentColor.Blue);
 
-		public Texture Texture => File.GetTexture(Resource.File);
+		public Texture2D Texture2D => File.GetTexture(Resource.File);
 
 		public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
 			SpriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();

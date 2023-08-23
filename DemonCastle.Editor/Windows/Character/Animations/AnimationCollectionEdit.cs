@@ -23,7 +23,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			var animationInfo = Animations.Add(new AnimationData {
 				Name = "animation" + Animations.Count()
 			});
-			AnimationItems.AddAnimation(animationInfo);
+			AnimationItems.AddAnimationLibrary(animationInfo);
 		}
 
 		protected void OnRemovePressed() {

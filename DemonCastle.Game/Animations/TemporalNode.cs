@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Game.Animations {
-	public class TemporalNode : Node2D {
+	public partial class TemporalNode : Node2D {
 		public float StartTime { get; set; }
 		public float EndTime { get; set; }
 		public float CurrentTime { get; set; }

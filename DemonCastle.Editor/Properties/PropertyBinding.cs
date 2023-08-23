@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 
 namespace DemonCastle.Editor.Properties {
-	public class PropertyBinding<TObject, TProperty> : IPropertyBinding<TProperty> {
+	public partial class PropertyBinding<TObject, TProperty> : IPropertyBinding<TProperty> {
 		protected TObject Target { get; }
 		protected Expression<Func<TObject, TProperty>> PropertyExpression { get; }
 

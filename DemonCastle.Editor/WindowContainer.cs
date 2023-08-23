@@ -21,7 +21,7 @@ namespace DemonCastle.Editor {
 				var window = GetWindow(file);
 				WindowFileMap[file] = window;
 				AddChild(window);
-				window.RectPosition = RectGlobalPosition + GetNextWindowLocation();
+				window.Position = GlobalPosition + GetNextWindowLocation();
 				window.Show();
 			}
 			catch (TargetInvocationException ex) {
@@ -34,7 +34,7 @@ namespace DemonCastle.Editor {
 			}
 		}
 
-		protected WindowDialog GetWindow(FileNavigator file) {
+		protected Window GetWindow(FileNavigator file) {
 			switch (file.Extension) {
 				case ".dcp": return new ProjectWindow(file.ToProjectInfo());
 				case ".dcc": return new CharacterWindow(file.ToCharacterInfo());
@@ -43,12 +43,12 @@ namespace DemonCastle.Editor {
 				case ".dcsg": return new SpriteGridWindow(file.ToSpriteGridInfo());
 				case ".txt": return new TextFileWindow(file.ToTextInfo());
 				case ".png": return new ImageWindow(file);
-				default: return new WindowDialog();
+				default: return new Window();
 			}
 		}
 		
 		protected Vector2 GetNextWindowLocation() {
-			return NextWindow = (NextWindow + new Vector2(50, 50)).PosMod(RectSize - new Vector2(200, 200));
+			return NextWindow = (NextWindow + new Vector2(50, 50)).PosMod(Size - new Vector2(200, 200));
 		}
 	}
 }

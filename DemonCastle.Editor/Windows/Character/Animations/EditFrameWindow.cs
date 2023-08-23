@@ -3,19 +3,19 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Character.Animations {
-	public class EditFrameWindow : AcceptDialog {
+	public partial class EditFrameWindow : AcceptDialog {
 		protected PropertyCollection Properties { get; }
 		
 		public EditFrameWindow(FrameInfo frameInfo) {
 			Name = nameof(EditFrameWindow);
 			WindowTitle = "Edit Frame";
-			RectMinSize = new Vector2(200, 200);
-			PopupExclusive = true;
+			CustomMinimumSize = new Vector2(200, 200);
+			Exclusive = true;
 
 			AddChild(Properties = new PropertyCollection());
 			
-			Properties.AddFile("Source", frameInfo, frameInfo.Directory, f => f.SourceFile);
-			Properties.AddString("Sprite", frameInfo, f => f.SpriteName);
+			Properties.AddFile("Source", frameInfo, frameInfo.DirAccess, f => f.SourceFile);
+			Properties.AddString("Sprite2D", frameInfo, f => f.SpriteName);
 			Properties.AddFloat("Duration", frameInfo, f => f.Duration);
 		}
 	}

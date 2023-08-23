@@ -4,7 +4,7 @@ using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data {
-	public class AnimationInfoCollection : IEnumerable<AnimationInfo> {
+	public partial class AnimationInfoCollection : IEnumerable<AnimationInfo> {
 		protected FileNavigator<CharacterFile> File { get; }
 		protected List<AnimationData> FileAnimations { get; }
 		protected List<AnimationInfo> Animations { get; }

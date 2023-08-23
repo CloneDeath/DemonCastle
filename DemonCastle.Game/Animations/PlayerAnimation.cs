@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Game.Animations {
-	public class PlayerAnimation : Node2D {
+	public partial class PlayerAnimation : Node2D {
 		protected readonly CharacterInfo Character;
 		protected Dictionary<string, AnimationNode> Animations { get; } = new Dictionary<string, AnimationNode>();
 		protected AnimationNode CurrentAnimation;

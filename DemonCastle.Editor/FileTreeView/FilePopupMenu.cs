@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
-	public class FilePopupMenu : PopupMenu {
+	public partial class FilePopupMenu : PopupMenu {
 		public event Action RenameFile;
 		
 		public event Action DeleteFile;
@@ -13,7 +13,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			AddItem("Rename", 0);
 			AddItem("Delete", 1);
 
-			Connect("id_pressed", this, nameof(OnIdPressed));
+			Connect("id_pressed", new Callable(this, nameof(OnIdPressed)));
 		}
 
 		protected void OnIdPressed(int id) {

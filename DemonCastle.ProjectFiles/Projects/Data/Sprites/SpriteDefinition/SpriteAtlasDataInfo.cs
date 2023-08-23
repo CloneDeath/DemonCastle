@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
-	public class SpriteAtlasDataInfo : ISpriteDefinition {
+	public partial class SpriteAtlasDataInfo : ISpriteDefinition {
 		protected SpriteAtlasInfo SpriteAtlasInfo { get; }
 		protected SpriteAtlasData Data { get; }
 
@@ -11,7 +11,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
 		}
 
 		public string Name => Data.Name;
-		public Texture Texture => SpriteAtlasInfo.Texture;
+		public Texture2D Texture2D => SpriteAtlasInfo.Texture2D;
 
 		public Rect2 Region => new Rect2 {
 			Position = new Vector2(Data.X, Data.Y),

@@ -12,27 +12,27 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 		protected SpriteAtlasDataCollection DataCollection { get; }
 
 		public SpriteAtlasWindow(SpriteAtlasInfo spriteAtlasInfo) {
-			WindowTitle = $"Sprite Atlas - {spriteAtlasInfo.FileName}";
-			RectSize = new Vector2(600, 300);
-			RectMinSize = RectSize;
+			WindowTitle = $"Sprite2D Atlas - {spriteAtlasInfo.FileName}";
+			Size = new Vector2(600, 300);
+			CustomMinimumSize = Size;
 
 			AddChild(SplitContainer = new HSplitContainer {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginTop = 5,
-				MarginBottom = -5,
-				MarginLeft = 5,
-				MarginRight = -5
+				OffsetTop = 5,
+				OffsetBottom = -5,
+				OffsetLeft = 5,
+				OffsetRight = -5
 			});
 			
 			SplitContainer.AddChild(PropertyCollection = new PropertyCollection {
-				MarginTop = 5,
-				MarginRight = -5,
-				MarginBottom = -5,
-				MarginLeft = 5,
+				OffsetTop = 5,
+				OffsetRight = -5,
+				OffsetBottom = -5,
+				OffsetLeft = 5,
 				AnchorBottom = 1,
 				AnchorRight = 1,
-				RectMinSize = new Vector2(200, 0)
+				CustomMinimumSize = new Vector2(200, 0)
 			});
 			PropertyCollection.AddString("File", spriteAtlasInfo, x => x.SpriteFile);
 			PropertyCollection.AddChild(new ColorProperty {
@@ -42,13 +42,13 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 			PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				MarginBottom = 0,
-				RectMinSize = new Vector2(100, 100)
+				OffsetBottom = 0,
+				CustomMinimumSize = new Vector2(100, 100)
 			});
 
 			SplitContainer.AddChild(ScrollContainer = new ScrollContainer());
 			ScrollContainer.AddChild(TextureRect = new TextureRect {
-				Texture = spriteAtlasInfo.Texture
+				Texture2D = spriteAtlasInfo.Texture2D
 			});
 		}
 	}

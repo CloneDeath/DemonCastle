@@ -4,9 +4,9 @@ namespace DemonCastle.Editor.Windows.Textures {
 	public partial class TextureView {
 		protected TextureRect TextureRect { get; }
 
-		public Texture Texture {
-			get => TextureRect.Texture;
-			set => TextureRect.Texture = value;
+		public Texture2D Texture2D {
+			get => TextureRect.Texture2D;
+			set => TextureRect.Texture2D = value;
 		}
 
 		public TextureView() {

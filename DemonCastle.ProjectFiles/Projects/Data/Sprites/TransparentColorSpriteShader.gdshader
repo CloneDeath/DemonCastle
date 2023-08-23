@@ -1,6 +1,6 @@
 shader_type canvas_item; 
 
-uniform vec4 transparent_color: hint_color;
+uniform vec4 transparent_color: source_color;
 uniform float threshold;
 
 void fragment() {

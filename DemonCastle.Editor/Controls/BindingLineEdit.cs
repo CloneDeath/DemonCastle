@@ -2,7 +2,7 @@ using DemonCastle.Editor.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Controls {
-	public class BindingLineEdit : WrapperControl<LineEdit> {
+	public partial class BindingLineEdit : WrapperControl<LineEdit> {
 		protected IPropertyBinding<string> PropertyBinding { get; set; }
 		public IPropertyBinding<string> Binding {
 			get => PropertyBinding;
@@ -26,8 +26,8 @@ namespace DemonCastle.Editor.Controls {
 		}
 
 		public BindingLineEdit() {
-			Inner.Connect("text_changed", this, nameof(OnValueChange));
-			RectMinSize = new Vector2(0, 24);
+			Inner.Connect("text_changed", new Callable(this, nameof(OnValueChange)));
+			CustomMinimumSize = new Vector2(0, 24);
 		}
 
 		protected void OnValueChange(string value) {

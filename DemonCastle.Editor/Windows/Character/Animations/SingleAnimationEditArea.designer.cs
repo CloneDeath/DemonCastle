@@ -12,7 +12,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(AddFrameButton = new Button {
 				Text = "Add Frame"
 			});
-			AddFrameButton.Connect("pressed", this, nameof(OnAddFrameButtonPressed));
+			AddFrameButton.Connect("pressed", new Callable(this, nameof(OnAddFrameButtonPressed)));
 			AddChild(GridContainer = new AnimationFrameGridContainer {
 				Columns = 3
 			});

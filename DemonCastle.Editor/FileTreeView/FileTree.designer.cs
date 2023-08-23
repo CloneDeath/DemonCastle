@@ -17,10 +17,10 @@ namespace DemonCastle.Editor.FileTreeView {
 			AllowRmbSelect = true;
 
 			AddChild(ConfirmRename = new RenameDialog());
-			ConfirmRename.Connect("confirmed", this, nameof(OnRenameConfirmed));
+			ConfirmRename.Connect("confirmed", new Callable(this, nameof(OnRenameConfirmed)));
 			
 			AddChild(ConfirmDelete = new DeleteDialog());
-			ConfirmDelete.Connect("confirmed", this, nameof(OnDeleteConfirmed));
+			ConfirmDelete.Connect("confirmed", new Callable(this, nameof(OnDeleteConfirmed)));
 
 			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
 			DirectoryPopupMenu.CreateCharacter += OnCreateCharacterSelected;
@@ -30,8 +30,8 @@ namespace DemonCastle.Editor.FileTreeView {
 			FilePopupMenu.DeleteFile += OnDeleteFile;
 
 			CreateTree();
-			Connect("item_activated", this, nameof(ItemActivated));
-			Connect("item_rmb_selected", this, nameof(ItemRmbSelected));
+			Connect("item_activated", new Callable(this, nameof(ItemActivated)));
+			Connect("item_rmb_selected", new Callable(this, nameof(ItemRmbSelected)));
 		}
 	}
 }

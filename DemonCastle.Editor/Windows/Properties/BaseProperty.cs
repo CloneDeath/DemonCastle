@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
-	public class BaseProperty : HBoxContainer {
+	public partial class BaseProperty : HBoxContainer {
 		protected Label Label { get; }
 
 		public string PropertyName {

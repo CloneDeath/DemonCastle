@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
-	public class LevelInfo : IListableInfo {
+	public partial class LevelInfo : IListableInfo {
 		protected FileNavigator<LevelFile> File { get; }
 		protected LevelFile Level => File.Resource;
 		public string FileName => File.FileName;
@@ -30,7 +30,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		}
 
 		public Vector2 StartingLocation => TileSize * (
-			GetAreaByName(Level.StartingPosition.Area).TilePosition
+			GetAreaByName(Level.StartingPosition.Area3D).TilePosition
 			+ new Vector2(Level.StartingPosition.X, Level.StartingPosition.Y)
 		) + new Vector2(TileWidth/2f, TileHeight);
 	}

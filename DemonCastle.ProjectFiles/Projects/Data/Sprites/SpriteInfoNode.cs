@@ -2,10 +2,10 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteInfoNode : Sprite {
+	public partial class SpriteInfoNode : Sprite2D {
 		protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 		public SpriteInfoNode(ISpriteDefinition definition) {
-			Texture = definition.Texture;
+			Texture2D = definition.Texture2D;
 			RegionEnabled = true;
 			RegionRect = definition.Region;
 			FlipH = definition.FlipHorizontal;

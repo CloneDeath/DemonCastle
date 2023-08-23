@@ -17,50 +17,50 @@ namespace DemonCastle {
 		public ProjectSelectionMenu() {
 			AddChild(DownloadButton = new Button {
 				Text = "Update Projects",
-				RectPosition = new Vector2(10, 10)
+				Position = new Vector2(10, 10)
 			});
-			DownloadButton.Connect("pressed", this, nameof(DownloadProjects));
+			DownloadButton.Connect("pressed", new Callable(this, nameof(DownloadProjects)));
 			
 			AddChild(ImportButton = new Button {
 				Text = "Import Project",
-				RectPosition = DownloadButton.RectPosition + new Vector2(310, 0)
+				Position = DownloadButton.Position + new Vector2(310, 0)
 			});
-			ImportButton.Connect("pressed", this, nameof(OpenImportProject));
+			ImportButton.Connect("pressed", new Callable(this, nameof(OpenImportProject)));
 			
 			AddChild(RemoveButton = new Button {
 				Text = "Remove Project",
-				RectPosition = ImportButton.RectPosition + new Vector2(0, 30)
+				Position = ImportButton.Position + new Vector2(0, 30)
 			});
-			RemoveButton.Connect("pressed", this, nameof(RemoveProject));
+			RemoveButton.Connect("pressed", new Callable(this, nameof(RemoveProject)));
 			
 			AddChild(EditButton = new Button {
 				Text = "Edit Project",
-				RectPosition = RemoveButton.RectPosition + new Vector2(0, 90)
+				Position = RemoveButton.Position + new Vector2(0, 90)
 			});
-			EditButton.Connect("pressed", this, nameof(EditProject));
+			EditButton.Connect("pressed", new Callable(this, nameof(EditProject)));
 			
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new []{"*.dcp; Demon Castle Project"},
-				Mode = FileDialog.ModeEnum.OpenFile,
-				PopupExclusive = true,
+				FileMode = FileDialog.FileModeEnum.OpenFile,
+				Exclusive = true,
 				Access = FileDialog.AccessEnum.Filesystem,
-				RectSize = new Vector2(800, 600),
-				Resizable = true,
-				WindowTitle = "Import Project"
+				Size = new Vector2I(800, 600),
+				Unresizable = false,
+				Title = "Import Project"
 			});
-			OpenFileDialog.Connect("file_selected", this, nameof(ImportProject));
+			OpenFileDialog.Connect("file_selected", new Callable(this, nameof(ImportProject)));
 
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
-				RectPosition = DownloadButton.RectPosition + new Vector2(0, 30),
+				Position = DownloadButton.Position + new Vector2(0, 30),
 				AnchorBottom = 1,
 				AnchorRight = 1
 			});
 			
 			AddChild(LaunchButton = new Button {
 				Text = "Launch",
-				RectPosition = ProjectList.RectPosition + new Vector2(0, 310)
+				Position = ProjectList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Connect("pressed", this, nameof(LaunchSelectedProject));
+			LaunchButton.Connect("pressed", new Callable(this, nameof(LaunchSelectedProject)));
 		}
 	}
 }

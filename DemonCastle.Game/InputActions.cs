@@ -18,7 +18,7 @@ namespace DemonCastle.Game {
 
 		private static void RegisterAction(string actionName, params KeyList[] keyList) {
 			RegisterAction(actionName, keyList.Select(key => (InputEvent)new InputEventKey {
-				Scancode = (uint) key
+				Keycode = (uint) key
 			}).ToArray());
 		}
 		

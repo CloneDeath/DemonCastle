@@ -5,10 +5,10 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
+	public partial class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 		public List<SpriteGridDataInfo> SpriteData { get; }
 
-		public Texture Texture => File.GetTexture(Resource.File);
+		public Texture2D Texture2D => File.GetTexture(Resource.File);
 
 		public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
 			SpriteData = Resource.Sprites.Select(s => new SpriteGridDataInfo(this, s)).ToList();

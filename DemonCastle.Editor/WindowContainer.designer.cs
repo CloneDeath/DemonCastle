@@ -4,8 +4,8 @@ using Godot;
 
 namespace DemonCastle.Editor {
 	public partial class WindowContainer {
-		protected Dictionary<FileNavigator, WindowDialog> WindowFileMap { get; } =
-			new Dictionary<FileNavigator, WindowDialog>();
+		protected Dictionary<FileNavigator, Window> WindowFileMap { get; } =
+			new Dictionary<FileNavigator, Window>();
 		
 		protected AcceptDialog ErrorWindow { get; }
 
@@ -13,7 +13,7 @@ namespace DemonCastle.Editor {
 			Name = nameof(WindowContainer);
 			
 			AddChild(ErrorWindow = new AcceptDialog {
-				PopupExclusive = true
+				Exclusive = true
 			}); 
 		}
 	}

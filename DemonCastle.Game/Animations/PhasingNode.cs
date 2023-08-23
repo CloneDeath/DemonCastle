@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 
 namespace DemonCastle.Game.Animations {
-	public class PhasingNode : Node2D {
+	public partial class PhasingNode : Node2D {
 		private List<TemporalNode> Nodes { get; } = new List<TemporalNode>();
 
 		public float Duration { get; set; } = 1;

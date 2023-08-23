@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Game.Animations {
-	public class AnimationNode : Node2D {
+	public partial class AnimationNode : Node2D {
 		protected AnimationInfo Animation { get; }
 		protected PhasingNode Frames { get; }
 
@@ -15,7 +15,7 @@ namespace DemonCastle.Game.Animations {
 			});
 			float totalOffset = 0;
 			foreach (var frame in Animation.Frames) {
-				Frames.AddPhase(frame.Sprite, totalOffset, totalOffset + frame.Duration);
+				Frames.AddPhase(frame.Sprite2D, totalOffset, totalOffset + frame.Duration);
 				totalOffset += frame.Duration;
 			}
 		}

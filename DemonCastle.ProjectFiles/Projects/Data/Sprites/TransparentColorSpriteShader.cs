@@ -1,15 +1,15 @@
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class TransparentColorSpriteShader : ShaderMaterial {
+	public partial class TransparentColorSpriteShader : ShaderMaterial {
 		public float Threshold {
-			get => (float)GetShaderParam("threshold");
-			set => SetShaderParam("threshold", value);
+			get => (float)GetShaderParameter("threshold");
+			set => SetShaderParameter("threshold", value);
 		}
 
 		public Color TransparentColor {
-			get => (Color) GetShaderParam("transparent_color");
-			set => SetShaderParam("transparent_color", value);
+			get => (Color) GetShaderParameter("transparent_color");
+			set => SetShaderParameter("transparent_color", value);
 		}
 		
 		public TransparentColorSpriteShader() {

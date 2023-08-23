@@ -1,0 +1,21 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>DemonCastle</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DemonCastle.ProjectFiles\**" />
+    <Compile Remove="DemonCastle.Game\**" />
+    <Compile Remove="DemonCastle.Editor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="DemonCastle.ProjectFiles\**" />
+    <EmbeddedResource Remove="DemonCastle.Game\**" />
+    <EmbeddedResource Remove="DemonCastle.Editor\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DemonCastle.Editor\DemonCastle.Editor.csproj" />
+    <ProjectReference Include="DemonCastle.Game\DemonCastle.Game.csproj" />
+    <ProjectReference Include="DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
+  </ItemGroup>
+</Project>

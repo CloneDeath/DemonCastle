@@ -1,7 +1,7 @@
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
-	public class ColorProperty : BaseProperty {
+	public partial class ColorProperty : BaseProperty {
 		protected ColorRect ColorRect { get; }
 
 		public Color PropertyValue {
@@ -13,7 +13,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			Name = nameof(ColorProperty);
 			
 			AddChild(ColorRect = new ColorRect {
-				RectMinSize = new Vector2(16, 16)
+				CustomMinimumSize = new Vector2(16, 16)
 			});
 		}
 	}

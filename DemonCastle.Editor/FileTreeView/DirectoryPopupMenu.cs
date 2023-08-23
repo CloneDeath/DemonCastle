@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
-	public class DirectoryPopupMenu : PopupMenu {
+	public partial class DirectoryPopupMenu : PopupMenu {
 		public event Action CreateCharacter;
 		
 		public DirectoryPopupMenu() {
@@ -10,7 +10,7 @@ namespace DemonCastle.Editor.FileTreeView {
 
 			AddItem("Create Character", 0);
 
-			Connect("id_pressed", this, nameof(OnIdPressed));
+			Connect("id_pressed", new Callable(this, nameof(OnIdPressed)));
 		}
 
 		protected void OnIdPressed(int id) {

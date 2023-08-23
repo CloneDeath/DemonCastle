@@ -2,9 +2,9 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class NullSpriteDefinition : ISpriteDefinition {
+	public partial class NullSpriteDefinition : ISpriteDefinition {
 		public string Name => "null";
-		public Texture Texture => new GradientTexture {
+		public Texture2D Texture2D => new GradientTexture2D {
 			Gradient = new Gradient {
 				Colors = new []{Colors.Red, Colors.Blue},
 				Offsets = new []{0f, 1f}

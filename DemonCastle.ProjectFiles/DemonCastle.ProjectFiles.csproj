@@ -1,6 +1,7 @@
-﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
+<Project Sdk="Godot.NET.Sdk/4.1.1">
 	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<RootNamespace>DemonCastle.ProjectFiles</RootNamespace>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
@@ -9,7 +10,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Godot.LocalResources">
-	    <Version>1.0.0</Version>
+	    <Version>4.1.1-preview002</Version>
 	  </PackageReference>
 	  <PackageReference Include="Newtonsoft.Json">
 	    <Version>13.0.1</Version>

@@ -2,7 +2,7 @@ using DemonCastle.Editor.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Windows.Properties {
-	public class BooleanProperty : BaseProperty {
+	public partial class BooleanProperty : BaseProperty {
 		protected IPropertyBinding<bool> Binding { get; }
 		protected CheckBox CheckBox { get; }
 
@@ -16,12 +16,12 @@ namespace DemonCastle.Editor.Windows.Properties {
 			Binding = binding;
 			
 			AddChild(CheckBox = new CheckBox {
-				RectMinSize = new Vector2(20, 20),
+				CustomMinimumSize = new Vector2(20, 20),
 				SizeFlagsHorizontal = (int)SizeFlags.ExpandFill,
 				Pressed = Binding.Get()
 			});
 
-			CheckBox.Connect("toggled", this, nameof(OnValueChange));
+			CheckBox.Connect("toggled", new Callable(this, nameof(OnValueChange)));
 		}
 
 		protected void OnValueChange(bool value) {
