@@ -32,5 +32,14 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 				});
 			}
 		}
+
+		public int GetTileSourceId(string tile) {
+			throw new System.NotImplementedException();
+		}
+
+		public Vector2I GetTileAtlasCoords(string tile) {
+			var tilePalette = Level.Tiles.First(t => t.Name == tile);
+			return tilePalette.Re
+		}
 	}
 }

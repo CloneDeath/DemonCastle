@@ -13,7 +13,7 @@ namespace DemonCastle.Game {
 
 		protected void LoadArea(AreaInfo area) {
 			foreach (var tileMapInfo in area.TileMap) {
-				SetCellv(tileMapInfo.Position, tileMapInfo.TileIndex);
+				SetCell(0, tileMapInfo.Position, tileMapInfo.SourceId, tileMapInfo.AtlasCoords);
 			}
 		}
 	}
