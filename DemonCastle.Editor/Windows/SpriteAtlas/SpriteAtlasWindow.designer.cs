@@ -36,7 +36,7 @@ namespace DemonCastle.Editor.Windows.SpriteAtlas {
 			});
 			PropertyCollection.AddString("File", spriteAtlasInfo, x => x.SpriteFile);
 			PropertyCollection.AddChild(new ColorProperty {
-				PropertyName = "Transparent Color",
+				DisplayName = "Transparent Color",
 				PropertyValue = spriteAtlasInfo.TransparentColor
 			});
 			PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
