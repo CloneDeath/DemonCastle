@@ -13,7 +13,7 @@ namespace DemonCastle.ProjectFiles {
 	}
 
 	public class StartingData {
-		public string Area3D { get; set; } = string.Empty;
+		public string Area { get; set; } = string.Empty;
 		public float X { get; set; }
 		public float Y { get; set; }
 	}

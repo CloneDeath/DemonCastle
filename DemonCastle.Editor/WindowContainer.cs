@@ -9,7 +9,7 @@ using Godot;
 
 namespace DemonCastle.Editor {
 	public partial class WindowContainer : Control {
-		protected Vector2 NextWindow = new(50, 50);
+		protected Vector2I NextWindow = new(50, 50);
 		
 		public void ShowWindowFor(FileNavigator file) {
 			if (WindowFileMap.TryGetValue(file, out var value)) {
@@ -21,7 +21,7 @@ namespace DemonCastle.Editor {
 				var window = GetWindow(file);
 				WindowFileMap[file] = window;
 				AddChild(window);
-				window.Position = GlobalPosition + GetNextWindowLocation();
+				window.Position = (Vector2I)GlobalPosition + GetNextWindowLocation();
 				window.Show();
 			}
 			catch (TargetInvocationException ex) {
@@ -47,8 +47,8 @@ namespace DemonCastle.Editor {
 			}
 		}
 		
-		protected Vector2 GetNextWindowLocation() {
-			return NextWindow = (NextWindow + new Vector2(50, 50)).PosMod(Size - new Vector2(200, 200));
+		protected Vector2I GetNextWindowLocation() {
+			return NextWindow = (NextWindow + new Vector2I(50, 50)) % ((Vector2I)Size - new Vector2I(200, 200));
 		}
 	}
 }

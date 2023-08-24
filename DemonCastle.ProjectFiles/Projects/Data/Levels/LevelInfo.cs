@@ -30,7 +30,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		}
 
 		public Vector2 StartingLocation => TileSize * (
-			GetAreaByName(Level.StartingPosition.Area3D).TilePosition
+			GetAreaByName(Level.StartingPosition.Area).TilePosition
 			+ new Vector2(Level.StartingPosition.X, Level.StartingPosition.Y)
 		) + new Vector2(TileWidth/2f, TileHeight);
 	}

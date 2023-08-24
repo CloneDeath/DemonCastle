@@ -4,11 +4,11 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 	public class AreaInfo {
-		protected AreaData Area3D { get; }
+		protected AreaData Area { get; }
 		public LevelInfo LevelInfo { get; }
 
 		public AreaInfo(AreaData area, LevelInfo levelInfo) {
-			Area3D = area;
+			Area = area;
 			LevelInfo = levelInfo;
 		}
 
