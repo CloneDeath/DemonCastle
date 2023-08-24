@@ -9,12 +9,12 @@ namespace DemonCastle.Editor.Windows {
 		public override void _Process(double delta) {
 			base._Process(delta);
 
-			if (GlobalPosition.x < GetParentControl().GlobalPosition.x) {
-				GlobalPosition = new Vector2(GetParentControl().GlobalPosition.x, GlobalPosition.y);
+			if (Position.X < GetParent<Control>().Position.X) {
+				Position = new Vector2I((int)GetParent<Control>().Position.X, Position.Y);
 			}
 
-			if (GlobalPosition.y < GetParentControl().GlobalPosition.y + 20) {
-				GlobalPosition = new Vector2(GlobalPosition.x, GetParentControl().GlobalPosition.y + 20);
+			if (Position.Y < GetParent<Control>().Position.Y + 20) {
+				Position = new Vector2I(Position.X, (int)GetParent<Control>().Position.Y + 20);
 			}
 		}
 	}

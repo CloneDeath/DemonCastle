@@ -19,7 +19,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		public string Name => Level.Name;
 		public int TileWidth => Level.TileWidth;
 		public int TileHeight => Level.TileHeight;
-		public Vector2 TileSize => new(Level.TileWidth, Level.TileHeight);
+		public Vector2I TileSize => new(Level.TileWidth, Level.TileHeight);
 		public TileSet TileSet => LevelTileSet;
 
 		public IEnumerable<AreaInfo> Areas => Level.Areas.Select(area => new AreaInfo(area, this));

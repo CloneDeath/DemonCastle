@@ -23,7 +23,7 @@ namespace DemonCastle.Editor.Windows.Textures {
 		public override void _Process(double delta) {
 			base._Process(delta);
 			Texture = SpriteGridInfo.Texture;
-			Update();
+			QueueRedraw();
 		}
 	}
 }

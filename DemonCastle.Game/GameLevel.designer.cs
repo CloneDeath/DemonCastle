@@ -1,3 +1,4 @@
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 
 namespace DemonCastle.Game {
@@ -7,8 +8,6 @@ namespace DemonCastle.Game {
 		public GameLevel(LevelInfo level) {
 			Level = level;
 			TileSet = level.TileSet;
-			CellSize = level.TileSize;
-			CollisionLayer = (uint) CollisionLayers.World;
 
 			LoadLevel();
 		}

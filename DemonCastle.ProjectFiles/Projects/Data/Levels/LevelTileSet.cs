@@ -11,35 +11,46 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		public LevelTileSet(LevelFile level, FileNavigator<LevelFile> file) {
 			File = file;
 			Level = level;
+			TileSize = new Vector2I(level.TileWidth, level.TileHeight);
 			foreach (var tile in level.Tiles) {
-				var index = Tiles.Count;
-				var tileInfo = new TileInfo(file, tile, index);
-				Tiles[index] = tileInfo;
+				var tileInfo = new TileInfo(file, tile);
+				Tiles[tile.Name] = tileInfo;
 				RegisterTile(tileInfo);
 			}
 		}
 
-		protected Dictionary<int, TileInfo> Tiles { get; } = new();
+		protected Dictionary<string, TileInfo> Tiles { get; } = new();
+		protected Dictionary<string, SourceMetadata> Sources { get; } = new();
 		
 		private void RegisterTile(TileInfo tileInfo) {
-			CreateTile(tileInfo.Index);
-			TileSetName(tileInfo.Index, tileInfo.Name);
-			TileSetTexture(tileInfo.Index, tileInfo.Texture);
-			TileSetRegion(tileInfo.Index, tileInfo.Region);
-			if (tileInfo.Collision.Any()) {
-				TileSetShape(tileInfo.Index, 0, new ConvexPolygonShape2D {
-					Points = tileInfo.Collision
-				});
-			}
+			var source = CreateOrFindSource(tileInfo);
+			source.CreateTile(tileInfo);
 		}
 
-		public int GetTileSourceId(string tile) {
-			throw new System.NotImplementedException();
+		private SourceMetadata CreateOrFindSource(TileInfo tileInfo) {
+			if (Sources.TryGetValue(tileInfo.TextureName, out var existing)) {
+				return existing;
+			}
+			
+			var source = new TileSetAtlasSource();
+			var sourceId = AddSource(source);
+			source.Texture = tileInfo.Texture;
+			source.TextureRegionSize = TileSize;
+
+			var metadata = new SourceMetadata(source, sourceId);
+			Sources[tileInfo.TextureName] = metadata;
+			return metadata;
+		}
+
+		public int GetTileSourceId(string tileName) {
+			var tile = Tiles[tileName];
+			var source = Sources[tile.TextureName];
+			return source.SourceId;
 		}
 
 		public Vector2I GetTileAtlasCoords(string tile) {
-			var tilePalette = Level.Tiles.First(t => t.Name == tile);
-			return tilePalette.Re
+			var tileInfo = Tiles.TryGetValue(tile, out var data) ? data : throw new KeyNotFoundException();
+			return tileInfo.AtlasCoords;
 		}
 	}
 }

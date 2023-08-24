@@ -15,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		public LevelTileSet LevelTileSet => LevelInfo.LevelTileSet;
 
 		public IEnumerable<TileMapInfo> TileMap => Area.TileMap.Select(tm => new TileMapInfo(tm, this));
-		public Vector2 AreaPosition => new(Area.X, Area.Y);
-		public Vector2 TilePosition => LevelInfo.TileSize * AreaPosition;
+		public Vector2I AreaPosition => new(Area.X, Area.Y);
+		public Vector2I TilePosition => LevelInfo.TileSize * AreaPosition;
 	}
 }

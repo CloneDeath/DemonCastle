@@ -3,3 +3,17 @@
 /home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.AssemblyInfoInputs.cache
 /home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.AssemblyInfo.cs
 /home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.csproj.CoreCompileInputs.cache
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/DemonCastle.ProjectFiles.deps.json
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/DemonCastle.ProjectFiles.runtimeconfig.json
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/DemonCastle.ProjectFiles.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/ref/DemonCastle.ProjectFiles.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/DemonCastle.ProjectFiles.pdb
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/Godot.LocalResources.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/GodotSharp.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/GodotSharpEditor.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/bin/Debug/Newtonsoft.Json.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.csproj.CopyComplete
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/ref/DemonCastle.ProjectFiles.dll
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.pdb
+/home/nicholas/Projects/Games/Godot/DemonCastle/DemonCastle.ProjectFiles/.godot/mono/temp/obj/Debug/DemonCastle.ProjectFiles.genruntimeconfig.cache

@@ -7,8 +7,6 @@ namespace DemonCastle.Game {
 		protected float JumpHeight => Character.JumpHeight * Level.TileHeight;
 		protected int Facing { get; set; } = 1;
 		
-		protected double VSpeed { get; set; }
-		
 		public override void _Process(double delta) {
 			base._Process(delta);
 
@@ -16,12 +14,11 @@ namespace DemonCastle.Game {
 			var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
 			var deltaX = (right - left) * WalkSpeed;
 			if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
-				VSpeed = -GetJumpSpeed();
+				Velocity -= new Vector2(0, -GetJumpSpeed());
 			}
 
-			VSpeed += Gravity * delta;
-			var actual = MoveAndSlide(new Vector2(deltaX, VSpeed));
-			VSpeed = actual.y;
+			Velocity = new Vector2(deltaX, (float)(Velocity.Y + Gravity * delta));
+			MoveAndSlide();
 
 			if (right - left == 0) {
 				Animation.PlayIdle();
