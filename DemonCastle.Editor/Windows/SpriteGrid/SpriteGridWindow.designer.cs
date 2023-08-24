@@ -12,7 +12,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 		public SpriteGridWindow(SpriteGridInfo spriteGridInfo) {
 			Name = nameof(SpriteGridWindow);
 
-			Title = $"Sprite2D Grid - {spriteGridInfo.FileName}";
+			Title = $"Sprite Grid - {spriteGridInfo.FileName}";
 			Size = new Vector2I(600, 550);
 			MinSize = new Vector2I(500, 350);
 			

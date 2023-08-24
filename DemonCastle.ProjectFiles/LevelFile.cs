@@ -21,7 +21,7 @@ namespace DemonCastle.ProjectFiles {
 	public class TileData {
 		public string Name { get; set; } = string.Empty;
 		public string Source { get; set; } = string.Empty;
-		public string Sprite2D { get; set; } = string.Empty;
+		public string Sprite { get; set; } = string.Empty;
 		public List<CollisionData> Collision { get; set; } = new();
 	}
 

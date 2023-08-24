@@ -20,7 +20,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Properties.AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
 			Properties.AddChild(Preview = new TextureRect {
 				Texture = PreviewTexture = new AtlasTexture {
-					Atlas = spriteData.Texture2D,
+					Atlas = spriteData.Texture,
 					Region = spriteData.Region
 				},
 				FlipH = spriteData.FlipHorizontal
@@ -47,7 +47,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			base._Process(delta);
 
 			Preview.FlipH = SpriteData.FlipHorizontal;
-			PreviewTexture.Atlas = SpriteData.Texture2D;
+			PreviewTexture.Atlas = SpriteData.Texture;
 			PreviewTexture.Region = SpriteData.Region;
 		}
 	}

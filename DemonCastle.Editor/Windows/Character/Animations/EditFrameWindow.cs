@@ -15,7 +15,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(Properties = new PropertyCollection());
 			
 			Properties.AddFile("Source", frameInfo, frameInfo.Directory, f => f.SourceFile);
-			Properties.AddString("Sprite2D", frameInfo, f => f.SpriteName);
+			Properties.AddString("Sprite", frameInfo, f => f.SpriteName);
 			Properties.AddFloat("Duration", frameInfo, f => f.Duration);
 		}
 	}

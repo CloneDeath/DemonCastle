@@ -11,7 +11,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
 		}
 
 		public string Name => Data.Name;
-		public Texture2D Texture2D => SpriteAtlasInfo.Texture2D;
+		public Texture2D Texture => SpriteAtlasInfo.Texture;
 
 		public Rect2 Region => new() {
 			Position = new Vector2(Data.X, Data.Y),

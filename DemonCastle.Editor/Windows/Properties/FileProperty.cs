@@ -21,7 +21,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new [] {
 					"*.png; Portable Network Graphic",
-					"*.dcsg; Demon Castle Sprite2D Grid"
+					"*.dcsg; Demon Castle Sprite Grid"
 				},
 				FileMode = FileDialog.FileModeEnum.OpenFile,
 				Exclusive = true,

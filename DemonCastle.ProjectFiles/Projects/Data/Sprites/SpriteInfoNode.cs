@@ -5,7 +5,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 	public partial class SpriteInfoNode : Sprite2D {
 		protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 		public SpriteInfoNode(ISpriteDefinition definition) {
-			Texture = definition.Texture2D;
+			Texture = definition.Texture;
 			RegionEnabled = true;
 			RegionRect = definition.Region;
 			FlipH = definition.FlipHorizontal;

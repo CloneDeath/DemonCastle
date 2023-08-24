@@ -28,14 +28,14 @@ namespace DemonCastle.ProjectFiles.Projects.Data {
 		}
 
 		public string SpriteName {
-			get => FrameData.Sprite2D;
-			set { FrameData.Sprite2D = value; Save(); }
+			get => FrameData.Sprite;
+			set { FrameData.Sprite = value; Save(); }
 		}
 
 		protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : File.GetSprite(FrameData.Source);
 
-		public SpriteInfoNode Sprite2D => new(Source.GetSpriteDefinition(FrameData.Sprite2D));
-		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite2D));
+		public SpriteInfoNode Sprite => new(Source.GetSpriteDefinition(FrameData.Sprite));
+		public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
 
 		protected void Save() => File.Save();
 

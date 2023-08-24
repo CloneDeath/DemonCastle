@@ -15,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 			(byte) Resource.TransparentColor.Green,
 			(byte) Resource.TransparentColor.Blue);
 
-		public Texture2D Texture2D => File.GetTexture(Resource.File);
+		public Texture2D Texture => File.GetTexture(Resource.File);
 
 		public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
 			SpriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();

@@ -15,7 +15,7 @@ namespace DemonCastle.Game.Animations {
 			});
 			float totalOffset = 0;
 			foreach (var frame in Animation.Frames) {
-				Frames.AddPhase(frame.Sprite2D, totalOffset, totalOffset + frame.Duration);
+				Frames.AddPhase(frame.Sprite, totalOffset, totalOffset + frame.Duration);
 				totalOffset += frame.Duration;
 			}
 		}

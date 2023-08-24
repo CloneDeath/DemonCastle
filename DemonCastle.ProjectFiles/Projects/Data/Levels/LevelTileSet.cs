@@ -24,7 +24,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		private void RegisterTile(TileInfo tileInfo) {
 			CreateTile(tileInfo.Index);
 			TileSetName(tileInfo.Index, tileInfo.Name);
-			TileSetTexture(tileInfo.Index, tileInfo.Texture2D);
+			TileSetTexture(tileInfo.Index, tileInfo.Texture);
 			TileSetRegion(tileInfo.Index, tileInfo.Region);
 			if (tileInfo.Collision.Any()) {
 				TileSetShape(tileInfo.Index, 0, new ConvexPolygonShape2D {

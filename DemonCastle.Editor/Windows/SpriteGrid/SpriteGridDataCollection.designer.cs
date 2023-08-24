@@ -25,7 +25,7 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			ReloadSpriteData();
 			
 			Contents.AddChild(AddSpriteDataButton = new Button {
-				Text = "Add Sprite2D Data"
+				Text = "Add Sprite Data"
 			});
 			AddSpriteDataButton.Connect("pressed", new Callable(this, nameof(OnAddSpriteDataButtonPressed)));
 		}
