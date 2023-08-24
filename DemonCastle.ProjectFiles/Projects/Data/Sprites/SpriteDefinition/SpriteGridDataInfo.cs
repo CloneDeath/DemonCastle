@@ -24,7 +24,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition {
 			get => Data.Y;
 			set { Data.Y = value; Save(); }
 		}
-		public Texture2D Texture2D => SpriteGrid.Texture2D;
+		public Texture2D Texture2D => SpriteGrid.Texture;
 		public Rect2 Region => new() {
 			Position = Offset + Span * new Vector2(Data.X, Data.Y),
 			Size = Size

@@ -7,16 +7,16 @@ using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
 	public partial class FileTree : Tree {
-		public event Action<FileNavigator> OnItemActivated;
+		public event Action<FileNavigator> OnFileActivated;
 
 		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 		
-		protected void ItemActivated() {
+		protected void FileActivated() {
 			var selected = GetSelected();
 			if (!FileMap.ContainsKey(selected)) return;
 			
-			OnItemActivated?.Invoke(FileMap[selected]);
+			OnFileActivated?.Invoke(FileMap[selected]);
 		}
 
 		protected void ItemRmbSelected(Vector2I position) {

@@ -30,7 +30,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			FilePopupMenu.DeleteFile += OnDeleteFile;
 
 			CreateTree();
-			Connect("item_activated", new Callable(this, nameof(ItemActivated)));
+			Connect("item_activated", new Callable(this, nameof(FileActivated)));
 			Connect("item_rmb_selected", new Callable(this, nameof(ItemRmbSelected)));
 		}
 	}

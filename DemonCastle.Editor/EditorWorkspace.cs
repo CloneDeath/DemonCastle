@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor {
 	public partial class EditorWorkspace : Control {
-		protected void FileTreeOnOnItemActivated(FileNavigator file) {
+		protected void FileTreeOnOnFileActivated(FileNavigator file) {
 			WindowContainer.ShowWindowFor(file);
 		}
 	}
