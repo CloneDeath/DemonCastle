@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
@@ -13,18 +14,19 @@ namespace DemonCastle.ProjectFiles.Projects {
 		protected FileCollection Files => new(GlobalPath);
 		protected LocalProjectList LocalProjects => new();
 
-		public void DownloadProjects() {
+		public async Task DownloadProjects() {
 			if (Directory.Exists(GlobalPath)) {
 				Directory.Delete(GlobalPath, true);
 			}
-			DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
-			DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
+			await DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
+			await DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
 		}
 		
-		public void DownloadProject(string url) {
+		public async Task DownloadProject(string url) {
 			var dest = Path.GetTempFileName();
-			using (var wc = new WebClient()) {
-				wc.DownloadFile(url, dest);
+			using (var httpClient = new HttpClient()) {
+				var responseBytes = await httpClient.GetByteArrayAsync(url);
+				await File.WriteAllBytesAsync(dest, responseBytes);
 			}
 			ZipFile.ExtractToDirectory(dest, GlobalPath);
 		}

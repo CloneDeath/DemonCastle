@@ -19,7 +19,7 @@ namespace DemonCastle {
 				Text = "Update Projects",
 				Position = new Vector2(10, 10)
 			});
-			DownloadButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(DownloadProjects)));
+			DownloadButton.Pressed += this.DownloadProjects;
 			
 			AddChild(ImportButton = new Button {
 				Text = "Import Project",

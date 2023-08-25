@@ -14,7 +14,7 @@ namespace DemonCastle {
 			base._Ready();
             
 			if (!ProjectManager.ProjectsExist) {
-				ProjectManager.DownloadProjects();
+				ProjectManager.DownloadProjects().Wait();
 			} else {
 				ProjectList.Load(ProjectManager.GetProjects());
 			}
@@ -27,8 +27,8 @@ namespace DemonCastle {
 			EditButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
 		}
 
-		protected void DownloadProjects() {
-			ProjectManager.DownloadProjects();
+		protected async void DownloadProjects() {
+			await ProjectManager.DownloadProjects();
 			ProjectList.Load(ProjectManager.GetProjects());
 		}
 
