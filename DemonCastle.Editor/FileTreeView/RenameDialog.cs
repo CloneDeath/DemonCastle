@@ -16,10 +16,10 @@ namespace DemonCastle.Editor.FileTreeView {
 			Exclusive = true;
 			MinSize += new Vector2I(0, 10);
 
-			Connect("about_to_show", new Callable(this, nameof(OnAboutToShow)));
+			Connect(Window.SignalName.AboutToPopup, new Callable(this, nameof(OnAboutToShow)));
 			
 			AddChild(LineEdit = new LineEdit());
-			LineEdit.Connect("gui_input", new Callable(this, nameof(OnLineEditGuiInput)));
+			LineEdit.Connect(Control.SignalName.GuiInput, new Callable(this, nameof(OnLineEditGuiInput)));
 		}
 
 		protected void OnAboutToShow() {
@@ -33,7 +33,7 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected void OnLineEditGuiInput(InputEvent input) {
 			if (!input.IsActionPressed(InputActions.EditorSubmit)) return;
 			
-			EmitSignal("confirmed");
+			EmitSignal(AcceptDialog.SignalName.Confirmed);
 			Hide();
 		}
 	}

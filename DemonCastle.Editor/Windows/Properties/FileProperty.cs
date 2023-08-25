@@ -16,7 +16,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(LoadButton = new Button {
 				Text = "..."
 			});
-			LoadButton.Connect("pressed", new Callable(this, nameof(OnClick)));
+			LoadButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnClick)));
 
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new [] {

@@ -28,10 +28,10 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 			Properties.AddChild(DeleteButton = new Button {
 				Text = "Delete"
 			});
-			DeleteButton.Connect("pressed", new Callable(this, nameof(OnDeleteButtonPressed)));
+			DeleteButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnDeleteButtonPressed)));
 			
 			AddChild(DeleteConfirmation = new DeleteSpriteDataDialog());
-			DeleteConfirmation.Connect("confirmed", new Callable(this, nameof(OnDeleteConfirmed)));
+			DeleteConfirmation.Connect(AcceptDialog.SignalName.Confirmed, new Callable(this, nameof(OnDeleteConfirmed)));
 		}
 
 		protected void OnDeleteButtonPressed() {

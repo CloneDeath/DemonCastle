@@ -14,7 +14,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(AddButton = new Button {
 				Text = "Add"
 			});
-			AddButton.Connect("pressed", new Callable(this, nameof(OnAddPressed)));
+			AddButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnAddPressed)));
 			
 			AddChild(AnimationItems = new AnimationItemList {
 				SizeFlagsVertical = SizeFlags.ExpandFill
@@ -25,7 +25,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(RemoveButton = new Button {
 				Text = "Remove"
 			});
-			RemoveButton.Connect("pressed", new Callable(this, nameof(OnRemovePressed)));
+			RemoveButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnRemovePressed)));
 		}
 	}
 }

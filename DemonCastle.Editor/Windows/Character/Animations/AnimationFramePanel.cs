@@ -34,15 +34,15 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			Items.AddChild(EditButton = new Button {
 				Text = "Edit"
 			});
-			EditButton.Connect("pressed", new Callable(this, nameof(OnEditButtonClicked)));
+			EditButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnEditButtonClicked)));
 			
 			Items.AddChild(DeleteButton = new Button {
 				Text = "Delete"
 			});
-			DeleteButton.Connect("pressed", new Callable(this, nameof(OnDeleteButtonClicked)));
+			DeleteButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnDeleteButtonClicked)));
 
 			AddChild(EditWindow = new EditFrameWindow(frameInfo));
-			EditWindow.Connect("confirmed", new Callable(this, nameof(OnEditWindowClosed)));
+			EditWindow.Connect(AcceptDialog.SignalName.Confirmed, new Callable(this, nameof(OnEditWindowClosed)));
 			
 			LoadFrameInfo();
 		}

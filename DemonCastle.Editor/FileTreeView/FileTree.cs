@@ -19,13 +19,14 @@ namespace DemonCastle.Editor.FileTreeView {
 			OnFileActivated?.Invoke(FileMap[selected]);
 		}
 
-		protected void ItemRmbSelected(Vector2I position) {
+		protected void OnItemSelected() {
+			if (!Input.IsMouseButtonPressed(MouseButton.Right)) return;
 			var selected = GetSelected();
 			if (DirectoryMap.ContainsKey(selected)) {
-				DirectoryPopupMenu.Position = position;
+				DirectoryPopupMenu.Position = (Vector2I)GetViewport().GetMousePosition();
 				DirectoryPopupMenu.Popup();
 			} else if (FileMap.ContainsKey(selected)) {
-				FilePopupMenu.Position = position;
+				FilePopupMenu.Position = (Vector2I)GetViewport().GetMousePosition();
 				FilePopupMenu.Popup();
 			}
 		}

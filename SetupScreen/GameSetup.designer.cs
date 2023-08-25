@@ -36,7 +36,7 @@ namespace DemonCastle.SetupScreen {
 				Text = "Start Chapter",
 				Position = CharacterInfoList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Connect("pressed", new Callable(this, nameof(OnLaunchButtonClicked)));
+			LaunchButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnLaunchButtonClicked)));
 		}
 	}
 }
