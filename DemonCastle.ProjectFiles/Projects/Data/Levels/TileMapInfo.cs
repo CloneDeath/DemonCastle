@@ -11,9 +11,8 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		}
 
 		protected LevelTileSet TileSet => AreaInfo.LevelTileSet;
-
+		
 		public Vector2I Position => new Vector2I(TileMapData.X, TileMapData.Y) + AreaInfo.TilePosition;
-		public int SourceId => TileSet.GetTileSourceId(TileMapData.Tile);
-		public Vector2I AtlasCoords => TileSet.GetTileAtlasCoords(TileMapData.Tile);
+		public string TileName => TileMapData.Tile;
 	}
 }

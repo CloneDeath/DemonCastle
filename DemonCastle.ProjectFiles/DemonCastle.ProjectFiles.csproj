@@ -7,7 +7,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Content Include="Projects\Data\Sprites\TransparentColorSpriteShader.shader" />
+	  <Content Include="Projects\Data\Sprites\TransparentColorSpriteShader.gdshader" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Godot.LocalResources">

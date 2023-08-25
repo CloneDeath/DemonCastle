@@ -7,8 +7,6 @@ namespace DemonCastle.Game {
 		
 		public GameLevel(LevelInfo level) {
 			Level = level;
-			TileSet = level.TileSet;
-
 			LoadLevel();
 		}
 	}

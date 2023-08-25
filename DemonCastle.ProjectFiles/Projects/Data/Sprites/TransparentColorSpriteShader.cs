@@ -13,7 +13,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
 		}
 		
 		public TransparentColorSpriteShader() {
-			Shader = ResourceLoader.Load<Shader>($"res://DemonCastle.ProjectFiles/Projects/Data/Sprites/{nameof(TransparentColorSpriteShader)}.shader");
+			Shader = ResourceLoader.Load<Shader>($"res://DemonCastle.ProjectFiles/Projects/Data/Sprites/{nameof(TransparentColorSpriteShader)}.gdshader");
 		}
 	}
 }

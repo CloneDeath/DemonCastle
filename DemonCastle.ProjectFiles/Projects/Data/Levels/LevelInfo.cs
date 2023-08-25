@@ -9,18 +9,17 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		protected LevelFile Level => File.Resource;
 		public string FileName => File.FileName;
 
-		public LevelTileSet LevelTileSet { get; }
+		public LevelTileSet TileSet { get; }
 
 		public LevelInfo(FileNavigator<LevelFile> file) {
 			File = file;
-			LevelTileSet = new LevelTileSet(Level, File);
+			TileSet = new LevelTileSet(Level, File);
 		}
 		
 		public string Name => Level.Name;
 		public int TileWidth => Level.TileWidth;
 		public int TileHeight => Level.TileHeight;
 		public Vector2I TileSize => new(Level.TileWidth, Level.TileHeight);
-		public TileSet TileSet => LevelTileSet;
 
 		public IEnumerable<AreaInfo> Areas => Level.Areas.Select(area => new AreaInfo(area, this));
 

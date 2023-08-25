@@ -9,7 +9,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 	public class TileInfo {
 		protected TileData TileData { get; }
 		protected FileNavigator<LevelFile> Level { get; }
-		protected Vector2I LevelTileSize => new Vector2I(Level.Resource.TileWidth, Level.Resource.TileHeight);
+		protected Vector2I LevelTileSize => new(Level.Resource.TileWidth, Level.Resource.TileHeight);
 
 		public TileInfo(FileNavigator<LevelFile> level, TileData tileData) {
 			TileData = tileData;
