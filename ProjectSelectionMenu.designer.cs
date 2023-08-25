@@ -29,7 +29,7 @@ namespace DemonCastle {
 			
 			AddChild(RemoveButton = new Button {
 				Text = "Remove Project",
-				Position = ImportButton.Position + new Vector2(0, 30)
+				Position = ImportButton.Position + new Vector2(0, 40)
 			});
 			RemoveButton.Pressed += this.RemoveProject;
 			
@@ -51,7 +51,7 @@ namespace DemonCastle {
 			OpenFileDialog.FileSelected += this.ImportProject;;
 
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
-				Position = DownloadButton.Position + new Vector2(0, 30),
+				Position = DownloadButton.Position + new Vector2(0, 40),
 				AnchorBottom = 1,
 				AnchorRight = 1
 			});
