@@ -15,7 +15,7 @@ namespace DemonCastle.Editor {
 			AddChild(SplitContainer = new HSplitContainer {
 				Name = nameof(HSplitContainer),
 				AnchorRight = 1,
-				AnchorBottom = 1,
+				AnchorBottom = 1
 			});
 
 			SplitContainer.AddChild(FileTree = new FileTree(project.File) {

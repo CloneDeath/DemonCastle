@@ -11,7 +11,7 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 				AnchorRight = 1,
 				OffsetRight = 0,
 				AnchorBottom = 1,
-				OffsetBottom = 1
+				OffsetBottom = 0
 			});
 			SplitContainer.AddChild(Animations = new AnimationCollectionEdit(characterInfo.Animations));
 			Animations.AnimationSelected += OnAnimationSelected;

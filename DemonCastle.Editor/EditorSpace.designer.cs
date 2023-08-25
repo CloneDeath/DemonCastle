@@ -9,14 +9,16 @@ namespace DemonCastle.Editor {
 			AddChild(new EditorTopBar {
 				AnchorRight = 1,
 				OffsetRight = 0,
-				OffsetBottom = 25
+				OffsetTop = 5,
+				OffsetLeft = 5
 			});
 			AddChild(new EditorWorkspace(project) {
 				AnchorRight = 1,
 				AnchorBottom = 1,
-				OffsetRight = 0,
-				OffsetBottom = 0,
-				OffsetTop = 25
+				OffsetRight = 5,
+				OffsetLeft = 5,
+				OffsetBottom = -5,
+				OffsetTop = 40
 			});
 		}
 	}
