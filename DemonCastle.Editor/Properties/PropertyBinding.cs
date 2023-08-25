@@ -15,7 +15,7 @@ namespace DemonCastle.Editor.Properties {
 			PropertyExpression = propertyExpression;
 		}
 
-		public TProperty Get() => (TProperty)Property.GetValue(Target);
+		public TProperty Get() => (TProperty)(Property.GetValue(Target) ?? throw new NullReferenceException());
 		public void Set(TProperty value) => Property.SetValue(Target, value);
 	}
 }

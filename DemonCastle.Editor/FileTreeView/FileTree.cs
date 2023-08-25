@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
 	public partial class FileTree : Tree {
-		public event Action<FileNavigator> OnFileActivated;
+		public event Action<FileNavigator>? OnFileActivated;
 
 		protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 		protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
@@ -38,7 +38,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			CreateDirectory(null, Root);
 		}
 
-		protected void CreateDirectory(TreeItem parent, DirectoryNavigator directory) {
+		protected void CreateDirectory(TreeItem? parent, DirectoryNavigator directory) {
 			if (directory.DirectoryName.StartsWith(".")) return;
 			
 			var dir = CreateItem(parent);
@@ -87,7 +87,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			CreateTree();
 		}
 
-		protected FileNavigator SelectedFile {
+		protected FileNavigator? SelectedFile {
 			get {
 				var selected = GetSelected();
 				return FileMap.TryGetValue(selected, out var value) ? value : null;

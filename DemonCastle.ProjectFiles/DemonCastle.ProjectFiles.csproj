@@ -4,6 +4,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<RootNamespace>DemonCastle.ProjectFiles</RootNamespace>
 		<IsPackable>false</IsPackable>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Include="Projects\Data\Sprites\TransparentColorSpriteShader.shader" />

@@ -42,6 +42,6 @@ namespace DemonCastle.ProjectFiles {
 	public class TileMapData {
 		public int X { get; set; } = 0;
 		public int Y { get; set; } = 0;
-		public string Tile { get; set; }
+		public string Tile { get; set; } = string.Empty;
 	}
 }

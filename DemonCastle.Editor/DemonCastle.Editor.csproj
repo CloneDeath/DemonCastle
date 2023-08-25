@@ -4,6 +4,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<RootNamespace>DemonCastle.Editor</RootNamespace>
 		<IsPackable>false</IsPackable>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\DemonCastle.Game\DemonCastle.Game.csproj" />

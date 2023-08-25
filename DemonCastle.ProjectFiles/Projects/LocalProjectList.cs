@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -11,7 +12,8 @@ namespace DemonCastle.ProjectFiles.Projects {
 			if (!File.Exists(GlobalPath)) return new ProjectListFile();
 
 			var contents = File.ReadAllText(GlobalPath);
-			return JsonConvert.DeserializeObject<ProjectListFile>(contents);
+			return JsonConvert.DeserializeObject<ProjectListFile>(contents)
+				   ?? throw new NullReferenceException();
 		}
 		
 		public IEnumerable<string> ProjectFiles => GetProjectList().Projects;

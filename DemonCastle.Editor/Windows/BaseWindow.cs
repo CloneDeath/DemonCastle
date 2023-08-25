@@ -4,6 +4,7 @@ namespace DemonCastle.Editor.Windows {
 	public partial class BaseWindow : Window {
 		public BaseWindow() {
 			Unresizable = false;
+			CloseRequested += Hide;
 		}
 		
 		public override void _Process(double delta) {

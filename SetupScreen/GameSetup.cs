@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.SetupScreen {
 	public partial class GameSetup : Container {
-		public event Action<LevelInfo, CharacterInfo> GameStart;
+		public event Action<LevelInfo, CharacterInfo>? GameStart;
 
 		public override void _Process(double delta) {
 			base._Process(delta);

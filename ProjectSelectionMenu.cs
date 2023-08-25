@@ -7,8 +7,8 @@ namespace DemonCastle {
 	public partial class ProjectSelectionMenu : Container {
 		protected ProjectManager ProjectManager { get; } = new();
 
-		public event Action<ProjectInfo> ProjectLoaded;
-		public event Action<ProjectInfo> ProjectEdit;
+		public event Action<ProjectInfo>? ProjectLoaded;
+		public event Action<ProjectInfo>? ProjectEdit;
 
 		public override void _Ready() {
 			base._Ready();

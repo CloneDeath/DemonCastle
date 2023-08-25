@@ -45,8 +45,6 @@ namespace DemonCastle.Editor {
 		}
 
 		private static string AppendDirectorySeparatorChar(string path) {
-			if (path == null) return null;
-			
 			// Append a slash only if the path is a directory and does not have a slash.
 			if (!Path.HasExtension(path) &&
 			    !path.EndsWith(Path.DirectorySeparatorChar.ToString()))

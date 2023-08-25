@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
@@ -14,7 +15,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 
 		public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
 		public FileNavigator(string filePath, ProjectResources resources) 
-			: base(Path.GetDirectoryName(filePath), resources) {
+			: base(Path.GetDirectoryName(filePath) ?? throw new NullReferenceException(), resources) {
 			FilePath = filePath;
 		}
 

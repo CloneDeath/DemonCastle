@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -9,7 +10,8 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public FileNavigator(string filePath, ProjectResources resources) 
 			: base(filePath, resources) {
 			var fileContents = File.ReadAllText(filePath);
-			Resource = JsonConvert.DeserializeObject<T>(fileContents);
+			Resource = JsonConvert.DeserializeObject<T>(fileContents)
+					   ?? throw new NullReferenceException();
 		}
 
 		public void Save() {

@@ -3,9 +3,8 @@ using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
 	public partial class FilePopupMenu : PopupMenu {
-		public event Action RenameFile;
-		
-		public event Action DeleteFile;
+		public event Action? RenameFile;
+		public event Action? DeleteFile;
 		
 		public FilePopupMenu() {
 			Name = nameof(FilePopupMenu);

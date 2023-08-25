@@ -3,12 +3,12 @@ using Godot;
 
 namespace DemonCastle.Editor.Controls {
 	public partial class BindingLineEdit : WrapperControl<LineEdit> {
-		protected IPropertyBinding<string> PropertyBinding { get; set; }
-		public IPropertyBinding<string> Binding {
+		protected IPropertyBinding<string>? PropertyBinding { get; set; }
+		public IPropertyBinding<string>? Binding {
 			get => PropertyBinding;
 			set {
 				PropertyBinding = value;
-				Inner.Text = PropertyBinding.Get();
+				Inner.Text = PropertyBinding?.Get();
 			}
 		}
 
@@ -31,7 +31,7 @@ namespace DemonCastle.Editor.Controls {
 		}
 
 		protected void OnValueChange(string value) {
-			Binding.Set(value);
+			Binding?.Set(value);
 		}
 	}
 }
