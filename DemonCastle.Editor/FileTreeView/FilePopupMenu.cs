@@ -13,10 +13,10 @@ namespace DemonCastle.Editor.FileTreeView {
 			AddItem("Rename", 0);
 			AddItem("Delete", 1);
 
-			Connect("id_pressed", new Callable(this, nameof(OnIdPressed)));
+			IdPressed += OnIdPressed;
 		}
 
-		protected void OnIdPressed(int id) {
+		protected void OnIdPressed(long id) {
 			switch (id) {
 				case 0: {
 					RenameFile?.Invoke();

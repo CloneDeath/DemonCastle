@@ -21,7 +21,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 				ButtonPressed = Binding.Get()
 			});
 
-			CheckBox.Connect("toggled", new Callable(this, nameof(OnValueChange)));
+			CheckBox.Toggled += OnValueChange;
 		}
 
 		protected void OnValueChange(bool value) {

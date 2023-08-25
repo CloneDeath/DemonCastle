@@ -14,8 +14,8 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			RemoveButton.Disabled = !AnimationItems.IsAnythingSelected();
 		}
 
-		protected void OnAnimationSelected(int index) {
-			var animationInfo = Animations[index];
+		protected void OnAnimationSelected(long index) {
+			var animationInfo = Animations[(int)index];
 			AnimationSelected?.Invoke(animationInfo);
 		}
 

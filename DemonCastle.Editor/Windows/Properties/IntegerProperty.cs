@@ -21,10 +21,10 @@ namespace DemonCastle.Editor.Windows.Properties {
 				Value = Binding.Get()
 			});
 
-			SpinBox.Connect("value_changed", new Callable(this, nameof(OnValueChange)));
+			SpinBox.ValueChanged += OnValueChange;
 		}
 
-		protected void OnValueChange(float value) {
+		protected void OnValueChange(double value) {
 			Binding.Set((int)value);
 		}
 	}

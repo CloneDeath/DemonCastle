@@ -10,10 +10,10 @@ namespace DemonCastle.Editor.FileTreeView {
 
 			AddItem("Create Character", 0);
 
-			Connect("id_pressed", new Callable(this, nameof(OnIdPressed)));
+			IdPressed += OnIdPressed;
 		}
 
-		protected void OnIdPressed(int id) {
+		protected void OnIdPressed(long id) {
 			CreateCharacter?.Invoke();
 		}
 	}

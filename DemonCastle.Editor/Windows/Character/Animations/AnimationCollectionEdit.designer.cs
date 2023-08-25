@@ -14,18 +14,18 @@ namespace DemonCastle.Editor.Windows.Character.Animations {
 			AddChild(AddButton = new Button {
 				Text = "Add"
 			});
-			AddButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnAddPressed)));
+			AddButton.Pressed += this.OnAddPressed;;
 			
 			AddChild(AnimationItems = new AnimationItemList {
 				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
-			AnimationItems.Connect("item_selected", new Callable(this, nameof(OnAnimationSelected)));
+			AnimationItems.ItemSelected += this.OnAnimationSelected;;
 			AnimationItems.AddAnimations(animations);
 			
 			AddChild(RemoveButton = new Button {
 				Text = "Remove"
 			});
-			RemoveButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnRemovePressed)));
+			RemoveButton.Pressed += this.OnRemovePressed;;
 		}
 	}
 }

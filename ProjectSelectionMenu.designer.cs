@@ -25,19 +25,19 @@ namespace DemonCastle {
 				Text = "Import Project",
 				Position = DownloadButton.Position + new Vector2(310, 0)
 			});
-			ImportButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OpenImportProject)));
+			ImportButton.Pressed += OpenImportProject;
 			
 			AddChild(RemoveButton = new Button {
 				Text = "Remove Project",
 				Position = ImportButton.Position + new Vector2(0, 30)
 			});
-			RemoveButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(RemoveProject)));
+			RemoveButton.Pressed += this.RemoveProject;
 			
 			AddChild(EditButton = new Button {
 				Text = "Edit Project",
 				Position = RemoveButton.Position + new Vector2(0, 90)
 			});
-			EditButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(EditProject)));
+			EditButton.Pressed += this.EditProject;
 			
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new []{"*.dcp; Demon Castle Project"},
@@ -48,7 +48,7 @@ namespace DemonCastle {
 				Unresizable = false,
 				Title = "Import Project"
 			});
-			OpenFileDialog.Connect("file_selected", new Callable(this, nameof(ImportProject)));
+			OpenFileDialog.FileSelected += this.ImportProject;;
 
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
 				Position = DownloadButton.Position + new Vector2(0, 30),
@@ -60,7 +60,7 @@ namespace DemonCastle {
 				Text = "Launch",
 				Position = ProjectList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(LaunchSelectedProject)));
+			LaunchButton.Pressed += this.LaunchSelectedProject;;
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(LoadButton = new Button {
 				Text = "..."
 			});
-			LoadButton.Connect(BaseButton.SignalName.Pressed, new Callable(this, nameof(OnClick)));
+			LoadButton.Pressed += OnClick;
 
 			AddChild(OpenFileDialog = new FileDialog {
 				Filters = new [] {
@@ -30,7 +30,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 				Unresizable = false,
 				Title = "RefCounted Image"
 			});
-			OpenFileDialog.Connect("file_selected", new Callable(this, nameof(FileSelected)));
+			OpenFileDialog.FileSelected += FileSelected;
 		}
 
 		protected void OnClick() {

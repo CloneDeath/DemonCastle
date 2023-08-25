@@ -26,7 +26,7 @@ namespace DemonCastle.Editor.Controls {
 		}
 
 		public BindingLineEdit() {
-			Inner.Connect("text_changed", new Callable(this, nameof(OnValueChange)));
+			Inner.TextChanged += OnValueChange;
 			CustomMinimumSize = new Vector2(0, 24);
 		}
 

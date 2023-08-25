@@ -16,10 +16,10 @@ namespace DemonCastle.Editor.FileTreeView {
 			Exclusive = true;
 			MinSize += new Vector2I(0, 10);
 
-			Connect(Window.SignalName.AboutToPopup, new Callable(this, nameof(OnAboutToShow)));
+			AboutToPopup += OnAboutToShow;
 			
 			AddChild(LineEdit = new LineEdit());
-			LineEdit.Connect(Control.SignalName.GuiInput, new Callable(this, nameof(OnLineEditGuiInput)));
+			LineEdit.GuiInput += OnLineEditGuiInput;
 		}
 
 		protected void OnAboutToShow() {
