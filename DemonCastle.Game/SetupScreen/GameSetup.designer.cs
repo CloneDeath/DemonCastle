@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.SetupScreen {
+namespace DemonCastle.Game.SetupScreen {
 	public partial class GameSetup {
 		protected Label CharactersLabel { get; }
 		protected InfoItemList<CharacterInfo> CharacterInfoList { get; }
