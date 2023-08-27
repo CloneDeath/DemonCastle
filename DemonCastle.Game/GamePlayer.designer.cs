@@ -21,6 +21,7 @@ namespace DemonCastle.Game {
 				}
 			});
 			CollisionLayer = (uint) CollisionLayers.Player;
+			CollisionMask = (uint)CollisionLayers.World;
 			AddChild(Animation = new PlayerAnimation(character));
 		}
 	}
