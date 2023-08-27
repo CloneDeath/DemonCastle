@@ -103,7 +103,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			var selected = GetSelected();
 			if (!DirectoryMap.ContainsKey(selected)) return;
 			var dirNav = DirectoryMap[selected];
-			dirNav.CreateFile("text", "txt", string.Empty);
+			dirNav.CreateEmptyFile("text", "txt");
 			
 			CreateTree();
 		}

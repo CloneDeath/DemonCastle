@@ -85,8 +85,17 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			var contents = JsonConvert.SerializeObject(data);
 			if (FileExists(file)) {
 				CreateFile(fileName, 0, extension, contents);
+			} else {
+				CreateFileWithContents(file, contents);
 			}
-			else {
+		}
+
+		public void CreateEmptyFile(string fileName, string extension) {
+			var file = $"{fileName}.{extension}";
+			var contents = string.Empty;
+			if (FileExists(file)) {
+				CreateFile(fileName, 0, extension, contents);
+			} else {
 				CreateFileWithContents(file, contents);
 			}
 		}
