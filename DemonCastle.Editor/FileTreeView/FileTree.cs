@@ -81,10 +81,6 @@ namespace DemonCastle.Editor.FileTreeView {
 			if (!DirectoryMap.ContainsKey(selected)) return;
 			var dirNav = DirectoryMap[selected];
 			dirNav.CreateDirectory("directory");
-			dirNav.CreateFile("character", "dcc", new CharacterFile {
-				Name = "character"
-			});
-			
 			CreateTree();
 		}
 		
