@@ -19,7 +19,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			OnFileActivated?.Invoke(FileMap[selected]);
 		}
 
-		protected void OnItemSelected() {
+		protected void OnItemSelected(Vector2 position, long button) {
 			if (!Input.IsMouseButtonPressed(MouseButton.Right)) return;
 			var selected = GetSelected();
 			if (DirectoryMap.ContainsKey(selected)) {
