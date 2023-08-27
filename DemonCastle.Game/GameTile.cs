@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Game; 
 
 public partial class GameTile : Node2D {
-	private readonly StaticBody2D Body;
+	private StaticBody2D Body { get; }
 	
 	public GameTile(TileInfo tile, TileMapInfo tileMapInfo) {
 		Position = tileMapInfo.Position;
