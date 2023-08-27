@@ -23,7 +23,8 @@ namespace DemonCastle.Editor.Windows.SpriteGrid {
 					Atlas = spriteData.Texture,
 					Region = spriteData.Region
 				},
-				FlipH = spriteData.FlipHorizontal
+				FlipH = spriteData.FlipHorizontal,
+				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered
 			});
 			Properties.AddChild(DeleteButton = new Button {
 				Text = "Delete"

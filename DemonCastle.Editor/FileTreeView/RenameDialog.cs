@@ -1,4 +1,3 @@
-using DemonCastle.Game;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView {
@@ -12,14 +11,19 @@ namespace DemonCastle.Editor.FileTreeView {
 		
 		public RenameDialog() {
 			Name = nameof(RenameDialog);
-			DialogText = "Enter a new name:";
+			Title = "Rename";
 			Exclusive = true;
-			MinSize += new Vector2I(0, 10);
+			MinSize += new Vector2I(0, 30);
 
 			AboutToPopup += OnAboutToShow;
-			
-			AddChild(LineEdit = new LineEdit());
-			LineEdit.GuiInput += OnLineEditGuiInput;
+
+			var vbox = new VBoxContainer();
+			AddChild(vbox);
+			vbox.AddChild(new Label {
+				Text = "Enter a new name:"
+			});
+			vbox.AddChild(LineEdit = new LineEdit());
+			RegisterTextEnter(LineEdit);
 		}
 
 		protected void OnAboutToShow() {
@@ -28,13 +32,6 @@ namespace DemonCastle.Editor.FileTreeView {
 
 		public void FocusLineEdit() {
 			LineEdit.GrabFocus();
-		}
-
-		protected void OnLineEditGuiInput(InputEvent input) {
-			if (!input.IsActionPressed(InputActions.EditorSubmit)) return;
-			
-			EmitSignal(AcceptDialog.SignalName.Confirmed);
-			Hide();
 		}
 	}
 }
