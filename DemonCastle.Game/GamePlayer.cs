@@ -14,7 +14,7 @@ namespace DemonCastle.Game {
 			var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
 			var deltaX = (right - left) * WalkSpeed;
 			if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
-				Velocity -= new Vector2(0, -GetJumpSpeed());
+				Velocity = -new Vector2(Velocity.X, GetJumpSpeed());
 			}
 
 			Velocity = new Vector2(deltaX, (float)(Velocity.Y + Gravity * delta));
