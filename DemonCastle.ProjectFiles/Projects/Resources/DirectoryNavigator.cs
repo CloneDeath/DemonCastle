@@ -75,6 +75,11 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 			return files.Select(file => new FileNavigator(file, ProjectResources));
 		}
 
+		public void CreateDirectory(string directoryName) {
+			var fullPath = Path.Combine(Directory, directoryName);
+			System.IO.Directory.CreateDirectory(fullPath);
+		}
+
 		public void CreateFile<TFile>(string fileName, string extension, TFile data) {
 			var file = $"{fileName}.{extension}";
 			var contents = JsonConvert.SerializeObject(data);

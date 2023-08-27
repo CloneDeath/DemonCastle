@@ -76,13 +76,34 @@ namespace DemonCastle.Editor.FileTreeView {
 			}
 		}
 
-		public void OnCreateCharacterSelected() {
+		public void OnAddDirectorySelected() {
+			var selected = GetSelected();
+			if (!DirectoryMap.ContainsKey(selected)) return;
+			var dirNav = DirectoryMap[selected];
+			dirNav.CreateDirectory("directory");
+			dirNav.CreateFile("character", "dcc", new CharacterFile {
+				Name = "character"
+			});
+			
+			CreateTree();
+		}
+		
+		public void OnCreateCharacterFileSelected() {
 			var selected = GetSelected();
 			if (!DirectoryMap.ContainsKey(selected)) return;
 			var dirNav = DirectoryMap[selected];
 			dirNav.CreateFile("character", "dcc", new CharacterFile {
 				Name = "character"
 			});
+			
+			CreateTree();
+		}
+		
+		public void OnCreateTextFileSelected() {
+			var selected = GetSelected();
+			if (!DirectoryMap.ContainsKey(selected)) return;
+			var dirNav = DirectoryMap[selected];
+			dirNav.CreateFile("text", "txt", string.Empty);
 			
 			CreateTree();
 		}
