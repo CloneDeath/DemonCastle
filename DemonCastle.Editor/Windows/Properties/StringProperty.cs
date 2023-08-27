@@ -17,7 +17,7 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(LineEdit = new BindingLineEdit {
 				Binding = binding,
 				SizeFlagsHorizontal = SizeFlags.ExpandFill,
-				CustomMinimumSize = new Vector2(0, 24)
+				CustomMinimumSize = new Vector2(0, 32)
 			});
 		}
 	}
