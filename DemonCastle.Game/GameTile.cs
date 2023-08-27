@@ -9,7 +9,8 @@ public partial class GameTile : Node2D {
 		AddChild(new Sprite2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,
-			RegionRect = tile.Region
+			RegionRect = tile.Region,
+			Centered = false
 		});
 	}
 }
