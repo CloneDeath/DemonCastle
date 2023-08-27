@@ -29,7 +29,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public LevelInfo ToLevelInfo() => ProjectResources.GetLevel(FilePath);
 		public ProjectInfo ToProjectInfo() => ProjectResources.GetProject(FilePath);
 
-		public void Rename(string newName) {
+		public void RenameFile(string newName) {
 			var newPath = Path.Combine(Directory, newName);
 			File.Move(FilePath, newPath);
 		}

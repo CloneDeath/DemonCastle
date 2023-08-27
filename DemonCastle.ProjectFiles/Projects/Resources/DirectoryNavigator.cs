@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -78,6 +79,15 @@ namespace DemonCastle.ProjectFiles.Projects.Resources {
 		public void CreateDirectory(string directoryName) {
 			var fullPath = Path.Combine(Directory, directoryName);
 			System.IO.Directory.CreateDirectory(fullPath);
+		}
+
+		public void DeleteDirectory() => System.IO.Directory.Delete(Directory, true);
+
+		public void RenameDirectory(string newName) {
+			var parent = System.IO.Directory.GetParent(Directory)
+				?? throw new NullReferenceException();
+			var fullPath = Path.Combine(parent.FullName, newName);
+			System.IO.Directory.Move(Directory, fullPath);
 		}
 
 		public void CreateFile<TFile>(string fileName, string extension, TFile data) {

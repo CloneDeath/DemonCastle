@@ -7,6 +7,8 @@ namespace DemonCastle.Editor.FileTreeView {
 		public event Action? AddDirectory;
 		public event Action? CreateCharacterFile;
 		public event Action? CreateTextFile;
+		public event Action? RenameDirectory;
+		public event Action? DeleteDirectory;
 		
 		public DirectoryPopupMenu() {
 			Name = nameof(DirectoryPopupMenu);
@@ -19,6 +21,9 @@ namespace DemonCastle.Editor.FileTreeView {
 			
 			AddItem("Create Text File", 2);
 			SetItemIcon(2, IconTextures.TextFileIcon);
+
+			AddItem("Rename...", 3);
+			AddItem("Delete...", 4);
 
 			IdPressed += OnIdPressed;
 		}
@@ -33,6 +38,12 @@ namespace DemonCastle.Editor.FileTreeView {
 					break;
 				case 2:
 					CreateTextFile?.Invoke();
+					break;
+				case 3:
+					RenameDirectory?.Invoke();
+					break;
+				case 4:
+					DeleteDirectory?.Invoke();
 					break;
 				default: throw new NotImplementedException($"Id {id} not handled in DirectoryPopupMenu.");
 			}

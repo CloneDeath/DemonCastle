@@ -115,28 +115,35 @@ namespace DemonCastle.Editor.FileTreeView {
 			}
 		}
 
-		protected void OnRenameFile() {
-			if (SelectedFile == null) return;
-			ConfirmRename.Text = SelectedFile.FileNameWithoutExtension;
+		protected DirectoryNavigator? SelectedDirectory {
+			get {
+				var selected = GetSelected();
+				return DirectoryMap.TryGetValue(selected, out var value) ? value : null;
+			}
+		}
+
+		protected void OnRename() {
+			ConfirmRename.Text = SelectedFile?.FileNameWithoutExtension
+				?? SelectedDirectory?.DirectoryName
+				?? string.Empty;
 			ConfirmRename.PopupCentered();
 			ConfirmRename.FocusLineEdit();
 		}
 
 		protected void OnRenameConfirmed() {
-			if (SelectedFile == null) return;
-
-			SelectedFile.Rename($"{ConfirmRename.Text}{SelectedFile.Extension}");
+			SelectedFile?.RenameFile($"{ConfirmRename.Text}{SelectedFile.Extension}");
+			SelectedDirectory?.RenameDirectory($"{ConfirmRename.Text}");
 			CreateTree();
 		}
 
-		protected void OnDeleteFile() {
+		protected void OnDelete() {
 			ConfirmDelete.PopupCentered();
 		}
 
 		protected void OnDeleteConfirmed() {
-			if (SelectedFile == null) return;
-			
-			SelectedFile.DeleteFile();
+			SelectedFile?.DeleteFile();
+			SelectedDirectory?.DeleteDirectory();
+
 			CreateTree();
 		}
 	}

@@ -15,6 +15,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			Root = rootDirectory;
 			HideRoot = true;
 			AllowRmbSelect = true;
+			AllowReselect = true;
 
 			AddChild(ConfirmRename = new RenameDialog());
 			ConfirmRename.Confirmed += this.OnRenameConfirmed;;
@@ -26,10 +27,12 @@ namespace DemonCastle.Editor.FileTreeView {
 			DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
 			DirectoryPopupMenu.CreateCharacterFile += OnCreateCharacterFileSelected;
 			DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
+			DirectoryPopupMenu.RenameDirectory += OnRename;
+			DirectoryPopupMenu.DeleteDirectory += OnDelete;
 
 			AddChild(FilePopupMenu = new FilePopupMenu());
-			FilePopupMenu.RenameFile += OnRenameFile;
-			FilePopupMenu.DeleteFile += OnDeleteFile;
+			FilePopupMenu.RenameFile += OnRename;
+			FilePopupMenu.DeleteFile += OnDelete;
 
 			CreateTree();
 			this.ItemActivated += this.FileActivated;
