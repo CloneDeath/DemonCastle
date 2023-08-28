@@ -6,15 +6,14 @@ namespace DemonCastle.Editor.Windows.Level;
 public partial class AreaEditor {
 	public Node2D Root; 
 	public AreaEditor(LevelInfo levelInfo) {
-		var subViewportContainer = new SubViewportContainer();
-		AddChild(subViewportContainer);
-
-		var subViewport = new SubViewport {
-			Size = new Vector2I(1000, 1000)
+		Name = nameof(AreaEditor);
+		
+		var control = new Control {
+			Size = new Vector2(500, 500)
 		};
-		subViewportContainer.AddChild(subViewport);
+		AddChild(control);
 
-		subViewport.AddChild(Root = new Node2D());
+		control.AddChild(Root = new Node2D());
 		LoadLevel(levelInfo);
 	}
 }
