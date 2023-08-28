@@ -12,7 +12,7 @@ namespace DemonCastle.Editor {
 			var gameSetup = new GameSetup(Project);
 			gameSetup.GameStart += (level, character) => {
 				gameSetup.QueueFree();
-				AddChild(new GameRunner(level, character));
+				PlayWindow.AddChild(new GameRunner(level, character));
 			};
 			PlayWindow.AddChild(gameSetup);
 			PlayWindow.PopupCentered();

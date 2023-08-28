@@ -19,7 +19,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = new Vector2(10, 10)
 			});
 			AddChild(CharacterInfoList = new InfoItemList<CharacterInfo> {
-				Position = CharactersLabel.Position + new Vector2(0, 20)
+				Position = CharactersLabel.Position + new Vector2(0, 30)
 			});
 			CharacterInfoList.Load(project.Characters);
 			
@@ -28,7 +28,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = CharactersLabel.Position + new Vector2(310, 0)
 			});
 			AddChild(LevelInfoList = new InfoItemList<LevelInfo> {
-				Position = LevelsLabel.Position + new Vector2(0, 20)
+				Position = LevelsLabel.Position + new Vector2(0, 30)
 			});
 			LevelInfoList.Load(project.Levels);
 			

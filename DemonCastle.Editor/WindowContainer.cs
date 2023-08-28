@@ -6,6 +6,7 @@ using DemonCastle.Editor.Windows.SpriteAtlas;
 using DemonCastle.Editor.Windows.SpriteGrid;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
+using LevelWindow = DemonCastle.Editor.Windows.Level.LevelWindow;
 
 namespace DemonCastle.Editor {
 	public partial class WindowContainer : Control {
