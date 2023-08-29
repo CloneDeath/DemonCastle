@@ -1,5 +1,5 @@
-namespace DemonCastle.ProjectFiles.Projects.Data {
-	public interface IListableInfo {
-		string Name { get; }
-	}
+namespace DemonCastle.ProjectFiles.Projects.Data; 
+
+public interface IListableInfo {
+	string Name { get; }
 }

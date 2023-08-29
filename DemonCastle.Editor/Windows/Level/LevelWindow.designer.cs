@@ -25,10 +25,8 @@ public partial class LevelWindow {
 		
 		SplitContainer.AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", levelInfo, x => x.Name);
-		Properties.AddInteger("Tile Width", levelInfo, x => x.TileWidth);
-		Properties.AddInteger("Tile Height", levelInfo, x => x.TileHeight);
-		Properties.AddInteger("Area Width", levelInfo, x => x.AreaWidth);
-		Properties.AddInteger("Area Height", levelInfo, x => x.AreaHeight);
+		Properties.AddVector2I("Tile Size", levelInfo, x => x.TileSize);
+		Properties.AddVector2I("Area Size", levelInfo, x => x.AreaSize);
 
 		SplitContainer.AddChild(new AreaEditor(levelInfo));
 	}

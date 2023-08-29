@@ -1,33 +1,33 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Properties {
-	public partial class FloatProperty : BaseProperty {
-		protected IPropertyBinding<float> Binding { get; }
-		protected SpinBox SpinBox { get; }
+namespace DemonCastle.Editor.Windows.Properties; 
 
-		public int PropertyValue {
-			get => (int)SpinBox.Value;
-			set => SpinBox.Value = value;
-		}
+public partial class FloatProperty : BaseProperty {
+	protected IPropertyBinding<float> Binding { get; }
+	protected SpinBox SpinBox { get; }
+
+	public float PropertyValue {
+		get => (float)SpinBox.Value;
+		set => SpinBox.Value = value;
+	}
 		
-		public FloatProperty(IPropertyBinding<float> binding) {
-			Name = nameof(FloatProperty);
-			Binding = binding;
+	public FloatProperty(IPropertyBinding<float> binding) {
+		Name = nameof(FloatProperty);
+		Binding = binding;
 			
-			AddChild(SpinBox = new SpinBox {
-				CustomMinimumSize = new Vector2(20, 20),
-				SizeFlagsHorizontal = SizeFlags.ExpandFill,
-				Step = 0.01,
-				Rounded = false,
-				Value = Binding.Get()
-			});
+		AddChild(SpinBox = new SpinBox {
+			CustomMinimumSize = new Vector2(20, 20),
+			SizeFlagsHorizontal = SizeFlags.ExpandFill,
+			Step = 0.01,
+			Rounded = false,
+			Value = Binding.Get()
+		});
 
-			SpinBox.ValueChanged += OnValueChange;
-		}
+		SpinBox.ValueChanged += OnValueChange;
+	}
 
-		protected void OnValueChange(double value) {
-			Binding.Set((float)value);
-		}
+	protected void OnValueChange(double value) {
+		Binding.Set((float)value);
 	}
 }

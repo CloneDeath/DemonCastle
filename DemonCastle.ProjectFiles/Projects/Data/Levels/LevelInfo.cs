@@ -17,28 +17,23 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		set { Resource.Name = value; Save(); }
 	}
 
-	public int TileWidth {
-		get => Resource.TileWidth;
-		set { Resource.TileWidth = value; Save(); }
+	public Vector2I TileSize {
+		get => new (Resource.TileWidth, Resource.TileHeight);
+		set {
+			Resource.TileWidth = value.X;
+			Resource.TileHeight = value.Y;
+			Save();
+		}
 	}
 
-	public int TileHeight {
-		get => Resource.TileHeight;
-		set { Resource.TileHeight = value; Save(); }
+	public Vector2I AreaSize {
+		get => new(Resource.AreaWidth, Resource.AreaHeight);
+		set {
+			Resource.AreaWidth = value.X;
+			Resource.AreaHeight = value.Y;
+			Save();
+		}
 	}
-
-	public int AreaWidth {
-		get => Resource.AreaWidth;
-		set { Resource.AreaWidth = value; Save(); }
-	}
-
-	public int AreaHeight {
-		get => Resource.AreaHeight;
-		set { Resource.AreaHeight = value; Save(); }
-	}
-
-	public Vector2I TileSize => new(Resource.TileWidth, Resource.TileHeight);
-	public Vector2I AreaSize => new(Resource.AreaWidth, Resource.AreaHeight);
 
 	public IEnumerable<AreaInfo> Areas => Resource.Areas.Select(area => new AreaInfo(area, this));
 
@@ -50,5 +45,5 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 	public Vector2 StartingLocation => TileSize * (
 													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
 													  + new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
-												  ) + new Vector2(TileWidth/2f, TileHeight);
+												  ) + TileSize / new Vector2(1/2f, 1);
 }

@@ -2,9 +2,9 @@ using Godot;
 
 namespace DemonCastle.Game {
 	public partial class GamePlayer : CharacterBody2D {
-		protected float WalkSpeed => Character.WalkSpeed * Level.TileWidth;
-		protected float Gravity => Character.Gravity * Level.TileHeight;
-		protected float JumpHeight => Character.JumpHeight * Level.TileHeight;
+		protected float WalkSpeed => Character.WalkSpeed * Level.TileSize.X;
+		protected float Gravity => Character.Gravity * Level.TileSize.Y;
+		protected float JumpHeight => Character.JumpHeight * Level.TileSize.Y;
 		protected int Facing { get; set; } = 1;
 		
 		public override void _Process(double delta) {

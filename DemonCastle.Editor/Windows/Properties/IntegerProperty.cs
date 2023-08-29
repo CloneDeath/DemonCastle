@@ -18,9 +18,9 @@ namespace DemonCastle.Editor.Windows.Properties {
 			AddChild(SpinBox = new SpinBox {
 				CustomMinimumSize = new Vector2(20, 20),
 				SizeFlagsHorizontal = SizeFlags.ExpandFill,
-				Value = Binding.Get()
+				Value = Binding.Get(),
+				Rounded = true
 			});
-
 			SpinBox.ValueChanged += OnValueChange;
 		}
 
