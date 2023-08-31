@@ -8,12 +8,14 @@ namespace DemonCastle.Game {
 		public const string PlayerJump = nameof(PlayerJump);
 
 		public const string EditorSubmit = nameof(EditorSubmit);
+		public const string EditorClick = nameof(EditorClick);
 		
 		public static void RegisterActions() {
 			RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
 			RegisterAction(PlayerMoveRight, Key.Right, Key.D);
 			RegisterAction(PlayerJump, Key.Up, Key.W);
 			RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
+			RegisterAction(EditorClick, MouseButton.Left);
 		}
 
 		private static void RegisterAction(string actionName, params Key[] keyList) {

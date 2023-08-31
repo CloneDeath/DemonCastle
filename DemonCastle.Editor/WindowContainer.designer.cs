@@ -11,6 +11,7 @@ namespace DemonCastle.Editor {
 
 		public WindowContainer() {
 			Name = nameof(WindowContainer);
+			AddToGroup(nameof(WindowContainer));
 			
 			AddChild(ErrorWindow = new AcceptDialog {
 				Exclusive = true

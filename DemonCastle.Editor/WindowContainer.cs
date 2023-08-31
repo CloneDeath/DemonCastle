@@ -21,9 +21,7 @@ namespace DemonCastle.Editor {
 			try {
 				var window = GetWindow(file);
 				WindowFileMap[file] = window;
-				AddChild(window);
-				window.Position = (Vector2I)GlobalPosition + GetNextWindowLocation();
-				window.Show();
+				ShowWindow(window);
 			}
 			catch (TargetInvocationException ex) {
 				ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.InnerException?.Message}";
@@ -33,6 +31,12 @@ namespace DemonCastle.Editor {
 				ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.Message}";
 				ErrorWindow.PopupCentered();
 			}
+		}
+
+		public void ShowWindow(Window window) {
+			AddChild(window);
+			window.Position = (Vector2I)GlobalPosition + GetNextWindowLocation();
+			window.Show();
 		}
 
 		protected Window GetWindow(FileNavigator file) {
