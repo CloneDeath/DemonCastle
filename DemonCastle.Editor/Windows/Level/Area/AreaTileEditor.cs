@@ -21,15 +21,15 @@ public partial class AreaTileEditor : ScrollContainer {
 		}
 	}
 
-	public override void _Process(double delta) {
-		base._Process(delta);
-
-		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
+	public override void _GuiInput(InputEvent @event) {
+		base._GuiInput(@event);
+		
+		if (@event.IsActionPressed(InputActions.EditorClick) && MouseWithinBounds()) {
 			var index = GetTileIndexOfMousePosition();
 			if (IndexIsValid(index)) {
 				TileCellSelected?.Invoke(index);
 			}
-		} else if (Input.IsActionJustPressed(InputActions.EditorRightClick) && MouseWithinBounds()) {
+		} else if (@event.IsActionPressed(InputActions.EditorRightClick) && MouseWithinBounds()) {
 			var index = GetTileIndexOfMousePosition();
 			if (IndexIsValid(index)) {
 				TileCellCleared?.Invoke(index);
