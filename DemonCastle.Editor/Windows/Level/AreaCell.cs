@@ -29,6 +29,8 @@ public partial class AreaCell : Node2D {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
+		Position = _areaInfo.AreaPosition * _levelInfo.AreaSize;
+
 		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
 			var window = new AreaWindow(_areaInfo);
 			var container = GetWindowContainer();
