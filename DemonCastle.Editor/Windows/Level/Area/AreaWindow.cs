@@ -9,4 +9,8 @@ public partial class AreaWindow : BaseWindow {
 
 		AreaTileEditor.SetTile(cell, selectedTile.Name);
 	}
+	
+	private void AreaTileEditorOnTileCellCleared(Vector2I cell) {
+		AreaTileEditor.ClearTile(cell);
+	}
 }

@@ -61,4 +61,12 @@ public class AreaInfo {
 		}
 		LevelInfo.Save();
 	}
+
+	public void ClearTile(Vector2I position) {
+		var tile = Area.TileMap.FirstOrDefault(t => t.X == position.X && t.Y == position.Y);
+		if (tile == null) return;
+		
+		Area.TileMap.Remove(tile);
+		LevelInfo.Save();
+	}
 }

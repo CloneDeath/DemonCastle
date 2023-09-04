@@ -43,5 +43,6 @@ public partial class AreaWindow {
 		ToolSplitContainer.AddChild(TileSelector = new TileSelectorPanel(area.TileSet));
 		SplitContainer.AddChild(AreaTileEditor = new AreaTileEditor(area));
 		AreaTileEditor.TileCellSelected += AreaTileEditorOnTileCellSelected;
+		AreaTileEditor.TileCellCleared += AreaTileEditorOnTileCellCleared;
 	}
 }
