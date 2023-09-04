@@ -45,4 +45,5 @@ public class AreaInfo {
 	public Vector2I AreaSize => LevelInfo.AreaSize;
 
 	public TileInfo GetTileInfo(string tileName) => LevelInfo.GetTileInfo(tileName);
+	public LevelTileSet TileSet => LevelInfo.TileSet;
 }
