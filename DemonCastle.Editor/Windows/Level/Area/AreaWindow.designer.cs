@@ -27,5 +27,7 @@ public partial class AreaWindow {
 		Properties.AddString("Name", areaInfo, x => x.Name);
 		Properties.AddVector2I("Position", areaInfo, x => x.AreaPosition);
 		Properties.AddVector2I("Size", areaInfo, x => x.AreaSize);
+		
+		SplitContainer.AddChild(new AreaTileEditor(areaInfo));
 	}
 }
