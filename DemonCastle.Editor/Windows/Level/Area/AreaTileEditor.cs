@@ -8,6 +8,9 @@ namespace DemonCastle.Editor.Windows.Level.Area;
 public partial class AreaTileEditor : ScrollContainer {
 	public event Action<Vector2I>? TileCellSelected;
 	public event Action<Vector2I>? TileCellCleared;
+
+	private Vector2I? _previousTriggeredPosition;
+	private bool? _previousTriggerWasSelect;
 	
 	private void LoadArea(AreaInfo areaInfo) {
 		foreach (var tileMapInfo in areaInfo.TileMap) {
@@ -39,16 +42,20 @@ public partial class AreaTileEditor : ScrollContainer {
 
 	private void TriggerTileCellSelected() {
 		var index = GetTileIndexOfMousePosition();
-		if (IndexIsValid(index)) {
-			TileCellSelected?.Invoke(index);
-		}
+		if (!IndexIsValid(index)) return;
+		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == true) return;
+		TileCellSelected?.Invoke(index);
+		_previousTriggeredPosition = index;
+		_previousTriggerWasSelect = true;
 	}
 
 	private void TriggerTileCellCleared() {
 		var index = GetTileIndexOfMousePosition();
-		if (IndexIsValid(index)) {
-			TileCellCleared?.Invoke(index);
-		}
+		if (!IndexIsValid(index)) return;
+		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == false) return;
+		TileCellCleared?.Invoke(index);
+		_previousTriggeredPosition = index;
+		_previousTriggerWasSelect = false;
 	}
 
 	private bool IndexIsValid(Vector2I index) => index is { X: >= 0, Y: >= 0 } && index.X < Area.AreaSize.X && index.Y < Area.AreaSize.Y;
