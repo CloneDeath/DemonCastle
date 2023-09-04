@@ -17,8 +17,8 @@ public partial class AreaTileEditor {
 		AddChild(control);
 
 		control.AddChild(Root = new Node2D());
-		control.AddChild(new GridControl {
-			TotalSize = area.Size * area.AreaSize * area.TileSize,
+		control.AddChild(new Level.GridControl {
+			Size = area.Size * area.AreaSize * area.TileSize,
 			GridSize = area.TileSize
 		});
 		LoadArea(area);

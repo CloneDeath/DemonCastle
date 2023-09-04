@@ -13,6 +13,10 @@ public partial class AreaEditor {
 		};
 		AddChild(control);
 
+		control.AddChild(new GridControl {
+			Size = new Vector2I(500, 500),
+			GridSize = levelInfo.AreaSize
+		});
 		control.AddChild(Root = new Node2D());
 		LoadLevel(levelInfo);
 	}
