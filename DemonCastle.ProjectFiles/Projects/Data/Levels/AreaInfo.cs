@@ -30,7 +30,7 @@ public class AreaInfo {
 		}
 	}
 
-	public Vector2I AreaSize {
+	public Vector2I Size {
 		get => new(Area.Width, Area.Height);
 		set {
 			Area.Width = value.X;
@@ -40,7 +40,9 @@ public class AreaInfo {
 	}
 
 	public Vector2I TilePosition => LevelInfo.TileSize * AreaPosition * LevelInfo.AreaSize;
+	
 	public Vector2I TileSize => LevelInfo.TileSize;
+	public Vector2I AreaSize => LevelInfo.AreaSize;
 
 	public TileInfo GetTileInfo(string tileName) => LevelInfo.GetTileInfo(tileName);
 }

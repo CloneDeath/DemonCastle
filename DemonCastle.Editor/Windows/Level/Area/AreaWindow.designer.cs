@@ -8,10 +8,10 @@ public partial class AreaWindow {
 	protected HSplitContainer SplitContainer { get; }
 	protected PropertyCollection Properties { get; }
 	
-	public AreaWindow(AreaInfo areaInfo) {
+	public AreaWindow(AreaInfo area) {
 		Name = nameof(AreaWindow);
-		Title = $"Area - X:{areaInfo.AreaPosition.X}, Y:{areaInfo.AreaPosition.Y}";
-		Size = new Vector2I(400, 100) + areaInfo.AreaSize * areaInfo.TileSize;
+		Title = $"Area - X:{area.AreaPosition.X}, Y:{area.AreaPosition.Y}";
+		Size = new Vector2I(400, 100) + area.Size * area.AreaSize * area.TileSize;
 		MinSize = Size;
 		
 		AddChild(SplitContainer = new HSplitContainer {
@@ -24,10 +24,10 @@ public partial class AreaWindow {
 		});
 		
 		SplitContainer.AddChild(Properties = new PropertyCollection());
-		Properties.AddString("Name", areaInfo, x => x.Name);
-		Properties.AddVector2I("Position", areaInfo, x => x.AreaPosition);
-		Properties.AddVector2I("Size", areaInfo, x => x.AreaSize);
+		Properties.AddString("Name", area, x => x.Name);
+		Properties.AddVector2I("Position", area, x => x.AreaPosition);
+		Properties.AddVector2I("Size", area, x => x.Size);
 		
-		SplitContainer.AddChild(new AreaTileEditor(areaInfo));
+		SplitContainer.AddChild(new AreaTileEditor(area));
 	}
 }

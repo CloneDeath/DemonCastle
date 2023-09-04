@@ -17,12 +17,12 @@ public partial class AreaCell : Node2D {
 		const int borderWidth = 2;
 		AddChild(new ColorRect {
 			Color = Colors.LightBlue,
-			Size = areaInfo.AreaSize * _levelInfo.AreaSize
+			Size = areaInfo.Size * _levelInfo.AreaSize
 		});
 		AddChild(new ColorRect {
 			Position = new Vector2(1, 1) * borderWidth,
 			Color = Colors.Blue,
-			Size = areaInfo.AreaSize * _levelInfo.AreaSize - new Vector2I(2, 2) * borderWidth
+			Size = areaInfo.Size * _levelInfo.AreaSize - new Vector2I(2, 2) * borderWidth
 		});
 	}
 
@@ -42,7 +42,7 @@ public partial class AreaCell : Node2D {
 		var mousePosition = GetViewport().GetMousePosition();
 		var myPosition = GlobalPosition;
 		var delta = mousePosition - myPosition;
-		var size = _areaInfo.AreaSize * _levelInfo.AreaSize;
+		var size = _areaInfo.Size * _levelInfo.AreaSize;
 		return delta is { X: >= 0, Y: >= 0 }
 			   && delta.X < size.X
 			   && delta.Y < size.Y;
