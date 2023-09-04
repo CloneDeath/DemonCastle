@@ -11,7 +11,7 @@ public partial class LevelWindow {
 	public LevelWindow(LevelInfo levelInfo) {
 		Name = nameof(LevelWindow);
 		Title = $"Level - {levelInfo.FileName}";
-		Size = new Vector2I(300, 300);
+		Size = new Vector2I(600, 400);
 		MinSize = Size;
 		
 		AddChild(SplitContainer = new HSplitContainer {
