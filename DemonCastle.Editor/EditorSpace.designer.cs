@@ -13,6 +13,7 @@ public partial class EditorSpace {
 	public EditorSpace(ProjectInfo project) {
 		Project = project;
 		AddChild(PlayWindow = new Window {
+			Title = Project.Name,
 			Visible = false,
 			MinSize = new Vector2I(640, 480),
 			Exclusive = true
