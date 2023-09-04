@@ -46,4 +46,19 @@ public class AreaInfo {
 
 	public TileInfo GetTileInfo(string tileName) => LevelInfo.GetTileInfo(tileName);
 	public LevelTileSet TileSet => LevelInfo.TileSet;
+
+	public void SetTile(Vector2I position, string tileName) {
+		var tile = Area.TileMap.FirstOrDefault(t => t.X == position.X && t.Y == position.Y);
+		if (tile != null) {
+			tile.Tile = tileName;
+		}
+		else {
+			Area.TileMap.Add(new TileMapData {
+				X = position.X,
+				Y = position.Y,
+				Tile = tileName
+			});
+		}
+		LevelInfo.Save();
+	}
 }

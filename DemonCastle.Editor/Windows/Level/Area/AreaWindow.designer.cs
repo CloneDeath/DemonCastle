@@ -8,6 +8,8 @@ public partial class AreaWindow {
 	protected HSplitContainer SplitContainer { get; }
 	protected PropertyCollection Properties { get; }
 	protected VSplitContainer ToolSplitContainer { get; }
+	protected AreaTileEditor AreaTileEditor { get; }
+	protected TileSelectorPanel TileSelector { get; }
 	
 	public AreaWindow(AreaInfo area) {
 		Name = nameof(AreaWindow);
@@ -38,8 +40,8 @@ public partial class AreaWindow {
 		Properties.AddVector2I("Position", area, x => x.AreaPosition);
 		Properties.AddVector2I("Size", area, x => x.Size);
 
-		ToolSplitContainer.AddChild(new TileSelectorPanel(area.TileSet));
-		
-		SplitContainer.AddChild(new AreaTileEditor(area));
+		ToolSplitContainer.AddChild(TileSelector = new TileSelectorPanel(area.TileSet));
+		SplitContainer.AddChild(AreaTileEditor = new AreaTileEditor(area));
+		AreaTileEditor.TileCellSelected += AreaTileEditorOnTileCellSelected;
 	}
 }

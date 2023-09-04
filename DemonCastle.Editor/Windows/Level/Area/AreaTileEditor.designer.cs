@@ -4,8 +4,11 @@ using Godot;
 namespace DemonCastle.Editor.Windows.Level.Area; 
 
 public partial class AreaTileEditor {
-	public Node2D Root; 
-	public AreaTileEditor(AreaInfo areaInfo) {
+	public AreaInfo Area { get; }
+	public Node2D Root;
+	
+	public AreaTileEditor(AreaInfo area) {
+		Area = area;
 		Name = nameof(AreaEditor);
 		
 		var control = new Control {
@@ -14,6 +17,6 @@ public partial class AreaTileEditor {
 		AddChild(control);
 
 		control.AddChild(Root = new Node2D());
-		LoadArea(areaInfo);
+		LoadArea(area);
 	}
 }
