@@ -23,17 +23,31 @@ public partial class AreaTileEditor : ScrollContainer {
 
 	public override void _GuiInput(InputEvent @event) {
 		base._GuiInput(@event);
-		
-		if (@event.IsActionPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			var index = GetTileIndexOfMousePosition();
-			if (IndexIsValid(index)) {
-				TileCellSelected?.Invoke(index);
+
+		if (@event is InputEventMouseMotion) {
+			if (Input.IsActionPressed(InputActions.EditorClick)) {
+				TriggerTileCellSelected();
+			} else if (Input.IsActionPressed(InputActions.EditorRightClick)) {
+				TriggerTileCellCleared();
 			}
+		} else if (@event.IsActionPressed(InputActions.EditorClick) && MouseWithinBounds()) {
+			TriggerTileCellSelected();
 		} else if (@event.IsActionPressed(InputActions.EditorRightClick) && MouseWithinBounds()) {
-			var index = GetTileIndexOfMousePosition();
-			if (IndexIsValid(index)) {
-				TileCellCleared?.Invoke(index);
-			}
+			TriggerTileCellCleared();
+		}
+	}
+
+	private void TriggerTileCellSelected() {
+		var index = GetTileIndexOfMousePosition();
+		if (IndexIsValid(index)) {
+			TileCellSelected?.Invoke(index);
+		}
+	}
+
+	private void TriggerTileCellCleared() {
+		var index = GetTileIndexOfMousePosition();
+		if (IndexIsValid(index)) {
+			TileCellCleared?.Invoke(index);
 		}
 	}
 
