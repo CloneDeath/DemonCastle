@@ -5,6 +5,8 @@ using Godot;
 namespace DemonCastle.Editor.Windows.Level.Area; 
 
 public partial class SelectableTile : TextureRect {
+	protected Control SelectionBox;
+	
 	public SelectableTile(TileInfo tile) {
 		Name = nameof(SelectableTile);
 		
@@ -13,13 +15,37 @@ public partial class SelectableTile : TextureRect {
 			Region = tile.Region
 		};
 		FlipH = tile.FlipHorizontal;
+		
+		AddChild(SelectionBox = new Control {
+			Visible = false
+		});
+		SelectionBox.AddChild(new ColorRect { // TOP
+			Color = Colors.White,
+			Position = new Vector2(-1, -1),
+			Size = new Vector2(tile.Region.Size.X + 2, 1)
+		});
+		SelectionBox.AddChild(new ColorRect { // BOTTOM
+			Color = Colors.White,
+			Position = new Vector2(-1, tile.Region.Size.Y + 1),
+			Size = new Vector2(tile.Region.Size.X + 2, 1)
+		});
+		SelectionBox.AddChild(new ColorRect { // LEFT
+			Color = Colors.White,
+			Position = new Vector2(-1, -1),
+			Size = new Vector2(1, tile.Region.Size.Y + 2)
+		});
+		SelectionBox.AddChild(new ColorRect { // RIGHT
+			Color = Colors.White,
+			Position = new Vector2(tile.Region.Size.X + 1, -1),
+			Size = new Vector2(1, tile.Region.Size.Y + 2)
+		});
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
 		
 		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			Modulate = Colors.Blue;
+			SelectionBox.Visible = true;
 		}
 	}
 
