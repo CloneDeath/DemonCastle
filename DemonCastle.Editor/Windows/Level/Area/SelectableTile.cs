@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -6,9 +7,12 @@ namespace DemonCastle.Editor.Windows.Level.Area;
 
 public partial class SelectableTile : TextureRect {
 	protected Control SelectionBox;
+	public TileInfo Tile;
+	public event Action<SelectableTile>? Selected;
 	
 	public SelectableTile(TileInfo tile) {
 		Name = nameof(SelectableTile);
+		Tile = tile;
 		
 		Texture = new AtlasTexture {
 			Atlas = tile.Texture,
@@ -45,6 +49,7 @@ public partial class SelectableTile : TextureRect {
 		base._Process(delta);
 		
 		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
+			Selected?.Invoke(this);
 			SelectionBox.Visible = true;
 		}
 	}
@@ -57,5 +62,9 @@ public partial class SelectableTile : TextureRect {
 		return delta is { X: >= 0, Y: >= 0 }
 			   && delta.X < size.X
 			   && delta.Y < size.Y;
+	}
+
+	public void ClearSelection() {
+		SelectionBox.Visible = false;
 	}
 }
