@@ -11,7 +11,7 @@ public partial class AreaWindow {
 	public AreaWindow(AreaInfo areaInfo) {
 		Name = nameof(AreaWindow);
 		Title = $"Area - X:{areaInfo.AreaPosition.X}, Y:{areaInfo.AreaPosition.Y}";
-		Size = new Vector2I(400, 400);
+		Size = new Vector2I(400, 100) + areaInfo.AreaSize * areaInfo.TileSize;
 		MinSize = Size;
 		
 		AddChild(SplitContainer = new HSplitContainer {

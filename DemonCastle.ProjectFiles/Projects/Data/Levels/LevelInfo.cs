@@ -46,4 +46,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
 													  + new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
 												  ) + TileSize / new Vector2(1/2f, 1);
+
+	public TileInfo GetTileInfo(string tileName) => TileSet.GetTileInfo(tileName);
+
 }

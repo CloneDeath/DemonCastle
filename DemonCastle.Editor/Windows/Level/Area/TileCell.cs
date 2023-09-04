@@ -4,13 +4,14 @@ using Godot;
 namespace DemonCastle.Editor.Windows.Level.Area; 
 
 public partial class TileCell : Node2D {
-	public TileCell(TileInfo tile, TileMapInfo tileMapInfo) {
-		Position = tileMapInfo.AreaPosition;
+	public TileCell(TileMapInfo tile) {
+		Position = tile.AreaPosition;
 
-		const int borderWidth = 2;
-		AddChild(new TextureRect {
+		AddChild(new Sprite2D {
 			Texture = tile.Texture,
-			Size = tileMapInfo.TileSize
-		});	
+			RegionEnabled = true,
+			RegionRect = tile.Region,
+			Centered = false
+		});
 	}
 }
