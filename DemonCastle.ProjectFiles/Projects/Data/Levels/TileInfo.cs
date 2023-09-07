@@ -9,19 +9,36 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels {
 		protected TileData TileData { get; }
 		protected FileNavigator<LevelFile> Level { get; }
 		protected Vector2I LevelTileSize => new(Level.Resource.TileWidth, Level.Resource.TileHeight);
+		
+		public string Directory => Level.Directory;
 
 		public TileInfo(FileNavigator<LevelFile> level, TileData tileData) {
 			TileData = tileData;
 			Level = level;
 		}
-		
-		public string Name => TileData.Name;
-		protected ISpriteSource Source => Level.GetSprite(TileData.Source);
-		protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(TileData.Sprite);
+
+		public string Name {
+			get => TileData.Name;
+			set { TileData.Name = value; Save(); }
+		}
+
+		public string SourceFile {
+			get => TileData.Source;
+			set { TileData.Source = value; Save(); }
+		}
+
+		public string SpriteName {
+			get => TileData.Sprite;
+			set { TileData.Sprite = value; Save(); }
+		}
+
+		protected ISpriteSource Source => Level.GetSprite(SourceFile);
+		protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(SpriteName);
 		public Texture2D Texture => Sprite.Texture;
-		public string TextureName => TileData.Source;
 		public Rect2 Region => Sprite.Region;
 		public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y) * LevelTileSize).ToArray();
 		public bool FlipHorizontal => Sprite.FlipHorizontal;
+
+		private void Save() => Level.Save();
 	}
 }
