@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Extensions;
 using DemonCastle.Editor.Windows.Level.Area;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -33,7 +34,7 @@ public partial class AreaCell : Node2D {
 
 		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
 			var window = new AreaWindow(_areaInfo);
-			var container = GetWindowContainer();
+			var container = this.GetWindowContainer();
 			container.ShowWindow(window);
 		}
 	}
@@ -46,9 +47,5 @@ public partial class AreaCell : Node2D {
 		return delta is { X: >= 0, Y: >= 0 }
 			   && delta.X < size.X
 			   && delta.Y < size.Y;
-	}
-
-	private WindowContainer GetWindowContainer() {
-		return (WindowContainer)GetTree().GetFirstNodeInGroup(nameof(WindowContainer));
 	}
 }

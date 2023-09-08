@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Windows.Level.Area;
 using DemonCastle.Editor.Windows.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -5,10 +6,20 @@ using Godot;
 namespace DemonCastle.Editor.Windows.Level; 
 
 public partial class LevelWindow {
+	protected LevelInfo LevelInfo { get; }
+	
 	protected HSplitContainer SplitContainer { get; }
+	protected Control LeftPanel { get; }
+	
 	protected PropertyCollection Properties { get; }
+	protected Button AddTileButton { get; }
+	protected Button EditTileButton { get; }
+	protected Button DeleteTileButton { get; }
+	protected TileSelectorPanel TileSelector { get; }
 
 	public LevelWindow(LevelInfo levelInfo) {
+		LevelInfo = levelInfo;
+		
 		Name = nameof(LevelWindow);
 		Title = $"Level - {levelInfo.FileName}";
 		Size = new Vector2I(600, 400);
@@ -22,12 +33,21 @@ public partial class LevelWindow {
 			OffsetRight = -5,
 			OffsetBottom = -5
 		});
-		
-		SplitContainer.AddChild(Properties = new PropertyCollection());
-		Properties.AddString("Name", levelInfo, x => x.Name);
-		Properties.AddVector2I("Tile Size", levelInfo, x => x.TileSize);
-		Properties.AddVector2I("Area Size", levelInfo, x => x.AreaSize);
-
+		SplitContainer.AddChild(LeftPanel = new VBoxContainer());
+		{
+			LeftPanel.AddChild(Properties = new PropertyCollection());
+			Properties.AddString("Name", levelInfo, x => x.Name);
+			Properties.AddVector2I("Tile Size", levelInfo, x => x.TileSize);
+			Properties.AddVector2I("Area Size", levelInfo, x => x.AreaSize);
+			
+			LeftPanel.AddChild(AddTileButton = new Button { Text = "Add Tile" });
+			AddTileButton.Pressed += AddTileButtonOnPressed; 
+			LeftPanel.AddChild(EditTileButton = new Button { Text = "Edit Tile" });
+			EditTileButton.Pressed += EditTileButtonOnPressed;
+			LeftPanel.AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
+			DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
+			LeftPanel.AddChild(TileSelector = new TileSelectorPanel(levelInfo.TileSet));
+		}
 		SplitContainer.AddChild(new AreaEditor(levelInfo));
 	}
 }
