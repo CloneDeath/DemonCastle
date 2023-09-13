@@ -14,7 +14,8 @@ public partial class GameTile : Node2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,
 			RegionRect = tile.Region,
-			Centered = false
+			Centered = false,
+			Scale = tile.TileSize / tile.Region.Size,
 		});
 		if (tile.Collision.Any()) {
 			AddChild(Body = new StaticBody2D {

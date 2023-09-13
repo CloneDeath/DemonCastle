@@ -11,7 +11,8 @@ public partial class TileCell : Node2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,
 			RegionRect = tile.Region,
-			Centered = false
+			Centered = false,
+			Scale = tile.TileSize / tile.Region.Size
 		});
 	}
 }
