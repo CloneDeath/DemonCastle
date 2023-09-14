@@ -12,10 +12,13 @@ public partial class LevelWindow {
 	protected Control LeftPanel { get; }
 	
 	protected PropertyCollection Properties { get; }
+	protected Button AddAreaButton { get; }
 	protected Button AddTileButton { get; }
 	protected Button EditTileButton { get; }
 	protected Button DeleteTileButton { get; }
 	protected TileSelectorPanel TileSelector { get; }
+	
+	protected AreaEditor AreaEditor { get; }
 
 	public LevelWindow(LevelInfo levelInfo) {
 		LevelInfo = levelInfo;
@@ -40,14 +43,20 @@ public partial class LevelWindow {
 			Properties.AddVector2I("Tile Size", levelInfo, x => x.TileSize);
 			Properties.AddVector2I("Area Size", levelInfo, x => x.AreaSize);
 			
+			LeftPanel.AddChild(AddAreaButton = new Button { Text = "Add Area" });
+			AddAreaButton.Pressed += AddAreaButtonOnPressed;
+			
 			LeftPanel.AddChild(AddTileButton = new Button { Text = "Add Tile" });
 			AddTileButton.Pressed += AddTileButtonOnPressed; 
+			
 			LeftPanel.AddChild(EditTileButton = new Button { Text = "Edit Tile" });
 			EditTileButton.Pressed += EditTileButtonOnPressed;
+			
 			LeftPanel.AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
 			DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
+			
 			LeftPanel.AddChild(TileSelector = new TileSelectorPanel(levelInfo.TileSet));
 		}
-		SplitContainer.AddChild(new AreaEditor(levelInfo));
+		SplitContainer.AddChild(AreaEditor = new AreaEditor(levelInfo));
 	}
 }

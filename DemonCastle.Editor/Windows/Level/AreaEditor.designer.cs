@@ -4,9 +4,12 @@ using Godot;
 namespace DemonCastle.Editor.Windows.Level; 
 
 public partial class AreaEditor {
-	public Node2D Root; 
+	private readonly LevelInfo _levelInfo;
+	public Node2D Root;
+	
 	public AreaEditor(LevelInfo levelInfo) {
 		Name = nameof(AreaEditor);
+		_levelInfo = levelInfo;
 		
 		var control = new Control {
 			Size = new Vector2(500, 500)

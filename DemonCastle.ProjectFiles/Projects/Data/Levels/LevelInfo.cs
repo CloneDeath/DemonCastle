@@ -37,6 +37,12 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 
 	public IEnumerable<AreaInfo> Areas => Resource.Areas.Select(area => new AreaInfo(area, this));
 
+	public AreaInfo CreateArea() {
+		var area = new AreaData();
+		Resource.Areas.Add(area);
+		return new AreaInfo(area, this);
+	}
+
 	private AreaInfo GetAreaByName(string name) {
 		var area = Resource.Areas.First(a => a.Name == name);
 		return new AreaInfo(area, this);
@@ -48,5 +54,4 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 												  ) + TileSize / new Vector2(1/2f, 1);
 
 	public TileInfo GetTileInfo(string tileName) => TileSet.GetTileInfo(tileName);
-
 }
