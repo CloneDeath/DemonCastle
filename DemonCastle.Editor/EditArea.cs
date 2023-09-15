@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DemonCastle.Editor.Extensions;
 using DemonCastle.Editor.Windows;
 using DemonCastle.Editor.Windows.Character;
 using DemonCastle.Editor.Windows.Level;
@@ -37,6 +38,7 @@ public partial class EditArea : TabContainer {
 
 	public void ShowEditor(Control editor) {
 		AddChild(editor);
+		CurrentTab = editor.GetIndex();
 	}
 
 	protected virtual Control GetEditor(FileNavigator file) {

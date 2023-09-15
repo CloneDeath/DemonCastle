@@ -10,9 +10,9 @@ public partial class EditArea {
 	public EditArea() {
 		Name = nameof(EditArea);
 		AddToGroup(nameof(EditArea));
-			
+
 		AddChild(ErrorWindow = new AcceptDialog {
 			Exclusive = true
-		}); 
+		}, false, InternalMode.Back);
 	}
 }

@@ -29,7 +29,7 @@ public partial class EditorSpace {
 		AddChild(new EditorWorkspace(project) {
 			AnchorRight = 1,
 			AnchorBottom = 1,
-			OffsetRight = 5,
+			OffsetRight = -5,
 			OffsetLeft = 5,
 			OffsetBottom = -5,
 			OffsetTop = 40
