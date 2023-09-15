@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using DemonCastle.Editor.Extensions;
 using DemonCastle.Editor.Windows;
 using DemonCastle.Editor.Windows.Character;
 using DemonCastle.Editor.Windows.Level;
@@ -17,7 +16,7 @@ public partial class EditArea : TabContainer {
 
 	public void ShowWindowFor(FileNavigator file) {
 		if (EditorFileMap.TryGetValue(file, out var value)) {
-			value.Show();
+			CurrentTab = value.GetIndex();
 			return;
 		}
 
