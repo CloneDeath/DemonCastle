@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Level; 
 
-public partial class LevelWindow {
+public partial class LevelEditor {
 	protected LevelInfo LevelInfo { get; }
 	
 	protected HSplitContainer SplitContainer { get; }
@@ -20,13 +20,11 @@ public partial class LevelWindow {
 	
 	protected AreaEditor AreaEditor { get; }
 
-	public LevelWindow(LevelInfo levelInfo) {
-		LevelInfo = levelInfo;
+	public LevelEditor(LevelInfo levelInfo) {
+		Name = $"Level - {levelInfo.FileName}";
+		CustomMinimumSize = new Vector2I(600, 400);
 		
-		Name = nameof(LevelWindow);
-		Title = $"Level - {levelInfo.FileName}";
-		Size = new Vector2I(600, 400);
-		MinSize = Size;
+		LevelInfo = levelInfo;
 		
 		AddChild(SplitContainer = new HSplitContainer {
 			AnchorBottom = 1,

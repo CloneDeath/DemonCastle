@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Extensions;
-using DemonCastle.Editor.Windows.Level.Area;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -33,9 +32,9 @@ public partial class AreaCell : Node2D {
 		Position = _areaInfo.AreaPosition * _levelInfo.AreaSize;
 
 		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			var window = new AreaWindow(_areaInfo);
-			var container = this.GetWindowContainer();
-			container.ShowWindow(window);
+			var window = new Area.AreaEditor(_areaInfo);
+			var container = this.GetEditArea();
+			container.ShowEditor(window);
 		}
 	}
 

@@ -2,7 +2,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Level.Area; 
 
-public partial class AreaWindow : BaseWindow {
+public partial class AreaEditor : Control {
 	private void AreaTileEditorOnTileCellSelected(Vector2I cell) {
 		var selectedTile = TileSelector.SelectedTile;
 		if (selectedTile == null) return;

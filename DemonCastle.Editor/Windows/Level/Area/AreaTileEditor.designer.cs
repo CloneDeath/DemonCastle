@@ -9,7 +9,7 @@ public partial class AreaTileEditor {
 	
 	public AreaTileEditor(AreaInfo area) {
 		Area = area;
-		Name = nameof(AreaEditor);
+		Name = nameof(Level.AreaEditor);
 		
 		var control = new Control {
 			Size = new Vector2(500, 500)

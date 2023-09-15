@@ -4,18 +4,16 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Level.Area; 
 
-public partial class AreaWindow {
+public partial class AreaEditor {
 	protected HSplitContainer SplitContainer { get; }
 	protected PropertyCollection Properties { get; }
 	protected VSplitContainer ToolSplitContainer { get; }
 	protected AreaTileEditor AreaTileEditor { get; }
 	protected TileSelectorPanel TileSelector { get; }
 	
-	public AreaWindow(AreaInfo area) {
-		Name = nameof(AreaWindow);
-		Title = $"Area - X:{area.AreaPosition.X}, Y:{area.AreaPosition.Y}";
-		Size = new Vector2I(400, 100) + area.Size * area.AreaSize * area.TileSize;
-		MinSize = Size;
+	public AreaEditor(AreaInfo area) {
+		Name = $"Area - X:{area.AreaPosition.X}, Y:{area.AreaPosition.Y}";
+		CustomMinimumSize = new Vector2I(400, 100) + area.Size * area.AreaSize * area.TileSize;
 		
 		AddChild(SplitContainer = new HSplitContainer {
 			AnchorBottom = 1,

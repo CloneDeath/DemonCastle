@@ -4,14 +4,12 @@ using Godot;
 
 namespace DemonCastle.Editor.Windows.Level.TileMap; 
 
-public partial class TileWindow : BaseWindow {
+public partial class TileEditor : Control {
 	protected PropertyCollection Properties { get; }
 
-	public TileWindow(TileInfo tileInfo) {
-		Name = nameof(TileWindow);
-		Title = $"Tile Window";
-		Size = new Vector2I(80, 100);
-		MinSize = Size;
+	public TileEditor(TileInfo tileInfo) {
+		Name = $"Tile Window";
+		CustomMinimumSize = new Vector2I(80, 100);
 		
 		AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", tileInfo, x => x.Name);
