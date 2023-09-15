@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using DemonCastle.Editor.Windows;
 using DemonCastle.Editor.Windows.Character;
@@ -51,5 +52,12 @@ public partial class EditArea : TabContainer {
 			".png" => new ImageEditor(file),
 			_ => new Control()
 		};
+	}
+
+	private void OnTabButtonPressed(long tab) {
+		var control = GetTabControl((int)tab);
+		var mapItem = EditorFileMap.FirstOrDefault(t => t.Value == control);
+		EditorFileMap.Remove(mapItem.Key);
+		control.QueueFree();
 	}
 }

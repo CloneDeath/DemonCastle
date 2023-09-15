@@ -9,7 +9,11 @@ public partial class EditArea {
 
 	public EditArea() {
 		Name = nameof(EditArea);
+		DragToRearrangeEnabled = true;
 		AddToGroup(nameof(EditArea));
+		
+		GetChild<TabBar>(0, true).TabCloseDisplayPolicy = TabBar.CloseButtonDisplayPolicy.ShowActiveOnly;
+		GetChild<TabBar>(0, true).TabClosePressed += OnTabButtonPressed;
 
 		AddChild(ErrorWindow = new AcceptDialog {
 			Exclusive = true
