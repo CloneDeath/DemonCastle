@@ -53,7 +53,7 @@ public partial class EditArea : TabContainer {
 			".dcsg" => new SpriteGridEditor(file.ToSpriteGridInfo()),
 			".txt" => new TextFileEditor(file.ToTextInfo()),
 			".png" => new ImageEditor(file),
-			_ => throw new NotSupportedException("No Editor for ")
+			_ => throw new NotSupportedException($"No Editor for {file.Extension}")
 		};
 	}
 
