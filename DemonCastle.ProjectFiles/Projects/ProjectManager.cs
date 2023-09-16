@@ -38,7 +38,7 @@ public class ProjectManager {
 	public bool ProjectsExist => GetProjects().Any();
 
 	public IEnumerable<ProjectInfo> GetProjects() {
-		var projectFiles = GetProjectFiles().Where(File.Exists);
+		var projectFiles = GetProjectFiles().Where(File.Exists).Distinct();
 		foreach (var projectFile in projectFiles) {
 			var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
 			yield return new ProjectInfo(fileNavigator);

@@ -26,7 +26,7 @@ namespace DemonCastle.ProjectFiles.Projects {
 		}
 
 		private void SaveProjectList(ProjectListFile project) {
-			project.Projects = project.Projects.Where(File.Exists).ToList();
+			project.Projects = project.Projects.Where(File.Exists).Distinct().ToList();
 			var content = JsonConvert.SerializeObject(project);
 			File.WriteAllText(GlobalPath, content);
 		}

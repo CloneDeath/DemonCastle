@@ -13,7 +13,6 @@ namespace DemonCastle.Editor.FileTreeView {
 		public FileTree(DirectoryNavigator rootDirectory) {
 			Name = nameof(FileTree);
 			Root = rootDirectory;
-			HideRoot = true;
 			AllowRmbSelect = true;
 
 			AddChild(ConfirmRename = new RenameDialog());
