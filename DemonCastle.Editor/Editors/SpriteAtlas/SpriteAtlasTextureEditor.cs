@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
@@ -5,6 +7,8 @@ namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasTextureEditor : ScrollContainer {
 	protected TextureRect TextureRect { get; }
+
+	private List<SpriteAtlasArea> _areas = new();
 	
 	public SpriteAtlasTextureEditor(SpriteAtlasInfo spriteAtlasInfo) {
 		AddChild(TextureRect = new TextureRect {
@@ -12,7 +16,16 @@ public partial class SpriteAtlasTextureEditor : ScrollContainer {
 		});
 
 		foreach (var dataInfo in spriteAtlasInfo.SpriteData) {
-			AddChild(new SpriteAtlasArea(dataInfo));
+			var area = new SpriteAtlasArea(dataInfo);
+			AddChild(area);
+			_areas.Add(area);
+			area.Selected += Area_OnSelected;
+		}
+	}
+
+	private void Area_OnSelected(SpriteAtlasArea selected) {
+		foreach (var area in _areas.Where(a => a != selected)) {
+			area.IsSelected = false;
 		}
 	}
 }

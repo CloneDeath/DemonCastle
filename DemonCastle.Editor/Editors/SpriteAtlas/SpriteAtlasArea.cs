@@ -1,12 +1,33 @@
+using System;
+using DemonCastle.Editor.Editors.Level.Area;
+using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
 public partial class SpriteAtlasArea : Outline {
 	private readonly SpriteAtlasDataInfo _info;
+	private bool _isSelected;
+
+	public event Action<SpriteAtlasArea>? Selected;
+
+	private DragData _drag = new DragData();
+
+	private static readonly Color Color_NotSelected = new(Colors.Gray, 0.5f);
+	private static readonly Color Color_Selected = Colors.White;
+
+	public bool IsSelected {
+		get => _isSelected;
+		set {
+			_isSelected = value;
+			Color = value ? Color_Selected : Color_NotSelected;
+		}
+	}
 
 	public SpriteAtlasArea(SpriteAtlasDataInfo info) {
 		_info = info;
+		IsSelected = false;
 	}
 
 	public override void _Process(double delta) {
@@ -14,5 +35,39 @@ public partial class SpriteAtlasArea : Outline {
 
 		Position = _info.Position;
 		Size = _info.Size;
+
+		if (IsSelected) {
+			MouseDefaultCursorShape = CursorShape.Drag;
+			
+			if (Input.IsActionJustReleased(InputActions.EditorClick)) {
+				_drag.Dragging = false;
+			}
+			
+			if (_drag.Dragging) {
+				_drag.MouseCurrent = GetGlobalMousePosition();
+				Position = _drag.NewPosition;
+				_info.Position = (Vector2I)_drag.NewPosition;
+			} 
+		}
+		else {
+			MouseDefaultCursorShape = CursorShape.Arrow;
+		}
+	}
+
+	public override void _GuiInput(InputEvent @event) {
+		base._GuiInput(@event);
+
+		if (IsSelected) {
+			if (@event.IsActionPressed(InputActions.EditorClick)) {
+				_drag.Dragging = true;
+				_drag.MouseStart = GetGlobalMousePosition();
+				_drag.PositionStart = Position;
+			}
+		} else {
+			if (@event.IsActionPressed(InputActions.EditorClick)) {
+				IsSelected = true;
+				Selected?.Invoke(this);
+			}
+		}
 	}
 }

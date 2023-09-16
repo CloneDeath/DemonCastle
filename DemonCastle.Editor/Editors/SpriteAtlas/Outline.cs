@@ -3,10 +3,28 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
 public partial class Outline : Control {
+	private Color _color = Colors.White;
+
+	public Color Color {
+		get => _color;
+		set {
+			_color = value;
+			SetColor(value);
+		}
+	}
+
+	private void SetColor(Color value) {
+		foreach (var rect in _rects) {
+			rect.Color = value;
+		}
+	}
+
+	private ColorRect[] _rects = new ColorRect[4];
+
 	public Outline() {
 		// Top
-		AddChild(new ColorRect {
-			Color = Colors.White,
+		AddChild(_rects[0] = new ColorRect {
+			Color = Color,
 			AnchorLeft = 0,
 			AnchorRight = 1,
 			AnchorTop = 0,
@@ -15,8 +33,8 @@ public partial class Outline : Control {
 		});
 		
 		// Bottom
-		AddChild(new ColorRect {
-			Color = Colors.White,
+		AddChild(_rects[1] = new ColorRect {
+			Color = Color,
 			AnchorLeft = 0,
 			AnchorRight = 1,
 			AnchorTop = 1,
@@ -25,8 +43,8 @@ public partial class Outline : Control {
 		});
 		
 		// Left
-		AddChild(new ColorRect {
-			Color = Colors.White,
+		AddChild(_rects[2] = new ColorRect {
+			Color = Color,
 			AnchorLeft = 0,
 			AnchorRight = 0,
 			AnchorTop = 0,
@@ -35,8 +53,8 @@ public partial class Outline : Control {
 		});
 		
 		// Right
-		AddChild(new ColorRect {
-			Color = Colors.White,
+		AddChild(_rects[3] = new ColorRect {
+			Color = Color,
 			AnchorLeft = 1,
 			AnchorRight = 1,
 			AnchorTop = 0,
