@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Godot;
 
 namespace DemonCastle.ProjectFiles; 
 
@@ -12,6 +13,10 @@ public class ColorData {
 	public int Red { get; set; }
 	public int Green { get; set; }
 	public int Blue { get; set; }
+
+	public Color ToColor() {
+		return Color.Color8((byte)Red, (byte)Green, (byte)Blue);
+	}
 }
 
 public class SpriteAtlasData {

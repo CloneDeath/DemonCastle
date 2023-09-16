@@ -16,6 +16,12 @@ public partial class PropertyCollection : VBoxContainer {
 			DisplayName = name
 		});
 	}
+	
+	public void AddColor<T>(string name, T target,Expression<Func<T, Color>> propertyExpression) {
+		AddChild(new ColorProperty(new PropertyBinding<T, Color>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
 
 	public void AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) {
 		AddChild(new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {

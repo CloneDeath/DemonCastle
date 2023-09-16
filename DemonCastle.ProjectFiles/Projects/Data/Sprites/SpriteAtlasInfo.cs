@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.ProjectFiles.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -14,10 +15,10 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 		set { Resource.File = value; Save(); }
 	}
 
-	public Color TransparentColor => Color.Color8(
-		(byte) Resource.TransparentColor.Red,
-		(byte) Resource.TransparentColor.Green,
-		(byte) Resource.TransparentColor.Blue);
+	public Color TransparentColor {
+		get => Resource.TransparentColor.ToColor();
+		set { Resource.TransparentColor = value.ToColorData(); Save(); }
+	}
 
 	public Texture2D Texture => File.GetTexture(Resource.File);
 

@@ -1,20 +1,29 @@
+using DemonCastle.Editor.Properties;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties; 
 
 public partial class ColorProperty : BaseProperty {
-	protected ColorRect ColorRect { get; }
+	protected IPropertyBinding<Color> Binding { get; }
+	protected ColorPickerButton ColorPicker { get; }
 
 	public Color PropertyValue {
-		get => ColorRect.Color;
-		set => ColorRect.Color = value;
+		get => ColorPicker.Color;
+		set => ColorPicker.Color = value;
 	}
-		
-	public ColorProperty() {
+	
+	public ColorProperty(IPropertyBinding<Color> binding) {
 		Name = nameof(ColorProperty);
-			
-		AddChild(ColorRect = new ColorRect {
-			CustomMinimumSize = new Vector2(24, 24)
+		Binding = binding;
+		
+		AddChild(ColorPicker = new ColorPickerButton {
+			CustomMinimumSize = new Vector2(24, 24),
+			Color = binding.Get()
 		});
+		ColorPicker.ColorChanged += ColorPicker_OnColorChanged;
+	}
+
+	private void ColorPicker_OnColorChanged(Color color) {
+		Binding.Set(color);
 	}
 }
