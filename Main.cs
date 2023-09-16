@@ -5,37 +5,36 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle {
-    public partial class Main : Node2D
-    {
-        protected GameSetup GameSetup { get; set; }
-        protected EditorSpace EditorSpace { get; set; }
+namespace DemonCastle; 
 
-        public override void _Ready() {
-            base._Ready();
+public partial class Main : Node2D {
+    protected GameSetup GameSetup { get; set; }
+    protected EditorSpace EditorSpace { get; set; }
+
+    public override void _Ready() {
+        base._Ready();
             
-            InputActions.RegisterActions();
-            GetWindow().Mode = Window.ModeEnum.Maximized;
-        }
+        InputActions.RegisterActions();
+        GetWindow().Mode = Window.ModeEnum.Maximized;
+    }
 
-        protected void OnProjectLoaded(ProjectInfo project) {
-            ProjectSelectionMenu.QueueFree();
+    protected void OnProjectLoaded(ProjectInfo project) {
+        ProjectSelectionMenu.QueueFree();
 
-            AddChild(GameSetup = new GameSetup(project));
-            GameSetup.GameStart += OnGameStart;
-        }
+        AddChild(GameSetup = new GameSetup(project));
+        GameSetup.GameStart += OnGameStart;
+    }
 
-        private void OnGameStart(LevelInfo level, CharacterInfo character) {
-            GameSetup.QueueFree();
+    private void OnGameStart(LevelInfo level, CharacterInfo character) {
+        GameSetup.QueueFree();
 
-            AddChild(new GameRunner(level, character));
-        }
+        AddChild(new GameRunner(level, character));
+    }
 
-        private void OnProjectEdit(ProjectInfo project) {
-            ProjectSelectionMenu.QueueFree();
+    private void OnProjectEdit(ProjectInfo project) {
+        ProjectSelectionMenu.QueueFree();
 
-            GetWindow().Title = $"DemonCastle - {project.Name}";
-            AddChild(EditorSpace = new EditorSpace(project));
-        }
+        GetWindow().Title = $"DemonCastle - {project.Name}";
+        AddChild(EditorSpace = new EditorSpace(project));
     }
 }

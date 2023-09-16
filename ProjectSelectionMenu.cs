@@ -3,61 +3,74 @@ using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle {
-	public partial class ProjectSelectionMenu : Container {
-		protected ProjectManager ProjectManager { get; } = new();
+namespace DemonCastle; 
 
-		public event Action<ProjectInfo>? ProjectLoaded;
-		public event Action<ProjectInfo>? ProjectEdit;
+public partial class ProjectSelectionMenu : Container {
+	protected ProjectManager ProjectManager { get; } = new();
 
-		public override void _Ready() {
-			base._Ready();
+	public event Action<ProjectInfo>? ProjectLoaded;
+	public event Action<ProjectInfo>? ProjectEdit;
+
+	public override void _Ready() {
+		base._Ready();
             
-			if (!ProjectManager.ProjectsExist) {
-				ProjectManager.DownloadProjects().Wait();
-			} else {
-				ProjectList.Load(ProjectManager.GetProjects());
-			}
-		}
-
-		public override void _Process(double delta) {
-			base._Process(delta);
-			LaunchButton.Disabled = !ProjectList.IsItemSelected;
-			RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
-			EditButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
-		}
-
-		protected async void DownloadProjects() {
-			await ProjectManager.DownloadProjects();
+		if (!ProjectManager.ProjectsExist) {
+			ProjectManager.DownloadProjects().Wait();
+		} else {
 			ProjectList.Load(ProjectManager.GetProjects());
 		}
+	}
 
-		private void NewProjectButtonOnPressed() {
-			throw new NotImplementedException();
+	public override void _Process(double delta) {
+		base._Process(delta);
+		LaunchButton.Disabled = !ProjectList.IsItemSelected;
+		RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
+		EditButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
+	}
+
+	protected async void DownloadProjects() {
+		await ProjectManager.DownloadProjects();
+		ProjectList.Load(ProjectManager.GetProjects());
+	}
+
+	private void NewProjectButtonOnPressed() {
+		OpenFolderDialog.Popup();
+	}
+
+	protected void CreateProject(string folderPath) {
+		try {
+			ProjectManager.CreateProject(folderPath);
+		}
+		catch (Exception ex) {
+			ErrorPopup.DialogText = ex.Message;
+			ErrorPopup.Popup();
+			return;
 		}
 
-		protected void OpenImportProject() {
-			OpenFileDialog.Popup();
-		}
+		ProjectList.Load(ProjectManager.GetProjects());
+	}
 
-		protected void ImportProject(string filePath) {
-			ProjectManager.ImportProject(filePath);
-			ProjectList.Load(ProjectManager.GetProjects());
-		}
+	protected void OpenImportProject() {
+		OpenFileDialog.Popup();
+	}
 
-		protected void RemoveProject() {
-			ProjectManager.RemoveProject(ProjectList.SelectedItem);
-			ProjectList.Load(ProjectManager.GetProjects());
-		}
+	protected void ImportProject(string filePath) {
+		ProjectManager.ImportProject(filePath);
+		ProjectList.Load(ProjectManager.GetProjects());
+	}
 
-		protected void EditProject() {
-			var project = ProjectList.SelectedItem;
-			ProjectEdit?.Invoke(project);
-		}
+	protected void RemoveProject() {
+		ProjectManager.RemoveProject(ProjectList.SelectedItem);
+		ProjectList.Load(ProjectManager.GetProjects());
+	}
 
-		protected void LaunchSelectedProject() {
-			var project = ProjectList.SelectedItem;
-			ProjectLoaded?.Invoke(project);
-		}
+	protected void EditProject() {
+		var project = ProjectList.SelectedItem;
+		ProjectEdit?.Invoke(project);
+	}
+
+	protected void LaunchSelectedProject() {
+		var project = ProjectList.SelectedItem;
+		ProjectLoaded?.Invoke(project);
 	}
 }

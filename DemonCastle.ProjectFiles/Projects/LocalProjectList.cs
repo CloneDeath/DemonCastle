@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace DemonCastle.ProjectFiles.Projects {
@@ -25,6 +26,7 @@ namespace DemonCastle.ProjectFiles.Projects {
 		}
 
 		private void SaveProjectList(ProjectListFile project) {
+			project.Projects = project.Projects.Where(File.Exists).ToList();
 			var content = JsonConvert.SerializeObject(project);
 			File.WriteAllText(GlobalPath, content);
 		}
