@@ -5,6 +5,8 @@ using Godot;
 namespace DemonCastle {
 	public partial class ProjectSelectionMenu {
 		protected Button DownloadButton { get; }
+		
+		protected Button NewProjectButton { get; }
 		protected Button ImportButton { get; }
 		protected Button RemoveButton { get; }
 		protected Button EditButton { get; }
@@ -21,9 +23,16 @@ namespace DemonCastle {
 			});
 			DownloadButton.Pressed += this.DownloadProjects;
 			
+			
+			AddChild(NewProjectButton = new Button {
+				Text = "New Project",
+				Position = DownloadButton.Position + new Vector2(310, 0)
+			});
+			NewProjectButton.Pressed += NewProjectButtonOnPressed;
+			
 			AddChild(ImportButton = new Button {
 				Text = "Import Project",
-				Position = DownloadButton.Position + new Vector2(310, 0)
+				Position = NewProjectButton.Position + new Vector2(0, 40)
 			});
 			ImportButton.Pressed += OpenImportProject;
 			
@@ -48,7 +57,7 @@ namespace DemonCastle {
 				Unresizable = false,
 				Title = "Import Project"
 			});
-			OpenFileDialog.FileSelected += this.ImportProject;;
+			OpenFileDialog.FileSelected += this.ImportProject;
 
 			AddChild(ProjectList = new InfoItemList<ProjectInfo> {
 				Position = DownloadButton.Position + new Vector2(0, 40),
@@ -60,7 +69,7 @@ namespace DemonCastle {
 				Text = "Launch",
 				Position = ProjectList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Pressed += this.LaunchSelectedProject;;
+			LaunchButton.Pressed += this.LaunchSelectedProject;
 		}
 	}
 }

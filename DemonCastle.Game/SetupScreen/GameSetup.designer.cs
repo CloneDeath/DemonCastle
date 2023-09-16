@@ -36,7 +36,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Text = "Start Chapter",
 				Position = CharacterInfoList.Position + new Vector2(0, 310)
 			});
-			LaunchButton.Pressed += this.OnLaunchButtonClicked;;
+			LaunchButton.Pressed += this.OnLaunchButtonClicked;
 		}
 	}
 }

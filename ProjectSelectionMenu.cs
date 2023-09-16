@@ -32,6 +32,10 @@ namespace DemonCastle {
 			ProjectList.Load(ProjectManager.GetProjects());
 		}
 
+		private void NewProjectButtonOnPressed() {
+			throw new NotImplementedException();
+		}
+
 		protected void OpenImportProject() {
 			OpenFileDialog.Popup();
 		}

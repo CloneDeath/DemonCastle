@@ -17,10 +17,10 @@ namespace DemonCastle.Editor.FileTreeView {
 			AllowRmbSelect = true;
 
 			AddChild(ConfirmRename = new RenameDialog());
-			ConfirmRename.Confirmed += this.OnRenameConfirmed;;
+			ConfirmRename.Confirmed += this.OnRenameConfirmed;
 			
 			AddChild(ConfirmDelete = new DeleteDialog());
-			ConfirmDelete.Confirmed += this.OnDeleteConfirmed;;
+			ConfirmDelete.Confirmed += this.OnDeleteConfirmed;
 
 			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
 			DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
