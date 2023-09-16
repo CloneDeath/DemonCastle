@@ -14,7 +14,7 @@ public partial class ColorProperty : BaseProperty {
 		Name = nameof(ColorProperty);
 			
 		AddChild(ColorRect = new ColorRect {
-			CustomMinimumSize = new Vector2(16, 16)
+			CustomMinimumSize = new Vector2(24, 24)
 		});
 	}
 }
