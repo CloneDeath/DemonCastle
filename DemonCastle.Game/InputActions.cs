@@ -11,6 +11,7 @@ public static class InputActions {
 	public const string EditorSubmit = nameof(EditorSubmit);
 	public const string EditorClick = nameof(EditorClick);
 	public const string EditorRightClick = nameof(EditorRightClick);
+	public const string EditorRename = nameof(EditorRename);
 		
 	public static void RegisterActions() {
 		RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
@@ -19,6 +20,7 @@ public static class InputActions {
 		RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
 		RegisterAction(EditorClick, MouseButton.Left);
 		RegisterAction(EditorRightClick, MouseButton.Right);
+		RegisterAction(EditorRename, Key.F2);
 	}
 
 	private static void RegisterAction(string actionName, params Key[] keyList) {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Editor.Icons;
+using DemonCastle.Game;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -12,7 +13,14 @@ public partial class FileTree : Tree {
 
 	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
-		
+
+	public override void _GuiInput(InputEvent @event) {
+		base._GuiInput(@event);
+		if (Input.IsActionJustPressed(InputActions.EditorRename)) {
+			OnRename();
+		}
+	}
+
 	protected void FileActivated() {
 		var selected = GetSelected();
 		if (!FileMap.ContainsKey(selected)) return;
