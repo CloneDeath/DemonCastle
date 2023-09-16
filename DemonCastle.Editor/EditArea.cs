@@ -2,20 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DemonCastle.Editor.Windows;
-using DemonCastle.Editor.Windows.Character;
-using DemonCastle.Editor.Windows.Level;
-using DemonCastle.Editor.Windows.SpriteAtlas;
-using DemonCastle.Editor.Windows.SpriteGrid;
+using DemonCastle.Editor.Editors;
+using DemonCastle.Editor.Editors.Character;
+using DemonCastle.Editor.Editors.Level;
+using DemonCastle.Editor.Editors.SpriteAtlas;
+using DemonCastle.Editor.Editors.SpriteGrid;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
-using CharacterEditor = DemonCastle.Editor.Editors.Character.CharacterEditor;
-using ImageEditor = DemonCastle.Editor.Editors.ImageEditor;
-using LevelEditor = DemonCastle.Editor.Editors.Level.LevelEditor;
-using ProjectEditor = DemonCastle.Editor.Editors.ProjectEditor;
-using SpriteAtlasEditor = DemonCastle.Editor.Editors.SpriteAtlas.SpriteAtlasEditor;
-using SpriteGridEditor = DemonCastle.Editor.Editors.SpriteGrid.SpriteGridEditor;
-using TextFileEditor = DemonCastle.Editor.Editors.TextFileEditor;
 
 namespace DemonCastle.Editor; 
 
