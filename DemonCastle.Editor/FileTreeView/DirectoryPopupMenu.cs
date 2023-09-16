@@ -46,7 +46,7 @@ public partial class DirectoryPopupMenu : PopupMenu {
 			case 4:
 				DeleteDirectory?.Invoke();
 				break;
-			default: throw new NotImplementedException($"Id {id} not handled in DirectoryPopupMenu.");
+			default: throw new NotSupportedException($"Id {id} not handled in DirectoryPopupMenu.");
 		}
 	}
 }
