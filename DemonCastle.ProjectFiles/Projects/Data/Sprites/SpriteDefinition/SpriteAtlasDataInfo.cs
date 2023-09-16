@@ -15,9 +15,12 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 	public Texture2D Texture => SpriteAtlasInfo.Texture;
 
 	public Rect2 Region => new() {
-		Position = new Vector2(Data.X, Data.Y),
-		Size = new Vector2I(Data.Width, Data.Height)
+		Position = Position,
+		Size = Size
 	};
+
+	public Vector2I Position => new(Data.X, Data.Y);
+	public Vector2I Size => new(Data.Width, Data.Height);
 
 	public bool FlipHorizontal => Data.FlipHorizontal;
 	public Color TransparentColor => SpriteAtlasInfo.TransparentColor;

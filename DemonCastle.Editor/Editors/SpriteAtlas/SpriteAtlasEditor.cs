@@ -14,8 +14,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
     protected HSplitContainer SplitContainer { get; }
     protected PropertyCollection PropertyCollection { get; }
     protected Button AddSpriteButton { get; }
-    protected ScrollContainer ScrollContainer { get; }
-    protected TextureRect TextureRect { get; }
+    protected SpriteAtlasTextureEditor TextureEditor { get; }
 
     protected SpriteAtlasDataCollection DataCollection { get; }
 
@@ -60,10 +59,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
             CustomMinimumSize = new Vector2(100, 100)
         });
 
-        SplitContainer.AddChild(ScrollContainer = new ScrollContainer());
-        ScrollContainer.AddChild(TextureRect = new TextureRect {
-            Texture = spriteAtlasInfo.Texture
-        });
+        SplitContainer.AddChild(TextureEditor = new SpriteAtlasTextureEditor(spriteAtlasInfo));
     }
 
     private void AddSpriteButton_OnPressed() {
