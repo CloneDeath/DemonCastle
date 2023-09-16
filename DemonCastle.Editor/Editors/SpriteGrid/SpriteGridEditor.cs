@@ -1,17 +1,23 @@
+using System.Net.Http.Headers;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.Editor.Editors.Textures;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid; 
 
-public partial class SpriteGridEditor : Control {
+public partial class SpriteGridEditor : BaseEditor {
+	public override Texture2D TabIcon => IconTextures.SpriteGridIcon;	
+	public override string TabText { get; }	
+	
 	protected PropertyCollection PropertyCollection { get; }
 	protected SpriteGridTextureView TextureView { get; }
 	protected SpriteGridDataCollection DataCollection { get; }
 
 	public SpriteGridEditor(SpriteGridInfo spriteGridInfo) {
-		Name = $"Sprite Grid - {spriteGridInfo.FileName}";
+		Name = nameof(SpriteGridEditor);
+		TabText = $"Sprite Grid - {spriteGridInfo.FileName}";
 		CustomMinimumSize = new Vector2I(500, 350);
 			
 		AddChild(PropertyCollection = new PropertyCollection {

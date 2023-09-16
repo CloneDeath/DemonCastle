@@ -1,10 +1,14 @@
 using DemonCastle.Editor.Editors.Level.TileMap;
 using DemonCastle.Editor.Extensions;
+using DemonCastle.Editor.Icons;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level; 
 
-public partial class LevelEditor : Control {
+public partial class LevelEditor : BaseEditor {
+	public override Texture2D TabIcon => IconTextures.LevelIcon;
+	public override string TabText { get; }
+	
 	public override void _Process(double delta) {
 		base._Process(delta);
 

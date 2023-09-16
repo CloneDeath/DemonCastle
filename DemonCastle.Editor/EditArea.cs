@@ -13,7 +13,7 @@ using Godot;
 namespace DemonCastle.Editor; 
 
 public partial class EditArea : TabContainer {
-	protected Dictionary<FileNavigator, Control> EditorFileMap { get; } = new();
+	protected Dictionary<FileNavigator, BaseEditor> EditorFileMap { get; } = new();
 
 	public void ShowWindowFor(FileNavigator file) {
 		if (EditorFileMap.TryGetValue(file, out var value)) {
@@ -36,12 +36,15 @@ public partial class EditArea : TabContainer {
 		}
 	}
 
-	public void ShowEditor(Control editor) {
+	public void ShowEditor(BaseEditor editor) {
 		AddChild(editor);
-		CurrentTab = editor.GetIndex();
+		var index = editor.GetIndex();
+		SetTabIcon(index, editor.TabIcon);
+		SetTabTitle(index, editor.TabText);
+		CurrentTab = index;
 	}
 
-	protected virtual Control GetEditor(FileNavigator file) {
+	protected virtual BaseEditor GetEditor(FileNavigator file) {
 		return file.Extension switch {
 			".dcp" => new ProjectEditor(file.ToProjectInfo()),
 			".dcc" => new CharacterEditor(file.ToCharacterInfo()),
@@ -50,7 +53,7 @@ public partial class EditArea : TabContainer {
 			".dcsg" => new SpriteGridEditor(file.ToSpriteGridInfo()),
 			".txt" => new TextFileEditor(file.ToTextInfo()),
 			".png" => new ImageEditor(file),
-			_ => new Control()
+			_ => throw new NotSupportedException("No Editor for ")
 		};
 	}
 

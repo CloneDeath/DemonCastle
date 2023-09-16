@@ -21,7 +21,8 @@ public partial class LevelEditor {
 	protected AreaEditor AreaEditor { get; }
 
 	public LevelEditor(LevelInfo levelInfo) {
-		Name = $"Level - {levelInfo.FileName}";
+		Name = nameof(LevelEditor);
+		TabText = levelInfo.FileName;
 		CustomMinimumSize = new Vector2I(600, 400);
 		
 		LevelInfo = levelInfo;

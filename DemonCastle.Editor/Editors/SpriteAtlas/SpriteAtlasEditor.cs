@@ -1,10 +1,14 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
-public partial class SpriteAtlasEditor : Control {
+public partial class SpriteAtlasEditor : BaseEditor {
+    public override Texture2D TabIcon => IconTextures.AtlasIcon;
+    public override string TabText { get; }
+    
     protected HSplitContainer SplitContainer { get; }
     protected PropertyCollection PropertyCollection { get; }
     protected ScrollContainer ScrollContainer { get; }
@@ -13,7 +17,8 @@ public partial class SpriteAtlasEditor : Control {
     protected SpriteAtlasDataCollection DataCollection { get; }
 
     public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlasInfo) {
-        Name = $"Sprite Atlas - {spriteAtlasInfo.FileName}";
+        Name = nameof(SpriteAtlasEditor);
+        TabText = spriteAtlasInfo.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
 
         AddChild(SplitContainer = new HSplitContainer {

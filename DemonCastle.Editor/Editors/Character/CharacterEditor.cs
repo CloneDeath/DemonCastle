@@ -1,15 +1,20 @@
 using DemonCastle.Editor.Editors.Character.Animations;
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Character; 
 
-public partial class CharacterEditor : Control {
+public partial class CharacterEditor : BaseEditor {
+	public override Texture2D TabIcon => IconTextures.CharacterIcon;
+	public override string TabText { get; }
+	
 	protected PropertyCollection Properties { get; }
 	
 	public CharacterEditor(CharacterInfo characterInfo) {
-		Name = $"Character - {characterInfo.FileName}";
+		Name = nameof(CharacterEditor);
+		TabText = characterInfo.FileName;
 		CustomMinimumSize = new Vector2I(600, 300);
 
 		AddChild(Properties = new PropertyCollection {

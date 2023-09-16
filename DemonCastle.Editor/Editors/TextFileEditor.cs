@@ -1,13 +1,18 @@
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors; 
 
-public partial class TextFileEditor : Control {
+public partial class TextFileEditor : BaseEditor {
+	public override Texture2D TabIcon => IconTextures.TextFileIcon;
+	public override string TabText { get; }
+	
 	protected TextEdit TextEdit { get; }
 		
 	public TextFileEditor(TextInfo textInfo) {
-		Name = $"Text - {textInfo.FileName}";
+		Name = nameof(TextFileEditor);
+		TabText = textInfo.FileName;
 		CustomMinimumSize = new Vector2I(300, 300);
 		
 		AddChild(TextEdit = new TextEdit {
