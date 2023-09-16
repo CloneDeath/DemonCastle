@@ -57,7 +57,7 @@ public partial class EditArea : TabContainer {
 	private void OnTabButtonPressed(long tab) {
 		var control = GetTabControl((int)tab);
 		var mapItem = EditorFileMap.FirstOrDefault(t => t.Value == control);
-		EditorFileMap.Remove(mapItem.Key);
+		if (mapItem.Key != null) EditorFileMap.Remove(mapItem.Key);
 		control.QueueFree();
 	}
 }
