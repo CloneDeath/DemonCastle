@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxn1e4w3nxh"
-path="res://.godot/imported/AtlasIcon.png-203a58e6106faf7134f902c7095616fb.ctex"
+uid="uid://osgj0id1iamm"
+path="res://.godot/imported/SpriteAtlasIcon.png-6289b3d54e8637de29a72974de799ff9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DemonCastle.Editor/Icons/AtlasIcon.png"
-dest_files=["res://.godot/imported/AtlasIcon.png-203a58e6106faf7134f902c7095616fb.ctex"]
+source_file="res://DemonCastle.Editor/Icons/SpriteAtlasIcon.png"
+dest_files=["res://.godot/imported/SpriteAtlasIcon.png-6289b3d54e8637de29a72974de799ff9.ctex"]
 
 [params]
 

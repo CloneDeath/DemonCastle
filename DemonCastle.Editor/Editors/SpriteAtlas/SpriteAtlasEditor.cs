@@ -6,7 +6,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
 public partial class SpriteAtlasEditor : BaseEditor {
-    public override Texture2D TabIcon => IconTextures.AtlasIcon;
+    public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
     public override string TabText { get; }
     
     protected HSplitContainer SplitContainer { get; }

@@ -11,11 +11,10 @@
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="Icons\AtlasIcon.aseprite">
-	    <DependentUpon>AtlasIcon.png</DependentUpon>
+	  <Content Include="Icons\SpriteAtlasIcon.aseprite">
+	    <DependentUpon>SpriteAtlasIcon.png</DependentUpon>
 	  </Content>
-	  <Content Include="Icons\AtlasIcon.png" />
-	  <Content Include="Icons\AtlasIcon.png.import" />
+	  <Content Include="Icons\SpriteAtlasIcon.png" />
 	  <Content Include="Icons\CharacterIcon.aseprite">
 	    <DependentUpon>CharacterIcon.png</DependentUpon>
 	  </Content>

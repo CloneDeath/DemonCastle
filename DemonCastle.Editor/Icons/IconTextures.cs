@@ -3,7 +3,7 @@ using Godot;
 namespace DemonCastle.Editor.Icons; 
 
 public static class IconTextures {
-	public static Texture2D AtlasIcon { get; } = LoadTexture(nameof(AtlasIcon));
+	public static Texture2D SpriteAtlasIcon { get; } = LoadTexture(nameof(SpriteAtlasIcon));
 	public static Texture2D CharacterIcon { get; } = LoadTexture(nameof(CharacterIcon));
 	public static Texture2D FolderIcon { get; } = LoadTexture(nameof(FolderIcon));
 	public static Texture2D LevelIcon { get; } = LoadTexture(nameof(LevelIcon));

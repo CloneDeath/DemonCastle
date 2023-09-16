@@ -70,7 +70,7 @@ public partial class FileTree : Tree {
 		switch (extension) {
 			case ".dcp": return IconTextures.ProjectIcon;
 			case ".dcl": return IconTextures.LevelIcon;
-			case ".dcsa": return IconTextures.AtlasIcon;
+			case ".dcsa": return IconTextures.SpriteAtlasIcon;
 			case ".dcsg": return IconTextures.SpriteGridIcon;
 			case ".dcc": return IconTextures.CharacterIcon;
 			case ".txt": return IconTextures.TextFileIcon;
@@ -95,6 +95,15 @@ public partial class FileTree : Tree {
 		dirNav.CreateFile("character", "dcc", new CharacterFile {
 			Name = "character"
 		});
+			
+		CreateTree();
+	}
+	
+	public void OnCreateSpriteAtlasFileSelected() {
+		var selected = GetSelected();
+		if (!DirectoryMap.ContainsKey(selected)) return;
+		var dirNav = DirectoryMap[selected];
+		dirNav.CreateFile("sprite-atlas", "dcsa", new SpriteAtlasFile());
 			
 		CreateTree();
 	}
