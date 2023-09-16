@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.Editor.Editors.Textures;
 using DemonCastle.Editor.Icons;
@@ -17,7 +16,7 @@ public partial class SpriteGridEditor : BaseEditor {
 
 	public SpriteGridEditor(SpriteGridInfo spriteGridInfo) {
 		Name = nameof(SpriteGridEditor);
-		TabText = $"Sprite Grid - {spriteGridInfo.FileName}";
+		TabText = spriteGridInfo.FileName;
 		CustomMinimumSize = new Vector2I(500, 350);
 			
 		AddChild(PropertyCollection = new PropertyCollection {

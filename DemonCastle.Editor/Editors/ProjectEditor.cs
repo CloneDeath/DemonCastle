@@ -1,4 +1,3 @@
-using System.IO;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
