@@ -8,7 +8,6 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected FilePopupMenu FilePopupMenu { get; }
 		protected DeleteDialog ConfirmDelete { get; }
 		protected RenameDialog ConfirmRename { get; }
-
 		
 		public FileTree(DirectoryNavigator rootDirectory) {
 			Name = nameof(FileTree);

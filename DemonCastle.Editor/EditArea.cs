@@ -15,7 +15,7 @@ namespace DemonCastle.Editor;
 public partial class EditArea : TabContainer {
 	protected Dictionary<FileNavigator, BaseEditor> EditorFileMap { get; } = new();
 
-	public void ShowWindowFor(FileNavigator file) {
+	public void ShowEditorFor(FileNavigator file) {
 		if (EditorFileMap.TryGetValue(file, out var value)) {
 			CurrentTab = value.GetIndex();
 			return;

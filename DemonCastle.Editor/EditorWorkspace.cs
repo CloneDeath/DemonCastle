@@ -4,7 +4,7 @@ using Godot;
 namespace DemonCastle.Editor; 
 
 public partial class EditorWorkspace : Control {
-	protected void FileTreeOnOnFileActivated(FileNavigator file) {
-		EditArea.ShowWindowFor(file);
+	protected void ExplorerOnFileActivated(FileNavigator file) {
+		EditArea.ShowEditorFor(file);
 	}
 }

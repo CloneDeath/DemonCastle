@@ -32,6 +32,8 @@ public partial class FileTree : Tree {
 			FilePopupMenu.Popup();
 		}
 	}
+	
+	public void Refresh() => CreateTree();
 
 	protected void CreateTree() {
 		Clear();
