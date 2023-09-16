@@ -8,45 +8,60 @@ public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? AddDirectory;
 	public event Action? CreateCharacterFile;
 	public event Action? CreateTextFile;
+	public event Action? OpenFolder; 
 	public event Action? RenameDirectory;
 	public event Action? DeleteDirectory;
-		
+	
+	private PopupAction[] Actions { get; }
+	
 	public DirectoryPopupMenu() {
 		Name = nameof(DirectoryPopupMenu);
+		
+		Actions = new[] {
+			new PopupAction {
+				Text = "Add Directory",
+				Icon = IconTextures.FolderIcon,
+				Action = () => AddDirectory?.Invoke()
+			},
+			new PopupAction {
+				Text = "Create Character File",
+				Icon = IconTextures.CharacterIcon,
+				Action = () => CreateCharacterFile?.Invoke()
+			},
+			new PopupAction {
+				Text = "Create Text File",
+				Icon = IconTextures.TextFileIcon,
+				Action = () => CreateTextFile?.Invoke()
+			},
+			new PopupAction {
+				Text = "Open Folder...",
+				Action = () => OpenFolder?.Invoke()
+			},
+			new PopupAction {
+				Text = "Rename...",
+				Action = () => RenameDirectory?.Invoke()
+			},
+			new PopupAction {
+				Text = "Delete...",
+				Action = () => DeleteDirectory?.Invoke()
+			}
+		};
 
-		AddItem("Add Directory", 0);
-		SetItemIcon(0, IconTextures.FolderIcon);
-			
-		AddItem("Create Character File", 1);
-		SetItemIcon(1, IconTextures.CharacterIcon);
-			
-		AddItem("Create Text File", 2);
-		SetItemIcon(2, IconTextures.TextFileIcon);
-
-		AddItem("Rename...", 3);
-		AddItem("Delete...", 4);
+		for (var i = 0; i < Actions.Length; i++) {
+			var action = Actions[i];
+			AddItem(action.Text, i);
+			if (action.Icon != null) SetItemIcon(i, action.Icon);
+		}
 
 		IdPressed += OnIdPressed;
 	}
 
 	protected void OnIdPressed(long id) {
-		switch (id) {
-			case 0:
-				AddDirectory?.Invoke();
-				break;
-			case 1:
-				CreateCharacterFile?.Invoke();
-				break;
-			case 2:
-				CreateTextFile?.Invoke();
-				break;
-			case 3:
-				RenameDirectory?.Invoke();
-				break;
-			case 4:
-				DeleteDirectory?.Invoke();
-				break;
-			default: throw new NotSupportedException($"Id {id} not handled in DirectoryPopupMenu.");
+		if (id > Actions.Length) {
+			throw new NotSupportedException($"Id {id} not handled in DirectoryPopupMenu.");
 		}
+
+		var action = Actions[id];
+		action.Action();
 	}
 }

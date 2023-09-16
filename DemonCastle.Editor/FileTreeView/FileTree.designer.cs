@@ -25,6 +25,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
 			DirectoryPopupMenu.CreateCharacterFile += OnCreateCharacterFileSelected;
 			DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
+			DirectoryPopupMenu.OpenFolder += OnOpenFolder;
 			DirectoryPopupMenu.RenameDirectory += OnRename;
 			DirectoryPopupMenu.DeleteDirectory += OnDelete;
 

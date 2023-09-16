@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -117,6 +118,11 @@ public partial class FileTree : Tree {
 			var selected = GetSelected();
 			return DirectoryMap.TryGetValue(selected, out var value) ? value : null;
 		}
+	}
+
+	protected void OnOpenFolder() {
+		var folder = SelectedDirectory?.Directory ?? throw new Exception("No Directory Selected");
+		OS.ShellShowInFileManager(folder);
 	}
 
 	protected void OnRename() {
