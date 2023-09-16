@@ -38,8 +38,9 @@ public partial class ProjectSelectionMenu : Container {
 	}
 
 	protected void CreateProject(string folderPath) {
+		ProjectInfo project;
 		try {
-			ProjectManager.CreateProject(folderPath);
+			project = ProjectManager.CreateProject(folderPath);
 		}
 		catch (Exception ex) {
 			ErrorPopup.DialogText = ex.Message;
@@ -48,6 +49,7 @@ public partial class ProjectSelectionMenu : Container {
 		}
 
 		ProjectList.Load(ProjectManager.GetProjects());
+		ProjectEdit?.Invoke(project);
 	}
 
 	protected void OpenImportProject() {

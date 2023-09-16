@@ -57,7 +57,7 @@ public class ProjectManager {
         LocalProjects.RemoveProject(project.FilePath);
 	}
 
-	public void CreateProject(string folderPath) {
+	public ProjectInfo CreateProject(string folderPath) {
 		if (!Directory.Exists(folderPath)) throw new Exception($"Folder '{folderPath}' does not exist.");
 		if (Directory.EnumerateFiles(folderPath).Any() || Directory.EnumerateDirectories(folderPath).Any()) {
 			throw new Exception("Folder must be empty.");
@@ -74,5 +74,8 @@ public class ProjectManager {
 		File.WriteAllText(projectFilePath, JsonConvert.SerializeObject(projectFile));
 
         LocalProjects.AddProject(projectFilePath);
+		
+		var fileNavigator = new FileNavigator<ProjectFile>(projectFilePath);
+		return new ProjectInfo(fileNavigator);
 	}
 }
