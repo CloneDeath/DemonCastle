@@ -11,16 +11,36 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 		Data = data;
 	}
 
-	public string Name => Data.Name;
+	public string Name {
+		get => Data.Name;
+		set { Data.Name = value; Save(); }
+	}
+
 	public Texture2D Texture => SpriteAtlasInfo.Texture;
 
-	public Rect2 Region => new() {
-		Position = Position,
-		Size = Size
-	};
+	public Rect2I Region {
+		get => new(Position, Size);
+		set {
+			Position = value.Position;
+			Size = value.Size;
+		}
+	}
 
-	public Vector2I Position => new(Data.X, Data.Y);
-	public Vector2I Size => new(Data.Width, Data.Height);
+	public Vector2I Position {
+		get => new(Data.X, Data.Y);
+		set {
+			X = value.X;
+			Y = value.Y;
+		}
+	}
+
+	public Vector2I Size {
+		get => new(Data.Width, Data.Height);
+		set {
+			Width = value.X;
+			Height = value.Y;
+		}
+	}
 
 	public bool FlipHorizontal => Data.FlipHorizontal;
 	public Color TransparentColor => SpriteAtlasInfo.TransparentColor;

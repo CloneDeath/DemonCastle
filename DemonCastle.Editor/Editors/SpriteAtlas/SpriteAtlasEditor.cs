@@ -41,7 +41,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
             OffsetLeft = 5,
             AnchorBottom = 1,
             AnchorRight = 1,
-            CustomMinimumSize = new Vector2(200, 0)
+            CustomMinimumSize = new Vector2(410, 0)
         });
         PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile);
         PropertyCollection.AddColor("Transparent Color", spriteAtlasInfo, x => x.TransparentColor);

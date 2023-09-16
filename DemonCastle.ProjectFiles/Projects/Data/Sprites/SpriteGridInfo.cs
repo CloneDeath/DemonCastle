@@ -15,9 +15,9 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 		SpriteData = Resource.Sprites.Select(s => new SpriteGridDataInfo(this, s)).ToList();
 	}
 		
-	public Vector2 Offset => new(Resource.XOffset, Resource.YOffset);
-	public Vector2 Span => new(Resource.Width + Resource.XSeparation, Resource.Height + Resource.YSeparation);
-	public Vector2 Size => new(Resource.Width, Resource.Height);
+	public Vector2I Offset => new(Resource.XOffset, Resource.YOffset);
+	public Vector2I Span => new(Resource.Width + Resource.XSeparation, Resource.Height + Resource.YSeparation);
+	public Vector2I Size => new(Resource.Width, Resource.Height);
 		
 	public string SpriteFile {
 		get => Resource.File;

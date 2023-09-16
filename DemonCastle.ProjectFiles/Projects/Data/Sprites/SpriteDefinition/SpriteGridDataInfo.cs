@@ -26,8 +26,8 @@ public class SpriteGridDataInfo : ISpriteDefinition {
 		set { Data.Y = value; Save(); }
 	}
 	public Texture2D Texture => SpriteGrid.Texture;
-	public Rect2 Region => new() {
-		Position = Offset + Span * new Vector2(Data.X, Data.Y),
+	public Rect2I Region => new() {
+		Position = Offset + Span * new Vector2I(Data.X, Data.Y),
 		Size = Size
 	};
 
@@ -38,9 +38,9 @@ public class SpriteGridDataInfo : ISpriteDefinition {
 	public Color TransparentColor => Colors.Transparent;
 	public float TransparentColorThreshold => 0.001f;
 
-	protected Vector2 Offset => SpriteGrid.Offset;
-	protected Vector2 Span => SpriteGrid.Span;
-	protected Vector2 Size => SpriteGrid.Size;
+	protected Vector2I Offset => SpriteGrid.Offset;
+	protected Vector2I Span => SpriteGrid.Span;
+	protected Vector2I Size => SpriteGrid.Size;
 
 	public void Save() => SpriteGrid.Save();
 	public void Remove() => SpriteGrid.Remove(Data, this);

@@ -48,7 +48,13 @@ public partial class PropertyCollection : VBoxContainer {
 	}
 
 	public void AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) {
-		AddChild(new Vector2IProperty(new PropertyBinding<T,Vector2I>(target, propertyExpression)) {
+		AddChild(new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
+	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) {
+		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
 			DisplayName = name
 		});
 	}

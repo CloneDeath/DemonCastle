@@ -9,9 +9,6 @@ public partial class SpriteAtlasDataPanel : PanelContainer {
 	public SpriteAtlasDataPanel(SpriteAtlasDataInfo spriteData) {
 		AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", spriteData, x => x.Name);
-		Properties.AddInteger("X", spriteData, x => x.X);
-		Properties.AddInteger("Y", spriteData, x => x.Y);
-		Properties.AddInteger("Width", spriteData, x => x.Width);
-		Properties.AddInteger("Height", spriteData, x => x.Height);
+		Properties.AddRect2I("Region", spriteData, x => x.Region);
 	}
 }

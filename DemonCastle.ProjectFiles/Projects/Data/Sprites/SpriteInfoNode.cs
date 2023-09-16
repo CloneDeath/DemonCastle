@@ -14,6 +14,6 @@ public partial class SpriteInfoNode : Sprite2D {
 			TransparentColor = definition.TransparentColor,
 			Threshold = definition.TransparentColorThreshold
 		};
-		Offset = new Vector2(0, -definition.Region.Size.Y/2);
+		Offset = new Vector2(0, -definition.Region.Size.Y/2f);
 	}
 }
