@@ -1,15 +1,15 @@
 using Godot;
 
-namespace DemonCastle.Game.Animations {
-	public partial class TemporalNode : Node2D {
-		public double StartTime { get; set; }
-		public double EndTime { get; set; }
-		public double CurrentTime { get; set; }
+namespace DemonCastle.Game.Animations; 
 
-		public override void _Process(double delta) {
-			base._Process(delta);
+public partial class TemporalNode : Node2D {
+	public double StartTime { get; set; }
+	public double EndTime { get; set; }
+	public double CurrentTime { get; set; }
 
-			Visible = StartTime <= CurrentTime && CurrentTime < EndTime;
-		}
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		Visible = StartTime <= CurrentTime && CurrentTime < EndTime;
 	}
 }

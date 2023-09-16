@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Character.Animations {
+namespace DemonCastle.Editor.Editors.Character.Animations {
 	public partial class AnimationCollectionEdit {
 		protected AnimationInfoCollection Animations { get; }
 		protected AnimationItemList AnimationItems { get; }

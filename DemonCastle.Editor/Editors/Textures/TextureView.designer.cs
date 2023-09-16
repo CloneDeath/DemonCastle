@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Textures {
+namespace DemonCastle.Editor.Editors.Textures {
 	public partial class TextureView {
 		protected TextureRect TextureRect { get; }
 

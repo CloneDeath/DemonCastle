@@ -1,8 +1,8 @@
+using DemonCastle.Editor.Editors.Level.TileMap;
 using DemonCastle.Editor.Extensions;
-using DemonCastle.Editor.Windows.Level.TileMap;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level; 
+namespace DemonCastle.Editor.Editors.Level; 
 
 public partial class LevelEditor : Control {
 	public override void _Process(double delta) {

@@ -2,27 +2,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace DemonCastle.ProjectFiles.Projects {
-	public class FileCollection {
-		private readonly string _directory;
+namespace DemonCastle.ProjectFiles.Projects; 
 
-		public FileCollection(string directory) {
-			_directory = directory;
-		}
+public class FileCollection {
+	private readonly string _directory;
 
-		public IEnumerable<string> AllFiles => GetAllFiles(_directory);
-		public IEnumerable<string> ProjectFiles => AllFiles.Where(file => file.EndsWith(".dcp"));
+	public FileCollection(string directory) {
+		_directory = directory;
+	}
 
-		protected IEnumerable<string> GetAllFiles(string directory) {
-			if (!Directory.Exists(directory)) return new string[0];
+	public IEnumerable<string> AllFiles => GetAllFiles(_directory);
+	public IEnumerable<string> ProjectFiles => AllFiles.Where(file => file.EndsWith(".dcp"));
+
+	protected IEnumerable<string> GetAllFiles(string directory) {
+		if (!Directory.Exists(directory)) return new string[0];
 			
-			IEnumerable<string> files = Directory.GetFiles(directory);
-			var subFiles = Directory.GetDirectories(directory).SelectMany(GetAllFiles);
-			return files.Concat(subFiles);
-		}
+		IEnumerable<string> files = Directory.GetFiles(directory);
+		var subFiles = Directory.GetDirectories(directory).SelectMany(GetAllFiles);
+		return files.Concat(subFiles);
+	}
 
-		public string GetFile(string file) {
-			return Path.Combine(_directory, file);
-		}
+	public string GetFile(string file) {
+		return Path.Combine(_directory, file);
 	}
 }

@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.Area; 
 
 public partial class AreaEditor {
 	protected HSplitContainer SplitContainer { get; }

@@ -2,51 +2,51 @@ using System;
 using DemonCastle.Editor.Icons;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView {
-	public partial class DirectoryPopupMenu : PopupMenu {
-		public event Action? AddDirectory;
-		public event Action? CreateCharacterFile;
-		public event Action? CreateTextFile;
-		public event Action? RenameDirectory;
-		public event Action? DeleteDirectory;
+namespace DemonCastle.Editor.FileTreeView; 
+
+public partial class DirectoryPopupMenu : PopupMenu {
+	public event Action? AddDirectory;
+	public event Action? CreateCharacterFile;
+	public event Action? CreateTextFile;
+	public event Action? RenameDirectory;
+	public event Action? DeleteDirectory;
 		
-		public DirectoryPopupMenu() {
-			Name = nameof(DirectoryPopupMenu);
+	public DirectoryPopupMenu() {
+		Name = nameof(DirectoryPopupMenu);
 
-			AddItem("Add Directory", 0);
-			SetItemIcon(0, IconTextures.FolderIcon);
+		AddItem("Add Directory", 0);
+		SetItemIcon(0, IconTextures.FolderIcon);
 			
-			AddItem("Create Character File", 1);
-			SetItemIcon(1, IconTextures.CharacterIcon);
+		AddItem("Create Character File", 1);
+		SetItemIcon(1, IconTextures.CharacterIcon);
 			
-			AddItem("Create Text File", 2);
-			SetItemIcon(2, IconTextures.TextFileIcon);
+		AddItem("Create Text File", 2);
+		SetItemIcon(2, IconTextures.TextFileIcon);
 
-			AddItem("Rename...", 3);
-			AddItem("Delete...", 4);
+		AddItem("Rename...", 3);
+		AddItem("Delete...", 4);
 
-			IdPressed += OnIdPressed;
-		}
+		IdPressed += OnIdPressed;
+	}
 
-		protected void OnIdPressed(long id) {
-			switch (id) {
-				case 0:
-					AddDirectory?.Invoke();
-					break;
-				case 1:
-					CreateCharacterFile?.Invoke();
-					break;
-				case 2:
-					CreateTextFile?.Invoke();
-					break;
-				case 3:
-					RenameDirectory?.Invoke();
-					break;
-				case 4:
-					DeleteDirectory?.Invoke();
-					break;
-				default: throw new NotImplementedException($"Id {id} not handled in DirectoryPopupMenu.");
-			}
+	protected void OnIdPressed(long id) {
+		switch (id) {
+			case 0:
+				AddDirectory?.Invoke();
+				break;
+			case 1:
+				CreateCharacterFile?.Invoke();
+				break;
+			case 2:
+				CreateTextFile?.Invoke();
+				break;
+			case 3:
+				RenameDirectory?.Invoke();
+				break;
+			case 4:
+				DeleteDirectory?.Invoke();
+				break;
+			default: throw new NotImplementedException($"Id {id} not handled in DirectoryPopupMenu.");
 		}
 	}
 }

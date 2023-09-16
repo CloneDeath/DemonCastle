@@ -4,26 +4,26 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Sprites {
-	public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
-		public List<SpriteAtlasDataInfo> SpriteData { get; }
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites; 
 
-		public string SpriteFile => Resource.File;
+public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
+	public List<SpriteAtlasDataInfo> SpriteData { get; }
 
-		public Color TransparentColor => Color.Color8(
-			(byte) Resource.TransparentColor.Red,
-			(byte) Resource.TransparentColor.Green,
-			(byte) Resource.TransparentColor.Blue);
+	public string SpriteFile => Resource.File;
 
-		public Texture2D Texture => File.GetTexture(Resource.File);
+	public Color TransparentColor => Color.Color8(
+		(byte) Resource.TransparentColor.Red,
+		(byte) Resource.TransparentColor.Green,
+		(byte) Resource.TransparentColor.Blue);
 
-		public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
-			SpriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();
-		}
+	public Texture2D Texture => File.GetTexture(Resource.File);
 
-		public ISpriteDefinition GetSpriteDefinition(string spriteName) {
-			return SpriteData.FirstOrDefault(s => s.Name == spriteName)
-				?? (ISpriteDefinition) new NullSpriteDefinition();
-		}
+	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
+		SpriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();
+	}
+
+	public ISpriteDefinition GetSpriteDefinition(string spriteName) {
+		return SpriteData.FirstOrDefault(s => s.Name == spriteName)
+			   ?? (ISpriteDefinition) new NullSpriteDefinition();
 	}
 }

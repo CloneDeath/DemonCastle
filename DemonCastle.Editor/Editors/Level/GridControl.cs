@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level; 
+namespace DemonCastle.Editor.Editors.Level; 
 
 public partial class GridControl : Control {
 	public Vector2I GridSize { get; set; } = new(16, 16);

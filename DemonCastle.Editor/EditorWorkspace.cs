@@ -1,10 +1,10 @@
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor {
-	public partial class EditorWorkspace : Control {
-		protected void FileTreeOnOnFileActivated(FileNavigator file) {
-			EditArea.ShowWindowFor(file);
-		}
+namespace DemonCastle.Editor; 
+
+public partial class EditorWorkspace : Control {
+	protected void FileTreeOnOnFileActivated(FileNavigator file) {
+		EditArea.ShowWindowFor(file);
 	}
 }

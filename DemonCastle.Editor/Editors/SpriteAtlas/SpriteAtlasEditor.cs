@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
 public partial class SpriteAtlasEditor : Control {
     protected HSplitContainer SplitContainer { get; }

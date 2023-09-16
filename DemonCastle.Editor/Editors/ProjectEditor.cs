@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows; 
+namespace DemonCastle.Editor.Editors; 
 
 public partial class ProjectEditor : Control {
 	public ProjectEditor(ProjectInfo projectInfo) {

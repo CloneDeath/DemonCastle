@@ -1,22 +1,22 @@
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.SpriteGrid {
-	public partial class SpriteGridDataCollection : ScrollContainer {
-		protected SpriteGridInfo SpriteGrid { get; }
+namespace DemonCastle.Editor.Editors.SpriteGrid; 
 
-		protected void ReloadSpriteData() {
-			foreach (var child in SpriteCollection.GetChildren()) {
-				child.QueueFree();
-			}
-			foreach (var data in SpriteGrid.SpriteData) {
-				SpriteCollection.AddChild(new SpriteGridDataPanel(data));
-			}
+public partial class SpriteGridDataCollection : ScrollContainer {
+	protected SpriteGridInfo SpriteGrid { get; }
+
+	protected void ReloadSpriteData() {
+		foreach (var child in SpriteCollection.GetChildren()) {
+			child.QueueFree();
 		}
+		foreach (var data in SpriteGrid.SpriteData) {
+			SpriteCollection.AddChild(new SpriteGridDataPanel(data));
+		}
+	}
 		
-		protected void OnAddSpriteDataButtonPressed() {
-			SpriteGrid.AddNewSpriteData();
-			ReloadSpriteData();
-		}
+	protected void OnAddSpriteDataButtonPressed() {
+		SpriteGrid.AddNewSpriteData();
+		ReloadSpriteData();
 	}
 }

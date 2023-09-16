@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.Area; 
 
 public partial class AreaTileEditor {
 	public AreaInfo Area { get; }
@@ -17,7 +17,7 @@ public partial class AreaTileEditor {
 		AddChild(control);
 
 		control.AddChild(Root = new Node2D());
-		control.AddChild(new Level.GridControl {
+		control.AddChild(new GridControl {
 			Size = area.Size * area.AreaSize * area.TileSize,
 			GridSize = area.TileSize
 		});

@@ -1,9 +1,9 @@
-using DemonCastle.Editor.Windows.Character.Animations;
-using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Editors.Character.Animations;
+using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Character; 
+namespace DemonCastle.Editor.Editors.Character; 
 
 public partial class CharacterEditor : Control {
 	protected PropertyCollection Properties { get; }

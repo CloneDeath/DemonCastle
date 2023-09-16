@@ -1,37 +1,37 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.Game.Animations {
-	public partial class PhasingNode : Node2D {
-		private List<TemporalNode> Nodes { get; } = new();
+namespace DemonCastle.Game.Animations; 
 
-		public double Duration { get; set; } = 1;
-		public double CurrentTime { get; set; }
-		public bool Playing { get; set; }
+public partial class PhasingNode : Node2D {
+	private List<TemporalNode> Nodes { get; } = new();
 
-		public override void _Process(double delta) {
-			base._Process(delta);
+	public double Duration { get; set; } = 1;
+	public double CurrentTime { get; set; }
+	public bool Playing { get; set; }
 
-			if (!Playing) return;
+	public override void _Process(double delta) {
+		base._Process(delta);
 
-			CurrentTime = (CurrentTime + delta) % Duration;
-			foreach (var temporalNode in Nodes) {
-				temporalNode.CurrentTime = CurrentTime;
-			}
+		if (!Playing) return;
+
+		CurrentTime = (CurrentTime + delta) % Duration;
+		foreach (var temporalNode in Nodes) {
+			temporalNode.CurrentTime = CurrentTime;
 		}
+	}
 
-		public void AddPhase(Node node, float startTime, float endTime) {
-			var child = new TemporalNode {
-				StartTime = startTime,
-				EndTime = endTime
-			};
-			child.AddChild(node);
-			Nodes.Add(child);
-			AddChild(child);
-		}
+	public void AddPhase(Node node, float startTime, float endTime) {
+		var child = new TemporalNode {
+			StartTime = startTime,
+			EndTime = endTime
+		};
+		child.AddChild(node);
+		Nodes.Add(child);
+		AddChild(child);
+	}
 
-		public void Play() {
-			Playing = true;
-		}
+	public void Play() {
+		Playing = true;
 	}
 }

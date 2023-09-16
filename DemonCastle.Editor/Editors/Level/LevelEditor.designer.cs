@@ -1,9 +1,9 @@
-using DemonCastle.Editor.Windows.Level.Area;
-using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Editors.Level.Area;
+using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level; 
+namespace DemonCastle.Editor.Editors.Level; 
 
 public partial class LevelEditor {
 	protected LevelInfo LevelInfo { get; }

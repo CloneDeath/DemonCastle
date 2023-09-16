@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.SpriteGrid {
+namespace DemonCastle.Editor.Editors.SpriteGrid {
 	public partial class SpriteGridDataCollection {
 		protected VBoxContainer SpriteCollection { get; }
 		protected VBoxContainer Contents { get; }

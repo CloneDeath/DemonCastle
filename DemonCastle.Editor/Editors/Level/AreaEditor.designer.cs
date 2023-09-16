@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level; 
+namespace DemonCastle.Editor.Editors.Level; 
 
 public partial class AreaEditor {
 	private readonly LevelInfo _levelInfo;

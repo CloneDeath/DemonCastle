@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Windows.Properties;
+using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level.TileMap; 
+namespace DemonCastle.Editor.Editors.Level.TileMap; 
 
 public partial class TileEditor : Control {
 	protected PropertyCollection Properties { get; }

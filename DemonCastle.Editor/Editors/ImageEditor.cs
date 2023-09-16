@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor.Windows; 
+namespace DemonCastle.Editor.Editors; 
 
 public partial class ImageEditor : Control {
 	protected ScrollContainer ScrollContainer { get; }

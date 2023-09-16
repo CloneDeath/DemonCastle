@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Windows; 
+namespace DemonCastle.Editor.Editors; 
 
 public partial class TextFileEditor : Control {
 	protected TextEdit TextEdit { get; }

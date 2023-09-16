@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Controls;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Character.Animations {
+namespace DemonCastle.Editor.Editors.Character.Animations {
 	public partial class SingleAnimationEditArea {
 		protected AnimationFrameGridContainer GridContainer { get; }
 		protected BindingLineEdit LineEdit { get; }

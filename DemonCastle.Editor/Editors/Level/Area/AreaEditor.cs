@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.Area; 
 
 public partial class AreaEditor : Control {
 	private void AreaTileEditorOnTileCellSelected(Vector2I cell) {

@@ -1,30 +1,30 @@
 using System;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView {
-	public partial class FilePopupMenu : PopupMenu {
-		public event Action? RenameFile;
-		public event Action? DeleteFile;
+namespace DemonCastle.Editor.FileTreeView; 
+
+public partial class FilePopupMenu : PopupMenu {
+	public event Action? RenameFile;
+	public event Action? DeleteFile;
 		
-		public FilePopupMenu() {
-			Name = nameof(FilePopupMenu);
+	public FilePopupMenu() {
+		Name = nameof(FilePopupMenu);
 
-			AddItem("Rename", 0);
-			AddItem("Delete", 1);
+		AddItem("Rename", 0);
+		AddItem("Delete", 1);
 
-			IdPressed += OnIdPressed;
-		}
+		IdPressed += OnIdPressed;
+	}
 
-		protected void OnIdPressed(long id) {
-			switch (id) {
-				case 0: {
-					RenameFile?.Invoke();
-					break;
-				}
-				case 1: {
-					DeleteFile?.Invoke();
-					break;
-				}
+	protected void OnIdPressed(long id) {
+		switch (id) {
+			case 0: {
+				RenameFile?.Invoke();
+				break;
+			}
+			case 1: {
+				DeleteFile?.Invoke();
+				break;
 			}
 		}
 	}

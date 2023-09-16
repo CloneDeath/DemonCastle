@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Properties; 
+namespace DemonCastle.Editor.Editors.Properties; 
 
 public partial class FloatProperty : BaseProperty {
 	protected IPropertyBinding<float> Binding { get; }

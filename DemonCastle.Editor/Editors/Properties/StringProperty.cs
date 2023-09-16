@@ -2,23 +2,23 @@ using DemonCastle.Editor.Controls;
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.Properties {
-	public partial class StringProperty : BaseProperty {
-		protected BindingLineEdit LineEdit { get; }
+namespace DemonCastle.Editor.Editors.Properties; 
 
-		public string PropertyValue {
-			get => LineEdit.Text;
-			set => LineEdit.Text = value;
-		}
+public partial class StringProperty : BaseProperty {
+	protected BindingLineEdit LineEdit { get; }
 
-		public StringProperty(IPropertyBinding<string> binding) {
-			Name = nameof(StringProperty);
+	public string PropertyValue {
+		get => LineEdit.Text;
+		set => LineEdit.Text = value;
+	}
 
-			AddChild(LineEdit = new BindingLineEdit {
-				Binding = binding,
-				SizeFlagsHorizontal = SizeFlags.ExpandFill,
-				CustomMinimumSize = new Vector2(0, 32)
-			});
-		}
+	public StringProperty(IPropertyBinding<string> binding) {
+		Name = nameof(StringProperty);
+
+		AddChild(LineEdit = new BindingLineEdit {
+			Binding = binding,
+			SizeFlagsHorizontal = SizeFlags.ExpandFill,
+			CustomMinimumSize = new Vector2(0, 32)
+		});
 	}
 }

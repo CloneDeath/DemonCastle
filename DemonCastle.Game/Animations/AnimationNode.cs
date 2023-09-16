@@ -2,29 +2,29 @@ using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Game.Animations {
-	public partial class AnimationNode : Node2D {
-		protected AnimationInfo Animation { get; }
-		protected PhasingNode Frames { get; }
+namespace DemonCastle.Game.Animations; 
 
-		public AnimationNode(AnimationInfo animation) {
-			Animation = animation;
+public partial class AnimationNode : Node2D {
+	protected AnimationInfo Animation { get; }
+	protected PhasingNode Frames { get; }
 
-			AddChild(Frames = new PhasingNode {
-				Duration = Animation.Frames.Sum(f => f.Duration)
-			});
-			float totalOffset = 0;
-			foreach (var frame in Animation.Frames) {
-				Frames.AddPhase(frame.Sprite, totalOffset, totalOffset + frame.Duration);
-				totalOffset += frame.Duration;
-			}
+	public AnimationNode(AnimationInfo animation) {
+		Animation = animation;
+
+		AddChild(Frames = new PhasingNode {
+			Duration = Animation.Frames.Sum(f => f.Duration)
+		});
+		float totalOffset = 0;
+		foreach (var frame in Animation.Frames) {
+			Frames.AddPhase(frame.Sprite, totalOffset, totalOffset + frame.Duration);
+			totalOffset += frame.Duration;
 		}
+	}
 
-		public string AnimationName => Animation.Name;
+	public string AnimationName => Animation.Name;
 
-		public void Play() {
-			Frames.CurrentTime = 0;
-			Frames.Play();
-		}
+	public void Play() {
+		Frames.CurrentTime = 0;
+		Frames.Play();
 	}
 }

@@ -1,9 +1,9 @@
-using DemonCastle.Editor.Windows.Properties;
-using DemonCastle.Editor.Windows.Textures;
+using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Textures;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Windows.SpriteGrid; 
+namespace DemonCastle.Editor.Editors.SpriteGrid; 
 
 public partial class SpriteGridEditor : Control {
 	protected PropertyCollection PropertyCollection { get; }
