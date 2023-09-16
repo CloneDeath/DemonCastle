@@ -6,11 +6,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
 public partial class SpriteAtlasEditor : BaseEditor {
+    private readonly SpriteAtlasInfo _spriteAtlasInfo;
+    
     public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
     public override string TabText { get; }
     
     protected HSplitContainer SplitContainer { get; }
     protected PropertyCollection PropertyCollection { get; }
+    protected Button AddSpriteButton { get; }
     protected ScrollContainer ScrollContainer { get; }
     protected TextureRect TextureRect { get; }
 
@@ -20,6 +23,8 @@ public partial class SpriteAtlasEditor : BaseEditor {
         Name = nameof(SpriteAtlasEditor);
         TabText = spriteAtlasInfo.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
+        
+        _spriteAtlasInfo = spriteAtlasInfo;
 
         AddChild(SplitContainer = new HSplitContainer {
             AnchorRight = 1,
@@ -41,10 +46,17 @@ public partial class SpriteAtlasEditor : BaseEditor {
         });
         PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile);
         PropertyCollection.AddColor("Transparent Color", spriteAtlasInfo, x => x.TransparentColor);
+        
+        PropertyCollection.AddChild(AddSpriteButton = new Button {
+            Text = "Add Sprite"
+        });
+        AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
+        
         PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
             AnchorRight = 1,
             AnchorBottom = 1,
             OffsetBottom = 0,
+            SizeFlagsVertical = SizeFlags.ExpandFill,
             CustomMinimumSize = new Vector2(100, 100)
         });
 
@@ -52,5 +64,10 @@ public partial class SpriteAtlasEditor : BaseEditor {
         ScrollContainer.AddChild(TextureRect = new TextureRect {
             Texture = spriteAtlasInfo.Texture
         });
+    }
+
+    private void AddSpriteButton_OnPressed() {
+        _spriteAtlasInfo.CreateSprite();
+        DataCollection.Reload();
     }
 }
