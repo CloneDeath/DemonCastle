@@ -9,7 +9,10 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 	public List<SpriteAtlasDataInfo> SpriteData { get; }
 
-	public string SpriteFile => Resource.File;
+	public string SpriteFile {
+		get => Resource.File;
+		set { Resource.File = value; Save(); }
+	}
 
 	public Color TransparentColor => Color.Color8(
 		(byte) Resource.TransparentColor.Red,
