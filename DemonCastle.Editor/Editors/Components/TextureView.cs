@@ -23,7 +23,7 @@ public partial class TextureView : Container {
 
 
 		AddChild(Controls = new HBoxContainer {
-			CustomMinimumSize = new Vector2(100, 30)
+			CustomMinimumSize = new Vector2(100, 10)
 		});
 		Controls.AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
 		Controls_MagPlus.Pressed += Controls_MagPlus_OnPressed;
@@ -33,7 +33,7 @@ public partial class TextureView : Container {
 
 		AddChild(TextureRect = new ScrollableTextureRect {
 			Name = nameof(TextureRect),
-			OffsetTop = 35,
+			OffsetTop = 30,
 			OffsetBottom = -35
 		});
 		TextureRect.InnerTexture.MouseEntered += TextureRect_OnMouseEntered;
