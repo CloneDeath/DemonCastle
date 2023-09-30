@@ -12,7 +12,8 @@ public partial class SpriteAtlasArea : Outline {
 
 	public event Action<SpriteAtlasArea>? Selected;
 
-	private DragData _drag = new DragData();
+	private Label SpriteName;
+	private readonly DragData _drag = new();
 
 	private static readonly Color Color_NotSelected = new(Colors.Gray, 0.5f);
 	private static readonly Color Color_Selected = Colors.White;
@@ -28,6 +29,13 @@ public partial class SpriteAtlasArea : Outline {
 	public SpriteAtlasArea(SpriteAtlasDataInfo info) {
 		_info = info;
 		IsSelected = false;
+		
+		AddChild(SpriteName = new Label {
+			Text = info.Name,
+			HorizontalAlignment = HorizontalAlignment.Center,
+			VerticalAlignment = VerticalAlignment.Top,
+			Size = new Vector2(0, 0)
+		});
 	}
 
 	public override void _Process(double delta) {
@@ -35,6 +43,8 @@ public partial class SpriteAtlasArea : Outline {
 
 		Position = _info.Position;
 		Size = _info.Size;
+		SpriteName.Position = new Vector2(Size.X / 2, Size.Y);
+		SpriteName.Modulate = Color;
 
 		if (IsSelected) {
 			MouseDefaultCursorShape = CursorShape.Drag;
