@@ -22,7 +22,8 @@ public partial class FileProperty : StringProperty {
 		AddChild(OpenFileDialog = new FileDialog {
 			Filters = new [] {
 				"*.png; Portable Network Graphic",
-				"*.dcsg; Demon Castle Sprite Grid"
+				"*.dcsg; Demon Castle Sprite Grid",
+				"*.dcsa; Demon Castle Sprite Atlas"
 			},
 			FileMode = FileDialog.FileModeEnum.OpenFile,
 			Exclusive = true,
