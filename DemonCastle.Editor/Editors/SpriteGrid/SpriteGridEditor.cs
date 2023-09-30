@@ -22,9 +22,9 @@ public partial class SpriteGridEditor : BaseEditor {
 			OffsetLeft = 5,
 			OffsetTop = 5,
 			OffsetBottom = -5,
-			OffsetRight = 205,
-			AnchorBottom = 1
+			OffsetRight = 205
 		});
+		PropertyCollection.SetAnchorsPreset(LayoutPreset.LeftWide, true);
 		PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile);
 		PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
 		PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
