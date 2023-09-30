@@ -1,15 +1,14 @@
 using DemonCastle.Editor.Editors.Properties;
-using DemonCastle.Editor.Editors.Textures;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteGrid; 
+namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.SpriteGridIcon;	
-	public override string TabText { get; }	
-	
+	public override Texture2D TabIcon => IconTextures.SpriteGridIcon;
+	public override string TabText { get; }
+
 	protected PropertyCollection PropertyCollection { get; }
 	protected SpriteGridTextureView TextureView { get; }
 	protected SpriteGridDataCollection DataCollection { get; }
@@ -18,7 +17,7 @@ public partial class SpriteGridEditor : BaseEditor {
 		Name = nameof(SpriteGridEditor);
 		TabText = spriteGridInfo.FileName;
 		CustomMinimumSize = new Vector2I(500, 350);
-			
+
 		AddChild(PropertyCollection = new PropertyCollection {
 			OffsetLeft = 5,
 			OffsetTop = 5,
@@ -39,7 +38,7 @@ public partial class SpriteGridEditor : BaseEditor {
 			OffsetBottom = 0,
 			CustomMinimumSize = new Vector2(100, 100)
 		});
-			
+
 		AddChild(new VSeparator {
 			Name = nameof(VSeparator),
 			Position = new Vector2(210, 5),

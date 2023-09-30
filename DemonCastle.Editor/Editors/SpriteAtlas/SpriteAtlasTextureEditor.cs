@@ -1,19 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
-public partial class SpriteAtlasTextureEditor : ScrollContainer {
-	protected TextureRect TextureRect { get; }
-
+public partial class SpriteAtlasTextureEditor : TextureView {
 	private readonly List<SpriteAtlasArea> _areas = new();
-	
+
 	public SpriteAtlasTextureEditor(SpriteAtlasInfo spriteAtlasInfo) {
-		AddChild(TextureRect = new TextureRect {
-			Texture = spriteAtlasInfo.Texture
-		});
+		Texture = spriteAtlasInfo.Texture;
 
 		foreach (var dataInfo in spriteAtlasInfo.SpriteData) {
 			var area = new SpriteAtlasArea(dataInfo);
