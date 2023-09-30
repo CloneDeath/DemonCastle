@@ -5,10 +5,10 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
-public partial class SpriteAtlasTextureEditor : TextureView {
+public partial class SpriteAtlasTextureView : TextureView {
 	private readonly List<SpriteAtlasArea> _areas = new();
 
-	public SpriteAtlasTextureEditor(SpriteAtlasInfo spriteAtlasInfo) {
+	public SpriteAtlasTextureView(SpriteAtlasInfo spriteAtlasInfo) {
 		Texture = spriteAtlasInfo.Texture;
 
 		foreach (var dataInfo in spriteAtlasInfo.SpriteData) {

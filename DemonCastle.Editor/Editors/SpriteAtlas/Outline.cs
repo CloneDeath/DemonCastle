@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class Outline : Control {
 	private Color _color = Colors.White;
@@ -25,13 +25,10 @@ public partial class Outline : Control {
 		// Top
 		AddChild(_rects[0] = new ColorRect {
 			Color = Color,
-			AnchorLeft = 0,
-			AnchorRight = 1,
-			AnchorTop = 0,
-			AnchorBottom = 0,
 			OffsetTop = -1
 		});
-		
+		_rects[0].SetAnchorsPreset(LayoutPreset.TopWide, true);
+
 		// Bottom
 		AddChild(_rects[1] = new ColorRect {
 			Color = Color,
@@ -41,7 +38,7 @@ public partial class Outline : Control {
 			AnchorBottom = 1,
 			OffsetBottom = 1
 		});
-		
+
 		// Left
 		AddChild(_rects[2] = new ColorRect {
 			Color = Color,
@@ -51,7 +48,7 @@ public partial class Outline : Control {
 			AnchorBottom = 1,
 			OffsetLeft = -1
 		});
-		
+
 		// Right
 		AddChild(_rects[3] = new ColorRect {
 			Color = Color,
