@@ -4,7 +4,7 @@ using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasArea : Components.Outline {
 	private readonly SpriteAtlasDataInfo _info;
@@ -29,7 +29,7 @@ public partial class SpriteAtlasArea : Components.Outline {
 	public SpriteAtlasArea(SpriteAtlasDataInfo info) {
 		_info = info;
 		IsSelected = false;
-		
+
 		AddChild(SpriteName = new Label {
 			Text = info.Name,
 			HorizontalAlignment = HorizontalAlignment.Center,
@@ -48,13 +48,13 @@ public partial class SpriteAtlasArea : Components.Outline {
 
 		if (IsSelected) {
 			MouseDefaultCursorShape = CursorShape.Drag;
-			
+
 			if (Input.IsActionJustReleased(InputActions.EditorClick)) {
 				_drag.Dragging = false;
 			}
 
 			if (!_drag.Dragging) return;
-			_drag.MouseCurrent = GetGlobalMousePosition();
+			_drag.MouseCurrent = GetGlobalMousePosition() / GetGlobalTransform().Scale;
 			Position = _drag.NewPosition;
 			_info.Position = (Vector2I)_drag.NewPosition;
 		}
@@ -69,7 +69,7 @@ public partial class SpriteAtlasArea : Components.Outline {
 		if (!@event.IsActionPressed(InputActions.EditorClick)) return;
 		if (IsSelected) {
 			_drag.Dragging = true;
-			_drag.MouseStart = GetGlobalMousePosition();
+			_drag.MouseStart = GetGlobalMousePosition() / GetGlobalTransform().Scale;
 			_drag.PositionStart = Position;
 		} else {
 			IsSelected = true;
