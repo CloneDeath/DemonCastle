@@ -7,13 +7,15 @@ namespace DemonCastle.Game.SetupScreen {
 	public partial class GameSetup {
 		protected Label CharactersLabel { get; }
 		protected InfoItemList<CharacterInfo> CharacterInfoList { get; }
-		
+
 		protected Label LevelsLabel { get; }
 		protected InfoItemList<LevelInfo> LevelInfoList { get; }
-		
+
 		protected Button LaunchButton { get; }
-		
+
 		public GameSetup(ProjectInfo project) {
+			Name = nameof(GameSetup);
+
 			AddChild(CharactersLabel = new Label {
 				Text = "Characters:",
 				Position = new Vector2(10, 10)
@@ -22,7 +24,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = CharactersLabel.Position + new Vector2(0, 30)
 			});
 			CharacterInfoList.Load(project.Characters);
-			
+
 			AddChild(LevelsLabel = new Label {
 				Text = "Levels:",
 				Position = CharactersLabel.Position + new Vector2(310, 0)
@@ -31,7 +33,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = LevelsLabel.Position + new Vector2(0, 30)
 			});
 			LevelInfoList.Load(project.Levels);
-			
+
 			AddChild(LaunchButton = new Button {
 				Text = "Start Chapter",
 				Position = CharacterInfoList.Position + new Vector2(0, 310)

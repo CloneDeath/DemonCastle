@@ -3,16 +3,19 @@ using DemonCastle.Editor.TopBar;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor; 
+namespace DemonCastle.Editor;
 
 public partial class EditorSpace {
 	private EditorTopBar TopBar;
 	protected ProjectInfo Project { get; }
 	protected Window PlayWindow;
-	
+
 	public EditorSpace(ProjectInfo project) {
+		Name = nameof(EditorSpace);
+
 		Project = project;
 		AddChild(PlayWindow = new Window {
+			Name = nameof(PlayWindow),
 			Title = Project.Name,
 			Visible = false,
 			MinSize = new Vector2I(640, 480),

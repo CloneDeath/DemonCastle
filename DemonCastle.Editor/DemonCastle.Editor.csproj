@@ -11,6 +11,13 @@
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Include="Icons\MagnifyMinusIcon.aseprite" />
+	  <Content Include="Icons\MagnifyMinusIcon.png" />
+	  <Content Include="Icons\MagnifyPlusIcon.aseprite" />
+	  <Content Include="Icons\MagnifyPlusIcon.png" />
+	  <Content Include="Icons\RefreshIcon.aseprite" />
+	  <Content Include="Icons\RefreshIcon.png" />
+	  <Content Include="Icons\RefreshIcon.png.import" />
 	  <Content Include="Icons\SpriteAtlasIcon.aseprite">
 	    <DependentUpon>SpriteAtlasIcon.png</DependentUpon>
 	  </Content>
