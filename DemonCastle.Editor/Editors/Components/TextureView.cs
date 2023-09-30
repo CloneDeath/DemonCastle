@@ -10,6 +10,7 @@ public partial class TextureView : Container {
 	protected ScrollableTextureRect TextureRect { get; }
 	protected HBoxContainer Footer { get; }
 	protected Label Footer_SizeLabel { get; }
+	protected Label Footer_MousePixel { get; }
 
 	public Texture2D Texture {
 		get => TextureRect.Texture;
@@ -19,6 +20,7 @@ public partial class TextureView : Container {
 	public TextureView() {
 		Name = nameof(TextureView);
 		TextureFilter = TextureFilterEnum.Nearest;
+
 
 		AddChild(Controls = new HBoxContainer {
 			CustomMinimumSize = new Vector2(100, 30)
@@ -34,6 +36,8 @@ public partial class TextureView : Container {
 			OffsetTop = 35,
 			OffsetBottom = -35
 		});
+		TextureRect.InnerTexture.MouseEntered += TextureRect_OnMouseEntered;
+		TextureRect.InnerTexture.MouseExited += TextureRect_OnMouseExited;
 		TextureRect.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
 		AddChild(Footer = new HBoxContainer {
@@ -42,6 +46,15 @@ public partial class TextureView : Container {
 		});
 		Footer.SetAnchorsPreset(LayoutPreset.BottomWide, true);
 		Footer.AddChild(Footer_SizeLabel = new Label());
+		Footer.AddChild(Footer_MousePixel = new Label { Visible = false });
+	}
+
+	private void TextureRect_OnMouseEntered() {
+		Footer_MousePixel.Visible = true;
+	}
+
+	private void TextureRect_OnMouseExited() {
+		Footer_MousePixel.Visible = false;
 	}
 
 	private void Controls_MagPlus_OnPressed() {
@@ -57,5 +70,7 @@ public partial class TextureView : Container {
 
 		var size = Texture.GetSize();
 		Footer_SizeLabel.Text = $"{size.X}x{size.Y}";
+		var pixel = TextureRect.InnerTexture.GetLocalMousePosition().Floor();
+		Footer_MousePixel.Text = $"@{pixel.X}x{pixel.Y}";
 	}
 }

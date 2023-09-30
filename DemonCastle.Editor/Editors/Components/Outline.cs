@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas;
+namespace DemonCastle.Editor.Editors.Components;
 
 public partial class Outline : Control {
 	private Color _color = Colors.White;

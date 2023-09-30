@@ -6,7 +6,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas; 
 
-public partial class SpriteAtlasArea : Outline {
+public partial class SpriteAtlasArea : Components.Outline {
 	private readonly SpriteAtlasDataInfo _info;
 	private bool _isSelected;
 
