@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Resources; 
+namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class ProjectResources {
 	protected FileNavigator<T> GetFile<T>(string path) => new(path, this);
@@ -12,7 +12,7 @@ public class ProjectResources {
 	public ProjectResources() {
 		Characters = new ResourceCache<CharacterInfo>(path
 			=> new CharacterInfo(GetFile<CharacterFile>(path)));
-			
+
 		Levels = new ResourceCache<LevelInfo>(path
 			=> new LevelInfo(GetFile<LevelFile>(path)));
 
@@ -26,7 +26,6 @@ public class ProjectResources {
 			=> {
 			var image = new Image();
 			image.Load(path);
-
 			return ImageTexture.CreateFromImage(image);
 		});
 
@@ -36,7 +35,7 @@ public class ProjectResources {
 		Projects = new ResourceCache<ProjectInfo>(path
 			=> new ProjectInfo(GetFile<ProjectFile>(path)));
 	}
-	protected ResourceCache<CharacterInfo> Characters { get; } 
+	protected ResourceCache<CharacterInfo> Characters { get; }
 	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
 
 	protected ResourceCache<LevelInfo> Levels { get; }

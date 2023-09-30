@@ -15,8 +15,9 @@ public partial class ImageEditor : BaseEditor {
 		Name = nameof(ImageEditor);
 		TabText = texture.FileName;
 
-		AddChild(TextureView = new TextureView());
+		AddChild(TextureView = new TextureView {
+			Texture = texture.ToTexture()
+		});
 		TextureView.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, LayoutPresetMode.Minsize, 5);
-		TextureView.Texture = texture.ToTexture();
 	}
 }
