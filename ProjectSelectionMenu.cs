@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle; 
+namespace DemonCastle;
 
 public partial class ProjectSelectionMenu : Container {
 	protected ProjectManager ProjectManager { get; } = new();
@@ -13,7 +13,7 @@ public partial class ProjectSelectionMenu : Container {
 
 	public override void _Ready() {
 		base._Ready();
-            
+
 		if (!ProjectManager.ProjectsExist) {
 			ProjectManager.DownloadProjects().Wait();
 		} else {

@@ -21,7 +21,7 @@ public partial class AnimationFramePanel : PanelContainer {
 			AnchorRight = 1,
 			AnchorBottom = 1,
 			OffsetRight = 0,
-			OffsetBottom = 0,
+			OffsetBottom = 0
 		});
 			
 		Items.AddChild(new Label {
