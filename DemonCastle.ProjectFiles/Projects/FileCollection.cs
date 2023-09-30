@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ public class FileCollection {
 	public IEnumerable<string> ProjectFiles => AllFiles.Where(file => file.EndsWith(".dcp"));
 
 	protected IEnumerable<string> GetAllFiles(string directory) {
-		if (!Directory.Exists(directory)) return new string[0];
+		if (!Directory.Exists(directory)) return Array.Empty<string>();
 			
 		IEnumerable<string> files = Directory.GetFiles(directory);
 		var subFiles = Directory.GetDirectories(directory).SelectMany(GetAllFiles);

@@ -7,7 +7,7 @@ public static class ColorExtensions {
 		return new ColorData {
 			Red = (byte)(color.R * 255),
 			Green = (byte)(color.G * 255),
-			Blue = (byte)(color.B * 255),
+			Blue = (byte)(color.B * 255)
 		};
 	}
 }

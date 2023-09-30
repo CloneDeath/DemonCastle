@@ -33,15 +33,15 @@ public class CollisionData {
 
 public class AreaData {
 	public string Name { get; set; } = string.Empty;
-	public int X { get; set; } = 0;
-	public int Y { get; set; } = 0;
+	public int X { get; set; }
+	public int Y { get; set; }
 	public int Width { get; set; } = 1;
 	public int Height { get; set; } = 1;
 	public List<TileMapData> TileMap { get; set; } = new();
 }
 
 public class TileMapData {
-	public int X { get; set; } = 0;
-	public int Y { get; set; } = 0;
+	public int X { get; set; }
+	public int Y { get; set; }
 	public string Tile { get; set; } = string.Empty;
 }

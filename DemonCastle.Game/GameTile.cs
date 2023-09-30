@@ -15,17 +15,17 @@ public partial class GameTile : Node2D {
 			RegionEnabled = true,
 			RegionRect = tile.Region,
 			Centered = false,
-			Scale = tile.TileSize / tile.Region.Size,
+			Scale = tile.TileSize / tile.Region.Size
 		});
-		if (tile.Collision.Any()) {
-			AddChild(Body = new StaticBody2D {
-				CollisionLayer = (uint)CollisionLayers.World
-			});
-			Body.AddChild(new CollisionShape2D {
-				Shape = new ConvexPolygonShape2D {
-					Points = tile.Collision
-				}
-			});
-		}
+		
+		if (!tile.Collision.Any()) return;
+		AddChild(Body = new StaticBody2D {
+			CollisionLayer = (uint)CollisionLayers.World
+		});
+		Body.AddChild(new CollisionShape2D {
+			Shape = new ConvexPolygonShape2D {
+				Points = tile.Collision
+			}
+		});
 	}
 }

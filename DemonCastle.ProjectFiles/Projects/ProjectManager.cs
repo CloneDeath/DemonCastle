@@ -18,7 +18,7 @@ public class ProjectManager {
 	protected static FileCollection Files => new(GlobalPath);
 	protected static LocalProjectList LocalProjects => new();
 
-	public async Task DownloadProjects() {
+	public static async Task DownloadProjects() {
 		if (Directory.Exists(GlobalPath)) {
 			Directory.Delete(GlobalPath, true);
 		}
@@ -26,7 +26,7 @@ public class ProjectManager {
 		await DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
 	}
 		
-	public async Task DownloadProject(string url) {
+	public static async Task DownloadProject(string url) {
 		var dest = Path.GetTempFileName();
 		using (var httpClient = new HttpClient()) {
 			var responseBytes = await httpClient.GetByteArrayAsync(url);
@@ -37,7 +37,7 @@ public class ProjectManager {
 
 	public bool ProjectsExist => GetProjects().Any();
 
-	public IEnumerable<ProjectInfo> GetProjects() {
+	public static IEnumerable<ProjectInfo> GetProjects() {
 		var projectFiles = GetProjectFiles().Where(File.Exists).Distinct();
 		foreach (var projectFile in projectFiles) {
 			var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
@@ -45,19 +45,19 @@ public class ProjectManager {
 		}
 	}
 
-	protected IEnumerable<string> GetProjectFiles() {
+	protected static IEnumerable<string> GetProjectFiles() {
 		return Files.ProjectFiles.Concat(LocalProjects.ProjectFiles);
 	}
 
-	public void ImportProject(string filePath) {
+	public static void ImportProject(string filePath) {
         LocalProjects.AddProject(filePath);
 	}
 
-	public void RemoveProject(ProjectInfo project) {
+	public static void RemoveProject(ProjectInfo project) {
         LocalProjects.RemoveProject(project.FilePath);
 	}
 
-	public ProjectInfo CreateProject(string folderPath) {
+	public static ProjectInfo CreateProject(string folderPath) {
 		if (!Directory.Exists(folderPath)) throw new Exception($"Folder '{folderPath}' does not exist.");
 		if (Directory.EnumerateFiles(folderPath).Any() || Directory.EnumerateDirectories(folderPath).Any()) {
 			throw new Exception("Folder must be empty.");

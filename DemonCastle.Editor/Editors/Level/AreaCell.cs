@@ -31,11 +31,10 @@ public partial class AreaCell : Node2D {
 
 		Position = _areaInfo.AreaPosition * _levelInfo.AreaSize;
 
-		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			var window = new Area.AreaEditor(_areaInfo);
-			var container = this.GetEditArea();
-			container.ShowEditor(window);
-		}
+		if (!Input.IsActionJustPressed(InputActions.EditorClick) || !MouseWithinBounds()) return;
+		var window = new Area.AreaEditor(_areaInfo);
+		var container = this.GetEditArea();
+		container.ShowEditor(window);
 	}
 
 	private bool MouseWithinBounds() {

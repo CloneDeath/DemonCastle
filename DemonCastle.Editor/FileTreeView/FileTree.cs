@@ -73,18 +73,17 @@ public partial class FileTree : Tree {
 		FileMap[node] = file;
 	}
 
-	protected Texture2D GetIconForFile(string extension) {
-		switch (extension) {
-			case ".dcp": return IconTextures.ProjectIcon;
-			case ".dcl": return IconTextures.LevelIcon;
-			case ".dcsa": return IconTextures.SpriteAtlasIcon;
-			case ".dcsg": return IconTextures.SpriteGridIcon;
-			case ".dcc": return IconTextures.CharacterIcon;
-			case ".txt": return IconTextures.TextFileIcon;
-			case ".png": return IconTextures.TextureIcon;
-			default:
-				return IconTextures.UnknownIcon;
-		}
+	protected static Texture2D GetIconForFile(string extension) {
+		return extension switch {
+			".dcp" => IconTextures.ProjectIcon,
+			".dcl" => IconTextures.LevelIcon,
+			".dcsa" => IconTextures.SpriteAtlasIcon,
+			".dcsg" => IconTextures.SpriteGridIcon,
+			".dcc" => IconTextures.CharacterIcon,
+			".txt" => IconTextures.TextFileIcon,
+			".png" => IconTextures.TextureIcon,
+			_ => IconTextures.UnknownIcon
+		};
 	}
 
 	public void OnAddDirectorySelected() {

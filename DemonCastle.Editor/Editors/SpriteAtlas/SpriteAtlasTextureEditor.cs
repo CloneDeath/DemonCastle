@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.Editors.SpriteAtlas;
 public partial class SpriteAtlasTextureEditor : ScrollContainer {
 	protected TextureRect TextureRect { get; }
 
-	private List<SpriteAtlasArea> _areas = new();
+	private readonly List<SpriteAtlasArea> _areas = new();
 	
 	public SpriteAtlasTextureEditor(SpriteAtlasInfo spriteAtlasInfo) {
 		AddChild(TextureRect = new TextureRect {

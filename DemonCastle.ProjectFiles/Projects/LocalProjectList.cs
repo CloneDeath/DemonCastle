@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace DemonCastle.ProjectFiles.Projects; 
 
 public class LocalProjectList {
-	protected string GodotPath => "user://ProjectList.json";
+	protected static string GodotPath => "user://ProjectList.json";
 	protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 
 	protected ProjectListFile GetProjectList() {

@@ -13,7 +13,7 @@ public partial class TileEditor : BaseEditor {
 
 	public TileEditor(TileInfo tileInfo) {
 		Name = nameof(TileEditor);
-		TabText = $"Tile Window";
+		TabText = "Tile Window";
 		CustomMinimumSize = new Vector2I(80, 100);
 		
 		AddChild(Properties = new PropertyCollection());

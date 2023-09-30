@@ -24,7 +24,7 @@ public class ProjectInfo : IListableInfo {
 	public string FilePath => File.FilePath;
 
 
-	protected string GodotLocal => "user://";
+	protected static string GodotLocal => "user://";
 	protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotLocal);
 
 	public bool IsImported => !FilePath.StartsWith(GlobalPath);

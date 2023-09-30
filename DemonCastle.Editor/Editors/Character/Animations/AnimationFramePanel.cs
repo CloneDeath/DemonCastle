@@ -51,7 +51,7 @@ public partial class AnimationFramePanel : PanelContainer {
 	protected void LoadFrameInfo() {
 		DurationLabel.Text = $"{FrameInfo.Duration}s";
 			
-		foreach (Node child in TextureContainer.GetChildren()) {
+		foreach (var child in TextureContainer.GetChildren()) {
 			child.QueueFree();
 		}
 		var texture = FrameInfo.TextureRect;

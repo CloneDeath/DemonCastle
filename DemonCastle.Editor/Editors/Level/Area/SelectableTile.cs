@@ -47,11 +47,10 @@ public partial class SelectableTile : TextureRect {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		
-		if (Input.IsActionJustPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			Selected?.Invoke(this);
-			SelectionBox.Visible = true;
-		}
+
+		if (!Input.IsActionJustPressed(InputActions.EditorClick) || !MouseWithinBounds()) return;
+		Selected?.Invoke(this);
+		SelectionBox.Visible = true;
 	}
 
 	private bool MouseWithinBounds() {

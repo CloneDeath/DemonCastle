@@ -22,7 +22,7 @@ public partial class ImageEditor : BaseEditor {
 			OffsetLeft = 5,
 			OffsetTop = 5,
 			OffsetBottom = -5,
-			OffsetRight = -5,
+			OffsetRight = -5
 		});
 		ScrollContainer.AddChild(TextureRect = new TextureRect {
 			Texture = texture.ToTexture()
