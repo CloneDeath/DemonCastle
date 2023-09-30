@@ -10,7 +10,7 @@ using Godot;
 using Newtonsoft.Json;
 using HttpClient = System.Net.Http.HttpClient;
 
-namespace DemonCastle.ProjectFiles.Projects; 
+namespace DemonCastle.ProjectFiles.Projects;
 
 public class ProjectManager {
 	protected const string GodotPath = "user://Projects/";
@@ -25,7 +25,7 @@ public class ProjectManager {
 		await DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
 		await DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
 	}
-		
+
 	public static async Task DownloadProject(string url) {
 		var dest = Path.GetTempFileName();
 		using (var httpClient = new HttpClient()) {
@@ -35,7 +35,7 @@ public class ProjectManager {
 		ZipFile.ExtractToDirectory(dest, GlobalPath);
 	}
 
-	public bool ProjectsExist => GetProjects().Any();
+	public static bool ProjectsExist => GetProjects().Any();
 
 	public static IEnumerable<ProjectInfo> GetProjects() {
 		var projectFiles = GetProjectFiles().Where(File.Exists).Distinct();
@@ -46,15 +46,15 @@ public class ProjectManager {
 	}
 
 	protected static IEnumerable<string> GetProjectFiles() {
-		return Files.ProjectFiles.Concat(LocalProjects.ProjectFiles);
+		return Files.ProjectFiles.Concat(LocalProjectList.ProjectFiles);
 	}
 
 	public static void ImportProject(string filePath) {
-        LocalProjects.AddProject(filePath);
+        LocalProjectList.AddProject(filePath);
 	}
 
 	public static void RemoveProject(ProjectInfo project) {
-        LocalProjects.RemoveProject(project.FilePath);
+        LocalProjectList.RemoveProject(project.FilePath);
 	}
 
 	public static ProjectInfo CreateProject(string folderPath) {
@@ -63,7 +63,7 @@ public class ProjectManager {
 			throw new Exception("Folder must be empty.");
 		}
 
-		var projectName = Path.GetFileName(folderPath) 
+		var projectName = Path.GetFileName(folderPath)
 						  ?? throw new Exception($"Failed to get Folder Name from '{folderPath}'");
 		var projectFilePath = Path.Combine(folderPath, $"{projectName}.dcp");
 
@@ -73,8 +73,8 @@ public class ProjectManager {
 		};
 		File.WriteAllText(projectFilePath, JsonConvert.SerializeObject(projectFile));
 
-        LocalProjects.AddProject(projectFilePath);
-		
+        LocalProjectList.AddProject(projectFilePath);
+
 		var fileNavigator = new FileNavigator<ProjectFile>(projectFilePath);
 		return new ProjectInfo(fileNavigator);
 	}

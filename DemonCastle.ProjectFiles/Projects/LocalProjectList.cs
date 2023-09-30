@@ -4,35 +4,35 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace DemonCastle.ProjectFiles.Projects; 
+namespace DemonCastle.ProjectFiles.Projects;
 
 public class LocalProjectList {
 	protected static string GodotPath => "user://ProjectList.json";
-	protected string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
+	protected static string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 
-	protected ProjectListFile GetProjectList() {
+	protected static ProjectListFile GetProjectList() {
 		if (!File.Exists(GlobalPath)) return new ProjectListFile();
 
 		var contents = File.ReadAllText(GlobalPath);
 		return JsonConvert.DeserializeObject<ProjectListFile>(contents)
 			   ?? throw new NullReferenceException();
 	}
-		
-	public IEnumerable<string> ProjectFiles => GetProjectList().Projects;
 
-	public void AddProject(string filePath) {
+	public static IEnumerable<string> ProjectFiles => GetProjectList().Projects;
+
+	public static void AddProject(string filePath) {
 		var project = GetProjectList();
 		project.Projects.Add(filePath);
 		SaveProjectList(project);
 	}
 
-	private void SaveProjectList(ProjectListFile project) {
+	private static void SaveProjectList(ProjectListFile project) {
 		project.Projects = project.Projects.Where(File.Exists).Distinct().ToList();
 		var content = JsonConvert.SerializeObject(project);
 		File.WriteAllText(GlobalPath, content);
 	}
 
-	public void RemoveProject(string projectFilePath) {
+	public static void RemoveProject(string projectFilePath) {
 		var project = GetProjectList();
 		project.Projects.Remove(projectFilePath);
 		SaveProjectList(project);
