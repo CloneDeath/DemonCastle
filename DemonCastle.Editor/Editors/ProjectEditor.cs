@@ -2,7 +2,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Editors; 
+namespace DemonCastle.Editor.Editors;
 
 public partial class ProjectEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.ProjectIcon;
@@ -11,6 +11,5 @@ public partial class ProjectEditor : BaseEditor {
 	public ProjectEditor(ProjectInfo projectInfo) {
 		Name = nameof(ProjectEditor);
 		TabText = projectInfo.FileName;
-		CustomMinimumSize = new Vector2I(300, 300);
 	}
 }
