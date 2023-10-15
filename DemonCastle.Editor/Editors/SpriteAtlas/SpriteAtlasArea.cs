@@ -1,5 +1,4 @@
 using System;
-using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
