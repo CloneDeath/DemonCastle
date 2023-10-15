@@ -44,6 +44,7 @@ public partial class TextureView : Container {
 			OffsetTop = 30,
 			OffsetBottom = -35
 		});
+		TextureRect.InnerTexture.MouseDefaultCursorShape = CursorShape.Cross;
 		TextureRect.InnerTexture.MouseEntered += TextureRect_OnMouseEntered;
 		TextureRect.InnerTexture.MouseExited += TextureRect_OnMouseExited;
 		TextureRect.SetAnchorsPreset(LayoutPreset.FullRect, true);

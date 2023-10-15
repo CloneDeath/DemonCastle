@@ -21,7 +21,7 @@ public partial class SpriteAtlasTextureView : TextureView {
 
 	private void Area_OnSelected(SpriteAtlasArea selected) {
 		foreach (var area in _areas.Where(a => a != selected)) {
-			area.IsSelected = false;
+			area.Deselect();
 		}
 	}
 }
