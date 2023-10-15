@@ -11,56 +11,8 @@
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Include="Icons\MagnifyMinusIcon.aseprite" />
-	  <Content Include="Icons\MagnifyMinusIcon.png" />
-	  <Content Include="Icons\MagnifyPlusIcon.aseprite" />
-	  <Content Include="Icons\MagnifyPlusIcon.png" />
-	  <Content Include="Icons\RefreshIcon.aseprite" />
-	  <Content Include="Icons\RefreshIcon.png" />
-	  <Content Include="Icons\RefreshIcon.png.import" />
-	  <Content Include="Icons\SpriteAtlasIcon.aseprite">
-	    <DependentUpon>SpriteAtlasIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\SpriteAtlasIcon.png" />
-	  <Content Include="Icons\CharacterIcon.aseprite">
-	    <DependentUpon>CharacterIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\CharacterIcon.png" />
-	  <Content Include="Icons\CharacterIcon.png.import" />
-	  <Content Include="Icons\FolderIcon.aseprite">
-	    <DependentUpon>FolderIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\FolderIcon.png" />
-	  <Content Include="Icons\FolderIcon.png.import" />
-	  <Content Include="Icons\LevelIcon.aseprite">
-	    <DependentUpon>LevelIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\LevelIcon.png" />
-	  <Content Include="Icons\LevelIcon.png.import" />
-	  <Content Include="Icons\ProjectIcon.aseprite">
-	    <DependentUpon>ProjectIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\ProjectIcon.png" />
-	  <Content Include="Icons\ProjectIcon.png.import" />
-	  <Content Include="Icons\SpriteGridIcon.aseprite">
-	    <DependentUpon>SpriteGridIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\SpriteGridIcon.png" />
-	  <Content Include="Icons\SpriteGridIcon.png.import" />
-	  <Content Include="Icons\TextFileIcon.aseprite">
-	    <DependentUpon>TextFileIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\TextFileIcon.png" />
-	  <Content Include="Icons\TextFileIcon.png.import" />
-	  <Content Include="Icons\TextureIcon.aseprite">
-	    <DependentUpon>TextureIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\TextureIcon.png" />
-	  <Content Include="Icons\TextureIcon.png.import" />
-	  <Content Include="Icons\UnknownIcon.aseprite">
-	    <DependentUpon>UnknownIcon.png</DependentUpon>
-	  </Content>
-	  <Content Include="Icons\UnknownIcon.png" />
-	  <Content Include="Icons\UnknownIcon.png.import" />
+	  <Content Include="Icons\*.aseprite" />
+	  <Content Include="Icons\*.png" />
+	  <Content Include="Icons\*.png.import" />
 	</ItemGroup>
 </Project>

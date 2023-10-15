@@ -12,7 +12,7 @@ public partial class SpriteAtlasArea : Components.Outline {
 
 	public event Action<SpriteAtlasArea>? Selected;
 
-	private Label SpriteName;
+	private readonly Label SpriteName;
 	private readonly DragData _drag = new();
 
 	private static readonly Color Color_NotSelected = new(Colors.Gray, 0.5f);
@@ -43,7 +43,7 @@ public partial class SpriteAtlasArea : Components.Outline {
 
 		Position = _info.Position;
 		Size = _info.Size;
-		SpriteName.Position = new Vector2(Size.X / 2, Size.Y);
+		SpriteName.Position = new Vector2(Size.X / 2, Size.Y) - new Vector2(SpriteName.Size.X / 2, 0);
 		SpriteName.Modulate = Color;
 
 		if (IsSelected) {

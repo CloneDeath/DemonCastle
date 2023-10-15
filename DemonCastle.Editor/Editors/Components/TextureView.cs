@@ -5,8 +5,10 @@ namespace DemonCastle.Editor.Editors.Components;
 
 public partial class TextureView : Container {
 	protected HBoxContainer Controls { get; }
+	protected Button Controls_Grid { get; }
 	protected Button Controls_MagPlus { get; }
 	protected Button Controls_MagMinus { get; }
+	protected Button Controls_OneToOne { get; }
 	protected ScrollableTextureRect TextureRect { get; }
 	protected HBoxContainer Footer { get; }
 	protected Label Footer_SizeLabel { get; }
@@ -25,10 +27,13 @@ public partial class TextureView : Container {
 		AddChild(Controls = new HBoxContainer {
 			CustomMinimumSize = new Vector2(100, 10)
 		});
+		Controls.AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
 		Controls.AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
 		Controls_MagPlus.Pressed += Controls_MagPlus_OnPressed;
 		Controls.AddChild(Controls_MagMinus = new Button { Icon = IconTextures.MagnifyMinusIcon });
 		Controls_MagMinus.Pressed += Controls_MagMinus_OnPressed;
+		Controls.AddChild(Controls_OneToOne = new Button { Icon = IconTextures.OneToOneIcon });
+		Controls_OneToOne.Pressed += Controls_OneToOne_OnPressed;
 		Controls.SetAnchorsPreset(LayoutPreset.TopWide);
 
 		AddChild(TextureRect = new ScrollableTextureRect {
@@ -63,6 +68,10 @@ public partial class TextureView : Container {
 
 	private void Controls_MagMinus_OnPressed() {
 		TextureRect.Zoom /= 2;
+	}
+
+	private void Controls_OneToOne_OnPressed() {
+		TextureRect.Zoom = 1;
 	}
 
 	public override void _Process(double delta) {
