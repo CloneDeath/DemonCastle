@@ -42,6 +42,7 @@ public partial class SpriteAtlasArea : Components.Outline {
 
 		Position = _info.Position;
 		Size = _info.Size;
+		SpriteName.Text = _info.Name;
 		SpriteName.Position = new Vector2(Size.X / 2, Size.Y) - new Vector2(SpriteName.Size.X / 2, 0);
 		SpriteName.Modulate = Color;
 

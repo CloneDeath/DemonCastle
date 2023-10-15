@@ -10,9 +10,13 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotifyPropertyChanged {
-	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) { }
-	public IEnumerable<SpriteAtlasDataInfo> SpriteData =>
-		Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s));
+	private readonly List<SpriteAtlasDataInfo> _spriteData;
+
+	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
+		_spriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();
+	}
+
+	public IEnumerable<SpriteAtlasDataInfo> SpriteData => _spriteData;
 
 	public string SpriteFile {
 		get => Resource.File;
@@ -42,6 +46,7 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 	public SpriteAtlasDataInfo CreateSprite() {
 		var spriteAtlasData = new SpriteAtlasData();
 		Resource.Sprites.Add(spriteAtlasData);
+		_spriteData.Add(new SpriteAtlasDataInfo(this, spriteAtlasData));
 		return new SpriteAtlasDataInfo(this, spriteAtlasData);
 	}
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.ProjectFiles; 
+namespace DemonCastle.ProjectFiles;
 
 public class SpriteAtlasFile {
 	public string File { get; set; } = string.Empty;
@@ -20,10 +20,10 @@ public class ColorData {
 }
 
 public class SpriteAtlasData {
-	public string Name { get; set; } = string.Empty;
-	public int X { get; set; }
-	public int Y { get; set; }
-	public int Width { get; set; }
-	public int Height { get; set; }
-	public bool FlipHorizontal { get; set; }
+	public string Name = string.Empty;
+	public int X;
+	public int Y;
+	public int Width;
+	public int Height;
+	public bool FlipHorizontal;
 }
