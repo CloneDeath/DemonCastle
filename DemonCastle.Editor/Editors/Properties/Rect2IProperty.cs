@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties; 
+namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class Rect2IProperty : VBoxContainer {
 	protected Label Label { get; }
@@ -30,7 +30,8 @@ public partial class Rect2IProperty : VBoxContainer {
 	public Rect2IProperty(IPropertyBinding<Rect2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
-		
+		binding.Changed += Binding_OnChanged;
+
 		AddChild(Label = new Label());
 
 		AddChild(HBoxContainer = new HBoxContainer());
@@ -49,7 +50,7 @@ public partial class Rect2IProperty : VBoxContainer {
 			Rounded = true
 		});
 		YBox.ValueChanged += OnValueChange;
-		
+
 		HBoxContainer.AddChild(new Label { Text = "W" });
 		HBoxContainer.AddChild(WidthBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
@@ -57,7 +58,7 @@ public partial class Rect2IProperty : VBoxContainer {
 			Rounded = true
 		});
 		WidthBox.ValueChanged += OnValueChange;
-		
+
 		HBoxContainer.AddChild(new Label { Text = "H" });
 		HBoxContainer.AddChild(HeightBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
@@ -65,6 +66,10 @@ public partial class Rect2IProperty : VBoxContainer {
 			Rounded = true
 		});
 		HeightBox.ValueChanged += OnValueChange;
+	}
+
+	private void Binding_OnChanged(Rect2I obj) {
+		PropertyValue = obj;
 	}
 
 	protected void OnValueChange(double value) {

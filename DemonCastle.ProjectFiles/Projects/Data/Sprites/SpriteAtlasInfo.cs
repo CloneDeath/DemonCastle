@@ -1,32 +1,42 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Sprites; 
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
-public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
-	public IEnumerable<SpriteAtlasDataInfo> SpriteData => Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s));
+public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotifyPropertyChanged {
+	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) { }
+	public IEnumerable<SpriteAtlasDataInfo> SpriteData =>
+		Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s));
 
 	public string SpriteFile {
 		get => Resource.File;
-		set { Resource.File = value; Save(); }
+		set {
+			Resource.File = value;
+			Save();
+			OnPropertyChanged();
+		}
 	}
 
 	public Color TransparentColor {
 		get => Resource.TransparentColor.ToColor();
-		set { Resource.TransparentColor = value.ToColorData(); Save(); }
+		set {
+			Resource.TransparentColor = value.ToColorData();
+			Save();
+			OnPropertyChanged();
+		}
 	}
 
 	public Texture2D Texture => File.GetTexture(Resource.File);
 
-	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) { }
-
 	public ISpriteDefinition GetSpriteDefinition(string spriteName) {
 		return SpriteData.FirstOrDefault(s => s.Name == spriteName)
-			   ?? (ISpriteDefinition) new NullSpriteDefinition();
+			   ?? (ISpriteDefinition)new NullSpriteDefinition();
 	}
 
 	public SpriteAtlasDataInfo CreateSprite() {
@@ -34,4 +44,19 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 		Resource.Sprites.Add(spriteAtlasData);
 		return new SpriteAtlasDataInfo(this, spriteAtlasData);
 	}
+
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler? PropertyChanged;
+
+	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+
+	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
+		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+		field = value;
+		OnPropertyChanged(propertyName);
+		return true;
+	}
+	#endregion
 }

@@ -1,16 +1,13 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data; 
+namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class FrameInfo {
-	protected AnimationInfo Animation { get; }
-	protected FileNavigator<CharacterFile> File { get; }
-	public string Directory => File.Directory;
-	protected FrameData FrameData { get; }
-	public int Index { get; }
-
+public class FrameInfo : INotifyPropertyChanged {
 	public FrameInfo(AnimationInfo animation, FileNavigator<CharacterFile> file, FrameData frameData, int index) {
 		Animation = animation;
 		File = file;
@@ -18,22 +15,42 @@ public class FrameInfo {
 		Index = index;
 	}
 
+	protected AnimationInfo Animation { get; }
+	protected FileNavigator<CharacterFile> File { get; }
+	public string Directory => File.Directory;
+	protected FrameData FrameData { get; }
+	public int Index { get; }
+
 	public float Duration {
 		get => FrameData.Duration;
-		set { FrameData.Duration = value; Save(); }
+		set {
+			FrameData.Duration = value;
+			Save();
+			OnPropertyChanged();
+		}
 	}
 
 	public string SourceFile {
 		get => FrameData.Source;
-		set { FrameData.Source = value; Save(); }
+		set {
+			FrameData.Source = value;
+			Save();
+			OnPropertyChanged();
+		}
 	}
 
 	public string SpriteName {
 		get => FrameData.Sprite;
-		set { FrameData.Sprite = value; Save(); }
+		set {
+			FrameData.Sprite = value;
+			Save();
+			OnPropertyChanged();
+		}
 	}
 
-	protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source) ? new NullSpriteSource() : File.GetSprite(FrameData.Source);
+	protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source)
+										  ? new NullSpriteSource()
+										  : File.GetSprite(FrameData.Source);
 
 	public SpriteInfoNode Sprite => new(Source.GetSpriteDefinition(FrameData.Sprite));
 	public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
@@ -43,4 +60,19 @@ public class FrameInfo {
 	public void Delete() {
 		Animation.RemoveFrame(this, FrameData);
 	}
+
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler? PropertyChanged;
+
+	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+
+	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
+		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+		field = value;
+		OnPropertyChanged(propertyName);
+		return true;
+	}
+	#endregion
 }

@@ -1,28 +1,26 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Levels; 
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
-public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
-	public LevelTileSet TileSet { get; }
-
+public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChanged {
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
 		TileSet = new LevelTileSet(file.Resource, File);
 	}
 
-	public string Name {
-		get => Resource.Name;
-		set { Resource.Name = value; Save(); }
-	}
+	public LevelTileSet TileSet { get; }
 
 	public Vector2I TileSize {
-		get => new (Resource.TileWidth, Resource.TileHeight);
+		get => new(Resource.TileWidth, Resource.TileHeight);
 		set {
 			Resource.TileWidth = value.X;
 			Resource.TileHeight = value.Y;
 			Save();
+			OnPropertyChanged();
 		}
 	}
 
@@ -32,10 +30,26 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 			Resource.AreaWidth = value.X;
 			Resource.AreaHeight = value.Y;
 			Save();
+			OnPropertyChanged();
 		}
 	}
 
 	public IEnumerable<AreaInfo> Areas => Resource.Areas.Select(area => new AreaInfo(area, this));
+
+	public Vector2 StartingLocation => TileSize * (
+													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
+													  + new Vector2(Resource.StartingPosition.X,
+														  Resource.StartingPosition.Y)
+												  ) + TileSize / new Vector2(1 / 2f, 1);
+
+	public string Name {
+		get => Resource.Name;
+		set {
+			Resource.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
 
 	public AreaInfo CreateArea() {
 		var area = new AreaData();
@@ -48,10 +62,20 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		return new AreaInfo(area, this);
 	}
 
-	public Vector2 StartingLocation => TileSize * (
-													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
-													  + new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
-												  ) + TileSize / new Vector2(1/2f, 1);
-
 	public TileInfo GetTileInfo(string tileName) => TileSet.GetTileInfo(tileName);
+
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler? PropertyChanged;
+
+	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+
+	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
+		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+		field = value;
+		OnPropertyChanged(propertyName);
+		return true;
+	}
+	#endregion
 }
