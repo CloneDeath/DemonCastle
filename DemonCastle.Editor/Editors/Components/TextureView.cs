@@ -4,6 +4,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class TextureView : Container {
+	private bool _showGrid;
+
 	protected HBoxContainer Controls { get; }
 	protected Button Controls_Grid { get; }
 	protected Button Controls_MagPlus { get; }
@@ -28,6 +30,7 @@ public partial class TextureView : Container {
 			CustomMinimumSize = new Vector2(100, 10)
 		});
 		Controls.AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
+		Controls_Grid.Pressed += Controls_Grid_OnPressed;
 		Controls.AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
 		Controls_MagPlus.Pressed += Controls_MagPlus_OnPressed;
 		Controls.AddChild(Controls_MagMinus = new Button { Icon = IconTextures.MagnifyMinusIcon });
@@ -47,6 +50,7 @@ public partial class TextureView : Container {
 
 		TextureRect.InnerTexture.AddChild(TextureRect_Grid = new Grid {
 			CellSize = Vector2I.One,
+			Color = new Color(Colors.White, 0.5f),
 			MouseFilter = MouseFilterEnum.Pass
 		});
 		TextureRect_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
@@ -58,6 +62,10 @@ public partial class TextureView : Container {
 		Footer.SetAnchorsPreset(LayoutPreset.BottomWide, true);
 		Footer.AddChild(Footer_SizeLabel = new Label());
 		Footer.AddChild(Footer_MousePixel = new Label { Visible = false });
+	}
+
+	private void Controls_Grid_OnPressed() {
+		_showGrid = !_showGrid;
 	}
 
 	private void TextureRect_OnMouseEntered() {
@@ -87,5 +95,6 @@ public partial class TextureView : Container {
 		Footer_SizeLabel.Text = $"{size.X}x{size.Y}";
 		var pixel = TextureRect.InnerTexture.GetLocalMousePosition().Floor();
 		Footer_MousePixel.Text = $"@{pixel.X}x{pixel.Y}";
+		TextureRect_Grid.Visible = TextureRect.Zoom >= 4 && _showGrid;
 	}
 }
