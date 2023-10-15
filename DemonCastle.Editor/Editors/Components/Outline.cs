@@ -25,38 +25,33 @@ public partial class Outline : Control {
 		// Top
 		AddChild(_rects[0] = new ColorRect {
 			Color = Color,
-			OffsetTop = -1
+			OffsetTop = -1,
+			MouseFilter = MouseFilterEnum.Pass
 		});
 		_rects[0].SetAnchorsPreset(LayoutPreset.TopWide, true);
 
 		// Bottom
 		AddChild(_rects[1] = new ColorRect {
 			Color = Color,
-			AnchorLeft = 0,
-			AnchorRight = 1,
-			AnchorTop = 1,
-			AnchorBottom = 1,
-			OffsetBottom = 1
+			OffsetBottom = 1,
+			MouseFilter = MouseFilterEnum.Pass
 		});
+		_rects[1].SetAnchorsPreset(LayoutPreset.BottomWide, true);
 
 		// Left
 		AddChild(_rects[2] = new ColorRect {
 			Color = Color,
-			AnchorLeft = 0,
-			AnchorRight = 0,
-			AnchorTop = 0,
-			AnchorBottom = 1,
-			OffsetLeft = -1
+			OffsetLeft = -1,
+			MouseFilter = MouseFilterEnum.Pass
 		});
+		_rects[2].SetAnchorsPreset(LayoutPreset.LeftWide, true);
 
 		// Right
 		AddChild(_rects[3] = new ColorRect {
 			Color = Color,
-			AnchorLeft = 1,
-			AnchorRight = 1,
-			AnchorTop = 0,
-			AnchorBottom = 1,
-			OffsetRight = 1
+			OffsetRight = 1,
+			MouseFilter = MouseFilterEnum.Pass
 		});
+		_rects[3].SetAnchorsPreset(LayoutPreset.RightWide, true);
 	}
 }
