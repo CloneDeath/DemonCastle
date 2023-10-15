@@ -14,7 +14,7 @@ public partial class SpriteAtlasArea : Control {
 
 	private readonly Label SpriteName;
 	private readonly Outline Outline;
-	private readonly DraggableRegion[] _draggableRegion = new DraggableRegion[5];
+	private readonly DraggableRegion[] _draggableRegion = new DraggableRegion[9];
 
 	private readonly SpriteAtlasDataInfo _info;
 
@@ -29,9 +29,13 @@ public partial class SpriteAtlasArea : Control {
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
-		// Center
-		AddChild(_draggableRegion[0] = new DraggableRegion());
-		_draggableRegion[0].SetAnchorsPreset(LayoutPreset.FullRect);
+		// TopLeft
+		AddChild(_draggableRegion[0] = new DraggableRegion {
+			OffsetTop = -EdgeMargin,
+			OffsetLeft = -EdgeMargin,
+			CursorShape = CursorShape.Fdiagsize
+		});
+		_draggableRegion[0].SetAnchorsPreset(LayoutPreset.TopLeft, true);
 		_draggableRegion[0].Selected += DraggableRegion_OnSelected;
 
 		// Top
@@ -42,29 +46,61 @@ public partial class SpriteAtlasArea : Control {
 		_draggableRegion[1].SetAnchorsPreset(LayoutPreset.TopWide, true);
 		_draggableRegion[1].Selected += DraggableRegion_OnSelected;
 
-		// Left
+		// TopRight
 		AddChild(_draggableRegion[2] = new DraggableRegion {
+			OffsetTop = -EdgeMargin,
+			OffsetRight = EdgeMargin,
+			CursorShape = CursorShape.Bdiagsize
+		});
+		_draggableRegion[2].SetAnchorsPreset(LayoutPreset.TopRight, true);
+		_draggableRegion[2].Selected += DraggableRegion_OnSelected;
+
+		// Left
+		AddChild(_draggableRegion[3] = new DraggableRegion {
 			OffsetLeft = -EdgeMargin,
 			CursorShape = CursorShape.Hsize
 		});
-		_draggableRegion[2].SetAnchorsPreset(LayoutPreset.LeftWide, true);
-		_draggableRegion[2].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[3].SetAnchorsPreset(LayoutPreset.LeftWide, true);
+		_draggableRegion[3].Selected += DraggableRegion_OnSelected;
+
+		// Center
+		AddChild(_draggableRegion[4] = new DraggableRegion());
+		_draggableRegion[4].SetAnchorsPreset(LayoutPreset.FullRect);
+		_draggableRegion[4].Selected += DraggableRegion_OnSelected;
 
 		// Right
-		AddChild(_draggableRegion[3] = new DraggableRegion {
+		AddChild(_draggableRegion[5] = new DraggableRegion {
 			OffsetRight = EdgeMargin,
 			CursorShape = CursorShape.Hsize
 		});
-		_draggableRegion[3].SetAnchorsPreset(LayoutPreset.RightWide, true);
-		_draggableRegion[3].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[5].SetAnchorsPreset(LayoutPreset.RightWide, true);
+		_draggableRegion[5].Selected += DraggableRegion_OnSelected;
+
+		// BottomLeft
+		AddChild(_draggableRegion[6] = new DraggableRegion {
+			OffsetLeft = -EdgeMargin,
+			OffsetBottom = EdgeMargin,
+			CursorShape = CursorShape.Bdiagsize
+		});
+		_draggableRegion[6].SetAnchorsPreset(LayoutPreset.BottomLeft, true);
+		_draggableRegion[6].Selected += DraggableRegion_OnSelected;
 
 		// Bottom
-		AddChild(_draggableRegion[4] = new DraggableRegion {
+		AddChild(_draggableRegion[7] = new DraggableRegion {
 			OffsetBottom = EdgeMargin,
 			CursorShape = CursorShape.Vsize
 		});
-		_draggableRegion[4].SetAnchorsPreset(LayoutPreset.BottomWide, true);
-		_draggableRegion[4].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[7].SetAnchorsPreset(LayoutPreset.BottomWide, true);
+		_draggableRegion[7].Selected += DraggableRegion_OnSelected;
+
+		// BottomRight
+		AddChild(_draggableRegion[8] = new DraggableRegion {
+			OffsetRight = EdgeMargin,
+			OffsetBottom = EdgeMargin,
+			CursorShape = CursorShape.Fdiagsize
+		});
+		_draggableRegion[8].SetAnchorsPreset(LayoutPreset.BottomRight, true);
+		_draggableRegion[8].Selected += DraggableRegion_OnSelected;
 
 		AddChild(SpriteName = new Label {
 			Text = info.Name,
