@@ -10,6 +10,7 @@ public partial class TextureView : Container {
 	protected Button Controls_MagMinus { get; }
 	protected Button Controls_OneToOne { get; }
 	protected ScrollableTextureRect TextureRect { get; }
+	protected Grid TextureRect_Grid { get; }
 	protected HBoxContainer Footer { get; }
 	protected Label Footer_SizeLabel { get; }
 	protected Label Footer_MousePixel { get; }
@@ -22,7 +23,6 @@ public partial class TextureView : Container {
 	public TextureView() {
 		Name = nameof(TextureView);
 		TextureFilter = TextureFilterEnum.Nearest;
-
 
 		AddChild(Controls = new HBoxContainer {
 			CustomMinimumSize = new Vector2(100, 10)
@@ -44,6 +44,12 @@ public partial class TextureView : Container {
 		TextureRect.InnerTexture.MouseEntered += TextureRect_OnMouseEntered;
 		TextureRect.InnerTexture.MouseExited += TextureRect_OnMouseExited;
 		TextureRect.SetAnchorsPreset(LayoutPreset.FullRect, true);
+
+		TextureRect.InnerTexture.AddChild(TextureRect_Grid = new Grid {
+			CellSize = Vector2I.One,
+			MouseFilter = MouseFilterEnum.Pass
+		});
+		TextureRect_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
 
 		AddChild(Footer = new HBoxContainer {
 			CustomMinimumSize = new Vector2(100, 20),

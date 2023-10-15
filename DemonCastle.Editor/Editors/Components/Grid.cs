@@ -4,7 +4,7 @@ namespace DemonCastle.Editor.Editors.Components;
 
 public partial class Grid : Control {
 	private Vector2I _cellSize;
-	private Color _color;
+	private Color _color = Colors.White;
 
 	public Vector2I CellSize {
 		get => _cellSize;
