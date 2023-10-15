@@ -54,9 +54,9 @@ public partial class SpriteAtlasArea : Components.Outline {
 			}
 
 			if (!_drag.Dragging) return;
-			_drag.MouseCurrent = GetGlobalMousePosition() / GetGlobalTransform().Scale;
+			_drag.MouseCurrent = (Vector2I)(GetGlobalMousePosition() / GetGlobalTransform().Scale);
 			Position = _drag.NewPosition;
-			_info.Position = (Vector2I)_drag.NewPosition;
+			_info.Position = _drag.NewPosition;
 		}
 		else {
 			MouseDefaultCursorShape = CursorShape.Arrow;
@@ -69,8 +69,8 @@ public partial class SpriteAtlasArea : Components.Outline {
 		if (!@event.IsActionPressed(InputActions.EditorClick)) return;
 		if (IsSelected) {
 			_drag.Dragging = true;
-			_drag.MouseStart = GetGlobalMousePosition() / GetGlobalTransform().Scale;
-			_drag.PositionStart = Position;
+			_drag.MouseStart = (Vector2I)(GetGlobalMousePosition() / GetGlobalTransform().Scale);
+			_drag.PositionStart = (Vector2I)Position;
 		} else {
 			IsSelected = true;
 			Selected?.Invoke(this);
