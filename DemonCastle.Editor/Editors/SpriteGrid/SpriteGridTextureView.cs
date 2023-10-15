@@ -11,7 +11,6 @@ public partial class SpriteGridTextureView : Components.TextureView {
 	protected int DeltaY => SpriteGridInfo.Height + SpriteGridInfo.YSeparation;
 	public override void _Draw() {
 		base._Draw();
-		if (Texture == null) return;
 
 		for (var x = StartX; x <= TextureWidth; x += DeltaX) {
 			for (var y = StartY; y <= TextureHeight; y += DeltaY) {
