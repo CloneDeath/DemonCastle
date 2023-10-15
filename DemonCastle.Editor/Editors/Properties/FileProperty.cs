@@ -1,30 +1,29 @@
+using System.Collections.Generic;
+using System.Linq;
+using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
 using Godot;
 using Path = System.IO.Path;
 
-namespace DemonCastle.Editor.Editors.Properties; 
+namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class FileProperty : StringProperty {
 	protected string Directory { get; }
 	protected Button LoadButton { get; }
 	protected FileDialog OpenFileDialog { get; }
-	public FileProperty(IPropertyBinding<string> binding, string directory)
+	public FileProperty(IPropertyBinding<string> binding, string directory, IEnumerable<IFileTypeData> fileTypes)
 		: base(binding) {
 		Directory = directory;
 
 		LineEdit.Editable = false;
-			
+
 		AddChild(LoadButton = new Button {
 			Text = "..."
 		});
 		LoadButton.Pressed += OnClick;
 
 		AddChild(OpenFileDialog = new FileDialog {
-			Filters = new [] {
-				"*.png; Portable Network Graphic",
-				"*.dcsg; Demon Castle Sprite Grid",
-				"*.dcsa; Demon Castle Sprite Atlas"
-			},
+			Filters = fileTypes.Select(t => t.Filter).ToArray(),
 			FileMode = FileDialog.FileModeEnum.OpenFile,
 			Exclusive = true,
 			Access = FileDialog.AccessEnum.Filesystem,

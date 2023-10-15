@@ -25,7 +25,7 @@ public partial class SpriteGridEditor : BaseEditor {
 			OffsetRight = 205
 		});
 		PropertyCollection.SetAnchorsPreset(LayoutPreset.LeftWide, true);
-		PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile);
+		PropertyCollection.AddFile("File", spriteGridInfo, spriteGridInfo.Directory, x => x.SpriteFile, FileType.RawTextureFiles);
 		PropertyCollection.AddInteger("Width", spriteGridInfo, x => x.Width);
 		PropertyCollection.AddInteger("Height", spriteGridInfo, x => x.Height);
 		PropertyCollection.AddInteger("X Offset", spriteGridInfo, x => x.XOffset);

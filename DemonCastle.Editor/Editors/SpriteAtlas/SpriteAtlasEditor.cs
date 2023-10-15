@@ -3,14 +3,14 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
     private readonly SpriteAtlasInfo _spriteAtlasInfo;
-    
+
     public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
     public override string TabText { get; }
-    
+
     protected HSplitContainer SplitContainer { get; }
     protected PropertyCollection PropertyCollection { get; }
     protected Button AddSpriteButton { get; }
@@ -22,7 +22,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
         Name = nameof(SpriteAtlasEditor);
         TabText = spriteAtlasInfo.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
-        
+
         _spriteAtlasInfo = spriteAtlasInfo;
 
         AddChild(SplitContainer = new HSplitContainer {
@@ -33,7 +33,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
             OffsetLeft = 5,
             OffsetRight = -5
         });
-        
+
         SplitContainer.AddChild(PropertyCollection = new PropertyCollection {
             OffsetTop = 5,
             OffsetRight = -5,
@@ -43,14 +43,14 @@ public partial class SpriteAtlasEditor : BaseEditor {
             AnchorRight = 1,
             CustomMinimumSize = new Vector2(410, 0)
         });
-        PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile);
+        PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile, FileType.RawTextureFiles);
         PropertyCollection.AddColor("Transparent Color", spriteAtlasInfo, x => x.TransparentColor);
-        
+
         PropertyCollection.AddChild(AddSpriteButton = new Button {
             Text = "Add Sprite"
         });
         AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
-        
+
         PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
             AnchorRight = 1,
             AnchorBottom = 1,

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
 using Godot;
 
@@ -12,8 +13,9 @@ public partial class PropertyCollection : VBoxContainer {
 	}
 
 	public void AddFile<T>(string name, T target, string directory,
-						   Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory) {
+						   Expression<Func<T, string>> propertyExpression,
+						   IFileTypeData[] fileTypes) where T : INotifyPropertyChanged {
+		AddChild(new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
 		});
 	}
