@@ -25,8 +25,10 @@ public partial class DraggableRegion : Control {
 
 			if (!_drag.Dragging) return;
 			_drag.MouseCurrent = (Vector2I)(GetGlobalMousePosition() / GetGlobalTransform().Scale);
-			Position = _drag.NewPosition;
+
+			if (_drag.Delta.Length() <= 0) return;
 			DragUpdate?.Invoke(_drag);
+			_drag.MousePrevious = _drag.MouseCurrent;
 		}
 		else {
 			MouseDefaultCursorShape = CursorShape.Arrow;
@@ -39,8 +41,7 @@ public partial class DraggableRegion : Control {
 		if (!@event.IsActionPressed(InputActions.EditorClick)) return;
 		if (IsSelected) {
 			_drag.Dragging = true;
-			_drag.MouseStart = (Vector2I)(GetGlobalMousePosition() / GetGlobalTransform().Scale);
-			_drag.PositionStart = (Vector2I)Position;
+			_drag.MousePrevious = (Vector2I)(GetGlobalMousePosition() / GetGlobalTransform().Scale);
 		} else {
 			IsSelected = true;
 			Selected?.Invoke(this);

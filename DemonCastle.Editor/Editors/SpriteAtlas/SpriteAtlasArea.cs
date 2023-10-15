@@ -37,6 +37,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[0].SetAnchorsPreset(LayoutPreset.TopLeft, true);
 		_draggableRegion[0].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[0].DragUpdate += DraggableRegion_TopLeft_OnDragUpdate;
 
 		// Top
 		AddChild(_draggableRegion[1] = new DraggableRegion {
@@ -45,6 +46,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[1].SetAnchorsPreset(LayoutPreset.TopWide, true);
 		_draggableRegion[1].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[1].DragUpdate += DraggableRegion_Top_OnDragUpdate;
 
 		// TopRight
 		AddChild(_draggableRegion[2] = new DraggableRegion {
@@ -54,6 +56,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[2].SetAnchorsPreset(LayoutPreset.TopRight, true);
 		_draggableRegion[2].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[2].DragUpdate += DraggableRegion_TopRight_OnDragUpdate;
 
 		// Left
 		AddChild(_draggableRegion[3] = new DraggableRegion {
@@ -62,11 +65,13 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[3].SetAnchorsPreset(LayoutPreset.LeftWide, true);
 		_draggableRegion[3].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[3].DragUpdate += DraggableRegion_Left_OnDragUpdate;
 
 		// Center
 		AddChild(_draggableRegion[4] = new DraggableRegion());
 		_draggableRegion[4].SetAnchorsPreset(LayoutPreset.FullRect);
 		_draggableRegion[4].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[4].DragUpdate += DraggableRegion_Center_OnDragUpdate;
 
 		// Right
 		AddChild(_draggableRegion[5] = new DraggableRegion {
@@ -75,6 +80,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[5].SetAnchorsPreset(LayoutPreset.RightWide, true);
 		_draggableRegion[5].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[5].DragUpdate += DraggableRegion_Right_OnDragUpdate;
 
 		// BottomLeft
 		AddChild(_draggableRegion[6] = new DraggableRegion {
@@ -84,6 +90,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[6].SetAnchorsPreset(LayoutPreset.BottomLeft, true);
 		_draggableRegion[6].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[6].DragUpdate += DraggableRegion_BottomLeft_OnDragUpdate;
 
 		// Bottom
 		AddChild(_draggableRegion[7] = new DraggableRegion {
@@ -92,6 +99,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[7].SetAnchorsPreset(LayoutPreset.BottomWide, true);
 		_draggableRegion[7].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[7].DragUpdate += DraggableRegion_Bottom_OnDragUpdate;
 
 		// BottomRight
 		AddChild(_draggableRegion[8] = new DraggableRegion {
@@ -101,6 +109,7 @@ public partial class SpriteAtlasArea : Control {
 		});
 		_draggableRegion[8].SetAnchorsPreset(LayoutPreset.BottomRight, true);
 		_draggableRegion[8].Selected += DraggableRegion_OnSelected;
+		_draggableRegion[8].DragUpdate += DraggableRegion_BottomRight_OnDragUpdate;
 
 		AddChild(SpriteName = new Label {
 			Text = info.Name,
@@ -116,6 +125,43 @@ public partial class SpriteAtlasArea : Control {
 		}
 		IsSelected = true;
 		Selected?.Invoke(this);
+	}
+
+	private void DraggableRegion_TopLeft_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, -obj.Delta.Y, 0, 0);
+	}
+
+	private void DraggableRegion_Top_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(0, -obj.Delta.Y, 0, 0);
+	}
+
+	private void DraggableRegion_TopRight_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(0, -obj.Delta.Y, obj.Delta.X, 0);
+
+	}
+
+	private void DraggableRegion_Left_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, 0, 0, 0);
+	}
+
+	private void DraggableRegion_Center_OnDragUpdate(DragData obj) {
+		_info.Position += obj.Delta;
+	}
+
+	private void DraggableRegion_Right_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(0, 0, obj.Delta.X, 0);
+	}
+
+	private void DraggableRegion_BottomLeft_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, 0, 0, obj.Delta.Y);
+	}
+
+	private void DraggableRegion_Bottom_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(0, 0, 0, obj.Delta.Y);
+	}
+
+	private void DraggableRegion_BottomRight_OnDragUpdate(DragData obj) {
+		_info.Region = _info.Region.GrowIndividual(0, 0, obj.Delta.X, obj.Delta.Y);
 	}
 
 	public override void _Process(double delta) {
