@@ -1,13 +1,17 @@
 using System.IO;
 
-namespace DemonCastle.ProjectFiles.Projects.Resources; 
+namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class TextFileNavigator : FileNavigator {
-	public string Resource { get; }
-		
+	public string Resource { get; set; }
+
 	public TextFileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
 
 	public TextFileNavigator(string filePath, ProjectResources resources) : base(filePath, resources) {
 		Resource = File.ReadAllText(filePath);
+	}
+
+	public void Save() {
+		File.WriteAllText(FilePath, Resource);
 	}
 }

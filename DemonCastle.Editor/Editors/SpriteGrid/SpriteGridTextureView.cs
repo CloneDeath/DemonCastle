@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteGrid; 
+namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridTextureView : Components.TextureView {
 	protected int TextureWidth => Texture.GetWidth();
