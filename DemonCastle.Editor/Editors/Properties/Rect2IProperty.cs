@@ -39,7 +39,9 @@ public partial class Rect2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(XBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Value = Binding.Get().Position.X,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue
 		});
 		XBox.ValueChanged += OnValueChange;
 
@@ -47,7 +49,9 @@ public partial class Rect2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(YBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Value = Binding.Get().Position.Y,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue
 		});
 		YBox.ValueChanged += OnValueChange;
 
@@ -55,7 +59,9 @@ public partial class Rect2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(WidthBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Value = Binding.Get().Size.X,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue
 		});
 		WidthBox.ValueChanged += OnValueChange;
 
@@ -63,7 +69,9 @@ public partial class Rect2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(HeightBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Value = Binding.Get().Size.Y,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue
 		});
 		HeightBox.ValueChanged += OnValueChange;
 	}
