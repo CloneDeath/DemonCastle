@@ -38,40 +38,40 @@ public partial class Rect2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(new Label { Text = "X" });
 		HBoxContainer.AddChild(XBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().Position.X,
 			Rounded = true,
 			MinValue = 0,
-			MaxValue = double.MaxValue
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().Position.X
 		});
 		XBox.ValueChanged += OnValueChange;
 
 		HBoxContainer.AddChild(new Label { Text = "Y" });
 		HBoxContainer.AddChild(YBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().Position.Y,
 			Rounded = true,
 			MinValue = 0,
-			MaxValue = double.MaxValue
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().Position.Y
 		});
 		YBox.ValueChanged += OnValueChange;
 
 		HBoxContainer.AddChild(new Label { Text = "W" });
 		HBoxContainer.AddChild(WidthBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().Size.X,
 			Rounded = true,
 			MinValue = 0,
-			MaxValue = double.MaxValue
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().Size.X
 		});
 		WidthBox.ValueChanged += OnValueChange;
 
 		HBoxContainer.AddChild(new Label { Text = "H" });
 		HBoxContainer.AddChild(HeightBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().Size.Y,
 			Rounded = true,
 			MinValue = 0,
-			MaxValue = double.MaxValue
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().Size.Y,
 		});
 		HeightBox.ValueChanged += OnValueChange;
 	}

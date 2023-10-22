@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties; 
+namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class Vector2IProperty : VBoxContainer {
 	protected Label Label { get; }
@@ -26,7 +26,7 @@ public partial class Vector2IProperty : VBoxContainer {
 	public Vector2IProperty(IPropertyBinding<Vector2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
-		
+
 		AddChild(Label = new Label());
 
 		AddChild(HBoxContainer = new HBoxContainer());
@@ -34,8 +34,10 @@ public partial class Vector2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(XBox = new SpinBox {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().X,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().X
 		});
 		XBox.ValueChanged += OnXValueChange;
 
@@ -43,8 +45,10 @@ public partial class Vector2IProperty : VBoxContainer {
 		HBoxContainer.AddChild(YBox = new SpinBox {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get().Y,
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue,
+			Value = Binding.Get().Y
 		});
 		YBox.ValueChanged += OnYValueChange;
 	}
@@ -52,7 +56,7 @@ public partial class Vector2IProperty : VBoxContainer {
 	protected void OnXValueChange(double value) {
 		Binding.Set(new Vector2I((int)value, (int)YBox.Value));
 	}
-	
+
 	protected void OnYValueChange(double value) {
 		Binding.Set(new Vector2I((int)XBox.Value, (int)value));
 	}

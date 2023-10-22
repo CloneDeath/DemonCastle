@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties; 
+namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class IntegerProperty : BaseProperty {
 	protected IPropertyBinding<int> Binding { get; }
@@ -11,16 +11,18 @@ public partial class IntegerProperty : BaseProperty {
 		get => (int)SpinBox.Value;
 		set => SpinBox.Value = value;
 	}
-		
+
 	public IntegerProperty(IPropertyBinding<int> binding) {
 		Name = nameof(IntegerProperty);
 		Binding = binding;
-			
+
 		AddChild(SpinBox = new SpinBox {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
-			Value = Binding.Get(),
-			Rounded = true
+			Rounded = true,
+			MinValue = 0,
+			MaxValue = double.MaxValue,
+			Value = Binding.Get()
 		});
 		SpinBox.ValueChanged += OnValueChange;
 	}

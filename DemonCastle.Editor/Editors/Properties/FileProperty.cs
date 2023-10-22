@@ -29,7 +29,7 @@ public partial class FileProperty : StringProperty {
 			Access = FileDialog.AccessEnum.Filesystem,
 			Size = new Vector2I(800, 600),
 			Unresizable = false,
-			Title = "RefCounted Image"
+			Title = "Select File",
 		});
 		OpenFileDialog.FileSelected += FileSelected;
 	}
