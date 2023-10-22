@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.FileTreeView {
 		protected FilePopupMenu FilePopupMenu { get; }
 		protected DeleteDialog ConfirmDelete { get; }
 		protected RenameDialog ConfirmRename { get; }
-		
+
 		public FileTree(DirectoryNavigator rootDirectory) {
 			Name = nameof(FileTree);
 			Root = rootDirectory;
@@ -16,14 +16,15 @@ namespace DemonCastle.Editor.FileTreeView {
 
 			AddChild(ConfirmRename = new RenameDialog());
 			ConfirmRename.Confirmed += this.OnRenameConfirmed;
-			
+
 			AddChild(ConfirmDelete = new DeleteDialog());
 			ConfirmDelete.Confirmed += this.OnDeleteConfirmed;
 
 			AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
 			DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
-			DirectoryPopupMenu.CreateCharacterFile += OnCreateCharacterFileSelected;
 			DirectoryPopupMenu.CreateSpriteAtlasFile += OnCreateSpriteAtlasFileSelected;
+			DirectoryPopupMenu.CreateCharacterFile += OnCreateCharacterFileSelected;
+			DirectoryPopupMenu.CreateLevelFile += OnCreateLevelFileSelected;
 			DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
 			DirectoryPopupMenu.OpenFolder += OnOpenFolder;
 			DirectoryPopupMenu.RenameDirectory += OnRename;

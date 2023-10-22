@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
 	public event Action<FileNavigator>? OnFileActivated;
@@ -24,7 +24,7 @@ public partial class FileTree : Tree {
 	protected void FileActivated() {
 		var selected = GetSelected();
 		if (!FileMap.ContainsKey(selected)) return;
-			
+
 		OnFileActivated?.Invoke(FileMap[selected]);
 	}
 
@@ -39,7 +39,7 @@ public partial class FileTree : Tree {
 			FilePopupMenu.Popup();
 		}
 	}
-	
+
 	public void Refresh() => CreateTree();
 
 	protected void CreateTree() {
@@ -51,7 +51,7 @@ public partial class FileTree : Tree {
 
 	protected void CreateDirectory(TreeItem? parent, DirectoryNavigator directory) {
 		if (directory.DirectoryName.StartsWith(".")) return;
-			
+
 		var dir = CreateItem(parent);
 		dir.SetText(0, directory.DirectoryName);
 		dir.SetIcon(0, IconTextures.FolderIcon);
@@ -93,7 +93,16 @@ public partial class FileTree : Tree {
 		dirNav.CreateDirectory("directory");
 		CreateTree();
 	}
-		
+
+	public void OnCreateSpriteAtlasFileSelected() {
+		var selected = GetSelected();
+		if (!DirectoryMap.ContainsKey(selected)) return;
+		var dirNav = DirectoryMap[selected];
+		dirNav.CreateFile("sprite-atlas", "dcsa", new SpriteAtlasFile());
+
+		CreateTree();
+	}
+
 	public void OnCreateCharacterFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
@@ -101,25 +110,27 @@ public partial class FileTree : Tree {
 		dirNav.CreateFile("character", "dcc", new CharacterFile {
 			Name = "character"
 		});
-			
+
 		CreateTree();
 	}
-	
-	public void OnCreateSpriteAtlasFileSelected() {
+
+	public void OnCreateLevelFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("sprite-atlas", "dcsa", new SpriteAtlasFile());
-			
+		dirNav.CreateFile("level", "dcl", new LevelFile {
+			Name = "level"
+		});
+
 		CreateTree();
 	}
-		
+
 	public void OnCreateTextFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 		var dirNav = DirectoryMap[selected];
 		dirNav.CreateEmptyFile("text", "txt");
-			
+
 		CreateTree();
 	}
 

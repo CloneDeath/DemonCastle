@@ -2,22 +2,22 @@ using System;
 using DemonCastle.Editor.Icons;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView;
 
 public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? AddDirectory;
-	public event Action? CreateCharacterFile;
 	public event Action? CreateSpriteAtlasFile;
+	public event Action? CreateCharacterFile;
+	public event Action? CreateLevelFile;
 	public event Action? CreateTextFile;
-	public event Action? OpenFolder; 
+	public event Action? OpenFolder;
 	public event Action? RenameDirectory;
 	public event Action? DeleteDirectory;
-	
+
 	private PopupAction[] Actions { get; }
-	
+
 	public DirectoryPopupMenu() {
 		Name = nameof(DirectoryPopupMenu);
-		
 		Actions = new[] {
 			new PopupAction {
 				Text = "Add Directory",
@@ -25,14 +25,19 @@ public partial class DirectoryPopupMenu : PopupMenu {
 				Action = () => AddDirectory?.Invoke()
 			},
 			new PopupAction {
+				Text = "Create Sprite Atlas File",
+				Icon = IconTextures.SpriteAtlasIcon,
+				Action = () => CreateSpriteAtlasFile?.Invoke()
+			},
+			new PopupAction {
 				Text = "Create Character File",
 				Icon = IconTextures.CharacterIcon,
 				Action = () => CreateCharacterFile?.Invoke()
 			},
 			new PopupAction {
-				Text = "Create Sprite Atlas File",
-				Icon = IconTextures.SpriteAtlasIcon,
-				Action = () => CreateSpriteAtlasFile?.Invoke()
+				Text	= "Create Level File",
+				Icon = IconTextures.LevelIcon,
+				Action = () => CreateLevelFile?.Invoke()
 			},
 			new PopupAction {
 				Text = "Create Text File",
@@ -52,6 +57,7 @@ public partial class DirectoryPopupMenu : PopupMenu {
 				Action = () => DeleteDirectory?.Invoke()
 			}
 		};
+
 
 		for (var i = 0; i < Actions.Length; i++) {
 			var action = Actions[i];
