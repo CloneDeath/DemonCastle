@@ -21,6 +21,13 @@ public partial class SpriteDefinitionView : CenterContainer {
 		}
 	}
 
+	public override void _ExitTree() {
+		base._ExitTree();
+		if (_definition is INotifyPropertyChanged definitionNotify) {
+			definitionNotify.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
+		}
+	}
+
 	private void DefinitionNotify_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		Reload();
 	}

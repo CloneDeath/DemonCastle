@@ -76,6 +76,11 @@ public partial class Rect2IProperty : VBoxContainer {
 		HeightBox.ValueChanged += OnValueChange;
 	}
 
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
+	}
+
 	private void Binding_OnChanged(Rect2I obj) {
 		PropertyValue = obj;
 	}
