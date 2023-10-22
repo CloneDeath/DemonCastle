@@ -3,8 +3,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridTextureView : Components.TextureView {
-	protected int TextureWidth => Texture.GetWidth();
-	protected int TextureHeight => Texture.GetHeight();
+	protected int TextureWidth => Texture?.GetWidth() ?? 0;
+	protected int TextureHeight => Texture?.GetHeight() ?? 0;
 	protected int StartX => SpriteGridInfo.XOffset;
 	protected int StartY => SpriteGridInfo.YOffset;
 	protected int DeltaX => SpriteGridInfo.Width + SpriteGridInfo.XSeparation;

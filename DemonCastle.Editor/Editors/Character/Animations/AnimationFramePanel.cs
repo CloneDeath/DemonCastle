@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -9,7 +10,7 @@ public partial class AnimationFramePanel : PanelContainer {
 	protected VBoxContainer Items { get; }
 	protected Button EditButton { get; }
 	protected Button DeleteButton { get; }
-	protected CenterContainer TextureContainer { get; }
+	protected SpriteDefinitionView SpriteDefinitionView { get; }
 
 	protected EditFrameWindow EditWindow { get; }
 
@@ -28,7 +29,7 @@ public partial class AnimationFramePanel : PanelContainer {
 			Text = $"{FrameInfo.Index} - {frameInfo.SpriteName}"
 		});
 
-		Items.AddChild(TextureContainer = new CenterContainer());
+		Items.AddChild(SpriteDefinitionView = new SpriteDefinitionView(FrameInfo.SpriteDefinition));
 
 		Items.AddChild(DurationLabel = new Label());
 
@@ -50,13 +51,7 @@ public partial class AnimationFramePanel : PanelContainer {
 
 	protected void LoadFrameInfo() {
 		DurationLabel.Text = $"{FrameInfo.Duration}s";
-
-		foreach (var child in TextureContainer.GetChildren()) {
-			child.QueueFree();
-		}
-		var texture = FrameInfo.TextureRect;
-		TextureContainer.AddChild(texture);
-		texture.StretchMode = TextureRect.StretchModeEnum.KeepCentered;
+		SpriteDefinitionView.Reload();
 	}
 
 	protected void OnEditWindowClosed() {
