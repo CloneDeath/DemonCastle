@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties;
@@ -14,7 +16,7 @@ public partial class PropertyCollection : VBoxContainer {
 
 	public void AddFile<T>(string name, T target, string directory,
 						   Expression<Func<T, string>> propertyExpression,
-						   IFileTypeData[] fileTypes) where T : INotifyPropertyChanged {
+						   IEnumerable<IFileTypeData> fileTypes) where T : INotifyPropertyChanged {
 		AddChild(new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
 		});
@@ -58,6 +60,12 @@ public partial class PropertyCollection : VBoxContainer {
 
 	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
 		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
+	public void AddSpriteName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
+		AddChild(new SpriteNameProperty(new PropertyBinding<T, string>(target, propertyExpression), options) {
 			DisplayName = name
 		});
 	}

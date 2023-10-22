@@ -89,6 +89,8 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 			   ?? (ISpriteDefinition)new NullSpriteDefinition();
 	}
 
+	public IEnumerable<string> SpriteNames => SpriteData.Select(s => s.Name);
+
 	public void AddNewSpriteData() {
 		var spriteData = new SpriteGridData();
 		Resource.Sprites.Add(spriteData);

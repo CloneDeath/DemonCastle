@@ -43,6 +43,8 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 			   ?? (ISpriteDefinition)new NullSpriteDefinition();
 	}
 
+	public IEnumerable<string> SpriteNames => SpriteData.Select(d => d.Name);
+
 	public SpriteAtlasDataInfo CreateSprite() {
 		var spriteAtlasData = new SpriteAtlasData();
 		Resource.Sprites.Add(spriteAtlasData);

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -51,6 +53,9 @@ public class FrameInfo : INotifyPropertyChanged {
 	protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source)
 										  ? new NullSpriteSource()
 										  : File.GetSprite(FrameData.Source);
+
+	public IEnumerable<ISpriteDefinition> SpriteDefinitions =>
+		Source.SpriteNames.Select(s => Source.GetSpriteDefinition(s));
 
 	public SpriteInfoNode Sprite => new(Source.GetSpriteDefinition(FrameData.Sprite));
 	public TextureRect TextureRect => new SpriteDefinitionTextureRect(Source.GetSpriteDefinition(FrameData.Sprite));
