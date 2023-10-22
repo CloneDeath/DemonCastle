@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Character.Animations; 
+namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class AnimationFramePanel : PanelContainer {
 	protected FrameInfo FrameInfo { get; }
@@ -10,33 +10,33 @@ public partial class AnimationFramePanel : PanelContainer {
 	protected Button EditButton { get; }
 	protected Button DeleteButton { get; }
 	protected CenterContainer TextureContainer { get; }
-		
+
 	protected EditFrameWindow EditWindow { get; }
-		
+
 	public AnimationFramePanel(FrameInfo frameInfo) {
 		FrameInfo = frameInfo;
 		CustomMinimumSize = new Vector2(50, 50);
-			
+
 		AddChild(Items = new VBoxContainer {
 			AnchorRight = 1,
 			AnchorBottom = 1,
 			OffsetRight = 0,
 			OffsetBottom = 0
 		});
-			
+
 		Items.AddChild(new Label {
-			Text = frameInfo.Index.ToString()
+			Text = $"{FrameInfo.Index} - {frameInfo.SpriteName}"
 		});
 
 		Items.AddChild(TextureContainer = new CenterContainer());
 
 		Items.AddChild(DurationLabel = new Label());
-			
+
 		Items.AddChild(EditButton = new Button {
 			Text = "Edit"
 		});
 		EditButton.Pressed += OnEditButtonClicked;
-			
+
 		Items.AddChild(DeleteButton = new Button {
 			Text = "Delete"
 		});
@@ -44,13 +44,13 @@ public partial class AnimationFramePanel : PanelContainer {
 
 		AddChild(EditWindow = new EditFrameWindow(frameInfo));
 		EditWindow.Confirmed += OnEditWindowClosed;
-			
+
 		LoadFrameInfo();
 	}
 
 	protected void LoadFrameInfo() {
 		DurationLabel.Text = $"{FrameInfo.Duration}s";
-			
+
 		foreach (var child in TextureContainer.GetChildren()) {
 			child.QueueFree();
 		}
