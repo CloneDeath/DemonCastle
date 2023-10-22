@@ -110,9 +110,17 @@ public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 		}
 	}
 
+	public bool FlipHorizontal {
+		get => Data.FlipHorizontal;
+		set {
+			Data.FlipHorizontal = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public Texture2D Texture => SpriteAtlasInfo.Texture;
 
-	public bool FlipHorizontal => Data.FlipHorizontal;
 	public Color TransparentColor => SpriteAtlasInfo.TransparentColor;
 	public float TransparentColorThreshold => 0.001f;
 
