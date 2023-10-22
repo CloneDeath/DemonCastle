@@ -48,7 +48,7 @@ public class TileInfo : INotifyPropertyChanged {
 		}
 	}
 
-	protected ISpriteSource Source => Level.GetSprite(SourceFile);
+	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
 	protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(SpriteName);
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
