@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Editor.Properties;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
-public partial class SpriteNameProperty : BaseProperty {
-	private readonly List<ISpriteDefinition> _options;
+public partial class AnimationNameProperty : BaseProperty {
+	private readonly List<AnimationInfo> _options;
 	protected IPropertyBinding<string> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
@@ -19,9 +19,9 @@ public partial class SpriteNameProperty : BaseProperty {
 		}
 	}
 
-	public SpriteNameProperty(IPropertyBinding<string> binding, IEnumerable<ISpriteDefinition> options) {
+	public AnimationNameProperty(IPropertyBinding<string> binding, IEnumerable<AnimationInfo> options) {
 		_options = options.ToList();
-		Name = nameof(SpriteNameProperty);
+		Name = nameof(AnimationNameProperty);
 		Binding = binding;
 
 		AddChild(OptionButton = new OptionButton {
@@ -30,12 +30,7 @@ public partial class SpriteNameProperty : BaseProperty {
 		});
 		for (var i = 0; i < _options.Count; i++) {
 			var option = _options[i];
-			var texture = new AtlasTexture {
-				Atlas = option.Texture,
-				Region = option.Region,
-				FilterClip = true
-			};
-			OptionButton.AddIconItem(texture, option.Name, i);
+			OptionButton.AddItem(option.Name, i);
 		}
 		PropertyValue = binding.Get();
 

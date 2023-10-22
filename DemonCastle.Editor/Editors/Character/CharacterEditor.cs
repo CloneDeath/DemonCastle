@@ -30,9 +30,9 @@ public partial class CharacterEditor : BaseEditor {
 		Properties.AddFloat("Gravity", characterInfo, x => x.Gravity);
 		Properties.AddFloat("Width", characterInfo, x => x.Width);
 		Properties.AddFloat("Height", characterInfo, x => x.Height);
-		Properties.AddString("Idle Animation", characterInfo, x => x.IdleAnimation);
-		Properties.AddString("Walk Animation", characterInfo, x => x.WalkAnimation);
-		Properties.AddString("Jump Animation", characterInfo, x => x.JumpAnimation);
+		Properties.AddAnimationName("Idle Animation", characterInfo, x => x.IdleAnimation, characterInfo.Animations);
+		Properties.AddAnimationName("Walk Animation", characterInfo, x => x.WalkAnimation, characterInfo.Animations);
+		Properties.AddAnimationName("Jump Animation", characterInfo, x => x.JumpAnimation, characterInfo.Animations);
 
 		AddChild(new VSeparator {
 			Name = nameof(VSeparator),

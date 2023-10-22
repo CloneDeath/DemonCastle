@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
@@ -66,6 +67,12 @@ public partial class PropertyCollection : VBoxContainer {
 
 	public void AddSpriteName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
 		AddChild(new SpriteNameProperty(new PropertyBinding<T, string>(target, propertyExpression), options) {
+			DisplayName = name
+		});
+	}
+
+	public void AddAnimationName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<AnimationInfo> options) where T : INotifyPropertyChanged {
+		AddChild(new AnimationNameProperty(new PropertyBinding<T, string>(target, propertyExpression), options) {
 			DisplayName = name
 		});
 	}
