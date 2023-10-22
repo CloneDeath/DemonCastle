@@ -50,6 +50,8 @@ public class TileInfo : INotifyPropertyChanged {
 
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
 	protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(SpriteName);
+	public IEnumerable<ISpriteDefinition> SpriteOptions =>
+		Source.SpriteNames.Select(s => Source.GetSpriteDefinition(s));
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
 	public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y) * TileSize).ToArray();
