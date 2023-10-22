@@ -25,7 +25,7 @@ public partial class SpriteAtlasTextureView : TextureView {
 	}
 
 	private void SpriteAtlasInfo_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName != "File") return;
+		if (e.PropertyName != nameof(_spriteAtlasInfo.SpriteFile)) return;
 		Texture = _spriteAtlasInfo.Texture;
 	}
 
