@@ -31,7 +31,12 @@ public class AnimationInfo : INotifyPropertyChanged {
 	protected void Save() => File.Save();
 
 	public void AddFrame() {
-		var frame = new FrameData();
+		var previousFrame = Animation.Frames.LastOrDefault();
+		var frame = new FrameData {
+			Source = previousFrame?.Source ?? string.Empty,
+			Sprite = previousFrame?.Sprite ?? string.Empty,
+			Duration = previousFrame?.Duration ?? 1
+		};
 		Animation.Frames.Add(frame);
 		Frames.Add(new FrameInfo(this, File, frame, Frames.Count));
 		Save();

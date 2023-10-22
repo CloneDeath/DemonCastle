@@ -3,9 +3,9 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Character.Animations {
 	public partial class SingleAnimationEditArea {
-		protected AnimationFrameGridContainer GridContainer { get; }
 		protected BindingLineEdit LineEdit { get; }
 		protected Button AddFrameButton { get; }
+		protected AnimationFrameContainer FrameContainer { get; }
 
 		public SingleAnimationEditArea() {
 			AddChild(LineEdit = new BindingLineEdit());
@@ -13,9 +13,7 @@ namespace DemonCastle.Editor.Editors.Character.Animations {
 				Text = "Add Frame"
 			});
 			AddFrameButton.Pressed += this.OnAddFrameButtonPressed;
-			AddChild(GridContainer = new AnimationFrameGridContainer {
-				Columns = 3
-			});
+			AddChild(FrameContainer = new AnimationFrameContainer());
 		}
 	}
 }
