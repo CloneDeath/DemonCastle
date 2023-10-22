@@ -6,7 +6,7 @@ public partial class ScrollableTextureRect : ScrollContainer {
 	private Control TextureHolder { get; }
 	public TextureRect InnerTexture { get; }
 
-	public Texture2D Texture {
+	public Texture2D? Texture {
 		get => InnerTexture.Texture;
 		set => InnerTexture.Texture = value;
 	}

@@ -17,7 +17,7 @@ public partial class TextureView : Container {
 	protected Label Footer_SizeLabel { get; }
 	protected Label Footer_MousePixel { get; }
 
-	public Texture2D Texture {
+	public Texture2D? Texture {
 		get => TextureRect.Texture;
 		set => TextureRect.Texture = value;
 	}
@@ -91,6 +91,7 @@ public partial class TextureView : Container {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
+		if (Texture == null) return;
 
 		var size = Texture.GetSize();
 		Footer_SizeLabel.Text = $"{size.X}x{size.Y}";
