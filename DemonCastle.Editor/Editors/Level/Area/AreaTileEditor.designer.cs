@@ -1,16 +1,16 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.Area;
 
 public partial class AreaTileEditor {
 	public AreaInfo Area { get; }
 	public Node2D Root;
-	
+
 	public AreaTileEditor(AreaInfo area) {
 		Area = area;
-		Name = nameof(Level.AreaEditor);
-		
+		Name = nameof(AreaTileEditor);
+
 		var control = new Control {
 			Size = new Vector2(500, 500)
 		};
