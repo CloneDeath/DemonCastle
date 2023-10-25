@@ -21,6 +21,6 @@ public class FileNavigator<T> : FileNavigator {
 
 	public void Save() {
 		var contents = JsonConvert.SerializeObject(Resource, Formatting.Indented);
-		_saveTask = _saveTask.ContinueWith((_task) => File.WriteAllTextAsync(FilePath, contents));
+		_saveTask = _saveTask.ContinueWith(_ => File.WriteAllTextAsync(FilePath, contents));
 	}
 }
