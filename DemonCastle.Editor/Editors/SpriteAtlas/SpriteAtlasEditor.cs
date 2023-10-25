@@ -26,23 +26,21 @@ public partial class SpriteAtlasEditor : BaseEditor {
         _spriteAtlasInfo = spriteAtlasInfo;
 
         AddChild(SplitContainer = new HSplitContainer {
-            AnchorRight = 1,
-            AnchorBottom = 1,
             OffsetTop = 5,
             OffsetBottom = -5,
             OffsetLeft = 5,
             OffsetRight = -5
         });
+        SplitContainer.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
         SplitContainer.AddChild(PropertyCollection = new PropertyCollection {
             OffsetTop = 5,
             OffsetRight = -5,
             OffsetBottom = -5,
             OffsetLeft = 5,
-            AnchorBottom = 1,
-            AnchorRight = 1,
             CustomMinimumSize = new Vector2(410, 0)
         });
+        PropertyCollection.SetAnchorsPreset(LayoutPreset.FullRect, true);
         PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile, FileType.RawTextureFiles);
         PropertyCollection.AddColor("Transparent Color", spriteAtlasInfo, x => x.TransparentColor);
 
@@ -52,12 +50,9 @@ public partial class SpriteAtlasEditor : BaseEditor {
         AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
 
         PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
-            AnchorRight = 1,
-            AnchorBottom = 1,
-            OffsetBottom = 0,
-            SizeFlagsVertical = SizeFlags.ExpandFill,
-            CustomMinimumSize = new Vector2(100, 100)
+            SizeFlagsVertical = SizeFlags.ExpandFill
         });
+        DataCollection.SetAnchorsPreset(LayoutPreset.FullRect);
 
         SplitContainer.AddChild(TextureView = new SpriteAtlasTextureView(spriteAtlasInfo));
     }

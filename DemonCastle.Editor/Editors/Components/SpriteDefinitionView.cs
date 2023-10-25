@@ -38,6 +38,7 @@ public partial class SpriteDefinitionView : CenterContainer {
 			Region = _definition.Region,
 			FilterClip = true
 		};
+		Rect.TextureFilter = TextureFilterEnum.Nearest;
 		Rect.FlipH = _definition.FlipHorizontal;
 	}
 }
