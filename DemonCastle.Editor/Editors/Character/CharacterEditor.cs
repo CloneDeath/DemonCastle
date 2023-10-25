@@ -10,6 +10,8 @@ public partial class CharacterEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.CharacterIcon;
 	public override string TabText { get; }
 
+	protected HSplitContainer SplitContainer { get; }
+
 	protected PropertyCollection Properties { get; }
 
 	public CharacterEditor(CharacterInfo characterInfo) {
@@ -17,13 +19,10 @@ public partial class CharacterEditor : BaseEditor {
 		TabText = characterInfo.FileName;
 		CustomMinimumSize = new Vector2I(600, 300);
 
-		AddChild(Properties = new PropertyCollection {
-			OffsetLeft = 5,
-			OffsetTop = 5,
-			OffsetRight = 205,
-			OffsetBottom = -5
-		});
-		Properties.SetAnchorsPreset(LayoutPreset.LeftWide, true);
+		AddChild(SplitContainer = new HSplitContainer());
+		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+
+		SplitContainer.AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", characterInfo, x => x.Name);
 		Properties.AddFloat("Walk Speed", characterInfo, x => x.WalkSpeed);
 		Properties.AddFloat("Jump Height", characterInfo, x => x.JumpHeight);
@@ -34,19 +33,6 @@ public partial class CharacterEditor : BaseEditor {
 		Properties.AddAnimationName("Walk Animation", characterInfo, x => x.WalkAnimation, characterInfo.Animations);
 		Properties.AddAnimationName("Jump Animation", characterInfo, x => x.JumpAnimation, characterInfo.Animations);
 
-		AddChild(new VSeparator {
-			Name = nameof(VSeparator),
-			Position = new Vector2(210, 5),
-			OffsetBottom = -5,
-			AnchorBottom = 1
-		});
-
-		AddChild(new AnimationArea(characterInfo) {
-			Position = new Vector2(215, 5),
-			OffsetRight = -5,
-			OffsetBottom = -5,
-			AnchorRight = 1,
-			AnchorBottom = 1
-		});
+		SplitContainer.AddChild(new AnimationArea(characterInfo));
 	}
 }
