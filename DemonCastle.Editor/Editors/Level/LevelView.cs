@@ -12,7 +12,7 @@ public partial class LevelView : VSplitContainer {
 		AddChild(_minimap = new MinimapView(levelInfo) {
 			CustomMinimumSize = new Vector2(0, 150)
 		});
-		AddChild(new LevelTiles.LevelTilesView(levelInfo));
+		AddChild(new LevelTilesView(levelInfo));
 	}
 
 	public void Reload() {

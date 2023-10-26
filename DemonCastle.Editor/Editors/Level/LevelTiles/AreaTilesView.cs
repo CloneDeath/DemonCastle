@@ -9,9 +9,12 @@ public partial class AreaTilesView : Control {
 	private Outline Outline { get; }
 
 	public AreaTilesView(AreaInfo areaInfo) {
+		Name = nameof(areaInfo);
+
 		_areaInfo = areaInfo;
 		AddChild(Outline = new Outline {
-			MouseFilter = MouseFilterEnum.Ignore
+			MouseFilter = MouseFilterEnum.Ignore,
+			Color = new Color(Colors.White, 0.5f)
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
