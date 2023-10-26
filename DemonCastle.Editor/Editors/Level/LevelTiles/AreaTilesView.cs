@@ -7,6 +7,7 @@ namespace DemonCastle.Editor.Editors.Level.LevelTiles;
 public partial class AreaTilesView : Control {
 	private readonly AreaInfo _areaInfo;
 	private Outline Outline { get; }
+	private TilesView Root { get; }
 
 	public AreaTilesView(AreaInfo areaInfo) {
 		Name = nameof(areaInfo);
@@ -17,6 +18,7 @@ public partial class AreaTilesView : Control {
 			Color = new Color(Colors.White, 0.5f)
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
+		AddChild(Root = new TilesView(areaInfo));
 
 		Size = areaInfo.TileSize * areaInfo.AreaSize * areaInfo.Size;
 	}
