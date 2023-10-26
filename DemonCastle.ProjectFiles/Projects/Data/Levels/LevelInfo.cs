@@ -8,8 +8,11 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
 public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChanged {
+	private readonly List<AreaInfo> _areas;
+
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
 		TileSet = new LevelTileSet(file.Resource, File);
+		_areas = Resource.Areas.Select(area => new AreaInfo(area, this)).ToList();
 	}
 
 	public LevelTileSet TileSet { get; }
@@ -34,7 +37,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 		}
 	}
 
-	public IEnumerable<AreaInfo> Areas => Resource.Areas.Select(area => new AreaInfo(area, this));
+	public IEnumerable<AreaInfo> Areas => _areas;
 
 	public Vector2 StartingLocation => TileSize * (
 													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
@@ -54,6 +57,8 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 	public AreaInfo CreateArea() {
 		var area = new AreaData();
 		Resource.Areas.Add(area);
+		_areas.Add(new AreaInfo(area, this));
+		OnPropertyChanged(nameof(Areas));
 		return new AreaInfo(area, this);
 	}
 

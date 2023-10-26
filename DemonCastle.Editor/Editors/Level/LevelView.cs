@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Level.LevelTiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -9,9 +10,9 @@ public partial class LevelView : VSplitContainer {
 		Name = nameof(LevelView);
 
 		AddChild(_minimap = new MinimapView(levelInfo) {
-			CustomMinimumSize = new Vector2(0, 100)
+			CustomMinimumSize = new Vector2(0, 150)
 		});
-		AddChild(new Panel());
+		AddChild(new LevelTiles.LevelTilesView(levelInfo));
 	}
 
 	public void Reload() {
