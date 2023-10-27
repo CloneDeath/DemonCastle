@@ -1,6 +1,4 @@
-using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Properties;
-using DemonCastle.Editor.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -25,8 +23,6 @@ public partial class LevelDetailsPanel : VBoxContainer {
 	}
 
 	private void AddAreaButtonOnPressed() {
-		var area = LevelInfo.CreateArea();
-		var editor = new AreaEditor(area);
-		this.GetEditArea().ShowEditor(editor);
+		LevelInfo.CreateArea();
 	}
 }

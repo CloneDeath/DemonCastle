@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -22,6 +23,21 @@ public partial class MinimapView : ScrollContainer {
 		});
 		control.AddChild(Root = new Node2D());
 		LoadLevel(levelInfo);
+	}
+
+	public override void _EnterTree() {
+		base._EnterTree();
+		_levelInfo.PropertyChanged += LevelInfoOnPropertyChanged;
+		Reload();
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		_levelInfo.PropertyChanged -= LevelInfoOnPropertyChanged;
+	}
+
+	private void LevelInfoOnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		Reload();
 	}
 
 	public void Reload() => LoadLevel(_levelInfo);
