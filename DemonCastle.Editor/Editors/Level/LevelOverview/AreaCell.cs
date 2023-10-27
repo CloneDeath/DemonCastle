@@ -3,7 +3,7 @@ using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level; 
+namespace DemonCastle.Editor.Editors.Level.LevelOverview; 
 
 public partial class AreaCell : Node2D {
 	private readonly AreaInfo _areaInfo;

@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level;
+namespace DemonCastle.Editor.Editors.Level.LevelOverview;
 
 public partial class MinimapView : ScrollContainer {
 	private readonly LevelInfo _levelInfo;

@@ -1,3 +1,5 @@
+using DemonCastle.Editor.Editors.Level.LevelOverview;
+using DemonCastle.Editor.Editors.Level.LevelTiles;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -8,27 +10,23 @@ public partial class LevelEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.LevelIcon;
 	public override string TabText { get; }
 
-	protected LevelInfo LevelInfo { get; }
+	protected LevelInfo Level { get; }
 
-	protected HSplitContainer SplitContainer { get; }
-	protected LevelDetailsPanel DetailsPanel { get; }
-	protected LevelView LevelView { get; }
+	protected VSplitContainer SplitContainer { get; }
+	protected LevelOverviewEdit LevelOverview { get; }
+	protected LevelTilesEdit LevelTiles { get; }
 
-	public LevelEditor(LevelInfo levelInfo) {
+	public LevelEditor(LevelInfo level) {
 		Name = nameof(LevelEditor);
-		TabText = levelInfo.FileName;
+		TabText = level.FileName;
 		CustomMinimumSize = new Vector2I(600, 400);
 
-		LevelInfo = levelInfo;
+		Level = level;
 
-		AddChild(SplitContainer = new HSplitContainer());
+		AddChild(SplitContainer = new VSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
-		SplitContainer.AddChild(DetailsPanel = new LevelDetailsPanel(levelInfo));
-		DetailsPanel.AreaAdded += DetailsPanelOnAreaAdded;
-		SplitContainer.AddChild(LevelView = new LevelView(levelInfo));
-	}
 
-	private void DetailsPanelOnAreaAdded() {
-		LevelView.Reload();
+		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
+		SplitContainer.AddChild(LevelTiles = new LevelTilesEdit(level));
 	}
 }

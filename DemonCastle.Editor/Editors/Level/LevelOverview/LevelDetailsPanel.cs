@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Level.TileMap;
 using DemonCastle.Editor.Editors.Properties;
@@ -6,12 +5,10 @@ using DemonCastle.Editor.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level;
+namespace DemonCastle.Editor.Editors.Level.LevelOverview;
 
 public partial class LevelDetailsPanel : VBoxContainer {
 	protected LevelInfo LevelInfo { get; }
-
-	public event Action? AreaAdded;
 
 	protected PropertyCollection Properties { get; }
 	protected Button AddAreaButton { get; }
@@ -55,7 +52,6 @@ public partial class LevelDetailsPanel : VBoxContainer {
 		var area = LevelInfo.CreateArea();
 		var editor = new AreaEditor(area);
 		this.GetEditArea().ShowEditor(editor);
-		AreaAdded?.Invoke();
 	}
 
 	private void AddTileButtonOnPressed() {
