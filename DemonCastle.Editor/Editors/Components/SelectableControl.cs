@@ -6,6 +6,7 @@ namespace DemonCastle.Editor.Editors.Components;
 
 public partial class SelectableControl : Control {
 	public CursorShape SelectedCursorShape { get; set; } = CursorShape.PointingHand;
+	public CursorShape DefaultCursorShape { get; set; } = CursorShape.Arrow;
 
 	private bool _isSelected;
 
@@ -25,7 +26,7 @@ public partial class SelectableControl : Control {
 
 		MouseDefaultCursorShape = IsSelected
 		  ? SelectedCursorShape
-		  : CursorShape.Arrow;
+		  : DefaultCursorShape;
 	}
 
 	public override void _GuiInput(InputEvent @event) {

@@ -1,49 +1,51 @@
-using DemonCastle.Editor.Extensions;
-using DemonCastle.Game;
+using System.Linq;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.LevelOverview; 
+namespace DemonCastle.Editor.Editors.Level.LevelOverview;
 
-public partial class AreaCell : Node2D {
+public partial class AreaCell : SelectableControl {
 	private readonly AreaInfo _areaInfo;
 	private readonly LevelInfo _levelInfo;
+
+	private ColorRect AreaColor { get; }
+	private ColorRect OutlineColor { get; }
 
 	public AreaCell(AreaInfo areaInfo) {
 		_areaInfo = areaInfo;
 		_levelInfo = areaInfo.LevelInfo;
-		Position = areaInfo.AreaPosition * _levelInfo.AreaSize;
+
+		SelectedCursorShape = CursorShape.Arrow;
+		DefaultCursorShape = CursorShape.PointingHand;
 
 		const int borderWidth = 2;
-		AddChild(new ColorRect {
+		AddChild(AreaColor = new ColorRect {
 			Color = Colors.LightBlue,
-			Size = areaInfo.Size * _levelInfo.AreaSize
+			MouseFilter = MouseFilterEnum.Ignore
 		});
-		AddChild(new ColorRect {
-			Position = new Vector2(1, 1) * borderWidth,
+		AreaColor.SetAnchorsPreset(LayoutPreset.FullRect);
+		AddChild(OutlineColor = new ColorRect {
 			Color = Colors.Blue,
-			Size = areaInfo.Size * _levelInfo.AreaSize - new Vector2I(2, 2) * borderWidth
+			MouseFilter = MouseFilterEnum.Ignore
 		});
+		OutlineColor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: borderWidth);
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
 
 		Position = _areaInfo.AreaPosition * _levelInfo.AreaSize;
-
-		if (!Input.IsActionJustPressed(InputActions.EditorClick) || !MouseWithinBounds()) return;
-		var window = new Area.AreaEditor(_areaInfo);
-		var container = this.GetEditArea();
-		container.ShowEditor(window);
+		Size = _areaInfo.Size * _levelInfo.AreaSize;
+		AreaColor.Color = IsSelected ? Colors.MediumBlue : Colors.LightBlue;
 	}
 
-	private bool MouseWithinBounds() {
-		var mousePosition = GetViewport().GetMousePosition();
-		var myPosition = GlobalPosition;
-		var delta = mousePosition - myPosition;
-		var size = _areaInfo.Size * _levelInfo.AreaSize;
-		return delta is { X: >= 0, Y: >= 0 }
-			   && delta.X < size.X
-			   && delta.Y < size.Y;
+	protected override void OnSelected() {
+		base.OnSelected();
+
+		var siblings = GetParent().GetChildren().Where(c => c is AreaCell && c != this).Cast<AreaCell>();
+		foreach (var sibling in siblings) {
+			sibling.IsSelected = false;
+		}
 	}
 }
