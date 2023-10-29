@@ -27,7 +27,7 @@ public partial class AreaView : Control {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Position = Area.AreaPosition * Area.AreaSize * Area.TileSize;
-		Size = Area.TileSize * Area.AreaSize * Area.Size;
+		Position = Area.PositionOfArea.ToLevelPositionInPixels();
+		Size = Area.SizeOfArea.ToPixelSize();
 	}
 }

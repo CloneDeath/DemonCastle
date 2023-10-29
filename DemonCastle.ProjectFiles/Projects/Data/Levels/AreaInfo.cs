@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using DemonCastle.ProjectFiles.Locations;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -47,7 +48,10 @@ public class AreaInfo : INotifyPropertyChanged {
 		}
 	}
 
-	public Vector2I TilePosition => LevelInfo.TileSize * AreaPosition * LevelInfo.AreaSize;
+	public AreaPosition PositionOfArea => new(AreaPosition, LevelInfo.AreaSize, LevelInfo.TileSize);
+	public AreaSize SizeOfArea => new(Size, LevelInfo.AreaSize, LevelInfo.TileSize);
+
+	public Vector2I TilePosition => AreaPosition * LevelInfo.TileSize * LevelInfo.AreaSize;
 
 	public Vector2I TileSize => LevelInfo.TileSize;
 	public Vector2I AreaSize => LevelInfo.AreaSize;

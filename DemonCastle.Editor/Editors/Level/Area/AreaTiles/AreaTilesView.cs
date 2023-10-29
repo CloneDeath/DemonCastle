@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class AreaTilesView : Node2D{
+public partial class AreaTilesView : Node2D {
 	private readonly AreaInfo _areaInfo;
 
 	public AreaTilesView(AreaInfo areaInfo) {
