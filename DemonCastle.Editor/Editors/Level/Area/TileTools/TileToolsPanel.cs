@@ -3,7 +3,7 @@ using DemonCastle.Editor.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools;
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
 public partial class TileToolsPanel : VBoxContainer {
 	protected LevelInfo Level { get; }

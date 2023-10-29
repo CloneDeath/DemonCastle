@@ -3,7 +3,7 @@ using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools; 
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools; 
 
 public partial class SelectableTile : TextureRect {
 	protected Control SelectionBox;

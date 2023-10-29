@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
+using TileView = DemonCastle.Editor.Editors.Level.Area.AreaTiles.TileView;
 
 namespace DemonCastle.Editor.Editors.Level.AreaOld; 
 

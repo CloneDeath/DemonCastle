@@ -1,12 +1,12 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area;
+namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class TilesView : Node2D{
+public partial class AreaTilesView : Node2D{
 	private readonly AreaInfo _areaInfo;
 
-	public TilesView(AreaInfo areaInfo) {
+	public AreaTilesView(AreaInfo areaInfo) {
 		_areaInfo = areaInfo;
 		ReloadArea();
 	}

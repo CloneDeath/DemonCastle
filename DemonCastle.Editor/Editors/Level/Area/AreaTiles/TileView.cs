@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area;
+namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
 public partial class TileView : Sprite2D {
 	public TileView(TileMapInfo tile) {

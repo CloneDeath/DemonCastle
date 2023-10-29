@@ -1,7 +1,9 @@
+using DemonCastle.Editor.Editors.Level.Area.Tiles;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
+using TileSelectorPanel = DemonCastle.Editor.Editors.Level.Area.TileTools.TileSelectorPanel;
 
 namespace DemonCastle.Editor.Editors.Level.AreaOld; 
 
@@ -13,7 +15,7 @@ public partial class AreaEditor {
 	protected PropertyCollection Properties { get; }
 	protected VSplitContainer ToolSplitContainer { get; }
 	protected AreaTileEditor AreaTileEditor { get; }
-	protected Area.Tools.TileSelectorPanel TileSelector { get; }
+	protected TileSelectorPanel TileSelector { get; }
 	
 	public AreaEditor(AreaInfo area) {
 		Name = nameof(AreaEditor);
@@ -43,7 +45,7 @@ public partial class AreaEditor {
 		Properties.AddVector2I("Position", area, x => x.AreaPosition);
 		Properties.AddVector2I("Size", area, x => x.Size);
 
-		ToolSplitContainer.AddChild(TileSelector = new Area.Tools.TileSelectorPanel(area.TileSet));
+		ToolSplitContainer.AddChild(TileSelector = new TileSelectorPanel(area.TileSet));
 		SplitContainer.AddChild(AreaTileEditor = new AreaTileEditor(area));
 		AreaTileEditor.TileCellSelected += AreaTileEditorOnTileCellSelected;
 		AreaTileEditor.TileCellCleared += AreaTileEditorOnTileCellCleared;

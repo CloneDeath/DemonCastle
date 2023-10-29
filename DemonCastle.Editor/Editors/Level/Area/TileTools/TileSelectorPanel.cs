@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.Editor.Editors.Level.AreaOld;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools; 
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools; 
 
 public partial class TileSelectorPanel : HFlowContainer {
 	public LevelTileSet TileSet { get; }

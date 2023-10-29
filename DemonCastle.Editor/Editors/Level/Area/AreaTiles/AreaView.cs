@@ -2,13 +2,13 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area;
+namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class AreaTilesView : Control {
+public partial class AreaView : Control {
 	protected Outline Outline { get; }
-	protected TilesView Root { get; }
+	protected AreaTiles.AreaTilesView Root { get; }
 
-	public AreaTilesView(AreaInfo areaInfo) {
+	public AreaView(AreaInfo areaInfo) {
 		Name = nameof(areaInfo);
 
 		AddChild(Outline = new Outline {
@@ -16,7 +16,7 @@ public partial class AreaTilesView : Control {
 			Color = new Color(Colors.White, 0.5f)
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
-		AddChild(Root = new TilesView(areaInfo));
+		AddChild(Root = new AreaTiles.AreaTilesView(areaInfo));
 
 		Size = areaInfo.TileSize * areaInfo.AreaSize * areaInfo.Size;
 	}
