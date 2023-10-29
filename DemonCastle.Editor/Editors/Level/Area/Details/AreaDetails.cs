@@ -8,7 +8,14 @@ public partial class AreaDetails : PropertyCollection {
 
 	public AreaInfo? Proxy {
 		get => AreaProxy.Proxy;
-		set => AreaProxy.Proxy = value;
+		set {
+			AreaProxy.Proxy = value;
+			if (value == null) {
+				DisableProperties();
+			} else {
+				EnableProperties();
+			}
+		}
 	}
 
 	public AreaDetails() {
@@ -17,5 +24,7 @@ public partial class AreaDetails : PropertyCollection {
 		AddString("Name", AreaProxy, x => x.Name);
 		AddVector2I("Position", AreaProxy, x => x.AreaPosition);
 		AddVector2I("Size", AreaProxy, x => x.Size);
+
+		DisableProperties();
 	}
 }

@@ -40,4 +40,14 @@ public partial class AnimationNameProperty : BaseProperty {
 	private void OnItemSelected(long index) {
 		Binding.Set(index < 0 ? string.Empty : _options[(int)index].Name);
 	}
+
+	public override void Enable() {
+		base.Enable();
+		OptionButton.Disabled = false;
+	}
+
+	public override void Disable() {
+		base.Disable();
+		OptionButton.Disabled = true;
+	}
 }

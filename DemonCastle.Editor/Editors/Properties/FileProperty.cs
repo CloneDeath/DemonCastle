@@ -45,4 +45,16 @@ public partial class FileProperty : StringProperty {
 	protected void FileSelected(string filePath) {
 		PropertyValue = RelativePath.GetRelativePath(Directory, filePath);
 	}
+
+	public override void Enable() {
+		base.Enable();
+		LoadButton.Disabled = false;
+		LineEdit.Editable = false;
+	}
+
+	public override void Disable() {
+		base.Disable();
+		LoadButton.Disabled = true;
+		LineEdit.Editable = false;
+	}
 }

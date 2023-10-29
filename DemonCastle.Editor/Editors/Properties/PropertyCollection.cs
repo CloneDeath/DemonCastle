@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
@@ -11,6 +12,18 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class PropertyCollection : VBoxContainer {
+	public void EnableProperties() {
+		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
+			child.Enable();
+		}
+	}
+
+	public void DisableProperties() {
+		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
+			child.Disable();
+		}
+	}
+
 	public PropertyCollection() {
 		Name = nameof(PropertyCollection);
 	}

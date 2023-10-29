@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
-public partial class Vector2IProperty : VBoxContainer {
+public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 	protected Label Label { get; }
 	protected IPropertyBinding<Vector2I> Binding { get; }
 	protected HBoxContainer HBoxContainer { get; }
@@ -64,5 +64,15 @@ public partial class Vector2IProperty : VBoxContainer {
 
 	private void Binding_OnChanged(Vector2I value) {
 		PropertyValue = value;
+	}
+
+	public virtual void Enable() {
+		XBox.Editable = true;
+		YBox.Editable = true;
+	}
+
+	public virtual void Disable() {
+		XBox.Editable = false;
+		YBox.Editable = false;
 	}
 }

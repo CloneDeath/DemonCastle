@@ -30,4 +30,14 @@ public partial class IntegerProperty : BaseProperty {
 	protected void OnValueChange(double value) {
 		Binding.Set((int)value);
 	}
+
+	public override void Enable() {
+		base.Enable();
+		SpinBox.Editable = true;
+	}
+
+	public override void Disable() {
+		base.Disable();
+		SpinBox.Editable = false;
+	}
 }

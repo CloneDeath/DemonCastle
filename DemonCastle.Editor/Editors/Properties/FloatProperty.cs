@@ -32,4 +32,14 @@ public partial class FloatProperty : BaseProperty {
 	protected void OnValueChange(double value) {
 		Binding.Set((float)value);
 	}
+
+	public override void Enable() {
+		base.Enable();
+		SpinBox.Editable = true;
+	}
+
+	public override void Disable() {
+		base.Disable();
+		SpinBox.Editable = false;
+	}
 }
