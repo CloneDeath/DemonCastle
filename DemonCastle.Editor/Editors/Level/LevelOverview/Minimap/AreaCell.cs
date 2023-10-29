@@ -3,7 +3,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.LevelOverview;
+namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
 public partial class AreaCell : SelectableControl {
 	private readonly AreaInfo _areaInfo;
