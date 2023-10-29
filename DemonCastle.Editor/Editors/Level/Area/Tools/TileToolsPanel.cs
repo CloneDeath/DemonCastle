@@ -11,7 +11,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected Button AddTileButton { get; }
 	protected Button EditTileButton { get; }
 	protected Button DeleteTileButton { get; }
-	protected AreaOld.TileSelectorPanel TileSelector { get; }
+	protected TileSelectorPanel TileSelector { get; }
 
 	public TileToolsPanel(LevelInfo level) {
 		Name = nameof(TileToolsPanel);
@@ -26,7 +26,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
 		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
 
-		AddChild(TileSelector = new AreaOld.TileSelectorPanel(level.TileSet));
+		AddChild(TileSelector = new TileSelectorPanel(level.TileSet));
 	}
 
 	public override void _Process(double delta) {

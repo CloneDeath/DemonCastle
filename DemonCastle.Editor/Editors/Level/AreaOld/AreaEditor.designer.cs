@@ -13,7 +13,7 @@ public partial class AreaEditor {
 	protected PropertyCollection Properties { get; }
 	protected VSplitContainer ToolSplitContainer { get; }
 	protected AreaTileEditor AreaTileEditor { get; }
-	protected TileSelectorPanel TileSelector { get; }
+	protected Area.Tools.TileSelectorPanel TileSelector { get; }
 	
 	public AreaEditor(AreaInfo area) {
 		Name = nameof(AreaEditor);
@@ -43,7 +43,7 @@ public partial class AreaEditor {
 		Properties.AddVector2I("Position", area, x => x.AreaPosition);
 		Properties.AddVector2I("Size", area, x => x.Size);
 
-		ToolSplitContainer.AddChild(TileSelector = new TileSelectorPanel(area.TileSet));
+		ToolSplitContainer.AddChild(TileSelector = new Area.Tools.TileSelectorPanel(area.TileSet));
 		SplitContainer.AddChild(AreaTileEditor = new AreaTileEditor(area));
 		AreaTileEditor.TileCellSelected += AreaTileEditorOnTileCellSelected;
 		AreaTileEditor.TileCellCleared += AreaTileEditorOnTileCellCleared;
