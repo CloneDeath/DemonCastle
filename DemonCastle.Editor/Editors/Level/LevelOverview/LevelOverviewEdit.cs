@@ -17,6 +17,10 @@ public partial class LevelOverviewEdit : HSplitContainer {
 		AddChild(Minimap = new Minimap.MinimapView(level) {
 			CustomMinimumSize = new Vector2(0, 150)
 		});
-		Minimap.AreaSelected += AreaSelected;
+		Minimap.AreaSelected += Minimap_OnAreaSelected;
+	}
+
+	private void Minimap_OnAreaSelected(AreaInfo obj) {
+		AreaSelected?.Invoke(obj);
 	}
 }
