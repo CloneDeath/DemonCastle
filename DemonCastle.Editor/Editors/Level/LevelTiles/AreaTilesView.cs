@@ -5,8 +5,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level.LevelTiles;
 
 public partial class AreaTilesView : Control {
-	private Outline Outline { get; }
-	private TilesView Root { get; }
+	protected Outline Outline { get; }
+	protected TilesView Root { get; }
 
 	public AreaTilesView(AreaInfo areaInfo) {
 		Name = nameof(areaInfo);
