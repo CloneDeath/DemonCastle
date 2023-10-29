@@ -23,10 +23,6 @@ public partial class LevelAreasView : ScrollContainer {
 		foreach (var area in _levelInfo.Areas) {
 			AreaContainer.AddChild(new AreaView(area));
 		}
-	}
-
-	public override void _Process(double delta) {
-		base._Process(delta);
 
 		var areas = _levelInfo.Areas.ToList();
 		if (areas.Count <= 0) return;
