@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -6,11 +8,14 @@ namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
 public partial class MinimapView : ScrollContainer {
 	private readonly LevelInfo _levelInfo;
-	public Node2D Root;
+	protected Node2D Root;
+
+	public event Action<AreaInfo>? AreaSelected;
 
 	public MinimapView(LevelInfo levelInfo) {
-		Name = nameof(MinimapView);
 		_levelInfo = levelInfo;
+
+		Name = nameof(MinimapView);
 
 		var control = new Control {
 			Size = new Vector2(500, 500)
@@ -47,7 +52,14 @@ public partial class MinimapView : ScrollContainer {
 			child.QueueFree();
 		}
 		foreach (var area in levelInfo.Areas) {
-			Root.AddChild(new AreaCell(area));
+			var cell = new AreaCell(area);
+			cell.Selected += Cell_OnSelected;
+			Root.AddChild(cell);
 		}
+	}
+
+	private void Cell_OnSelected(SelectableControl obj) {
+		if (obj is not AreaCell cell) return;
+		AreaSelected?.Invoke(cell.Area);
 	}
 }

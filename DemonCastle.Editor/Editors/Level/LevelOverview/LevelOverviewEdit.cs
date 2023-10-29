@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -7,6 +8,8 @@ public partial class LevelOverviewEdit : HSplitContainer {
 	protected LevelDetailsPanel DetailsPanel { get; }
 	protected Minimap.MinimapView Minimap { get; }
 
+	public event Action<AreaInfo>? AreaSelected;
+
 	public LevelOverviewEdit(LevelInfo level) {
 		Name = nameof(LevelOverviewEdit);
 
@@ -14,5 +17,6 @@ public partial class LevelOverviewEdit : HSplitContainer {
 		AddChild(Minimap = new Minimap.MinimapView(level) {
 			CustomMinimumSize = new Vector2(0, 150)
 		});
+		Minimap.AreaSelected += AreaSelected;
 	}
 }

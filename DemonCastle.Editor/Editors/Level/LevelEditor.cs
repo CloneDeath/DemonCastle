@@ -27,6 +27,11 @@ public partial class LevelEditor : BaseEditor {
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
 		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
+		LevelOverview.AreaSelected += LevelOverview_OnAreaSelected;
 		SplitContainer.AddChild(Area = new AreaEdit(level));
+	}
+
+	private void LevelOverview_OnAreaSelected(AreaInfo area) {
+		Area.SelectedArea = area;
 	}
 }

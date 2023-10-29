@@ -6,15 +6,16 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
 public partial class AreaCell : SelectableControl {
-	private readonly AreaInfo _areaInfo;
-	private readonly LevelInfo _levelInfo;
+	public AreaInfo Area { get; }
+	private LevelInfo Level => Area.LevelInfo;
 
 	private ColorRect AreaColor { get; }
 	private ColorRect OutlineColor { get; }
 
-	public AreaCell(AreaInfo areaInfo) {
-		_areaInfo = areaInfo;
-		_levelInfo = areaInfo.LevelInfo;
+	public AreaCell(AreaInfo area) {
+		Area = area;
+
+		Name = nameof(AreaCell);
 
 		SelectedCursorShape = CursorShape.Arrow;
 		DefaultCursorShape = CursorShape.PointingHand;
@@ -35,8 +36,8 @@ public partial class AreaCell : SelectableControl {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Position = _areaInfo.AreaPosition * _levelInfo.AreaSize;
-		Size = _areaInfo.Size * _levelInfo.AreaSize;
+		Position = Area.AreaPosition * Level.AreaSize;
+		Size = Area.Size * Level.AreaSize;
 		AreaColor.Color = IsSelected ? Colors.MediumBlue : Colors.LightBlue;
 	}
 
