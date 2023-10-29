@@ -16,7 +16,7 @@ public partial class AreaEdit : HSplitContainer {
 		AddChild(LeftPanel = new VBoxContainer());
 		LeftPanel.AddChild(Details = new AreaDetails());
 		LeftPanel.AddChild(new TileToolsPanel(level));
-		AddChild(new LevelTilesView(level));
+		AddChild(new LevelAreasView(level));
 	}
 
 	public AreaInfo? SelectedArea {

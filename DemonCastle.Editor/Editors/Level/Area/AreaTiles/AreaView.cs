@@ -5,10 +5,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
 public partial class AreaView : Control {
+	protected AreaInfo Area { get; }
+
 	protected Outline Outline { get; }
 	protected AreaTilesView Root { get; }
 
-	public AreaView(AreaInfo areaInfo) {
+	public AreaView(AreaInfo area) {
+		Area = area;
+
 		Name = nameof(AreaView);
 
 		AddChild(Outline = new Outline {
@@ -16,8 +20,14 @@ public partial class AreaView : Control {
 			Color = new Color(Colors.White, 0.5f)
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
-		AddChild(Root = new AreaTilesView(areaInfo));
+		AddChild(Root = new AreaTilesView(area));
 
-		Size = areaInfo.TileSize * areaInfo.AreaSize * areaInfo.Size;
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		Position = Area.AreaPosition * Area.AreaSize * Area.TileSize;
+		Size = Area.TileSize * Area.AreaSize * Area.Size;
 	}
 }

@@ -3,10 +3,10 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class LevelTilesView : Panel {
+public partial class LevelAreasView : Panel {
 	private readonly LevelInfo _levelInfo;
 
-	public LevelTilesView(LevelInfo levelInfo) {
+	public LevelAreasView(LevelInfo levelInfo) {
 		_levelInfo = levelInfo;
 
 		ReloadAreas();
@@ -18,9 +18,7 @@ public partial class LevelTilesView : Panel {
 		}
 
 		foreach (var area in _levelInfo.Areas) {
-			AddChild(new AreaView(area) {
-				Position = area.AreaPosition * area.AreaSize * area.TileSize
-			});
+			AddChild(new AreaView(area));
 		}
 	}
 }
