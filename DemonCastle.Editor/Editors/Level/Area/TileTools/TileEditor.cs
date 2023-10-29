@@ -3,7 +3,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.TileMap;
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
 public partial class TileEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.LevelIcon;
