@@ -10,7 +10,7 @@ using DemonCastle.Editor.Editors.SpriteGrid;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor; 
+namespace DemonCastle.Editor;
 
 public partial class EditArea : TabContainer {
 	protected Dictionary<FileNavigator, BaseEditor> EditorFileMap { get; } = new();
@@ -29,10 +29,12 @@ public partial class EditArea : TabContainer {
 		catch (TargetInvocationException ex) {
 			ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.InnerException?.Message}";
 			ErrorWindow.PopupCentered();
+			throw;
 		}
 		catch (Exception ex) {
 			ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.Message}";
 			ErrorWindow.PopupCentered();
+			throw;
 		}
 	}
 

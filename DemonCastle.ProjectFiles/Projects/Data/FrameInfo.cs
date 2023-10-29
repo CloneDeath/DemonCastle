@@ -57,7 +57,8 @@ public class FrameInfo : INotifyPropertyChanged {
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Source.Sprites;
 
 	public SpriteInfoNode Sprite => new(SpriteDefinition);
-	public ISpriteDefinition SpriteDefinition => Source.Sprites.First(s => s.Id == FrameData.SpriteId);
+	public ISpriteDefinition SpriteDefinition => Source.Sprites.FirstOrDefault(s => s.Id == FrameData.SpriteId)
+												 ?? new NullSpriteDefinition();
 
 	protected void Save() => File.Save();
 
