@@ -1,8 +1,8 @@
 using DemonCastle.Editor.Editors.Level.LevelOverview;
-using DemonCastle.Editor.Editors.Level.LevelTiles;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
+using AreaEdit = DemonCastle.Editor.Editors.Level.Area.AreaEdit;
 
 namespace DemonCastle.Editor.Editors.Level;
 
@@ -14,7 +14,7 @@ public partial class LevelEditor : BaseEditor {
 
 	protected VSplitContainer SplitContainer { get; }
 	protected LevelOverviewEdit LevelOverview { get; }
-	protected LevelTilesEdit LevelTiles { get; }
+	protected AreaEdit Area { get; }
 
 	public LevelEditor(LevelInfo level) {
 		Name = nameof(LevelEditor);
@@ -27,6 +27,6 @@ public partial class LevelEditor : BaseEditor {
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
 		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
-		SplitContainer.AddChild(LevelTiles = new LevelTilesEdit(level));
+		SplitContainer.AddChild(Area = new AreaEdit(level));
 	}
 }

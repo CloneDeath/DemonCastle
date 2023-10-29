@@ -3,7 +3,7 @@ using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.AreaOld; 
 
 public partial class TileSelectorPanel : HFlowContainer {
 	public LevelTileSet TileSet { get; }

@@ -1,10 +1,9 @@
-using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Level.TileMap;
 using DemonCastle.Editor.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.LevelTiles.Tools;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools;
 
 public partial class TileToolsPanel : VBoxContainer {
 	protected LevelInfo Level { get; }
@@ -12,7 +11,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected Button AddTileButton { get; }
 	protected Button EditTileButton { get; }
 	protected Button DeleteTileButton { get; }
-	protected TileSelectorPanel TileSelector { get; }
+	protected AreaOld.TileSelectorPanel TileSelector { get; }
 
 	public TileToolsPanel(LevelInfo level) {
 		Name = nameof(TileToolsPanel);
@@ -27,7 +26,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
 		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
 
-		AddChild(TileSelector = new TileSelectorPanel(level.TileSet));
+		AddChild(TileSelector = new AreaOld.TileSelectorPanel(level.TileSet));
 	}
 
 	public override void _Process(double delta) {

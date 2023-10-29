@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.LevelTiles;
+namespace DemonCastle.Editor.Editors.Level.Area;
 
 public partial class LevelTilesView : Panel {
 	private readonly LevelInfo _levelInfo;

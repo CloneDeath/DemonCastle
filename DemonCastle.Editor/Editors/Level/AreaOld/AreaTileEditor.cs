@@ -1,9 +1,10 @@
 using System;
+using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area; 
+namespace DemonCastle.Editor.Editors.Level.AreaOld; 
 
 public partial class AreaTileEditor : ScrollContainer {
 	public event Action<Vector2I>? TileCellSelected;
@@ -14,7 +15,7 @@ public partial class AreaTileEditor : ScrollContainer {
 	
 	private void LoadArea(AreaInfo areaInfo) {
 		foreach (var tileMapInfo in areaInfo.TileMap) {
-			Root.AddChild(new LevelTiles.TileView(tileMapInfo));
+			Root.AddChild(new TileView(tileMapInfo));
 		}
 	}
 

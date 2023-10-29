@@ -2,7 +2,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.LevelTiles;
+namespace DemonCastle.Editor.Editors.Level.Area;
 
 public partial class AreaTilesView : Control {
 	protected Outline Outline { get; }
