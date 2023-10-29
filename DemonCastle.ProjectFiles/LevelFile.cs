@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 
-namespace DemonCastle.ProjectFiles; 
+namespace DemonCastle.ProjectFiles;
 
 public class LevelFile {
 	public string Name { get; set; } = string.Empty;
@@ -14,15 +15,16 @@ public class LevelFile {
 }
 
 public class StartingData {
-	public string Area { get; set; } = string.Empty;
+	public Guid AreaId { get; set; }
 	public float X { get; set; }
 	public float Y { get; set; }
 }
 
 public class TileData {
 	public string Name { get; set; } = string.Empty;
+	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Source { get; set; } = string.Empty;
-	public string Sprite { get; set; } = string.Empty;
+	public Guid SpriteId { get; set; }
 	public List<CollisionData> Collision { get; set; } = new();
 }
 
@@ -32,6 +34,7 @@ public class CollisionData {
 }
 
 public class AreaData {
+	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name { get; set; } = string.Empty;
 	public int X { get; set; }
 	public int Y { get; set; }
@@ -43,5 +46,5 @@ public class AreaData {
 public class TileMapData {
 	public int X { get; set; }
 	public int Y { get; set; }
-	public string Tile { get; set; } = string.Empty;
+	public Guid TileId { get; set; }
 }

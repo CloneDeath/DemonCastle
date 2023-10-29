@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 
-namespace DemonCastle.ProjectFiles; 
+namespace DemonCastle.ProjectFiles;
 
 public class SpriteGridFile {
 	public string File { get; set; } = string.Empty;
@@ -14,6 +15,7 @@ public class SpriteGridFile {
 }
 
 public class SpriteGridData {
+	public Guid Id { get; set; } = Guid.NewGuid();
 	public int X { get; set; }
 	public int Y { get; set; }
 	public string Name { get; set; } = string.Empty;

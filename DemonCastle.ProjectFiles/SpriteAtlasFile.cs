@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -20,6 +21,7 @@ public class ColorData {
 }
 
 public class SpriteAtlasData {
+	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name = string.Empty;
 	public int X;
 	public int Y;
