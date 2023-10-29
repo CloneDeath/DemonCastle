@@ -1,9 +1,11 @@
+using System;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Sprites; 
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class NullSpriteDefinition : ISpriteDefinition {
+	public Guid Id => Guid.Empty;
 	public string Name => "null";
 	public Texture2D Texture => new GradientTexture2D {
 		Gradient = new Gradient {

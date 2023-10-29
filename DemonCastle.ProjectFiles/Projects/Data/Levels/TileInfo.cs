@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,6 +22,8 @@ public class TileInfo : INotifyPropertyChanged {
 
 	public string Directory => Level.Directory;
 
+	public Guid Id => TileData.Id;
+
 	public string Name {
 		get => TileData.Name;
 		set {
@@ -39,19 +42,18 @@ public class TileInfo : INotifyPropertyChanged {
 		}
 	}
 
-	public string SpriteName {
-		get => TileData.Sprite;
+	public Guid SpriteId {
+		get => TileData.SpriteId;
 		set {
-			TileData.Sprite = value;
+			TileData.SpriteId = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
-	protected ISpriteDefinition Sprite => Source.GetSpriteDefinition(SpriteName);
-	public IEnumerable<ISpriteDefinition> SpriteOptions =>
-		Source.SpriteNames.Select(s => Source.GetSpriteDefinition(s));
+	protected ISpriteDefinition Sprite => Source.Sprites.First(s => s.Id == TileData.SpriteId);
+	public IEnumerable<ISpriteDefinition> SpriteOptions => Source.Sprites;
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
 	public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y) * TileSize).ToArray();

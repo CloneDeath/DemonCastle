@@ -79,8 +79,8 @@ public partial class AreaTileEditor : ScrollContainer {
 			   && delta.Y < size.Y;
 	}
 
-	public void SetTile(Vector2I position, string tileName) {
-		Area.SetTile(position, tileName);
+	public void SetTile(Vector2I position, Guid tileId) {
+		Area.SetTile(position, tileId);
 		ClearChildren();
 		LoadArea(Area);
 	}

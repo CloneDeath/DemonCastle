@@ -16,7 +16,8 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 		_spriteData = Resource.Sprites.Select(s => new SpriteAtlasDataInfo(this, s)).ToList();
 	}
 
-	public IEnumerable<SpriteAtlasDataInfo> SpriteData => _spriteData;
+	public IEnumerable<SpriteAtlasDataInfo> AtlasSprites => _spriteData;
+	public IEnumerable<ISpriteDefinition> Sprites => _spriteData;
 
 	public string SpriteFile {
 		get => Resource.File;
@@ -37,13 +38,6 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 	}
 
 	public Texture2D Texture => File.GetTexture(Resource.File);
-
-	public ISpriteDefinition GetSpriteDefinition(string spriteName) {
-		return SpriteData.FirstOrDefault(s => s.Name == spriteName)
-			   ?? (ISpriteDefinition)new NullSpriteDefinition();
-	}
-
-	public IEnumerable<string> SpriteNames => SpriteData.Select(d => d.Name);
 
 	public SpriteAtlasDataInfo CreateSprite() {
 		var spriteAtlasData = new SpriteAtlasData();

@@ -78,8 +78,8 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
-	public void AddSpriteName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
-		AddChild(new SpriteNameProperty(new PropertyBinding<T, string>(target, propertyExpression), options) {
+	public void AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
+		AddChild(new SpriteReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		});
 	}

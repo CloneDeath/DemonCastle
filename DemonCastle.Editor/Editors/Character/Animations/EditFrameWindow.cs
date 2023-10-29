@@ -16,7 +16,7 @@ public partial class EditFrameWindow : AcceptDialog {
 		AddChild(Properties = new PropertyCollection());
 
 		Properties.AddFile("Source", frameInfo, frameInfo.Directory, f => f.SourceFile, FileType.SpriteSources);
-		Properties.AddSpriteName("Sprite", frameInfo, f => f.SpriteName, frameInfo.SpriteDefinitions);
+		Properties.AddSpriteReference("Sprite", frameInfo, f => f.SpriteId, frameInfo.SpriteDefinitions);
 		Properties.AddFloat("Duration", frameInfo, f => f.Duration);
 	}
 }

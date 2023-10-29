@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -40,10 +41,10 @@ public class FrameInfo : INotifyPropertyChanged {
 		}
 	}
 
-	public string SpriteName {
-		get => FrameData.Sprite;
+	public Guid SpriteId {
+		get => FrameData.SpriteId;
 		set {
-			FrameData.Sprite = value;
+			FrameData.SpriteId = value;
 			Save();
 			OnPropertyChanged();
 		}
@@ -53,11 +54,10 @@ public class FrameInfo : INotifyPropertyChanged {
 										  ? new NullSpriteSource()
 										  : File.GetSprite(FrameData.Source);
 
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions =>
-		Source.SpriteNames.Select(s => Source.GetSpriteDefinition(s));
+	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Source.Sprites;
 
-	public SpriteInfoNode Sprite => new(Source.GetSpriteDefinition(FrameData.Sprite));
-	public ISpriteDefinition SpriteDefinition => Source.GetSpriteDefinition(FrameData.Sprite);
+	public SpriteInfoNode Sprite => new(SpriteDefinition);
+	public ISpriteDefinition SpriteDefinition => Source.Sprites.First(s => s.Id == FrameData.SpriteId);
 
 	protected void Save() => File.Save();
 

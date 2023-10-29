@@ -9,11 +9,14 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPropertyChanged {
+	private List<SpriteGridDataInfo> SpriteData { get; }
+
 	public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
 		SpriteData = Resource.Sprites.Select(s => new SpriteGridDataInfo(this, s)).ToList();
 	}
 
-	public List<SpriteGridDataInfo> SpriteData { get; }
+	public IEnumerable<SpriteGridDataInfo> GridSprites => SpriteData;
+	public IEnumerable<ISpriteDefinition> Sprites => SpriteData;
 
 	public Texture2D Texture => File.GetTexture(Resource.File);
 
@@ -83,13 +86,6 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 			OnPropertyChanged();
 		}
 	}
-
-	public ISpriteDefinition GetSpriteDefinition(string spriteName) {
-		return SpriteData.FirstOrDefault(s => s.Name == spriteName)
-			   ?? (ISpriteDefinition)new NullSpriteDefinition();
-	}
-
-	public IEnumerable<string> SpriteNames => SpriteData.Select(s => s.Name);
 
 	public void AddNewSpriteData() {
 		var spriteData = new SpriteGridData();

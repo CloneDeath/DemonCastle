@@ -26,7 +26,7 @@ public partial class AnimationFramePanel : PanelContainer {
 		});
 
 		Items.AddChild(new Label {
-			Text = $"{FrameInfo.Index} - {frameInfo.SpriteName}"
+			Text = $"{FrameInfo.Index} - {frameInfo.Sprite.Name}"
 		});
 
 		Items.AddChild(SpriteDefinitionView = new SpriteDefinitionView(FrameInfo.SpriteDefinition));

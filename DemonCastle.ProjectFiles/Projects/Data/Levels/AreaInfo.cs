@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,6 +16,8 @@ public class AreaInfo : INotifyPropertyChanged {
 
 	protected AreaData Area { get; }
 	public LevelInfo LevelInfo { get; }
+
+	public Guid Id => Area.Id;
 
 	public string Name {
 		get => Area.Name;
@@ -57,18 +60,18 @@ public class AreaInfo : INotifyPropertyChanged {
 	public Vector2I AreaSize => LevelInfo.AreaSize;
 	public LevelTileSet TileSet => LevelInfo.TileSet;
 
-	public TileInfo GetTileInfo(string tileName) => LevelInfo.GetTileInfo(tileName);
+	public TileInfo GetTileInfo(Guid tileId) => LevelInfo.GetTileInfo(tileId);
 
-	public void SetTile(Vector2I position, string tileName) {
+	public void SetTile(Vector2I position, Guid tileId) {
 		var tile = Area.TileMap.FirstOrDefault(t => t.X == position.X && t.Y == position.Y);
 		if (tile != null) {
-			tile.Tile = tileName;
+			tile.TileId = tileId;
 		}
 		else {
 			Area.TileMap.Add(new TileMapData {
 				X = position.X,
 				Y = position.Y,
-				Tile = tileName
+				TileId = tileId
 			});
 		}
 

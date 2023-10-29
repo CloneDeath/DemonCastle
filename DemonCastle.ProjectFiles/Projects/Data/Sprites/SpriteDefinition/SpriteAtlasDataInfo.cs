@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,17 @@ public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 
 	protected SpriteAtlasInfo SpriteAtlasInfo { get; }
 	protected SpriteAtlasData Data { get; }
+
+	public Guid Id => Data.Id;
+
+	public string Name {
+		get => Data.Name;
+		set {
+			Data.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
 
 	public int X {
 		get => Data.X;
@@ -97,15 +109,6 @@ public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 			OnPropertyChanged(nameof(Width));
 			OnPropertyChanged(nameof(Height));
 			OnPropertyChanged(nameof(Size));
-			OnPropertyChanged();
-		}
-	}
-
-	public string Name {
-		get => Data.Name;
-		set {
-			Data.Name = value;
-			Save();
 			OnPropertyChanged();
 		}
 	}

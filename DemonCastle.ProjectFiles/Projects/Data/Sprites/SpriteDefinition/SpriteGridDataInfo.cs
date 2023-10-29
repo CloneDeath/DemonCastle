@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,17 @@ public class SpriteGridDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 
 	protected SpriteGridData Data { get; }
 	protected SpriteGridInfo SpriteGrid { get; }
+
+	public Guid Id => Data.Id;
+
+	public string Name {
+		get => Data.Name;
+		set {
+			Data.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
 
 	public int X {
 		get => Data.X;
@@ -35,15 +47,6 @@ public class SpriteGridDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 	protected Vector2I Offset => SpriteGrid.Offset;
 	protected Vector2I Span => SpriteGrid.Span;
 	protected Vector2I Size => SpriteGrid.Size;
-
-	public string Name {
-		get => Data.Name;
-		set {
-			Data.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
 
 	public Texture2D Texture => SpriteGrid.Texture;
 	public Rect2I Region => new() {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -34,7 +35,7 @@ public class AnimationInfo : INotifyPropertyChanged {
 		var previousFrame = Animation.Frames.LastOrDefault();
 		var frame = new FrameData {
 			Source = previousFrame?.Source ?? string.Empty,
-			Sprite = previousFrame?.Sprite ?? string.Empty,
+			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
 			Duration = previousFrame?.Duration ?? 1
 		};
 		Animation.Frames.Add(frame);

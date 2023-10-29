@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -40,7 +41,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 	public IEnumerable<AreaInfo> Areas => _areas;
 
 	public Vector2 StartingLocation => TileSize * (
-													  GetAreaByName(Resource.StartingPosition.Area).TilePosition
+													  GetAreaById(Resource.StartingPosition.AreaId).TilePosition
 													  + new Vector2(Resource.StartingPosition.X,
 														  Resource.StartingPosition.Y)
 												  ) + TileSize / new Vector2(1 / 2f, 1);
@@ -62,12 +63,11 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 		return new AreaInfo(area, this);
 	}
 
-	private AreaInfo GetAreaByName(string name) {
-		var area = Resource.Areas.First(a => a.Name == name);
-		return new AreaInfo(area, this);
+	private AreaInfo GetAreaById(Guid id) {
+		return _areas.First(a => a.Id == id);
 	}
 
-	public TileInfo GetTileInfo(string tileName) => TileSet.GetTileInfo(tileName);
+	public TileInfo GetTileInfo(Guid tileId) => TileSet.GetTileInfo(tileId);
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

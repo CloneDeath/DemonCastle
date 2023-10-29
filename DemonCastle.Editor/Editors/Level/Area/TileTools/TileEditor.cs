@@ -19,6 +19,6 @@ public partial class TileEditor : BaseEditor {
 		AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", tileInfo, x => x.Name);
 		Properties.AddFile("Source", tileInfo, tileInfo.Directory,  t => t.SourceFile, FileType.SpriteSources);
-		Properties.AddSpriteName("Sprite", tileInfo, x => x.SpriteName, tileInfo.SpriteOptions);
+		Properties.AddSpriteReference("Sprite", tileInfo, x => x.SpriteId, tileInfo.SpriteOptions);
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Editor.Properties;
@@ -6,22 +7,22 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
-public partial class SpriteNameProperty : BaseProperty {
+public partial class SpriteReferenceProperty : BaseProperty {
 	private readonly List<ISpriteDefinition> _options;
-	protected IPropertyBinding<string> Binding { get; }
+	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
-	public string PropertyValue {
-		get => OptionButton.Selected < 0 ? string.Empty : _options[OptionButton.Selected].Name;
+	public Guid PropertyValue {
+		get => OptionButton.Selected < 0 ? Guid.Empty : _options[OptionButton.Selected].Id;
 		set {
-			var option = _options.FirstOrDefault(o => o.Name == value);
+			var option = _options.FirstOrDefault(o => o.Id == value);
 			OptionButton.Selected = option == null ? -1 : _options.IndexOf(option);
 		}
 	}
 
-	public SpriteNameProperty(IPropertyBinding<string> binding, IEnumerable<ISpriteDefinition> options) {
+	public SpriteReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<ISpriteDefinition> options) {
 		_options = options.ToList();
-		Name = nameof(SpriteNameProperty);
+		Name = nameof(SpriteReferenceProperty);
 		Binding = binding;
 
 		AddChild(OptionButton = new OptionButton {
@@ -43,7 +44,7 @@ public partial class SpriteNameProperty : BaseProperty {
 	}
 
 	private void OnItemSelected(long index) {
-		Binding.Set(index < 0 ? string.Empty : _options[(int)index].Name);
+		Binding.Set(index < 0 ? Guid.Empty : _options[(int)index].Id);
 	}
 
 	public override void Enable() {

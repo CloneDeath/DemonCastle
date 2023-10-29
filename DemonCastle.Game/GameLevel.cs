@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Game; 
+namespace DemonCastle.Game;
 
 public partial class GameLevel : Node2D {
 	public Vector2 StartingLocation => Level.StartingLocation;
@@ -14,7 +14,7 @@ public partial class GameLevel : Node2D {
 
 	protected void LoadArea(AreaInfo area) {
 		foreach (var tileMapInfo in area.TileMap) {
-			var tileInfo = Level.TileSet.GetTileInfo(tileMapInfo.TileName);
+			var tileInfo = tileMapInfo.Tile;
 			AddChild(new GameTile(tileInfo, tileMapInfo));
 		}
 	}

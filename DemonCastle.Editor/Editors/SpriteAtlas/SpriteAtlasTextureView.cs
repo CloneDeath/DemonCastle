@@ -14,7 +14,7 @@ public partial class SpriteAtlasTextureView : TextureView {
 		_spriteAtlasInfo = spriteAtlasInfo;
 		Texture = spriteAtlasInfo.Texture;
 
-		foreach (var dataInfo in spriteAtlasInfo.SpriteData) {
+		foreach (var dataInfo in spriteAtlasInfo.AtlasSprites) {
 			var area = new SpriteAtlasArea(dataInfo);
 			TextureRect.InnerTexture.AddChild(area);
 			_areas.Add(area);

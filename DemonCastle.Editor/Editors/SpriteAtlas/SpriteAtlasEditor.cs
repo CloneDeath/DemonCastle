@@ -49,7 +49,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
         });
         AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
 
-        PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.SpriteData) {
+        PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.AtlasSprites) {
             SizeFlagsVertical = SizeFlags.ExpandFill
         });
         DataCollection.SetAnchorsPreset(LayoutPreset.FullRect);
