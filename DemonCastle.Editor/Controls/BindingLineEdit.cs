@@ -1,14 +1,20 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Controls; 
+namespace DemonCastle.Editor.Controls;
 
 public partial class BindingLineEdit : WrapperControl<LineEdit> {
 	protected IPropertyBinding<string>? PropertyBinding { get; set; }
 	public IPropertyBinding<string>? Binding {
 		get => PropertyBinding;
 		set {
+			if (PropertyBinding != null) {
+				PropertyBinding.Changed -= PropertyBinding_OnChanged;
+			}
 			PropertyBinding = value;
+			if (PropertyBinding != null) {
+				PropertyBinding.Changed += PropertyBinding_OnChanged;
+			}
 			Inner.Text = PropertyBinding?.Get();
 		}
 	}
@@ -33,5 +39,9 @@ public partial class BindingLineEdit : WrapperControl<LineEdit> {
 
 	protected void OnValueChange(string value) {
 		Binding?.Set(value);
+	}
+
+	private void PropertyBinding_OnChanged(string value) {
+		Inner.Text = value;
 	}
 }

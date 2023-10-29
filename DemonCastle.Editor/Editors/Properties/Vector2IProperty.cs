@@ -26,6 +26,7 @@ public partial class Vector2IProperty : VBoxContainer {
 	public Vector2IProperty(IPropertyBinding<Vector2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
+		Binding.Changed += Binding_OnChanged;
 
 		AddChild(Label = new Label());
 
@@ -59,5 +60,9 @@ public partial class Vector2IProperty : VBoxContainer {
 
 	protected void OnYValueChange(double value) {
 		Binding.Set(new Vector2I((int)XBox.Value, (int)value));
+	}
+
+	private void Binding_OnChanged(Vector2I value) {
+		PropertyValue = value;
 	}
 }
