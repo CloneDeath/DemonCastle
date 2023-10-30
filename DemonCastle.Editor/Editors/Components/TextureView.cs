@@ -29,12 +29,12 @@ public partial class TextureView : Container {
 			OffsetTop = 30,
 			OffsetBottom = -35
 		});
-		TextureRect.InnerTexture.MouseDefaultCursorShape = CursorShape.Cross;
-		TextureRect.InnerTexture.MouseEntered += TextureRect_OnMouseEntered;
-		TextureRect.InnerTexture.MouseExited += TextureRect_OnMouseExited;
+		TextureRect.Inner.MouseDefaultCursorShape = CursorShape.Cross;
+		TextureRect.Inner.MouseEntered += TextureRect_OnMouseEntered;
+		TextureRect.Inner.MouseExited += TextureRect_OnMouseExited;
 		TextureRect.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
-		TextureRect.InnerTexture.AddChild(TextureRect_Grid = new Grid {
+		TextureRect.Inner.AddChild(TextureRect_Grid = new Grid {
 			CellSize = Vector2I.One,
 			Color = new Color(Colors.White, 0.5f),
 			MouseFilter = MouseFilterEnum.Pass
@@ -68,7 +68,7 @@ public partial class TextureView : Container {
 
 		var size = Texture.GetSize();
 		Footer_SizeLabel.Text = $"{size.X}x{size.Y}";
-		var pixel = TextureRect.InnerTexture.GetLocalMousePosition().Floor();
+		var pixel = TextureRect.Inner.GetLocalMousePosition().Floor();
 		Footer_MousePixel.Text = $"@{pixel.X}x{pixel.Y}";
 		TextureRect_Grid.Visible = TextureRect.Zoom >= 4 && Toolbar.ShowGrid;
 	}
