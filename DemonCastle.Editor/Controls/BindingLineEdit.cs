@@ -42,6 +42,7 @@ public partial class BindingLineEdit : WrapperControl<LineEdit> {
 	}
 
 	private void PropertyBinding_OnChanged(string value) {
+		if (Inner.Text == value) return;
 		Inner.Text = value;
 	}
 }
