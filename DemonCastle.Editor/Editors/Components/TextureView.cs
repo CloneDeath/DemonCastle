@@ -1,16 +1,10 @@
-using DemonCastle.Editor.Icons;
+using DemonCastle.Editor.Editors.Components.TextureViewComponents;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class TextureView : Container {
-	private bool _showGrid;
-
-	protected HBoxContainer Controls { get; }
-	protected Button Controls_Grid { get; }
-	protected Button Controls_MagPlus { get; }
-	protected Button Controls_MagMinus { get; }
-	protected Button Controls_OneToOne { get; }
+	protected TextureViewToolbar Toolbar { get; }
 	protected ScrollableTextureRect TextureRect { get; }
 	protected Grid TextureRect_Grid { get; }
 	protected HBoxContainer Footer { get; }
@@ -26,16 +20,9 @@ public partial class TextureView : Container {
 		Name = nameof(TextureView);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(Controls = new HBoxContainer());
-		Controls.AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
-		Controls_Grid.Pressed += Controls_Grid_OnPressed;
-		Controls.AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
-		Controls_MagPlus.Pressed += Controls_MagPlus_OnPressed;
-		Controls.AddChild(Controls_MagMinus = new Button { Icon = IconTextures.MagnifyMinusIcon });
-		Controls_MagMinus.Pressed += Controls_MagMinus_OnPressed;
-		Controls.AddChild(Controls_OneToOne = new Button { Icon = IconTextures.OneToOneIcon });
-		Controls_OneToOne.Pressed += Controls_OneToOne_OnPressed;
-		Controls.SetAnchorsPreset(LayoutPreset.TopWide);
+		AddChild(Toolbar = new TextureViewToolbar());
+		Toolbar.SetAnchorsPreset(LayoutPreset.TopWide);
+		Toolbar.ZoomLevelChanged += Toolbar_OnZoomLevelChanged;
 
 		AddChild(TextureRect = new ScrollableTextureRect {
 			Name = nameof(TextureRect),
@@ -63,8 +50,8 @@ public partial class TextureView : Container {
 		Footer.AddChild(Footer_MousePixel = new Label { Visible = false });
 	}
 
-	private void Controls_Grid_OnPressed() {
-		_showGrid = !_showGrid;
+	private void Toolbar_OnZoomLevelChanged(float zoom) {
+		TextureRect.Zoom = zoom;
 	}
 
 	private void TextureRect_OnMouseEntered() {
@@ -75,18 +62,6 @@ public partial class TextureView : Container {
 		Footer_MousePixel.Visible = false;
 	}
 
-	private void Controls_MagPlus_OnPressed() {
-		TextureRect.Zoom *= 2;
-	}
-
-	private void Controls_MagMinus_OnPressed() {
-		TextureRect.Zoom /= 2;
-	}
-
-	private void Controls_OneToOne_OnPressed() {
-		TextureRect.Zoom = 1;
-	}
-
 	public override void _Process(double delta) {
 		base._Process(delta);
 		if (Texture == null) return;
@@ -95,6 +70,6 @@ public partial class TextureView : Container {
 		Footer_SizeLabel.Text = $"{size.X}x{size.Y}";
 		var pixel = TextureRect.InnerTexture.GetLocalMousePosition().Floor();
 		Footer_MousePixel.Text = $"@{pixel.X}x{pixel.Y}";
-		TextureRect_Grid.Visible = TextureRect.Zoom >= 4 && _showGrid;
+		TextureRect_Grid.Visible = TextureRect.Zoom >= 4 && Toolbar.ShowGrid;
 	}
 }
