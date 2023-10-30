@@ -26,9 +26,7 @@ public partial class TextureView : Container {
 		Name = nameof(TextureView);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(Controls = new HBoxContainer {
-			CustomMinimumSize = new Vector2(100, 10)
-		});
+		AddChild(Controls = new HBoxContainer());
 		Controls.AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
 		Controls_Grid.Pressed += Controls_Grid_OnPressed;
 		Controls.AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
