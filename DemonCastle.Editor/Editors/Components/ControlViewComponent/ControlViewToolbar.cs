@@ -2,9 +2,9 @@ using System;
 using DemonCastle.Editor.Icons;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Components.TextureViewComponents;
+namespace DemonCastle.Editor.Editors.Components.ControlViewComponent;
 
-public partial class TextureViewToolbar : HBoxContainer {
+public partial class ControlViewToolbar : HBoxContainer {
 	public bool ShowGrid { get; set; }
 
 	protected Button Controls_Grid { get; }
@@ -15,7 +15,7 @@ public partial class TextureViewToolbar : HBoxContainer {
 	public float Zoom { get; set; } = 1;
 	public event Action<float>? ZoomLevelChanged;
 
-	public TextureViewToolbar() {
+	public ControlViewToolbar() {
 		AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
 		Controls_Grid.Pressed += Controls_Grid_OnPressed;
 		AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });

@@ -1,13 +1,13 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Components.TextureViewComponents;
+namespace DemonCastle.Editor.Editors.Components.ControlViewComponent;
 
-public partial class TextureViewFooter : HBoxContainer {
+public partial class ControlViewFooter : HBoxContainer {
 	protected Label Footer_SizeLabel { get; }
 	protected Label Footer_MousePosition { get; }
 
-	public TextureViewFooter() {
-		Name = nameof(TextureViewFooter);
+	public ControlViewFooter() {
+		Name = nameof(ControlViewFooter);
 		AddChild(Footer_SizeLabel = new Label());
 		AddChild(Footer_MousePosition = new Label { Visible = false });
 	}

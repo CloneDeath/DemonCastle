@@ -1,13 +1,14 @@
-using DemonCastle.Editor.Editors.Components.TextureViewComponents;
 using Godot;
+using ControlViewFooter = DemonCastle.Editor.Editors.Components.ControlViewComponent.ControlViewFooter;
+using ControlViewToolbar = DemonCastle.Editor.Editors.Components.ControlViewComponent.ControlViewToolbar;
 
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class TextureView : Container {
-	protected TextureViewToolbar Toolbar { get; }
+	protected ControlViewToolbar Toolbar { get; }
 	protected ScrollableTextureRect TextureRect { get; }
 	protected Grid TextureRect_Grid { get; }
-	protected TextureViewFooter Footer { get; }
+	protected ControlViewFooter Footer { get; }
 
 	public Texture2D? Texture {
 		get => TextureRect.Texture;
@@ -18,7 +19,7 @@ public partial class TextureView : Container {
 		Name = nameof(TextureView);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(Toolbar = new TextureViewToolbar());
+		AddChild(Toolbar = new ControlViewToolbar());
 		Toolbar.SetAnchorsPreset(LayoutPreset.TopWide);
 		Toolbar.ZoomLevelChanged += Toolbar_OnZoomLevelChanged;
 
@@ -39,7 +40,7 @@ public partial class TextureView : Container {
 		});
 		TextureRect_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
 
-		AddChild(Footer = new TextureViewFooter {
+		AddChild(Footer = new ControlViewFooter {
 			OffsetTop = -20
 		});
 		Footer.SetAnchorsPreset(LayoutPreset.BottomWide, true);
