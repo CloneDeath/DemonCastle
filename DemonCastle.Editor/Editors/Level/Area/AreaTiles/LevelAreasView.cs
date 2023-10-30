@@ -1,27 +1,29 @@
 using System.Linq;
+using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class LevelAreasView : ScrollContainer {
-	protected Container AreaContainer { get; }
+public partial class LevelAreasView : ControlView<Container> {
 	private readonly LevelInfo _levelInfo;
 
 	public LevelAreasView(LevelInfo levelInfo) {
 		_levelInfo = levelInfo;
-		AddChild(AreaContainer = new Container());
-
+		CellSize = levelInfo.TileSize;
+		MainControl_Grid.Color = new Color(Colors.White, 0.1f);
 		ReloadAreas();
 	}
 
 	private void ReloadAreas() {
-		foreach (var child in AreaContainer.GetChildren()) {
+		foreach (var child in MainControl.Inner.GetChildren()) {
 			child.QueueFree();
 		}
 
 		foreach (var area in _levelInfo.Areas) {
-			AreaContainer.AddChild(new AreaView(area));
+			MainControl.Inner.AddChild(new AreaView(area) {
+				MouseFilter = MouseFilterEnum.Pass
+			});
 		}
 
 		var areas = _levelInfo.Areas.ToList();
@@ -33,9 +35,8 @@ public partial class LevelAreasView : ScrollContainer {
 			minRect = minRect.Merge(rect);
 		}
 
-		AreaContainer.Position = minRect.Position;
-		AreaContainer.Size = minRect.Size;
-		AreaContainer.CustomMinimumSize = minRect.Size;
+		MainControl.Inner.Size = minRect.Size;
+		MainControl.Inner.CustomMinimumSize = minRect.Size;
 	}
 
 	protected static Rect2 GetRect2(AreaInfo area) {

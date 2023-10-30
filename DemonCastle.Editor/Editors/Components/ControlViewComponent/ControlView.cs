@@ -21,15 +21,15 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 			OffsetBottom = -25
 		});
 		MainControl.Inner.MouseDefaultCursorShape = CursorShape.Cross;
-		MainControl.Inner.MouseEntered += TextureRect_OnMouseEntered;
-		MainControl.Inner.MouseExited += TextureRect_OnMouseExited;
+		MainControl.Inner.MouseEntered += MainControl_Inner_OnMouseEntered;
+		MainControl.Inner.MouseExited += MainControl_Inner_OnMouseExited;
 		MainControl.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
 		MainControl.Inner.AddChild(MainControl_Grid = new Grid {
 			CellSize = Vector2I.One,
 			Color = new Color(Colors.White, 0.5f),
 			MouseFilter = MouseFilterEnum.Pass
-		});
+		}, false, InternalMode.Front );
 		MainControl_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
 
 		AddChild(Footer = new ControlViewFooter {
@@ -47,21 +47,21 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 		MainControl.Zoom = zoom;
 	}
 
-	private void TextureRect_OnMouseEntered() {
+	private void MainControl_Inner_OnMouseEntered() {
 		Footer.MousePositionVisible = true;
 	}
 
-	private void TextureRect_OnMouseExited() {
+	private void MainControl_Inner_OnMouseExited() {
 		Footer.MousePositionVisible = false;
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		
-		var size = MainControl.Size;
+
+		var size = MainControl.Inner.Size / CellSize;
 		Footer.SetSizeText((Vector2I)size);
-		var pixel = MainControl.Inner.GetLocalMousePosition().Floor();
+		var pixel = MainControl.Inner.GetLocalMousePosition().Floor() / CellSize;
 		Footer.SetMousePositionText((Vector2I)pixel);
-		MainControl_Grid.Visible = MainControl.Zoom >= 4 && Toolbar.ShowGrid;
+		MainControl_Grid.Visible = CellSize * (int)MainControl.Zoom >= Vector2I.One * 4 && Toolbar.ShowGrid;
 	}
 }
