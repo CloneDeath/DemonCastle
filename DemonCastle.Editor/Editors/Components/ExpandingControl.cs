@@ -19,8 +19,8 @@ public partial class ExpandingControl : Control {
 			minimumBounds = minimumBounds.Merge(bounds);
 		}
 
-		Size = minimumBounds.Size;
-		CustomMinimumSize = minimumBounds.Size;
+		Size = minimumBounds.Size + minimumBounds.Position;
+		CustomMinimumSize = minimumBounds.Size + minimumBounds.Position;
 	}
 
 	protected static Rect2 GetBounds(Control child) {
