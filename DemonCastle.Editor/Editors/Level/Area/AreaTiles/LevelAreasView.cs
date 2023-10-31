@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -6,6 +8,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
 public partial class LevelAreasView : ControlView<ExpandingControl> {
 	private readonly LevelInfo _levelInfo;
+	private readonly Dictionary<AreaInfo, AreaView> _areaMap = new();
 
 	public LevelAreasView(LevelInfo levelInfo) {
 		_levelInfo = levelInfo;
@@ -15,15 +18,45 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 		ReloadAreas();
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		_levelInfo.PropertyChanged += LevelInfo_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		_levelInfo.PropertyChanged -= LevelInfo_OnPropertyChanged;
+	}
+
+	private void LevelInfo_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName != nameof(_levelInfo.Areas)) return;
+		ReloadAreas();
+	}
+
 	private void ReloadAreas() {
 		foreach (var child in MainControl.Inner.GetChildren()) {
 			child.QueueFree();
 		}
+		_areaMap.Clear();
 
 		foreach (var area in _levelInfo.Areas) {
-			MainControl.Inner.AddChild(new AreaView(area) {
+			var areaView = new AreaView(area) {
 				MouseFilter = MouseFilterEnum.Pass
-			});
+			};
+			MainControl.Inner.AddChild(areaView);
+			_areaMap[area] = areaView;
+		}
+	}
+
+	public void SelectArea(AreaInfo area) {
+		if (!_areaMap.ContainsKey(area)) return;
+		DeselectAllAreas();
+		_areaMap[area].IsSelected = true;
+	}
+
+	public void DeselectAllAreas() {
+		foreach (var areaView in _areaMap.Values) {
+			areaView.IsSelected = false;
 		}
 	}
 }

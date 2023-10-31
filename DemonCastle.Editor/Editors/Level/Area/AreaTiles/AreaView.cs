@@ -4,11 +4,14 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
-public partial class AreaView : Control {
+public partial class AreaView : SelectableControl {
 	protected AreaInfo Area { get; }
 
 	protected Outline Outline { get; }
 	protected AreaTilesView Root { get; }
+
+	private static readonly Color SelectedColor = new(Colors.White, 0.75f);
+	private static readonly Color DeselectedColor = new(Colors.White, 0.3f);
 
 	public AreaView(AreaInfo area) {
 		Area = area;
@@ -17,11 +20,10 @@ public partial class AreaView : Control {
 
 		AddChild(Outline = new Outline {
 			MouseFilter = MouseFilterEnum.Ignore,
-			Color = new Color(Colors.White, 0.5f)
+			Color = DeselectedColor
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
 		AddChild(Root = new AreaTilesView(area));
-
 	}
 
 	public override void _Process(double delta) {
@@ -29,5 +31,7 @@ public partial class AreaView : Control {
 
 		Position = Area.PositionOfArea.ToLevelPositionInPixels();
 		Size = Area.SizeOfArea.ToPixelSize();
+		Outline.Color = IsSelected ? SelectedColor : DeselectedColor;
+		Outline.Thickness = IsSelected ? 2 : 1;
 	}
 }

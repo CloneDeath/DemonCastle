@@ -9,9 +9,11 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
 public class AreaInfo : INotifyPropertyChanged {
+	private readonly List<TileMapInfo> _tileMapInfos = new();
 	public AreaInfo(AreaData area, LevelInfo levelInfo) {
 		Area = area;
 		LevelInfo = levelInfo;
+		_tileMapInfos.AddRange(Area.TileMap.Select(tm => new TileMapInfo(tm, this)));
 	}
 
 	protected AreaData Area { get; }
@@ -29,7 +31,7 @@ public class AreaInfo : INotifyPropertyChanged {
 	}
 
 	public LevelTileSet LevelTileSet => LevelInfo.TileSet;
-	public IEnumerable<TileMapInfo> TileMap => Area.TileMap.Select(tm => new TileMapInfo(tm, this));
+	public IEnumerable<TileMapInfo> TileMap => _tileMapInfos;
 
 	public Vector2I AreaPosition {
 		get => new(Area.X, Area.Y);
@@ -68,21 +70,30 @@ public class AreaInfo : INotifyPropertyChanged {
 			tile.TileId = tileId;
 		}
 		else {
-			Area.TileMap.Add(new TileMapData {
+			var tileMapData = new TileMapData {
 				X = position.X,
 				Y = position.Y,
 				TileId = tileId
-			});
+			};
+			Area.TileMap.Add(tileMapData);
+			_tileMapInfos.Add(new TileMapInfo(tileMapData, this));
 		}
 
+		OnPropertyChanged(nameof(TileMap));
 		LevelInfo.Save();
 	}
 
 	public void ClearTile(Vector2I position) {
 		var tile = Area.TileMap.FirstOrDefault(t => t.X == position.X && t.Y == position.Y);
-		if (tile == null) return;
+		if (tile != null) {
+			Area.TileMap.Remove(tile);
+		}
 
-		Area.TileMap.Remove(tile);
+		var index = _tileMapInfos.FindIndex(info => info.Position == position);
+		if (index >= 0) _tileMapInfos.RemoveAt(index);
+
+		if (tile == null && index < 0) return;
+		OnPropertyChanged(nameof(TileMap));
 		LevelInfo.Save();
 	}
 
