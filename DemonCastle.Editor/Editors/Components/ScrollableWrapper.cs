@@ -23,7 +23,7 @@ public partial class ScrollableWrapper<T> : ScrollContainer where T : Control, n
 	}
 
 	public void CenterOnPosition(Vector2 position) {
-		var target = position - Size / 2;
+		var target = (position - Size / 2) * Inner.Scale;
 		ScrollHorizontal = (int)target.X;
 		ScrollVertical = (int)target.Y;
 	}
