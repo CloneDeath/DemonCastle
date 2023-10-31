@@ -32,7 +32,9 @@ public partial class AreaView : SelectableControl {
 			Color = DeselectedColor
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
-		AddChild(Root = new AreaTilesView(area));
+		AddChild(Root = new AreaTilesView(area) {
+			MouseFilter = MouseFilterEnum.Pass
+		});
 	}
 
 	public override void _Process(double delta) {
@@ -51,56 +53,42 @@ public partial class AreaView : SelectableControl {
 
 	public override void _GuiInput(InputEvent @event) {
 		base._GuiInput(@event);
+		if (@event is not InputEventMouse mouseEvent) return;
 		if (!IsSelected) return;
 
-		if (@event is InputEventMouseMotion) {
+		if (mouseEvent is InputEventMouseMotion) {
 			if (Input.IsActionPressed(InputActions.EditorClick)) {
-				TriggerTileCellSelected();
+				TriggerTileCellSelected(mouseEvent.Position);
 			} else if (Input.IsActionPressed(InputActions.EditorRightClick)) {
-				TriggerTileCellCleared();
+				TriggerTileCellCleared(mouseEvent.Position);
 			}
-		} else if (@event.IsActionPressed(InputActions.EditorClick) && MouseWithinBounds()) {
-			TriggerTileCellSelected();
-		} else if (@event.IsActionPressed(InputActions.EditorRightClick) && MouseWithinBounds()) {
-			TriggerTileCellCleared();
+		} else if (mouseEvent.IsActionPressed(InputActions.EditorClick)) {
+			TriggerTileCellSelected(mouseEvent.Position);
+		} else if (mouseEvent.IsActionPressed(InputActions.EditorRightClick)) {
+			TriggerTileCellCleared(mouseEvent.Position);
 		}
 	}
 
-	private void TriggerTileCellSelected() {
-		var index = GetTileIndexOfMousePosition();
-		if (!IndexIsValid(index)) return;
+	private void TriggerTileCellSelected(Vector2 position) {
+		var index = GetTileIndexOfMousePosition(position);
+		GD.Print("Selected:", index);
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == true) return;
-		AreaTileSelected?.Invoke(Area, index);
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = true;
+		AreaTileSelected?.Invoke(Area, index);
 	}
 
-	private void TriggerTileCellCleared() {
-		var index = GetTileIndexOfMousePosition();
-		if (!IndexIsValid(index)) return;
+	private void TriggerTileCellCleared(Vector2 position) {
+		var index = GetTileIndexOfMousePosition(position);
+		GD.Print("Cleared:", index);
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == false) return;
-		AreaTileCleared?.Invoke(Area, index);
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = false;
+		AreaTileCleared?.Invoke(Area, index);
 	}
 
-	private bool MouseWithinBounds() {
-		var mousePosition = GetViewport().GetMousePosition();
-		var myPosition = GlobalPosition;
-		var delta = mousePosition - myPosition;
-		var size = Size;
-		return delta is { X: >= 0, Y: >= 0 }
-			   && delta.X < size.X
-			   && delta.Y < size.Y;
-	}
-
-	private bool IndexIsValid(Vector2I index) => index is { X: >= 0, Y: >= 0 } && index.X < Area.AreaSize.X && index.Y < Area.AreaSize.Y;
-
-	private Vector2I GetTileIndexOfMousePosition() {
-		var mousePosition = GetViewport().GetMousePosition();
-		var myPosition = GlobalPosition;
-		var offset = mousePosition - myPosition;
-		var index = (Vector2I)(offset / Area.TileSize);
+	private Vector2I GetTileIndexOfMousePosition(Vector2 position) {
+		var index = (Vector2I)(position / Area.TileSize);
 		return index;
 	}
 }
