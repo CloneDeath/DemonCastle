@@ -17,6 +17,8 @@ public partial class AreaView : SelectableControl {
 		Area = area;
 
 		Name = nameof(AreaView);
+		SelectedCursorShape = CursorShape.Cross;
+		DefaultCursorShape = CursorShape.PointingHand;
 
 		AddChild(Outline = new Outline {
 			MouseFilter = MouseFilterEnum.Ignore,

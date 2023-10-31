@@ -15,6 +15,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 		Name = nameof(LevelAreasView);
 		CellSize = levelInfo.TileSize;
 		GridVisible = true;
+		MainControl.Inner.MouseDefaultCursorShape = CursorShape.Arrow;
 		ReloadAreas();
 	}
 
