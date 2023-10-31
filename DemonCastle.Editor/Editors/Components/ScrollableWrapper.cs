@@ -21,4 +21,10 @@ public partial class ScrollableWrapper<T> : ScrollContainer where T : Control, n
 		Inner.Scale = Vector2.One * Zoom;
 		ControlHolder.CustomMinimumSize = Inner.Size * Inner.Scale;
 	}
+
+	public void CenterOnPosition(Vector2 position) {
+		var target = position - Size / 2;
+		ScrollHorizontal = (int)target.X;
+		ScrollVertical = (int)target.Y;
+	}
 }
