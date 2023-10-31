@@ -34,4 +34,9 @@ public partial class AreaView : SelectableControl {
 		Outline.Color = IsSelected ? SelectedColor : DeselectedColor;
 		Outline.Thickness = IsSelected ? 2 : 1;
 	}
+
+	protected override void OnSelected() {
+		base.OnSelected();
+		DeselectSiblings();
+	}
 }

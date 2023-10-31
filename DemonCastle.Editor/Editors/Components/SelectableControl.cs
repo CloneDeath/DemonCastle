@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DemonCastle.Game;
 using Godot;
 
@@ -46,4 +47,11 @@ public partial class SelectableControl : Control {
 	}
 
 	protected virtual void OnSelected() {}
+
+	protected void DeselectSiblings() {
+		var siblings = GetParent().GetChildren().Where(c => c is SelectableControl && c != this).Cast<SelectableControl>();
+		foreach (var sibling in siblings) {
+			sibling.IsSelected = false;
+		}
+	}
 }

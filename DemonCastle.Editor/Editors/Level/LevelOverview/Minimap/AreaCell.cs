@@ -1,4 +1,3 @@
-using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -43,10 +42,6 @@ public partial class AreaCell : SelectableControl {
 
 	protected override void OnSelected() {
 		base.OnSelected();
-
-		var siblings = GetParent().GetChildren().Where(c => c is AreaCell && c != this).Cast<AreaCell>();
-		foreach (var sibling in siblings) {
-			sibling.IsSelected = false;
-		}
+		DeselectSiblings();
 	}
 }
