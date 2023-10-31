@@ -1,32 +1,21 @@
 using System;
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
-using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
-public partial class MinimapView : ScrollContainer {
+public partial class MinimapView : ControlView<ExpandingControl> {
 	private readonly LevelInfo _levelInfo;
-	protected Node2D Root;
-
 	public event Action<AreaInfo>? AreaSelected;
 
 	public MinimapView(LevelInfo levelInfo) {
 		_levelInfo = levelInfo;
 
 		Name = nameof(MinimapView);
-
-		var control = new Control {
-			Size = new Vector2(500, 500)
-		};
-		AddChild(control);
-
-		control.AddChild(new GridControl {
-			Size = new Vector2I(500, 500),
-			GridSize = levelInfo.AreaSize
-		});
-		control.AddChild(Root = new Node2D());
+		CellSize = levelInfo.AreaSize;
+		GridVisible = true;
 		LoadLevel(levelInfo);
 	}
 
@@ -48,13 +37,13 @@ public partial class MinimapView : ScrollContainer {
 	public void Reload() => LoadLevel(_levelInfo);
 
 	private void LoadLevel(LevelInfo levelInfo) {
-		foreach (var child in Root.GetChildren()) {
+		foreach (var child in MainControl.Inner.GetChildren()) {
 			child.QueueFree();
 		}
 		foreach (var area in levelInfo.Areas) {
 			var cell = new AreaCell(area);
 			cell.Selected += Cell_OnSelected;
-			Root.AddChild(cell);
+			MainControl.Inner.AddChild(cell);
 		}
 	}
 

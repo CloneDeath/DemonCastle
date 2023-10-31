@@ -27,7 +27,7 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 
 		MainControl.Inner.AddChild(MainControl_Grid = new Grid {
 			CellSize = Vector2I.One,
-			Color = new Color(Colors.White, 0.5f),
+			Color = new Color(Colors.White, 0.1f),
 			MouseFilter = MouseFilterEnum.Pass
 		}, false, InternalMode.Front );
 		MainControl_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
@@ -41,6 +41,16 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 	public Vector2I CellSize {
 		get => MainControl_Grid.CellSize;
 		set => MainControl_Grid.CellSize = value;
+	}
+
+	public Color GridColor {
+		get => MainControl_Grid.Color;
+		set => MainControl_Grid.Color = value;
+	}
+
+	public bool GridVisible {
+		get => Toolbar.ShowGrid;
+		set => Toolbar.ShowGrid = value;
 	}
 
 	private void Toolbar_OnZoomLevelChanged(float zoom) {
