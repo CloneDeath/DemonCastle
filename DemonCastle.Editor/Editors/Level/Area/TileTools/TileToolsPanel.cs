@@ -28,6 +28,8 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(TileSelector = new TileSelectorPanel(level.TileSet));
 	}
 
+	public TileInfo? SelectedTile => TileSelector.SelectedTile;
+
 	public override void _Process(double delta) {
 		base._Process(delta);
 
