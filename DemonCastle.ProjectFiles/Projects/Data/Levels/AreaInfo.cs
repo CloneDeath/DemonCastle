@@ -89,7 +89,7 @@ public class AreaInfo : INotifyPropertyChanged {
 			Area.TileMap.Remove(tile);
 		}
 
-		var index = _tileMapInfos.FindIndex(info => info.PositionOfTile.ToTileIndex() == tileIndex);
+		var index = _tileMapInfos.FindIndex(info => info.Position.ToTileIndex() == tileIndex);
 		if (index >= 0) _tileMapInfos.RemoveAt(index);
 
 		if (tile == null && index < 0) return;

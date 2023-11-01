@@ -5,7 +5,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 
 public partial class TileView : TextureRect {
 	public TileView(TileMapInfo tile) {
-		Position = tile.PositionOfTile.ToPixelPositionInArea();
+		Position = tile.Position.ToPixelPositionInArea();
 		Texture = new AtlasTexture {
 			Atlas = tile.Texture,
 			Region = tile.Region,

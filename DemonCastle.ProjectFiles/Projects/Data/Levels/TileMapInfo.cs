@@ -19,7 +19,7 @@ public class TileMapInfo {
 	public TileInfo Tile => AreaInfo.GetTileInfo(TileId);
 
 	public Vector2I TileScale => AreaInfo.TileSize;
-	public TilePosition PositionOfTile => new(TileIndex, AreaInfo.PositionOfArea, TileScale);
+	public TilePosition Position => new(TileIndex, AreaInfo.PositionOfArea, TileScale);
 	public Guid TileId => TileMapData.TileId;
 	public Texture2D Texture => Tile.Texture;
 	public Rect2 Region => Tile.Region;

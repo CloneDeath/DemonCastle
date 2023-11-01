@@ -9,7 +9,7 @@ public partial class GameTile : Node2D {
 	private StaticBody2D? Body { get; }
 
 	public GameTile(TileInfo tile, TileMapInfo tileMapInfo) {
-		Position = tileMapInfo.PositionOfTile.ToPixelPositionInLevel();
+		Position = tileMapInfo.Position.ToPixelPositionInLevel();
 		AddChild(new Sprite2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,
