@@ -14,19 +14,34 @@ public partial class SpriteAtlasTextureView : TextureView {
 		_spriteAtlasInfo = spriteAtlasInfo;
 		Texture = spriteAtlasInfo.Texture;
 
-		foreach (var dataInfo in spriteAtlasInfo.AtlasSprites) {
-			var area = new SpriteAtlasArea(dataInfo);
-			MainControl.Inner.AddChild(area);
-			_areas.Add(area);
-			area.Selected += Area_OnSelected;
-		}
+		ReloadSpriteData();
 
 		spriteAtlasInfo.PropertyChanged += SpriteAtlasInfo_OnPropertyChanged;
 	}
 
 	private void SpriteAtlasInfo_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName != nameof(_spriteAtlasInfo.SpriteFile)) return;
-		Texture = _spriteAtlasInfo.Texture;
+		switch (e.PropertyName) {
+			case nameof(_spriteAtlasInfo.SpriteFile):
+				Texture = _spriteAtlasInfo.Texture;
+				break;
+			case nameof(_spriteAtlasInfo.AtlasSprites):
+				ReloadSpriteData();
+				break;
+		}
+	}
+
+	private void ReloadSpriteData() {
+		foreach (var area in _areas) {
+			area.QueueFree();
+		}
+		_areas.Clear();
+
+		foreach (var dataInfo in _spriteAtlasInfo.AtlasSprites) {
+			var area = new SpriteAtlasArea(dataInfo);
+			MainControl.Inner.AddChild(area);
+			_areas.Add(area);
+			area.Selected += Area_OnSelected;
+		}
 	}
 
 	private void Area_OnSelected(SpriteAtlasArea selected) {

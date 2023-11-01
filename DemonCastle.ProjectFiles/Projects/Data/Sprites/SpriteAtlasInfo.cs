@@ -46,8 +46,11 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 			Width = lastSprite?.Width ?? 16
 		};
 		Resource.Sprites.Add(spriteAtlasData);
-		_spriteData.Add(new SpriteAtlasDataInfo(this, spriteAtlasData));
-		return new SpriteAtlasDataInfo(this, spriteAtlasData);
+		var spriteAtlasDataInfo = new SpriteAtlasDataInfo(this, spriteAtlasData);
+		_spriteData.Add(spriteAtlasDataInfo);
+		OnPropertyChanged(nameof(Sprites));
+		OnPropertyChanged(nameof(AtlasSprites));
+		return spriteAtlasDataInfo;
 	}
 
 	#region INotifyPropertyChanged
