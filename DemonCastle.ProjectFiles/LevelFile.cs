@@ -26,6 +26,8 @@ public class TileData {
 	public string Source { get; set; } = string.Empty;
 	public Guid SpriteId { get; set; }
 	public List<CollisionData> Collision { get; set; } = new();
+	public int Width { get; set; } = 1;
+	public int Height { get; set; } = 1;
 }
 
 public class CollisionData {

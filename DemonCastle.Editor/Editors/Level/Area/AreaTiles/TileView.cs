@@ -12,6 +12,6 @@ public partial class TileView : TextureRect {
 			FilterClip = true
 		};
 		FlipH = tile.FlipHorizontal;
-		Scale = tile.TileScale / tile.Region.Size;
+		Scale = tile.TileScale * tile.Span / tile.Region.Size ;
 	}
 }

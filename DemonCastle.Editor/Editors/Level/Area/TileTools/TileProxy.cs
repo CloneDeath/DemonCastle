@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
@@ -48,6 +49,13 @@ public class TileProxy : INotifyPropertyChanged {
 		get => _proxy?.SpriteId ?? Guid.Empty;
 		set {
 			if (_proxy != null) _proxy.SpriteId = value;
+		}
+	}
+
+	public Vector2I Span {
+		get => _proxy?.Span ?? Vector2I.One;
+		set {
+			if (_proxy != null) _proxy.Span = value;
 		}
 	}
 

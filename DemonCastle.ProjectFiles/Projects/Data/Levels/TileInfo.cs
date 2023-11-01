@@ -53,6 +53,16 @@ public class TileInfo : INotifyPropertyChanged {
 		}
 	}
 
+	public Vector2I Span {
+		get => new(TileData.Width, TileData.Height);
+		set {
+			TileData.Width = value.X;
+			TileData.Height = value.Y;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == TileData.SpriteId)
 										  ?? new NullSpriteDefinition();

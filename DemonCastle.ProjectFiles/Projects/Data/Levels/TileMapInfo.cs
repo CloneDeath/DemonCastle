@@ -24,4 +24,5 @@ public class TileMapInfo {
 	public Texture2D Texture => Tile.Texture;
 	public Rect2 Region => Tile.Region;
 	public bool FlipHorizontal => Tile.FlipHorizontal;
+	public Vector2I Span => Tile.Span;
 }
