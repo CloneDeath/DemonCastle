@@ -22,7 +22,8 @@ public partial class TileToolsPanel : VBoxContainer {
 		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
 
 		AddChild(TileSelector = new TileSelectorPanel(level.TileSet) {
-			SizeFlagsVertical = SizeFlags.ExpandFill
+			SizeFlagsVertical = SizeFlags.ExpandFill,
+			CustomMinimumSize = new Vector2(0, 100)
 		});
 		TileSelector.TileSelected += TileSelector_OnTileSelected;
 

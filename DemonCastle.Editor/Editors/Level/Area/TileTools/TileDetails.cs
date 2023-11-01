@@ -1,4 +1,3 @@
-using System.Linq;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -29,11 +28,5 @@ public partial class TileDetails : PropertyCollection {
 		AddSpriteReference("Sprite", TileProxy, x => x.SpriteId, TileProxy.SpriteOptions);
 
 		DisableProperties();
-	}
-
-	public override void _Process(double delta) {
-		base._Process(delta);
-		var sprite = TileProxy.SpriteOptions.FirstOrDefault(o => o.Id == TileProxy.SpriteId);
-		CustomMinimumSize = sprite?.Texture.GetSize() ?? new Vector2(16, 16);
 	}
 }
