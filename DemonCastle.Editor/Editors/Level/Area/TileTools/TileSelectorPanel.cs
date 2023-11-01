@@ -3,13 +3,13 @@ using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools; 
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
 public partial class TileSelectorPanel : HFlowContainer {
 	public LevelTileSet TileSet { get; }
 	private readonly List<SelectableTile> _selection = new();
 	public TileInfo? SelectedTile;
-	
+
 	public TileSelectorPanel(LevelTileSet tileSet) {
 		TileSet = tileSet;
 		Reload();
@@ -26,7 +26,8 @@ public partial class TileSelectorPanel : HFlowContainer {
 		foreach (var node in GetChildren()) {
 			node.QueueFree();
 		}
-		
+		_selection.Clear();
+
 		foreach (var tile in TileSet.Tiles) {
 			var c = new SelectableTile(tile);
 			AddChild(c);
