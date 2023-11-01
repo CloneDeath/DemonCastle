@@ -29,6 +29,7 @@ public partial class TileView : SpriteDefinitionView {
 		switch (e.PropertyName) {
 			case nameof(Tile.Sprite):
 				Load(Tile.Sprite);
+				LoadScale();
 				break;
 			case nameof(Tile.Span):
 				LoadScale();
