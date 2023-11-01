@@ -3,13 +3,13 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Game; 
+namespace DemonCastle.Game;
 
 public partial class GameTile : Node2D {
 	private StaticBody2D? Body { get; }
-	
+
 	public GameTile(TileInfo tile, TileMapInfo tileMapInfo) {
-		Position = tileMapInfo.Position;
+		Position = tileMapInfo.PositionOfTile.ToPixelPositionInLevel();
 		AddChild(new Sprite2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,
@@ -17,7 +17,7 @@ public partial class GameTile : Node2D {
 			Centered = false,
 			Scale = tile.TileSize / tile.Region.Size
 		});
-		
+
 		if (!tile.Collision.Any()) return;
 		AddChild(Body = new StaticBody2D {
 			CollisionLayer = (uint)CollisionLayers.World

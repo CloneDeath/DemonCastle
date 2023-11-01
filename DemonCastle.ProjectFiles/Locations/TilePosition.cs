@@ -14,4 +14,6 @@ public class TilePosition {
 	}
 
 	public Vector2I ToTileIndex() => _tileIndex;
+	public Vector2I ToPixelPositionInArea() => _tileIndex * _tileScaleInPixels;
+	public Vector2I ToPixelPositionInLevel() => _tileIndex * _tileScaleInPixels + _parentPosition.ToPixelPositionInLevel();
 }
