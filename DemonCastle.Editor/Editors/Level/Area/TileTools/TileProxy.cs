@@ -28,6 +28,7 @@ public class TileProxy : INotifyPropertyChanged {
 			OnPropertyChanged(nameof(SpriteId));
 			OnPropertyChanged(nameof(Directory));
 			OnPropertyChanged(nameof(SpriteOptions));
+			OnPropertyChanged(nameof(Span));
 		}
 	}
 

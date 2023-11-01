@@ -16,7 +16,9 @@ public partial class AreaEdit : HSplitContainer {
 	public AreaEdit(LevelInfo level) {
 		Name = nameof(AreaEdit);
 
-		AddChild(LeftPanel = new VBoxContainer());
+		AddChild(LeftPanel = new VBoxContainer {
+			CustomMinimumSize = new Vector2(275, 0)
+		});
 		LeftPanel.AddChild(Details = new AreaDetails());
 		LeftPanel.AddChild(Tools = new TileToolsPanel(level));
 		AddChild(RightPanel = new LevelAreasView(level));
