@@ -1,4 +1,5 @@
 using System;
+using DemonCastle.ProjectFiles.Locations;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -13,6 +14,7 @@ public class TileMapInfo {
 	}
 
 	protected LevelTileSet TileSet => AreaInfo.LevelTileSet;
+	protected Vector2I TileIndex => new(TileMapData.X, TileMapData.Y);
 
 	public TileInfo Tile => AreaInfo.GetTileInfo(TileId);
 
@@ -23,4 +25,5 @@ public class TileMapInfo {
 	public Texture2D Texture => Tile.Texture;
 	public Rect2 Region => Tile.Region;
 	public bool FlipHorizontal => Tile.FlipHorizontal;
+	public TilePosition PositionOfTile => new(TileIndex, AreaInfo.PositionOfArea, TileSize);
 }

@@ -40,7 +40,7 @@ public partial class AreaView : SelectableControl {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Position = Area.PositionOfArea.ToLevelPositionInPixels();
+		Position = Area.PositionOfArea.ToPixelPositionInLevel();
 		Size = Area.SizeOfArea.ToPixelSize();
 		Outline.Color = IsSelected ? SelectedColor : DeselectedColor;
 		Outline.Thickness = IsSelected ? 2 : 1;
@@ -71,7 +71,6 @@ public partial class AreaView : SelectableControl {
 
 	private void TriggerTileCellSelected(Vector2 position) {
 		var index = GetTileIndexOfMousePosition(position);
-		GD.Print("Selected:", index);
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == true) return;
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = true;
@@ -80,7 +79,6 @@ public partial class AreaView : SelectableControl {
 
 	private void TriggerTileCellCleared(Vector2 position) {
 		var index = GetTileIndexOfMousePosition(position);
-		GD.Print("Cleared:", index);
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == false) return;
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = false;
