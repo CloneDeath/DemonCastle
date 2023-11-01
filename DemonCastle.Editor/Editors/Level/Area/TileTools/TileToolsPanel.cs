@@ -27,7 +27,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		});
 		TileSelector.TileSelected += TileSelector_OnTileSelected;
 
-		AddChild(TileDetails = new TileDetails());
+		AddChild(TileDetails = new TileDetails(level.Directory));
 	}
 
 	private void TileSelector_OnTileSelected(TileInfo? obj) {

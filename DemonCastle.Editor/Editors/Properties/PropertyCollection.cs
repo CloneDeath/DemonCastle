@@ -28,12 +28,14 @@ public partial class PropertyCollection : VBoxContainer {
 		Name = nameof(PropertyCollection);
 	}
 
-	public void AddFile<T>(string name, T target, string directory,
+	public FileProperty AddFile<T>(string name, T target, string directory,
 						   Expression<Func<T, string>> propertyExpression,
 						   IEnumerable<IFileTypeData> fileTypes) where T : INotifyPropertyChanged {
-		AddChild(new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
+		var fileProperty = new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
-		});
+		};
+		AddChild(fileProperty);
+		return fileProperty;
 	}
 
 	public void AddColor<T>(string name, T target,Expression<Func<T, Color>> propertyExpression) where T : INotifyPropertyChanged {
@@ -78,10 +80,12 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
-	public void AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
-		AddChild(new SpriteReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
+		var spriteReferenceProperty = new SpriteReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
-		});
+		};
+		AddChild(spriteReferenceProperty);
+		return spriteReferenceProperty;
 	}
 
 	public void AddAnimationName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<AnimationInfo> options) where T : INotifyPropertyChanged {

@@ -8,7 +8,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class SpriteReferenceProperty : BaseProperty {
-	private readonly List<ISpriteDefinition> _options;
+	private List<ISpriteDefinition> _options = new();
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
@@ -21,7 +21,6 @@ public partial class SpriteReferenceProperty : BaseProperty {
 	}
 
 	public SpriteReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<ISpriteDefinition> options) {
-		_options = options.ToList();
 		Name = nameof(SpriteReferenceProperty);
 		Binding = binding;
 
@@ -29,6 +28,16 @@ public partial class SpriteReferenceProperty : BaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		});
+		LoadOptions(options);
+		PropertyValue = binding.Get();
+
+		OptionButton.ItemSelected += OnItemSelected;
+	}
+
+	public void LoadOptions(IEnumerable<ISpriteDefinition> options) {
+		_options = options.ToList();
+		OptionButton.Clear();
+
 		for (var i = 0; i < _options.Count; i++) {
 			var option = _options[i];
 			var texture = new AtlasTexture {
@@ -38,9 +47,6 @@ public partial class SpriteReferenceProperty : BaseProperty {
 			};
 			OptionButton.AddIconItem(texture, option.Name, i);
 		}
-		PropertyValue = binding.Get();
-
-		OptionButton.ItemSelected += OnItemSelected;
 	}
 
 	private void OnItemSelected(long index) {
