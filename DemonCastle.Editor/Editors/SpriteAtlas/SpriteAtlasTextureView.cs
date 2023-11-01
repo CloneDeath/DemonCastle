@@ -15,8 +15,16 @@ public partial class SpriteAtlasTextureView : TextureView {
 		Texture = spriteAtlasInfo.Texture;
 
 		ReloadSpriteData();
+	}
 
-		spriteAtlasInfo.PropertyChanged += SpriteAtlasInfo_OnPropertyChanged;
+	public override void _EnterTree() {
+		base._EnterTree();
+		_spriteAtlasInfo.PropertyChanged += SpriteAtlasInfo_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		_spriteAtlasInfo.PropertyChanged -= SpriteAtlasInfo_OnPropertyChanged;
 	}
 
 	private void SpriteAtlasInfo_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {

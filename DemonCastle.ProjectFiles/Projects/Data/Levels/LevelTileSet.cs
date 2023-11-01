@@ -24,7 +24,10 @@ public class LevelTileSet {
 	}
 
 	public TileInfo CreateTile() {
-		var tileData = new TileData();
+		var lastTile = Level.Tiles.LastOrDefault();
+		var tileData = new TileData {
+			Source = lastTile?.Source ?? string.Empty
+		};
 		Level.Tiles.Add(tileData);
 		File.Save();
 
