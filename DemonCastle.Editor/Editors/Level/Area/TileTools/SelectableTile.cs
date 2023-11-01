@@ -1,69 +1,31 @@
-using System;
-using DemonCastle.Game;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
-using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools; 
+namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
-public partial class SelectableTile : TextureRect {
-	protected Control SelectionBox;
-	public TileInfo Tile;
-	public event Action<SelectableTile>? Selected;
-	
+public partial class SelectableTile : SelectableControl {
+	protected Outline Outline;
+
+	public TileInfo Tile { get; private set; }
+
 	public SelectableTile(TileInfo tile) {
 		Name = nameof(SelectableTile);
 		Tile = tile;
-		
-		Texture = new AtlasTexture {
-			Atlas = tile.Texture,
-			Region = tile.Region
-		};
-		FlipH = tile.FlipHorizontal;
-		
-		AddChild(SelectionBox = new Control {
+
+		AddChild(new SpriteDefinitionView(tile.Sprite));
+		AddChild(Outline = new Outline {
 			Visible = false
 		});
-		SelectionBox.AddChild(new ColorRect { // TOP
-			Color = Colors.White,
-			Position = new Vector2(-1, -1),
-			Size = new Vector2(tile.Region.Size.X + 2, 1)
-		});
-		SelectionBox.AddChild(new ColorRect { // BOTTOM
-			Color = Colors.White,
-			Position = new Vector2(-1, tile.Region.Size.Y + 1),
-			Size = new Vector2(tile.Region.Size.X + 2, 1)
-		});
-		SelectionBox.AddChild(new ColorRect { // LEFT
-			Color = Colors.White,
-			Position = new Vector2(-1, -1),
-			Size = new Vector2(1, tile.Region.Size.Y + 2)
-		});
-		SelectionBox.AddChild(new ColorRect { // RIGHT
-			Color = Colors.White,
-			Position = new Vector2(tile.Region.Size.X + 1, -1),
-			Size = new Vector2(1, tile.Region.Size.Y + 2)
-		});
+		Outline.SetAnchorsPreset(LayoutPreset.FullRect);
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-
-		if (!Input.IsActionJustPressed(InputActions.EditorClick) || !MouseWithinBounds()) return;
-		Selected?.Invoke(this);
-		SelectionBox.Visible = true;
+		Outline.Visible = IsSelected;
 	}
 
-	private bool MouseWithinBounds() {
-		var mousePosition = GetViewport().GetMousePosition();
-		var myPosition = GlobalPosition;
-		var delta = mousePosition - myPosition;
-		var size = Size;
-		return delta is { X: >= 0, Y: >= 0 }
-			   && delta.X < size.X
-			   && delta.Y < size.Y;
-	}
-
-	public void ClearSelection() {
-		SelectionBox.Visible = false;
+	protected override void OnSelected() {
+		base.OnSelected();
+		DeselectSiblings();
 	}
 }

@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Extensions;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -8,9 +7,9 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected LevelInfo Level { get; }
 
 	protected Button AddTileButton { get; }
-	protected Button EditTileButton { get; }
 	protected Button DeleteTileButton { get; }
 	protected TileSelectorPanel TileSelector { get; }
+	protected TileDetails TileDetails { get; }
 
 	public TileToolsPanel(LevelInfo level) {
 		Name = nameof(TileToolsPanel);
@@ -19,13 +18,19 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(AddTileButton = new Button { Text = "Add Tile" });
 		AddTileButton.Pressed += AddTileButtonOnPressed;
 
-		AddChild(EditTileButton = new Button { Text = "Edit Tile" });
-		EditTileButton.Pressed += EditTileButtonOnPressed;
-
 		AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
 		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
 
-		AddChild(TileSelector = new TileSelectorPanel(level.TileSet));
+		AddChild(TileSelector = new TileSelectorPanel(level.TileSet) {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
+		TileSelector.TileSelected += TileSelector_OnTileSelected;
+
+		AddChild(TileDetails = new TileDetails());
+	}
+
+	private void TileSelector_OnTileSelected(TileInfo? obj) {
+		TileDetails.Proxy = obj;
 	}
 
 	public TileInfo? SelectedTile => TileSelector.SelectedTile;
@@ -34,22 +39,14 @@ public partial class TileToolsPanel : VBoxContainer {
 		base._Process(delta);
 
 		var itemSelected = TileSelector.SelectedTile != null;
-		EditTileButton.Disabled = !itemSelected;
 		DeleteTileButton.Disabled = !itemSelected;
 	}
 
 	private void AddTileButtonOnPressed() {
 		var tile = Level.TileSet.CreateTile();
-		var editor = new TileEditor(tile);
-		this.GetEditArea().ShowEditor(editor);
 		TileSelector.Reload();
-	}
-
-	private void EditTileButtonOnPressed() {
-		var tile = TileSelector.SelectedTile;
-		if (tile == null) return;
-		var window = new TileEditor(tile);
-		this.GetEditArea().ShowEditor(window);
+		TileSelector.SelectedTile = tile;
+		TileDetails.Proxy = tile;
 	}
 
 	private void DeleteTileButtonOnPressed() {
@@ -57,5 +54,6 @@ public partial class TileToolsPanel : VBoxContainer {
 		if (tile == null) return;
 		Level.TileSet.DeleteTile(tile);
 		TileSelector.Reload();
+		TileDetails.Proxy = null;
 	}
 }
