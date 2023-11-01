@@ -30,6 +30,7 @@ public partial class SpriteReferenceProperty : BaseProperty {
 		});
 		LoadOptions(options);
 		PropertyValue = binding.Get();
+		binding.Changed += Binding_OnChanged;
 
 		OptionButton.ItemSelected += OnItemSelected;
 	}
@@ -47,6 +48,10 @@ public partial class SpriteReferenceProperty : BaseProperty {
 			};
 			OptionButton.AddIconItem(texture, option.Name, i);
 		}
+	}
+
+	private void Binding_OnChanged(Guid value) {
+		PropertyValue = value;
 	}
 
 	private void OnItemSelected(long index) {

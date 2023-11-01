@@ -37,6 +37,7 @@ public partial class TileDetails : PropertyCollection {
 	private void TileProxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		if (e.PropertyName is nameof(TileProxy.SpriteId) or nameof(TileProxy.SourceFile)) {
 			SpriteIdProperty.LoadOptions(TileProxy.SpriteOptions);
+			SpriteIdProperty.PropertyValue = TileProxy.SpriteId;
 		}
 	}
 }
