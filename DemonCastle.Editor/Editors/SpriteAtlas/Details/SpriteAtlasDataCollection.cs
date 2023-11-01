@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas; 
+namespace DemonCastle.Editor.Editors.SpriteAtlas.Details; 
 
 public partial class SpriteAtlasDataCollection : ScrollContainer {
 	private readonly IEnumerable<SpriteAtlasDataInfo> _spriteData;

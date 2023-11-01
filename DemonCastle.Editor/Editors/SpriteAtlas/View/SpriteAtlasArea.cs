@@ -1,11 +1,12 @@
 using System;
 using System.Linq;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.Editor.Editors.SpriteAtlas.Dragging;
+using DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
+using DraggableRegion = DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging.DraggableRegion;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.View;
 
 public partial class SpriteAtlasArea : Control {
 	private const int EdgeMargin = 3;

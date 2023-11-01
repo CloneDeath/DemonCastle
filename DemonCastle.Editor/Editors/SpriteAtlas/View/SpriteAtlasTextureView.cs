@@ -4,7 +4,7 @@ using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.View;
 
 public partial class SpriteAtlasTextureView : TextureView {
 	private readonly SpriteAtlasInfo _spriteAtlasInfo;

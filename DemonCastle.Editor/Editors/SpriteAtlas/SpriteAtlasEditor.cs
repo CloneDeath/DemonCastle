@@ -14,9 +14,9 @@ public partial class SpriteAtlasEditor : BaseEditor {
     protected HSplitContainer SplitContainer { get; }
     protected PropertyCollection PropertyCollection { get; }
     protected Button AddSpriteButton { get; }
-    protected SpriteAtlasTextureView TextureView { get; }
+    protected View.SpriteAtlasTextureView TextureView { get; }
 
-    protected SpriteAtlasDataCollection DataCollection { get; }
+    protected Details.SpriteAtlasDataCollection DataCollection { get; }
 
     public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlasInfo) {
         Name = nameof(SpriteAtlasEditor);
@@ -25,13 +25,8 @@ public partial class SpriteAtlasEditor : BaseEditor {
 
         _spriteAtlasInfo = spriteAtlasInfo;
 
-        AddChild(SplitContainer = new HSplitContainer {
-            OffsetTop = 5,
-            OffsetBottom = -5,
-            OffsetLeft = 5,
-            OffsetRight = -5
-        });
-        SplitContainer.SetAnchorsPreset(LayoutPreset.FullRect, true);
+        AddChild(SplitContainer = new HSplitContainer());
+        SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
         SplitContainer.AddChild(PropertyCollection = new PropertyCollection {
             OffsetTop = 5,
@@ -49,12 +44,12 @@ public partial class SpriteAtlasEditor : BaseEditor {
         });
         AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
 
-        PropertyCollection.AddChild(DataCollection = new SpriteAtlasDataCollection(spriteAtlasInfo.AtlasSprites) {
+        PropertyCollection.AddChild(DataCollection = new Details.SpriteAtlasDataCollection(spriteAtlasInfo.AtlasSprites) {
             SizeFlagsVertical = SizeFlags.ExpandFill
         });
         DataCollection.SetAnchorsPreset(LayoutPreset.FullRect);
 
-        SplitContainer.AddChild(TextureView = new SpriteAtlasTextureView(spriteAtlasInfo));
+        SplitContainer.AddChild(TextureView = new View.SpriteAtlasTextureView(spriteAtlasInfo));
     }
 
     private void AddSpriteButton_OnPressed() {

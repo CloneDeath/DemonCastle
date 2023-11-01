@@ -3,7 +3,7 @@ using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.Details;
 
 public partial class SpriteAtlasDataPanel : PanelContainer {
 	protected PropertyCollection Properties { get; }

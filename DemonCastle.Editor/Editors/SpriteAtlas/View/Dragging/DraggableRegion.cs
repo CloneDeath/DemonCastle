@@ -3,7 +3,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Game;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas.Dragging;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging;
 
 public partial class DraggableRegion : SelectableControl {
 	private readonly DragData _drag = new();

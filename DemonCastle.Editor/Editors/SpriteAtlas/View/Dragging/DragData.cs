@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas.Dragging;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging;
 
 public class DragData {
 	public bool Dragging { get; set; }
