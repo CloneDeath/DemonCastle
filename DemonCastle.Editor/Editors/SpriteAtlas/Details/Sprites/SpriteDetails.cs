@@ -3,12 +3,12 @@ using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas.Details;
+namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 
-public partial class SpriteAtlasDataPanel : PanelContainer {
+public partial class SpriteDetails : PanelContainer {
 	protected PropertyCollection Properties { get; }
 
-	public SpriteAtlasDataPanel(SpriteAtlasDataInfo spriteData) {
+	public SpriteDetails(SpriteAtlasDataInfo spriteData) {
 		AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", spriteData, x => x.Name);
 		Properties.AddRect2I("Region", spriteData, x => x.Region);

@@ -1,45 +1,39 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.Editor.Editors.Level.Area.TileTools;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 
 public partial class SpriteSelectorPanel : HFlowContainer {
-	private readonly List<SelectableTile> _selection = new();
-	private TileInfo? _selectedTile;
+	private readonly List<SelectableSprite> _selection = new();
+	private ISpriteDefinition? _spriteDefinition;
 
-	public LevelTileSet TileSet { get; }
+	public SpriteAtlasInfo SpriteAtlas { get; }
 
-	public TileInfo? SelectedTile {
-		get => _selectedTile;
+	public ISpriteDefinition? SpriteDefinition {
+		get => _spriteDefinition;
 		set {
-			if (_selectedTile == value) return;
-			_selectedTile = value;
-			SelectTileInfo(value);
+			if (_spriteDefinition == value) return;
+			_spriteDefinition = value;
+			SelectSpriteDefinition(value);
 		}
 	}
 
-	public event Action<TileInfo?>? TileSelected;
+	public event Action<ISpriteDefinition?>? SpriteSelected;
 
-	public SpriteSelectorPanel(LevelTileSet tileSet) {
-		TileSet = tileSet;
+	public SpriteSelectorPanel(SpriteAtlasInfo spriteAtlas) {
+		SpriteAtlas = spriteAtlas;
 		Reload();
 	}
 
-	private void OnTileSelected(SelectableControl selection) {
-		if (selection is not SelectableTile selectableTile) return;
-		SelectedTile = selectableTile.Tile;
-		TileSelected?.Invoke(SelectedTile);
-	}
-
-	private void SelectTileInfo(TileInfo? tile) {
-		foreach (var selectableTile in _selection) {
-			selectableTile.IsSelected = selectableTile.Tile == tile;
+	private void SelectSpriteDefinition(ISpriteDefinition? spriteDefinition) {
+		foreach (var selectableSprite in _selection) {
+			selectableSprite.IsSelected = selectableSprite.SpriteDefinition == spriteDefinition;
 		}
-		TileSelected?.Invoke(SelectedTile);
+		SpriteSelected?.Invoke(SpriteDefinition);
 	}
 
 	public void Reload() {
@@ -48,11 +42,17 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		}
 		_selection.Clear();
 
-		foreach (var tile in TileSet.Tiles) {
-			var c = new SelectableTile(tile);
+		foreach (var sprite in SpriteAtlas.Sprites) {
+			var c = new SelectableSprite(sprite);
 			AddChild(c);
 			_selection.Add(c);
 			c.Selected += OnTileSelected;
 		}
+	}
+
+	private void OnTileSelected(SelectableControl selection) {
+		if (selection is not SelectableSprite selectableSprite) return;
+		SpriteDefinition = selectableSprite.SpriteDefinition;
+		SpriteSelected?.Invoke(SpriteDefinition);
 	}
 }

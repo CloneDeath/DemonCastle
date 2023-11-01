@@ -1,4 +1,6 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.SpriteAtlas.Details;
+using DemonCastle.Editor.Editors.SpriteAtlas.View;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
@@ -6,54 +8,35 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
-    private readonly SpriteAtlasInfo _spriteAtlasInfo;
+    private readonly SpriteAtlasInfo _spriteAtlas;
 
     public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
     public override string TabText { get; }
 
     protected HSplitContainer SplitContainer { get; }
-    protected PropertyCollection PropertyCollection { get; }
-    protected Button AddSpriteButton { get; }
-    protected View.SpriteAtlasTextureView TextureView { get; }
+    protected VBoxContainer LeftContainer { get; }
+    protected PropertyCollection SpriteAtlasDetails { get; }
+    protected SpriteAtlasTextureView TextureView { get; }
 
-    protected Details.SpriteAtlasDataCollection DataCollection { get; }
-
-    public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlasInfo) {
+    public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlas) {
         Name = nameof(SpriteAtlasEditor);
-        TabText = spriteAtlasInfo.FileName;
+        TabText = spriteAtlas.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
 
-        _spriteAtlasInfo = spriteAtlasInfo;
+        _spriteAtlas = spriteAtlas;
 
         AddChild(SplitContainer = new HSplitContainer());
         SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
-        SplitContainer.AddChild(PropertyCollection = new PropertyCollection {
-            OffsetTop = 5,
-            OffsetRight = -5,
-            OffsetBottom = -5,
-            OffsetLeft = 5,
-            CustomMinimumSize = new Vector2(410, 0)
-        });
-        PropertyCollection.SetAnchorsPreset(LayoutPreset.FullRect, true);
-        PropertyCollection.AddFile("File", spriteAtlasInfo, spriteAtlasInfo.Directory, x => x.SpriteFile, FileType.RawTextureFiles);
-        PropertyCollection.AddColor("Transparent Color", spriteAtlasInfo, x => x.TransparentColor);
+        SplitContainer.AddChild(LeftContainer = new VBoxContainer());
+        LeftContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+        {
+            LeftContainer.AddChild(SpriteAtlasDetails = new SpriteAtlasDetails(spriteAtlas) {
+                CustomMinimumSize = new Vector2(410, 0)
+            });
+            LeftContainer.AddChild(new SpriteAtlasDefinitionCollection(spriteAtlas));
+        }
 
-        PropertyCollection.AddChild(AddSpriteButton = new Button {
-            Text = "Add Sprite"
-        });
-        AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
-
-        PropertyCollection.AddChild(DataCollection = new Details.SpriteAtlasDataCollection(spriteAtlasInfo.AtlasSprites) {
-            SizeFlagsVertical = SizeFlags.ExpandFill
-        });
-        DataCollection.SetAnchorsPreset(LayoutPreset.FullRect);
-
-        SplitContainer.AddChild(TextureView = new View.SpriteAtlasTextureView(spriteAtlasInfo));
-    }
-
-    private void AddSpriteButton_OnPressed() {
-        _spriteAtlasInfo.CreateSprite();
-        DataCollection.Reload();
+        SplitContainer.AddChild(TextureView = new View.SpriteAtlasTextureView(spriteAtlas));
     }
 }
