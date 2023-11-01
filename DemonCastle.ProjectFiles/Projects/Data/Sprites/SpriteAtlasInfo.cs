@@ -40,7 +40,11 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 	public Texture2D Texture => File.GetTexture(Resource.File);
 
 	public SpriteAtlasDataInfo CreateSprite() {
-		var spriteAtlasData = new SpriteAtlasData();
+		var lastSprite = Resource.Sprites.LastOrDefault();
+		var spriteAtlasData = new SpriteAtlasData {
+			Height = lastSprite?.Height ?? 16,
+			Width = lastSprite?.Width ?? 16
+		};
 		Resource.Sprites.Add(spriteAtlasData);
 		_spriteData.Add(new SpriteAtlasDataInfo(this, spriteAtlasData));
 		return new SpriteAtlasDataInfo(this, spriteAtlasData);
