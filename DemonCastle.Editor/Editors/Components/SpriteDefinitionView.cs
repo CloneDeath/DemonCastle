@@ -5,20 +5,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class SpriteDefinitionView : CenterContainer {
-	private readonly ISpriteDefinition _definition;
+	private ISpriteDefinition? _definition;
 	private TextureRect Rect { get; set; }
 
 	public SpriteDefinitionView(ISpriteDefinition definition) {
-		_definition = definition;
-
 		AddChild(Rect = new TextureRect {
 			StretchMode = TextureRect.StretchModeEnum.KeepCentered
 		});
-		Reload();
-
-		if (definition is INotifyPropertyChanged definitionNotify) {
-			definitionNotify.PropertyChanged += DefinitionNotify_OnPropertyChanged;
-		}
+		Load(definition);
 	}
 
 	public override void _ExitTree() {
@@ -33,6 +27,18 @@ public partial class SpriteDefinitionView : CenterContainer {
 	}
 
 	public void Reload() {
+		if (_definition != null) Load(_definition);
+	}
+
+	public void Load(ISpriteDefinition definition) {
+		if (_definition is INotifyPropertyChanged oldDefinition) {
+			oldDefinition.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
+		}
+		_definition = definition;
+		if (_definition is INotifyPropertyChanged newDefinition) {
+			newDefinition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
+		}
+
 		Rect.Texture = new AtlasTexture {
 			Atlas = _definition.Texture,
 			Region = _definition.Region,

@@ -39,6 +39,7 @@ public class TileInfo : INotifyPropertyChanged {
 			TileData.Source = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprite));
 		}
 	}
 
@@ -48,6 +49,7 @@ public class TileInfo : INotifyPropertyChanged {
 			TileData.SpriteId = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprite));
 		}
 	}
 
