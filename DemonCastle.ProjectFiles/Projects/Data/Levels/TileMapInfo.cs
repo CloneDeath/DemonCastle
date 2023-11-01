@@ -37,9 +37,18 @@ public class TileMapInfo : INotifyPropertyChanged {
 
 	public Vector2I TileScale => AreaInfo.TileSize;
 	public TilePosition Position => new(TileIndex, AreaInfo.PositionOfArea, TileScale);
-	public Guid TileId => TileMapData.TileId;
+	public Guid TileId {
+		get => TileMapData.TileId;
+		set => TileMapData.TileId = value;
+	}
+
 	public Vector2I Span => Tile.Span;
 	public Rect2 Region => Sprite.Region;
+
+	public bool Contains(Vector2I tileIndex) {
+		var bounds = new Rect2I(Position.ToTileIndex(), Span);
+		return bounds.HasPoint(tileIndex);
+	}
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

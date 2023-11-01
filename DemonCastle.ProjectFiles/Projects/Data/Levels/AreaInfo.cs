@@ -65,9 +65,9 @@ public class AreaInfo : INotifyPropertyChanged {
 	public TileInfo GetTileInfo(Guid tileId) => LevelInfo.GetTileInfo(tileId);
 
 	public void SetTile(Vector2I tileIndex, Guid tileId) {
-		var tile = Area.TileMap.FirstOrDefault(t => t.X == tileIndex.X && t.Y == tileIndex.Y);
-		if (tile != null) {
-			tile.TileId = tileId;
+		var info = _tileMapInfos.Find(info => info.Contains(tileIndex));
+		if (info != null) {
+			info.TileId = tileId;
 		}
 		else {
 			var tileMapData = new TileMapData {
@@ -84,15 +84,16 @@ public class AreaInfo : INotifyPropertyChanged {
 	}
 
 	public void ClearTile(Vector2I tileIndex) {
-		var tile = Area.TileMap.FirstOrDefault(t => t.X == tileIndex.X && t.Y == tileIndex.Y);
+		var info = _tileMapInfos.Find(info => info.Contains(tileIndex));
+		if (info == null) return;
+		_tileMapInfos.Remove(info);
+
+		var infoPosition = info.Position.ToTileIndex();
+		var tile = Area.TileMap.FirstOrDefault(t => t.X == infoPosition.X && t.Y == infoPosition.Y);
 		if (tile != null) {
 			Area.TileMap.Remove(tile);
 		}
 
-		var index = _tileMapInfos.FindIndex(info => info.Position.ToTileIndex() == tileIndex);
-		if (index >= 0) _tileMapInfos.RemoveAt(index);
-
-		if (tile == null && index < 0) return;
 		OnPropertyChanged(nameof(TileMap));
 		LevelInfo.Save();
 	}
