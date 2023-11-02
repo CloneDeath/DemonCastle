@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -29,6 +31,28 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		Reload();
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		SpriteAtlas.PropertyChanged += SpriteAtlas_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		SpriteAtlas.PropertyChanged -= SpriteAtlas_OnPropertyChanged;
+	}
+
+	private void SpriteAtlas_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName != nameof(SpriteAtlas.AtlasSprites)) return;
+
+		var selected = GetSelectedSprite();
+		Reload();
+		SelectSpriteDefinition(selected);
+	}
+
+	private ISpriteDefinition? GetSelectedSprite() {
+		return _selection.FirstOrDefault(s => s.IsSelected)?.SpriteDefinition;
+	}
+
 	private void SelectSpriteDefinition(ISpriteDefinition? spriteDefinition) {
 		foreach (var selectableSprite in _selection) {
 			selectableSprite.IsSelected = selectableSprite.SpriteDefinition == spriteDefinition;
@@ -46,11 +70,11 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 			var c = new SelectableSprite(sprite);
 			AddChild(c);
 			_selection.Add(c);
-			c.Selected += OnTileSelected;
+			c.Selected += OnSpriteSelected;
 		}
 	}
 
-	private void OnTileSelected(SelectableControl selection) {
+	private void OnSpriteSelected(SelectableControl selection) {
 		if (selection is not SelectableSprite selectableSprite) return;
 		SpriteDefinition = selectableSprite.SpriteDefinition;
 		SpriteSelected?.Invoke(SpriteDefinition);

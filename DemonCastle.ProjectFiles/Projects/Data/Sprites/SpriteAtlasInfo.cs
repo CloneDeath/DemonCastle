@@ -25,6 +25,8 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 			Resource.File = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprites));
+			OnPropertyChanged(nameof(AtlasSprites));
 		}
 	}
 
@@ -34,6 +36,8 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 			Resource.TransparentColor = value.ToColorData();
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprites));
+			OnPropertyChanged(nameof(AtlasSprites));
 		}
 	}
 
