@@ -8,8 +8,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
-    private readonly SpriteAtlasInfo _spriteAtlas;
-
     public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
     public override string TabText { get; }
 
@@ -23,8 +21,6 @@ public partial class SpriteAtlasEditor : BaseEditor {
         TabText = spriteAtlas.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
 
-        _spriteAtlas = spriteAtlas;
-
         AddChild(SplitContainer = new HSplitContainer());
         SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
@@ -37,6 +33,6 @@ public partial class SpriteAtlasEditor : BaseEditor {
             LeftContainer.AddChild(new SpriteAtlasDefinitionCollection(spriteAtlas));
         }
 
-        SplitContainer.AddChild(TextureView = new View.SpriteAtlasTextureView(spriteAtlas));
+        SplitContainer.AddChild(TextureView = new SpriteAtlasTextureView(spriteAtlas));
     }
 }
