@@ -17,13 +17,15 @@ public partial class SpriteAtlasArea : Control {
 	private readonly Outline Outline;
 	private readonly DraggableRegion[] _draggableRegion = new DraggableRegion[9];
 
-	private readonly SpriteAtlasDataInfo _info;
+	public SpriteAtlasDataInfo Sprite { get; }
 
 	public bool IsSelected { get; private set; }
 	public event Action<SpriteAtlasArea>? Selected;
 
-	public SpriteAtlasArea(SpriteAtlasDataInfo info) {
-		_info = info;
+	public SpriteAtlasArea(SpriteAtlasDataInfo sprite) {
+		Sprite = sprite;
+
+		Name = nameof(SpriteAtlasArea);
 
 		AddChild(Outline = new Outline {
 			MouseFilter = MouseFilterEnum.Ignore
@@ -113,7 +115,7 @@ public partial class SpriteAtlasArea : Control {
 		_draggableRegion[8].DragUpdate += DraggableRegion_BottomRight_OnDragUpdate;
 
 		AddChild(SpriteName = new Label {
-			Text = info.Name,
+			Text = sprite.Name,
 			HorizontalAlignment = HorizontalAlignment.Center,
 			VerticalAlignment = VerticalAlignment.Top,
 			Size = new Vector2(0, 0)
@@ -129,51 +131,58 @@ public partial class SpriteAtlasArea : Control {
 	}
 
 	private void DraggableRegion_TopLeft_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, -obj.Delta.Y, 0, 0);
+		Sprite.Region = Sprite.Region.GrowIndividual(-obj.Delta.X, -obj.Delta.Y, 0, 0);
 	}
 
 	private void DraggableRegion_Top_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(0, -obj.Delta.Y, 0, 0);
+		Sprite.Region = Sprite.Region.GrowIndividual(0, -obj.Delta.Y, 0, 0);
 	}
 
 	private void DraggableRegion_TopRight_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(0, -obj.Delta.Y, obj.Delta.X, 0);
+		Sprite.Region = Sprite.Region.GrowIndividual(0, -obj.Delta.Y, obj.Delta.X, 0);
 
 	}
 
 	private void DraggableRegion_Left_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, 0, 0, 0);
+		Sprite.Region = Sprite.Region.GrowIndividual(-obj.Delta.X, 0, 0, 0);
 	}
 
 	private void DraggableRegion_Center_OnDragUpdate(DragData obj) {
-		_info.Position += obj.Delta;
+		Sprite.Position += obj.Delta;
 	}
 
 	private void DraggableRegion_Right_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(0, 0, obj.Delta.X, 0);
+		Sprite.Region = Sprite.Region.GrowIndividual(0, 0, obj.Delta.X, 0);
 	}
 
 	private void DraggableRegion_BottomLeft_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(-obj.Delta.X, 0, 0, obj.Delta.Y);
+		Sprite.Region = Sprite.Region.GrowIndividual(-obj.Delta.X, 0, 0, obj.Delta.Y);
 	}
 
 	private void DraggableRegion_Bottom_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(0, 0, 0, obj.Delta.Y);
+		Sprite.Region = Sprite.Region.GrowIndividual(0, 0, 0, obj.Delta.Y);
 	}
 
 	private void DraggableRegion_BottomRight_OnDragUpdate(DragData obj) {
-		_info.Region = _info.Region.GrowIndividual(0, 0, obj.Delta.X, obj.Delta.Y);
+		Sprite.Region = Sprite.Region.GrowIndividual(0, 0, obj.Delta.X, obj.Delta.Y);
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Position = _info.Position;
-		Size = _info.Size;
-		SpriteName.Text = _info.Name;
+		Position = Sprite.Position;
+		Size = Sprite.Size;
+		SpriteName.Text = Sprite.Name;
 		SpriteName.Position = new Vector2(Size.X / 2, Size.Y) - new Vector2(SpriteName.Size.X / 2, 0);
 		SpriteName.Modulate = IsSelected ? Color_Selected : Colors.Transparent;
 		Outline.Color = IsSelected ? Color_Selected : Color_NotSelected;
+	}
+
+	public void Select() {
+		IsSelected = true;
+		foreach (var draggableRegion in _draggableRegion) {
+			draggableRegion.IsSelected = true;
+		}
 	}
 
 	public void Deselect() {

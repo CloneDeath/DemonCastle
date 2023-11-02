@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -12,6 +13,8 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 	protected Button AddSpriteButton { get; }
 	protected SpriteSelectorPanel SpriteSelector { get; }
 	protected SpriteDetails SpriteDetails { get; }
+
+	public event Action<SpriteAtlasDataInfo?>? SpriteSelected;
 
 	public SpriteAtlasDefinitionCollection(SpriteAtlasInfo spriteAtlas) {
 		_spriteAtlas = spriteAtlas;
@@ -31,8 +34,14 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		AddChild(SpriteDetails = new SpriteDetails(_proxy));
 	}
 
-	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? obj) {
-		_proxy.Proxy = obj as SpriteAtlasDataInfo;
+	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
+		_proxy.Proxy = sprite;
+		SpriteSelector.SelectSprite(sprite);
+	}
+
+	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? sprite) {
+		_proxy.Proxy = sprite as SpriteAtlasDataInfo;
+		SpriteSelected?.Invoke(sprite as SpriteAtlasDataInfo);
 	}
 
 	private void AddSpriteButton_OnPressed() {

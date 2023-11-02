@@ -43,7 +43,6 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 
 	private void SpriteAtlas_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		if (e.PropertyName != nameof(SpriteAtlas.AtlasSprites)) return;
-
 		var selected = GetSelectedSprite();
 		Reload();
 		SelectSpriteDefinition(selected);
@@ -54,9 +53,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	}
 
 	private void SelectSpriteDefinition(ISpriteDefinition? spriteDefinition) {
-		foreach (var selectableSprite in _selection) {
-			selectableSprite.IsSelected = selectableSprite.SpriteDefinition == spriteDefinition;
-		}
+		SelectSprite(spriteDefinition as SpriteAtlasDataInfo);
 		SpriteSelected?.Invoke(SpriteDefinition);
 	}
 
@@ -78,5 +75,11 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		if (selection is not SelectableSprite selectableSprite) return;
 		SpriteDefinition = selectableSprite.SpriteDefinition;
 		SpriteSelected?.Invoke(SpriteDefinition);
+	}
+
+	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
+		foreach (var selectableSprite in _selection) {
+			selectableSprite.IsSelected = selectableSprite.SpriteDefinition == sprite;
+		}
 	}
 }

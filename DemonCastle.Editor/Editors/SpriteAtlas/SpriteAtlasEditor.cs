@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.SpriteAtlas.Details;
 using DemonCastle.Editor.Editors.SpriteAtlas.View;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
@@ -14,6 +15,7 @@ public partial class SpriteAtlasEditor : BaseEditor {
     protected HSplitContainer SplitContainer { get; }
     protected VBoxContainer LeftContainer { get; }
     protected PropertyCollection SpriteAtlasDetails { get; }
+    protected SpriteAtlasDefinitionCollection SpriteCollection { get; }
     protected SpriteAtlasTextureView TextureView { get; }
 
     public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlas) {
@@ -30,9 +32,19 @@ public partial class SpriteAtlasEditor : BaseEditor {
             LeftContainer.AddChild(SpriteAtlasDetails = new SpriteAtlasDetails(spriteAtlas) {
                 CustomMinimumSize = new Vector2(410, 0)
             });
-            LeftContainer.AddChild(new SpriteAtlasDefinitionCollection(spriteAtlas));
+            LeftContainer.AddChild(SpriteCollection = new SpriteAtlasDefinitionCollection(spriteAtlas));
+            SpriteCollection.SpriteSelected += SpriteCollection_OnSpriteSelected;
         }
 
         SplitContainer.AddChild(TextureView = new SpriteAtlasTextureView(spriteAtlas));
+        TextureView.SpriteSelected += TextureView_SpriteSelected;
+    }
+
+    private void SpriteCollection_OnSpriteSelected(SpriteAtlasDataInfo? sprite) {
+        TextureView.SelectSprite(sprite);
+    }
+
+    private void TextureView_SpriteSelected(SpriteAtlasDataInfo sprite) {
+        SpriteCollection.SelectSprite(sprite);
     }
 }
