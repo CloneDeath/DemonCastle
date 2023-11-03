@@ -12,6 +12,8 @@ public partial class SpriteReferenceProperty : BaseProperty {
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
+	public event Action<ISpriteDefinition>? SpriteSelected;
+
 	public Guid PropertyValue {
 		get => OptionButton.Selected < 0 ? Guid.Empty : _options[OptionButton.Selected].Id;
 		set {
@@ -56,6 +58,9 @@ public partial class SpriteReferenceProperty : BaseProperty {
 
 	private void OnItemSelected(long index) {
 		Binding.Set(index < 0 ? Guid.Empty : _options[(int)index].Id);
+		if (index > 0) {
+			SpriteSelected?.Invoke(_options[(int)index]);
+		}
 	}
 
 	public override void Enable() {

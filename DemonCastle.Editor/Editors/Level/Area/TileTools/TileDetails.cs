@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
@@ -29,10 +30,17 @@ public partial class TileDetails : PropertyCollection {
 		AddString("Name", TileProxy, x => x.Name);
 		AddFile("Source", TileProxy, levelDirectory,  t => t.SourceFile, FileType.SpriteSources);
 		SpriteIdProperty = AddSpriteReference("Sprite", TileProxy, x => x.SpriteId, TileProxy.SpriteOptions);
+		SpriteIdProperty.SpriteSelected += SpriteIdProperty_OnSpriteSelected;
 		AddVector2I("Span", TileProxy, x => x.Span);
 		DisableProperties();
 
 		TileProxy.PropertyChanged += TileProxy_OnPropertyChanged;
+	}
+
+	private void SpriteIdProperty_OnSpriteSelected(ISpriteDefinition obj) {
+		if (string.IsNullOrEmpty(TileProxy.Name)) {
+			TileProxy.Name = obj.Name;
+		}
 	}
 
 	private void TileProxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
