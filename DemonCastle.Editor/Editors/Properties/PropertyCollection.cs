@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
@@ -86,6 +87,14 @@ public partial class PropertyCollection : VBoxContainer {
 		};
 		AddChild(spriteReferenceProperty);
 		return spriteReferenceProperty;
+	}
+
+	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AreaInfo> options) where T : INotifyPropertyChanged {
+		var areaReferenceProperty = new AreaReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		};
+		AddChild(areaReferenceProperty);
+		return areaReferenceProperty;
 	}
 
 	public void AddAnimationName<T>(string name, T target, Expression<Func<T, string>> propertyExpression, IEnumerable<AnimationInfo> options) where T : INotifyPropertyChanged {

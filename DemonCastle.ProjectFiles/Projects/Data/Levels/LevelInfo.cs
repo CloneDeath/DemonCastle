@@ -38,6 +38,25 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 		}
 	}
 
+	public Guid StartingPositionAreaId {
+		get => Resource.StartingPosition.AreaId;
+		set {
+			Resource.StartingPosition.AreaId = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I StartingPositionAreaCell {
+		get => new(Resource.StartingPosition.X, Resource.StartingPosition.Y);
+		set {
+			Resource.StartingPosition.X = value.X;
+			Resource.StartingPosition.Y = value.Y;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public IEnumerable<AreaInfo> Areas => _areas;
 
 	public Vector2 StartingLocation => TileSize * (

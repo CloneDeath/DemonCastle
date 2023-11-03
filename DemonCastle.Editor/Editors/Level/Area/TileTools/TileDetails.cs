@@ -31,7 +31,7 @@ public partial class TileDetails : PropertyCollection {
 		AddString("Name", TileProxy, x => x.Name);
 		AddFile("Source", TileProxy, levelDirectory,  t => t.SourceFile, FileType.SpriteSources);
 		SpriteIdProperty = AddSpriteReference("Sprite", TileProxy, x => x.SpriteId, TileProxy.SpriteOptions);
-		SpriteIdProperty.SpriteSelected += SpriteIdProperty_OnSpriteSelected;
+		SpriteIdProperty.ItemSelected += SpriteIdProperty_OnSpriteSelected;
 		AddVector2I("Span", TileProxy, x => x.Span);
 		DisableProperties();
 
