@@ -63,13 +63,21 @@ public class TileInfo : INotifyPropertyChanged {
 		}
 	}
 
+	public Vector2[] Collision {
+		get => TileData.Collision.Select(c => new Vector2(c.X, c.Y) * TileSize).ToArray();
+		set {
+			TileData.Collision = value.Select(v => new CollisionData { X = v.X, Y = v.Y }).ToList();
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == TileData.SpriteId)
 										  ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteOptions => Source.Sprites;
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
-	public Vector2[] Collision => TileData.Collision.Select(c => new Vector2(c.X, c.Y) * TileSize).ToArray();
 	public bool FlipHorizontal => Sprite.FlipHorizontal;
 
 	private void Save() => Level.Save();

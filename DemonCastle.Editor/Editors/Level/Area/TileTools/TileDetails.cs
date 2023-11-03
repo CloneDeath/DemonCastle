@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DemonCastle.Editor.Editors.Level.Area.TileTools.Collision;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -33,6 +34,8 @@ public partial class TileDetails : PropertyCollection {
 		SpriteIdProperty = AddSpriteReference("Sprite", TileProxy, x => x.SpriteId, TileProxy.SpriteOptions);
 		SpriteIdProperty.ItemSelected += SpriteIdProperty_OnSpriteSelected;
 		AddVector2I("Span", TileProxy, x => x.Span);
+		AddChild(new TileCollisionView(TileProxy));
+
 		DisableProperties();
 
 		TileProxy.PropertyChanged += TileProxy_OnPropertyChanged;

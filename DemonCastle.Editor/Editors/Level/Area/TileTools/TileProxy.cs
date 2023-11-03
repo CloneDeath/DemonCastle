@@ -29,6 +29,7 @@ public class TileProxy : INotifyPropertyChanged {
 			OnPropertyChanged(nameof(Directory));
 			OnPropertyChanged(nameof(SpriteOptions));
 			OnPropertyChanged(nameof(Span));
+			OnPropertyChanged(nameof(Collision));
 		}
 	}
 
@@ -57,6 +58,13 @@ public class TileProxy : INotifyPropertyChanged {
 		get => _proxy?.Span ?? Vector2I.One;
 		set {
 			if (_proxy != null) _proxy.Span = value;
+		}
+	}
+
+	public Vector2[] Collision {
+		get => _proxy?.Collision ?? Array.Empty<Vector2>();
+		set {
+			if (_proxy != null) _proxy.Collision = value;
 		}
 	}
 
