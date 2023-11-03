@@ -50,6 +50,8 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 	}
 
 	private void AddSpriteButton_OnPressed() {
-		_spriteAtlas.CreateSprite();
+		var sprite = _spriteAtlas.CreateSprite();
+		SelectSprite(sprite);
+		SpriteSelected?.Invoke(sprite);
 	}
 }
