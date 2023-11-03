@@ -46,6 +46,8 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 	public SpriteAtlasDataInfo CreateSprite() {
 		var lastSprite = Resource.Sprites.LastOrDefault();
 		var spriteAtlasData = new SpriteAtlasData {
+			X = lastSprite?.X + lastSprite?.Width ?? 0,
+			Y = lastSprite?.Y ?? 0,
 			Height = lastSprite?.Height ?? 16,
 			Width = lastSprite?.Width ?? 16
 		};

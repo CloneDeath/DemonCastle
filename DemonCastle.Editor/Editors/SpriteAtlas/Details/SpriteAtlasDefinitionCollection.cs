@@ -32,15 +32,20 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;
 
 		AddChild(SpriteDetails = new SpriteDetails(_proxy));
+		SpriteDetails.DisableProperties();
 	}
 
 	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
 		_proxy.Proxy = sprite;
+		if (sprite != null) SpriteDetails.EnableProperties();
+		else SpriteDetails.DisableProperties();
 		SpriteSelector.SelectSprite(sprite);
 	}
 
 	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? sprite) {
 		_proxy.Proxy = sprite as SpriteAtlasDataInfo;
+		if (sprite != null) SpriteDetails.EnableProperties();
+		else SpriteDetails.DisableProperties();
 		SpriteSelected?.Invoke(sprite as SpriteAtlasDataInfo);
 	}
 
