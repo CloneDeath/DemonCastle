@@ -59,11 +59,9 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 
 	public IEnumerable<AreaInfo> Areas => _areas;
 
-	public Vector2 StartingLocation => TileSize * (
-													  GetAreaById(Resource.StartingPosition.AreaId).TilePosition
-													  + new Vector2(Resource.StartingPosition.X,
-														  Resource.StartingPosition.Y)
-												  ) + TileSize / new Vector2(1 / 2f, 1);
+	public Vector2 StartingLocation => GetAreaById(Resource.StartingPosition.AreaId).TilePosition
+									   + TileSize * new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
+									   + TileSize / new Vector2(1 / 2f, 1);
 
 	public string Name {
 		get => Resource.Name;
