@@ -1,5 +1,6 @@
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.Editor.Icons;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 

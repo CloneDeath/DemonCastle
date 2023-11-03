@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details;

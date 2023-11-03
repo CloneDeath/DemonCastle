@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.Editor.FileTypes;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.FileTypes;
 using Godot;
 using Path = System.IO.Path;
 

@@ -17,10 +17,12 @@ public class ProjectInfo : IListableInfo {
 	public string Name => Project.Name;
 
 	public IEnumerable<CharacterInfo> Characters => File.GetFilesAndSubFiles()
-														.Where(f => f.Extension == ".dcc")
+														.Where(f => f.Extension == FileType.Character.Extension)
 														.Select(f => f.ToCharacterInfo());
 
-	public IEnumerable<LevelInfo> Levels => File.GetLevels(Project.Levels);
+	public IEnumerable<LevelInfo> Levels => File.GetFilesAndSubFiles()
+												.Where(f => f.Extension == FileType.Level.Extension)
+												.Select(f => f.ToLevelInfo());
 	public string FilePath => File.FilePath;
 
 
