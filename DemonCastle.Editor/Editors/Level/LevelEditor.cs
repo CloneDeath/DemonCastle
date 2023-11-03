@@ -29,6 +29,11 @@ public partial class LevelEditor : BaseEditor {
 		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
 		LevelOverview.AreaSelected += LevelOverview_OnAreaSelected;
 		SplitContainer.AddChild(Area = new AreaEdit(level));
+		Area.AreaSelected += Area_OnAreaSelected;
+	}
+
+	private void Area_OnAreaSelected(AreaInfo area) {
+		LevelOverview.SelectArea(area);
 	}
 
 	private void LevelOverview_OnAreaSelected(AreaInfo area) {

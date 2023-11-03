@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 using DemonCastle.Editor.Editors.Level.Area.Details;
 using DemonCastle.Editor.Editors.Level.Area.TileTools;
@@ -13,6 +14,8 @@ public partial class AreaEdit : HSplitContainer {
 
 	protected LevelAreasView RightPanel { get; }
 
+	public event Action<AreaInfo>? AreaSelected;
+
 	public AreaEdit(LevelInfo level) {
 		Name = nameof(AreaEdit);
 
@@ -22,6 +25,7 @@ public partial class AreaEdit : HSplitContainer {
 		LeftPanel.AddChild(Details = new AreaDetails());
 		LeftPanel.AddChild(Tools = new TileToolsPanel(level));
 		AddChild(RightPanel = new LevelAreasView(level));
+		RightPanel.AreaSelected += LevelAreasView_OnAreaSelected;
 		RightPanel.AreaTileSelected += LevelAreasView_OnAreaTileSelected;
 		RightPanel.AreaTileCleared += LevelAreasView_OnAreaTileCleared;
 	}
@@ -37,6 +41,11 @@ public partial class AreaEdit : HSplitContainer {
 				RightPanel.SelectArea(value);
 			}
 		}
+	}
+
+	private void LevelAreasView_OnAreaSelected(AreaInfo area) {
+		Details.Proxy = area;
+		AreaSelected?.Invoke(area);
 	}
 
 	private void LevelAreasView_OnAreaTileSelected(AreaInfo area, Vector2I cell) {

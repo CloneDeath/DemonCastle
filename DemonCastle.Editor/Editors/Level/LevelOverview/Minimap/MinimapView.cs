@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
@@ -8,6 +9,7 @@ namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
 public partial class MinimapView : ControlView<ExpandingControl> {
 	private readonly LevelInfo _levelInfo;
+	private readonly List<AreaCell> _areas = new();
 	public event Action<AreaInfo>? AreaSelected;
 
 	public MinimapView(LevelInfo levelInfo) {
@@ -17,6 +19,12 @@ public partial class MinimapView : ControlView<ExpandingControl> {
 		CellSize = levelInfo.AreaSize;
 		GridVisible = true;
 		LoadLevel(levelInfo);
+	}
+
+	public void SelectArea(AreaInfo area) {
+		foreach (var areaCell in _areas) {
+			areaCell.IsSelected = areaCell.Area == area;
+		}
 	}
 
 	public override void _EnterTree() {
@@ -40,8 +48,11 @@ public partial class MinimapView : ControlView<ExpandingControl> {
 		foreach (var child in MainControl.Inner.GetChildren()) {
 			child.QueueFree();
 		}
+		_areas.Clear();
+
 		foreach (var area in levelInfo.Areas) {
 			var cell = new AreaCell(area);
+			_areas.Add(cell);
 			cell.Selected += Cell_OnSelected;
 			MainControl.Inner.AddChild(cell);
 		}

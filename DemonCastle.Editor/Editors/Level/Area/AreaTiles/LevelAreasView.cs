@@ -12,6 +12,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 	private readonly LevelInfo _levelInfo;
 	private readonly Dictionary<AreaInfo, AreaView> _areaMap = new();
 
+	public event Action<AreaInfo>? AreaSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileCleared;
 
@@ -49,6 +50,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 			var areaView = new AreaView(area) {
 				MouseFilter = MouseFilterEnum.Pass
 			};
+			areaView.Selected += _ => AreaSelected?.Invoke(area);
 			areaView.AreaTileSelected += (areaInfo, index) => AreaTileSelected?.Invoke(areaInfo, index);
 			areaView.AreaTileCleared += (areaInfo, index) => AreaTileCleared?.Invoke(areaInfo, index);
 			MainControl.Inner.AddChild(areaView);
