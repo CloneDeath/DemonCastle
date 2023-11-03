@@ -19,8 +19,16 @@ public partial class SelectableTile : SelectableControl {
 			Visible = false
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect);
+	}
 
-		tile.PropertyChanged += Tile_OnPropertyChanged;
+	public override void _EnterTree() {
+		base._EnterTree();
+		Tile.PropertyChanged += Tile_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Tile.PropertyChanged -= Tile_OnPropertyChanged;
 	}
 
 	private void Tile_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
