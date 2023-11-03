@@ -24,6 +24,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = CharactersLabel.Position + new Vector2(0, 30)
 			});
 			CharacterInfoList.Load(project.Characters);
+			CharacterInfoList.Select(0);
 
 			AddChild(LevelsLabel = new Label {
 				Text = "Levels:",
@@ -33,6 +34,7 @@ namespace DemonCastle.Game.SetupScreen {
 				Position = LevelsLabel.Position + new Vector2(0, 30)
 			});
 			LevelInfoList.Load(project.Levels);
+			LevelInfoList.Select(0);
 
 			AddChild(LaunchButton = new Button {
 				Text = "Start Chapter",

@@ -15,7 +15,7 @@ public partial class GameTile : Node2D {
 			RegionEnabled = true,
 			RegionRect = tile.Region,
 			Centered = false,
-			Scale = tile.TileSize / tile.Region.Size
+			Scale = tile.Span * tile.TileSize / tile.Region.Size
 		});
 
 		if (!tile.Collision.Any()) return;
