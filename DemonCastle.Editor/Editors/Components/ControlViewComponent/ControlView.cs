@@ -20,6 +20,8 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 			OffsetTop = 30,
 			OffsetBottom = -25
 		});
+		MainControl.GetHScrollBar().MinValue = -2;
+		MainControl.GetVScrollBar().MinValue = -2;
 		MainControl.Inner.MouseDefaultCursorShape = CursorShape.Cross;
 		MainControl.Inner.MouseEntered += MainControl_Inner_OnMouseEntered;
 		MainControl.Inner.MouseExited += MainControl_Inner_OnMouseExited;
@@ -54,7 +56,9 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 	}
 
 	private void Toolbar_OnZoomLevelChanged(float zoom) {
+		var previousZoom = MainControl.Zoom;
 		MainControl.Zoom = zoom;
+		MainControl.ScrollPosition = (Vector2I)((Vector2)MainControl.ScrollPosition * zoom / previousZoom);
 	}
 
 	private void MainControl_Inner_OnMouseEntered() {
