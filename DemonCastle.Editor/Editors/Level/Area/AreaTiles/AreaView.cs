@@ -52,9 +52,10 @@ public partial class AreaView : SelectableControl {
 	}
 
 	public override void _GuiInput(InputEvent @event) {
+		var isSelected = IsSelected;
 		base._GuiInput(@event);
 		if (@event is not InputEventMouse mouseEvent) return;
-		if (!IsSelected) return;
+		if (!isSelected) return;
 
 		if (mouseEvent is InputEventMouseMotion) {
 			if (Input.IsActionPressed(InputActions.EditorClick)) {
@@ -74,7 +75,9 @@ public partial class AreaView : SelectableControl {
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == true) return;
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = true;
-		AreaTileSelected?.Invoke(Area, index);
+		if (index >= Vector2I.Zero && index < Area.SizeOfArea.ToPixelSize()) {
+			AreaTileSelected?.Invoke(Area, index);
+		}
 	}
 
 	private void TriggerTileCellCleared(Vector2 position) {
@@ -82,7 +85,9 @@ public partial class AreaView : SelectableControl {
 		if (_previousTriggeredPosition == index && _previousTriggerWasSelect == false) return;
 		_previousTriggeredPosition = index;
 		_previousTriggerWasSelect = false;
-		AreaTileCleared?.Invoke(Area, index);
+		if (index >= Vector2I.Zero && index < Area.SizeOfArea.ToPixelSize()) {
+			AreaTileCleared?.Invoke(Area, index);
+		}
 	}
 
 	private Vector2I GetTileIndexOfMousePosition(Vector2 position) {

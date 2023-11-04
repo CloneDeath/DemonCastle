@@ -19,6 +19,11 @@ public partial class BindingLineEdit : WrapperControl<LineEdit> {
 		}
 	}
 
+	public override void _ExitTree() {
+		base._ExitTree();
+		if (PropertyBinding != null) PropertyBinding.Changed -= PropertyBinding_OnChanged;
+	}
+
 	public string Text {
 		get => Inner.Text;
 		set {
