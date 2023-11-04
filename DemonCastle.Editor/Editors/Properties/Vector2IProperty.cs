@@ -26,7 +26,6 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 	public Vector2IProperty(IPropertyBinding<Vector2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
-		Binding.Changed += Binding_OnChanged;
 
 		AddChild(Label = new Label());
 
@@ -52,6 +51,16 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 			Value = Binding.Get().Y
 		});
 		YBox.ValueChanged += OnYValueChange;
+	}
+
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
 	}
 
 	protected void OnXValueChange(double value) {

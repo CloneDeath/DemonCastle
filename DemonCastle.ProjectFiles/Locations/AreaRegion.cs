@@ -11,13 +11,17 @@ public class AreaRegion {
 		_size = size;
 	}
 
-	public bool HasPixelPositionInLevel(Vector2 pixelPosition) {
-		var rect = new Rect2(_position.ToPixelPositionInLevel(), _size.ToPixelSize());
+	public bool HasPixelPositionInLevel(Vector2I pixelPosition) {
+		var rect = ToPixelRegionInLevel();
 		return rect.HasPoint(pixelPosition);
 	}
 
 	public bool ContainsAreaIndex(Vector2I areaIndex) {
-		var rect = new Rect2(_position.AreaIndex, _size.ToAreaScale());
-		return rect.HasPoint(areaIndex + new Vector2(0.5f, 0.5f));
+		var rect = new Rect2I(_position.AreaIndex, _size.ToAreaScale());
+		return rect.HasPoint(areaIndex);
+	}
+
+	public Rect2I ToPixelRegionInLevel() {
+		return new Rect2I(_position.ToPixelPositionInLevel(), _size.ToPixelSize());
 	}
 }

@@ -51,4 +51,8 @@ public partial class ScrollableWrapper<T> : ScrollContainer where T : Control, n
 		ScrollHorizontal = (int)target.X;
 		ScrollVertical = (int)target.Y;
 	}
+
+	public Rect2 GetVisibleRegion() {
+		return new Rect2(ScrollPosition, Size * Inner.Scale);
+	}
 }

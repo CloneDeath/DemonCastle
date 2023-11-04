@@ -62,7 +62,11 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 		if (!_areaMap.ContainsKey(area)) return;
 		var areaView = _areaMap[area];
 		areaView.IsSelected = true;
-		MainControl.CenterOnPosition(areaView.Position + areaView.Size / 2);
+
+		var region = area.Region.ToPixelRegionInLevel();
+		if (!MainControl.GetVisibleRegion().Intersects(region)) {
+			MainControl.CenterOnPosition(areaView.Position + areaView.Size / 2);
+		}
 	}
 
 	public void DeselectAllAreas() {

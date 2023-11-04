@@ -21,7 +21,7 @@ public partial class GameLevel : Node2D {
 		}
 	}
 
-	public AreaInfo? GetAreaAtPoint(Vector2 point) {
+	public AreaInfo? GetAreaAtPoint(Vector2I point) {
 		return Level.Areas.FirstOrDefault(area => area.Region.HasPixelPositionInLevel(point));
 	}
 }

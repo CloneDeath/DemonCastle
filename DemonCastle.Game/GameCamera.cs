@@ -21,7 +21,7 @@ public partial class GameCamera : Camera2D {
 	}
 
 	private void SetLimits() {
-		var area = _level.GetAreaAtPoint(_player.Position);
+		var area = _level.GetAreaAtPoint((Vector2I)_player.Position);
 		if (area == null) return;
 
 		var start = area.PositionOfArea.ToPixelPositionInLevel();
