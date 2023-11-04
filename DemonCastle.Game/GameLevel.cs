@@ -4,7 +4,14 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameLevel : Node2D {
+	protected LevelInfo Level { get; }
+
 	public Vector2 StartingLocation => Level.StartingLocation;
+
+	public GameLevel(LevelInfo level) {
+		Level = level;
+		LoadLevel();
+	}
 
 	protected void LoadLevel() {
 		foreach (var area in Level.Areas) {

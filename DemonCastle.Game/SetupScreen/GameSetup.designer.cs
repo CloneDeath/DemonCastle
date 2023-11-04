@@ -3,44 +3,44 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Game.SetupScreen {
-	public partial class GameSetup {
-		protected Label CharactersLabel { get; }
-		protected InfoItemList<CharacterInfo> CharacterInfoList { get; }
+namespace DemonCastle.Game.SetupScreen;
 
-		protected Label LevelsLabel { get; }
-		protected InfoItemList<LevelInfo> LevelInfoList { get; }
+public partial class GameSetup {
+	protected Label CharactersLabel { get; }
+	protected InfoItemList<CharacterInfo> CharacterInfoList { get; }
 
-		protected Button LaunchButton { get; }
+	protected Label LevelsLabel { get; }
+	protected InfoItemList<LevelInfo> LevelInfoList { get; }
 
-		public GameSetup(ProjectInfo project) {
-			Name = nameof(GameSetup);
+	protected Button LaunchButton { get; }
 
-			AddChild(CharactersLabel = new Label {
-				Text = "Characters:",
-				Position = new Vector2(10, 10)
-			});
-			AddChild(CharacterInfoList = new InfoItemList<CharacterInfo> {
-				Position = CharactersLabel.Position + new Vector2(0, 30)
-			});
-			CharacterInfoList.Load(project.Characters);
-			CharacterInfoList.Select(0);
+	public GameSetup(ProjectInfo project) {
+		Name = nameof(GameSetup);
 
-			AddChild(LevelsLabel = new Label {
-				Text = "Levels:",
-				Position = CharactersLabel.Position + new Vector2(310, 0)
-			});
-			AddChild(LevelInfoList = new InfoItemList<LevelInfo> {
-				Position = LevelsLabel.Position + new Vector2(0, 30)
-			});
-			LevelInfoList.Load(project.Levels);
-			LevelInfoList.Select(0);
+		AddChild(CharactersLabel = new Label {
+			Text = "Characters:",
+			Position = new Vector2(10, 10)
+		});
+		AddChild(CharacterInfoList = new InfoItemList<CharacterInfo> {
+			Position = CharactersLabel.Position + new Vector2(0, 30)
+		});
+		CharacterInfoList.Load(project.Characters);
+		CharacterInfoList.Select(0);
 
-			AddChild(LaunchButton = new Button {
-				Text = "Start Chapter",
-				Position = CharacterInfoList.Position + new Vector2(0, 310)
-			});
-			LaunchButton.Pressed += this.OnLaunchButtonClicked;
-		}
+		AddChild(LevelsLabel = new Label {
+			Text = "Levels:",
+			Position = CharactersLabel.Position + new Vector2(310, 0)
+		});
+		AddChild(LevelInfoList = new InfoItemList<LevelInfo> {
+			Position = LevelsLabel.Position + new Vector2(0, 30)
+		});
+		LevelInfoList.Load(project.Levels);
+		LevelInfoList.Select(0);
+
+		AddChild(LaunchButton = new Button {
+			Text = "Start Chapter",
+			Position = CharacterInfoList.Position + new Vector2(0, 310)
+		});
+		LaunchButton.Pressed += this.OnLaunchButtonClicked;
 	}
 }
