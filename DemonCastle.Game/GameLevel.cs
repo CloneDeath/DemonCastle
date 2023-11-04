@@ -15,7 +15,7 @@ public partial class GameLevel : Node2D {
 		Name = nameof(GameLevel);
 
 		foreach (var area in Level.Areas) {
-			AddChild(new GameArea(area) {
+			AddChild(new GameArea(area, level) {
 				Position = area.PositionOfArea.ToPixelPositionInLevel()
 			});
 		}

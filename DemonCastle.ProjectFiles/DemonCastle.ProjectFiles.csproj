@@ -17,4 +17,9 @@
 	    <Version>13.0.1</Version>
 	  </PackageReference>
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Locations\AreaPosition.operators.cs">
+	    <DependentUpon>AreaPosition.cs</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 </Project>

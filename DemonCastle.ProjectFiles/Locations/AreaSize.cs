@@ -16,4 +16,8 @@ public class AreaSize {
 	public Vector2I ToPixelSize() {
 		return _areaSize * _areaScaleInTiles * _tileScaleInPixels;
 	}
+
+	public Vector2I ToAreaScale() {
+		return _areaSize;
+	}
 }

@@ -15,4 +15,9 @@ public class AreaRegion {
 		var rect = new Rect2(_position.ToPixelPositionInLevel(), _size.ToPixelSize());
 		return rect.HasPoint(pixelPosition);
 	}
+
+	public bool ContainsAreaIndex(Vector2I areaIndex) {
+		var rect = new Rect2(_position.AreaIndex, _size.ToAreaScale());
+		return rect.HasPoint(areaIndex + new Vector2(0.5f, 0.5f));
+	}
 }

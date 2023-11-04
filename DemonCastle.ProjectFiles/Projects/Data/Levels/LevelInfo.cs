@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -63,6 +64,8 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 									   + TileSize * new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
 									   + TileSize / new Vector2(1 / 2f, 1);
 
+	public TileSize AreaScale => new(AreaSize, TileSize);
+
 	public string Name {
 		get => Resource.Name;
 		set {
@@ -82,6 +85,10 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 
 	private AreaInfo GetAreaById(Guid id) {
 		return _areas.First(a => a.Id == id);
+	}
+
+	public AreaInfo? GetAreaAt(AreaPosition position) {
+		return _areas.FirstOrDefault(a => a.Region.ContainsAreaIndex(position.AreaIndex));
 	}
 
 	public TileInfo GetTileInfo(Guid tileId) => TileSet.GetTileInfo(tileId);
