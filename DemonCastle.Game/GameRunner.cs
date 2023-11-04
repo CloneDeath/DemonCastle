@@ -12,5 +12,6 @@ public partial class GameRunner : Node2D {
 		AddChild(Player = new GamePlayer(level, player) {
 			Position = Level.StartingLocation
 		});
+		AddChild(new GameCamera(Player, Level));
 	}
 }

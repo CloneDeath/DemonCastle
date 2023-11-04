@@ -55,6 +55,7 @@ public class AreaInfo : INotifyPropertyChanged {
 
 	public AreaPosition PositionOfArea => new(AreaPosition, LevelInfo.AreaSize, LevelInfo.TileSize);
 	public AreaSize SizeOfArea => new(Size, LevelInfo.AreaSize, LevelInfo.TileSize);
+	public AreaRegion Region => new(PositionOfArea, SizeOfArea);
 
 	public Vector2I TilePosition => AreaPosition * LevelInfo.TileSize * LevelInfo.AreaSize;
 

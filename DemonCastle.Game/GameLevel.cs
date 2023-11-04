@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -24,5 +25,9 @@ public partial class GameLevel : Node2D {
 			var tileInfo = tileMapInfo.Tile;
 			AddChild(new GameTile(tileInfo, tileMapInfo));
 		}
+	}
+
+	public AreaInfo? GetAreaAtPoint(Vector2 point) {
+		return Level.Areas.FirstOrDefault(area => area.Region.HasPixelPositionInLevel(point));
 	}
 }
