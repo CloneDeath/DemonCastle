@@ -8,8 +8,7 @@ namespace DemonCastle.Game;
 public partial class GameTile : Node2D {
 	private StaticBody2D? Body { get; }
 
-	public GameTile(TileInfo tile, TileMapInfo tileMapInfo) {
-		Position = tileMapInfo.Position.ToPixelPositionInLevel();
+	public GameTile(TileInfo tile) {
 		AddChild(new Sprite2D {
 			Texture = tile.Texture,
 			RegionEnabled = true,

@@ -11,19 +11,13 @@ public partial class GameLevel : Node2D {
 
 	public GameLevel(LevelInfo level) {
 		Level = level;
-		LoadLevel();
-	}
 
-	protected void LoadLevel() {
+		Name = nameof(GameLevel);
+
 		foreach (var area in Level.Areas) {
-			LoadArea(area);
-		}
-	}
-
-	protected void LoadArea(AreaInfo area) {
-		foreach (var tileMapInfo in area.TileMap) {
-			var tileInfo = tileMapInfo.Tile;
-			AddChild(new GameTile(tileInfo, tileMapInfo));
+			AddChild(new GameArea(area) {
+				Position = area.PositionOfArea.ToPixelPositionInLevel()
+			});
 		}
 	}
 
