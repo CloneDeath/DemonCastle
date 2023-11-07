@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.TileTools.Collision;
 
-public partial class TileCollisionView : VBoxContainer {
+public partial class TileCollisionView : HBoxContainer {
 	private readonly TileProxy _tile;
 	public Label Description { get; }
 	public Button ButtonMakeSolid { get; }

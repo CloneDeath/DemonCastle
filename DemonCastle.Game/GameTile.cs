@@ -23,7 +23,7 @@ public partial class GameTile : Node2D {
 		});
 		Body.AddChild(new CollisionShape2D {
 			Shape = new ConvexPolygonShape2D {
-				Points = tile.Collision
+				Points = tile.Collision.Select(v => v * tile.TileSize * tile.Span).ToArray()
 			}
 		});
 	}

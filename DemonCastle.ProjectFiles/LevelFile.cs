@@ -25,14 +25,20 @@ public class TileData {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Source { get; set; } = string.Empty;
 	public Guid SpriteId { get; set; }
-	public List<CollisionData> Collision { get; set; } = new();
+	public List<Position2D> Collision { get; set; } = new();
 	public int Width { get; set; } = 1;
 	public int Height { get; set; } = 1;
+	public StairData? Stairs { get; set; }
 }
 
-public class CollisionData {
+public class Position2D {
 	public float X { get; set; }
 	public float Y { get; set; }
+}
+
+public class StairData {
+	public Position2D Start { get; set; } = new();
+	public Position2D End { get; set; } = new();
 }
 
 public class AreaData {
