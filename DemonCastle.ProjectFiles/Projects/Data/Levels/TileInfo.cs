@@ -72,6 +72,15 @@ public class TileInfo : INotifyPropertyChanged {
 		}
 	}
 
+	public StairData? Stairs {
+		get => TileData.Stairs;
+		set {
+			TileData.Stairs = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == TileData.SpriteId)
 										  ?? new NullSpriteDefinition();

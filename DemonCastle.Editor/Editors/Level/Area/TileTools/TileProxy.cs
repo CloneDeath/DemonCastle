@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
@@ -65,6 +66,13 @@ public class TileProxy : INotifyPropertyChanged {
 		get => _proxy?.Collision ?? Array.Empty<Vector2>();
 		set {
 			if (_proxy != null) _proxy.Collision = value;
+		}
+	}
+
+	public StairData? Stairs {
+		get => _proxy?.Stairs;
+		set {
+			if (_proxy != null) _proxy.Stairs = value;
 		}
 	}
 

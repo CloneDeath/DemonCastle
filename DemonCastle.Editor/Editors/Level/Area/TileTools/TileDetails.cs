@@ -5,6 +5,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
+using DemonCastle.Editor.Editors.Level.Area.TileTools.Stairs;
 
 namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
 
@@ -35,6 +36,7 @@ public partial class TileDetails : PropertyCollection {
 		SpriteIdProperty.ItemSelected += SpriteIdProperty_OnSpriteSelected;
 		AddVector2I("Span", TileProxy, x => x.Span);
 		AddChild(new TileCollisionView(TileProxy));
+		AddChild(new TileStairView(TileProxy));
 
 		DisableProperties();
 
