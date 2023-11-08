@@ -31,6 +31,7 @@ public class TileProxy : INotifyPropertyChanged {
 			OnPropertyChanged(nameof(SpriteOptions));
 			OnPropertyChanged(nameof(Span));
 			OnPropertyChanged(nameof(Collision));
+			OnPropertyChanged(nameof(Stairs));
 		}
 	}
 
