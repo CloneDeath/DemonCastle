@@ -8,7 +8,7 @@ namespace DemonCastle.Game;
 public partial class GameTile : Node2D {
 	private readonly TileInfo _tile;
 	private StaticBody2D? Body { get; set; }
-	private Area2D? Stairs { get; set; }
+	private GameTileStairs? Stairs { get; set; }
 
 	public GameTile(TileInfo tile) {
 		_tile = tile;
@@ -42,13 +42,6 @@ public partial class GameTile : Node2D {
 	private void SetupStairs() {
 		if (_tile.Stairs == null) return;
 
-		var size = _tile.TileSize * _tile.Span;
-		AddChild(Stairs = new Area2D());
-		Stairs.AddChild(new CollisionShape2D {
-			Position = size/2,
-			Shape = new RectangleShape2D {
-				Size = size
-			}
-		});
+		AddChild(Stairs = new GameTileStairs(_tile, _tile.Stairs));
 	}
 }
