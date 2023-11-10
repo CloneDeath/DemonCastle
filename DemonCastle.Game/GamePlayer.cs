@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.Game.States;
 using Godot;
 
@@ -15,6 +17,7 @@ public partial class GamePlayer : CharacterBody2D {
 	private int _moveDirection;
 	private bool _jump;
 	public bool ApplyGravity { get; set; } = true;
+	private List<GameTileStairs> _stairs = new();
 
 	public override void _EnterTree() {
 		base._EnterTree();
@@ -55,7 +58,8 @@ public partial class GamePlayer : CharacterBody2D {
 		_moveDirection = Math.Sign(direction.X);
 	}
 
-	public void GetCollidingWith() {
+	public GameTileStairs? GetNearbyStairs() {
+		return _stairs.FirstOrDefault();
 	}
 
 	public void Jump() {
@@ -63,10 +67,14 @@ public partial class GamePlayer : CharacterBody2D {
 	}
 
 	private void StairsDetection_OnAreaEntered(Area2D area) {
-		GD.Print("Enter");
+		if (area is not GameTileStairs stairs) return;
+		if (_stairs.Contains(stairs)) return;
+		_stairs.Add(stairs);
 	}
 
 	private void StairsDetection_OnAreaExited(Area2D area) {
-		GD.Print("Exit");
+		if (area is not GameTileStairs stairs) return;
+		if (!_stairs.Contains(stairs)) return;
+		_stairs.Remove(stairs);
 	}
 }

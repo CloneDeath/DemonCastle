@@ -1,3 +1,5 @@
+using Godot;
+
 namespace DemonCastle.Game.States;
 
 public class ClimbingStairsState : IState {
@@ -6,7 +8,9 @@ public class ClimbingStairsState : IState {
 	}
 
 	public void OnEnter(GamePlayer player) {
-
+		player.ApplyGravity = false;
+		player.StopMoving();
+		GD.Print("State: ClimbingStairsState");
 	}
 
 	public IState? Update(GamePlayer player, double delta) {

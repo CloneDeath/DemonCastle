@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace DemonCastle.Game.States;
@@ -5,9 +6,20 @@ namespace DemonCastle.Game.States;
 public class NormalState : IState {
 	public void OnEnter(GamePlayer player) {
 		player.ApplyGravity = true;
+		player.StopMoving();
+		GD.Print("State: NormalState");
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
+		var stairs = player.GetNearbyStairs();
+		var target = GetTargetInStairs(player, stairs);
+		if (stairs != null && target != null) {
+			var isUp = GetStairDirection(stairs, target.Value);
+			if (isUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
+				!isUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+				return new ApproachStairsState(stairs, target.Value, isUp);
+			}
+		}
 		if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
 			player.Jump();
 		}
@@ -25,6 +37,21 @@ public class NormalState : IState {
 			player.Facing = right - left;
 		}
 		return null;
+	}
+
+	private static bool GetStairDirection(GameTileStairs stairs, Vector2 target) {
+		var startDist = stairs.Start.GlobalPosition.DistanceTo(target);
+		var endDist = stairs.Start.GlobalPosition.DistanceTo(target);
+		var from = startDist < endDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
+		var to = startDist < endDist ? stairs.End.GlobalPosition : stairs.Start.GlobalPosition;
+		return from.Y < to.Y;
+	}
+
+	private static Vector2? GetTargetInStairs(GamePlayer player, GameTileStairs? stairs) {
+		if (stairs == null) return null;
+		var startYDist = Math.Abs(stairs.Start.GlobalPosition.Y - player.GlobalPosition.Y);
+		var endYDist = Math.Abs(stairs.End.GlobalPosition.Y - player.GlobalPosition.Y);
+		return startYDist < endYDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
 	}
 
 	public void OnExit(GamePlayer player) {

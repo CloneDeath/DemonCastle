@@ -14,7 +14,7 @@ public class ApproachStairsState : IState {
 	}
 
 	public void OnEnter(GamePlayer player) {
-
+		GD.Print("State: ApproachStairsState");
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
