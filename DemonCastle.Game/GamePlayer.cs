@@ -55,7 +55,18 @@ public partial class GamePlayer : CharacterBody2D {
 		_moveDirection = Math.Sign(direction.X);
 	}
 
+	public void GetCollidingWith() {
+	}
+
 	public void Jump() {
 		_jump = true;
+	}
+
+	private void StairsDetection_OnAreaEntered(Area2D area) {
+		GD.Print("Enter");
+	}
+
+	private void StairsDetection_OnAreaExited(Area2D area) {
+		GD.Print("Exit");
 	}
 }

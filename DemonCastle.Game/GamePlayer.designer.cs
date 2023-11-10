@@ -11,10 +11,12 @@ public partial class GamePlayer {
 	protected CharacterInfo Character { get; }
 
 	public PlayerAnimation Animation { get; }
+	public Area2D StairsDetection { get; }
 
 	public GamePlayer(LevelInfo level, CharacterInfo character) {
 		Level = level;
 		Character = character;
+
 		AddChild(new CollisionShape2D {
 			Position = new Vector2(0, -Character.Size.Y/2),
 			Shape = new RectangleShape2D {
@@ -22,7 +24,21 @@ public partial class GamePlayer {
 			}
 		});
 		CollisionLayer = (uint) CollisionLayers.Player;
-		CollisionMask = (uint)CollisionLayers.World;
+		CollisionMask = (uint) CollisionLayers.World;
 		AddChild(Animation = new PlayerAnimation(character));
+
+		AddChild(StairsDetection = new Area2D {
+			CollisionLayer = (uint) CollisionLayers.Player,
+			CollisionMask = (uint) CollisionLayers.World,
+			Monitoring = true
+		});
+		StairsDetection.AddChild(new CollisionShape2D {
+			Position = new Vector2(0, -level.TileSize.Y/2),
+			Shape = new RectangleShape2D {
+				Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2)
+			}
+		});
+		StairsDetection.AreaEntered += StairsDetection_OnAreaEntered;
+		StairsDetection.AreaExited += StairsDetection_OnAreaExited;
 	}
 }
