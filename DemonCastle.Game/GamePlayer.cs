@@ -13,10 +13,9 @@ public partial class GamePlayer : CharacterBody2D {
 
 	private IState State = new NormalState();
 
-	private Vector2 _momentum;
 	private Vector2 _moveDirection;
 	private bool _jump;
-	public bool ApplyGravity { get; set; } = true;
+	private bool _applyGravity = true;
 	private readonly List<GameTileStairs> _stairs = new();
 
 	public override void _EnterTree() {
@@ -35,27 +34,17 @@ public partial class GamePlayer : CharacterBody2D {
 			Logger.StateChanged(State);
 		}
 
-		if (ApplyGravity) {
-			_momentum = new Vector2(_momentum.X, (float)(_momentum.Y + Gravity * delta));
+		if (_applyGravity) {
+			Velocity += new Vector2(0, (float)(Gravity * delta));
+			Velocity = new Vector2(_moveDirection.X * WalkSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+		} else {
+			Velocity = _moveDirection * WalkSpeed;
 		}
-		if (_jump) {
-			_momentum = new Vector2(Velocity.X, -GetJumpSpeed());
-		}
-		Velocity = _momentum;
 
-		if (_moveDirection.Length() > 0) {
-			Velocity += _moveDirection.Normalized() * WalkSpeed;
-		}
 		StopMoving();
 		_jump = false;
 
 		MoveAndSlide();
-		if (IsOnFloor() || IsOnCeiling()) {
-			_momentum.Y = 0;
-		}
-		if (IsOnWall()) {
-			_momentum.X = 0;
-		}
 
 		Animation.Scale = new Vector2(Facing, 1);
 	}
@@ -92,11 +81,21 @@ public partial class GamePlayer : CharacterBody2D {
 		_stairs.Remove(stairs);
 	}
 
+	public void EnableWorldCollisions() {
+		CollisionMask = (uint)CollisionLayers.World;
+	}
+
 	public void DisableWorldCollisions() {
 		CollisionMask = 0;
 	}
 
-	public void EnableWorldCollisions() {
-		CollisionMask = (uint)CollisionLayers.World;
+	public void EnableGravity() {
+		Velocity = Vector2.Zero;
+		_applyGravity = true;
+	}
+
+	public void DisableGravity() {
+		Velocity = Vector2.Zero;
+		_applyGravity = false;
 	}
 }

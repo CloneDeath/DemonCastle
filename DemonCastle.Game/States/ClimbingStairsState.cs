@@ -11,7 +11,7 @@ public class ClimbingStairsState : IState {
 	}
 
 	public void OnEnter(GamePlayer player) {
-		player.ApplyGravity = false;
+		player.DisableGravity();
 		player.DisableWorldCollisions();
 	}
 

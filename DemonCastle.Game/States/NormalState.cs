@@ -6,7 +6,7 @@ namespace DemonCastle.Game.States;
 
 public class NormalState : IState {
 	public void OnEnter(GamePlayer player) {
-		player.ApplyGravity = true;
+		player.EnableGravity();
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
