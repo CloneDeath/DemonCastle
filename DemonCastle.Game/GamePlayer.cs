@@ -88,4 +88,8 @@ public partial class GamePlayer : CharacterBody2D {
 		Velocity = Vector2.Zero;
 		_applyGravity = false;
 	}
+
+	public bool IsStandingOnFloor() {
+		return FloorDetection.GetOverlappingBodies().Any();
+	}
 }

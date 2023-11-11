@@ -10,17 +10,20 @@ public class NormalState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		var stairs = player.GetNearbyStairs().FirstOrDefault();
-		var target = GetTargetInStairs(player, stairs);
-		if (stairs != null && target != null) {
-			var isUp = GetStairDirection(stairs, target.Value);
-			if (isUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
-				!isUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-				return new ApproachStairsState(stairs, target.Value, isUp);
+		if (player.IsStandingOnFloor()) {
+			var stairs = player.GetNearbyStairs().FirstOrDefault();
+			var target = GetTargetInStairs(player, stairs);
+			if (stairs != null && target != null) {
+				var isUp = GetStairDirection(stairs, target.Value);
+				if (isUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
+					!isUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+					return new ApproachStairsState(stairs, target.Value, isUp);
+				}
 			}
-		}
-		if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
-			player.Jump();
+
+			if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
+				player.Jump();
+			}
 		}
 
 		var left = Input.IsActionPressed(InputActions.PlayerMoveLeft) ? 1 : 0;
