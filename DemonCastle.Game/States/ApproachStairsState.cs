@@ -4,11 +4,11 @@ using Godot;
 namespace DemonCastle.Game.States;
 
 public class ApproachStairsState : IState {
-	private readonly GameTileStairs _stairs;
+	private readonly Tiles.GameTileStairs _stairs;
 	private readonly Vector2 _target;
 	private readonly bool _upStairs;
 
-	public ApproachStairsState(GameTileStairs stairs, Vector2 target, bool upStairs) {
+	public ApproachStairsState(Tiles.GameTileStairs stairs, Vector2 target, bool upStairs) {
 		_stairs = stairs;
 		_target = target;
 		_upStairs = upStairs;

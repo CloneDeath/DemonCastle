@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Game;
+namespace DemonCastle.Game.Tiles;
 
 public partial class GameTile : Node2D {
 	private readonly TileInfo _tile;

@@ -41,7 +41,7 @@ public class NormalState : IState {
 		return null;
 	}
 
-	private static bool GetStairDirection(GameTileStairs stairs, Vector2 target) {
+	private static bool GetStairDirection(Tiles.GameTileStairs stairs, Vector2 target) {
 		var startDist = stairs.Start.GlobalPosition.DistanceTo(target);
 		var endDist = stairs.End.GlobalPosition.DistanceTo(target);
 		var from = startDist < endDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
@@ -49,7 +49,7 @@ public class NormalState : IState {
 		return from.Y > to.Y;
 	}
 
-	private static Vector2? GetTargetInStairs(GamePlayer player, GameTileStairs? stairs) {
+	private static Vector2? GetTargetInStairs(GamePlayer player, Tiles.GameTileStairs? stairs) {
 		if (stairs == null) return null;
 		var startYDist = Math.Abs(stairs.Start.GlobalPosition.Y - player.GlobalPosition.Y);
 		var endYDist = Math.Abs(stairs.End.GlobalPosition.Y - player.GlobalPosition.Y);

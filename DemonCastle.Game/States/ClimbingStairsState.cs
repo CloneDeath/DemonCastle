@@ -4,9 +4,9 @@ using Godot;
 namespace DemonCastle.Game.States;
 
 public class ClimbingStairsState : IState {
-	private readonly GameTileStairs _stairs;
+	private readonly Tiles.GameTileStairs _stairs;
 
-	public ClimbingStairsState(GameTileStairs stairs) {
+	public ClimbingStairsState(Tiles.GameTileStairs stairs) {
 		_stairs = stairs;
 	}
 

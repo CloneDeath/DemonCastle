@@ -2,7 +2,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Game;
+namespace DemonCastle.Game.Tiles;
 
 public partial class GameTileStairs : Area2D {
 	public Node2D Start { get; }
@@ -21,10 +21,10 @@ public partial class GameTileStairs : Area2D {
 			}
 		});
 
-		AddChild(Start = new Node2D {
+		AddChild(Start = new GameTileStairsNode(tileStairs, true) {
 			Position = new Vector2(tileStairs.Start.X, tileStairs.Start.Y) * tile.TileSize * tile.Span
 		});
-		AddChild(End = new Node2D {
+		AddChild(End = new GameTileStairsNode(tileStairs, false) {
 			Position = new Vector2(tileStairs.End.X, tileStairs.End.Y) * tile.TileSize * tile.Span
 		});
 	}

@@ -63,8 +63,8 @@ public partial class GamePlayer : CharacterBody2D {
 		_moveDirection = direction.Normalized();
 	}
 
-	public IEnumerable<GameTileStairs> GetNearbyStairs() {
-		return StairsDetection.GetOverlappingAreas().Where(a => a is GameTileStairs).Cast<GameTileStairs>();
+	public IEnumerable<Tiles.GameTileStairs> GetNearbyStairs() {
+		return StairsDetection.GetOverlappingAreas().Where(a => a is Tiles.GameTileStairs).Cast<Tiles.GameTileStairs>();
 	}
 
 	public void Jump() {
