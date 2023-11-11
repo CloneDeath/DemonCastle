@@ -33,7 +33,7 @@ public partial class GamePlayer {
 			Monitoring = true
 		});
 		StairsDetection.AddChild(new CollisionShape2D {
-			Position = new Vector2(0, -level.TileSize.Y/2),
+			Position = new Vector2(0, -level.TileSize.Y/4),
 			Shape = new RectangleShape2D {
 				Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2)
 			}

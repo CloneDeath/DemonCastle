@@ -14,7 +14,7 @@ public class ApproachStairsState : IState {
 	}
 
 	public void OnEnter(GamePlayer player) {
-		GD.Print("State: ApproachStairsState");
+		player.ApplyGravity = true;
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
@@ -30,7 +30,11 @@ public class ApproachStairsState : IState {
 			return new ClimbingStairsState(_stairs);
 		}
 
-		player.MoveTo(_target);
+		if (player.GetNearbyStairs() == null) {
+			return new NormalState();
+		}
+
+		player.MoveTowards(_target);
 		return null;
 	}
 

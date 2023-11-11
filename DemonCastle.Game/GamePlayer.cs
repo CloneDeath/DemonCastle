@@ -17,7 +17,7 @@ public partial class GamePlayer : CharacterBody2D {
 	private int _moveDirection;
 	private bool _jump;
 	public bool ApplyGravity { get; set; } = true;
-	private List<GameTileStairs> _stairs = new();
+	private readonly List<GameTileStairs> _stairs = new();
 
 	public override void _EnterTree() {
 		base._EnterTree();
@@ -35,6 +35,7 @@ public partial class GamePlayer : CharacterBody2D {
 		}
 
 		Velocity = new Vector2(_moveDirection * WalkSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+		StopMoving();
 		_jump = false;
 		if (ApplyGravity) {
 			Velocity = new Vector2(Velocity.X, (float)(Velocity.Y + Gravity * delta));
@@ -53,7 +54,7 @@ public partial class GamePlayer : CharacterBody2D {
 	public void MoveLeft() => _moveDirection = -1;
 	public void StopMoving() => _moveDirection = 0;
 
-	public void MoveTo(Vector2 target) {
+	public void MoveTowards(Vector2 target) {
 		var direction = target - GlobalPosition;
 		_moveDirection = Math.Sign(direction.X);
 	}
