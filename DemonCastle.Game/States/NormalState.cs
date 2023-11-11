@@ -40,10 +40,10 @@ public class NormalState : IState {
 
 	private static bool GetStairDirection(GameTileStairs stairs, Vector2 target) {
 		var startDist = stairs.Start.GlobalPosition.DistanceTo(target);
-		var endDist = stairs.Start.GlobalPosition.DistanceTo(target);
+		var endDist = stairs.End.GlobalPosition.DistanceTo(target);
 		var from = startDist < endDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
 		var to = startDist < endDist ? stairs.End.GlobalPosition : stairs.Start.GlobalPosition;
-		return from.Y < to.Y;
+		return from.Y > to.Y;
 	}
 
 	private static Vector2? GetTargetInStairs(GamePlayer player, GameTileStairs? stairs) {
