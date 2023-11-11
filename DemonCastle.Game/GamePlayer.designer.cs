@@ -7,15 +7,17 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GamePlayer {
+	protected IGameLogger Logger { get; }
 	protected LevelInfo Level { get; }
 	protected CharacterInfo Character { get; }
 
 	public PlayerAnimation Animation { get; }
 	public Area2D StairsDetection { get; }
 
-	public GamePlayer(LevelInfo level, CharacterInfo character) {
+	public GamePlayer(LevelInfo level, CharacterInfo character, IGameLogger logger) {
 		Level = level;
 		Character = character;
+		Logger = logger;
 
 		AddChild(new CollisionShape2D {
 			Position = new Vector2(0, -Character.Size.Y/2),

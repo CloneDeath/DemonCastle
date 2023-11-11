@@ -32,8 +32,8 @@ public partial class GamePlayer : CharacterBody2D {
 			State.OnExit(this);
 			State = nextState;
 			State.OnEnter(this);
+			Logger.StateChanged(State);
 		}
-
 
 		if (ApplyGravity) {
 			_momentum = new Vector2(_momentum.X, (float)(_momentum.Y + Gravity * delta));
