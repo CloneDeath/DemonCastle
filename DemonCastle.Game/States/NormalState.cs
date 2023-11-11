@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 
 namespace DemonCastle.Game.States;
@@ -9,7 +10,7 @@ public class NormalState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		var stairs = player.GetNearbyStairs();
+		var stairs = player.GetNearbyStairs().FirstOrDefault();
 		var target = GetTargetInStairs(player, stairs);
 		if (stairs != null && target != null) {
 			var isUp = GetStairDirection(stairs, target.Value);

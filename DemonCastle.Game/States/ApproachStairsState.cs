@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace DemonCastle.Game.States;
@@ -30,7 +31,7 @@ public class ApproachStairsState : IState {
 			return new ClimbingStairsState(_stairs);
 		}
 
-		if (player.GetNearbyStairs() == null) {
+		if (!player.GetNearbyStairs().Any()) {
 			return new NormalState();
 		}
 

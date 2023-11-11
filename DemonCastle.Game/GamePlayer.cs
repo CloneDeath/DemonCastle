@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DemonCastle.Game.States;
+using DemonCastle.ProjectFiles;
 using Godot;
 
 namespace DemonCastle.Game;
@@ -14,7 +13,8 @@ public partial class GamePlayer : CharacterBody2D {
 
 	private IState State = new NormalState();
 
-	private int _moveDirection;
+	private Vector2 _momentum;
+	private Vector2 _moveDirection;
 	private bool _jump;
 	public bool ApplyGravity { get; set; } = true;
 	private readonly List<GameTileStairs> _stairs = new();
@@ -34,13 +34,27 @@ public partial class GamePlayer : CharacterBody2D {
 			State.OnEnter(this);
 		}
 
-		Velocity = new Vector2(_moveDirection * WalkSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+
+		if (ApplyGravity) {
+			_momentum = new Vector2(_momentum.X, (float)(_momentum.Y + Gravity * delta));
+		}
+		Velocity = _momentum;
+		if (_moveDirection.Length() > 0) {
+			Velocity += _moveDirection.Normalized() * WalkSpeed;
+		}
+		if (_jump) {
+			Velocity = new Vector2(Velocity.X, -GetJumpSpeed());
+		}
 		StopMoving();
 		_jump = false;
-		if (ApplyGravity) {
-			Velocity = new Vector2(Velocity.X, (float)(Velocity.Y + Gravity * delta));
-		}
+
 		MoveAndSlide();
+		if (Velocity.Y == 0) {
+			_momentum.Y = 0;
+		}
+		if (Velocity.X == 0) {
+			_momentum.X = 0;
+		}
 
 		Animation.Scale = new Vector2(Facing, 1);
 	}
@@ -50,18 +64,16 @@ public partial class GamePlayer : CharacterBody2D {
 		return time * Gravity;
 	}
 
-	public void MoveRight() => _moveDirection = 1;
-	public void MoveLeft() => _moveDirection = -1;
-	public void StopMoving() => _moveDirection = 0;
+	public void MoveRight() => _moveDirection = Vector2.Right;
+	public void MoveLeft() => _moveDirection = Vector2.Left;
+	public void StopMoving() => _moveDirection = Vector2.Zero;
 
 	public void MoveTowards(Vector2 target) {
 		var direction = target - GlobalPosition;
-		_moveDirection = Math.Sign(direction.X);
+		_moveDirection = direction.Normalized();
 	}
 
-	public GameTileStairs? GetNearbyStairs() {
-		return _stairs.FirstOrDefault();
-	}
+	public IEnumerable<GameTileStairs> GetNearbyStairs() => _stairs;
 
 	public void Jump() {
 		_jump = true;
@@ -77,5 +89,13 @@ public partial class GamePlayer : CharacterBody2D {
 		if (area is not GameTileStairs stairs) return;
 		if (!_stairs.Contains(stairs)) return;
 		_stairs.Remove(stairs);
+	}
+
+	public void DisableWorldCollisions() {
+		CollisionMask = 0;
+	}
+
+	public void EnableWorldCollisions() {
+		CollisionMask = (uint)CollisionLayers.World;
 	}
 }
