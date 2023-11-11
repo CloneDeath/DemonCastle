@@ -5,8 +5,8 @@ using Godot;
 namespace DemonCastle.Game.Tiles;
 
 public partial class GameTileStairs : Area2D {
-	public Node2D Start { get; }
-	public Node2D End { get; }
+	public GameTileStairsNode Start { get; }
+	public GameTileStairsNode End { get; }
 
 	public GameTileStairs(TileInfo tile, StairData tileStairs) {
 		Name = nameof(GameTileStairs);

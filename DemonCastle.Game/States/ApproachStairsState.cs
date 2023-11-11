@@ -1,17 +1,16 @@
 using System.Linq;
+using DemonCastle.Game.Tiles;
 using Godot;
 
 namespace DemonCastle.Game.States;
 
 public class ApproachStairsState : IState {
-	private readonly Tiles.GameTileStairs _stairs;
-	private readonly Vector2 _target;
-	private readonly bool _upStairs;
+	private readonly GameTileStairs _stairs;
+	private readonly GameTileStairsNode _target;
 
-	public ApproachStairsState(Tiles.GameTileStairs stairs, Vector2 target, bool upStairs) {
+	public ApproachStairsState(GameTileStairs stairs, GameTileStairsNode target) {
 		_stairs = stairs;
 		_target = target;
-		_upStairs = upStairs;
 	}
 
 	public void OnEnter(GamePlayer player) {
@@ -19,18 +18,19 @@ public class ApproachStairsState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		if (_upStairs && !Input.IsActionPressed(InputActions.PlayerMoveUp)) {
+		if (_target.PointsUp && !Input.IsActionPressed(InputActions.PlayerMoveUp)) {
 			return new NormalState();
 		}
-		if (!_upStairs && !Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+		if (!_target.PointsUp && !Input.IsActionPressed(InputActions.PlayerMoveDown)) {
 			return new NormalState();
 		}
 
-		player.Facing = _target.X > player.GlobalPosition.X ? 1 : -1;
+		player.Facing = _target.GlobalPosition.X > player.GlobalPosition.X ? 1 : -1;
 		player.Animation.PlayWalk();
 
-		var distanceToTarget = player.GlobalPosition.DistanceTo(_target);
+		var distanceToTarget = player.GlobalPosition.DistanceTo(_target.GlobalPosition);
 		if (distanceToTarget <= player.WalkSpeed * delta) {
+			player.Facing = _target.Facing;
 			return new ClimbingStairsState(_stairs);
 		}
 
@@ -38,7 +38,7 @@ public class ApproachStairsState : IState {
 			return new NormalState();
 		}
 
-		player.MoveTowards(_target);
+		player.MoveTowards(_target.GlobalPosition);
 		return null;
 	}
 

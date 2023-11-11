@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DemonCastle.Game.Tiles;
 using Godot;
 
 namespace DemonCastle.Game.States;
@@ -14,10 +15,10 @@ public class NormalState : IState {
 			var stairs = player.GetNearbyStairs().FirstOrDefault();
 			var target = GetTargetInStairs(player, stairs);
 			if (stairs != null && target != null) {
-				var isUp = GetStairDirection(stairs, target.Value);
-				if (isUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
-					!isUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-					return new ApproachStairsState(stairs, target.Value, isUp);
+
+				if (target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
+					!target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+					return new ApproachStairsState(stairs, target);
 				}
 			}
 
@@ -41,19 +42,11 @@ public class NormalState : IState {
 		return null;
 	}
 
-	private static bool GetStairDirection(Tiles.GameTileStairs stairs, Vector2 target) {
-		var startDist = stairs.Start.GlobalPosition.DistanceTo(target);
-		var endDist = stairs.End.GlobalPosition.DistanceTo(target);
-		var from = startDist < endDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
-		var to = startDist < endDist ? stairs.End.GlobalPosition : stairs.Start.GlobalPosition;
-		return from.Y > to.Y;
-	}
-
-	private static Vector2? GetTargetInStairs(GamePlayer player, Tiles.GameTileStairs? stairs) {
+	private static GameTileStairsNode? GetTargetInStairs(GamePlayer player, GameTileStairs? stairs) {
 		if (stairs == null) return null;
 		var startYDist = Math.Abs(stairs.Start.GlobalPosition.Y - player.GlobalPosition.Y);
 		var endYDist = Math.Abs(stairs.End.GlobalPosition.Y - player.GlobalPosition.Y);
-		return startYDist < endYDist ? stairs.Start.GlobalPosition : stairs.End.GlobalPosition;
+		return startYDist < endYDist ? stairs.Start : stairs.End;
 	}
 
 	public void OnExit(GamePlayer player) {
