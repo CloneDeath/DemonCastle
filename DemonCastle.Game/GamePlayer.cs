@@ -38,21 +38,22 @@ public partial class GamePlayer : CharacterBody2D {
 		if (ApplyGravity) {
 			_momentum = new Vector2(_momentum.X, (float)(_momentum.Y + Gravity * delta));
 		}
+		if (_jump) {
+			_momentum = new Vector2(Velocity.X, -GetJumpSpeed());
+		}
 		Velocity = _momentum;
+
 		if (_moveDirection.Length() > 0) {
 			Velocity += _moveDirection.Normalized() * WalkSpeed;
-		}
-		if (_jump) {
-			Velocity = new Vector2(Velocity.X, -GetJumpSpeed());
 		}
 		StopMoving();
 		_jump = false;
 
 		MoveAndSlide();
-		if (Velocity.Y == 0) {
+		if (IsOnFloor() || IsOnCeiling()) {
 			_momentum.Y = 0;
 		}
-		if (Velocity.X == 0) {
+		if (IsOnWall()) {
 			_momentum.X = 0;
 		}
 
