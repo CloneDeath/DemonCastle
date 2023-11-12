@@ -49,10 +49,12 @@ public class SpriteGridDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 	protected Vector2I Size => SpriteGrid.Size;
 
 	public Texture2D Texture => SpriteGrid.Texture;
-	public Rect2I Region => new() {
-		Position = Offset + Span * new Vector2I(Data.X, Data.Y),
-		Size = Size
-	};
+
+	public Rect2I Region =>
+		new() {
+			Position = Offset + Span * new Vector2I(Data.X, Data.Y),
+			Size = Size
+		};
 
 	public bool FlipHorizontal {
 		get => Data.FlipHorizontal;

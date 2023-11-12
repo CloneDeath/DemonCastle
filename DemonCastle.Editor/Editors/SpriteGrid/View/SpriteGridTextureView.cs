@@ -1,8 +1,15 @@
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteGrid;
+namespace DemonCastle.Editor.Editors.SpriteGrid.View;
 
 public partial class SpriteGridTextureView : Components.TextureView {
+	protected SpriteGridInfo SpriteGridInfo { get; }
+
+	public SpriteGridTextureView(SpriteGridInfo spriteGridInfo) {
+		SpriteGridInfo = spriteGridInfo;
+	}
+
 	protected int TextureWidth => Texture?.GetWidth() ?? 0;
 	protected int TextureHeight => Texture?.GetHeight() ?? 0;
 	protected int StartX => SpriteGridInfo.XOffset;

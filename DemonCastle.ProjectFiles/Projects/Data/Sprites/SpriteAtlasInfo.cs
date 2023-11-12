@@ -54,6 +54,7 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 		Resource.Sprites.Add(spriteAtlasData);
 		var spriteAtlasDataInfo = new SpriteAtlasDataInfo(this, spriteAtlasData);
 		_spriteData.Add(spriteAtlasDataInfo);
+		Save();
 		OnPropertyChanged(nameof(Sprites));
 		OnPropertyChanged(nameof(AtlasSprites));
 		return spriteAtlasDataInfo;

@@ -87,17 +87,23 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 		}
 	}
 
-	public void AddNewSpriteData() {
+	public SpriteGridDataInfo CreateSprite() {
 		var spriteData = new SpriteGridData();
 		Resource.Sprites.Add(spriteData);
-		SpriteData.Add(new SpriteGridDataInfo(this, spriteData));
+		var spriteGridDataInfo = new SpriteGridDataInfo(this, spriteData);
+		SpriteData.Add(spriteGridDataInfo);
 		Save();
+		OnPropertyChanged(nameof(Sprites));
+		OnPropertyChanged(nameof(SpriteData));
+		return spriteGridDataInfo;
 	}
 
 	public void Remove(SpriteGridData data, SpriteGridDataInfo spriteGridDataInfo) {
 		Resource.Sprites.Remove(data);
 		SpriteData.Remove(spriteGridDataInfo);
 		Save();
+		OnPropertyChanged(nameof(Sprites));
+		OnPropertyChanged(nameof(SpriteData));
 	}
 
 	#region INotifyPropertyChanged
