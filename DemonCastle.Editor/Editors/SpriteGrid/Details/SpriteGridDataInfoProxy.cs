@@ -25,6 +25,8 @@ public class SpriteGridDataInfoProxy : INotifyPropertyChanged, ISpriteDefinition
 
 			OnPropertyChanged(nameof(Id));
 			OnPropertyChanged(nameof(Name));
+			OnPropertyChanged(nameof(X));
+			OnPropertyChanged(nameof(Y));
 			OnPropertyChanged(nameof(Texture));
 			OnPropertyChanged(nameof(Region));
 			OnPropertyChanged(nameof(FlipHorizontal));

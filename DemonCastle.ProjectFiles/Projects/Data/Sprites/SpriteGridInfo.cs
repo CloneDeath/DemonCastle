@@ -94,7 +94,7 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 		SpriteData.Add(spriteGridDataInfo);
 		Save();
 		OnPropertyChanged(nameof(Sprites));
-		OnPropertyChanged(nameof(SpriteData));
+		OnPropertyChanged(nameof(GridSprites));
 		return spriteGridDataInfo;
 	}
 
@@ -103,7 +103,7 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 		SpriteData.Remove(spriteGridDataInfo);
 		Save();
 		OnPropertyChanged(nameof(Sprites));
-		OnPropertyChanged(nameof(SpriteData));
+		OnPropertyChanged(nameof(GridSprites));
 	}
 
 	#region INotifyPropertyChanged
