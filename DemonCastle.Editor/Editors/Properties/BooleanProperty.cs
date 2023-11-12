@@ -25,6 +25,20 @@ public partial class BooleanProperty : BaseProperty {
 		CheckBox.Toggled += OnValueChange;
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
+	}
+
+	private void Binding_OnChanged(bool value) {
+		PropertyValue = value;
+	}
+
 	protected void OnValueChange(bool value) {
 		Binding.Set(value);
 	}

@@ -37,6 +37,20 @@ public partial class AnimationNameProperty : BaseProperty {
 		OptionButton.ItemSelected += OnItemSelected;
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
+	}
+
+	private void Binding_OnChanged(string value) {
+		PropertyValue = value;
+	}
+
 	private void OnItemSelected(long index) {
 		Binding.Set(index < 0 ? string.Empty : _options[(int)index].Name);
 	}

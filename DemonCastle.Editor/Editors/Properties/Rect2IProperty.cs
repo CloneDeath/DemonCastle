@@ -30,7 +30,6 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 	public Rect2IProperty(IPropertyBinding<Rect2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
-		binding.Changed += Binding_OnChanged;
 
 		AddChild(Label = new Label());
 
@@ -74,6 +73,11 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 			Value = Binding.Get().Size.Y,
 		});
 		HeightBox.ValueChanged += OnValueChange;
+	}
+
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
 	}
 
 	public override void _ExitTree() {

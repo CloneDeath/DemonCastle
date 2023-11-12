@@ -23,6 +23,20 @@ public partial class ColorProperty : BaseProperty {
 		ColorPicker.ColorChanged += ColorPicker_OnColorChanged;
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
+	}
+
+	private void Binding_OnChanged(Color value) {
+		PropertyValue = value;
+	}
+
 	private void ColorPicker_OnColorChanged(Color color) {
 		Binding.Set(color);
 	}

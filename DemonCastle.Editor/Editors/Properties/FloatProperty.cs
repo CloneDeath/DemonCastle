@@ -29,6 +29,20 @@ public partial class FloatProperty : BaseProperty {
 		SpinBox.ValueChanged += OnValueChange;
 	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
+		Binding.Changed += Binding_OnChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		Binding.Changed -= Binding_OnChanged;
+	}
+
+	private void Binding_OnChanged(float value) {
+		PropertyValue = value;
+	}
+
 	protected void OnValueChange(double value) {
 		Binding.Set((float)value);
 	}
