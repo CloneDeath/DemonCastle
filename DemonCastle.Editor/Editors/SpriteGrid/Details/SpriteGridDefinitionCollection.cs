@@ -1,8 +1,8 @@
 using System;
-using DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
+using SpriteSelectorPanel = DemonCastle.Editor.Editors.Components.SpriteSelectorPanel;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid.Details;
 
