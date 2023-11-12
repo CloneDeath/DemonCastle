@@ -13,7 +13,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	private readonly List<SelectableSprite> _selection = new();
 	private ISpriteDefinition? _spriteDefinition;
 
-	public SpriteAtlasInfo SpriteAtlas { get; }
+	public ISpriteSource SpriteSource { get; }
 
 	public ISpriteDefinition? SpriteDefinition {
 		get => _spriteDefinition;
@@ -26,23 +26,27 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 
 	public event Action<ISpriteDefinition?>? SpriteSelected;
 
-	public SpriteSelectorPanel(SpriteAtlasInfo spriteAtlas) {
-		SpriteAtlas = spriteAtlas;
+	public SpriteSelectorPanel(ISpriteSource spriteSource) {
+		SpriteSource = spriteSource;
 		Reload();
 	}
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		SpriteAtlas.PropertyChanged += SpriteAtlas_OnPropertyChanged;
+		if (SpriteSource is INotifyPropertyChanged notifySource) {
+			notifySource.PropertyChanged += SpriteAtlas_OnPropertyChanged;
+		}
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		SpriteAtlas.PropertyChanged -= SpriteAtlas_OnPropertyChanged;
+		if (SpriteSource is INotifyPropertyChanged notifySource) {
+			notifySource.PropertyChanged -= SpriteAtlas_OnPropertyChanged;
+		}
 	}
 
 	private void SpriteAtlas_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName != nameof(SpriteAtlas.AtlasSprites)) return;
+		if (e.PropertyName != nameof(SpriteSource.Sprites)) return;
 		var selected = GetSelectedSprite();
 		Reload();
 		SelectSpriteDefinition(selected);
@@ -63,7 +67,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		}
 		_selection.Clear();
 
-		foreach (var sprite in SpriteAtlas.Sprites) {
+		foreach (var sprite in SpriteSource.Sprites) {
 			var c = new SelectableSprite(sprite);
 			AddChild(c);
 			_selection.Add(c);
@@ -77,7 +81,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		SpriteSelected?.Invoke(SpriteDefinition);
 	}
 
-	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
+	public void SelectSprite(ISpriteDefinition? sprite) {
 		foreach (var selectableSprite in _selection) {
 			selectableSprite.IsSelected = selectableSprite.SpriteDefinition == sprite;
 		}
