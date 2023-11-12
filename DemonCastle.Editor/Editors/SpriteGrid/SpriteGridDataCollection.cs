@@ -16,7 +16,7 @@ public partial class SpriteGridDataCollection : ScrollContainer {
 	}
 
 	protected void OnAddSpriteDataButtonPressed() {
-		SpriteGrid.AddNewSpriteData();
+		SpriteGrid.CreateSprite();
 		ReloadSpriteData();
 	}
 }

@@ -42,6 +42,20 @@ public class SpriteGridDataInfoProxy : INotifyPropertyChanged, ISpriteDefinition
 		}
 	}
 
+	public int X {
+		get => _proxy?.X ?? 0;
+		set {
+			if (_proxy != null) _proxy.X = value;
+		}
+	}
+
+	public int Y {
+		get => _proxy?.Y ?? 0;
+		set {
+			if (_proxy != null) _proxy.Y = value;
+		}
+	}
+
 	public Texture2D Texture => _proxy?.Texture ?? new NullSpriteDefinition().Texture;
 
 	public Rect2I Region => _proxy?.Region ?? new Rect2I(Vector2I.Zero, Vector2I.One * 16);

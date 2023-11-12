@@ -1,8 +1,6 @@
 using DemonCastle.Editor.Editors.Properties;
-using DemonCastle.Editor.Editors.SpriteAtlas.Details;
 using DemonCastle.Editor.Editors.SpriteGrid.Details;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
@@ -33,7 +31,6 @@ public partial class SpriteGridEditor : BaseEditor {
 				CustomMinimumSize = new Vector2(410, 0)
 			});
 			LeftContainer.AddChild(SpriteCollection = new SpriteGridDefinitionCollection(spriteGrid));
-			SpriteCollection.SpriteSelected += SpriteCollection_OnSpriteSelected;
 		}
 
 		SplitContainer.AddChild(TextureView = new View.SpriteGridTextureView(spriteGrid));
