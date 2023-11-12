@@ -7,6 +7,7 @@ namespace DemonCastle.Editor.FileTreeView;
 public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? AddDirectory;
 	public event Action? CreateSpriteAtlasFile;
+	public event Action? CreateSpriteGridFile;
 	public event Action? CreateCharacterFile;
 	public event Action? CreateLevelFile;
 	public event Action? CreateTextFile;
@@ -28,6 +29,11 @@ public partial class DirectoryPopupMenu : PopupMenu {
 				Text = "Create Sprite Atlas File",
 				Icon = IconTextures.SpriteAtlasIcon,
 				Action = () => CreateSpriteAtlasFile?.Invoke()
+			},
+			new PopupAction {
+				Text = "Create Sprite Grid File",
+				Icon = IconTextures.SpriteGridIcon,
+				Action = () => CreateSpriteGridFile?.Invoke()
 			},
 			new PopupAction {
 				Text = "Create Character File",

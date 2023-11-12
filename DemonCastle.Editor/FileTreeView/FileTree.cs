@@ -103,6 +103,15 @@ public partial class FileTree : Tree {
 		CreateTree();
 	}
 
+	public void OnCreateSpriteGridFileSelected() {
+		var selected = GetSelected();
+		if (!DirectoryMap.ContainsKey(selected)) return;
+		var dirNav = DirectoryMap[selected];
+		dirNav.CreateFile("sprite-grid", "dcsg", new SpriteGridFile());
+
+		CreateTree();
+	}
+
 	public void OnCreateCharacterFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
