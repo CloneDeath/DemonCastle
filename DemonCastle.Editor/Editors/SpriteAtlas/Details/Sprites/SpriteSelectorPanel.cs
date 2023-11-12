@@ -10,7 +10,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 
 public partial class SpriteSelectorPanel : HFlowContainer {
-	private readonly List<SelectableSprite> _selection = new();
+	private readonly List<Components.SelectableSprite> _selection = new();
 	private ISpriteDefinition? _spriteDefinition;
 
 	public ISpriteSource SpriteSource { get; }
@@ -68,7 +68,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		_selection.Clear();
 
 		foreach (var sprite in SpriteSource.Sprites) {
-			var c = new SelectableSprite(sprite);
+			var c = new Components.SelectableSprite(sprite);
 			AddChild(c);
 			_selection.Add(c);
 			c.Selected += OnSpriteSelected;
@@ -76,7 +76,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	}
 
 	private void OnSpriteSelected(SelectableControl selection) {
-		if (selection is not SelectableSprite selectableSprite) return;
+		if (selection is not Components.SelectableSprite selectableSprite) return;
 		SpriteDefinition = selectableSprite.SpriteDefinition;
 		SpriteSelected?.Invoke(SpriteDefinition);
 	}

@@ -1,7 +1,6 @@
-using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 
-namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
+namespace DemonCastle.Editor.Editors.Components;
 
 public partial class SelectableSprite : SelectableControl {
 	protected SpriteDefinitionView SpriteDefinitionView { get; }
@@ -12,6 +11,9 @@ public partial class SelectableSprite : SelectableControl {
 	public SelectableSprite(ISpriteDefinition spriteDefinition) {
 		Name = nameof(SelectableSprite);
 		SpriteDefinition = spriteDefinition;
+
+		DefaultCursorShape = CursorShape.PointingHand;
+		SelectedCursorShape = CursorShape.Arrow;
 
 		AddChild(SpriteDefinitionView = new SpriteDefinitionView(spriteDefinition));
 		AddChild(Outline = new Outline {
