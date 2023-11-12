@@ -33,18 +33,18 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	public override void _EnterTree() {
 		base._EnterTree();
 		if (SpriteSource is INotifyPropertyChanged notifySource) {
-			notifySource.PropertyChanged += SpriteAtlas_OnPropertyChanged;
+			notifySource.PropertyChanged += SpriteSource_OnPropertyChanged;
 		}
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (SpriteSource is INotifyPropertyChanged notifySource) {
-			notifySource.PropertyChanged -= SpriteAtlas_OnPropertyChanged;
+			notifySource.PropertyChanged -= SpriteSource_OnPropertyChanged;
 		}
 	}
 
-	private void SpriteAtlas_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+	private void SpriteSource_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		if (e.PropertyName != nameof(SpriteSource.Sprites)) return;
 		var selected = GetSelectedSprite();
 		Reload();
@@ -56,7 +56,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	}
 
 	private void SelectSpriteDefinition(ISpriteDefinition? spriteDefinition) {
-		SelectSprite(spriteDefinition as SpriteAtlasDataInfo);
+		SelectSprite(spriteDefinition);
 		SpriteSelected?.Invoke(SpriteDefinition);
 	}
 
