@@ -46,9 +46,8 @@ public partial class GamePlayer {
 			CollisionMask = (uint) CollisionLayers.World
 		});
 		FloorDetection.AddChild(new CollisionShape2D {
-			Shape = new SegmentShape2D {
-				A = new Vector2(0, -level.TileSize.Y / 2),
-				B = new Vector2(0, level.TileSize.Y / 2)
+			Shape = new RectangleShape2D {
+				Size = new Vector2(Character.Size.X, 2)
 			}
 		});
 	}
