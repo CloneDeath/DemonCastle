@@ -11,12 +11,22 @@ public partial class GameRunner : Control {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(Level = new GameLevel(level));
-		AddChild(Player = new GamePlayer(level, player, new GameLogger()) {
+		var subViewportContainer = new SubViewportContainer {
+			Stretch = false,
+			Scale = Vector2.One * 3
+		};
+		AddChild(subViewportContainer);
+		subViewportContainer.SetAnchorsPreset(LayoutPreset.FullRect);
+
+		var subViewport = new SubViewport {
+			Size = level.AreaScale.ToPixelSize()
+		};
+		subViewportContainer.AddChild(subViewport);
+
+		subViewport.AddChild(Level = new GameLevel(level));
+		subViewport.AddChild(Player = new GamePlayer(level, player, new GameLogger()) {
 			Position = Level.StartingLocation
 		});
-		AddChild(new GameCamera(Player, Level) {
-			Zoom = Vector2.One * 3
-		});
+		subViewport.AddChild(new GameCamera(Player, Level));
 	}
 }

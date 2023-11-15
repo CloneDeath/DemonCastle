@@ -18,7 +18,7 @@ public partial class EditorSpace {
 			Name = nameof(PlayWindow),
 			Title = Project.Name,
 			Visible = false,
-			MinSize = new Vector2I(640, 480),
+			MinSize = new Vector2I(640, 580),
 			Exclusive = true
 		});
 		PlayWindow.CloseRequested += PlayWindow.Hide;
