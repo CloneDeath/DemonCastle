@@ -2,7 +2,7 @@ using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using Godot;
 
-namespace DemonCastle.Editor; 
+namespace DemonCastle.Editor;
 
 public partial class EditorSpace : CanvasLayer {
 	private void PlayPressed() {
@@ -13,7 +13,9 @@ public partial class EditorSpace : CanvasLayer {
 		var gameSetup = new GameSetup(Project);
 		gameSetup.GameStart += (level, character) => {
 			gameSetup.QueueFree();
-			PlayWindow.AddChild(new GameRunner(level, character));
+			var runner = new GameRunner(level, character);
+			PlayWindow.AddChild(runner);
+			runner.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		};
 		PlayWindow.AddChild(gameSetup);
 		PlayWindow.PopupCentered();

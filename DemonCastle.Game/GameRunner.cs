@@ -4,7 +4,7 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GameRunner : Node2D {
+public partial class GameRunner : Control {
 	protected GameLevel Level { get; }
 	protected GamePlayer Player { get; }
 	public GameRunner(LevelInfo level, CharacterInfo player) {

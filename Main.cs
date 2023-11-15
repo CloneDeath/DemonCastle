@@ -5,15 +5,15 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle; 
+namespace DemonCastle;
 
-public partial class Main : Node2D {
+public partial class Main : Control {
     protected GameSetup GameSetup { get; set; }
     protected EditorSpace EditorSpace { get; set; }
 
     public override void _Ready() {
         base._Ready();
-            
+
         InputActions.RegisterActions();
         GetWindow().Mode = Window.ModeEnum.Maximized;
     }
@@ -28,7 +28,9 @@ public partial class Main : Node2D {
     private void OnGameStart(LevelInfo level, CharacterInfo character) {
         GameSetup.QueueFree();
 
-        AddChild(new GameRunner(level, character));
+        var gameRunner = new GameRunner(level, character);
+        AddChild(gameRunner);
+        gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }
 
     private void OnProjectEdit(ProjectInfo project) {
