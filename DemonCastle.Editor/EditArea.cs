@@ -8,7 +8,6 @@ using DemonCastle.Editor.Editors.Level;
 using DemonCastle.Editor.Editors.SpriteAtlas;
 using DemonCastle.Editor.Editors.SpriteGrid;
 using DemonCastle.Editor.Editors.Weapon;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
