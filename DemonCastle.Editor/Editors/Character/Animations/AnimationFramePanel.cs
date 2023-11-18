@@ -12,7 +12,7 @@ public partial class AnimationFramePanel : PanelContainer {
 	protected Button DeleteButton { get; }
 	protected SpriteDefinitionView SpriteDefinitionView { get; }
 
-	protected EditFrameWindow EditWindow { get; }
+	protected Frame.EditFrameWindow EditWindow { get; }
 
 	public AnimationFramePanel(FrameInfo frameInfo) {
 		FrameInfo = frameInfo;
@@ -43,7 +43,7 @@ public partial class AnimationFramePanel : PanelContainer {
 		});
 		DeleteButton.Pressed += OnDeleteButtonClicked;
 
-		AddChild(EditWindow = new EditFrameWindow(frameInfo));
+		AddChild(EditWindow = new Frame.EditFrameWindow(frameInfo));
 		EditWindow.Confirmed += OnEditWindowClosed;
 
 		LoadFrameInfo();
