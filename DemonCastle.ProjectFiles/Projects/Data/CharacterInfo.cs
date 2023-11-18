@@ -85,6 +85,33 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
+	public string CrouchAnimation {
+		get => Resource.CrouchAnimation;
+		set {
+			Resource.CrouchAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string StairsUpAnimation {
+		get => Resource.StairsUpAnimation;
+		set {
+			Resource.StairsUpAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string StairsDownAnimation {
+		get => Resource.StairsDownAnimation;
+		set {
+			Resource.StairsDownAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public Vector2 Size => new(Resource.Width, Resource.Height);
 
 	public string Name {

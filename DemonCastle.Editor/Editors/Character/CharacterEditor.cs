@@ -32,6 +32,9 @@ public partial class CharacterEditor : BaseEditor {
 		Properties.AddAnimationName("Idle Animation", characterInfo, x => x.IdleAnimation, characterInfo.Animations);
 		Properties.AddAnimationName("Walk Animation", characterInfo, x => x.WalkAnimation, characterInfo.Animations);
 		Properties.AddAnimationName("Jump Animation", characterInfo, x => x.JumpAnimation, characterInfo.Animations);
+		Properties.AddAnimationName("Crouch Animation", characterInfo, x => x.CrouchAnimation, characterInfo.Animations);
+		Properties.AddAnimationName("Stairs Up Animation", characterInfo, x => x.StairsUpAnimation, characterInfo.Animations);
+		Properties.AddAnimationName("Stairs Down Animation", characterInfo, x => x.StairsDownAnimation, characterInfo.Animations);
 
 		SplitContainer.AddChild(new AnimationArea(characterInfo));
 	}

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DemonCastle.ProjectFiles; 
+namespace DemonCastle.ProjectFiles;
 
 public class CharacterFile {
 	public string Name { get; set; } = string.Empty;
@@ -14,6 +14,9 @@ public class CharacterFile {
 	public string WalkAnimation { get; set; } = string.Empty;
 	public string IdleAnimation { get; set; } = string.Empty;
 	public string JumpAnimation { get; set; } = string.Empty;
+	public string CrouchAnimation { get; set; } = string.Empty;
+	public string StairsUpAnimation { get; set; } = string.Empty;
+	public string StairsDownAnimation { get; set; } = string.Empty;
 }
 
 public class AnimationData {
