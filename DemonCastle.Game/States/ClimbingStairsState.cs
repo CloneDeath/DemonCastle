@@ -33,14 +33,7 @@ public class ClimbingStairsState : IState {
 
 	private IState? MoveTowards(GamePlayer player, Node2D target) {
 		player.MoveTowards(target.GlobalPosition);
-		if (player.GlobalPosition.DistanceTo(target.GlobalPosition) > 0.5) {
-			if (target.GlobalPosition.Y > player.GlobalPosition.Y) {
-				player.Animation.PlayStairsDown();
-			} else {
-				player.Animation.PlayStairsUp();
-			}
-			return null;
-		}
+		if (player.GlobalPosition.DistanceTo(target.GlobalPosition) > 0.5) return null;
 
 		var stairs = player.GetNearbyStairs().FirstOrDefault(s => s != _stairs);
 		return stairs == null ? new NormalState() : new ClimbingStairsState(stairs);

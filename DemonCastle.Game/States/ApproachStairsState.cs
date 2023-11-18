@@ -31,6 +31,14 @@ public class ApproachStairsState : IState {
 		var distanceToTarget = player.GlobalPosition.DistanceTo(_target.GlobalPosition);
 		if (distanceToTarget <= player.WalkSpeed * delta) {
 			player.Facing = _target.Facing;
+
+			if (_target.PointsUp) {
+				player.Animation.PlayStairsUp();
+			}
+			else {
+				player.Animation.PlayStairsDown();
+			}
+
 			return new ClimbingStairsState(_stairs);
 		}
 
