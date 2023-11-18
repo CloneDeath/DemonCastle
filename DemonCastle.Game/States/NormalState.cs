@@ -28,6 +28,10 @@ public class NormalState : IState {
 			}
 		}
 
+		if (Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+			return new CrouchState();
+		}
+
 		var left = Input.IsActionPressed(InputActions.PlayerMoveLeft) ? 1 : 0;
 		var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
 		if (right - left == 0) {
