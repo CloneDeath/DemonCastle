@@ -1,8 +1,9 @@
+using System;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Game.Animations; 
+namespace DemonCastle.Game.Animations;
 
 public partial class AnimationNode : Node2D {
 	protected AnimationInfo Animation { get; }
@@ -21,7 +22,7 @@ public partial class AnimationNode : Node2D {
 		}
 	}
 
-	public string AnimationName => Animation.Name;
+	public Guid AnimationId => Animation.Id;
 
 	public void Play() {
 		Frames.CurrentTime = 0;

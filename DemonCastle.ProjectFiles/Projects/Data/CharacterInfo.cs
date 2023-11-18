@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -58,7 +59,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string IdleAnimation {
+	public Guid IdleAnimation {
 		get => Resource.IdleAnimation;
 		set {
 			Resource.IdleAnimation = value;
@@ -67,7 +68,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string WalkAnimation {
+	public Guid WalkAnimation {
 		get => Resource.WalkAnimation;
 		set {
 			Resource.WalkAnimation = value;
@@ -76,7 +77,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string JumpAnimation {
+	public Guid JumpAnimation {
 		get => Resource.JumpAnimation;
 		set {
 			Resource.JumpAnimation = value;
@@ -85,7 +86,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string CrouchAnimation {
+	public Guid CrouchAnimation {
 		get => Resource.CrouchAnimation;
 		set {
 			Resource.CrouchAnimation = value;
@@ -94,7 +95,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string StairsUpAnimation {
+	public Guid StairsUpAnimation {
 		get => Resource.StairsUpAnimation;
 		set {
 			Resource.StairsUpAnimation = value;
@@ -103,7 +104,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public string StairsDownAnimation {
+	public Guid StairsDownAnimation {
 		get => Resource.StairsDownAnimation;
 		set {
 			Resource.StairsDownAnimation = value;

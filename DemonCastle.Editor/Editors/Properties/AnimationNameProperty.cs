@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -12,18 +13,18 @@ public partial class AnimationNameProperty : BaseProperty {
 
 	private List<AnimationInfo> Options => _options.ToList();
 
-	protected IPropertyBinding<string> Binding { get; }
+	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
-	public string PropertyValue {
-		get => OptionButton.Selected < 0 ? string.Empty : Options[OptionButton.Selected].Name;
+	public Guid PropertyValue {
+		get => OptionButton.Selected < 0 ? Guid.Empty : Options[OptionButton.Selected].Id;
 		set {
-			var option = _options.FirstOrDefault(o => o.Name == value);
+			var option = _options.FirstOrDefault(o => o.Id == value);
 			OptionButton.Selected = option == null ? -1 : Options.IndexOf(option);
 		}
 	}
 
-	public AnimationNameProperty(IPropertyBinding<string> binding, IEnumerable<AnimationInfo> options) {
+	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerable<AnimationInfo> options) {
 		_options = options;
 		Name = nameof(AnimationNameProperty);
 		Binding = binding;
@@ -66,12 +67,12 @@ public partial class AnimationNameProperty : BaseProperty {
 		Binding.Changed -= Binding_OnChanged;
 	}
 
-	private void Binding_OnChanged(string value) {
+	private void Binding_OnChanged(Guid value) {
 		PropertyValue = value;
 	}
 
 	private void OnItemSelected(long index) {
-		Binding.Set(index < 0 ? string.Empty : Options[(int)index].Name);
+		Binding.Set(index < 0 ? Guid.Empty : Options[(int)index].Id);
 	}
 
 	public override void Enable() {

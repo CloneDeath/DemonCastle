@@ -18,6 +18,8 @@ public class AnimationInfo : INotifyPropertyChanged {
 	protected AnimationData Animation { get; }
 	public List<FrameInfo> Frames { get; }
 
+	public Guid Id => Animation.Id;
+
 	public string Name {
 		get => Animation.Name;
 		set {
@@ -26,7 +28,6 @@ public class AnimationInfo : INotifyPropertyChanged {
 			OnPropertyChanged();
 		}
 	}
-
 
 	protected void Save() => File.Save();
 
