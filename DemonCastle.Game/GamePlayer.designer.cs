@@ -47,7 +47,7 @@ public partial class GamePlayer {
 		});
 		FloorDetection.AddChild(new CollisionShape2D {
 			Shape = new RectangleShape2D {
-				Size = new Vector2(Character.Size.X, 2)
+				Size = new Vector2(Character.Size.X, level.TileSize.Y / 4)
 			}
 		});
 	}

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.Game.Animations;
