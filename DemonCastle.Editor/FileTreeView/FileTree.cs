@@ -80,6 +80,7 @@ public partial class FileTree : Tree {
 			".dcsa" => IconTextures.SpriteAtlasIcon,
 			".dcsg" => IconTextures.SpriteGridIcon,
 			".dcc" => IconTextures.CharacterIcon,
+			".dcw" => IconTextures.WeaponIcon,
 			".txt" => IconTextures.TextFileIcon,
 			".png" => IconTextures.TextureIcon,
 			_ => IconTextures.UnknownIcon
