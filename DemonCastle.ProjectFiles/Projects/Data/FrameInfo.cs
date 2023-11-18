@@ -38,6 +38,9 @@ public class FrameInfo : INotifyPropertyChanged {
 			FrameData.Source = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprite));
+			OnPropertyChanged(nameof(SpriteId));
+			OnPropertyChanged(nameof(SpriteDefinition));
 		}
 	}
 
@@ -47,6 +50,8 @@ public class FrameInfo : INotifyPropertyChanged {
 			FrameData.SpriteId = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprite));
+			OnPropertyChanged(nameof(SpriteDefinition));
 		}
 	}
 

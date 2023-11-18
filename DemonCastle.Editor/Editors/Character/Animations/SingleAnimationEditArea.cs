@@ -19,7 +19,7 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 
 		FrameContainer.ClearChildren();
 		foreach (var frame in Current.Frames) {
-			FrameContainer.AddChild(new AnimationFramePanel(frame));
+			FrameContainer.AddChild(new Frame.AnimationFramePanel(frame));
 		}
 	}
 

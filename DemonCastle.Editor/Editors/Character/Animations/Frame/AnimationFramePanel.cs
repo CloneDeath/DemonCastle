@@ -2,35 +2,32 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Character.Animations;
+namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
 
 public partial class AnimationFramePanel : PanelContainer {
 	protected FrameInfo FrameInfo { get; }
-	protected Label DurationLabel { get; }
+
 	protected VBoxContainer Items { get; }
+	protected Label FrameInfoLabel { get; }
+	protected Label DurationLabel { get; }
 	protected Button EditButton { get; }
 	protected Button DeleteButton { get; }
 	protected SpriteDefinitionView SpriteDefinitionView { get; }
 
-	protected Frame.EditFrameWindow EditWindow { get; }
+	protected EditFrameWindow EditWindow { get; }
 
 	public AnimationFramePanel(FrameInfo frameInfo) {
 		FrameInfo = frameInfo;
+
+		Name = nameof(AnimationFramePanel);
 		CustomMinimumSize = new Vector2(50, 50);
 
-		AddChild(Items = new VBoxContainer {
-			AnchorRight = 1,
-			AnchorBottom = 1,
-			OffsetRight = 0,
-			OffsetBottom = 0
-		});
+		AddChild(Items = new VBoxContainer());
+		Items.SetAnchorsPreset(LayoutPreset.FullRect);
 
-		Items.AddChild(new Label {
-			Text = $"{FrameInfo.Index} - {frameInfo.Sprite.Name}"
-		});
+		Items.AddChild(FrameInfoLabel = new Label());
 
 		Items.AddChild(SpriteDefinitionView = new SpriteDefinitionView(FrameInfo.SpriteDefinition));
-
 		Items.AddChild(DurationLabel = new Label());
 
 		Items.AddChild(EditButton = new Button {
@@ -43,15 +40,16 @@ public partial class AnimationFramePanel : PanelContainer {
 		});
 		DeleteButton.Pressed += OnDeleteButtonClicked;
 
-		AddChild(EditWindow = new Frame.EditFrameWindow(frameInfo));
+		AddChild(EditWindow = new EditFrameWindow(frameInfo));
 		EditWindow.Confirmed += OnEditWindowClosed;
 
 		LoadFrameInfo();
 	}
 
 	protected void LoadFrameInfo() {
+		FrameInfoLabel.Text = $"{FrameInfo.Index} - {FrameInfo.SpriteDefinition.Name}";
 		DurationLabel.Text = $"{FrameInfo.Duration}s";
-		SpriteDefinitionView.Reload();
+		SpriteDefinitionView.Load(FrameInfo.SpriteDefinition);
 	}
 
 	protected void OnEditWindowClosed() {
