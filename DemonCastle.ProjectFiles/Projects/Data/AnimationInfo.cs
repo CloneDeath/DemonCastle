@@ -27,7 +27,6 @@ public class AnimationInfo : INotifyPropertyChanged {
 		}
 	}
 
-	public event PropertyChangedEventHandler? PropertyChanged;
 
 	protected void Save() => File.Save();
 
@@ -49,6 +48,9 @@ public class AnimationInfo : INotifyPropertyChanged {
 		Save();
 	}
 
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler? PropertyChanged;
+
 	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
@@ -59,4 +61,5 @@ public class AnimationInfo : INotifyPropertyChanged {
 		OnPropertyChanged(propertyName);
 		return true;
 	}
+	#endregion
 }
