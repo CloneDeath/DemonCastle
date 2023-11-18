@@ -13,7 +13,8 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 
 	protected Button AddSpriteButton { get; }
 	protected SpriteSelectorPanel SpriteSelector { get; }
-	protected SpriteDetails SpriteDetails { get; }
+	protected Sprites.SpriteAtlasDetails SpriteAtlasDetails { get; }
+	private readonly Button DeleteButton;
 
 	public event Action<SpriteAtlasDataInfo?>? SpriteSelected;
 
@@ -32,21 +33,32 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		});
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;
 
-		AddChild(SpriteDetails = new SpriteDetails(_proxy));
-		SpriteDetails.DisableProperties();
+		AddChild(SpriteAtlasDetails = new Sprites.SpriteAtlasDetails(_proxy));
+		SpriteAtlasDetails.DisableProperties();
+
+		AddChild(DeleteButton = new Button {
+			Text = "Delete Sprite"
+		});
+		DeleteButton.Pressed += DeleteButton_OnPressed;
 	}
 
 	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
 		_proxy.Proxy = sprite;
-		if (sprite != null) SpriteDetails.EnableProperties();
-		else SpriteDetails.DisableProperties();
+		if (sprite != null) SpriteAtlasDetails.EnableProperties();
+		else SpriteAtlasDetails.DisableProperties();
 		SpriteSelector.SelectSprite(sprite);
 	}
 
 	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? sprite) {
 		_proxy.Proxy = sprite as SpriteAtlasDataInfo;
-		if (sprite != null) SpriteDetails.EnableProperties();
-		else SpriteDetails.DisableProperties();
+		if (sprite != null) {
+			SpriteAtlasDetails.EnableProperties();
+			DeleteButton.Disabled = false;
+		}
+		else {
+			SpriteAtlasDetails.DisableProperties();
+			DeleteButton.Disabled = true;
+		}
 		SpriteSelected?.Invoke(sprite as SpriteAtlasDataInfo);
 	}
 
@@ -54,5 +66,13 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		var sprite = _spriteAtlas.CreateSprite();
 		SelectSprite(sprite);
 		SpriteSelected?.Invoke(sprite);
+	}
+
+	private void DeleteButton_OnPressed() {
+		var selectedSprite = _proxy.Proxy;
+		if (selectedSprite == null) return;
+		_spriteAtlas.DeleteSprite(selectedSprite);
+		SelectSprite(null);
+		SpriteSelected?.Invoke(null);
 	}
 }

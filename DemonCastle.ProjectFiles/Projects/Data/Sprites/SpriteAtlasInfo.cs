@@ -60,6 +60,14 @@ public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource, INotify
 		return spriteAtlasDataInfo;
 	}
 
+	public void DeleteSprite(SpriteAtlasDataInfo sprite) {
+		Resource.Sprites.Remove(sprite.Data);
+		_spriteData.Remove(sprite);
+		Save();
+		OnPropertyChanged(nameof(Sprites));
+		OnPropertyChanged(nameof(AtlasSprites));
+	}
+
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;
 

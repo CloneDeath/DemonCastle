@@ -7,13 +7,14 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 
 public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
+	public SpriteAtlasData Data { get; }
+
 	public SpriteAtlasDataInfo(SpriteAtlasInfo spriteAtlasInfo, SpriteAtlasData data) {
 		SpriteAtlasInfo = spriteAtlasInfo;
 		Data = data;
 	}
 
 	protected SpriteAtlasInfo SpriteAtlasInfo { get; }
-	protected SpriteAtlasData Data { get; }
 
 	public Guid Id => Data.Id;
 
