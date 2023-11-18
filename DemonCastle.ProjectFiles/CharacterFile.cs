@@ -25,3 +25,9 @@ public class AnimationData {
 	public string Name { get; set; } = string.Empty;
 	public List<FrameData> Frames { get; set; } = new();
 }
+
+public class FrameData {
+	public float Duration { get; set; } = 1;
+	public Guid SpriteId { get; set; }
+	public string Source { get; set; } = string.Empty;
+}
