@@ -1,7 +1,8 @@
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Sprites; 
+namespace DemonCastle.Game.Animations; 
 
 public partial class SpriteInfoNode : Sprite2D {
 	protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
