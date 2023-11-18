@@ -7,6 +7,8 @@ using DemonCastle.Editor.Editors.Character;
 using DemonCastle.Editor.Editors.Level;
 using DemonCastle.Editor.Editors.SpriteAtlas;
 using DemonCastle.Editor.Editors.SpriteGrid;
+using DemonCastle.Editor.Editors.Weapon;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -50,6 +52,7 @@ public partial class EditArea : TabContainer {
 		return file.Extension switch {
 			".dcp" => new ProjectEditor(file.ToProjectInfo()),
 			".dcc" => new CharacterEditor(file.ToCharacterInfo()),
+			".dcw" => new WeaponEditor(file.ToWeaponInfo()),
 			".dcl" => new LevelEditor(file.ToLevelInfo()),
 			".dcsa" => new SpriteAtlasEditor(file.ToSpriteAtlasInfo()),
 			".dcsg" => new SpriteGridEditor(file.ToSpriteGridInfo()),

@@ -123,6 +123,17 @@ public partial class FileTree : Tree {
 		CreateTree();
 	}
 
+	public void OnCreateWeaponFileSelected() {
+		var selected = GetSelected();
+		if (!DirectoryMap.ContainsKey(selected)) return;
+		var dirNav = DirectoryMap[selected];
+		dirNav.CreateFile("weapon", "dcw", new WeaponFile {
+			Name = "weapon"
+		});
+
+		CreateTree();
+	}
+
 	public void OnCreateLevelFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;

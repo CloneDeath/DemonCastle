@@ -9,6 +9,7 @@ public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? CreateSpriteAtlasFile;
 	public event Action? CreateSpriteGridFile;
 	public event Action? CreateCharacterFile;
+	public event Action? CreateWeaponFile;
 	public event Action? CreateLevelFile;
 	public event Action? CreateTextFile;
 	public event Action? OpenFolder;
@@ -39,6 +40,11 @@ public partial class DirectoryPopupMenu : PopupMenu {
 				Text = "Create Character File",
 				Icon = IconTextures.CharacterIcon,
 				Action = () => CreateCharacterFile?.Invoke()
+			},
+			new PopupAction {
+				Text = "Create Weapon File",
+				Icon = IconTextures.WeaponIcon,
+				Action = () => CreateWeaponFile?.Invoke()
 			},
 			new PopupAction {
 				Text	= "Create Level File",

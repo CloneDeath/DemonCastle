@@ -17,6 +17,7 @@ public static class IconTextures {
 	public static Texture2D TextFileIcon { get; } = LoadTexture(nameof(TextFileIcon));
 	public static Texture2D TextureIcon { get; } = LoadTexture(nameof(TextureIcon));
 	public static Texture2D UnknownIcon { get; } = LoadTexture(nameof(UnknownIcon));
+	public static Texture2D WeaponIcon { get; } = LoadTexture(nameof(WeaponIcon));
 
 	private static Texture2D LoadTexture(string textureName) {
 		return ResourceLoader.Load<Texture2D>($"res://DemonCastle.Editor/Icons/{textureName}.png");

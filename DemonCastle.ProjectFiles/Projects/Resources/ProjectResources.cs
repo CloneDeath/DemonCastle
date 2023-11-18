@@ -13,6 +13,9 @@ public class ProjectResources {
 		Characters = new ResourceCache<CharacterInfo>(path
 			=> new CharacterInfo(GetFile<CharacterFile>(path)));
 
+		Weapons = new ResourceCache<WeaponInfo>(path
+			=> new WeaponInfo(GetFile<WeaponFile>(path)));
+
 		Levels = new ResourceCache<LevelInfo>(path
 			=> new LevelInfo(GetFile<LevelFile>(path)));
 
@@ -37,6 +40,9 @@ public class ProjectResources {
 	}
 	protected ResourceCache<CharacterInfo> Characters { get; }
 	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
+
+	protected ResourceCache<WeaponInfo> Weapons { get; }
+	public WeaponInfo GetWeapon(string path) => Weapons.Get(path);
 
 	protected ResourceCache<LevelInfo> Levels { get; }
 	public LevelInfo GetLevel(string path) => Levels.Get(path);

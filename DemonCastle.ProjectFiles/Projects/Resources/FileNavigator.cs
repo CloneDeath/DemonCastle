@@ -6,7 +6,7 @@ using Godot;
 using Path = System.IO.Path;
 using File = System.IO.File;
 
-namespace DemonCastle.ProjectFiles.Projects.Resources; 
+namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class FileNavigator : DirectoryNavigator {
 	public string FilePath { get; }
@@ -15,7 +15,7 @@ public class FileNavigator : DirectoryNavigator {
 	public string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(FileName);
 
 	public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
-	public FileNavigator(string filePath, ProjectResources resources) 
+	public FileNavigator(string filePath, ProjectResources resources)
 		: base(Path.GetDirectoryName(filePath) ?? throw new NullReferenceException(), resources) {
 		FilePath = filePath;
 	}
@@ -27,6 +27,7 @@ public class FileNavigator : DirectoryNavigator {
 	public SpriteAtlasInfo ToSpriteAtlasInfo() => ProjectResources.GetSpriteAtlas(FilePath);
 	public SpriteGridInfo ToSpriteGridInfo() => ProjectResources.GetSpriteGrid(FilePath);
 	public CharacterInfo ToCharacterInfo() => ProjectResources.GetCharacter(FilePath);
+	public WeaponInfo ToWeaponInfo() => ProjectResources.GetWeapon(FilePath);
 	public LevelInfo ToLevelInfo() => ProjectResources.GetLevel(FilePath);
 	public ProjectInfo ToProjectInfo() => ProjectResources.GetProject(FilePath);
 

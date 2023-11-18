@@ -25,6 +25,7 @@ namespace DemonCastle.Editor.FileTreeView {
 			DirectoryPopupMenu.CreateSpriteAtlasFile += OnCreateSpriteAtlasFileSelected;
 			DirectoryPopupMenu.CreateSpriteGridFile += OnCreateSpriteGridFileSelected;
 			DirectoryPopupMenu.CreateCharacterFile += OnCreateCharacterFileSelected;
+			DirectoryPopupMenu.CreateWeaponFile += OnCreateWeaponFileSelected;
 			DirectoryPopupMenu.CreateLevelFile += OnCreateLevelFileSelected;
 			DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
 			DirectoryPopupMenu.OpenFolder += OnOpenFolder;
