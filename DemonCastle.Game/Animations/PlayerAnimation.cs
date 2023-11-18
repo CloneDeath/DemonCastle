@@ -23,6 +23,10 @@ public partial class PlayerAnimation : Node2D {
 
 	public void PlayIdle() => Play(Character.IdleAnimation);
 	public void PlayWalk() => Play(Character.WalkAnimation);
+	public void PlayJump() => Play(Character.JumpAnimation);
+	public void PlayCrouch() => Play(Character.CrouchAnimation);
+	public void PlayStairsUp() => Play(Character.StairsUpAnimation);
+	public void PlayStairsDown() => Play(Character.StairsDownAnimation);
 
 	protected void Play(Guid animationId) {
 		if (CurrentAnimation?.AnimationId == animationId) return;

@@ -80,11 +80,15 @@ public partial class GamePlayer : CharacterBody2D {
 	}
 
 	public void EnableGravity() {
+		if (_applyGravity) return;
+
 		Velocity = Vector2.Zero;
 		_applyGravity = true;
 	}
 
 	public void DisableGravity() {
+		if (!_applyGravity) return;
+
 		Velocity = Vector2.Zero;
 		_applyGravity = false;
 	}

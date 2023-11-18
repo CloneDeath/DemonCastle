@@ -11,19 +11,20 @@ public class NormalState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		if (player.IsStandingOnFloor()) {
-			var stairs = player.GetNearbyStairs().FirstOrDefault();
-			var target = GetTargetInStairs(player, stairs);
-			if (stairs != null && target != null) {
+		if (!player.IsStandingOnFloor()) {
+			return new InAirState();
+		}
 
-				if (target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
-					!target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-					return new ApproachStairsState(stairs, target);
-				}
-			}
+		if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
+			player.Jump();
+		}
 
-			if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
-				player.Jump();
+		var stairs = player.GetNearbyStairs().FirstOrDefault();
+		var target = GetTargetInStairs(player, stairs);
+		if (stairs != null && target != null) {
+			if (target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
+				!target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+				return new ApproachStairsState(stairs, target);
 			}
 		}
 
