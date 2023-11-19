@@ -30,6 +30,13 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 		AddFrameButton.Pressed += AddFrameButton_OnPressed;
 	}
 
+	public override void _ExitTree() {
+		base._ExitTree();
+		if (_current != null) {
+			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
+		}
+	}
+
 	public void Load(WeaponAnimationInfo animation) {
 		if (_current != null) {
 			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;

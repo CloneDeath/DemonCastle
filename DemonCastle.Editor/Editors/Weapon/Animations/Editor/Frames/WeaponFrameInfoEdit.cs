@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -20,20 +21,22 @@ public partial class WeaponFrameInfoEdit : PropertyCollection {
 		Name = nameof(WeaponFrameInfoEdit);
 
 		AddFloat("Duration", _proxy, p => p.Duration);
-		var source = AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
-		source.FileSelected += Source_OnFileSelected;
+		AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 		AddChild(DeleteButton = new Button {
 			Text = "Delete Frame"
 		});
 		DeleteButton.Pressed += DeleteButton_OnPressed;
+
+		_proxy.PropertyChanged += Proxy_OnPropertyChanged;
+	}
+
+	private void Proxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		SpriteReference.LoadOptions(_proxy.SpriteDefinitions);
+		SpriteReference.PropertyValue = _proxy.SpriteId;
 	}
 
 	private void DeleteButton_OnPressed() {
 		_proxy.DeleteFrame();
-	}
-
-	private void Source_OnFileSelected(string file) {
-		SpriteReference.LoadOptions(_proxy.SpriteDefinitions);
 	}
 }
