@@ -9,13 +9,13 @@ public partial class WeaponFrameItem : SelectableControl {
 	private static readonly Color SelectedColor = Colors.White;
 	private static readonly Color DeselectedColor = new(Colors.White, 0.25f);
 
-	private readonly WeaponFrameInfo _frame;
+	public WeaponFrameInfo Frame { get; }
 
 	private Outline Outline { get; }
 	private SpriteDefinitionView SpriteDefinitionView { get; }
 
 	public WeaponFrameItem(WeaponFrameInfo frame) {
-		_frame = frame;
+		Frame = frame;
 		Name = nameof(WeaponFrameItem);
 		CustomMinimumSize = new Vector2(60, 60);
 
@@ -31,16 +31,16 @@ public partial class WeaponFrameItem : SelectableControl {
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		_frame.PropertyChanged += Frame_OnPropertyChanged;
+		Frame.PropertyChanged += Frame_OnPropertyChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_frame.PropertyChanged -= Frame_OnPropertyChanged;
+		Frame.PropertyChanged -= Frame_OnPropertyChanged;
 	}
 
 	private void Frame_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		SpriteDefinitionView.Load(_frame.SpriteDefinition);
+		SpriteDefinitionView.Load(Frame.SpriteDefinition);
 	}
 
 	public override void _Process(double delta) {

@@ -16,7 +16,7 @@ public partial class WeaponAnimations : HSplitContainer {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		AnimationList.AnimationSelected += AnimationList_OnAnimationSelected;
-		AddChild(AnimationEditor = new WeaponAnimationEditor {
+		AddChild(AnimationEditor = new WeaponAnimationEditor(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

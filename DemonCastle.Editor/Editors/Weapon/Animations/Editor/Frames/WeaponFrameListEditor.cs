@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Specialized;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
@@ -10,6 +12,8 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
+
+	public event Action<WeaponFrameInfo>? FrameSelected;
 
 	public WeaponFrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {
@@ -54,7 +58,14 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 
 		if (_current == null) return;
 		foreach (var frame in _current.Frames) {
-			FrameContainer.AddChild(new WeaponFrameItem(frame));
+			var weaponFrameItem = new WeaponFrameItem(frame);
+			weaponFrameItem.Selected += WeaponFrameItem_OnSelected;
+			FrameContainer.AddChild(weaponFrameItem);
 		}
+	}
+
+	private void WeaponFrameItem_OnSelected(SelectableControl obj) {
+		if (obj is not WeaponFrameItem wfi) return;
+		FrameSelected?.Invoke(wfi.Frame);
 	}
 }

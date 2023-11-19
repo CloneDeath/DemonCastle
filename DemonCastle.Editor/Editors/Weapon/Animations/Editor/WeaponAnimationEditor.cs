@@ -4,15 +4,25 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor;
 
-public partial class WeaponAnimationEditor : VBoxContainer {
+public partial class WeaponAnimationEditor : VSplitContainer {
+	private VBoxContainer Top { get; }
 	private WeaponAnimationDetails Details { get; }
 	private WeaponFrameListEditor FrameList { get; }
+	private WeaponFrameInfoEdit FrameEdit { get; }
 
-	public WeaponAnimationEditor() {
+	public WeaponAnimationEditor(WeaponInfo weapon) {
 		Name = nameof(WeaponAnimationEditor);
 
-		AddChild(Details = new WeaponAnimationDetails());
-		AddChild(FrameList = new WeaponFrameListEditor());
+		AddChild(Top = new VBoxContainer());
+		Top.AddChild(Details = new WeaponAnimationDetails());
+		Top.AddChild(FrameList = new WeaponFrameListEditor());
+		FrameList.FrameSelected += FrameList_OnFrameSelected;
+
+		AddChild(FrameEdit = new WeaponFrameInfoEdit(weapon));
+	}
+
+	private void FrameList_OnFrameSelected(WeaponFrameInfo frame) {
+		FrameEdit.WeaponFrameInfo = frame;
 	}
 
 	public void LoadAnimation(WeaponAnimationInfo animation) {
