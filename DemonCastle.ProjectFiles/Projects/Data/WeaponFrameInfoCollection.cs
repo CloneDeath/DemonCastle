@@ -37,6 +37,8 @@ public class WeaponFrameInfoCollection : IEnumerable<WeaponFrameInfo>, INotifyCo
 
 	public void Remove(WeaponFrameInfo frame) {
 		FrameData.Remove(frame.FrameData);
+		Save();
+		Frames.Remove(frame);
 	}
 
 	protected void Save() => _file.Save();
