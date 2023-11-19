@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
@@ -10,7 +11,11 @@ public partial class SpriteDefinitionView : CenterContainer {
 
 	public SpriteDefinitionView(ISpriteDefinition definition) {
 		AddChild(Rect = new TextureRect {
-			StretchMode = TextureRect.StretchModeEnum.KeepCentered
+			StretchMode = TextureRect.StretchModeEnum.KeepCentered,
+			Material = new TransparentColorSpriteShader {
+				TransparentColor = definition.TransparentColor,
+				Threshold = definition.TransparentColorThreshold
+			}
 		});
 		Load(definition);
 	}
