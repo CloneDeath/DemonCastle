@@ -20,7 +20,7 @@ public class WeaponFrameInfo : INotifyPropertyChanged {
 	protected WeaponAnimationInfo Animation { get; }
 	protected FileNavigator<WeaponFile> File { get; }
 	public string Directory => File.Directory;
-	protected WeaponFrameData FrameData { get; }
+	public WeaponFrameData FrameData { get; }
 	public int Index { get; }
 
 	public float Duration {

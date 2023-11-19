@@ -12,12 +12,12 @@ public class WeaponAnimationInfo : INotifyPropertyChanged {
 	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, WeaponAnimationData animation) {
 		File = file;
 		Animation = animation;
-		Frames = Animation.Frames.Select((f, i) => new WeaponFrameInfo(this, File, f, i)).ToList();
+		Frames = new WeaponFrameInfoCollection(file, this, animation.Frames);
 	}
 
 	protected FileNavigator<WeaponFile> File { get; }
 	protected WeaponAnimationData Animation { get; }
-	public List<WeaponFrameInfo> Frames { get; }
+	public WeaponFrameInfoCollection  Frames { get; }
 
 	public Guid Id => Animation.Id;
 
@@ -41,7 +41,7 @@ public class WeaponAnimationInfo : INotifyPropertyChanged {
 			Origin = previousFrame?.Origin ?? Vector2I.Zero
 		};
 		Animation.Frames.Add(frame);
-		Frames.Add(new WeaponFrameInfo(this, File, frame, Frames.Count));
+		Frames.Add(frame);
 		Save();
 	}
 
