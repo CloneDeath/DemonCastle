@@ -7,6 +7,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class WeaponInfo : FileInfo<WeaponFile>, IListableInfo, INotifyPropertyChanged {
 	public WeaponInfo(FileNavigator<WeaponFile> file) : base(file) {
+		Animations = new WeaponAnimationInfoCollection(file, Resource.Animations);
 	}
 
 	public string Name {
@@ -17,6 +18,9 @@ public class WeaponInfo : FileInfo<WeaponFile>, IListableInfo, INotifyPropertyCh
 			OnPropertyChanged();
 		}
 	}
+
+	public WeaponAnimationInfoCollection Animations { get; }
+
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

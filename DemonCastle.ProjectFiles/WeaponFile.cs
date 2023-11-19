@@ -7,13 +7,13 @@ namespace DemonCastle.ProjectFiles;
 public class WeaponFile {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name { get; set; } = string.Empty;
-	public List<AnimationData> Animations { get; set; } = new();
+	public List<WeaponAnimationData> Animations { get; set; } = new();
 }
 
 public class WeaponAnimationData {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name { get; set; } = string.Empty;
-	public List<FrameData> Frames { get; set; } = new();
+	public List<WeaponFrameData> Frames { get; set; } = new();
 }
 
 public class WeaponFrameData {
