@@ -45,10 +45,12 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
-	public void AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {
+	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
+		var stringProperty = new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {
 			DisplayName = name
-		});
+		};
+		AddChild(stringProperty);
+		return stringProperty;
 	}
 
 	public void AddInteger<T>(string name, T target, Expression<Func<T, int>> propertyExpression) where T : INotifyPropertyChanged {
