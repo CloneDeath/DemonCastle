@@ -54,7 +54,7 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 
 		if (_current == null) return;
 		foreach (var frame in _current.Frames) {
-			FrameContainer.AddChild(new WeaponFrameEditor(frame));
+			FrameContainer.AddChild(new WeaponFrameItem(frame));
 		}
 	}
 }
