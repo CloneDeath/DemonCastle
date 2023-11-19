@@ -1,3 +1,5 @@
+using DemonCastle.Editor.Editors.Weapon.Animations;
+using DemonCastle.Editor.Editors.Weapon.Details;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
@@ -18,6 +20,11 @@ public partial class WeaponEditor : BaseEditor {
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
-		SplitContainer.AddChild(new WeaponDetails(weapon));
+		SplitContainer.AddChild(new WeaponDetails(weapon) {
+			CustomMinimumSize = new Vector2(300, 300)
+		});
+		SplitContainer.AddChild(new WeaponAnimations(weapon) {
+			CustomMinimumSize = new Vector2(300, 300)
+		});
 	}
 }
