@@ -13,8 +13,9 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 
 	public WeaponFrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {
-			SizeFlagsVertical = SizeFlags.ExpandFill
+			SizeFlagsVertical = SizeFlags.ExpandFill,
 		});
+
 		FrameContainer.AddChild(AddFrameButton = new Button {
 			Icon = IconTextures.AddIcon,
 			IconAlignment = HorizontalAlignment.Center,
