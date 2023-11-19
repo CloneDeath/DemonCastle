@@ -36,4 +36,6 @@ public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo> {
 	}
 
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
+
+	public void DeleteFrame() => Proxy?.Delete();
 }

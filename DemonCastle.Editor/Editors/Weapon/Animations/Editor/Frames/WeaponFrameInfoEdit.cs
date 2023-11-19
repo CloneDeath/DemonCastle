@@ -1,6 +1,7 @@
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
 
@@ -8,6 +9,7 @@ public partial class WeaponFrameInfoEdit : PropertyCollection {
 	private  readonly WeaponFrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
+	protected Button DeleteButton { get; }
 
 	public WeaponFrameInfo? WeaponFrameInfo {
 		get => _proxy.Proxy;
@@ -21,6 +23,14 @@ public partial class WeaponFrameInfoEdit : PropertyCollection {
 		var source = AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
 		source.FileSelected += Source_OnFileSelected;
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
+		AddChild(DeleteButton = new Button {
+			Text = "Delete Frame"
+		});
+		DeleteButton.Pressed += DeleteButton_OnPressed;
+	}
+
+	private void DeleteButton_OnPressed() {
+		_proxy.DeleteFrame();
 	}
 
 	private void Source_OnFileSelected(string file) {
