@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -15,7 +16,9 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		FrameContainer.AddChild(AddFrameButton = new Button {
-			Text = "Add\nFrame",
+			Icon = IconTextures.AddIcon,
+			IconAlignment = HorizontalAlignment.Center,
+			TooltipText = "Add Frame",
 			CustomMinimumSize = new Vector2(60, 60),
 			Disabled = true
 		}, @internal: InternalMode.Back);
