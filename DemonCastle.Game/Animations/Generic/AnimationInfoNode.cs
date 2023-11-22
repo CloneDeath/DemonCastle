@@ -5,12 +5,12 @@ using Godot;
 
 namespace DemonCastle.Game.Animations.Generic;
 
-public partial class AnimationNode : Node2D {
-	public event Action<AnimationNode>? Complete;
+public partial class AnimationInfoNode : Node2D {
+	public event Action<AnimationInfoNode>? Complete;
 	protected IAnimationInfo Animation { get; }
 	protected PhasingNode Frames { get; }
 
-	public AnimationNode(IAnimationInfo animation) {
+	public AnimationInfoNode(IAnimationInfo animation) {
 		Animation = animation;
 
 		AddChild(Frames = new PhasingNode {

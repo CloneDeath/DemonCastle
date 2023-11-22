@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.Game.Animations.Generic;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -7,14 +8,15 @@ namespace DemonCastle.Game.Animations;
 
 public partial class PlayerAnimation : Node2D {
 	protected readonly CharacterInfo Character;
-	protected Dictionary<Guid, Generic.AnimationNode> Animations { get; } = new();
+	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 	public bool IsComplete { get; private set; }
 
-	protected Generic.AnimationNode? CurrentAnimation;
+	protected AnimationInfoNode? CurrentAnimation;
+
 	public PlayerAnimation(CharacterInfo character) {
 		Character = character;
 		foreach (var animation in character.Animations) {
-			var animationNode = new Generic.AnimationNode(animation) {
+			var animationNode = new AnimationInfoNode(animation) {
 				Visible = false
 			};
 			animationNode.Complete += AnimationNode_OnComplete;
@@ -47,8 +49,8 @@ public partial class PlayerAnimation : Node2D {
 		CurrentAnimation.Play();
 	}
 
-	private void AnimationNode_OnComplete(Generic.AnimationNode node) {
-		if (node.AnimationId != CurrentAnimation?.AnimationId) return;
+	private void AnimationNode_OnComplete(AnimationInfoNode infoNode) {
+		if (infoNode.AnimationId != CurrentAnimation?.AnimationId) return;
 		IsComplete = true;
 	}
 }
