@@ -47,7 +47,8 @@ public partial class PlayerAnimation : Node2D {
 		CurrentAnimation.Play();
 	}
 
-	private void AnimationNode_OnComplete(AnimationNode obj) {
+	private void AnimationNode_OnComplete(AnimationNode node) {
+		if (node.AnimationId != CurrentAnimation?.AnimationId) return;
 		IsComplete = true;
 	}
 }
