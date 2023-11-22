@@ -46,7 +46,7 @@ public partial class AnimationCollectionEdit : VBoxContainer {
 	}
 
 	protected void OnAddPressed() {
-		var animationInfo = Animations.Add(new AnimationData {
+		var animationInfo = Animations.Add(new CharacterAnimationData {
 			Name = "animation" + Animations.Count()
 		});
 		AnimationItems.AddAnimationLibrary(animationInfo);

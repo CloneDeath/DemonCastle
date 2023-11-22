@@ -11,7 +11,7 @@ public class CharacterFile {
 	public float Gravity { get; set; } = 10;
 	public float Height { get; set; } = 16;
 	public float Width { get; set; } = 16;
-	public List<AnimationData> Animations { get; set; } = new();
+	public List<CharacterAnimationData> Animations { get; set; } = new();
 	public Guid WalkAnimation { get; set; } = Guid.Empty;
 	public Guid IdleAnimation { get; set; } = Guid.Empty;
 	public Guid JumpAnimation { get; set; } = Guid.Empty;
@@ -20,13 +20,13 @@ public class CharacterFile {
 	public Guid StairsDownAnimation { get; set; } = Guid.Empty;
 }
 
-public class AnimationData {
+public class CharacterAnimationData {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name { get; set; } = string.Empty;
-	public List<FrameData> Frames { get; set; } = new();
+	public List<CharacterFrameData> Frames { get; set; } = new();
 }
 
-public class FrameData {
+public class CharacterFrameData {
 	public float Duration { get; set; } = 1;
 	public Guid SpriteId { get; set; }
 	public string Source { get; set; } = string.Empty;

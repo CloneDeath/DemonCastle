@@ -10,7 +10,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class FrameInfo : INotifyPropertyChanged {
-	public FrameInfo(AnimationInfo animation, FileNavigator<CharacterFile> file, FrameData frameData, int index) {
+	public FrameInfo(AnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
 		Animation = animation;
 		File = file;
 		FrameData = frameData;
@@ -20,7 +20,7 @@ public class FrameInfo : INotifyPropertyChanged {
 	protected AnimationInfo Animation { get; }
 	protected FileNavigator<CharacterFile> File { get; }
 	public string Directory => File.Directory;
-	protected FrameData FrameData { get; }
+	protected CharacterFrameData FrameData { get; }
 	public int Index { get; }
 
 	public float Duration {

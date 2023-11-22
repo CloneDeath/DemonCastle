@@ -9,20 +9,20 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
 	protected FileNavigator<CharacterFile> File { get; }
-	protected List<AnimationData> FileAnimations { get; }
+	protected List<CharacterAnimationData> FileAnimations { get; }
 	protected ObservableCollection<AnimationInfo> Animations { get; }
 
-	public AnimationInfoCollection(FileNavigator<CharacterFile> file, List<AnimationData> animations) {
+	public AnimationInfoCollection(FileNavigator<CharacterFile> file, List<CharacterAnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
 		Animations = new ObservableCollection<AnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
 		Animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public AnimationInfo Add(AnimationData animationData) {
-		FileAnimations.Add(animationData);
+	public AnimationInfo Add(CharacterAnimationData characterAnimationData) {
+		FileAnimations.Add(characterAnimationData);
 		Save();
-		var animInfo = new AnimationInfo(File, animationData);
+		var animInfo = new AnimationInfo(File, characterAnimationData);
 		Animations.Add(animInfo);
 		return animInfo;
 	}
