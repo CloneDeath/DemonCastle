@@ -2,16 +2,21 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.Game.Animations.Generic;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
 namespace DemonCastle.Game.Animations;
 
 public partial class CharacterAnimation : Node2D {
+	public bool IsComplete { get; private set; }
+	public Guid AnimationId => CurrentAnimation?.AnimationId ?? Guid.Empty;
+
 	protected readonly CharacterInfo Character;
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
-	public bool IsComplete { get; private set; }
 
 	protected AnimationInfoNode? CurrentAnimation;
+
+	public CharacterFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as CharacterFrameInfo;
 
 	public CharacterAnimation(CharacterInfo character) {
 		Character = character;

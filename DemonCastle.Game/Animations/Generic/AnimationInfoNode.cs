@@ -27,6 +27,20 @@ public partial class AnimationInfoNode : Node2D {
 
 	public Guid AnimationId => Animation.Id;
 
+	public IFrameInfo? CurrentFrame {
+		get {
+			var currentTime = Frames.CurrentTime;
+			foreach (var frame in Animation.Frames) {
+				if (currentTime < frame.Duration) {
+					return frame;
+				}
+				currentTime -= frame.Duration;
+			}
+
+			return null;
+		}
+	}
+
 	public void Play() {
 		Frames.CurrentTime = 0;
 		Frames.Play();

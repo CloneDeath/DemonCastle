@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.States;
@@ -7,6 +8,9 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GamePlayer : CharacterBody2D {
+	private Guid PreviousAnimationId = Guid.Empty;
+	private int PreviousFrameIndex = -1;
+
 	public float WalkSpeed => Character.WalkSpeed * Level.TileSize.X;
 	public float Gravity => Character.Gravity * Level.TileSize.Y;
 	public float JumpHeight => Character.JumpHeight * Level.TileSize.Y;
@@ -33,6 +37,21 @@ public partial class GamePlayer : CharacterBody2D {
 			State.OnEnter(this);
 			Logger.StateChanged(State);
 		}
+
+		if (Animation.AnimationId != PreviousAnimationId || (Animation.CurrentFrame != null && Animation.CurrentFrame?.Index != PreviousFrameIndex)) {
+			var animation = Animation.CurrentFrame;
+			if (animation != null) {
+				if (!animation.WeaponEnabled) {
+					Weapon.PlayNone();
+				}
+				else {
+					Weapon.Play(animation.WeaponAnimation);
+				}
+			}
+		}
+
+		PreviousAnimationId = Animation.AnimationId;
+		PreviousFrameIndex = Animation.CurrentFrame?.Index ?? -1;
 
 		if (_applyGravity) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
