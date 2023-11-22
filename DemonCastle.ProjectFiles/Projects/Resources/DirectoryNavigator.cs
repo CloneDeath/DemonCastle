@@ -11,14 +11,14 @@ using Newtonsoft.Json;
 using File = System.IO.File;
 using Path = System.IO.Path;
 
-namespace DemonCastle.ProjectFiles.Projects.Resources; 
+namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class DirectoryNavigator {
 	public string Directory { get; }
 	protected ProjectResources ProjectResources { get; }
 	public string DirectoryName => new DirectoryInfo(Directory).Name;
 
-	public DirectoryNavigator(string directory) 
+	public DirectoryNavigator(string directory)
 		: this(directory, new ProjectResources())
 	{ }
 
@@ -32,6 +32,11 @@ public class DirectoryNavigator {
 	public CharacterInfo GetCharacter(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetCharacter(path);
+	}
+
+	public WeaponInfo GetWeapon(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetWeapon(path);
 	}
 
 	public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);

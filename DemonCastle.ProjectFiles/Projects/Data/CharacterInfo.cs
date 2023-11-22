@@ -13,6 +13,15 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		Animations = new CharacterAnimationInfoCollection(file, Resource.Animations);
 	}
 
+	public string Name {
+		get => Resource.Name;
+		set {
+			Resource.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public CharacterAnimationInfoCollection Animations { get; }
 
 	public float WalkSpeed {
@@ -66,8 +75,11 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 			Resource.DefaultWeapon = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(DefaultWeaponInfo));
 		}
 	}
+
+	public WeaponInfo DefaultWeaponInfo => File.GetWeapon(DefaultWeapon);
 
 	public Guid IdleAnimation {
 		get => Resource.IdleAnimation;
@@ -160,15 +172,6 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 	}
 
 	public Vector2 Size => new(Resource.Width, Resource.Height);
-
-	public string Name {
-		get => Resource.Name;
-		set {
-			Resource.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;
