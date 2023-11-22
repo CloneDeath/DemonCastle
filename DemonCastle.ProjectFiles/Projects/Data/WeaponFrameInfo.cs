@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -50,6 +51,15 @@ public class WeaponFrameInfo : INotifyPropertyChanged {
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(SpriteDefinition));
+		}
+	}
+
+	public Vector2I Origin {
+		get => FrameData.Origin;
+		set {
+			FrameData.Origin = value;
+			Save();
+			OnPropertyChanged();
 		}
 	}
 

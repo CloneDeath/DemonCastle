@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
 
@@ -32,6 +33,13 @@ public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo> {
 		get => Proxy?.SpriteId ?? Guid.Empty;
 		set {
 			if (Proxy != null) Proxy.SpriteId = value;
+		}
+	}
+
+	public Vector2I Origin {
+		get => Proxy?.Origin ?? Vector2I.Zero;
+		set {
+			if (Proxy != null) Proxy.Origin = value;
 		}
 	}
 
