@@ -1,0 +1,28 @@
+using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data;
+
+namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
+
+public partial class CharacterFrameDetails : PropertyCollection {
+	private FrameInfo Frame { get; }
+
+	protected SpriteReferenceProperty SpriteReference { get; }
+
+	public CharacterFrameDetails(FrameInfo frame) {
+		Frame = frame;
+		Name = nameof(CharacterFrameDetails);
+
+		var source = AddFile("Source", frame, frame.Directory, f => f.SourceFile, FileType.SpriteSources);
+		source.FileSelected += Source_OnFileSelected;
+		SpriteReference = AddSpriteReference("Sprite", frame, f => f.SpriteId, frame.SpriteDefinitions);
+		AddFloat("Duration", frame, f => f.Duration);
+		AddBoolean("Weapon Enabled", frame, f => f.WeaponEnabled);
+		AddString("Weapon Animation", frame, f => f.WeaponAnimation);
+		AddVector2I("Weapon Position", frame, f => f.WeaponPosition);
+	}
+
+	private void Source_OnFileSelected(string file) {
+		SpriteReference.LoadOptions(Frame.SpriteDefinitions);
+	}
+}
