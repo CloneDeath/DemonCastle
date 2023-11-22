@@ -2,11 +2,11 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Game.Animations; 
+namespace DemonCastle.Game.Animations.Generic; 
 
-public partial class SpriteInfoNode : Sprite2D {
+public partial class SpriteDefinitionNode : Sprite2D {
 	protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
-	public SpriteInfoNode(ISpriteDefinition definition) {
+	public SpriteDefinitionNode(ISpriteDefinition definition) {
 		Texture = definition.Texture;
 		RegionEnabled = true;
 		RegionRect = definition.Region;

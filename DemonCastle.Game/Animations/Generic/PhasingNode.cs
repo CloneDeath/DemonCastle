@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.Game.Animations;
+namespace DemonCastle.Game.Animations.Generic;
 
 public partial class PhasingNode : Node2D {
 	private List<TemporalNode> Nodes { get; } = new();

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Game.Animations; 
+namespace DemonCastle.Game.Animations.Generic; 
 
 public partial class TemporalNode : Node2D {
 	public double StartTime { get; set; }

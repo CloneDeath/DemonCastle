@@ -7,14 +7,14 @@ namespace DemonCastle.Game.Animations;
 
 public partial class PlayerAnimation : Node2D {
 	protected readonly CharacterInfo Character;
-	protected Dictionary<Guid, AnimationNode> Animations { get; } = new();
+	protected Dictionary<Guid, Generic.AnimationNode> Animations { get; } = new();
 	public bool IsComplete { get; private set; }
 
-	protected AnimationNode? CurrentAnimation;
+	protected Generic.AnimationNode? CurrentAnimation;
 	public PlayerAnimation(CharacterInfo character) {
 		Character = character;
 		foreach (var animation in character.Animations) {
-			var animationNode = new AnimationNode(animation) {
+			var animationNode = new Generic.AnimationNode(animation) {
 				Visible = false
 			};
 			animationNode.Complete += AnimationNode_OnComplete;
@@ -47,7 +47,7 @@ public partial class PlayerAnimation : Node2D {
 		CurrentAnimation.Play();
 	}
 
-	private void AnimationNode_OnComplete(AnimationNode node) {
+	private void AnimationNode_OnComplete(Generic.AnimationNode node) {
 		if (node.AnimationId != CurrentAnimation?.AnimationId) return;
 		IsComplete = true;
 	}
