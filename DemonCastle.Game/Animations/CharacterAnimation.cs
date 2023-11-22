@@ -6,14 +6,14 @@ using Godot;
 
 namespace DemonCastle.Game.Animations;
 
-public partial class PlayerAnimation : Node2D {
+public partial class CharacterAnimation : Node2D {
 	protected readonly CharacterInfo Character;
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 	public bool IsComplete { get; private set; }
 
 	protected AnimationInfoNode? CurrentAnimation;
 
-	public PlayerAnimation(CharacterInfo character) {
+	public CharacterAnimation(CharacterInfo character) {
 		Character = character;
 		foreach (var animation in character.Animations) {
 			var animationNode = new AnimationInfoNode(animation) {

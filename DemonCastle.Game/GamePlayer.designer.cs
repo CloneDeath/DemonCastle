@@ -11,7 +11,7 @@ public partial class GamePlayer {
 	protected LevelInfo Level { get; }
 	protected CharacterInfo Character { get; }
 
-	public PlayerAnimation Animation { get; }
+	public CharacterAnimation Animation { get; }
 	public Area2D StairsDetection { get; }
 	public Area2D FloorDetection { get; }
 
@@ -28,7 +28,7 @@ public partial class GamePlayer {
 		});
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
-		AddChild(Animation = new PlayerAnimation(character));
+		AddChild(Animation = new CharacterAnimation(character));
 
 		AddChild(StairsDetection = new Area2D {
 			CollisionLayer = (uint) CollisionLayers.Player,
