@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.Game.Animations.Generic;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
 namespace DemonCastle.Game.Animations;
@@ -11,6 +12,8 @@ public partial class WeaponAnimation : Node2D {
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 
 	protected AnimationInfoNode? CurrentAnimation;
+
+	public WeaponFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as WeaponFrameInfo;
 
 	public WeaponAnimation(WeaponInfo weapon) {
 		Weapon = weapon;

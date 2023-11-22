@@ -38,17 +38,7 @@ public partial class GamePlayer : CharacterBody2D {
 			Logger.StateChanged(State);
 		}
 
-		if (Animation.AnimationId != PreviousAnimationId || (Animation.CurrentFrame != null && Animation.CurrentFrame?.Index != PreviousFrameIndex)) {
-			var animation = Animation.CurrentFrame;
-			if (animation != null) {
-				if (!animation.WeaponEnabled) {
-					Weapon.PlayNone();
-				}
-				else {
-					Weapon.Play(animation.WeaponAnimation);
-				}
-			}
-		}
+		UpdateWeaponFrame();
 
 		PreviousAnimationId = Animation.AnimationId;
 		PreviousFrameIndex = Animation.CurrentFrame?.Index ?? -1;
@@ -66,6 +56,29 @@ public partial class GamePlayer : CharacterBody2D {
 		MoveAndSlide();
 
 		Animation.Scale = new Vector2(Facing, 1);
+	}
+
+	private void UpdateWeaponFrame() {
+		if (Animation.AnimationId == PreviousAnimationId &&
+			(Animation.CurrentFrame == null || Animation.CurrentFrame?.Index == PreviousFrameIndex)) {
+			return;
+		}
+
+		var characterFrame = Animation.CurrentFrame;
+		if (characterFrame == null) return;
+
+		if (!characterFrame.WeaponEnabled) {
+			Weapon.PlayNone();
+		}
+		else {
+			Weapon.Play(characterFrame.WeaponAnimation);
+		}
+		var weaponFrame = Weapon.CurrentFrame;
+
+		var characterFrameTopLeftOffset = characterFrame.SpriteDefinition.Region.Size * new Vector2(0.5f, 1);
+		var weaponFrameTopLeftOffset = weaponFrame?.SpriteDefinition.Region.Size * new Vector2(0.5f, 1) ?? Vector2.Zero;
+		Weapon.Position = characterFrame.WeaponPosition - characterFrameTopLeftOffset
+						  + weaponFrameTopLeftOffset - (weaponFrame?.Origin ?? Vector2.Zero) ;
 	}
 
 	private float GetJumpSpeed() {
