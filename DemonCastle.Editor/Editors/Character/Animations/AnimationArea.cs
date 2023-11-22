@@ -21,7 +21,7 @@ public partial class AnimationArea : Control {
 		SplitContainer.SplitOffset = 100;
 	}
 
-	protected void OnAnimationSelected(AnimationInfo animationInfo) {
+	protected void OnAnimationSelected(CharacterAnimationInfo animationInfo) {
 		AnimationEdit.CurrentAnimation = animationInfo;
 	}
 }

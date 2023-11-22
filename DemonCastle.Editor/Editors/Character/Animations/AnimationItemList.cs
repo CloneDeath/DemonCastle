@@ -5,11 +5,11 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations; 
 
 public partial class AnimationItemList : ItemList {
-	public void AddAnimationLibrary(AnimationInfo animation) {
+	public void AddAnimationLibrary(CharacterAnimationInfo animation) {
 		AddItem(animation.Name);
 	}
 
-	public void AddAnimations(IEnumerable<AnimationInfo> animations) {
+	public void AddAnimations(IEnumerable<CharacterAnimationInfo> animations) {
 		foreach (var animation in animations) {
 			AddAnimationLibrary(animation);
 		}

@@ -10,15 +10,15 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class FrameInfo : INotifyPropertyChanged {
-	public FrameInfo(AnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
+public class CharacterFrameInfo : INotifyPropertyChanged {
+	public CharacterFrameInfo(CharacterAnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
 		Animation = animation;
 		File = file;
 		FrameData = frameData;
 		Index = index;
 	}
 
-	protected AnimationInfo Animation { get; }
+	protected CharacterAnimationInfo Animation { get; }
 	protected FileNavigator<CharacterFile> File { get; }
 	public string Directory => File.Directory;
 	protected CharacterFrameData FrameData { get; }

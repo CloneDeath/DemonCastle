@@ -5,11 +5,11 @@ using DemonCastle.ProjectFiles.Projects.Data;
 namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
 
 public partial class CharacterFrameDetails : PropertyCollection {
-	private FrameInfo Frame { get; }
+	private CharacterFrameInfo Frame { get; }
 
 	protected SpriteReferenceProperty SpriteReference { get; }
 
-	public CharacterFrameDetails(FrameInfo frame) {
+	public CharacterFrameDetails(CharacterFrameInfo frame) {
 		Frame = frame;
 		Name = nameof(CharacterFrameDetails);
 

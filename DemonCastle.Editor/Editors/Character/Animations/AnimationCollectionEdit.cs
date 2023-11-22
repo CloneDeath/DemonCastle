@@ -7,14 +7,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class AnimationCollectionEdit : VBoxContainer {
-	protected AnimationInfoCollection Animations { get; }
+	protected CharacterAnimationInfoCollection Animations { get; }
 	protected AnimationItemList AnimationItems { get; }
 	protected Button AddButton { get; }
 	protected Button RemoveButton { get; }
 
-	public event Action<AnimationInfo>? AnimationSelected;
+	public event Action<CharacterAnimationInfo>? AnimationSelected;
 
-	public AnimationCollectionEdit(AnimationInfoCollection animations) {
+	public AnimationCollectionEdit(CharacterAnimationInfoCollection animations) {
 		Animations = animations;
 
 		AddChild(AddButton = new Button {

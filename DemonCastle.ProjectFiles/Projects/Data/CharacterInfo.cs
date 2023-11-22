@@ -9,10 +9,10 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyPropertyChanged {
 	public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) {
-		Animations = new AnimationInfoCollection(file, Resource.Animations);
+		Animations = new CharacterAnimationInfoCollection(file, Resource.Animations);
 	}
 
-	public AnimationInfoCollection Animations { get; }
+	public CharacterAnimationInfoCollection Animations { get; }
 
 	public float WalkSpeed {
 		get => Resource.WalkSpeed;

@@ -7,22 +7,22 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
+public class CharacterAnimationInfoCollection : IEnumerable<CharacterAnimationInfo>, INotifyCollectionChanged {
 	protected FileNavigator<CharacterFile> File { get; }
 	protected List<CharacterAnimationData> FileAnimations { get; }
-	protected ObservableCollection<AnimationInfo> Animations { get; }
+	protected ObservableCollection<CharacterAnimationInfo> Animations { get; }
 
-	public AnimationInfoCollection(FileNavigator<CharacterFile> file, List<CharacterAnimationData> animations) {
+	public CharacterAnimationInfoCollection(FileNavigator<CharacterFile> file, List<CharacterAnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
-		Animations = new ObservableCollection<AnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
+		Animations = new ObservableCollection<CharacterAnimationInfo>(animations.Select(data => new CharacterAnimationInfo(file, data)).ToList());
 		Animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public AnimationInfo Add(CharacterAnimationData characterAnimationData) {
+	public CharacterAnimationInfo Add(CharacterAnimationData characterAnimationData) {
 		FileAnimations.Add(characterAnimationData);
 		Save();
-		var animInfo = new AnimationInfo(File, characterAnimationData);
+		var animInfo = new CharacterAnimationInfo(File, characterAnimationData);
 		Animations.Add(animInfo);
 		return animInfo;
 	}
@@ -35,10 +35,10 @@ public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollec
 
 	protected void Save() => File.Save();
 
-	public AnimationInfo this[int index] => Animations[index];
+	public CharacterAnimationInfo this[int index] => Animations[index];
 
 	#region IEnumerable
-	public IEnumerator<AnimationInfo> GetEnumerator() => Animations.GetEnumerator();
+	public IEnumerator<CharacterAnimationInfo> GetEnumerator() => Animations.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

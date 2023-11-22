@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
 
 public partial class AnimationFramePanel : PanelContainer {
-	protected FrameInfo FrameInfo { get; }
+	protected CharacterFrameInfo FrameInfo { get; }
 
 	protected VBoxContainer Items { get; }
 	protected Label FrameInfoLabel { get; }
@@ -16,7 +16,7 @@ public partial class AnimationFramePanel : PanelContainer {
 
 	protected EditFrameWindow EditWindow { get; }
 
-	public AnimationFramePanel(FrameInfo frameInfo) {
+	public AnimationFramePanel(CharacterFrameInfo frameInfo) {
 		FrameInfo = frameInfo;
 
 		Name = nameof(AnimationFramePanel);

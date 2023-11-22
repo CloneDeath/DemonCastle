@@ -99,7 +99,7 @@ public partial class PropertyCollection : VBoxContainer {
 		return areaReferenceProperty;
 	}
 
-	public void AddAnimationName<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AnimationInfo> options) where T : INotifyPropertyChanged {
+	public void AddAnimationName<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<CharacterAnimationInfo> options) where T : INotifyPropertyChanged {
 		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		});

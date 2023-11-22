@@ -7,10 +7,10 @@ namespace DemonCastle.Game.Animations;
 
 public partial class AnimationNode : Node2D {
 	public event Action<AnimationNode>? Complete;
-	protected AnimationInfo Animation { get; }
+	protected CharacterAnimationInfo Animation { get; }
 	protected PhasingNode Frames { get; }
 
-	public AnimationNode(AnimationInfo animation) {
+	public AnimationNode(CharacterAnimationInfo animation) {
 		Animation = animation;
 
 		AddChild(Frames = new PhasingNode {

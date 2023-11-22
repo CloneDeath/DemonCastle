@@ -7,16 +7,16 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class AnimationInfo : INotifyPropertyChanged {
-	public AnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData characterAnimation) {
+public class CharacterAnimationInfo : INotifyPropertyChanged {
+	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData characterAnimation) {
 		File = file;
 		Animation = characterAnimation;
-		Frames = Animation.Frames.Select((f, i) => new FrameInfo(this, File, f, i)).ToList();
+		Frames = Animation.Frames.Select((f, i) => new CharacterFrameInfo(this, File, f, i)).ToList();
 	}
 
 	protected FileNavigator<CharacterFile> File { get; }
 	protected CharacterAnimationData Animation { get; }
-	public List<FrameInfo> Frames { get; }
+	public List<CharacterFrameInfo> Frames { get; }
 
 	public Guid Id => Animation.Id;
 
@@ -39,11 +39,11 @@ public class AnimationInfo : INotifyPropertyChanged {
 			Duration = previousFrame?.Duration ?? 1
 		};
 		Animation.Frames.Add(frame);
-		Frames.Add(new FrameInfo(this, File, frame, Frames.Count));
+		Frames.Add(new CharacterFrameInfo(this, File, frame, Frames.Count));
 		Save();
 	}
 
-	public void RemoveFrame(FrameInfo frameInfo, CharacterFrameData frameData) {
+	public void RemoveFrame(CharacterFrameInfo frameInfo, CharacterFrameData frameData) {
 		Animation.Frames.Remove(frameData);
 		Frames.Remove(frameInfo);
 		Save();

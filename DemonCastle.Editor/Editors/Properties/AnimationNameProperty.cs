@@ -9,9 +9,9 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class AnimationNameProperty : BaseProperty {
-	private readonly IEnumerable<AnimationInfo> _options;
+	private readonly IEnumerable<CharacterAnimationInfo> _options;
 
-	private List<AnimationInfo> Options => _options.ToList();
+	private List<CharacterAnimationInfo> Options => _options.ToList();
 
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
@@ -24,7 +24,7 @@ public partial class AnimationNameProperty : BaseProperty {
 		}
 	}
 
-	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerable<AnimationInfo> options) {
+	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerable<CharacterAnimationInfo> options) {
 		_options = options;
 		Name = nameof(AnimationNameProperty);
 		Binding = binding;

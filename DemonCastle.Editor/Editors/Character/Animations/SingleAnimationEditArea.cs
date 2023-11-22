@@ -5,8 +5,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class SingleAnimationEditArea : VBoxContainer {
-	protected AnimationInfo Current;
-	public AnimationInfo CurrentAnimation {
+	protected CharacterAnimationInfo Current;
+	public CharacterAnimationInfo CurrentAnimation {
 		get => Current;
 		set {
 			Current = value;
@@ -15,7 +15,7 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 	}
 
 	protected void BindAnimation() {
-		LineEdit.Binding = new PropertyBinding<AnimationInfo, string>(Current, animation => animation.Name);
+		LineEdit.Binding = new PropertyBinding<CharacterAnimationInfo, string>(Current, animation => animation.Name);
 
 		FrameContainer.ClearChildren();
 		foreach (var frame in Current.Frames) {
