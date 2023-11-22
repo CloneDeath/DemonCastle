@@ -2,7 +2,6 @@ using System;
 using System.Collections.Specialized;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 

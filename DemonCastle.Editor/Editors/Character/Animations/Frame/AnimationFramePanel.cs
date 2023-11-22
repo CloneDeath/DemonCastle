@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
