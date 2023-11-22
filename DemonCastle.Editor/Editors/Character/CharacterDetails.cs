@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.Character;
@@ -13,6 +14,7 @@ public partial class CharacterDetails : PropertyCollection {
 		AddFloat("Gravity", character, x => x.Gravity);
 		AddFloat("Width", character, x => x.Width);
 		AddFloat("Height", character, x => x.Height);
+		AddFile("Default Weapon", character, character.Directory, x => x.DefaultWeapon, new[]{FileType.Weapon});
 		AddAnimationName("Idle Animation", character, x => x.IdleAnimation, character.Animations);
 		AddAnimationName("Walk Animation", character, x => x.WalkAnimation, character.Animations);
 		AddAnimationName("Jump Animation", character, x => x.JumpAnimation, character.Animations);

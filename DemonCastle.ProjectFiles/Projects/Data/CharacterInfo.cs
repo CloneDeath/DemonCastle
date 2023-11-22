@@ -60,6 +60,15 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
+	public string DefaultWeapon {
+		get => Resource.DefaultWeapon;
+		set {
+			Resource.DefaultWeapon = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public Guid IdleAnimation {
 		get => Resource.IdleAnimation;
 		set {

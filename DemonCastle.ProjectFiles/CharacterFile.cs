@@ -12,7 +12,7 @@ public class CharacterFile {
 	public float Gravity { get; set; } = 10;
 	public float Height { get; set; } = 16;
 	public float Width { get; set; } = 16;
-	public Guid DefaultWeapon { get; set; }
+	public string DefaultWeapon { get; set; } = string.Empty;
 	public List<CharacterAnimationData> Animations { get; set; } = new();
 	public Guid WalkAnimation { get; set; } = Guid.Empty;
 	public Guid IdleAnimation { get; set; } = Guid.Empty;
