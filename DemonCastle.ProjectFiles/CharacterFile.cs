@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 namespace DemonCastle.ProjectFiles;
 
@@ -30,4 +31,11 @@ public class CharacterFrameData {
 	public float Duration { get; set; } = 1;
 	public Guid SpriteId { get; set; }
 	public string Source { get; set; } = string.Empty;
+	public CharacterFrameWeaponData Weapon { get; set; } = new();
+}
+
+public class CharacterFrameWeaponData {
+	public bool Enabled { get; set; } = false;
+	public Vector2I Position { get; set; } = Vector2I.Zero;
+	public string Animation { get; set; } = string.Empty;
 }
