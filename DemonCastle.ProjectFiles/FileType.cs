@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DemonCastle.ProjectFiles.FileTypes;
 
 namespace DemonCastle.ProjectFiles;
@@ -10,6 +11,6 @@ public static class FileType {
 	public static IFileTypeData Level => new LevelFileTypeData();
 	public static IFileTypeData Weapon => new WeaponFileType();
 
-	public static IFileTypeData[] SpriteSources => new[] { SpriteAtlas, SpriteGrid };
-	public static IFileTypeData[] RawTextureFiles => new[] { Png };
+	public static IEnumerable<IFileTypeData> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
+	public static IEnumerable<IFileTypeData> RawTextureFiles => new[] { Png };
 }

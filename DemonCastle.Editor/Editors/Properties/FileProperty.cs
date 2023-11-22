@@ -33,7 +33,7 @@ public partial class FileProperty : StringProperty {
 			Access = FileDialog.AccessEnum.Filesystem,
 			Size = new Vector2I(800, 600),
 			Unresizable = false,
-			Title = "Select File",
+			Title = "Select File"
 		});
 		OpenFileDialog.FileSelected += OnFileSelected;
 	}

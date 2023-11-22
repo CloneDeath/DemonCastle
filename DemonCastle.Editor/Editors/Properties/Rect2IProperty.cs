@@ -70,7 +70,7 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 			Rounded = true,
 			MinValue = 0,
 			MaxValue = double.MaxValue,
-			Value = Binding.Get().Size.Y,
+			Value = Binding.Get().Size.Y
 		});
 		HeightBox.ValueChanged += OnValueChange;
 	}
