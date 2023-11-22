@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Character.Animations.Frame;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -18,8 +19,8 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 		LineEdit.Binding = new PropertyBinding<CharacterAnimationInfo, string>(Current, animation => animation.Name);
 
 		FrameContainer.ClearChildren();
-		foreach (var frame in Current.Frames) {
-			FrameContainer.AddChild(new Frame.AnimationFramePanel(frame));
+		foreach (var frame in Current.CharacterFrames) {
+			FrameContainer.AddChild(new AnimationFramePanel(frame));
 		}
 	}
 

@@ -33,17 +33,17 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (_current != null) {
-			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
+			_current.WeaponFrames.CollectionChanged -= Frames_OnCollectionChanged;
 		}
 	}
 
 	public void Load(WeaponAnimationInfo animation) {
 		if (_current != null) {
-			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
+			_current.WeaponFrames.CollectionChanged -= Frames_OnCollectionChanged;
 		}
 		_current = animation;
 		if (_current != null) {
-			_current.Frames.CollectionChanged += Frames_OnCollectionChanged;
+			_current.WeaponFrames.CollectionChanged += Frames_OnCollectionChanged;
 		}
 
 		AddFrameButton.Disabled = _current == null;
@@ -64,7 +64,7 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 		}
 
 		if (_current == null) return;
-		foreach (var frame in _current.Frames) {
+		foreach (var frame in _current.WeaponFrames) {
 			var weaponFrameItem = new WeaponFrameItem(frame);
 			weaponFrameItem.Selected += WeaponFrameItem_OnSelected;
 			FrameContainer.AddChild(weaponFrameItem);

@@ -8,16 +8,17 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class WeaponAnimationInfo : INotifyPropertyChanged {
+public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, WeaponAnimationData animation) {
 		File = file;
 		Animation = animation;
-		Frames = new WeaponFrameInfoCollection(file, this, animation.Frames);
+		WeaponFrames = new WeaponFrameInfoCollection(file, this, animation.Frames);
 	}
 
 	protected FileNavigator<WeaponFile> File { get; }
 	protected WeaponAnimationData Animation { get; }
-	public WeaponFrameInfoCollection  Frames { get; }
+	public WeaponFrameInfoCollection  WeaponFrames { get; }
+	public IEnumerable<IFrameInfo> Frames => WeaponFrames;
 
 	public Guid Id => Animation.Id;
 
@@ -41,13 +42,13 @@ public class WeaponAnimationInfo : INotifyPropertyChanged {
 			Origin = previousFrame?.Origin ?? Vector2I.Zero
 		};
 		Animation.Frames.Add(frame);
-		Frames.Add(frame);
+		WeaponFrames.Add(frame);
 		Save();
 	}
 
 	public void RemoveFrame(WeaponFrameInfo frameInfo, WeaponFrameData frameData) {
 		Animation.Frames.Remove(frameData);
-		Frames.Remove(frameInfo);
+		WeaponFrames.Remove(frameInfo);
 		Save();
 	}
 

@@ -10,7 +10,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class WeaponFrameInfo : INotifyPropertyChanged {
+public class WeaponFrameInfo : IFrameInfo, INotifyPropertyChanged {
 	public WeaponFrameInfo(WeaponAnimationInfo animation, FileNavigator<WeaponFile> file, WeaponFrameData frameData, int index) {
 		Animation = animation;
 		File = file;
