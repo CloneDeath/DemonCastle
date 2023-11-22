@@ -113,6 +113,42 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
+	public Guid StandAttackAnimation {
+		get => Resource.StandAttackAnimation;
+		set {
+			Resource.StandAttackAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Guid JumpAttackAnimation {
+		get => Resource.JumpAttackAnimation;
+		set {
+			Resource.JumpAttackAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Guid StairsUpAttackAnimation {
+		get => Resource.StairsUpAttackAnimation;
+		set {
+			Resource.StairsUpAttackAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Guid StairsDownAttackAnimation {
+		get => Resource.StairsDownAttackAnimation;
+		set {
+			Resource.StairsDownAttackAnimation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public Vector2 Size => new(Resource.Width, Resource.Height);
 
 	public string Name {

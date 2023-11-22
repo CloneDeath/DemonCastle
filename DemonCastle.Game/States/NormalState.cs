@@ -19,6 +19,10 @@ public class NormalState : IState {
 			player.Jump();
 		}
 
+		if (Input.IsActionJustPressed(InputActions.PlayerAttack)) {
+			return new NormalAttackState();
+		}
+
 		var stairs = player.GetNearbyStairs().FirstOrDefault();
 		var target = GetTargetInStairs(player, stairs);
 		if (stairs != null && target != null) {

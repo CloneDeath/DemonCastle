@@ -19,6 +19,10 @@ public class CharacterFile {
 	public Guid CrouchAnimation { get; set; } = Guid.Empty;
 	public Guid StairsUpAnimation { get; set; } = Guid.Empty;
 	public Guid StairsDownAnimation { get; set; } = Guid.Empty;
+	public Guid StandAttackAnimation { get; set; } = Guid.Empty;
+	public Guid JumpAttackAnimation { get; set; } = Guid.Empty;
+	public Guid StairsUpAttackAnimation { get; set; } = Guid.Empty;
+	public Guid StairsDownAttackAnimation { get; set; } = Guid.Empty;
 }
 
 public class CharacterAnimationData {

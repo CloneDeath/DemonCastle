@@ -9,6 +9,7 @@ public static class InputActions {
 	public const string PlayerMoveUp = nameof(PlayerMoveUp);
 	public const string PlayerMoveDown = nameof(PlayerMoveDown);
 	public const string PlayerJump = nameof(PlayerJump);
+	public const string PlayerAttack = nameof(PlayerAttack);
 
 	public const string EditorSubmit = nameof(EditorSubmit);
 	public const string EditorClick = nameof(EditorClick);
@@ -18,7 +19,8 @@ public static class InputActions {
 	public static void RegisterActions() {
 		RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
 		RegisterAction(PlayerMoveRight, Key.Right, Key.D);
-		RegisterAction(PlayerJump, Key.Space);
+		RegisterAction(PlayerJump, Key.Space, Key.Z);
+		RegisterAction(PlayerAttack, Key.F, Key.X);
 		RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
 		RegisterAction(EditorClick, MouseButton.Left);
 		RegisterAction(EditorRightClick, MouseButton.Right);

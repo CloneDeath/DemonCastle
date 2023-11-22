@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.Game.Animations; 
+namespace DemonCastle.Game.Animations;
 
 public partial class PhasingNode : Node2D {
 	private List<TemporalNode> Nodes { get; } = new();
+
+	public event Action<PhasingNode>? Complete;
 
 	public double Duration { get; set; } = 1;
 	public double CurrentTime { get; set; }
@@ -15,7 +18,11 @@ public partial class PhasingNode : Node2D {
 
 		if (!Playing) return;
 
-		CurrentTime = (CurrentTime + delta) % Duration;
+		CurrentTime += delta;
+		if (CurrentTime > Duration) {
+			Complete?.Invoke(this);
+			CurrentTime %= Duration;
+		}
 		foreach (var temporalNode in Nodes) {
 			temporalNode.CurrentTime = CurrentTime;
 		}

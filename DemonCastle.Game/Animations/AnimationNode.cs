@@ -6,6 +6,7 @@ using Godot;
 namespace DemonCastle.Game.Animations;
 
 public partial class AnimationNode : Node2D {
+	public event Action<AnimationNode>? Complete;
 	protected AnimationInfo Animation { get; }
 	protected PhasingNode Frames { get; }
 
@@ -15,6 +16,7 @@ public partial class AnimationNode : Node2D {
 		AddChild(Frames = new PhasingNode {
 			Duration = Animation.Frames.Sum(f => f.Duration)
 		});
+		Frames.Complete += _ => Complete?.Invoke(this);
 		float totalOffset = 0;
 		foreach (var frame in Animation.Frames) {
 			var sprite = new SpriteInfoNode(frame.SpriteDefinition);
