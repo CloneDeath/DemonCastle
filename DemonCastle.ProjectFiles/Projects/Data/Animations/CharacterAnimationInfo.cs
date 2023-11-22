@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.ProjectFiles.Projects.Data;
+namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class CharacterAnimationInfo : INotifyPropertyChanged {
 	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData characterAnimation) {

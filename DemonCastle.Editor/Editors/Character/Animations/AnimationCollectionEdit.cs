@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Character.Animations;

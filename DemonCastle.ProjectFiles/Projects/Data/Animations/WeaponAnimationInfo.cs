@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data;
+namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfo : INotifyPropertyChanged {
 	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, WeaponAnimationData animation) {

@@ -8,7 +8,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data;
+namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponFrameInfo : INotifyPropertyChanged {
 	public WeaponFrameInfo(WeaponAnimationInfo animation, FileNavigator<WeaponFile> file, WeaponFrameData frameData, int index) {

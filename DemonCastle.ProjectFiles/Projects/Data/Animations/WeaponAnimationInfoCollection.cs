@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
-namespace DemonCastle.ProjectFiles.Projects.Data;
+namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfoCollection : IEnumerable<WeaponAnimationInfo>, INotifyCollectionChanged {
 	protected FileNavigator<WeaponFile> File { get; }

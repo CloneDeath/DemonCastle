@@ -1,5 +1,6 @@
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor;
 
