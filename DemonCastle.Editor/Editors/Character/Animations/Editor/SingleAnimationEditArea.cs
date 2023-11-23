@@ -8,6 +8,9 @@ namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 
 public partial class SingleAnimationEditArea : VBoxContainer {
 	protected CharacterAnimationInfo? Current;
+	protected BindingLineEdit LineEdit { get; }
+	protected AnimationFrameContainer FrameContainer { get; }
+
 	public CharacterAnimationInfo? CurrentAnimation {
 		get => Current;
 		set {
@@ -16,16 +19,8 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 		}
 	}
 
-	protected BindingLineEdit LineEdit { get; }
-	protected Button AddFrameButton { get; }
-	protected AnimationFrameContainer FrameContainer { get; }
-
 	public SingleAnimationEditArea() {
 		AddChild(LineEdit = new BindingLineEdit());
-		AddChild(AddFrameButton = new Button {
-			Text = "Add Frame"
-		});
-		AddFrameButton.Pressed += OnAddFrameButtonPressed;
 		AddChild(FrameContainer = new AnimationFrameContainer());
 	}
 
@@ -37,10 +32,5 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 		foreach (var frame in Current.CharacterFrames) {
 			FrameContainer.AddChild(new AnimationFramePanel(frame));
 		}
-	}
-
-	protected void OnAddFrameButtonPressed() {
-		CurrentAnimation?.AddFrame();
-		BindAnimation();
 	}
 }

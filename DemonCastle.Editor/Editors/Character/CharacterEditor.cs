@@ -20,6 +20,6 @@ public partial class CharacterEditor : BaseEditor {
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
 		SplitContainer.AddChild(new CharacterDetails(characterInfo));
-		SplitContainer.AddChild(new AnimationArea(characterInfo));
+		SplitContainer.AddChild(new CharacterAnimations(characterInfo));
 	}
 }
