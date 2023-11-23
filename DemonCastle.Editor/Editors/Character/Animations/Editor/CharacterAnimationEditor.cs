@@ -6,7 +6,7 @@ using DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 
-public partial class SingleAnimationEditArea : VBoxContainer {
+public partial class CharacterAnimationEditor : VBoxContainer {
 	protected CharacterAnimationInfo? Current;
 	protected BindingLineEdit LineEdit { get; }
 	protected AnimationFrameContainer FrameContainer { get; }
@@ -19,7 +19,7 @@ public partial class SingleAnimationEditArea : VBoxContainer {
 		}
 	}
 
-	public SingleAnimationEditArea() {
+	public CharacterAnimationEditor() {
 		AddChild(LineEdit = new BindingLineEdit());
 		AddChild(FrameContainer = new AnimationFrameContainer());
 	}

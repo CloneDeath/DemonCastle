@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class CharacterAnimations : HSplitContainer {
 	protected AnimationCollectionEdit AnimationList { get; }
-	protected SingleAnimationEditArea AnimationEditor { get; }
+	protected CharacterAnimationEditor AnimationEditor { get; }
 
 	public CharacterAnimations(CharacterInfo characterInfo) {
 		Name = nameof(CharacterAnimations);
@@ -18,7 +18,7 @@ public partial class CharacterAnimations : HSplitContainer {
 		});
 		AnimationList.AnimationSelected += OnAnimationSelected;
 
-		AddChild(AnimationEditor = new SingleAnimationEditArea {
+		AddChild(AnimationEditor = new CharacterAnimationEditor {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}
