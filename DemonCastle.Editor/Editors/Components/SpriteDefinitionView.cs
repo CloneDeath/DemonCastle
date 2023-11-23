@@ -9,14 +9,13 @@ public partial class SpriteDefinitionView : CenterContainer {
 	private ISpriteDefinition? _definition;
 	private TextureRect Rect { get; set; }
 
-	public SpriteDefinitionView(ISpriteDefinition definition) {
+	public SpriteDefinitionView() {
 		AddChild(Rect = new TextureRect {
-			StretchMode = TextureRect.StretchModeEnum.KeepCentered,
-			Material = new TransparentColorSpriteShader {
-				TransparentColor = definition.TransparentColor,
-				Threshold = definition.TransparentColorThreshold
-			}
+			StretchMode = TextureRect.StretchModeEnum.KeepCentered
 		});
+	}
+
+	public SpriteDefinitionView(ISpriteDefinition definition) : this() {
 		Load(definition);
 	}
 
@@ -51,5 +50,9 @@ public partial class SpriteDefinitionView : CenterContainer {
 		};
 		Rect.TextureFilter = TextureFilterEnum.Nearest;
 		Rect.FlipH = _definition.FlipHorizontal;
+		Rect.Material = new TransparentColorSpriteShader {
+			TransparentColor = definition.TransparentColor,
+			Threshold = definition.TransparentColorThreshold
+		};
 	}
 }

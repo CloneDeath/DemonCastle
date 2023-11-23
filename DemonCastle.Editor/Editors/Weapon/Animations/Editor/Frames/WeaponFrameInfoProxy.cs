@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
 
-public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo> {
+public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo>, IWeaponFrameInfo {
 	protected override void NotifyProxyChanged() {
 		OnPropertyChanged(nameof(Duration));
 		OnPropertyChanged(nameof(SourceFile));
 		OnPropertyChanged(nameof(SpriteId));
+		OnPropertyChanged(nameof(Origin));
 		OnPropertyChanged(nameof(Proxy.SpriteDefinition));
 		OnPropertyChanged(nameof(SpriteDefinitions));
 	}
@@ -43,6 +45,7 @@ public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo> {
 		}
 	}
 
+	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
 
 	public void DeleteFrame() => Proxy?.Delete();

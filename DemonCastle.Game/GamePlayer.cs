@@ -78,7 +78,7 @@ public partial class GamePlayer : CharacterBody2D {
 		var characterFrameTopLeftOffset = characterFrame.SpriteDefinition.Region.Size * new Vector2(0.5f, 1);
 		var weaponFrameTopLeftOffset = weaponFrame?.SpriteDefinition.Region.Size * new Vector2(0.5f, 1) ?? Vector2.Zero;
 		Weapon.Position = characterFrame.WeaponPosition - characterFrameTopLeftOffset
-						  + weaponFrameTopLeftOffset - (weaponFrame?.Origin ?? Vector2.Zero) ;
+						  + weaponFrameTopLeftOffset - (weaponFrame?.Origin ?? Vector2.Zero);
 	}
 
 	private float GetJumpSpeed() {

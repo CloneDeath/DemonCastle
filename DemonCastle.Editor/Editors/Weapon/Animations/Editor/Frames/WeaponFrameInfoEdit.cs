@@ -11,6 +11,7 @@ public partial class WeaponFrameInfoEdit : PropertyCollection {
 	private  readonly WeaponFrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
+	protected WeaponFrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
 	public WeaponFrameInfo? WeaponFrameInfo {
@@ -25,6 +26,12 @@ public partial class WeaponFrameInfoEdit : PropertyCollection {
 		AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 		AddVector2I("Origin", _proxy, p => p.Origin);
+
+		AddChild(FrameInfoView = new WeaponFrameInfoView {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
+		FrameInfoView.Load(_proxy);
+
 		AddChild(DeleteButton = new Button {
 			Text = "Delete Frame"
 		});
