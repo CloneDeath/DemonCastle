@@ -2,7 +2,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
+namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class AnimationFramePanel : PanelContainer {
 	protected CharacterFrameInfo FrameInfo { get; }

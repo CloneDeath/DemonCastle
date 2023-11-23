@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Character.Animations;
+namespace DemonCastle.Editor.Editors.Character.Animations.List;
 
 public partial class AnimationCollectionEdit : VBoxContainer {
 	protected CharacterAnimationInfoCollection Animations { get; }

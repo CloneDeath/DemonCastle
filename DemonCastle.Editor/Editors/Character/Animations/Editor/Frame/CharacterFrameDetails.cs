@@ -2,7 +2,7 @@ using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
+namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class CharacterFrameDetails : PropertyCollection {
 	private CharacterFrameInfo Frame { get; }

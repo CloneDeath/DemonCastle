@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Character.Animations.Frame;
+namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class EditFrameWindow : AcceptDialog {
 
