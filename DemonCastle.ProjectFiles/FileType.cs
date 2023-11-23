@@ -5,6 +5,7 @@ namespace DemonCastle.ProjectFiles;
 
 public static class FileType {
 	public static IFileType Png => new PngFileType();
+	public static IFileType Project => new ProjectFileType();
 	public static IFileType SpriteAtlas => new SpriteAtlasFileType();
 	public static IFileType SpriteGrid => new SpriteGridFileType();
 	public static IFileType Text => new TextFileType();

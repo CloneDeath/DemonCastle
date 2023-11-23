@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DemonCastle.Editor.Editors;
-using DemonCastle.Editor.Editors.Character;
-using DemonCastle.Editor.Editors.Level;
-using DemonCastle.Editor.Editors.SpriteAtlas;
-using DemonCastle.Editor.Editors.SpriteGrid;
-using DemonCastle.Editor.Editors.Weapon;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -48,17 +43,8 @@ public partial class EditArea : TabContainer {
 	}
 
 	protected virtual BaseEditor GetEditor(FileNavigator file) {
-		return file.Extension switch {
-			".dcp" => new ProjectEditor(file.ToProjectInfo()),
-			".dcc" => new CharacterEditor(file.ToCharacterInfo()),
-			".dcw" => new WeaponEditor(file.ToWeaponInfo()),
-			".dcl" => new LevelEditor(file.ToLevelInfo()),
-			".dcsa" => new SpriteAtlasEditor(file.ToSpriteAtlasInfo()),
-			".dcsg" => new SpriteGridEditor(file.ToSpriteGridInfo()),
-			".txt" => new TextFileEditor(file.ToTextInfo()),
-			".png" => new ImageEditor(file),
-			_ => throw new NotSupportedException($"No Editor for {file.Extension}")
-		};
+		return EditorFileType.All.FirstOrDefault(t => t.Extension == file.Extension)?.GetEditor(file) ??
+		       throw new NotSupportedException($"No Editor for {file.Extension}");
 	}
 
 	private void OnTabButtonPressed(long tab) {

@@ -13,6 +13,9 @@ public class ProjectResources {
 		Characters = new ResourceCache<CharacterInfo>(path
 			=> new CharacterInfo(GetFile<CharacterFile>(path)));
 
+		Monsters = new ResourceCache<MonsterInfo>(path
+			=> new MonsterInfo(GetFile<MonsterFile>(path)));
+
 		Weapons = new ResourceCache<WeaponInfo>(path
 			=> new WeaponInfo(GetFile<WeaponFile>(path)));
 
@@ -40,6 +43,9 @@ public class ProjectResources {
 	}
 	protected ResourceCache<CharacterInfo> Characters { get; }
 	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
+
+	protected ResourceCache<MonsterInfo> Monsters { get; }
+	public MonsterInfo GetMonster(string path) => Monsters.Get(path);
 
 	protected ResourceCache<WeaponInfo> Weapons { get; }
 	public WeaponInfo GetWeapon(string path) => Weapons.Get(path);
