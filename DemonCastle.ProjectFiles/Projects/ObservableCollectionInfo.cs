@@ -6,24 +6,29 @@ using System.Linq;
 
 namespace DemonCastle.ProjectFiles.Projects;
 
+public interface IInfoFactory<out TInfo, in TData> {
+	TInfo CreateInfo(TData data, int index);
+}
+
 public abstract class ObservableCollectionInfo<TInfo, TData> : IObservableCollection<TInfo> {
+	private readonly IInfoFactory<TInfo, TData> _factory;
 	protected List<TData> DataItems { get; }
 	protected ObservableCollection<TInfo> InfoItems { get; }
 
-	protected ObservableCollectionInfo(List<TData> frames) {
+	protected ObservableCollectionInfo(IInfoFactory<TInfo, TData> factory, List<TData> frames) {
+		_factory = factory;
 		DataItems = frames;
 
-		InfoItems = new ObservableCollection<TInfo>(frames.Select(CreateInfo));
+		InfoItems = new ObservableCollection<TInfo>(frames.Select(factory.CreateInfo));
 		InfoItems.CollectionChanged += InfoItems_OnCollectionChanged;
 	}
 
 	protected abstract void Save();
-	protected abstract TInfo CreateInfo(TData data, int index);
 
 	public TInfo Add(TData data) {
 		DataItems.Add(data);
 		Save();
-		var info = CreateInfo(data, InfoItems.Count);
+		var info = _factory.CreateInfo(data, InfoItems.Count);
 		InfoItems.Add(info);
 		return info;
 	}

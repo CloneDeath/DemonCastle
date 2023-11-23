@@ -5,14 +5,23 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class CharacterFrameInfoCollection : ObservableCollectionInfo<CharacterFrameInfo, CharacterFrameData> {
 	private readonly FileNavigator<CharacterFile> _file;
-	protected CharacterAnimationInfo Animation { get; }
 
 	public CharacterFrameInfoCollection(FileNavigator<CharacterFile> file, CharacterAnimationInfo animation, List<CharacterFrameData> frames)
-		: base(frames) {
+		: base(new CharacterFrameInfoFactory(file, animation), frames) {
 		_file = file;
-		Animation = animation;
 	}
 
 	protected override void Save() => _file.Save();
-	protected override CharacterFrameInfo CreateInfo(CharacterFrameData data, int index) => new(Animation, _file, data, index);
+}
+
+public class CharacterFrameInfoFactory : IInfoFactory<CharacterFrameInfo, CharacterFrameData> {
+	private readonly FileNavigator<CharacterFile> _file;
+	private readonly CharacterAnimationInfo _animation;
+
+	public CharacterFrameInfoFactory(FileNavigator<CharacterFile> file, CharacterAnimationInfo animation) {
+		_file = file;
+		_animation = animation;
+	}
+
+	public CharacterFrameInfo CreateInfo(CharacterFrameData data, int index) => new(_animation, _file, data, index);
 }
