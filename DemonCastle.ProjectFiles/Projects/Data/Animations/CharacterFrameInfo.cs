@@ -10,7 +10,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class CharacterFrameInfo : IFrameInfo, INotifyPropertyChanged {
+public class CharacterFrameInfo : IFrameInfo {
 	public CharacterFrameInfo(CharacterAnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
 		Animation = animation;
 		File = file;
@@ -91,10 +91,7 @@ public class CharacterFrameInfo : IFrameInfo, INotifyPropertyChanged {
 												 ?? new NullSpriteDefinition();
 
 	protected void Save() => File.Save();
-
-	public void Delete() {
-		Animation.RemoveFrame(this, FrameData);
-	}
+	public void Delete() => Animation.RemoveFrame(this);
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

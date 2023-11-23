@@ -14,7 +14,7 @@ public interface IWeaponFrameInfo : IFrameInfo {
 	Vector2I Origin { get; }
 }
 
-public class WeaponFrameInfo : IWeaponFrameInfo, INotifyPropertyChanged {
+public class WeaponFrameInfo : IWeaponFrameInfo {
 	public WeaponFrameInfo(WeaponAnimationInfo animation, FileNavigator<WeaponFile> file, WeaponFrameData frameData, int index) {
 		Animation = animation;
 		File = file;

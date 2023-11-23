@@ -8,16 +8,16 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class CharacterAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
-	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData characterAnimation) {
+	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData animation) {
 		File = file;
-		Animation = characterAnimation;
-		CharacterFrames = Animation.Frames.Select((f, i) => new CharacterFrameInfo(this, File, f, i)).ToList();
+		Animation = animation;
+		CharacterFrames = new CharacterFrameInfoCollection(file, this, animation.Frames);
 	}
 
 	protected FileNavigator<CharacterFile> File { get; }
 	protected CharacterAnimationData Animation { get; }
-	public List<CharacterFrameInfo> CharacterFrames { get; }
-	public IEnumerable<IFrameInfo> Frames => CharacterFrames;
+	public CharacterFrameInfoCollection CharacterFrames { get; }
+	public IObservableCollection<IFrameInfo> Frames => CharacterFrames;
 
 	public Guid Id => Animation.Id;
 
@@ -39,15 +39,15 @@ public class CharacterAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
 			Duration = previousFrame?.Duration ?? 1
 		};
-		Animation.Frames.Add(frame);
-		CharacterFrames.Add(new CharacterFrameInfo(this, File, frame, CharacterFrames.Count));
-		Save();
+		CharacterFrames.Add(frame);
+		OnPropertyChanged(nameof(CharacterFrames));
+		OnPropertyChanged(nameof(Frames));
 	}
 
-	public void RemoveFrame(CharacterFrameInfo frameInfo, CharacterFrameData frameData) {
-		Animation.Frames.Remove(frameData);
+	public void RemoveFrame(CharacterFrameInfo frameInfo) {
 		CharacterFrames.Remove(frameInfo);
-		Save();
+		OnPropertyChanged(nameof(CharacterFrames));
+		OnPropertyChanged(nameof(Frames));
 	}
 
 	#region INotifyPropertyChanged

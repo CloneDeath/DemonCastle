@@ -1,22 +1,21 @@
 using System.ComponentModel;
-using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
+namespace DemonCastle.Editor.Editors.Components.AnimationFrames;
 
-public partial class WeaponFrameItem : SelectableControl {
+public partial class FrameItem : SelectableControl {
 	private static readonly Color SelectedColor = Colors.White;
 	private static readonly Color DeselectedColor = new(Colors.White, 0.25f);
 
-	public WeaponFrameInfo Frame { get; }
+	public IFrameInfo Frame { get; }
 
 	private Outline Outline { get; }
 	private SpriteDefinitionView SpriteDefinitionView { get; }
 
-	public WeaponFrameItem(WeaponFrameInfo frame) {
+	public FrameItem(IFrameInfo frame) {
 		Frame = frame;
-		Name = nameof(WeaponFrameItem);
+		Name = nameof(FrameItem);
 		CustomMinimumSize = new Vector2(60, 60);
 
 		SelectedCursorShape = CursorShape.Arrow;

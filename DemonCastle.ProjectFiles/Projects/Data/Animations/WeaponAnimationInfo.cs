@@ -18,7 +18,7 @@ public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 	protected FileNavigator<WeaponFile> File { get; }
 	protected WeaponAnimationData Animation { get; }
 	public WeaponFrameInfoCollection  WeaponFrames { get; }
-	public IEnumerable<IFrameInfo> Frames => WeaponFrames;
+	public IObservableCollection<IFrameInfo> Frames => WeaponFrames;
 
 	public Guid Id => Animation.Id;
 

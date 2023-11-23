@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Specialized;
-using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
+namespace DemonCastle.Editor.Editors.Components.AnimationFrames;
 
-public partial class WeaponFrameListEditor : VBoxContainer {
-	private WeaponAnimationInfo? _current;
+public partial class FrameListEditor : VBoxContainer {
+	private IAnimationInfo? _current;
 
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
 
-	public event Action<WeaponFrameInfo>? FrameSelected;
+	public event Action<IFrameInfo>? FrameSelected;
 
-	public WeaponFrameListEditor() {
+	public FrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
@@ -33,17 +32,17 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (_current != null) {
-			_current.WeaponFrames.CollectionChanged -= Frames_OnCollectionChanged;
+			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
 		}
 	}
 
-	public void Load(WeaponAnimationInfo animation) {
+	public void Load(IAnimationInfo animation) {
 		if (_current != null) {
-			_current.WeaponFrames.CollectionChanged -= Frames_OnCollectionChanged;
+			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
 		}
 		_current = animation;
 		if (_current != null) {
-			_current.WeaponFrames.CollectionChanged += Frames_OnCollectionChanged;
+			_current.Frames.CollectionChanged += Frames_OnCollectionChanged;
 		}
 
 		AddFrameButton.Disabled = _current == null;
@@ -64,15 +63,15 @@ public partial class WeaponFrameListEditor : VBoxContainer {
 		}
 
 		if (_current == null) return;
-		foreach (var frame in _current.WeaponFrames) {
-			var weaponFrameItem = new WeaponFrameItem(frame);
-			weaponFrameItem.Selected += WeaponFrameItem_OnSelected;
+		foreach (var frame in _current.Frames) {
+			var weaponFrameItem = new FrameItem(frame);
+			weaponFrameItem.Selected += FrameItem_OnSelected;
 			FrameContainer.AddChild(weaponFrameItem);
 		}
 	}
 
-	private void WeaponFrameItem_OnSelected(SelectableControl obj) {
-		if (obj is not WeaponFrameItem wfi) return;
+	private void FrameItem_OnSelected(SelectableControl obj) {
+		if (obj is not FrameItem wfi) return;
 		FrameSelected?.Invoke(wfi.Frame);
 	}
 }
