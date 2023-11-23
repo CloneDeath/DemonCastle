@@ -6,22 +6,17 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
-public partial class AnimationArea : Control {
-	protected AnimationCollectionEdit Animations { get; }
-	protected SplitContainer SplitContainer { get; }
+public partial class AnimationArea : SplitContainer {
+	protected AnimationCollectionEdit AnimationList { get; }
 	protected SingleAnimationEditArea AnimationEdit { get; }
-	public AnimationArea(CharacterInfo characterInfo) {
-		AddChild(SplitContainer = new HSplitContainer {
-			AnchorRight = 1,
-			OffsetRight = 0,
-			AnchorBottom = 1,
-			OffsetBottom = 0
-		});
-		SplitContainer.AddChild(Animations = new AnimationCollectionEdit(characterInfo.Animations));
-		Animations.AnimationSelected += OnAnimationSelected;
 
-		SplitContainer.AddChild(AnimationEdit = new SingleAnimationEditArea());
-		SplitContainer.SplitOffset = 100;
+	public AnimationArea(CharacterInfo characterInfo) {
+		SplitOffset = 200;
+
+		AddChild(AnimationList = new AnimationCollectionEdit(characterInfo.Animations));
+		AnimationList.AnimationSelected += OnAnimationSelected;
+
+		AddChild(AnimationEdit = new SingleAnimationEditArea());
 	}
 
 	protected void OnAnimationSelected(CharacterAnimationInfo animationInfo) {
