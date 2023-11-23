@@ -1,10 +1,11 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
 
-public partial class WeaponFrameInfoView : SpriteDefinitionView {
+public partial class WeaponFrameInfoView : ControlView<SpriteDefinitionView> {
 	private IWeaponFrameInfo? _info;
 
 	public override void _ExitTree() {
@@ -23,12 +24,12 @@ public partial class WeaponFrameInfoView : SpriteDefinitionView {
 		if (_info is INotifyPropertyChanged newNotify) {
 			newNotify.PropertyChanged += Info_OnPropertyChanged;
 		}
-		Load(info.SpriteDefinition);
+		Inner.Load(info.SpriteDefinition);
 	}
 
 	private void Info_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		if (_info != null && e.PropertyName == nameof(IWeaponFrameInfo.SpriteDefinition)) {
-			base.Load(_info.SpriteDefinition);
+			Inner.Load(_info.SpriteDefinition);
 		}
 	}
 }

@@ -7,6 +7,7 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 	protected ScrollableWrapper<T> MainControl { get; }
 	protected Grid MainControl_Grid { get; }
 	protected ControlViewFooter Footer { get; }
+	protected T Inner => MainControl.Inner;
 
 	public ControlView() {
 		Name = nameof(ControlView<T>);
