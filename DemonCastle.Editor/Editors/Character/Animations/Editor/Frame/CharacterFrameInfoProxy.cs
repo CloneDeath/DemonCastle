@@ -40,9 +40,26 @@ public class CharacterFrameInfoProxy : InfoProxy<CharacterFrameInfo>, ICharacter
 		}
 	}
 
-	public bool WeaponEnabled => Proxy?.WeaponEnabled ?? false;
-	public string WeaponAnimation => Proxy?.WeaponAnimation ?? string.Empty;
-	public Vector2I WeaponPosition => Proxy?.WeaponPosition ?? Vector2I.Zero;
+	public bool WeaponEnabled {
+		get => Proxy?.WeaponEnabled ?? false;
+		set {
+			if (Proxy != null) Proxy.WeaponEnabled = value;
+		}
+	}
+
+	public string WeaponAnimation {
+		get => Proxy?.WeaponAnimation ?? string.Empty;
+		set {
+			if (Proxy != null) Proxy.WeaponAnimation = value;
+		}
+	}
+
+	public Vector2I WeaponPosition {
+		get => Proxy?.WeaponPosition ?? Vector2I.Zero;
+		set {
+			if (Proxy != null) Proxy.WeaponPosition = value;
+		}
+	}
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();

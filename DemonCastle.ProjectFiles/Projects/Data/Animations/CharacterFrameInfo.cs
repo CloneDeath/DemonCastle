@@ -11,9 +11,9 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public interface ICharacterFrameInfo : IFrameInfo {
-	bool WeaponEnabled { get; }
-	string WeaponAnimation { get; }
-	Vector2I WeaponPosition { get; }
+	bool WeaponEnabled { get; set; }
+	string WeaponAnimation { get; set; }
+	Vector2I WeaponPosition { get; set; }
 }
 
 public class CharacterFrameInfo : ICharacterFrameInfo {
