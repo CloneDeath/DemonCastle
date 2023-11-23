@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles;
@@ -74,17 +75,8 @@ public partial class FileTree : Tree {
 	}
 
 	protected static Texture2D GetIconForFile(string extension) {
-		return extension switch {
-			".dcp" => IconTextures.ProjectIcon,
-			".dcl" => IconTextures.LevelIcon,
-			".dcsa" => IconTextures.SpriteAtlasIcon,
-			".dcsg" => IconTextures.SpriteGridIcon,
-			".dcc" => IconTextures.CharacterIcon,
-			".dcw" => IconTextures.WeaponIcon,
-			".txt" => IconTextures.TextFileIcon,
-			".png" => IconTextures.TextureIcon,
-			_ => IconTextures.UnknownIcon
-		};
+		return EditorFileType.All.FirstOrDefault(e => e.Extension == extension)?.Icon
+			   ?? IconTextures.UnknownIcon;
 	}
 
 	public void OnAddDirectorySelected() {

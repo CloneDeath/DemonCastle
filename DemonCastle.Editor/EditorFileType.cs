@@ -11,6 +11,7 @@ public static class EditorFileType {
 	public static IEditorFileType Character { get; } = new CharacterEditorFileType();
 	public static IEditorFileType Level { get; } = new LevelEditorFileType();
 	public static IEditorFileType Monster { get; } = new MonsterEditorFileType();
+	public static IEditorFileType Png { get; } = new PngEditorFileType();
 	public static IEditorFileType Project { get; } = new ProjectEditorFileType();
 	public static IEditorFileType SpriteAtlas { get; } = new SpriteAtlasEditorFileType();
 	public static IEditorFileType SpriteGrid { get; } = new SpriteGridEditorFileType();
@@ -30,6 +31,7 @@ public static class EditorFileType {
 		Character,
 		Level,
 		Monster,
+		Png,
 		Project,
 		SpriteAtlas,
 		SpriteGrid,
