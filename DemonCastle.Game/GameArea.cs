@@ -1,3 +1,4 @@
+using DemonCastle.Game.Tiles;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -12,7 +13,7 @@ public partial class GameArea : Node2D {
 
 		foreach (var tileMapInfo in area.TileMap) {
 			var tileInfo = tileMapInfo.Tile;
-			AddChild(new Tiles.GameTile(tileInfo) {
+			AddChild(new GameTile(tileInfo) {
 				Position = tileMapInfo.Position.ToPixelPositionInArea()
 			});
 		}

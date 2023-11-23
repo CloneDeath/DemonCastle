@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Character.Animations.Editor;
+using DemonCastle.Editor.Editors.Character.Animations.List;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -6,7 +7,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class AnimationArea : Control {
-	protected List.AnimationCollectionEdit Animations { get; }
+	protected AnimationCollectionEdit Animations { get; }
 	protected SplitContainer SplitContainer { get; }
 	protected SingleAnimationEditArea AnimationEdit { get; }
 	public AnimationArea(CharacterInfo characterInfo) {
@@ -16,7 +17,7 @@ public partial class AnimationArea : Control {
 			AnchorBottom = 1,
 			OffsetBottom = 0
 		});
-		SplitContainer.AddChild(Animations = new List.AnimationCollectionEdit(characterInfo.Animations));
+		SplitContainer.AddChild(Animations = new AnimationCollectionEdit(characterInfo.Animations));
 		Animations.AnimationSelected += OnAnimationSelected;
 
 		SplitContainer.AddChild(AnimationEdit = new SingleAnimationEditArea());
