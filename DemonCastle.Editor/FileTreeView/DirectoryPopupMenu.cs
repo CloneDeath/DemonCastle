@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DemonCastle.Editor.Icons;
 using Godot;
 
@@ -6,11 +7,9 @@ namespace DemonCastle.Editor.FileTreeView;
 
 public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? AddDirectory;
-	public event Action? CreateSpriteAtlasFile;
-	public event Action? CreateSpriteGridFile;
-	public event Action? CreateCharacterFile;
-	public event Action? CreateWeaponFile;
-	public event Action? CreateLevelFile;
+
+	public event Action<IEditorFileType>? CreateEditorFile;
+
 	public event Action? CreateTextFile;
 	public event Action? OpenFolder;
 	public event Action? RenameDirectory;
@@ -20,55 +19,40 @@ public partial class DirectoryPopupMenu : PopupMenu {
 
 	public DirectoryPopupMenu() {
 		Name = nameof(DirectoryPopupMenu);
+
+		var createFileActions = EditorFileType.CreatableFileTypes
+			.Select(fileType => new PopupAction {
+				Text = $"Create {fileType.Name} File",
+				Icon = fileType.Icon,
+				Action = () => CreateEditorFile?.Invoke(fileType)
+			})
+			.ToArray();
 		Actions = new[] {
 			new PopupAction {
 				Text = "Add Directory",
 				Icon = IconTextures.FolderIcon,
 				Action = () => AddDirectory?.Invoke()
-			},
-			new PopupAction {
-				Text = "Create Sprite Atlas File",
-				Icon = IconTextures.SpriteAtlasIcon,
-				Action = () => CreateSpriteAtlasFile?.Invoke()
-			},
-			new PopupAction {
-				Text = "Create Sprite Grid File",
-				Icon = IconTextures.SpriteGridIcon,
-				Action = () => CreateSpriteGridFile?.Invoke()
-			},
-			new PopupAction {
-				Text = "Create Character File",
-				Icon = IconTextures.CharacterIcon,
-				Action = () => CreateCharacterFile?.Invoke()
-			},
-			new PopupAction {
-				Text = "Create Weapon File",
-				Icon = IconTextures.WeaponIcon,
-				Action = () => CreateWeaponFile?.Invoke()
-			},
-			new PopupAction {
-				Text	= "Create Level File",
-				Icon = IconTextures.LevelIcon,
-				Action = () => CreateLevelFile?.Invoke()
-			},
-			new PopupAction {
-				Text = "Create Text File",
-				Icon = IconTextures.TextFileIcon,
-				Action = () => CreateTextFile?.Invoke()
-			},
-			new PopupAction {
-				Text = "Open Folder...",
-				Action = () => OpenFolder?.Invoke()
-			},
-			new PopupAction {
-				Text = "Rename...",
-				Action = () => RenameDirectory?.Invoke()
-			},
-			new PopupAction {
-				Text = "Delete...",
-				Action = () => DeleteDirectory?.Invoke()
 			}
-		};
+		}.Concat(createFileActions)
+		 .Concat(new[]{
+			 new PopupAction {
+				 Text = "Create Text File",
+				 Icon = IconTextures.TextFileIcon,
+				 Action = () => CreateTextFile?.Invoke()
+			 },
+			 new PopupAction {
+				 Text = "Open Folder...",
+				 Action = () => OpenFolder?.Invoke()
+			 },
+			 new PopupAction {
+				 Text = "Rename...",
+				 Action = () => RenameDirectory?.Invoke()
+			 },
+			 new PopupAction {
+				 Text = "Delete...",
+				 Action = () => DeleteDirectory?.Invoke()
+			 }
+		 }).ToArray();
 
 
 		for (var i = 0; i < Actions.Length; i++) {

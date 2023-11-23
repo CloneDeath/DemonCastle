@@ -95,62 +95,22 @@ public partial class FileTree : Tree {
 		CreateTree();
 	}
 
-	public void OnCreateSpriteAtlasFileSelected() {
+	public void OnCreateEditorFileSelected(IEditorFileType fileType) {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("sprite-atlas", "dcsa", new SpriteAtlasFile());
+
+		dirNav.CreateFile(fileType.Name, fileType.Extension, fileType.CreateFileInstance());
 
 		CreateTree();
 	}
 
-	public void OnCreateSpriteGridFileSelected() {
-		var selected = GetSelected();
-		if (!DirectoryMap.ContainsKey(selected)) return;
-		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("sprite-grid", "dcsg", new SpriteGridFile());
-
-		CreateTree();
-	}
-
-	public void OnCreateCharacterFileSelected() {
-		var selected = GetSelected();
-		if (!DirectoryMap.ContainsKey(selected)) return;
-		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("character", "dcc", new CharacterFile {
-			Name = "character"
-		});
-
-		CreateTree();
-	}
-
-	public void OnCreateWeaponFileSelected() {
-		var selected = GetSelected();
-		if (!DirectoryMap.ContainsKey(selected)) return;
-		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("weapon", "dcw", new WeaponFile {
-			Name = "weapon"
-		});
-
-		CreateTree();
-	}
-
-	public void OnCreateLevelFileSelected() {
-		var selected = GetSelected();
-		if (!DirectoryMap.ContainsKey(selected)) return;
-		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile("level", "dcl", new LevelFile {
-			Name = "level"
-		});
-
-		CreateTree();
-	}
 
 	public void OnCreateTextFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateEmptyFile("text", "txt");
+		dirNav.CreateEmptyFile("text", FileType.Text.Extension);
 
 		CreateTree();
 	}

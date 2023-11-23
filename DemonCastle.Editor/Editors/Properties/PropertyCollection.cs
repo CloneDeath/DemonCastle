@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using DemonCastle.Editor.Properties;
-using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -31,7 +31,7 @@ public partial class PropertyCollection : VBoxContainer {
 
 	public FileProperty AddFile<T>(string name, T target, string directory,
 						   Expression<Func<T, string>> propertyExpression,
-						   IEnumerable<IFileTypeData> fileTypes) where T : INotifyPropertyChanged {
+						   IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
 		var fileProperty = new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
 		};

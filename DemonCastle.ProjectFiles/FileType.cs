@@ -4,13 +4,20 @@ using DemonCastle.ProjectFiles.FileTypes;
 namespace DemonCastle.ProjectFiles;
 
 public static class FileType {
-	public static IFileTypeData Png => new PngFileTypeData();
-	public static IFileTypeData SpriteAtlas => new SpriteAtlasFileTypeData();
-	public static IFileTypeData SpriteGrid => new SpriteGridFileTypeData();
-	public static IFileTypeData Character => new CharacterFileTypeData();
-	public static IFileTypeData Level => new LevelFileTypeData();
-	public static IFileTypeData Weapon => new WeaponFileType();
+	public static IFileType Png => new PngFileType();
+	public static IFileType SpriteAtlas => new SpriteAtlasFileType();
+	public static IFileType SpriteGrid => new SpriteGridFileType();
+	public static IFileType Text => new TextFileType();
+	public static IFileType Character => new CharacterFileType();
+	public static IFileType Level => new LevelFileType();
+	public static IFileType Weapon => new WeaponFileType();
 
-	public static IEnumerable<IFileTypeData> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
-	public static IEnumerable<IFileTypeData> RawTextureFiles => new[] { Png };
+	public static IEnumerable<IFileType> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
+	public static IEnumerable<IFileType> RawTextureFiles => new[] { Png };
+}
+
+public interface IFileType {
+	string Name { get; }
+	string Extension { get; }
+	string Filter { get; }
 }

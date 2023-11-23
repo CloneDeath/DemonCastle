@@ -97,7 +97,7 @@ public class DirectoryNavigator {
 	}
 
 	public void CreateFile<TFile>(string fileName, string extension, TFile data) {
-		var file = $"{fileName}.{extension}";
+		var file = $"{fileName}{extension}";
 		var contents = JsonConvert.SerializeObject(data);
 		if (FileExists(file)) {
 			CreateFile(fileName, 0, extension, contents);
@@ -107,7 +107,7 @@ public class DirectoryNavigator {
 	}
 
 	public void CreateEmptyFile(string fileName, string extension) {
-		var file = $"{fileName}.{extension}";
+		var file = $"{fileName}{extension}";
 		var contents = string.Empty;
 		if (FileExists(file)) {
 			CreateFile(fileName, 0, extension, contents);
@@ -118,7 +118,7 @@ public class DirectoryNavigator {
 
 	protected void CreateFile(string fileName, int index, string extension, string contents) {
 		while (true) {
-			var file = $"{fileName}{index}.{extension}";
+			var file = $"{fileName}{index}{extension}";
 			if (FileExists(file)) {
 				index += 1;
 				continue;

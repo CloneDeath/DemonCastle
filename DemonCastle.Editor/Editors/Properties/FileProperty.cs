@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Editor.Properties;
-using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles;
 using Godot;
 using Path = System.IO.Path;
 
@@ -15,7 +15,7 @@ public partial class FileProperty : StringProperty {
 
 	public event Action<string>? FileSelected;
 
-	public FileProperty(IPropertyBinding<string> binding, string directory, IEnumerable<IFileTypeData> fileTypes)
+	public FileProperty(IPropertyBinding<string> binding, string directory, IEnumerable<IFileType> fileTypes)
 		: base(binding) {
 		Directory = directory;
 

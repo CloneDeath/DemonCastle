@@ -10,6 +10,7 @@ public static class IconTextures {
 	public static Texture2D LevelIcon { get; } = LoadTexture(nameof(LevelIcon));
 	public static Texture2D MagnifyMinusIcon { get; } = LoadTexture(nameof(MagnifyMinusIcon));
 	public static Texture2D MagnifyPlusIcon { get; } = LoadTexture(nameof(MagnifyPlusIcon));
+	public static Texture2D MonsterIcon { get; } = LoadTexture(nameof(MonsterIcon));
 	public static Texture2D OneToOneIcon { get; } = LoadTexture(nameof(OneToOneIcon));
 	public static Texture2D ProjectIcon { get; } = LoadTexture(nameof(ProjectIcon));
 	public static Texture2D RefreshIcon { get; } = LoadTexture(nameof(RefreshIcon));
