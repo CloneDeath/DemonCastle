@@ -1,36 +1,35 @@
-using DemonCastle.Editor.Controls;
-using DemonCastle.Editor.Properties;
+using DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
-using DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
+using DemonCastle.Editor.Editors.Components.AnimationFrames;
+using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 
-public partial class CharacterAnimationEditor : VBoxContainer {
-	protected CharacterAnimationInfo? Current;
-	protected BindingLineEdit LineEdit { get; }
-	protected AnimationFrameContainer FrameContainer { get; }
+public partial class CharacterAnimationEditor : VSplitContainer {
+	private VBoxContainer Top { get; }
+	private CharacterAnimationDetails Details { get; }
+	private FrameListEditor FrameList { get; }
+	private CharacterFrameInfoDetails FrameDetails { get; }
 
-	public CharacterAnimationInfo? CurrentAnimation {
-		get => Current;
-		set {
-			Current = value;
-			BindAnimation();
-		}
+	public CharacterAnimationEditor(CharacterInfo character) {
+		Name = nameof(CharacterAnimationEditor);
+
+		AddChild(Top = new VBoxContainer());
+		Top.AddChild(Details = new CharacterAnimationDetails());
+		Top.AddChild(FrameList = new FrameListEditor());
+		FrameList.FrameSelected += FrameList_OnFrameSelected;
+
+		AddChild(FrameDetails = new CharacterFrameInfoDetails(character));
 	}
 
-	public CharacterAnimationEditor() {
-		AddChild(LineEdit = new BindingLineEdit());
-		AddChild(FrameContainer = new AnimationFrameContainer());
+
+	private void FrameList_OnFrameSelected(IFrameInfo frame) {
+		FrameDetails.CharacterFrameInfo = frame as CharacterFrameInfo;
 	}
 
-	protected void BindAnimation() {
-		if (Current == null) return;
-		LineEdit.Binding = new PropertyBinding<CharacterAnimationInfo, string>(Current, animation => animation.Name);
-
-		FrameContainer.ClearChildren();
-		foreach (var frame in Current.CharacterFrames) {
-			FrameContainer.AddChild(new AnimationFramePanel(frame));
-		}
+	public void LoadAnimation(CharacterAnimationInfo animation) {
+		Details.CharacterAnimation = animation;
+		FrameList.Load(animation);
 	}
 }

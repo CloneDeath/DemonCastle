@@ -10,7 +10,13 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class CharacterFrameInfo : IFrameInfo {
+public interface ICharacterFrameInfo : IFrameInfo {
+	bool WeaponEnabled { get; }
+	string WeaponAnimation { get; }
+	Vector2I WeaponPosition { get; }
+}
+
+public class CharacterFrameInfo : ICharacterFrameInfo {
 	public CharacterFrameInfo(CharacterAnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
 		Animation = animation;
 		File = file;
