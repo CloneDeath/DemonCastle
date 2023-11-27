@@ -17,7 +17,7 @@ public interface IWeaponFrameInfo : IFrameInfo {
 }
 
 public class WeaponFrameInfo : IWeaponFrameInfo {
-	public WeaponFrameInfo(WeaponAnimationInfo animation, FileNavigator<WeaponFile> file, FrameData frameData, int index) {
+	public WeaponFrameInfo(WeaponAnimationInfo animation, ISaveFile file, FrameData frameData, int index) {
 		Animation = animation;
 		File = file;
 		FrameData = frameData;
@@ -25,8 +25,7 @@ public class WeaponFrameInfo : IWeaponFrameInfo {
 	}
 
 	protected WeaponAnimationInfo Animation { get; }
-	protected FileNavigator<WeaponFile> File { get; }
-	public string Directory => File.Directory;
+	protected ISaveFile File { get; }
 	protected FrameData FrameData { get; }
 	public int Index { get; }
 

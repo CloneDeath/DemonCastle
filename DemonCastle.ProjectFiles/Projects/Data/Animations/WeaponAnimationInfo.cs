@@ -11,13 +11,13 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
-	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, AnimationData animation) {
+	public WeaponAnimationInfo(ISaveFile file, AnimationData animation) {
 		File = file;
 		Animation = animation;
 		WeaponFrames = new WeaponFrameInfoCollection(file, this, animation.Frames);
 	}
 
-	protected FileNavigator<WeaponFile> File { get; }
+	protected ISaveFile File { get; }
 	protected AnimationData Animation { get; }
 	public WeaponFrameInfoCollection  WeaponFrames { get; }
 	public IObservableCollection<IFrameInfo> Frames => WeaponFrames;

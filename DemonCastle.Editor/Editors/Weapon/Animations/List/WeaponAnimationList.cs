@@ -49,7 +49,7 @@ public partial class WeaponAnimationList : VBoxContainer {
 	}
 
 	private void AddButton_OnPressed() {
-		_weapon.Animations.Add(new WeaponAnimationData {
+		_weapon.Animations.Add(new AnimationData {
 			Name = "animation"
 		});
 	}

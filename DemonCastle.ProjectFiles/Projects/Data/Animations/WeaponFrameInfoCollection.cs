@@ -6,9 +6,9 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponFrameInfoCollection : ObservableCollectionInfo<WeaponFrameInfo, FrameData> {
-	private readonly FileNavigator<WeaponFile> _file;
+	private readonly ISaveFile _file;
 
-	public WeaponFrameInfoCollection(FileNavigator<WeaponFile> file, WeaponAnimationInfo animation, List<FrameData> frames)
+	public WeaponFrameInfoCollection(ISaveFile file, WeaponAnimationInfo animation, List<FrameData> frames)
 		: base(new WeaponFrameInfoFactory(file, animation), frames) {
 		_file = file;
 	}
@@ -17,10 +17,10 @@ public class WeaponFrameInfoCollection : ObservableCollectionInfo<WeaponFrameInf
 }
 
 public class WeaponFrameInfoFactory : IInfoFactory<WeaponFrameInfo, FrameData> {
-	private readonly FileNavigator<WeaponFile> _file;
-	private readonly WeaponAnimationInfo _animation;
+	private readonly ISaveFile _file;
+	protected readonly WeaponAnimationInfo _animation;
 
-	public WeaponFrameInfoFactory(FileNavigator<WeaponFile> file, WeaponAnimationInfo animation) {
+	public WeaponFrameInfoFactory(ISaveFile file, WeaponAnimationInfo animation) {
 		_file = file;
 		_animation = animation;
 	}
