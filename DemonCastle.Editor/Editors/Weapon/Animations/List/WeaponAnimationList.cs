@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
