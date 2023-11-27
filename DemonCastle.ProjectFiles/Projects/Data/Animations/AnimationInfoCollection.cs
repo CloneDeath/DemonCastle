@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class WeaponAnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
-	protected FileNavigator<WeaponFile> File { get; }
+public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
+	protected IFileNavigator File { get; }
 	protected List<AnimationData> FileAnimations { get; }
 	protected ObservableCollection<AnimationInfo> Animations { get; }
 
-	public WeaponAnimationInfoCollection(FileNavigator<WeaponFile> file, List<AnimationData> animations) {
+	public AnimationInfoCollection(IFileNavigator file, List<AnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
 		Animations = new ObservableCollection<AnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
