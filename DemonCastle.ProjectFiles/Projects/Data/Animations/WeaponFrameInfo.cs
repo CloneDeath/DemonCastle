@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -13,7 +12,8 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public interface IWeaponFrameInfo : IFrameInfo {
-	Vector2I Origin { get; }
+	Vector2I Anchor { get; }
+	Vector2I Offset { get; }
 }
 
 public class WeaponFrameInfo : IWeaponFrameInfo {
@@ -59,10 +59,19 @@ public class WeaponFrameInfo : IWeaponFrameInfo {
 		}
 	}
 
-	public Vector2I Origin {
-		get => FrameData.Origin;
+	public Vector2I Anchor {
+		get => FrameData.Origin.Anchor;
 		set {
-			FrameData.Origin = value;
+			FrameData.Origin.Anchor = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Offset {
+		get => FrameData.Origin.Offset;
+		set {
+			FrameData.Origin.Offset = value;
 			Save();
 			OnPropertyChanged();
 		}

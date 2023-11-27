@@ -26,7 +26,8 @@ public partial class WeaponFrameInfoDetails : PropertyCollection {
 		AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
-		AddVector2I("Origin", _proxy, p => p.Origin);
+		AddVector2I("Anchor", _proxy, p => p.Anchor);
+		AddVector2I("Offset", _proxy, p => p.Offset);
 
 		AddChild(FrameInfoView = new WeaponFrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill

@@ -12,8 +12,9 @@ public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo>, IWeaponFrameInfo
 		OnPropertyChanged(nameof(Duration));
 		OnPropertyChanged(nameof(SourceFile));
 		OnPropertyChanged(nameof(SpriteId));
-		OnPropertyChanged(nameof(Origin));
-		OnPropertyChanged(nameof(Proxy.SpriteDefinition));
+		OnPropertyChanged(nameof(Anchor));
+		OnPropertyChanged(nameof(Offset));
+		OnPropertyChanged(nameof(SpriteDefinition));
 		OnPropertyChanged(nameof(SpriteDefinitions));
 	}
 
@@ -38,10 +39,17 @@ public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo>, IWeaponFrameInfo
 		}
 	}
 
-	public Vector2I Origin {
-		get => Proxy?.Origin ?? Vector2I.Zero;
+	public Vector2I Anchor {
+		get => Proxy?.Anchor ?? Vector2I.Zero;
 		set {
-			if (Proxy != null) Proxy.Origin = value;
+			if (Proxy != null) Proxy.Anchor = value;
+		}
+	}
+
+	public Vector2I Offset {
+		get => Proxy?.Offset ?? Vector2I.Zero;
+		set {
+			if (Proxy != null) Proxy.Offset = value;
 		}
 	}
 
