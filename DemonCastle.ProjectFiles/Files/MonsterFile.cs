@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.ProjectFiles.Files.Animations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -22,18 +23,6 @@ public class MonsterFile {
 public class Size {
 	public int Width { get; set; } = 16;
 	public int Height { get; set; } = 16;
-}
-
-public class MonsterAnimationData {
-	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
-	public List<MonsterFrameData> Frames { get; set; } = new();
-}
-
-public class MonsterFrameData {
-	public float Duration { get; set; } = 1;
-	public Guid SpriteId { get; set; }
-	public string Source { get; set; } = string.Empty;
 }
 
 public class MonsterStateData {
