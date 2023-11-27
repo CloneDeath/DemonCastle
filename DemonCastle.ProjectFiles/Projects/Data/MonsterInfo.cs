@@ -18,6 +18,33 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 		}
 	}
 
+	public float MoveSpeed {
+		get => Resource.MoveSpeed;
+		set {
+			Resource.MoveSpeed = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public float JumpHeight {
+		get => Resource.JumpHeight;
+		set {
+			Resource.JumpHeight = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public float Gravity {
+		get => Resource.Gravity;
+		set {
+			Resource.Gravity = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;
 

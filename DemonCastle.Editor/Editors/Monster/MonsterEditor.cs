@@ -8,6 +8,8 @@ public partial class MonsterEditor : BaseEditor {
 	public override string TabText { get; }
 
 	public MonsterEditor(MonsterInfo monster) {
-		TabText = monster.Name;
+		TabText = monster.FileName;
+
+		AddChild(new MonsterDetails(monster));
 	}
 }
