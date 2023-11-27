@@ -11,14 +11,14 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
-	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, WeaponAnimationData animation) {
+	public WeaponAnimationInfo(FileNavigator<WeaponFile> file, AnimationData animation) {
 		File = file;
 		Animation = animation;
 		WeaponFrames = new WeaponFrameInfoCollection(file, this, animation.Frames);
 	}
 
 	protected FileNavigator<WeaponFile> File { get; }
-	protected WeaponAnimationData Animation { get; }
+	protected AnimationData Animation { get; }
 	public WeaponFrameInfoCollection  WeaponFrames { get; }
 	public IObservableCollection<IFrameInfo> Frames => WeaponFrames;
 
@@ -37,7 +37,7 @@ public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 
 	public void AddFrame() {
 		var previousFrame = Animation.Frames.LastOrDefault();
-		var frame = new WeaponFrameData {
+		var frame = new FrameData {
 			Source = previousFrame?.Source ?? string.Empty,
 			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
 			Duration = previousFrame?.Duration ?? 1,
@@ -48,7 +48,7 @@ public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 		Save();
 	}
 
-	public void RemoveFrame(WeaponFrameInfo frameInfo, WeaponFrameData frameData) {
+	public void RemoveFrame(WeaponFrameInfo frameInfo, FrameData frameData) {
 		Animation.Frames.Remove(frameData);
 		WeaponFrames.Remove(frameInfo);
 		Save();

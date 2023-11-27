@@ -16,7 +16,7 @@ public class MonsterFile {
 	public Size Size { get; set; } = new();
 	public Guid InitialState { get; set; } = Guid.Empty;
 
-	public List<MonsterAnimationData> Animations { get; set; } = new();
+	public List<AnimationData> Animations { get; set; } = new();
 	public List<MonsterStateData> States { get; set; } = new();
 }
 

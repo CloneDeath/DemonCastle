@@ -11,17 +11,17 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfoCollection : IEnumerable<WeaponAnimationInfo>, INotifyCollectionChanged {
 	protected FileNavigator<WeaponFile> File { get; }
-	protected List<WeaponAnimationData> FileAnimations { get; }
+	protected List<AnimationData> FileAnimations { get; }
 	protected ObservableCollection<WeaponAnimationInfo> Animations { get; }
 
-	public WeaponAnimationInfoCollection(FileNavigator<WeaponFile> file, List<WeaponAnimationData> animations) {
+	public WeaponAnimationInfoCollection(FileNavigator<WeaponFile> file, List<AnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
 		Animations = new ObservableCollection<WeaponAnimationInfo>(animations.Select(data => new WeaponAnimationInfo(file, data)).ToList());
 		Animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public WeaponAnimationInfo Add(WeaponAnimationData animationData) {
+	public WeaponAnimationInfo Add(AnimationData animationData) {
 		FileAnimations.Add(animationData);
 		Save();
 		var animationInfo = new WeaponAnimationInfo(File, animationData);
