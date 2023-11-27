@@ -24,10 +24,10 @@ public partial class WeaponAnimationEditor : VSplitContainer {
 	}
 
 	private void FrameList_OnFrameSelected(IFrameInfo frame) {
-		FrameDetails.WeaponFrameInfo = frame as WeaponFrameInfo;
+		FrameDetails.WeaponFrameInfo = frame as FrameInfo;
 	}
 
-	public void LoadAnimation(WeaponAnimationInfo animation) {
+	public void LoadAnimation(AnimationInfo animation) {
 		Details.WeaponAnimation = animation;
 		FrameList.Load(animation);
 	}

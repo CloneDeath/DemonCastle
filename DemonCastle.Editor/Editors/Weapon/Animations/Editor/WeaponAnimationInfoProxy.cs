@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor;
 
-public class WeaponAnimationInfoProxy : InfoProxy<WeaponAnimationInfo> {
+public class WeaponAnimationInfoProxy : InfoProxy<AnimationInfo> {
 	protected override void NotifyProxyChanged() {
 		OnPropertyChanged(nameof(Id));
 		OnPropertyChanged(nameof(Name));

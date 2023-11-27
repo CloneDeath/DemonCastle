@@ -13,7 +13,7 @@ public partial class WeaponAnimation : Node2D {
 
 	protected AnimationInfoNode? CurrentAnimation;
 
-	public WeaponFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as WeaponFrameInfo;
+	public FrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as FrameInfo;
 
 	public WeaponAnimation(WeaponInfo weapon) {
 		Weapon = weapon;

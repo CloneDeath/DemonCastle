@@ -9,22 +9,22 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class WeaponAnimationInfoCollection : IEnumerable<WeaponAnimationInfo>, INotifyCollectionChanged {
+public class WeaponAnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
 	protected FileNavigator<WeaponFile> File { get; }
 	protected List<AnimationData> FileAnimations { get; }
-	protected ObservableCollection<WeaponAnimationInfo> Animations { get; }
+	protected ObservableCollection<AnimationInfo> Animations { get; }
 
 	public WeaponAnimationInfoCollection(FileNavigator<WeaponFile> file, List<AnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
-		Animations = new ObservableCollection<WeaponAnimationInfo>(animations.Select(data => new WeaponAnimationInfo(file, data)).ToList());
+		Animations = new ObservableCollection<AnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
 		Animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public WeaponAnimationInfo Add(AnimationData animationData) {
+	public AnimationInfo Add(AnimationData animationData) {
 		FileAnimations.Add(animationData);
 		Save();
-		var animationInfo = new WeaponAnimationInfo(File, animationData);
+		var animationInfo = new AnimationInfo(File, animationData);
 		Animations.Add(animationInfo);
 		return animationInfo;
 	}
@@ -37,10 +37,10 @@ public class WeaponAnimationInfoCollection : IEnumerable<WeaponAnimationInfo>, I
 
 	protected void Save() => File.Save();
 
-	public WeaponAnimationInfo this[int index] => Animations[index];
+	public AnimationInfo this[int index] => Animations[index];
 
 	#region IEnumerable
-	public IEnumerator<WeaponAnimationInfo> GetEnumerator() => Animations.GetEnumerator();
+	public IEnumerator<AnimationInfo> GetEnumerator() => Animations.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

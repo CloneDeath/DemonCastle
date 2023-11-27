@@ -9,7 +9,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Weapon.Animations.List;
 
 public partial class WeaponAnimationList : VBoxContainer {
-	public event Action<WeaponAnimationInfo>? AnimationSelected;
+	public event Action<AnimationInfo>? AnimationSelected;
 
 	private readonly WeaponInfo _weapon;
 	private ItemList Animations { get; }

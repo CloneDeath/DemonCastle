@@ -11,15 +11,15 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class WeaponFrameInfo : IFrameInfo {
-	public WeaponFrameInfo(WeaponAnimationInfo animation, IFileNavigator file, FrameData frameData, int index) {
+public class FrameInfo : IFrameInfo {
+	public FrameInfo(AnimationInfo animation, IFileNavigator file, FrameData frameData, int index) {
 		Animation = animation;
 		File = file;
 		FrameData = frameData;
 		Index = index;
 	}
 
-	protected WeaponAnimationInfo Animation { get; }
+	protected AnimationInfo Animation { get; }
 	protected IFileNavigator File { get; }
 	protected FrameData FrameData { get; }
 	public int Index { get; }

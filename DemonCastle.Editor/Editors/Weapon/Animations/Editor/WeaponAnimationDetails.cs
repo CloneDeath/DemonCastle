@@ -8,7 +8,7 @@ public partial class WeaponAnimationDetails : PropertyCollection {
 
 	private StringProperty AnimationName { get; }
 
-	public WeaponAnimationInfo? WeaponAnimation {
+	public AnimationInfo? WeaponAnimation {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}

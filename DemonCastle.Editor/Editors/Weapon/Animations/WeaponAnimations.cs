@@ -23,7 +23,7 @@ public partial class WeaponAnimations : HSplitContainer {
 		});
 	}
 
-	private void AnimationList_OnAnimationSelected(WeaponAnimationInfo animation) {
+	private void AnimationList_OnAnimationSelected(AnimationInfo animation) {
 		AnimationEditor.LoadAnimation(animation);
 	}
 }

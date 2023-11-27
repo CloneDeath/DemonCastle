@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
 
-public class WeaponFrameInfoProxy : InfoProxy<WeaponFrameInfo>, IFrameInfo {
+public class WeaponFrameInfoProxy : InfoProxy<FrameInfo>, IFrameInfo {
 	protected override void NotifyProxyChanged() {
 		OnPropertyChanged(nameof(Duration));
 		OnPropertyChanged(nameof(SourceFile));

@@ -14,7 +14,7 @@ public partial class WeaponFrameInfoDetails : PropertyCollection {
 	protected WeaponFrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
-	public WeaponFrameInfo? WeaponFrameInfo {
+	public FrameInfo? WeaponFrameInfo {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}
