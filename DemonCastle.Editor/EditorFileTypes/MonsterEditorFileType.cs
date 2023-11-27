@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Monster;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;

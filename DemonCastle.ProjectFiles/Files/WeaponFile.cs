@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.ProjectFiles;
+namespace DemonCastle.ProjectFiles.Files;
 
 public class WeaponFile {
 	public Guid Id { get; set; } = Guid.NewGuid();

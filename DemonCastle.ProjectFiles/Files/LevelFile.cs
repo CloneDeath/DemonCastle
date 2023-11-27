@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DemonCastle.ProjectFiles;
+namespace DemonCastle.ProjectFiles.Files;
 
 public class LevelFile {
 	public string Name { get; set; } = string.Empty;

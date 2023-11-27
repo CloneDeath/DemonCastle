@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DemonCastle.ProjectFiles;
+namespace DemonCastle.ProjectFiles.Files;
 
 public class MonsterFile {
 	public Guid Id { get; set; } = Guid.NewGuid();
