@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -40,6 +41,16 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 		get => Resource.Gravity;
 		set {
 			Resource.Gravity = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Size {
+		get => new(Resource.Size.Width, Resource.Size.Height);
+		set {
+			Resource.Size.Width = value.X;
+			Resource.Size.Height = value.Y;
 			Save();
 			OnPropertyChanged();
 		}

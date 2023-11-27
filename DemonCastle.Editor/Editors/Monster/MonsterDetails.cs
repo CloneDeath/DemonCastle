@@ -11,5 +11,6 @@ public partial class MonsterDetails : PropertyCollection {
 		AddFloat("Move Speed", monster, m => m.MoveSpeed);
 		AddFloat("Jump Height", monster, m => m.JumpHeight);
 		AddFloat("Gravity", monster, m => m.Gravity);
+		AddVector2I("Size", monster, m => m.Size);
 	}
 }
