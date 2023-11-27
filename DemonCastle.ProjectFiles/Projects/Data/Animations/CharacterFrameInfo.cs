@@ -89,6 +89,24 @@ public class CharacterFrameInfo : ICharacterFrameInfo {
 		}
 	}
 
+	public Vector2I Anchor {
+		get => FrameData.Origin.Anchor;
+		set {
+			FrameData.Origin.Anchor = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Offset {
+		get => FrameData.Origin.Offset;
+		set {
+			FrameData.Origin.Offset = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source)
 										  ? new NullSpriteSource()
 										  : File.GetSprite(FrameData.Source);

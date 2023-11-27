@@ -11,12 +11,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public interface IWeaponFrameInfo : IFrameInfo {
-	Vector2I Anchor { get; }
-	Vector2I Offset { get; }
-}
-
-public class WeaponFrameInfo : IWeaponFrameInfo {
+public class WeaponFrameInfo : IFrameInfo {
 	public WeaponFrameInfo(WeaponAnimationInfo animation, IFileNavigator file, FrameData frameData, int index) {
 		Animation = animation;
 		File = file;

@@ -15,6 +15,8 @@ public class CharacterFrameInfoProxy : InfoProxy<CharacterFrameInfo>, ICharacter
 		OnPropertyChanged(nameof(WeaponEnabled));
 		OnPropertyChanged(nameof(WeaponAnimation));
 		OnPropertyChanged(nameof(WeaponPosition));
+		OnPropertyChanged(nameof(Anchor));
+		OnPropertyChanged(nameof(Offset));
 		OnPropertyChanged(nameof(SpriteDefinition));
 		OnPropertyChanged(nameof(SpriteDefinitions));
 	}
@@ -60,6 +62,20 @@ public class CharacterFrameInfoProxy : InfoProxy<CharacterFrameInfo>, ICharacter
 			if (Proxy != null) Proxy.WeaponPosition = value;
 		}
 	}
+
+	public Vector2I Anchor {
+		get => Proxy?.Anchor ?? Vector2I.Zero;
+		set {
+			if (Proxy != null) Proxy.Anchor = value;
+		}
+	}
+	public Vector2I Offset {
+		get => Proxy?.Offset ?? Vector2I.Zero;
+		set {
+			if (Proxy != null) Proxy.Offset = value;
+		}
+	}
+
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
