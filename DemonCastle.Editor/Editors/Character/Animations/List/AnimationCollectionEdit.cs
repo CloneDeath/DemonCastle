@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;

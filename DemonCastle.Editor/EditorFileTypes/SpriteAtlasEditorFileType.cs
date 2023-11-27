@@ -1,7 +1,6 @@
 using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.SpriteAtlas;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Resources;
