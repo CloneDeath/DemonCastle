@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
-public class FileNavigator<T> : FileNavigator, ISaveFile {
+public class FileNavigator<T> : FileNavigator, IFileNavigator {
 	public T Resource { get; }
 	private Task _saveTask = Task.CompletedTask;
 

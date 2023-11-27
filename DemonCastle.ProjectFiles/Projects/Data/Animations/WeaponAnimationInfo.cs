@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -11,13 +10,13 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
-	public WeaponAnimationInfo(ISaveFile file, AnimationData animation) {
+	public WeaponAnimationInfo(IFileNavigator file, AnimationData animation) {
 		File = file;
 		Animation = animation;
 		WeaponFrames = new WeaponFrameInfoCollection(file, this, animation.Frames);
 	}
 
-	protected ISaveFile File { get; }
+	protected IFileNavigator File { get; }
 	protected AnimationData Animation { get; }
 	public WeaponFrameInfoCollection  WeaponFrames { get; }
 	public IObservableCollection<IFrameInfo> Frames => WeaponFrames;
@@ -41,7 +40,10 @@ public class WeaponAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 			Source = previousFrame?.Source ?? string.Empty,
 			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
 			Duration = previousFrame?.Duration ?? 1,
-			Origin = previousFrame?.Origin ?? Vector2I.Zero
+			Origin = new FrameOrigin {
+				Offset = previousFrame?.Origin.Offset ?? Vector2I.Zero,
+				Anchor = previousFrame?.Origin.Anchor ?? Vector2I.Zero
+			}
 		};
 		Animation.Frames.Add(frame);
 		WeaponFrames.Add(frame);

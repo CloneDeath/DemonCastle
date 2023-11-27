@@ -1,5 +1,5 @@
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
-public interface ISaveFile {
+public interface IFileNavigator {
 	void Save();
 }
