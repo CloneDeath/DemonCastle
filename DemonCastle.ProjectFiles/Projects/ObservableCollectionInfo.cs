@@ -17,11 +17,11 @@ public abstract class ObservableCollectionInfo<TInfo, TData> : IEnumerableInfo<T
 	protected List<TData> DataItems { get; }
 	protected ObservableCollection<TInfo> InfoItems { get; }
 
-	protected ObservableCollectionInfo(IInfoFactory<TInfo, TData> factory, List<TData> frames) {
+	protected ObservableCollectionInfo(IInfoFactory<TInfo, TData> factory, List<TData> data) {
 		_factory = factory;
-		DataItems = frames;
+		DataItems = data;
 
-		InfoItems = new ObservableCollection<TInfo>(frames.Select(factory.CreateInfo));
+		InfoItems = new ObservableCollection<TInfo>(data.Select(factory.CreateInfo));
 		InfoItems.CollectionChanged += InfoItems_OnCollectionChanged;
 	}
 

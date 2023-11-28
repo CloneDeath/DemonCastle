@@ -31,7 +31,7 @@ public class FrameInfo : IFrameInfo {
 		Frames = frames;
 		File = file;
 		FrameData = data;
-		Slots = new FrameSlotInfoCollection(file, this, data.Slots);
+		Slots = new FrameSlotInfoCollection(file, data.Slots);
 	}
 
 	protected IEnumerableInfo<IFrameInfo> Frames { get; }

@@ -19,6 +19,10 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		OnPropertyChanged(nameof(SpriteId));
 		OnPropertyChanged(nameof(SpriteDefinition));
 
+		OnPropertyChanged(nameof(WeaponEnabled));
+		OnPropertyChanged(nameof(WeaponAnimation));
+		OnPropertyChanged(nameof(WeaponPosition));
+
 		OnPropertyChanged(nameof(SpriteDefinitions));
 	}
 
@@ -59,7 +63,7 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
-	public IEnumerableInfo<IFrameSlotInfo> Slots => Proxy?.Slots ?? null;
+	public IEnumerableInfo<IFrameSlotInfo> Slots => Proxy?.Slots ?? new NullEnumerableInfo<IFrameSlotInfo>();
 
 	public void Delete() => Proxy?.Delete();
 
@@ -80,6 +84,30 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 				if (slot == null) return;
 				Proxy.Slots.Remove(slot);
 			}
+		}
+	}
+
+	public string WeaponAnimation {
+		get {
+			var slot = Proxy?.Slots.FirstOrDefault(s => s.Name == "Weapon");
+			return slot?.Animation ?? string.Empty;
+		}
+		set {
+			var slot = Proxy?.Slots.FirstOrDefault(s => s.Name == "Weapon");
+			if (slot == null) return;
+			slot.Animation = value;
+		}
+	}
+
+	public Vector2I WeaponPosition {
+		get {
+			var slot = Proxy?.Slots.FirstOrDefault(s => s.Name == "Weapon");
+			return slot?.Position ?? Vector2I.Zero;
+		}
+		set {
+			var slot = Proxy?.Slots.FirstOrDefault(s => s.Name == "Weapon");
+			if (slot == null) return;
+			slot.Position = value;
 		}
 	}
 }
