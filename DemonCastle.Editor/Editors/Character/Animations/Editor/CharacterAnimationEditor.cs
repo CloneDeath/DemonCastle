@@ -24,8 +24,8 @@ public partial class CharacterAnimationEditor : VSplitContainer {
 	}
 
 
-	private void FrameList_OnFrameSelected(FrameInfo frame) {
-		FrameDetails.CharacterFrameInfo = frame;
+	private void FrameList_OnFrameSelected(IFrameInfo frame) {
+		FrameDetails.FrameInfo = frame;
 	}
 
 	public void LoadAnimation(IAnimationInfo animation) {

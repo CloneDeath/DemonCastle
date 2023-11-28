@@ -14,7 +14,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
-	public FrameInfo? FrameInfo {
+	public IFrameInfo? FrameInfo {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}

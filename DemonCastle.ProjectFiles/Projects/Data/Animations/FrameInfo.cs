@@ -12,13 +12,18 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public interface IFrameInfo : INotifyPropertyChanged {
-	float Duration { get; }
-	Vector2I Anchor { get; }
-	Vector2I Offset { get; }
+	float Duration { get; set; }
+	Vector2I Anchor { get; set; }
+	Vector2I Offset { get; set; }
 
-	string SourceFile { get; }
-	Guid SpriteId { get; }
+	string SourceFile { get; set; }
+	Guid SpriteId { get; set; }
 	ISpriteDefinition SpriteDefinition { get; }
+	public IEnumerable<ISpriteDefinition> SpriteDefinitions { get; }
+
+	IEnumerableInfo<IFrameSlotInfo> Slots { get; }
+
+	void Delete();
 }
 
 public class FrameInfo : IFrameInfo {
