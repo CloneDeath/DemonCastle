@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
-public partial class WeaponFrameInfoView : ControlView<SpriteDefinitionView> {
+public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	private IFrameInfo? _info;
 
 	public override void _ExitTree() {

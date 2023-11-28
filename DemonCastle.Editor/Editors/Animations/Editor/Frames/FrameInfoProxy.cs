@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -7,14 +8,16 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
-public class WeaponFrameInfoProxy : InfoProxy<FrameInfo>, IFrameInfo {
+public class FrameInfoProxy : InfoProxy<FrameInfo>, IFrameInfo {
 	protected override void NotifyProxyChanged() {
 		OnPropertyChanged(nameof(Duration));
-		OnPropertyChanged(nameof(SourceFile));
-		OnPropertyChanged(nameof(SpriteId));
 		OnPropertyChanged(nameof(Anchor));
 		OnPropertyChanged(nameof(Offset));
+
+		OnPropertyChanged(nameof(SourceFile));
+		OnPropertyChanged(nameof(SpriteId));
 		OnPropertyChanged(nameof(SpriteDefinition));
+
 		OnPropertyChanged(nameof(SpriteDefinitions));
 	}
 

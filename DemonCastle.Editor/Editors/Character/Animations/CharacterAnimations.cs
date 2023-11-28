@@ -23,7 +23,7 @@ public partial class CharacterAnimations : HSplitContainer {
 		});
 	}
 
-	protected void AnimationList_OnAnimationSelected(CharacterAnimationInfo animationInfo) {
+	protected void AnimationList_OnAnimationSelected(IAnimationInfo animationInfo) {
 		AnimationEditor.LoadAnimation(animationInfo);
 	}
 }

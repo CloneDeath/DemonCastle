@@ -19,8 +19,6 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	string SourceFile { get; }
 	Guid SpriteId { get; }
 	ISpriteDefinition SpriteDefinition { get; }
-
-	IEnumerableInfo<IFrameSlotInfo> Slots { get; }
 }
 
 public class FrameInfo : IFrameInfo {

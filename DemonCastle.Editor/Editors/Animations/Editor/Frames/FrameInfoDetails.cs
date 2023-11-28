@@ -1,35 +1,35 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public partial class FrameInfoDetails : PropertyCollection {
-	private  readonly WeaponFrameInfoProxy _proxy = new();
+	private readonly FrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
-	protected WeaponFrameInfoView FrameInfoView { get; }
+	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
-	public FrameInfo? WeaponFrameInfo {
+	public FrameInfo? FrameInfo {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}
 
-	public FrameInfoDetails(IEnumerableInfo<IAnimationInfo> animations) {
+	public FrameInfoDetails(IFileNavigator file) {
 		Name = nameof(FrameInfoDetails);
 
 		AddFloat("Duration", _proxy, p => p.Duration);
-		AddFile("Source", _proxy, animations.Directory, p => p.SourceFile, FileType.SpriteSources);
+		AddFile("Source", _proxy, file.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
 		AddVector2I("Anchor", _proxy, p => p.Anchor);
 		AddVector2I("Offset", _proxy, p => p.Offset);
 
-		AddChild(FrameInfoView = new WeaponFrameInfoView {
+		AddChild(FrameInfoView = new FrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		FrameInfoView.Load(_proxy);

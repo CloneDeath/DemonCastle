@@ -9,7 +9,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 public class FrameSlotInfoCollection : ObservableCollectionInfo<IFrameSlotInfo, FrameSlotData> {
 	private readonly IFileNavigator _file;
 
-	public FrameSlotInfoCollection(IFileNavigator file, IFrameInfo frame, List<FrameSlotData> frames)
+	public FrameSlotInfoCollection(IFileNavigator file, FrameInfo frame, List<FrameSlotData> frames)
 		: base(new FrameSlotInfoFactory(file, frame.Slots), frames) {
 		_file = file;
 	}
