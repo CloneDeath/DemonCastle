@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.ProjectFiles.Projects;
 
-public interface IInfoFactory<out TInfo, in TData> {
-	TInfo CreateInfo(TData data, int index);
+public interface IInfoFactory<out TInfo, TData> {
+	TInfo CreateInfo(TData data);
+	TData CreateData();
 }
 
-public abstract class ObservableCollectionInfo<TInfo, TData> : IObservableCollection<TInfo> {
+public abstract class ObservableCollectionInfo<TInfo, TData> : IEnumerableInfo<TInfo> {
 	private readonly IInfoFactory<TInfo, TData> _factory;
 	protected List<TData> DataItems { get; }
 	protected ObservableCollection<TInfo> InfoItems { get; }
@@ -28,9 +30,14 @@ public abstract class ObservableCollectionInfo<TInfo, TData> : IObservableCollec
 	public TInfo Add(TData data) {
 		DataItems.Add(data);
 		Save();
-		var info = _factory.CreateInfo(data, InfoItems.Count);
+		var info = _factory.CreateInfo(data);
 		InfoItems.Add(info);
 		return info;
+	}
+
+	public TInfo AppendNew() {
+		var data = _factory.CreateData();
+		return Add(data);
 	}
 
 	public void RemoveAt(int index) {

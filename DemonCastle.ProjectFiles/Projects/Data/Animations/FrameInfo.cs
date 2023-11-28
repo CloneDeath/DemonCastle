@@ -12,17 +12,15 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 public class FrameInfo : IFrameInfo {
-	public FrameInfo(AnimationInfo animation, IFileNavigator file, FrameData frameData, int index) {
-		Animation = animation;
+	public FrameInfo(IEnumerableInfo<IFrameInfo> frames, IFileNavigator file, FrameData frameData) {
+		Frames = frames;
 		File = file;
 		FrameData = frameData;
-		Index = index;
 	}
 
-	protected AnimationInfo Animation { get; }
+	protected IEnumerableInfo<IFrameInfo> Frames { get; }
 	protected IFileNavigator File { get; }
 	protected FrameData FrameData { get; }
-	public int Index { get; }
 
 	public float Duration {
 		get => FrameData.Duration;
@@ -72,18 +70,18 @@ public class FrameInfo : IFrameInfo {
 		}
 	}
 
-	protected ISpriteSource Source => string.IsNullOrWhiteSpace(FrameData.Source)
+	protected ISpriteSource SpriteSource => string.IsNullOrWhiteSpace(FrameData.Source)
 										  ? new NullSpriteSource()
 										  : File.GetSprite(FrameData.Source);
 
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Source.Sprites;
+	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 
-	public ISpriteDefinition SpriteDefinition => Source.Sprites.FirstOrDefault(s => s.Id == FrameData.SpriteId)
+	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == FrameData.SpriteId)
 												 ?? new NullSpriteDefinition();
 
 	protected void Save() => File.Save();
 
-	public void Delete() => Animation.RemoveFrame(this, FrameData);
+	public void Delete() => Frames.Remove(this);
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

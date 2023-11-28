@@ -9,7 +9,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class CharacterAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
+public class CharacterAnimationInfo : IAnimationInfo {
 	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData animation) {
 		File = file;
 		Animation = animation;
@@ -19,7 +19,7 @@ public class CharacterAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 	protected FileNavigator<CharacterFile> File { get; }
 	protected CharacterAnimationData Animation { get; }
 	public CharacterFrameInfoCollection CharacterFrames { get; }
-	public IObservableCollection<IFrameInfo> Frames => CharacterFrames;
+	public IEnumerableInfo<IFrameInfo> Frames => CharacterFrames;
 
 	public Guid Id => Animation.Id;
 
@@ -33,24 +33,6 @@ public class CharacterAnimationInfo : IAnimationInfo, INotifyPropertyChanged {
 	}
 
 	protected void Save() => File.Save();
-
-	public void AddFrame() {
-		var previousFrame = Animation.Frames.LastOrDefault();
-		var frame = new CharacterFrameData {
-			Source = previousFrame?.Source ?? string.Empty,
-			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
-			Duration = previousFrame?.Duration ?? 1
-		};
-		CharacterFrames.Add(frame);
-		OnPropertyChanged(nameof(CharacterFrames));
-		OnPropertyChanged(nameof(Frames));
-	}
-
-	public void RemoveFrame(CharacterFrameInfo frameInfo) {
-		CharacterFrames.Remove(frameInfo);
-		OnPropertyChanged(nameof(CharacterFrames));
-		OnPropertyChanged(nameof(Frames));
-	}
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

@@ -19,18 +19,16 @@ public interface ICharacterFrameInfo : IFrameInfo {
 }
 
 public class CharacterFrameInfo : ICharacterFrameInfo {
-	public CharacterFrameInfo(CharacterAnimationInfo animation, FileNavigator<CharacterFile> file, CharacterFrameData frameData, int index) {
-		Animation = animation;
+	public CharacterFrameInfo(IEnumerableInfo<IFrameInfo> frames, FileNavigator<CharacterFile> file, CharacterFrameData frameData) {
+		Frames = frames;
 		File = file;
 		FrameData = frameData;
-		Index = index;
 	}
 
-	protected CharacterAnimationInfo Animation { get; }
+	protected IEnumerableInfo<IFrameInfo> Frames { get; }
 	protected FileNavigator<CharacterFile> File { get; }
 	public string Directory => File.Directory;
 	protected CharacterFrameData FrameData { get; }
-	public int Index { get; }
 
 	public float Duration {
 		get => FrameData.Duration;
@@ -117,7 +115,7 @@ public class CharacterFrameInfo : ICharacterFrameInfo {
 												 ?? new NullSpriteDefinition();
 
 	protected void Save() => File.Save();
-	public void Delete() => Animation.RemoveFrame(this);
+	public void Delete() => Frames.Remove(this);
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

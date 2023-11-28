@@ -12,7 +12,7 @@ public partial class AnimationEditor : VSplitContainer {
 	private FrameListEditor FrameList { get; }
 	private FrameInfoDetails FrameDetails { get; }
 
-	public AnimationEditor(WeaponInfo weapon) {
+	public AnimationEditor(IEnumerableInfo<IAnimationInfo> animation) {
 		Name = nameof(AnimationEditor);
 
 		AddChild(Top = new VBoxContainer());
@@ -20,15 +20,15 @@ public partial class AnimationEditor : VSplitContainer {
 		Top.AddChild(FrameList = new FrameListEditor());
 		FrameList.FrameSelected += FrameList_OnFrameSelected;
 
-		AddChild(FrameDetails = new FrameInfoDetails(weapon));
+		AddChild(FrameDetails = new FrameInfoDetails(animation));
 	}
 
 	private void FrameList_OnFrameSelected(IFrameInfo frame) {
 		FrameDetails.WeaponFrameInfo = frame as FrameInfo;
 	}
 
-	public void LoadAnimation(AnimationInfo animation) {
-		Details.WeaponAnimation = animation;
+	public void LoadAnimation(IAnimationInfo animation) {
+		Details.Animation = animation;
 		FrameList.Load(animation);
 	}
 }

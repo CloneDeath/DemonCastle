@@ -1,10 +1,11 @@
 using System;
+using System.ComponentModel;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public interface IAnimationInfo {
+public interface IAnimationInfo : INotifyPropertyChanged {
 	Guid Id { get; }
-	IObservableCollection<IFrameInfo> Frames { get; }
+	string Name { get; set; }
 
-	void AddFrame();
+	IEnumerableInfo<IFrameInfo> Frames { get; }
 }

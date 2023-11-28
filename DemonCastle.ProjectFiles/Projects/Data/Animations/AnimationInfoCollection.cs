@@ -8,24 +8,34 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollectionChanged {
+public class AnimationInfoCollection : IEnumerableInfo<IAnimationInfo> {
 	protected IFileNavigator File { get; }
 	protected List<AnimationData> FileAnimations { get; }
-	protected ObservableCollection<AnimationInfo> Animations { get; }
+	protected ObservableCollection<IAnimationInfo> Animations { get; }
 
 	public AnimationInfoCollection(IFileNavigator file, List<AnimationData> animations) {
 		File = file;
 		FileAnimations = animations;
-		Animations = new ObservableCollection<AnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
+		Animations = new ObservableCollection<IAnimationInfo>(animations.Select(data => new AnimationInfo(file, data)).ToList());
 		Animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public AnimationInfo Add(AnimationData animationData) {
+	public IAnimationInfo AppendNew() {
+		var animationData = new AnimationData {
+			Name = "animation"
+		};
 		FileAnimations.Add(animationData);
 		Save();
 		var animationInfo = new AnimationInfo(File, animationData);
 		Animations.Add(animationInfo);
 		return animationInfo;
+	}
+
+	public void Remove(IAnimationInfo item) {
+		var index = Animations.IndexOf(item);
+		FileAnimations.RemoveAt(index);
+		Save();
+		Animations.RemoveAt(index);
 	}
 
 	public void RemoveAt(int animationIndex) {
@@ -36,10 +46,10 @@ public class AnimationInfoCollection : IEnumerable<AnimationInfo>, INotifyCollec
 
 	protected void Save() => File.Save();
 
-	public AnimationInfo this[int index] => Animations[index];
+	public IAnimationInfo this[int index] => Animations[index];
 
 	#region IEnumerable
-	public IEnumerator<AnimationInfo> GetEnumerator() => Animations.GetEnumerator();
+	public IEnumerator<IAnimationInfo> GetEnumerator() => Animations.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

@@ -4,11 +4,11 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 namespace DemonCastle.Editor.Editors.Animations.Editor;
 
 public partial class AnimationDetails : PropertyCollection {
-	private readonly WeaponAnimationInfoProxy _proxy = new();
+	private readonly AnimationInfoProxy _proxy = new();
 
 	private StringProperty AnimationName { get; }
 
-	public AnimationInfo? WeaponAnimation {
+	public IAnimationInfo? Animation {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}
@@ -24,7 +24,7 @@ public partial class AnimationDetails : PropertyCollection {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		if (WeaponAnimation == null) Disable();
+		if (Animation == null) Disable();
 		else Enable();
 	}
 }

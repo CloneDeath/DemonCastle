@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -9,15 +8,15 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Animations.List;
 
 public partial class AnimationList : VBoxContainer {
-	public event Action<AnimationInfo>? AnimationSelected;
+	public event Action<IAnimationInfo>? AnimationSelected;
 
-	private readonly WeaponInfo _weapon;
+	private readonly IEnumerableInfo<IAnimationInfo> _animations;
 	private ItemList Animations { get; }
 	private Button AddButton { get; }
 	private Button RemoveButton { get; }
 
-	public AnimationList(WeaponInfo weapon) {
-		_weapon = weapon;
+	public AnimationList(IEnumerableInfo<IAnimationInfo> animations) {
+		_animations = animations;
 
 		Name = nameof(AnimationList);
 
@@ -34,31 +33,29 @@ public partial class AnimationList : VBoxContainer {
 	}
 
 	private void Animations_OnItemSelected(long index) {
-		var animation = _weapon.Animations[(int)index];
+		var animation = _animations[(int)index];
 		AnimationSelected?.Invoke(animation);
 	}
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		_weapon.Animations.CollectionChanged += Animations_OnCollectionChanged;
+		_animations.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_weapon.Animations.CollectionChanged -= Animations_OnCollectionChanged;
+		_animations.CollectionChanged -= Animations_OnCollectionChanged;
 	}
 
 	private void AddButton_OnPressed() {
-		_weapon.Animations.Add(new AnimationData {
-			Name = "animation"
-		});
+		_animations.AppendNew();
 	}
 
 	private void RemoveButton_OnPressed() {
 		var selected = Animations.GetSelectedItems();
 		if (!selected.Any()) return;
 
-		_weapon.Animations.RemoveAt(selected[0]);
+		_animations.RemoveAt(selected[0]);
 	}
 
 	private void Animations_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
@@ -68,7 +65,7 @@ public partial class AnimationList : VBoxContainer {
 	private void ReloadAnimations() {
 		Animations.Clear();
 
-		foreach (var animation in _weapon.Animations) {
+		foreach (var animation in _animations) {
 			Animations.AddItem(animation.Name);
 		}
 	}

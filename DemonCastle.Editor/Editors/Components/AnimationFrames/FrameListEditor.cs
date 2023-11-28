@@ -54,7 +54,7 @@ public partial class FrameListEditor : VBoxContainer {
 	}
 
 	private void AddFrameButton_OnPressed() {
-		_current?.AddFrame();
+		_current?.Frames.AppendNew();
 	}
 
 	private void ReloadFrames() {

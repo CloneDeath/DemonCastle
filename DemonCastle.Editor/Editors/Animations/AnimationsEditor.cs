@@ -10,20 +10,20 @@ public partial class AnimationsEditor : HSplitContainer {
 	private AnimationList AnimationList { get; }
 	private AnimationEditor AnimationEditor { get; }
 
-	public AnimationsEditor(WeaponInfo weapon) {
+	public AnimationsEditor(IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(AnimationsEditor);
 
-		AddChild(AnimationList = new AnimationList(weapon) {
+		AddChild(AnimationList = new AnimationList(animations) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		AnimationList.AnimationSelected += AnimationList_OnAnimationSelected;
 
-		AddChild(AnimationEditor = new AnimationEditor(weapon) {
+		AddChild(AnimationEditor = new AnimationEditor(animations) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}
 
-	private void AnimationList_OnAnimationSelected(AnimationInfo animation) {
+	private void AnimationList_OnAnimationSelected(IAnimationInfo animation) {
 		AnimationEditor.LoadAnimation(animation);
 	}
 }

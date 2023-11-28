@@ -19,11 +19,11 @@ public partial class FrameInfoDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public FrameInfoDetails(WeaponInfo weapon) {
+	public FrameInfoDetails(IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(FrameInfoDetails);
 
 		AddFloat("Duration", _proxy, p => p.Duration);
-		AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
+		AddFile("Source", _proxy, animations.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
 		AddVector2I("Anchor", _proxy, p => p.Anchor);
