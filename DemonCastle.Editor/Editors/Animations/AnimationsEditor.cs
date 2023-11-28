@@ -6,12 +6,12 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations;
 
-public partial class WeaponAnimations : HSplitContainer {
+public partial class AnimationsEditor : HSplitContainer {
 	private WeaponAnimationList AnimationList { get; }
 	private WeaponAnimationEditor AnimationEditor { get; }
 
-	public WeaponAnimations(WeaponInfo weapon) {
-		Name = nameof(WeaponAnimations);
+	public AnimationsEditor(WeaponInfo weapon) {
+		Name = nameof(AnimationsEditor);
 
 		AddChild(AnimationList = new WeaponAnimationList(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)

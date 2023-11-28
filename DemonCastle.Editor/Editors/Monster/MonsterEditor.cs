@@ -25,7 +25,7 @@ public partial class MonsterEditor : BaseEditor {
 		});
 
 
-		RightArea.AddChild(new WeaponAnimations(monster));
+		RightArea.AddChild(new AnimationsEditor(monster));
 		RightArea.SetTabTitle(0, "Animations");
 		RightArea.AddChild(new Control());
 		RightArea.SetTabTitle(1, "States");
