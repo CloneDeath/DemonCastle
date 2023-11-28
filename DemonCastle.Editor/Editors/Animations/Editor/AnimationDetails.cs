@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor;
 
-public partial class WeaponAnimationDetails : PropertyCollection {
+public partial class AnimationDetails : PropertyCollection {
 	private readonly WeaponAnimationInfoProxy _proxy = new();
 
 	private StringProperty AnimationName { get; }
@@ -13,8 +13,8 @@ public partial class WeaponAnimationDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public WeaponAnimationDetails() {
-		Name = nameof(WeaponAnimationDetails);
+	public AnimationDetails() {
+		Name = nameof(AnimationDetails);
 
 		AnimationName = AddString("Name", _proxy, w => w.Name);
 	}

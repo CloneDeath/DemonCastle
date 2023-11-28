@@ -6,21 +6,21 @@ using FrameListEditor = DemonCastle.Editor.Editors.Components.AnimationFrames.Fr
 
 namespace DemonCastle.Editor.Editors.Animations.Editor;
 
-public partial class WeaponAnimationEditor : VSplitContainer {
+public partial class AnimationEditor : VSplitContainer {
 	private VBoxContainer Top { get; }
-	private WeaponAnimationDetails Details { get; }
+	private AnimationDetails Details { get; }
 	private FrameListEditor FrameList { get; }
-	private WeaponFrameInfoDetails FrameDetails { get; }
+	private FrameInfoDetails FrameDetails { get; }
 
-	public WeaponAnimationEditor(WeaponInfo weapon) {
-		Name = nameof(WeaponAnimationEditor);
+	public AnimationEditor(WeaponInfo weapon) {
+		Name = nameof(AnimationEditor);
 
 		AddChild(Top = new VBoxContainer());
-		Top.AddChild(Details = new WeaponAnimationDetails());
+		Top.AddChild(Details = new AnimationDetails());
 		Top.AddChild(FrameList = new FrameListEditor());
 		FrameList.FrameSelected += FrameList_OnFrameSelected;
 
-		AddChild(FrameDetails = new WeaponFrameInfoDetails(weapon));
+		AddChild(FrameDetails = new FrameInfoDetails(weapon));
 	}
 
 	private void FrameList_OnFrameSelected(IFrameInfo frame) {

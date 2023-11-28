@@ -8,7 +8,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations.List;
 
-public partial class WeaponAnimationList : VBoxContainer {
+public partial class AnimationList : VBoxContainer {
 	public event Action<AnimationInfo>? AnimationSelected;
 
 	private readonly WeaponInfo _weapon;
@@ -16,10 +16,10 @@ public partial class WeaponAnimationList : VBoxContainer {
 	private Button AddButton { get; }
 	private Button RemoveButton { get; }
 
-	public WeaponAnimationList(WeaponInfo weapon) {
+	public AnimationList(WeaponInfo weapon) {
 		_weapon = weapon;
 
-		Name = nameof(WeaponAnimationList);
+		Name = nameof(AnimationList);
 
 		AddChild(AddButton = new Button { Text = "Add" });
 		AddButton.Pressed += AddButton_OnPressed;

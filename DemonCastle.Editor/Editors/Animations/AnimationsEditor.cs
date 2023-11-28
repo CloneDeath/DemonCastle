@@ -7,18 +7,18 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Animations;
 
 public partial class AnimationsEditor : HSplitContainer {
-	private WeaponAnimationList AnimationList { get; }
-	private WeaponAnimationEditor AnimationEditor { get; }
+	private AnimationList AnimationList { get; }
+	private AnimationEditor AnimationEditor { get; }
 
 	public AnimationsEditor(WeaponInfo weapon) {
 		Name = nameof(AnimationsEditor);
 
-		AddChild(AnimationList = new WeaponAnimationList(weapon) {
+		AddChild(AnimationList = new AnimationList(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		AnimationList.AnimationSelected += AnimationList_OnAnimationSelected;
 
-		AddChild(AnimationEditor = new WeaponAnimationEditor(weapon) {
+		AddChild(AnimationEditor = new AnimationEditor(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

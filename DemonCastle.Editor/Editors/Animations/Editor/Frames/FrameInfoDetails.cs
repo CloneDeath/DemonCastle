@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
-public partial class WeaponFrameInfoDetails : PropertyCollection {
+public partial class FrameInfoDetails : PropertyCollection {
 	private  readonly WeaponFrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
@@ -19,8 +19,8 @@ public partial class WeaponFrameInfoDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public WeaponFrameInfoDetails(WeaponInfo weapon) {
-		Name = nameof(WeaponFrameInfoDetails);
+	public FrameInfoDetails(WeaponInfo weapon) {
+		Name = nameof(FrameInfoDetails);
 
 		AddFloat("Duration", _proxy, p => p.Duration);
 		AddFile("Source", _proxy, weapon.Directory, p => p.SourceFile, FileType.SpriteSources);
