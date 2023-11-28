@@ -77,6 +77,12 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
+	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
+		AddChild(new AnchorProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
 	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
 		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
 			DisplayName = name

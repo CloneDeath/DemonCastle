@@ -26,7 +26,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 		AddFile("Source", _proxy, file.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
-		AddVector2I("Anchor", _proxy, p => p.Anchor);
+		AddAnchor("Anchor", _proxy, p => p.Anchor);
 		AddVector2I("Offset", _proxy, p => p.Offset);
 
 		AddChild(FrameInfoView = new FrameInfoView {
