@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Animations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -16,10 +17,15 @@ public partial class MonsterEditor : BaseEditor {
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsPreset(LayoutPreset.FullRect);
 
-		SplitContainer.AddChild(new MonsterDetails(monster));
-		SplitContainer.AddChild(RightArea = new TabContainer());
+		SplitContainer.AddChild(new MonsterDetails(monster) {
+			CustomMinimumSize = new Vector2(300, 300)
+		});
+		SplitContainer.AddChild(RightArea = new TabContainer {
+			CustomMinimumSize = new Vector2(300, 300)
+		});
 
-		RightArea.AddChild(new Control());
+
+		RightArea.AddChild(new WeaponAnimations(monster));
 		RightArea.SetTabTitle(0, "Animations");
 		RightArea.AddChild(new Control());
 		RightArea.SetTabTitle(1, "States");
