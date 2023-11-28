@@ -15,7 +15,9 @@ public class NullEnumerableInfo<T> : IEnumerableInfo<T> {
 
 	public T AppendNew() => throw new Exception("Cannot append to null enumerable.");
 
-	public void Remove(T item) {}
+	public void Remove(T item) {
+		CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove));
+	}
 
 	public void RemoveAt(int index) {}
 }
