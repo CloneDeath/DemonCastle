@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
+namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public partial class WeaponFrameInfoDetails : PropertyCollection {
 	private  readonly WeaponFrameInfoProxy _proxy = new();

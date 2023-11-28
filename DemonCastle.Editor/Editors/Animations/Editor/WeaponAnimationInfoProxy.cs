@@ -1,7 +1,7 @@
 using System;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor;
+namespace DemonCastle.Editor.Editors.Animations.Editor;
 
 public class WeaponAnimationInfoProxy : InfoProxy<AnimationInfo> {
 	protected override void NotifyProxyChanged() {

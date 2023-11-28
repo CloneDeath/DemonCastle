@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor;
+namespace DemonCastle.Editor.Editors.Animations.Editor;
 
 public partial class WeaponAnimationDetails : PropertyCollection {
 	private readonly WeaponAnimationInfoProxy _proxy = new();

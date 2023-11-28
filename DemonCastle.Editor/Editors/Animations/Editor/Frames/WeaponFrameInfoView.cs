@@ -3,7 +3,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
+namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public partial class WeaponFrameInfoView : ControlView<SpriteDefinitionView> {
 	private IFrameInfo? _info;

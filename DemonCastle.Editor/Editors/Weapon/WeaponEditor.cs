@@ -1,4 +1,4 @@
-using DemonCastle.Editor.Editors.Weapon.Animations;
+using DemonCastle.Editor.Editors.Animations;
 using DemonCastle.Editor.Editors.Weapon.Details;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;

@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.Editor.Frames;
+namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public class WeaponFrameInfoProxy : InfoProxy<FrameInfo>, IFrameInfo {
 	protected override void NotifyProxyChanged() {

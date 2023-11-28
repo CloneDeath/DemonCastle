@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations.List;
+namespace DemonCastle.Editor.Editors.Animations.List;
 
 public partial class WeaponAnimationList : VBoxContainer {
 	public event Action<AnimationInfo>? AnimationSelected;

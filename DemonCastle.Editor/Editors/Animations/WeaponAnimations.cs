@@ -1,10 +1,10 @@
-using DemonCastle.Editor.Editors.Weapon.Animations.Editor;
-using DemonCastle.Editor.Editors.Weapon.Animations.List;
+using DemonCastle.Editor.Editors.Animations.Editor;
+using DemonCastle.Editor.Editors.Animations.List;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Weapon.Animations;
+namespace DemonCastle.Editor.Editors.Animations;
 
 public partial class WeaponAnimations : HSplitContainer {
 	private WeaponAnimationList AnimationList { get; }
