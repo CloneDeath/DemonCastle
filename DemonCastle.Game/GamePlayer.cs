@@ -64,20 +64,20 @@ public partial class GamePlayer : CharacterBody2D {
 		var characterFrame = Animation.CurrentFrame;
 		if (characterFrame == null) return;
 
-		var weaponSlot = characterFrame.Slots;
+		var weaponSlot = characterFrame.Slots.FirstOrDefault(s => s.Name == "Weapon");
 
-		if (!characterFrame.WeaponEnabled) {
+		if (weaponSlot == null) {
 			Game.PlayNone();
 		}
 		else {
-			Game.Play(characterFrame.WeaponAnimation);
+			Game.Play(weaponSlot.Animation);
 		}
 		var weaponFrame = Game.CurrentFrame;
 
 		var characterFrameTopLeftOffset = characterFrame.SpriteDefinition.Region.Size * new Vector2(0.5f, 1);
 		var weaponFrameTopLeftOffset = weaponFrame?.SpriteDefinition.Region.Size * new Vector2(0.5f, 1) ?? Vector2.Zero;
-		Game.Position = characterFrame.WeaponPosition - characterFrameTopLeftOffset
-						  + weaponFrameTopLeftOffset - (weaponFrame?.Offset ?? Vector2.Zero);
+		Game.Position = (weaponSlot?.Position ?? Vector2.Zero) - characterFrameTopLeftOffset
+						+ weaponFrameTopLeftOffset - (weaponFrame?.Offset ?? Vector2.Zero);
 	}
 
 	private float GetJumpSpeed() {
