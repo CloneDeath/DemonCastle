@@ -50,6 +50,6 @@ public partial class CharacterFrameInfoDetails : PropertyCollection {
 	}
 
 	private void DeleteButton_OnPressed() {
-		_proxy.DeleteFrame();
+		_proxy.Delete();
 	}
 }

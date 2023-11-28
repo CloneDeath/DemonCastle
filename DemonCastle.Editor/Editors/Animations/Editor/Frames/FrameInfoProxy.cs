@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -57,6 +59,27 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
+	public IEnumerableInfo<IFrameSlotInfo> Slots => Proxy?.Slots ?? null;
 
-	public void DeleteFrame() => Proxy?.Delete();
+	public void Delete() => Proxy?.Delete();
+
+	public bool WeaponEnabled {
+		get {
+			var slot = Proxy?.Slots.FirstOrDefault(s => s.Name == "Weapon");
+			return slot != null;
+		}
+		set {
+			if (Proxy == null) return;
+			if (value) {
+				var slot = Proxy.Slots.FirstOrDefault(s => s.Name == "Weapon");
+				if (slot != null) return;
+				slot = Proxy.Slots.AppendNew();
+				slot.Name = "Weapon";
+			} else {
+				var slot = Proxy.Slots.FirstOrDefault(s => s.Name == "Weapon");
+				if (slot == null) return;
+				Proxy.Slots.Remove(slot);
+			}
+		}
+	}
 }

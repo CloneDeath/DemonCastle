@@ -48,6 +48,6 @@ public partial class FrameInfoDetails : PropertyCollection {
 	}
 
 	private void DeleteButton_OnPressed() {
-		_proxy.DeleteFrame();
+		_proxy.Delete();
 	}
 }
