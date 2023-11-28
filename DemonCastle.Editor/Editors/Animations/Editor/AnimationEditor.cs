@@ -12,7 +12,7 @@ public partial class AnimationEditor : VSplitContainer {
 	private FrameListEditor FrameList { get; }
 	private FrameInfoDetails FrameDetails { get; }
 
-	public AnimationEditor(IEnumerableInfo<IAnimationInfo> animation) {
+	public AnimationEditor(IFileInfo file) {
 		Name = nameof(AnimationEditor);
 
 		AddChild(Top = new VBoxContainer());
@@ -20,7 +20,7 @@ public partial class AnimationEditor : VSplitContainer {
 		Top.AddChild(FrameList = new FrameListEditor());
 		FrameList.FrameSelected += FrameList_OnFrameSelected;
 
-		AddChild(FrameDetails = new FrameInfoDetails(animation));
+		AddChild(FrameDetails = new FrameInfoDetails(file));
 	}
 
 	private void FrameList_OnFrameSelected(IFrameInfo frame) {

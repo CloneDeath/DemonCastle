@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DemonCastle.Editor.Editors.Animations.Editor.Frames;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -8,13 +9,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class CharacterFrameInfoDetails : PropertyCollection {
-	private readonly CharacterFrameInfoProxy _proxy = new();
+	private readonly FrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
 	protected CharacterFrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
-	public CharacterFrameInfo? CharacterFrameInfo {
+	public FrameInfo? CharacterFrameInfo {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}

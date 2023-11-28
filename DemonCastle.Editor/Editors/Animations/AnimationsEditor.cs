@@ -10,7 +10,7 @@ public partial class AnimationsEditor : HSplitContainer {
 	private AnimationList AnimationList { get; }
 	private AnimationEditor AnimationEditor { get; }
 
-	public AnimationsEditor(IEnumerableInfo<IAnimationInfo> animations) {
+	public AnimationsEditor(IFileInfo file, IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(AnimationsEditor);
 
 		AddChild(AnimationList = new AnimationList(animations) {
@@ -18,7 +18,7 @@ public partial class AnimationsEditor : HSplitContainer {
 		});
 		AnimationList.AnimationSelected += AnimationList_OnAnimationSelected;
 
-		AddChild(AnimationEditor = new AnimationEditor(animations) {
+		AddChild(AnimationEditor = new AnimationEditor(file) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

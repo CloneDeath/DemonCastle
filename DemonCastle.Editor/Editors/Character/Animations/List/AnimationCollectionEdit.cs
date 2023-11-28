@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
@@ -12,7 +10,7 @@ public partial class AnimationCollectionEdit : VBoxContainer {
 	protected Button AddButton { get; }
 	protected Button RemoveButton { get; }
 
-	public event Action<AnimationInfo>? AnimationSelected;
+	public event Action<IAnimationInfo>? AnimationSelected;
 
 	public AnimationCollectionEdit(AnimationInfoCollection animations) {
 		Animations = animations;

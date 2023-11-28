@@ -12,7 +12,7 @@ public partial class FrameListEditor : VBoxContainer {
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
 
-	public event Action<IFrameInfo>? FrameSelected;
+	public event Action<FrameInfo>? FrameSelected;
 
 	public FrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {

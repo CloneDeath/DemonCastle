@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
-using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
@@ -19,7 +19,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public FrameInfoDetails(IFileNavigator file) {
+	public FrameInfoDetails(IFileInfo file) {
 		Name = nameof(FrameInfoDetails);
 
 		AddFloat("Duration", _proxy, p => p.Duration);

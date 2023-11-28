@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class CharacterFrameInfoView : ControlView<SpriteDefinitionView> {
-	private ICharacterFrameInfo? _info;
+	private IFrameInfo? _info;
 
 	public override void _ExitTree() {
 		base._ExitTree();
@@ -16,7 +16,7 @@ public partial class CharacterFrameInfoView : ControlView<SpriteDefinitionView> 
 		}
 	}
 
-	public void Load(ICharacterFrameInfo info) {
+	public void Load(IFrameInfo info) {
 		if (_info is INotifyPropertyChanged notify) {
 			notify.PropertyChanged -= Info_OnPropertyChanged;
 		}
@@ -28,7 +28,7 @@ public partial class CharacterFrameInfoView : ControlView<SpriteDefinitionView> 
 	}
 
 	private void Info_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (_info != null && e.PropertyName == nameof(ICharacterFrameInfo.SpriteDefinition)) {
+		if (_info != null && e.PropertyName == nameof(IFrameInfo.SpriteDefinition)) {
 			Inner.Load(_info.SpriteDefinition);
 		}
 	}

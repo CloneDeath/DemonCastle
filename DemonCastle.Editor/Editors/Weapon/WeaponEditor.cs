@@ -23,7 +23,7 @@ public partial class WeaponEditor : BaseEditor {
 		SplitContainer.AddChild(new WeaponDetails(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
-		SplitContainer.AddChild(new AnimationsEditor(weapon.Animations) {
+		SplitContainer.AddChild(new AnimationsEditor(weapon, weapon.Animations) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

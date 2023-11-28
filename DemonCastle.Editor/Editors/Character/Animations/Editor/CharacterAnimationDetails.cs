@@ -1,14 +1,15 @@
+using DemonCastle.Editor.Editors.Animations.Editor;
 using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 
 public partial class CharacterAnimationDetails : PropertyCollection {
-	private readonly CharacterAnimationInfoProxy _proxy = new();
+	private readonly AnimationInfoProxy _proxy = new();
 
 	private StringProperty AnimationName { get; }
 
-	public CharacterAnimationInfo? CharacterAnimation {
+	public IAnimationInfo? CharacterAnimation {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}
