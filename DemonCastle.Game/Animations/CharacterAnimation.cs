@@ -16,7 +16,7 @@ public partial class CharacterAnimation : Node2D {
 
 	protected AnimationInfoNode? CurrentAnimation;
 
-	public CharacterFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as CharacterFrameInfo;
+	public IFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame;
 
 	public CharacterAnimation(CharacterInfo character) {
 		Character = character;

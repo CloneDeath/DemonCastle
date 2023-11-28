@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Game.Animations;
 
-public partial class WeaponAnimation : Node2D {
+public partial class GameAnimation : Node2D {
 	protected readonly WeaponInfo Weapon;
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 
@@ -15,7 +15,7 @@ public partial class WeaponAnimation : Node2D {
 
 	public FrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as FrameInfo;
 
-	public WeaponAnimation(WeaponInfo weapon) {
+	public GameAnimation(WeaponInfo weapon) {
 		Weapon = weapon;
 		foreach (var animation in weapon.Animations) {
 			var animationNode = new AnimationInfoNode(animation) {

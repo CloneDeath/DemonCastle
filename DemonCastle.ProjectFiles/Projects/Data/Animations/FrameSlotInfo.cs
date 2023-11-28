@@ -1,37 +1,55 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class CharacterAnimationInfo : IAnimationInfo {
-	public CharacterAnimationInfo(FileNavigator<CharacterFile> file, CharacterAnimationData animation) {
-		File = file;
-		Animation = animation;
-		CharacterFrames = new CharacterFrameInfoCollection(file, this, animation.Frames);
+public interface IFrameSlotInfo : INotifyPropertyChanged {
+	string Name { get; set; }
+	string Animation { get; set; }
+	Vector2I Position { get; set; }
+}
+
+public class FrameSlotInfo : IFrameSlotInfo {
+	private readonly IFileNavigator _file;
+	private readonly FrameSlotData _data;
+
+	public FrameSlotInfo(IFileNavigator file, FrameSlotData data) {
+		_file = file;
+		_data = data;
 	}
 
-	protected FileNavigator<CharacterFile> File { get; }
-	protected CharacterAnimationData Animation { get; }
-	public CharacterFrameInfoCollection CharacterFrames { get; }
-	public IEnumerableInfo<IFrameInfo> Frames => CharacterFrames;
-
-	public Guid Id => Animation.Id;
-
 	public string Name {
-		get => Animation.Name;
+		get => _data.Name;
 		set {
-			Animation.Name = value;
+			_data.Name = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
-	protected void Save() => File.Save();
+	public string Animation {
+		get => _data.Animation;
+		set {
+			_data.Animation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Position {
+		get => _data.Position;
+		set {
+			_data.Position = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	protected void Save() => _file.Save();
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

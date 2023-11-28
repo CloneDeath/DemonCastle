@@ -1,15 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.States;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GamePlayer : CharacterBody2D {
-	private Guid PreviousAnimationId = Guid.Empty;
-	private int PreviousFrameIndex = -1;
+	private IFrameInfo? PreviousFrame;
 
 	public float WalkSpeed => Character.WalkSpeed * Level.TileSize.X;
 	public float Gravity => Character.Gravity * Level.TileSize.Y;
@@ -40,8 +39,7 @@ public partial class GamePlayer : CharacterBody2D {
 
 		UpdateWeaponFrame();
 
-		PreviousAnimationId = Animation.AnimationId;
-		PreviousFrameIndex = Animation.CurrentFrame?.Index ?? -1;
+		PreviousFrame = Animation.CurrentFrame ?? null;
 
 		if (_applyGravity) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
@@ -59,25 +57,26 @@ public partial class GamePlayer : CharacterBody2D {
 	}
 
 	private void UpdateWeaponFrame() {
-		if (Animation.AnimationId == PreviousAnimationId &&
-			(Animation.CurrentFrame == null || Animation.CurrentFrame?.Index == PreviousFrameIndex)) {
+		if (Animation.CurrentFrame == null || Animation.CurrentFrame == PreviousFrame) {
 			return;
 		}
 
 		var characterFrame = Animation.CurrentFrame;
 		if (characterFrame == null) return;
 
+		var weaponSlot = characterFrame.Slots;
+
 		if (!characterFrame.WeaponEnabled) {
-			Weapon.PlayNone();
+			Game.PlayNone();
 		}
 		else {
-			Weapon.Play(characterFrame.WeaponAnimation);
+			Game.Play(characterFrame.WeaponAnimation);
 		}
-		var weaponFrame = Weapon.CurrentFrame;
+		var weaponFrame = Game.CurrentFrame;
 
 		var characterFrameTopLeftOffset = characterFrame.SpriteDefinition.Region.Size * new Vector2(0.5f, 1);
 		var weaponFrameTopLeftOffset = weaponFrame?.SpriteDefinition.Region.Size * new Vector2(0.5f, 1) ?? Vector2.Zero;
-		Weapon.Position = characterFrame.WeaponPosition - characterFrameTopLeftOffset
+		Game.Position = characterFrame.WeaponPosition - characterFrameTopLeftOffset
 						  + weaponFrameTopLeftOffset - (weaponFrame?.Offset ?? Vector2.Zero);
 	}
 

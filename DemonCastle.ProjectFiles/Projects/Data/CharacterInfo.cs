@@ -11,7 +11,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyPropertyChanged {
 	public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) {
-		Animations = new CharacterAnimationInfoCollection(file, Resource.Animations);
+		Animations = new AnimationInfoCollection(file, Resource.Animations);
 	}
 
 	public string Name {
@@ -23,7 +23,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public CharacterAnimationInfoCollection Animations { get; }
+	public AnimationInfoCollection Animations { get; }
 
 	public float WalkSpeed {
 		get => Resource.WalkSpeed;

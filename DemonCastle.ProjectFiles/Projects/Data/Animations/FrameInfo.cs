@@ -11,11 +11,24 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
+public interface IFrameInfo : INotifyPropertyChanged {
+	float Duration { get; }
+	Vector2I Anchor { get; }
+	Vector2I Offset { get; }
+
+	string SourceFile { get; }
+	Guid SpriteId { get; }
+	ISpriteDefinition SpriteDefinition { get; }
+
+	IEnumerableInfo<IFrameSlotInfo> Slots { get; }
+}
+
 public class FrameInfo : IFrameInfo {
-	public FrameInfo(IEnumerableInfo<IFrameInfo> frames, IFileNavigator file, FrameData frameData) {
+	public FrameInfo(IEnumerableInfo<IFrameInfo> frames, IFileNavigator file, FrameData data) {
 		Frames = frames;
 		File = file;
-		FrameData = frameData;
+		FrameData = data;
+		Slots = new FrameSlotInfoCollection(file, this, data.Slots);
 	}
 
 	protected IEnumerableInfo<IFrameInfo> Frames { get; }
@@ -78,6 +91,9 @@ public class FrameInfo : IFrameInfo {
 
 	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == FrameData.SpriteId)
 												 ?? new NullSpriteDefinition();
+
+	public IEnumerableInfo<IFrameSlotInfo> Slots { get; }
+
 
 	protected void Save() => File.Save();
 
