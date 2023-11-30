@@ -16,13 +16,28 @@ public partial class ControlViewToolbar : HBoxContainer {
 	public event Action<float>? ZoomLevelChanged;
 
 	public ControlViewToolbar() {
-		AddChild(Controls_Grid = new Button { Icon = IconTextures.GridIcon });
+		AddChild(Controls_Grid = new Button {
+			Icon = IconTextures.GridIcon,
+			TooltipText = "Toggle Grid"
+		});
 		Controls_Grid.Pressed += Controls_Grid_OnPressed;
-		AddChild(Controls_MagPlus = new Button { Icon = IconTextures.MagnifyPlusIcon });
+
+		AddChild(Controls_MagPlus = new Button {
+			Icon = IconTextures.MagnifyPlusIcon,
+			TooltipText = "Zoom In"
+		});
 		Controls_MagPlus.Pressed += Controls_MagPlus_OnPressed;
-		AddChild(Controls_MagMinus = new Button { Icon = IconTextures.MagnifyMinusIcon });
+
+		AddChild(Controls_MagMinus = new Button {
+			Icon = IconTextures.MagnifyMinusIcon,
+			TooltipText = "Zoom Out"
+		});
 		Controls_MagMinus.Pressed += Controls_MagMinus_OnPressed;
-		AddChild(Controls_OneToOne = new Button { Icon = IconTextures.OneToOneIcon });
+
+		AddChild(Controls_OneToOne = new Button {
+			Icon = IconTextures.OneToOneIcon,
+			TooltipText = "Reset Zoom"
+		});
 		Controls_OneToOne.Pressed += Controls_OneToOne_OnPressed;
 	}
 

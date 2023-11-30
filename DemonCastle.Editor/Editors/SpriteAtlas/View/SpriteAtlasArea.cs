@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging;
+using DemonCastle.Editor.Editors.Components.Dragging;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
-using DraggableRegion = DemonCastle.Editor.Editors.SpriteAtlas.View.Dragging.DraggableRegion;
+using DraggableRegion = DemonCastle.Editor.Editors.Components.Dragging.DraggableRegion;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.View;
 

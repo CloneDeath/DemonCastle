@@ -59,7 +59,7 @@ public partial class SpriteAtlasTextureView : TextureView {
 
 		foreach (var dataInfo in _spriteAtlasInfo.AtlasSprites) {
 			var area = new SpriteAtlasArea(dataInfo);
-			MainControl.Inner.AddChild(area);
+			Inner.AddChild(area);
 			_areas.Add(area);
 			area.Selected += Area_OnSelected;
 		}

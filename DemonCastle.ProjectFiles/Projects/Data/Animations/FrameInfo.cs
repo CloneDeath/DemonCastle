@@ -15,6 +15,7 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	float Duration { get; set; }
 	Vector2I Anchor { get; set; }
 	Vector2I Offset { get; set; }
+	Vector2I Origin { get; }
 
 	string SourceFile { get; set; }
 	Guid SpriteId { get; set; }
@@ -74,6 +75,7 @@ public class FrameInfo : IFrameInfo {
 			FrameData.Origin.Anchor = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Origin));
 		}
 	}
 
@@ -83,12 +85,15 @@ public class FrameInfo : IFrameInfo {
 			FrameData.Origin.Offset = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Origin));
 		}
 	}
 
+	public Vector2I Origin => SpriteDefinition.Region.Size * (Anchor + Vector2I.One) / 2 + Offset;
+
 	protected ISpriteSource SpriteSource => string.IsNullOrWhiteSpace(FrameData.Source)
-										  ? new NullSpriteSource()
-										  : File.GetSprite(FrameData.Source);
+												? new NullSpriteSource()
+												: File.GetSprite(FrameData.Source);
 
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 

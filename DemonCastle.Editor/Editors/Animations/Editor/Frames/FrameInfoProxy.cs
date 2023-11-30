@@ -14,6 +14,7 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		OnPropertyChanged(nameof(Duration));
 		OnPropertyChanged(nameof(Anchor));
 		OnPropertyChanged(nameof(Offset));
+		OnPropertyChanged(nameof(Origin));
 
 		OnPropertyChanged(nameof(SourceFile));
 		OnPropertyChanged(nameof(SpriteId));
@@ -60,6 +61,8 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 			if (Proxy != null) Proxy.Offset = value;
 		}
 	}
+
+	public Vector2I Origin => Proxy?.Origin ?? Vector2I.Zero;
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
