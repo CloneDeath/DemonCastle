@@ -23,7 +23,7 @@ public partial class AnimationEditor : VSplitContainer {
 		AddChild(FrameDetails = new FrameInfoDetails(file));
 	}
 
-	private void FrameList_OnFrameSelected(IFrameInfo frame) {
+	private void FrameList_OnFrameSelected(IFrameInfo? frame) {
 		FrameDetails.FrameInfo = frame as FrameInfo;
 	}
 

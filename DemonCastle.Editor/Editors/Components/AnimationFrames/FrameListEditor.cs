@@ -12,7 +12,7 @@ public partial class FrameListEditor : VBoxContainer {
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
 
-	public event Action<IFrameInfo>? FrameSelected;
+	public event Action<IFrameInfo?>? FrameSelected;
 
 	public FrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {
@@ -47,6 +47,7 @@ public partial class FrameListEditor : VBoxContainer {
 
 		AddFrameButton.Disabled = _current == null;
 		ReloadFrames();
+		FrameSelected?.Invoke(null);
 	}
 
 	private void Frames_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
