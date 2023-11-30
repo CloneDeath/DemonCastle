@@ -30,7 +30,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 		AddVector2I("Offset", _proxy, p => p.Offset);
 
 		AddChild(FrameInfoView = new FrameInfoView {
-			SizeFlagsVertical = SizeFlags.ExpandFill
+			SizeFlagsVertical = SizeFlags.ExpandFill,
 		});
 		FrameInfoView.Load(_proxy);
 

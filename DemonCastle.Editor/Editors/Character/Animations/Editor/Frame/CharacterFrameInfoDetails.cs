@@ -20,16 +20,19 @@ public partial class CharacterFrameInfoDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public CharacterFrameInfoDetails(CharacterInfo character) {
+	public CharacterFrameInfoDetails(IFileInfo character) {
 		Name = nameof(CharacterFrameInfoDetails);
 
-		AddFloat("Duration", _proxy, f => f.Duration);
-		AddFile("Source", _proxy, character.Directory, f => f.SourceFile, FileType.SpriteSources);
-		SpriteReference = AddSpriteReference("Sprite", _proxy, f => f.SpriteId, _proxy.SpriteDefinitions);
+		AddFloat("Duration", _proxy, p => p.Duration);
+		AddFile("Source", _proxy, character.Directory, p => p.SourceFile, FileType.SpriteSources);
+		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
-		AddBoolean("Weapon Enabled", _proxy, f => f.WeaponEnabled);
-		AddString("Weapon Animation", _proxy, f => f.WeaponAnimation);
-		AddVector2I("Weapon Position", _proxy, f => f.WeaponPosition);
+		AddAnchor("Anchor", _proxy, p => p.Anchor);
+		AddVector2I("Offset", _proxy, p => p.Offset);
+
+		AddBoolean("Weapon Enabled", _proxy, p => p.WeaponEnabled);
+		AddString("Weapon Animation", _proxy, p => p.WeaponAnimation);
+		AddVector2I("Weapon Position", _proxy, p => p.WeaponPosition);
 
 		AddChild(FrameInfoView = new CharacterFrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill
