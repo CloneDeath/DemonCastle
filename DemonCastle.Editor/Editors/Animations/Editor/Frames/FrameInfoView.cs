@@ -12,40 +12,37 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	private PositionTarget OriginTarget { get; }
 
 	public FrameInfoView() {
-		Inner.AddChild(OriginTarget = new PositionTarget {
-			Target = new Vector2(0, 0)
-		});
+		Inner.AddChild(OriginTarget = new PositionTarget());
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 
-		if (_info is INotifyPropertyChanged notify) {
-			notify.PropertyChanged -= Info_OnPropertyChanged;
+		if (_info is not null) {
+			_info.PropertyChanged -= Info_OnPropertyChanged;
 		}
 	}
 
 	public void Load(IFrameInfo info) {
-		if (_info is INotifyPropertyChanged notify) {
-			notify.PropertyChanged -= Info_OnPropertyChanged;
+		if (_info is not null) {
+			_info.PropertyChanged -= Info_OnPropertyChanged;
 		}
 		_info = info;
-		if (_info is INotifyPropertyChanged newNotify) {
-			newNotify.PropertyChanged += Info_OnPropertyChanged;
-		}
+		_info.PropertyChanged += Info_OnPropertyChanged;
 		Inner.Load(info.SpriteDefinition);
 		OriginTarget.Target = _info.Origin;
 	}
 
 	private void Info_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		if (_info == null) return;
-		switch (e.PropertyName) {
-			case nameof(IFrameInfo.SpriteDefinition):
-				Inner.Load(_info.SpriteDefinition);
-				break;
-			case nameof(IFrameInfo.Origin):
-				OriginTarget.Target = _info.Origin;
-				break;
+		if (e.PropertyName == nameof(IFrameInfo.SpriteDefinition)) {
+			Inner.Load(_info.SpriteDefinition);
 		}
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		OriginTarget.Target = _info?.Origin ?? Vector2.Zero;
 	}
 }

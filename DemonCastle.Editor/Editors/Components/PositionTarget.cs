@@ -11,7 +11,7 @@ public partial class PositionTarget : Control {
 	public Vector2 Target {
 		get {
 			var offset = new Vector2(_length + 1, _length + 1);
-			return Position - offset;
+			return Position + offset;
 		}
 		set {
 			var offset = new Vector2(_length + 1, _length + 1);
