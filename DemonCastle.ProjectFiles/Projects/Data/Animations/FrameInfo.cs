@@ -89,7 +89,7 @@ public class FrameInfo : IFrameInfo {
 		}
 	}
 
-	public Vector2I Origin => SpriteDefinition.Region.Size * (Anchor + Vector2I.One) / 2 + Offset;
+	public Vector2I Origin => (SpriteDefinition.Region.Size - Vector2I.One) * (Anchor + Vector2I.One) / 2 + Offset;
 
 	protected ISpriteSource SpriteSource => string.IsNullOrWhiteSpace(FrameData.Source)
 												? new NullSpriteSource()

@@ -34,6 +34,7 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 			newNotify.PropertyChanged += Info_OnPropertyChanged;
 		}
 		Inner.Load(info.SpriteDefinition);
+		OriginTarget.Target = _info.Origin;
 	}
 
 	private void Info_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {

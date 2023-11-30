@@ -26,6 +26,7 @@ public partial class SpriteAtlasArea : Control {
 		Sprite = sprite;
 
 		Name = nameof(SpriteAtlasArea);
+		MouseFilter = MouseFilterEnum.Pass;
 
 		AddChild(Outline = new Outline {
 			MouseFilter = MouseFilterEnum.Ignore
