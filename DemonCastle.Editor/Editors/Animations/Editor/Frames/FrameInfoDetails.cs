@@ -50,4 +50,10 @@ public partial class FrameInfoDetails : PropertyCollection {
 	private void DeleteButton_OnPressed() {
 		_proxy.Delete();
 	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		if (FrameInfo == null) DisableProperties();
+		else EnableProperties();
+	}
 }
