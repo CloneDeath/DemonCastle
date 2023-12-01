@@ -11,9 +11,9 @@ public partial class AreaDetails : PropertyCollection {
 		set {
 			AreaProxy.Proxy = value;
 			if (value == null) {
-				DisableProperties();
+				Disable();
 			} else {
-				EnableProperties();
+				Enable();
 			}
 		}
 	}
@@ -25,6 +25,6 @@ public partial class AreaDetails : PropertyCollection {
 		AddVector2I("Position", AreaProxy, x => x.AreaPosition);
 		AddVector2I("Size", AreaProxy, x => x.Size);
 
-		DisableProperties();
+		Disable();
 	}
 }

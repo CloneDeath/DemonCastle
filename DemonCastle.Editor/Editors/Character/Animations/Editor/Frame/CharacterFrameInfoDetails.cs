@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Animations.Editor.Frames;
 using DemonCastle.Editor.Editors.Properties;
-using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -28,8 +27,7 @@ public partial class CharacterFrameInfoDetails : PropertyCollection {
 		AddFile("Source", _proxy, character.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
-		AddAnchor("Anchor", _proxy, p => p.Anchor);
-		AddVector2I("Offset", _proxy, p => p.Offset, new Vector2IPropertyOptions { AllowNegative = true });
+		AddOrigin("Origin", _proxy, p => p.Anchor, p => p.Offset);
 
 		AddBoolean("Weapon Enabled", _proxy, p => p.WeaponEnabled);
 		AddString("Weapon Animation", _proxy, p => p.WeaponAnimation);

@@ -14,14 +14,16 @@ using Vector2IProperty = DemonCastle.Editor.Editors.Properties.Vector.Vector2IPr
 
 namespace DemonCastle.Editor.Editors.Properties;
 
-public partial class PropertyCollection : VBoxContainer {
-	public void EnableProperties() {
+public partial class PropertyCollection : BoxContainer, IBaseProperty {
+	public string DisplayName { get; set; } = string.Empty;
+
+	public void Enable() {
 		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
 			child.Enable();
 		}
 	}
 
-	public void DisableProperties() {
+	public void Disable() {
 		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
 			child.Disable();
 		}
@@ -29,6 +31,7 @@ public partial class PropertyCollection : VBoxContainer {
 
 	public PropertyCollection() {
 		Name = nameof(PropertyCollection);
+		Vertical = true;
 	}
 
 	public FileProperty AddFile<T>(string name, T target, string directory,
@@ -79,12 +82,6 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
-	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new Properties.Anchor.AnchorProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
-			DisplayName = name
-		});
-	}
-
 	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
 		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
 			DisplayName = name
@@ -111,5 +108,21 @@ public partial class PropertyCollection : VBoxContainer {
 		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		});
+	}
+
+	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
+		AddChild(new Properties.Anchor.AnchorProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
+	public void AddOrigin<T>(string name, T target, Expression<Func<T, Vector2I>> anchorExpression, Expression<Func<T, Vector2I>> offsetExpression) where T : INotifyPropertyChanged {
+		var group = new PropertyCollection {
+			DisplayName = name,
+			Vertical = false
+		};
+		group.AddAnchor("Anchor", target, anchorExpression);
+		group.AddVector2I("Offset", target, offsetExpression, new Vector2IPropertyOptions { AllowNegative = true, Vertical = true });
+		AddChild(group);
 	}
 }

@@ -34,7 +34,7 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;
 
 		AddChild(SpriteAtlasDataDetails = new SpriteAtlasDataDetails(_proxy));
-		SpriteAtlasDataDetails.DisableProperties();
+		SpriteAtlasDataDetails.Disable();
 
 		AddChild(DeleteButton = new Button {
 			Text = "Delete Sprite"
@@ -44,19 +44,19 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 
 	public void SelectSprite(SpriteAtlasDataInfo? sprite) {
 		_proxy.Proxy = sprite;
-		if (sprite != null) SpriteAtlasDataDetails.EnableProperties();
-		else SpriteAtlasDataDetails.DisableProperties();
+		if (sprite != null) SpriteAtlasDataDetails.Enable();
+		else SpriteAtlasDataDetails.Disable();
 		SpriteSelector.SelectSprite(sprite);
 	}
 
 	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? sprite) {
 		_proxy.Proxy = sprite as SpriteAtlasDataInfo;
 		if (sprite != null) {
-			SpriteAtlasDataDetails.EnableProperties();
+			SpriteAtlasDataDetails.Enable();
 			DeleteButton.Disabled = false;
 		}
 		else {
-			SpriteAtlasDataDetails.DisableProperties();
+			SpriteAtlasDataDetails.Disable();
 			DeleteButton.Disabled = true;
 		}
 		SpriteSelected?.Invoke(sprite as SpriteAtlasDataInfo);

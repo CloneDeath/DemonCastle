@@ -32,20 +32,20 @@ public partial class SpriteGridDefinitionCollection : VBoxContainer {
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;
 
 		AddChild(SpriteDetails = new SpriteDetails(_proxy));
-		SpriteDetails.DisableProperties();
+		SpriteDetails.Disable();
 	}
 
 	public void SelectSprite(SpriteGridDataInfo? sprite) {
 		_proxy.Proxy = sprite;
-		if (sprite != null) SpriteDetails.EnableProperties();
-		else SpriteDetails.DisableProperties();
+		if (sprite != null) SpriteDetails.Enable();
+		else SpriteDetails.Disable();
 		SpriteSelector.SelectSprite(sprite);
 	}
 
 	private void SpriteSelector_OnSpriteSelected(ISpriteDefinition? sprite) {
 		_proxy.Proxy = sprite as SpriteGridDataInfo;
-		if (sprite != null) SpriteDetails.EnableProperties();
-		else SpriteDetails.DisableProperties();
+		if (sprite != null) SpriteDetails.Enable();
+		else SpriteDetails.Disable();
 		SpriteSelected?.Invoke(sprite as SpriteGridDataInfo);
 	}
 

@@ -7,8 +7,6 @@ namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 public partial class CharacterAnimationDetails : PropertyCollection {
 	private readonly AnimationInfoProxy _proxy = new();
 
-	private StringProperty AnimationName { get; }
-
 	public IAnimationInfo? CharacterAnimation {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
@@ -17,11 +15,8 @@ public partial class CharacterAnimationDetails : PropertyCollection {
 	public CharacterAnimationDetails() {
 		Name = nameof(CharacterAnimationDetails);
 
-		AnimationName = AddString("Name", _proxy, w => w.Name);
+		AddString("Name", _proxy, w => w.Name);
 	}
-
-	public void Disable() => AnimationName.Disable();
-	public void Enable() => AnimationName.Enable();
 
 	public override void _Process(double delta) {
 		base._Process(delta);

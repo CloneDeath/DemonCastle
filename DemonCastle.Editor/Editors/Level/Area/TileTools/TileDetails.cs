@@ -19,9 +19,9 @@ public partial class TileDetails : PropertyCollection {
 		set {
 			TileProxy.Proxy = value;
 			if (value == null) {
-				DisableProperties();
+				Disable();
 			} else {
-				EnableProperties();
+				Enable();
 			}
 		}
 	}
@@ -38,7 +38,7 @@ public partial class TileDetails : PropertyCollection {
 		AddChild(new TileCollisionView(TileProxy));
 		AddChild(new TileStairView(TileProxy));
 
-		DisableProperties();
+		Disable();
 
 		TileProxy.PropertyChanged += TileProxy_OnPropertyChanged;
 	}

@@ -54,7 +54,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		if (FrameInfo == null) DisableProperties();
-		else EnableProperties();
+		if (FrameInfo == null) Disable();
+		else Enable();
 	}
 }
