@@ -15,7 +15,7 @@ using Vector2IProperty = DemonCastle.Editor.Editors.Properties.Vector.Vector2IPr
 namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class PropertyCollection : BoxContainer, IBaseProperty {
-	public string DisplayName { get; set; } = string.Empty;
+	public virtual string DisplayName { get; set; } = string.Empty;
 
 	public void Enable() {
 		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
@@ -76,10 +76,12 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
-	public void AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression, Vector2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
-		AddChild(new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression), options ?? new Vector2IPropertyOptions()) {
+	public Vector2IProperty AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression, Vector2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var vector2IProperty = new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression), options ?? new Vector2IPropertyOptions()) {
 			DisplayName = name
-		});
+		};
+		AddChild(vector2IProperty);
+		return vector2IProperty;
 	}
 
 	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
@@ -117,12 +119,13 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 	}
 
 	public void AddOrigin<T>(string name, T target, Expression<Func<T, Vector2I>> anchorExpression, Expression<Func<T, Vector2I>> offsetExpression) where T : INotifyPropertyChanged {
-		var group = new PropertyCollection {
+		var group = new NamedPropertyCollection {
 			DisplayName = name,
 			Vertical = false
 		};
 		group.AddAnchor("Anchor", target, anchorExpression);
-		group.AddVector2I("Offset", target, offsetExpression, new Vector2IPropertyOptions { AllowNegative = true, Vertical = true });
+		var offset = group.AddVector2I("Offset", target, offsetExpression, new Vector2IPropertyOptions { AllowNegative = true, Vertical = true });
+		offset.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 		AddChild(group);
 	}
 }
