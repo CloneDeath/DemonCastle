@@ -18,8 +18,8 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 	public Vector2I PropertyValue {
 		get => new((int)XBox.Value, (int)YBox.Value);
 		set {
-			XBox.Value = value.X;
-			YBox.Value = value.Y;
+			if ((int)XBox.Value != value.X) XBox.Value = value.X;
+			if ((int)YBox.Value != value.Y) YBox.Value = value.Y;
 		}
 	}
 
@@ -35,8 +35,8 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = options.AllowNegative ? -double.MaxValue :  0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue :  0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().X
 		});
 		XBox.ValueChanged += OnXValueChange;
@@ -46,8 +46,8 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = options.AllowNegative ? -double.MaxValue :  0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue :  0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().Y
 		});
 		YBox.ValueChanged += OnYValueChange;
