@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class NullEnumerableInfo<T> : IEnumerableInfo<T> {
-	public IEnumerator<T> GetEnumerator() => (IEnumerator<T>)Array.Empty<T>().GetEnumerator();
+	public IEnumerator<T> GetEnumerator() => new List<T>().GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 	public event NotifyCollectionChangedEventHandler? CollectionChanged;

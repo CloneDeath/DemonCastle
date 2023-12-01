@@ -4,7 +4,7 @@ namespace DemonCastle.Editor.Editors.Components;
 
 public partial class PositionTarget : Control {
 	private const int _length = 3;
-	private readonly Color _color = Colors.White;
+	private Color _color = Colors.White;
 
 	private ColorRect[] _lines = new ColorRect[4];
 
@@ -16,6 +16,16 @@ public partial class PositionTarget : Control {
 		set {
 			var offset = new Vector2(_length + 1, _length + 1);
 			Position = value - offset;
+		}
+	}
+
+	public Color Color {
+		get => _color;
+		set {
+			_color = value;
+			foreach (var line in _lines) {
+				line.Color = value;
+			}
 		}
 	}
 

@@ -7,7 +7,12 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
-	private IFrameInfo? _info;
+	protected readonly FrameInfoProxy _proxy = new();
+
+	protected IFrameInfo? Frame {
+		get => _proxy.Proxy;
+		set => _proxy.Proxy = value;
+	}
 
 	private PositionTarget OriginTarget { get; }
 
@@ -18,31 +23,31 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	public override void _ExitTree() {
 		base._ExitTree();
 
-		if (_info is not null) {
-			_info.PropertyChanged -= Info_OnPropertyChanged;
+		if (Frame is not null) {
+			Frame.PropertyChanged -= Frame_OnPropertyChanged;
 		}
 	}
 
 	public void Load(IFrameInfo info) {
-		if (_info is not null) {
-			_info.PropertyChanged -= Info_OnPropertyChanged;
+		if (Frame is not null) {
+			Frame.PropertyChanged -= Frame_OnPropertyChanged;
 		}
-		_info = info;
-		_info.PropertyChanged += Info_OnPropertyChanged;
+		Frame = info;
+		Frame.PropertyChanged += Frame_OnPropertyChanged;
 		Inner.Load(info.SpriteDefinition);
-		OriginTarget.Target = _info.Origin;
+		OriginTarget.Target = Frame.Origin;
 	}
 
-	private void Info_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (_info == null) return;
+	private void Frame_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (Frame == null) return;
 		if (e.PropertyName == nameof(IFrameInfo.SpriteDefinition)) {
-			Inner.Load(_info.SpriteDefinition);
+			Inner.Load(Frame.SpriteDefinition);
 		}
 	}
 
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		OriginTarget.Target = _info?.Origin ?? Vector2.Zero;
+		OriginTarget.Target = Frame?.Origin ?? Vector2.Zero;
 	}
 }

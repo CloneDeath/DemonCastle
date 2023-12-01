@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Animations.Editor.Frames;
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -31,7 +32,7 @@ public partial class CharacterFrameInfoDetails : PropertyCollection {
 
 		AddBoolean("Weapon Enabled", _proxy, p => p.WeaponEnabled);
 		AddString("Weapon Animation", _proxy, p => p.WeaponAnimation);
-		AddVector2I("Weapon Position", _proxy, p => p.WeaponPosition);
+		AddVector2I("Weapon Position", _proxy, p => p.WeaponPosition, new Vector2IPropertyOptions { AllowNegative = true });
 
 		AddChild(FrameInfoView = new CharacterFrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill
