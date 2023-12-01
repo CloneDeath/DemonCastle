@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
+using Vector2IProperty = DemonCastle.Editor.Editors.Properties.Vector.Vector2IProperty;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
@@ -71,8 +73,8 @@ public partial class PropertyCollection : VBoxContainer {
 		});
 	}
 
-	public void AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
+	public void AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression, Vector2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		AddChild(new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression), options ?? new Vector2IPropertyOptions()) {
 			DisplayName = name
 		});
 	}

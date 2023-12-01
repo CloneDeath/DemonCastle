@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -27,7 +28,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
 		AddAnchor("Anchor", _proxy, p => p.Anchor);
-		AddVector2I("Offset", _proxy, p => p.Offset);
+		AddVector2I("Offset", _proxy, p => p.Offset, new Vector2IPropertyOptions { AllowNegative = true });
 
 		AddChild(FrameInfoView = new FrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill,

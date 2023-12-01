@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Vector;
 
 public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 	protected Label Label { get; }
@@ -23,7 +23,7 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 		}
 	}
 
-	public Vector2IProperty(IPropertyBinding<Vector2I> binding) {
+	public Vector2IProperty(IPropertyBinding<Vector2I> binding, Vector2IPropertyOptions options) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
 
@@ -35,7 +35,7 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
+			MinValue = options.AllowNegative ? -double.MaxValue :  0,
 			MaxValue = double.MaxValue,
 			Value = Binding.Get().X
 		});
@@ -46,7 +46,7 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
+			MinValue = options.AllowNegative ? -double.MaxValue :  0,
 			MaxValue = double.MaxValue,
 			Value = Binding.Get().Y
 		});
