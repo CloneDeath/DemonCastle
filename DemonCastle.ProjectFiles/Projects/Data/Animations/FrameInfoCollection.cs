@@ -11,7 +11,7 @@ public class FrameInfoCollection : ObservableCollectionInfo<IFrameInfo, FrameDat
 	private readonly IFileNavigator _file;
 
 	public FrameInfoCollection(IFileNavigator file, IAnimationInfo animation, List<FrameData> frames)
-		: base(new FrameInfoFactory(file, animation.Frames), frames) {
+		: base(new FrameInfoFactory(file, animation), frames) {
 		_file = file;
 	}
 
@@ -20,15 +20,15 @@ public class FrameInfoCollection : ObservableCollectionInfo<IFrameInfo, FrameDat
 
 public class FrameInfoFactory : IInfoFactory<IFrameInfo, FrameData> {
 	private readonly IFileNavigator _file;
-	protected readonly IEnumerableInfo<IFrameInfo> _frames;
+	private readonly IAnimationInfo _animation;
 
-	public FrameInfoFactory(IFileNavigator file, IEnumerableInfo<IFrameInfo> frames) {
+	public FrameInfoFactory(IFileNavigator file, IAnimationInfo animation) {
 		_file = file;
-		_frames = frames;
+		_animation = animation;
 	}
-	public IFrameInfo CreateInfo(FrameData data) => new FrameInfo(_frames, _file, data);
+	public IFrameInfo CreateInfo(FrameData data) => new FrameInfo(_animation.Frames, _file, data);
 	public FrameData CreateData() {
-		var previousFrame = _frames.LastOrDefault();
+		var previousFrame = _animation.Frames.LastOrDefault();
 		return new FrameData {
 			Source = previousFrame?.SourceFile ?? string.Empty,
 			SpriteId = previousFrame?.SpriteId ?? Guid.Empty,
