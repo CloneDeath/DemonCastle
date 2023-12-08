@@ -9,7 +9,7 @@ using File = System.IO.File;
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class FileNavigator : DirectoryNavigator {
-	public string FilePath { get; }
+	public string FilePath { get; private set; }
 	public string FileName => Path.GetFileName(FilePath);
 	public string Extension => Path.GetExtension(FilePath);
 	public string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(FileName);
@@ -35,5 +35,12 @@ public class FileNavigator : DirectoryNavigator {
 	public void RenameFile(string newName) {
 		var newPath = Path.Combine(Directory, newName);
 		File.Move(FilePath, newPath);
+		FilePath = newPath;
+	}
+
+	public void MoveTo(DirectoryNavigator directory) {
+		var newPath = Path.Combine(directory.Directory, FileName);
+		File.Move(FilePath, newPath);
+		FilePath = newPath;
 	}
 }

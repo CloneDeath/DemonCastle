@@ -24,7 +24,7 @@ public partial class FileTree : Tree {
 
 	protected void FileActivated() {
 		var selected = GetSelected();
-		if (!FileMap.ContainsKey(selected)) return;
+		if (selected == null || !FileMap.ContainsKey(selected)) return;
 
 		OnFileActivated?.Invoke(FileMap[selected]);
 	}
@@ -149,5 +149,51 @@ public partial class FileTree : Tree {
 		SelectedDirectory?.DeleteDirectory();
 
 		CreateTree();
+	}
+
+	public override Variant _GetDragData(Vector2 atPosition) {
+		DropModeFlags = (int) DropModeFlagsEnum.OnItem;
+
+		var item = GetItemAtPosition(atPosition);
+
+		var preview = new HBoxContainer();
+		preview.AddChild(new TextureRect {
+			Texture = item.GetIcon(0),
+			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered
+		});
+		preview.AddChild(new Label {
+			Text = item.GetText(0)
+		});
+		SetDragPreview(preview);
+
+		return item;
+	}
+
+	public override bool _CanDropData(Vector2 position, Variant data) {
+		var target = GetItemAtPosition(position);
+		return target != null && target != (TreeItem)data && DirectoryMap.ContainsKey(target);
+	}
+
+	public override void _DropData(Vector2 position, Variant data) {
+		var target = GetItemAtPosition(position);
+		var shift = GetDropSectionAtPosition(position);
+		var treeItem = (TreeItem)data;
+
+		var dir = DirectoryMap[target];
+		var file = FileMap[treeItem];
+		file.MoveTo(dir);
+
+		switch (shift) {
+			case -1:
+				treeItem.MoveBefore(target);
+				break;
+			case 0:
+				treeItem.GetParent().RemoveChild(treeItem);
+				target.AddChild(treeItem);
+				break;
+			case 1:
+				treeItem.MoveAfter(target);
+				break;
+		}
 	}
 }
