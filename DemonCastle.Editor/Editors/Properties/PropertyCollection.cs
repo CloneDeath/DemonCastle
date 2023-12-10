@@ -10,6 +10,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 using Vector2IProperty = DemonCastle.Editor.Editors.Properties.Vector.Vector2IProperty;
 
@@ -97,6 +98,14 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		};
 		AddChild(spriteReferenceProperty);
 		return spriteReferenceProperty;
+	}
+
+	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<StateInfo> options) where T : INotifyPropertyChanged {
+		var stateReferenceProperty = new StateReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		};
+		AddChild(stateReferenceProperty);
+		return stateReferenceProperty;
 	}
 
 	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AreaInfo> options) where T : INotifyPropertyChanged {

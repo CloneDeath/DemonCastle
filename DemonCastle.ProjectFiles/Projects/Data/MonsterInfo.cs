@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -56,6 +57,15 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 		set {
 			Resource.Size.Width = value.X;
 			Resource.Size.Height = value.Y;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Guid InitialState {
+		get => Resource.InitialState;
+		set {
+			Resource.InitialState = value;
 			Save();
 			OnPropertyChanged();
 		}
