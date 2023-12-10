@@ -18,7 +18,7 @@ public partial class EventsEditor : VBoxContainer {
 		Name = nameof(EventsEditor);
 
 		AddChild(Events = new ItemList {
-			SizeFlagsVertical = SizeFlags.ExpandFill
+			CustomMinimumSize = new Vector2(0, 90)
 		});
 		Events.AddItem("OnEnter");
 		Events.AddItem("OnUpdate");
