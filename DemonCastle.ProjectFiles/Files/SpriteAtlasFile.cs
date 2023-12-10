@@ -6,7 +6,11 @@ namespace DemonCastle.ProjectFiles.Files;
 
 public class SpriteAtlasFile {
 	public string File { get; set; } = string.Empty;
-	public ColorData TransparentColor { get; set; } = new();
+	public ColorData TransparentColor { get; set; } = new() {
+		Red = 255,
+		Green = 0,
+		Blue = 255
+	};
 	public List<SpriteAtlasData> Sprites { get; set; } = new();
 }
 

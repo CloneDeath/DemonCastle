@@ -17,6 +17,7 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	private PositionTarget OriginTarget { get; }
 
 	public FrameInfoView() {
+		MainControl.Zoom = 8;
 		Inner.AddChild(OriginTarget = new PositionTarget());
 	}
 
