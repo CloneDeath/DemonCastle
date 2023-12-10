@@ -13,7 +13,6 @@ public partial class StateEditor : VSplitContainer {
 		AddChild(Details = new StateDetails());
 	}
 
-
 	public void LoadState(StateInfo state) {
 		Details.State = state;
 	}

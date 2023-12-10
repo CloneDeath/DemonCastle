@@ -16,7 +16,7 @@ public partial class MonsterEditor : BaseEditor {
 		TabText = monster.FileName;
 
 		AddChild(SplitContainer = new HSplitContainer());
-		SplitContainer.SetAnchorsPreset(LayoutPreset.FullRect);
+		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
 		SplitContainer.AddChild(new MonsterDetails(monster) {
 			CustomMinimumSize = new Vector2(300, 300)
