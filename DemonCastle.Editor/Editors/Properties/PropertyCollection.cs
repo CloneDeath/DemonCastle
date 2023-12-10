@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -106,7 +107,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return areaReferenceProperty;
 	}
 
-	public void AddAnimationName<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<IAnimationInfo> options) where T : INotifyPropertyChanged {
+	public void AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
 		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		});

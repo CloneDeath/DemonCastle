@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
 public partial class AnimationNameProperty : BaseProperty {
-	private readonly IEnumerable<IAnimationInfo> _options;
+	private readonly IEnumerableInfo<IAnimationInfo> _options;
 
 	private List<IAnimationInfo> Options => _options.ToList();
 
@@ -24,14 +25,10 @@ public partial class AnimationNameProperty : BaseProperty {
 		}
 	}
 
-	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerable<IAnimationInfo> options) {
+	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<IAnimationInfo> options) {
 		_options = options;
 		Name = nameof(AnimationNameProperty);
 		Binding = binding;
-
-		if (options is INotifyCollectionChanged collectionChanged) {
-			collectionChanged.CollectionChanged += Options_OnCollectionChanged;
-		}
 
 		AddChild(OptionButton = new OptionButton {
 			CustomMinimumSize = new Vector2(20, 20),
@@ -60,11 +57,13 @@ public partial class AnimationNameProperty : BaseProperty {
 	public override void _EnterTree() {
 		base._EnterTree();
 		Binding.Changed += Binding_OnChanged;
+		_options.CollectionChanged += Options_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 		Binding.Changed -= Binding_OnChanged;
+		_options.CollectionChanged -= Options_OnCollectionChanged;
 	}
 
 	private void Binding_OnChanged(Guid value) {

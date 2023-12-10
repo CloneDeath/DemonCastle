@@ -1,4 +1,6 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 
 namespace DemonCastle.Editor.Editors.Monster.States.Editor;
@@ -11,10 +13,11 @@ public partial class StateDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public StateDetails() {
+	public StateDetails(IEnumerableInfo<IAnimationInfo> options) {
 		Name = nameof(StateDetails);
 
 		AddString("Name", _proxy, p => p.Name);
+		AddAnimationReference("Animation", _proxy, p => p.Animation, options);
 	}
 
 	public override void _Process(double delta) {

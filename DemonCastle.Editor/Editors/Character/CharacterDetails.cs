@@ -15,15 +15,15 @@ public partial class CharacterDetails : PropertyCollection {
 		AddFloat("Width", character, x => x.Width);
 		AddFloat("Height", character, x => x.Height);
 		AddFile("Default Weapon", character, character.Directory, x => x.DefaultWeapon, new[]{FileType.Weapon});
-		AddAnimationName("Idle Animation", character, x => x.IdleAnimation, character.Animations);
-		AddAnimationName("Walk Animation", character, x => x.WalkAnimation, character.Animations);
-		AddAnimationName("Jump Animation", character, x => x.JumpAnimation, character.Animations);
-		AddAnimationName("Crouch Animation", character, x => x.CrouchAnimation, character.Animations);
-		AddAnimationName("Stairs Up Animation", character, x => x.StairsUpAnimation, character.Animations);
-		AddAnimationName("Stairs Down Animation", character, x => x.StairsDownAnimation, character.Animations);
-		AddAnimationName("Stand Attack Animation", character, x => x.StandAttackAnimation, character.Animations);
-		AddAnimationName("Jump Attack Animation", character, x => x.JumpAttackAnimation, character.Animations);
-		AddAnimationName("Stairs Up Attack Animation", character, x => x.StairsUpAttackAnimation, character.Animations);
-		AddAnimationName("Stairs Down Attack Animation", character, x => x.StairsDownAttackAnimation, character.Animations);
+		AddAnimationReference("Idle Animation", character, x => x.IdleAnimation, character.Animations);
+		AddAnimationReference("Walk Animation", character, x => x.WalkAnimation, character.Animations);
+		AddAnimationReference("Jump Animation", character, x => x.JumpAnimation, character.Animations);
+		AddAnimationReference("Crouch Animation", character, x => x.CrouchAnimation, character.Animations);
+		AddAnimationReference("Stairs Up Animation", character, x => x.StairsUpAnimation, character.Animations);
+		AddAnimationReference("Stairs Down Animation", character, x => x.StairsDownAnimation, character.Animations);
+		AddAnimationReference("Stand Attack Animation", character, x => x.StandAttackAnimation, character.Animations);
+		AddAnimationReference("Jump Attack Animation", character, x => x.JumpAttackAnimation, character.Animations);
+		AddAnimationReference("Stairs Up Attack Animation", character, x => x.StairsUpAttackAnimation, character.Animations);
+		AddAnimationReference("Stairs Down Attack Animation", character, x => x.StairsDownAttackAnimation, character.Animations);
 	}
 }

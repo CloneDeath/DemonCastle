@@ -7,6 +7,7 @@ public class StateInfoProxy : InfoProxy<StateInfo> {
 	protected override void NotifyProxyChanged() {
 		OnPropertyChanged(nameof(Id));
 		OnPropertyChanged(nameof(Name));
+		OnPropertyChanged(nameof(Animation));
 	}
 
 	public Guid Id => Proxy?.Id ?? Guid.NewGuid();
@@ -15,6 +16,13 @@ public class StateInfoProxy : InfoProxy<StateInfo> {
 		get => Proxy?.Name ?? string.Empty;
 		set {
 			if (Proxy != null) Proxy.Name = value;
+		}
+	}
+
+	public Guid Animation {
+		get => Proxy?.Animation ?? Guid.Empty;
+		set {
+			if (Proxy != null) Proxy.Animation = value;
 		}
 	}
 }

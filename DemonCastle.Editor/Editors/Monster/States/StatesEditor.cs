@@ -1,6 +1,7 @@
 using DemonCastle.Editor.Editors.Monster.States.Editor;
 using DemonCastle.Editor.Editors.Monster.States.List;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
@@ -10,7 +11,7 @@ public partial class StatesEditor : HSplitContainer {
 	protected StateList StateList { get; }
 	protected StateEditor StateEditor { get; }
 
-	public StatesEditor(IFileInfo file, IEnumerableInfo<StateInfo> states) {
+	public StatesEditor(IFileInfo file, IEnumerableInfo<StateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(StatesEditor);
 
 		AddChild(StateList = new StateList(states){
@@ -18,7 +19,7 @@ public partial class StatesEditor : HSplitContainer {
 		});
 		StateList.StateSelected += StateList_OnStateSelected;
 
-		AddChild(StateEditor = new StateEditor(file) {
+		AddChild(StateEditor = new StateEditor(file, animations) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

@@ -27,6 +27,15 @@ public class StateInfo : INotifyPropertyChanged {
 		}
 	}
 
+	public Guid Animation {
+		get => State.Animation;
+		set {
+			State.Animation = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	protected void Save() => File.Save();
 
 	#region INotifyPropertyChanged
