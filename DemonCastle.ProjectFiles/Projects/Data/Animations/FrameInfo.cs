@@ -28,16 +28,18 @@ public interface IFrameInfo : INotifyPropertyChanged {
 }
 
 public class FrameInfo : IFrameInfo {
-	public FrameInfo(IEnumerableInfo<IFrameInfo> frames, IFileNavigator file, FrameData data) {
-		Frames = frames;
+	protected IAnimationInfo Animation { get; }
+	protected IFileNavigator File { get; }
+	protected FrameData FrameData { get; }
+
+	public FrameInfo(IAnimationInfo animation, IFileNavigator file, FrameData data) {
+		Animation = animation;
 		File = file;
 		FrameData = data;
 		Slots = new FrameSlotInfoCollection(file, data.Slots);
 	}
 
-	protected IEnumerableInfo<IFrameInfo> Frames { get; }
-	protected IFileNavigator File { get; }
-	protected FrameData FrameData { get; }
+	protected IEnumerableInfo<IFrameInfo> Frames => Animation.Frames;
 
 	public float Duration {
 		get => FrameData.Duration;
@@ -91,9 +93,9 @@ public class FrameInfo : IFrameInfo {
 
 	public Vector2I Origin => (SpriteDefinition.Region.Size - Vector2I.One) * (Anchor + Vector2I.One) / 2 + Offset;
 
-	protected ISpriteSource SpriteSource => string.IsNullOrWhiteSpace(FrameData.Source)
-												? new NullSpriteSource()
-												: File.GetSprite(FrameData.Source);
+	protected ISpriteSource SpriteSource => File.FileExists(FrameData.Source)
+												? File.GetSprite(FrameData.Source)
+												: new NullSpriteSource();
 
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 

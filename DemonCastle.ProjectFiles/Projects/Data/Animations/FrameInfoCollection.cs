@@ -26,7 +26,7 @@ public class FrameInfoFactory : IInfoFactory<IFrameInfo, FrameData> {
 		_file = file;
 		_animation = animation;
 	}
-	public IFrameInfo CreateInfo(FrameData data) => new FrameInfo(_animation.Frames, _file, data);
+	public IFrameInfo CreateInfo(FrameData data) => new FrameInfo(_animation, _file, data);
 	public FrameData CreateData() {
 		var previousFrame = _animation.Frames.LastOrDefault();
 		return new FrameData {
