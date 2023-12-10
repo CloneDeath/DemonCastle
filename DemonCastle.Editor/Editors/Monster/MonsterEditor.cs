@@ -25,7 +25,6 @@ public partial class MonsterEditor : BaseEditor {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 
-
 		RightArea.AddChild(new AnimationsEditor(monster, monster.Animations));
 		RightArea.SetTabTitle(0, "Animations");
 		RightArea.AddChild(new StatesEditor(monster, monster.States));
