@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
+using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
@@ -18,6 +19,7 @@ public class StateInfo : INotifyPropertyChanged {
 		OnEnter = new ActionInfoCollection(file, state.OnEnter);
 		OnUpdate = new ActionInfoCollection(file, state.OnUpdate);
 		OnExit = new ActionInfoCollection(file, state.OnExit);
+		Transitions = new TransitionInfoCollection(file, state.Transitions);
 	}
 
 	public Guid Id => State.Id;
@@ -43,6 +45,7 @@ public class StateInfo : INotifyPropertyChanged {
 	public ActionInfoCollection OnEnter { get; }
 	public ActionInfoCollection OnUpdate { get; }
 	public ActionInfoCollection OnExit { get; }
+	public TransitionInfoCollection Transitions { get; }
 
 	protected void Save() => File.Save();
 

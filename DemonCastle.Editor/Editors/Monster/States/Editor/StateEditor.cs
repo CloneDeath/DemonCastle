@@ -13,7 +13,7 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(IFileInfo file, IEnumerableInfo<IAnimationInfo> animations) {
+	public StateEditor(IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(StateEditor);
 
 		AddChild(Details = new StateDetails(animations));

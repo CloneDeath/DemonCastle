@@ -1,10 +1,12 @@
 using System;
+using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 
 namespace DemonCastle.Editor.Editors.Monster.States.Editor;
 
 public class StateInfoProxy : InfoProxy<StateInfo> {
 	protected override void NotifyProxyChanged() {
+		Transitions.Proxy = Proxy;
 		OnPropertyChanged(nameof(Id));
 		OnPropertyChanged(nameof(Name));
 		OnPropertyChanged(nameof(Animation));
@@ -25,4 +27,6 @@ public class StateInfoProxy : InfoProxy<StateInfo> {
 			if (Proxy != null) Proxy.Animation = value;
 		}
 	}
+
+	public TransitionInfoCollectionProxy Transitions { get; } = new();
 }

@@ -11,7 +11,7 @@ public partial class StatesEditor : HSplitContainer {
 	protected StateList StateList { get; }
 	protected StateEditor StateEditor { get; }
 
-	public StatesEditor(IFileInfo file, IEnumerableInfo<StateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
+	public StatesEditor(IEnumerableInfo<StateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(StatesEditor);
 
 		AddChild(StateList = new StateList(states){
@@ -19,7 +19,7 @@ public partial class StatesEditor : HSplitContainer {
 		});
 		StateList.StateSelected += StateList_OnStateSelected;
 
-		AddChild(StateEditor = new StateEditor(file, animations) {
+		AddChild(StateEditor = new StateEditor(animations) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

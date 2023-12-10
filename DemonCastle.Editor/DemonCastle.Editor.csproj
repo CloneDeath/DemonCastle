@@ -15,7 +15,4 @@
 	  <Content Include="Icons\*.png" />
 	  <Content Include="Icons\*.png.import" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Editors\Monster\States\Editor\Transitions\List\" />
-	</ItemGroup>
 </Project>
