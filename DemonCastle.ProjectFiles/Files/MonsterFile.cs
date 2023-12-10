@@ -44,8 +44,14 @@ public class MonsterStateTransitionData {
 }
 
 public class MonsterStateTransitionEvent {
+	public SelfEvents? Self { get; set; }
 	public AnimationEvent? Animation { get; set; }
 	public RandomTimerExpires? RandomTimerExpires { get; set; }
+}
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum SelfEvents {
+	Killed
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
