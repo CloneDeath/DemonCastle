@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
 using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.List;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
@@ -14,9 +16,9 @@ public partial class TransitionsEditor : HSplitContainer {
 	}
 
 	private TransitionList Transitions { get; }
-	private ItemList When { get; }
+	private TransitionEdit TransitionEdit { get; }
 
-	public TransitionsEditor() {
+	public TransitionsEditor(IEnumerable<StateInfo> options) {
 		Name = nameof(TransitionsEditor);
 
 		AddChild(Transitions = new TransitionList(_proxy.Transitions) {
@@ -24,14 +26,13 @@ public partial class TransitionsEditor : HSplitContainer {
 		});
 		Transitions.TransitionSelected += Transitions_OnTransitionSelected;
 
-		AddChild(When = new ItemList {
+		AddChild(TransitionEdit = new TransitionEdit(options) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
-		When.AddItem("animation.isComplete");
 	}
 
 	private void Transitions_OnTransitionSelected(TransitionInfo obj) {
-
+		TransitionEdit.Transition = obj;
 	}
 
 	public override void _Process(double delta) {

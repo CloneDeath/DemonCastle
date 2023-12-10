@@ -19,7 +19,7 @@ public partial class StatesEditor : HSplitContainer {
 		});
 		StateList.StateSelected += StateList_OnStateSelected;
 
-		AddChild(StateEditor = new StateEditor(animations) {
+		AddChild(StateEditor = new StateEditor(animations, states) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

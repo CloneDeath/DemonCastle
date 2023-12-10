@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Monster.States.Editor.Events;
 using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -13,7 +14,7 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(IEnumerableInfo<IAnimationInfo> animations) {
+	public StateEditor(IEnumerableInfo<IAnimationInfo> animations, IEnumerable<StateInfo> states) {
 		Name = nameof(StateEditor);
 
 		AddChild(Details = new StateDetails(animations));
@@ -21,7 +22,7 @@ public partial class StateEditor : VSplitContainer {
 		AddChild(TabContainer = new TabContainer());
 		TabContainer.AddChild(EventsEditor = new EventsEditor());
 		TabContainer.SetTabTitle(0, "Events");
-		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor());
+		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(states));
 		TabContainer.SetTabTitle(1, "Transitions");
 	}
 

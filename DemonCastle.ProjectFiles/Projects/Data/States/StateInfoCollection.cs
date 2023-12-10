@@ -22,7 +22,7 @@ public class StateInfoCollection : IEnumerableInfo<StateInfo> {
 
 	public StateInfo AppendNew() {
 		var stateData = new MonsterStateData {
-			Name = "animation"
+			Name = "state"
 		};
 		FileStates.Add(stateData);
 		Save();
