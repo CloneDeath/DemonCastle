@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Animations;
+using DemonCastle.Editor.Editors.Monster.States;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -27,7 +28,7 @@ public partial class MonsterEditor : BaseEditor {
 
 		RightArea.AddChild(new AnimationsEditor(monster, monster.Animations));
 		RightArea.SetTabTitle(0, "Animations");
-		RightArea.AddChild(new Control());
+		RightArea.AddChild(new StatesEditor(monster, monster.States));
 		RightArea.SetTabTitle(1, "States");
 	}
 }

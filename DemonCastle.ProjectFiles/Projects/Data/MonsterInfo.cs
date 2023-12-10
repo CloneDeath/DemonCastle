@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -11,6 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyPropertyChanged {
 	public MonsterInfo(FileNavigator<MonsterFile> file) : base(file) {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
+		States = new StateInfoCollection(file, Resource.States);
 	}
 
 	public string Name {
@@ -60,6 +62,7 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 	}
 
 	public AnimationInfoCollection Animations { get; }
+	public StateInfoCollection States { get; }
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;
