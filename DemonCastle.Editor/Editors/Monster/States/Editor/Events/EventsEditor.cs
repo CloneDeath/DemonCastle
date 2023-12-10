@@ -1,0 +1,32 @@
+using DemonCastle.ProjectFiles.Projects.Data.States;
+using Godot;
+
+namespace DemonCastle.Editor.Editors.Monster.States.Editor.Events;
+
+public partial class EventsEditor : VBoxContainer {
+	private readonly StateInfoProxy _proxy = new();
+
+	public StateInfo? State {
+		get => _proxy.Proxy;
+		set => _proxy.Proxy = value;
+	}
+
+	private ItemList Events { get; }
+	private ItemList EventActions { get; }
+
+	public EventsEditor() {
+		Name = nameof(EventsEditor);
+
+		AddChild(Events = new ItemList {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
+		Events.AddItem("OnEnter");
+		Events.AddItem("OnUpdate");
+		Events.AddItem("OnExit");
+
+		AddChild(EventActions = new ItemList {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
+		EventActions.AddItem("face(player)");
+	}
+}
