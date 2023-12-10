@@ -8,7 +8,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Monster.States.List;
 
 public partial class StateList : VBoxContainer {
-
 	public event Action<StateInfo>? StateSelected;
 
 	private readonly IEnumerableInfo<StateInfo> _states;

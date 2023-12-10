@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
@@ -14,6 +15,9 @@ public class StateInfo : INotifyPropertyChanged {
 	public StateInfo(IFileNavigator file, MonsterStateData state) {
 		File = file;
 		State = state;
+		OnEnter = new ActionInfoCollection(file, state.OnEnter);
+		OnUpdate = new ActionInfoCollection(file, state.OnUpdate);
+		OnExit = new ActionInfoCollection(file, state.OnExit);
 	}
 
 	public Guid Id => State.Id;
@@ -35,6 +39,10 @@ public class StateInfo : INotifyPropertyChanged {
 			OnPropertyChanged();
 		}
 	}
+
+	public ActionInfoCollection OnEnter { get; }
+	public ActionInfoCollection OnUpdate { get; }
+	public ActionInfoCollection OnExit { get; }
 
 	protected void Save() => File.Save();
 
