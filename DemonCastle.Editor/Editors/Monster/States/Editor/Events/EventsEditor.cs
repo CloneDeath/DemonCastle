@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Monster.States.Editor.Events.Actions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
@@ -24,9 +25,8 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnUpdate");
 		Events.AddItem("OnExit");
 
-		AddChild(EventActions = new ItemList {
+		AddChild(EventActions = new EventActionList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
-		EventActions.AddItem("face(player)");
 	}
 }

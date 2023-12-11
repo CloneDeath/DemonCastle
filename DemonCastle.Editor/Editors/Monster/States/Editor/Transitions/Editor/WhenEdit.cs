@@ -4,7 +4,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
 
-public partial class WhenEdit : HBoxContainer {
+public partial class WhenEdit : HFlowContainer {
 	private readonly TransitionInfoProxy _proxy = new();
 
 	public TransitionInfo? Transition {
@@ -53,11 +53,11 @@ public partial class WhenEdit : HBoxContainer {
 		for (var i = 0; i < Clauses.Length; i++) {
 			var clause = Clauses[i];
 			if (i == index) {
-				if (clause.IsSelected(when)) return;
+				if (clause.IsSelected(when)) continue;
 				clause.MakeSelected(when);
 				ClauseParams.AddChild(clause.GetControl(when));
 			} else {
-				if (!clause.IsSelected(when)) return;
+				if (!clause.IsSelected(when)) continue;
 				clause.MakeUnselected(when);
 			}
 		}

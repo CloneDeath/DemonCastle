@@ -22,7 +22,7 @@ public class ARandomTimerWhenClause : IWhenClause {
 		control.AddChild(new SpinBox { Value = 1 });
 		control.AddChild(new Label { Text = "and" });
 		control.AddChild(new SpinBox { Value = 2 });
-		control.AddChild(new Label { Text = "seconds" });
+		control.AddChild(new Label { Text = "seconds expires" });
 		return control;
 	}
 }
