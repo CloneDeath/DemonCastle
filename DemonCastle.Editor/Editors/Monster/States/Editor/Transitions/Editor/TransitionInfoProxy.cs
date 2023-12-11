@@ -25,4 +25,6 @@ public class TransitionInfoProxy : InfoProxy<TransitionInfo> {
 			if (Proxy != null) Proxy.TargetState = value;
 		}
 	}
+
+	public WhenInfo? When => Proxy?.When;
 }

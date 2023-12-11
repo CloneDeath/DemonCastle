@@ -5,7 +5,9 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
 public class TransitionInfo : BaseInfo<MonsterStateTransitionData> {
-	public TransitionInfo(IFileNavigator file, MonsterStateTransitionData data) : base(file, data) { }
+	public TransitionInfo(IFileNavigator file, MonsterStateTransitionData data) : base(file, data) {
+		When = new WhenInfo(file, data.When);
+	}
 
 	public Guid Id {
 		get => Data.Id;
@@ -33,4 +35,6 @@ public class TransitionInfo : BaseInfo<MonsterStateTransitionData> {
 			OnPropertyChanged();
 		}
 	}
+
+	public WhenInfo When { get; }
 }

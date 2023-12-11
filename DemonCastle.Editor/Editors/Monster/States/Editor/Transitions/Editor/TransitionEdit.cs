@@ -10,13 +10,19 @@ public partial class TransitionEdit : PropertyCollection {
 
 	public TransitionInfo? Transition {
 		get => _proxy.Proxy;
-		set => _proxy.Proxy = value;
+		set {
+			_proxy.Proxy = value;
+			WhenEdit.Transition = value;
+		}
 	}
+
+	private WhenEdit WhenEdit { get; }
 
 	public TransitionEdit(IEnumerable<StateInfo> options) {
 		Name = nameof(TransitionEdit);
 
 		AddString("Name", _proxy, t => t.Name);
 		AddStateReference("Target State", _proxy, t => t.TargetState, options);
+		AddChild(WhenEdit = new WhenEdit());
 	}
 }
