@@ -18,7 +18,7 @@ public class ThisMonsterWhenClause : IWhenClause {
 	}
 
 	public Control GetControl(WhenInfo when) {
-		var control = new HFlowContainer();
+		var control = new HBoxContainer();
 		control.AddChild(new Label { Text = "is" });
 
 		var options = new OptionButton();

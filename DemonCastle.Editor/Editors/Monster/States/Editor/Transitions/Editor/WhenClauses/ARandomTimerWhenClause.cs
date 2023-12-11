@@ -17,7 +17,7 @@ public class ARandomTimerWhenClause : IWhenClause {
 	}
 
 	public Control GetControl(WhenInfo when) {
-		var control = new HFlowContainer();
+		var control = new HBoxContainer();
 		control.AddChild(new Label { Text = "between" });
 		control.AddChild(new SpinBox { Value = 1 });
 		control.AddChild(new Label { Text = "and" });

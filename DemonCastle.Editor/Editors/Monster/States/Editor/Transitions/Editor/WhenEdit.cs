@@ -4,16 +4,19 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
 
-public partial class WhenEdit : HFlowContainer {
+public partial class WhenEdit : HBoxContainer {
 	private readonly TransitionInfoProxy _proxy = new();
 
 	public TransitionInfo? Transition {
 		get => _proxy.Proxy;
-		set => _proxy.Proxy = value;
+		set {
+			_proxy.Proxy = value;
+			Reload();
+		}
 	}
 
 	protected OptionButton Clause { get; }
-	protected HFlowContainer ClauseParams { get; }
+	protected HBoxContainer ClauseParams { get; }
 
 	private static readonly IWhenClause[] Clauses = {
 		new ThisMonsterWhenClause(),
@@ -33,7 +36,7 @@ public partial class WhenEdit : HFlowContainer {
 			Clause.AddItem(clause.Clause);
 		}
 
-		AddChild(ClauseParams = new HFlowContainer());
+		AddChild(ClauseParams = new HBoxContainer());
 	}
 
 	private void Clause_OnItemSelected(long index) {
@@ -42,7 +45,10 @@ public partial class WhenEdit : HFlowContainer {
 		}
 
 		var when = _proxy.When;
-		if (when == null) return;
+		if (when == null) {
+			Clause.Selected = -1;
+			return;
+		}
 
 		for (var i = 0; i < Clauses.Length; i++) {
 			var clause = Clauses[i];
@@ -54,6 +60,28 @@ public partial class WhenEdit : HFlowContainer {
 				if (!clause.IsSelected(when)) return;
 				clause.MakeUnselected(when);
 			}
+		}
+	}
+
+	private void Reload() {
+		foreach (var child in ClauseParams.GetChildren()) {
+			child.QueueFree();
+		}
+
+		Clause.Selected = -1;
+		var when = _proxy.When;
+		if (when == null) {
+			return;
+		}
+
+		for (var i = 0; i < Clauses.Length; i++) {
+			var clause = Clauses[i];
+			if (!clause.IsSelected(when)) continue;
+
+			clause.MakeSelected(when);
+			ClauseParams.AddChild(clause.GetControl(when));
+			Clause.Selected = i;
+			break;
 		}
 	}
 }
