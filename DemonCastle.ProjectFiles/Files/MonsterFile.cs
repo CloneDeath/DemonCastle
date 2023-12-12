@@ -10,6 +10,12 @@ public class MonsterFile {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Name { get; set; } = string.Empty;
 
+	public int Health { get; set; } = 1;
+	public int Experience { get; set; } = 1;
+	public int Attack { get; set; } = 1;
+	public int PhysicalDefense { get; set; } = 0;
+	public int MagicalDefense { get; set; } = 0;
+
 	public float MoveSpeed { get; set; } = 3;
 	public float JumpHeight { get; set; } = 3;
 	public float Gravity { get; set; } = 100;
@@ -69,19 +75,25 @@ public class Duration {
 }
 
 public class MonsterStateActionData {
-	public FaceTowardsAction? FaceTowards { get; set; }
+	public FaceAction? Face { get; set; }
 	public MoveAction? Move { get; set; }
 	public SelfAction? Self { get; set; }
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
-public enum FaceTowardsAction {
-	ClosestPlayer
+public enum FaceAction {
+	TowardsClosestPlayer,
+	AwayFromClosestPlayer,
+	Left,
+	Right
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
 public enum MoveAction {
-	Forward
+	Forward,
+	Backward,
+	Left,
+	Right
 }
 
 [JsonConverter(typeof(StringEnumConverter))]

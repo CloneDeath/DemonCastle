@@ -8,6 +8,13 @@ public partial class MonsterDetails : PropertyCollection {
 		Name = nameof(MonsterDetails);
 
 		AddString("Name", monster, m => m.Name);
+
+		AddInteger("Health", monster, m => m.Health);
+		AddInteger("Experience", monster, m => m.Experience);
+		AddInteger("Attack", monster, m => m.Attack);
+		AddInteger("PhysicalDefense", monster, m => m.PhysicalDefense);
+		AddInteger("MagicalDefense", monster, m => m.MagicalDefense);
+
 		AddFloat("Move Speed", monster, m => m.MoveSpeed);
 		AddFloat("Jump Height", monster, m => m.JumpHeight);
 		AddFloat("Gravity", monster, m => m.Gravity);

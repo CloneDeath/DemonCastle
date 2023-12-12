@@ -25,6 +25,51 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 		}
 	}
 
+	public int Health {
+		get => Resource.Health;
+		set {
+			Resource.Health = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public int Experience {
+		get => Resource.Experience;
+		set {
+			Resource.Experience = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public int Attack {
+		get => Resource.Attack;
+		set {
+			Resource.Attack = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public int PhysicalDefense {
+		get => Resource.PhysicalDefense;
+		set {
+			Resource.PhysicalDefense = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public int MagicalDefense {
+		get => Resource.MagicalDefense;
+		set {
+			Resource.MagicalDefense = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public float MoveSpeed {
 		get => Resource.MoveSpeed;
 		set {
