@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class SelectableTile : SelectableControl {
 	protected SpriteDefinitionView SpriteDefinitionView { get; }

@@ -1,9 +1,9 @@
 using System.ComponentModel;
-using DemonCastle.Editor.Editors.Level.Area.TileTools.Collision;
+using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
 using DemonCastle.ProjectFiles.Files;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools.Stairs;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
 
 public partial class TileStairView : HBoxContainer {
 	private readonly TileProxy _tile;

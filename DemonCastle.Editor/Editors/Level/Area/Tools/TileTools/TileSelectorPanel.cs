@@ -4,7 +4,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class TileSelectorPanel : HFlowContainer {
 	private readonly List<SelectableTile> _selection = new();

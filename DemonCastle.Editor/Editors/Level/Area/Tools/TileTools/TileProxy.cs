@@ -7,7 +7,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public class TileProxy : INotifyPropertyChanged {
 	private TileInfo? _proxy;

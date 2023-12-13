@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.TileTools.Collision;
+namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
 
 public partial class TileCollisionView : HBoxContainer {
 	private readonly TileProxy _tile;

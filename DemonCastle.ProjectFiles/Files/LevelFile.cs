@@ -48,7 +48,13 @@ public class AreaData {
 	public int Y { get; set; }
 	public int Width { get; set; } = 1;
 	public int Height { get; set; } = 1;
+	public List<MonsterData> Monsters { get; set; } = new();
 	public List<TileMapData> TileMap { get; set; } = new();
+}
+
+public class MonsterData {
+	public Guid MonsterId { get; set; }
+	public Position2D Position { get; set; } = new();
 }
 
 public class TileMapData {
