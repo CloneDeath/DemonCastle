@@ -13,7 +13,6 @@ public partial class EventsEditor : VBoxContainer {
 	}
 
 	private ItemList Events { get; }
-	private ItemList EventActions { get; }
 
 	public EventsEditor() {
 		Name = nameof(EventsEditor);
@@ -25,7 +24,7 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnUpdate");
 		Events.AddItem("OnExit");
 
-		AddChild(EventActions = new EventActionList {
+		AddChild(new EventActionList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}
