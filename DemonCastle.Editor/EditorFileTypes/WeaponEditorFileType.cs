@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Weapon;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -14,5 +15,5 @@ public class WeaponEditorFileType : WeaponFileType, IEditorFileType {
 		Name = "weapon"
 	};
 
-	public BaseEditor GetEditor(FileNavigator file) => new WeaponEditor(file.ToWeaponInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new WeaponEditor(file.ToWeaponInfo());
 }

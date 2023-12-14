@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Character;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -14,5 +15,5 @@ public class CharacterEditorFileType : CharacterFileType, IEditorFileType {
 		Name = "character"
 	};
 
-	public BaseEditor GetEditor(FileNavigator file) => new CharacterEditor(file.ToCharacterInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new CharacterEditor(file.ToCharacterInfo());
 }

@@ -2,6 +2,7 @@ using System;
 using DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 using DemonCastle.Editor.Editors.Level.Area.Details;
 using DemonCastle.Editor.Editors.Level.Area.Tools;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -16,14 +17,14 @@ public partial class AreaEdit : HSplitContainer {
 
 	public event Action<AreaInfo>? AreaSelected;
 
-	public AreaEdit(LevelInfo level) {
+	public AreaEdit(ProjectInfo project, LevelInfo level) {
 		Name = nameof(AreaEdit);
 
 		AddChild(LeftPanel = new VBoxContainer {
 			CustomMinimumSize = new Vector2(275, 0)
 		});
 		LeftPanel.AddChild(Details = new AreaDetails());
-		LeftPanel.AddChild(Tools = new ToolsPanel(level));
+		LeftPanel.AddChild(Tools = new ToolsPanel(project, level));
 		AddChild(RightPanel = new LevelAreasView(level));
 		RightPanel.AreaSelected += LevelAreasView_OnAreaSelected;
 		RightPanel.AreaTileSelected += LevelAreasView_OnAreaTileSelected;

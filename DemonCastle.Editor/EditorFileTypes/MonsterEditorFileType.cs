@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Monster;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -14,5 +15,5 @@ public class MonsterEditorFileType : MonsterFileType, IEditorFileType {
 		Name = "monster"
 	};
 
-	public BaseEditor GetEditor(FileNavigator file) => new MonsterEditor(file.ToMonsterInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new MonsterEditor(file.ToMonsterInfo());
 }

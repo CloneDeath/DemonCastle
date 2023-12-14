@@ -24,6 +24,11 @@ public class ProjectInfo : IListableInfo {
 	public IEnumerable<LevelInfo> Levels => File.GetFilesAndSubFiles()
 												.Where(f => f.Extension == FileType.Level.Extension)
 												.Select(f => f.ToLevelInfo());
+
+	public IEnumerable<MonsterInfo> Monsters => File.GetFilesAndSubFiles()
+												.Where(f => f.Extension == FileType.Monster.Extension)
+												.Select(f => f.ToMonsterInfo());
+
 	public string FilePath => File.FilePath;
 
 

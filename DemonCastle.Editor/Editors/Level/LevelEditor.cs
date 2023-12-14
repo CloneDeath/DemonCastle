@@ -1,5 +1,6 @@
 using DemonCastle.Editor.Editors.Level.LevelOverview;
 using DemonCastle.Editor.Icons;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 using AreaEdit = DemonCastle.Editor.Editors.Level.Area.AreaEdit;
@@ -16,7 +17,7 @@ public partial class LevelEditor : BaseEditor {
 	protected LevelOverviewEdit LevelOverview { get; }
 	protected AreaEdit Area { get; }
 
-	public LevelEditor(LevelInfo level) {
+	public LevelEditor(ProjectInfo project, LevelInfo level) {
 		Name = nameof(LevelEditor);
 		TabText = level.FileName;
 		CustomMinimumSize = new Vector2I(600, 400);
@@ -28,7 +29,7 @@ public partial class LevelEditor : BaseEditor {
 
 		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
 		LevelOverview.AreaSelected += LevelOverview_OnAreaSelected;
-		SplitContainer.AddChild(Area = new AreaEdit(level));
+		SplitContainer.AddChild(Area = new AreaEdit(project, level));
 		Area.AreaSelected += Area_OnAreaSelected;
 	}
 

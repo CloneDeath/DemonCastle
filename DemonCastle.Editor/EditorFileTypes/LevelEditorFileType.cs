@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Level;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -14,5 +15,5 @@ public class LevelEditorFileType : LevelFileType, IEditorFileType {
 		Name = "level"
 	};
 
-	public BaseEditor GetEditor(FileNavigator file) => new LevelEditor(file.ToLevelInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new LevelEditor(project, file.ToLevelInfo());
 }

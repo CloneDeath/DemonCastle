@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.FileTypes;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -14,5 +15,5 @@ public class ProjectEditorFileType : ProjectFileType, IEditorFileType {
 		Name = "project"
 	};
 
-	public BaseEditor GetEditor(FileNavigator file) => new ProjectEditor(file.ToProjectInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ProjectEditor(file.ToProjectInfo());
 }
