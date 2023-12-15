@@ -21,7 +21,6 @@ public partial class AnchorProperty : VBoxContainer, IBaseProperty {
 	public AnchorProperty(IPropertyBinding<Vector2I> binding) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
-		Binding.Changed += Binding_OnChanged;
 
 		AddChild(Label = new Label());
 
