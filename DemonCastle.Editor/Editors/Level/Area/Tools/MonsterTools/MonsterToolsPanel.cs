@@ -10,6 +10,15 @@ public partial class MonsterToolsPanel : VBoxContainer {
 	public MonsterToolsPanel(ProjectInfo project) {
 		Name = nameof(MonsterToolsPanel);
 
+		AddChild(new Button { Text = "Add Monster"});
+		AddChild(new ItemList {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
+		AddChild(new Button { Text = "Remove Monster"});
+
+		AddChild(new OptionButton());
+		AddChild(new TextEdit());
+
 		AddChild(new Label { Text = "Monster Tools"});
 		foreach (var monster in project.Monsters) {
 			var state = monster.States.FirstOrDefault(s => s.Id == monster.InitialState);
