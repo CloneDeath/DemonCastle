@@ -8,13 +8,20 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools;
 
 public partial class ToolsPanel : TabContainer {
 	private readonly TileToolsPanel _tileToolsPanel;
+	private readonly MonsterToolsPanel _monsterToolsPanel;
+
+	public AreaInfo? Area {
+		get => _monsterToolsPanel.Area;
+		set => _monsterToolsPanel.Area = value;
+	}
 
 	public ToolsPanel(ProjectInfo project, LevelInfo level) {
 		Name = nameof(ToolsPanel);
 
 		AddChild(_tileToolsPanel = new TileToolsPanel(level));
 		SetTabTitle(0, "Tiles");
-		AddChild(new MonsterToolsPanel(project));
+		AddChild(_monsterToolsPanel = new MonsterToolsPanel(project));
+		_monsterToolsPanel.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 		SetTabTitle(1, "Monsters");
 	}
 

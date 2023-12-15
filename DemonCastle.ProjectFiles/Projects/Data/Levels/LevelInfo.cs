@@ -15,7 +15,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
 		TileSet = new LevelTileSet(file.Resource, File);
-		_areas = Resource.Areas.Select(area => new AreaInfo(area, this)).ToList();
+		_areas = Resource.Areas.Select(area => new AreaInfo(file, area, this)).ToList();
 	}
 
 	public LevelTileSet TileSet { get; }
@@ -79,9 +79,10 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo, INotifyPropertyChan
 	public AreaInfo CreateArea() {
 		var area = new AreaData();
 		Resource.Areas.Add(area);
-		_areas.Add(new AreaInfo(area, this));
+		var areaInfo = new AreaInfo(File, area, this);
+		_areas.Add(areaInfo);
 		OnPropertyChanged(nameof(Areas));
-		return new AreaInfo(area, this);
+		return areaInfo;
 	}
 
 	private AreaInfo GetAreaById(Guid id) {

@@ -6,7 +6,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.Details;
 public partial class AreaDetails : PropertyCollection {
 	private readonly AreaProxy AreaProxy = new();
 
-	public AreaInfo? Proxy {
+	public AreaInfo? Area {
 		get => AreaProxy.Proxy;
 		set {
 			AreaProxy.Proxy = value;

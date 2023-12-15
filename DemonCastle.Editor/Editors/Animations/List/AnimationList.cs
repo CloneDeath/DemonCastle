@@ -11,8 +11,8 @@ public partial class AnimationList : VBoxContainer {
 	public event Action<IAnimationInfo>? AnimationSelected;
 
 	private readonly IEnumerableInfo<IAnimationInfo> _animations;
-	private ItemList Animations { get; }
 	private Button AddButton { get; }
+	private ItemList Animations { get; }
 	private Button RemoveButton { get; }
 
 	public AnimationList(IEnumerableInfo<IAnimationInfo> animations) {

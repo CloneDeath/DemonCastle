@@ -6,7 +6,7 @@ namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 
 public partial class AreaCell : SelectableControl {
 	public AreaInfo Area { get; }
-	private LevelInfo Level => Area.LevelInfo;
+	private LevelInfo Level => Area.Level;
 
 	private ColorRect AreaColor { get; }
 	private ColorRect OutlineColor { get; }

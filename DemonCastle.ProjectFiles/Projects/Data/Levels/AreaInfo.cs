@@ -1,70 +1,71 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Locations;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
-public class AreaInfo : INotifyPropertyChanged {
+public class AreaInfo : BaseInfo<AreaData> {
+	public LevelInfo Level { get; }
 	private readonly List<TileMapInfo> _tileMapInfos = new();
-	public AreaInfo(AreaData area, LevelInfo levelInfo) {
-		Area = area;
-		LevelInfo = levelInfo;
-		_tileMapInfos.AddRange(Area.TileMap.Select(tm => new TileMapInfo(tm, this)));
+
+	public AreaInfo(IFileNavigator file, AreaData area, LevelInfo level) : base(file, area) {
+		Level = level;
+		_tileMapInfos.AddRange(area.TileMap.Select(tm => new TileMapInfo(tm, this)));
+		Monsters = new MonsterDataInfoCollection(file, area.Monsters);
 	}
 
-	protected AreaData Area { get; }
-	public LevelInfo LevelInfo { get; }
-
-	public Guid Id => Area.Id;
+	public Guid Id => Data.Id;
 
 	public string Name {
-		get => Area.Name;
+		get => Data.Name;
 		set {
-			Area.Name = value;
-			LevelInfo.Save();
+			Data.Name = value;
+			Save();
 			OnPropertyChanged();
 		}
 	}
 
-	public LevelTileSet LevelTileSet => LevelInfo.TileSet;
+	public LevelTileSet LevelTileSet => Level.TileSet;
 	public IEnumerable<TileMapInfo> TileMap => _tileMapInfos;
 
+	public MonsterDataInfoCollection Monsters { get; }
+
 	public Vector2I AreaPosition {
-		get => new(Area.X, Area.Y);
+		get => new(Data.X, Data.Y);
 		set {
-			Area.X = value.X;
-			Area.Y = value.Y;
-			LevelInfo.Save();
+			Data.X = value.X;
+			Data.Y = value.Y;
+			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public Vector2I Size {
-		get => new(Area.Width, Area.Height);
+		get => new(Data.Width, Data.Height);
 		set {
-			Area.Width = value.X;
-			Area.Height = value.Y;
-			LevelInfo.Save();
+			Data.Width = value.X;
+			Data.Height = value.Y;
+			Save();
 			OnPropertyChanged();
 		}
 	}
 
-	public AreaPosition PositionOfArea => new(AreaPosition, LevelInfo.AreaSize, LevelInfo.TileSize);
-	public AreaSize SizeOfArea => new(Size, LevelInfo.AreaSize, LevelInfo.TileSize);
+	public AreaPosition PositionOfArea => new(AreaPosition, Level.AreaSize, Level.TileSize);
+	public AreaSize SizeOfArea => new(Size, Level.AreaSize, Level.TileSize);
 	public AreaRegion Region => new(PositionOfArea, SizeOfArea);
 
-	public Vector2I TilePosition => AreaPosition * LevelInfo.TileSize * LevelInfo.AreaSize;
+	public Vector2I TilePosition => AreaPosition * Level.TileSize * Level.AreaSize;
 
-	public Vector2I TileSize => LevelInfo.TileSize;
-	public Vector2I AreaSize => LevelInfo.AreaSize;
-	public LevelTileSet TileSet => LevelInfo.TileSet;
+	public Vector2I TileSize => Level.TileSize;
+	public Vector2I AreaSize => Level.AreaSize;
+	public LevelTileSet TileSet => Level.TileSet;
 
-	public TileInfo GetTileInfo(Guid tileId) => LevelInfo.GetTileInfo(tileId);
+	public TileInfo GetTileInfo(Guid tileId) => Level.GetTileInfo(tileId);
 
 	public void SetTile(Vector2I tileIndex, Guid tileId) {
 		var info = _tileMapInfos.Find(info => info.Contains(tileIndex));
@@ -77,12 +78,12 @@ public class AreaInfo : INotifyPropertyChanged {
 				Y = tileIndex.Y,
 				TileId = tileId
 			};
-			Area.TileMap.Add(tileMapData);
+			Data.TileMap.Add(tileMapData);
 			_tileMapInfos.Add(new TileMapInfo(tileMapData, this));
 		}
 
 		OnPropertyChanged(nameof(TileMap));
-		LevelInfo.Save();
+		Save();
 	}
 
 	public void ClearTile(Vector2I tileIndex) {
@@ -91,27 +92,12 @@ public class AreaInfo : INotifyPropertyChanged {
 		_tileMapInfos.Remove(info);
 
 		var infoPosition = info.Position.ToTileIndex();
-		var tile = Area.TileMap.FirstOrDefault(t => t.X == infoPosition.X && t.Y == infoPosition.Y);
+		var tile = Data.TileMap.FirstOrDefault(t => t.X == infoPosition.X && t.Y == infoPosition.Y);
 		if (tile != null) {
-			Area.TileMap.Remove(tile);
+			Data.TileMap.Remove(tile);
 		}
 
 		OnPropertyChanged(nameof(TileMap));
-		LevelInfo.Save();
+		Save();
 	}
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }

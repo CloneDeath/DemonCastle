@@ -1,8 +1,8 @@
 using DemonCastle.Editor.Editors.Animations.Editor.Frames;
+using DemonCastle.Editor.Editors.Components.AnimationFrames;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
-using FrameListEditor = DemonCastle.Editor.Editors.Components.AnimationFrames.FrameListEditor;
 
 namespace DemonCastle.Editor.Editors.Animations.Editor;
 

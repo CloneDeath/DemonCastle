@@ -32,9 +32,10 @@ public partial class AreaEdit : HSplitContainer {
 	}
 
 	public AreaInfo? SelectedArea {
-		get => Details.Proxy;
+		get => Details.Area;
 		set {
-			Details.Proxy = value;
+			Details.Area = value;
+			Tools.Area = value;
 			if (value == null) {
 				RightPanel.DeselectAllAreas();
 			}
@@ -45,7 +46,8 @@ public partial class AreaEdit : HSplitContainer {
 	}
 
 	private void LevelAreasView_OnAreaSelected(AreaInfo area) {
-		Details.Proxy = area;
+		Details.Area = area;
+		Tools.Area = area;
 		AreaSelected?.Invoke(area);
 	}
 
