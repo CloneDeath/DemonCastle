@@ -39,11 +39,11 @@ public partial class MonsterDataList : VBoxContainer {
 
 	public void Load(AreaInfo? area) {
 		if (_area != null) {
-			_area.Monsters.CollectionChanged += Monsters_OnCollectionChanged;
+			_area.Monsters.CollectionChanged -= Monsters_OnCollectionChanged;
 		}
 		_area = area;
 		if (_area != null) {
-			_area.Monsters.CollectionChanged -= Monsters_OnCollectionChanged;
+			_area.Monsters.CollectionChanged += Monsters_OnCollectionChanged;
 		}
 		Reload();
 	}
