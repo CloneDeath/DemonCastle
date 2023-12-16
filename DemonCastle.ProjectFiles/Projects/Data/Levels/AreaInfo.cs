@@ -16,7 +16,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 	public AreaInfo(IFileNavigator file, AreaData area, LevelInfo level) : base(file, area) {
 		Level = level;
 		_tileMapInfos.AddRange(area.TileMap.Select(tm => new TileMapInfo(tm, this)));
-		Monsters = new MonsterDataInfoCollection(file, area.Monsters);
+		Monsters = new MonsterDataInfoCollection(file, this, area.Monsters);
 	}
 
 	public Guid Id => Data.Id;

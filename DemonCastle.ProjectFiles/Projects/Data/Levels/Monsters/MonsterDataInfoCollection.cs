@@ -6,7 +6,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 
 public class MonsterDataInfoCollection : ObservableCollectionInfo<MonsterDataInfo, MonsterData> {
 	private readonly IFileNavigator _file;
-	public MonsterDataInfoCollection(IFileNavigator file, List<MonsterData> data) : base(new MonsterDataInfoFactory(file), data) {
+	public MonsterDataInfoCollection(IFileNavigator file, AreaInfo area, List<MonsterData> data) : base(new MonsterDataInfoFactory(file, area), data) {
 		_file = file;
 	}
 
@@ -15,11 +15,13 @@ public class MonsterDataInfoCollection : ObservableCollectionInfo<MonsterDataInf
 
 public class MonsterDataInfoFactory : IInfoFactory<MonsterDataInfo, MonsterData> {
 	private readonly IFileNavigator _file;
+	private readonly AreaInfo _area;
 
-	public MonsterDataInfoFactory(IFileNavigator file) {
+	public MonsterDataInfoFactory(IFileNavigator file, AreaInfo area) {
+		_area = area;
 		_file = file;
 	}
-	public MonsterDataInfo CreateInfo(MonsterData data) => new(_file, data);
+	public MonsterDataInfo CreateInfo(MonsterData data) => new(_file, _area, data);
 	public MonsterData CreateData() {
 		return new MonsterData();
 	}

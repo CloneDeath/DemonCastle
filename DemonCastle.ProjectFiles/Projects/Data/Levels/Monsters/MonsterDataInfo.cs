@@ -1,13 +1,18 @@
 using System;
 using DemonCastle.ProjectFiles.Extensions;
 using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 
 public class MonsterDataInfo : BaseInfo<MonsterData> {
-	public MonsterDataInfo(IFileNavigator file, MonsterData data) : base(file, data) { }
+	private readonly AreaInfo _area;
+
+	public MonsterDataInfo(IFileNavigator file, AreaInfo area, MonsterData data) : base(file, data) {
+		_area = area;
+	}
 
 	public Guid MonsterId {
 		get => Data.MonsterId;
@@ -24,6 +29,9 @@ public class MonsterDataInfo : BaseInfo<MonsterData> {
 			Data.Position = value.ToPosition2D();
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(MonsterPosition));
 		}
 	}
+
+	public MonsterPosition MonsterPosition => new(Data.Position, _area.PositionOfArea, _area.TileSize);
 }

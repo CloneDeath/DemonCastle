@@ -37,7 +37,7 @@ public partial class MonsterDataView : Container {
 	}
 
 	private void Reload() {
-		Position = _monsterData.Position;
+		Position = _monsterData.MonsterPosition.ToPixelPositionInArea();
 		var monster = _project.Monsters.FirstOrDefault(m => m.Id == _monsterData.MonsterId);
 		Sprite.Load(monster?.PreviewSpriteDefinition);
 	}
