@@ -21,7 +21,6 @@ public partial class ToolsPanel : TabContainer {
 		AddChild(_tileToolsPanel = new TileToolsPanel(level));
 		SetTabTitle(0, "Tiles");
 		AddChild(_monsterToolsPanel = new MonsterToolsPanel(project));
-		_monsterToolsPanel.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 		SetTabTitle(1, "Monsters");
 	}
 

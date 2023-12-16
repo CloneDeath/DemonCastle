@@ -24,7 +24,9 @@ public partial class AreaEdit : HSplitContainer {
 			CustomMinimumSize = new Vector2(275, 0)
 		});
 		LeftPanel.AddChild(Details = new AreaDetails());
-		LeftPanel.AddChild(Tools = new ToolsPanel(project, level));
+		LeftPanel.AddChild(Tools = new ToolsPanel(project, level) {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
 		AddChild(RightPanel = new LevelAreasView(level));
 		RightPanel.AreaSelected += LevelAreasView_OnAreaSelected;
 		RightPanel.AreaTileSelected += LevelAreasView_OnAreaTileSelected;
