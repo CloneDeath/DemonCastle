@@ -1,6 +1,9 @@
 using System;
 using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Editor.Editors.Level.Area.View.Monsters;
+using DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 using DemonCastle.Game;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -10,7 +13,8 @@ public partial class AreaView : SelectableControl {
 	protected AreaInfo Area { get; }
 
 	protected Outline Outline { get; }
-	protected Tiles.AreaTilesView Root { get; }
+	protected AreaTilesView Tiles { get; }
+	protected AreaMonstersView Monsters { get; }
 
 	private static readonly Color SelectedColor = new(Colors.White, 0.75f);
 	private static readonly Color DeselectedColor = new(Colors.White, 0.3f);
@@ -20,7 +24,7 @@ public partial class AreaView : SelectableControl {
 	private Vector2I? _previousTriggeredPosition;
 	private bool? _previousTriggerWasSelect;
 
-	public AreaView(AreaInfo area) {
+	public AreaView(ProjectInfo project, AreaInfo area) {
 		Area = area;
 
 		Name = nameof(AreaView);
@@ -32,7 +36,10 @@ public partial class AreaView : SelectableControl {
 			Color = DeselectedColor
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
-		AddChild(Root = new Tiles.AreaTilesView(area) {
+		AddChild(Tiles = new AreaTilesView(area) {
+			MouseFilter = MouseFilterEnum.Pass
+		});
+		AddChild(Monsters = new AreaMonstersView(project, area) {
 			MouseFilter = MouseFilterEnum.Pass
 		});
 	}

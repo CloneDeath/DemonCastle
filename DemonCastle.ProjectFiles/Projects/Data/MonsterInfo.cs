@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -123,17 +124,16 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 	public AnimationInfoCollection Animations { get; }
 	public StateInfoCollection States { get; }
 
-	public Texture2D PreviewTexture {
+	public ISpriteDefinition PreviewSpriteDefinition {
 		get {
 			var state = States.FirstOrDefault(s => s.Id == InitialState);
 			var animation = Animations.FirstOrDefault(a => a.Id == state?.Animation);
-			var spriteData = animation?.Frames.First().SpriteDefinition ?? new NullSpriteDefinition();
-			return new AtlasTexture {
-				Atlas = spriteData.Texture,
-				Region = spriteData.Region
-			};
+			return animation?.Frames.First().SpriteDefinition ?? new NullSpriteDefinition();
 		}
 	}
+
+	public Texture2D PreviewTexture => new AtlasTexture
+		{ Atlas = PreviewSpriteDefinition.Texture, Region = PreviewSpriteDefinition.Region };
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

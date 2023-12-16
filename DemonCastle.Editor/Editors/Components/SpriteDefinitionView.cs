@@ -34,7 +34,7 @@ public partial class SpriteDefinitionView : CenterContainer {
 		if (_definition != null) Load(_definition);
 	}
 
-	public void Load(ISpriteDefinition definition) {
+	public void Load(ISpriteDefinition? definition) {
 		if (_definition is INotifyPropertyChanged oldDefinition) {
 			oldDefinition.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
 		}
@@ -43,16 +43,18 @@ public partial class SpriteDefinitionView : CenterContainer {
 			newDefinition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
 		}
 
-		Rect.Texture = new AtlasTexture {
-			Atlas = _definition.Texture,
-			Region = _definition.Region,
-			FilterClip = true
-		};
+		Rect.Texture = _definition != null
+						   ? new AtlasTexture {
+							   Atlas = _definition.Texture,
+							   Region = _definition.Region,
+							   FilterClip = true
+						   }
+						   : null;
 		Rect.TextureFilter = TextureFilterEnum.Nearest;
-		Rect.FlipH = _definition.FlipHorizontal;
+		Rect.FlipH = _definition?.FlipHorizontal ?? false;
 		Rect.Material = new TransparentColorSpriteShader {
-			TransparentColor = definition.TransparentColor,
-			Threshold = definition.TransparentColorThreshold
+			TransparentColor = definition?.TransparentColor ?? Colors.Magenta,
+			Threshold = definition?.TransparentColorThreshold ?? 0.01f
 		};
 	}
 }

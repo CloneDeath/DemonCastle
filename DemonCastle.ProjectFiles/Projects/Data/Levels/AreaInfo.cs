@@ -82,8 +82,8 @@ public class AreaInfo : BaseInfo<AreaData> {
 			_tileMapInfos.Add(new TileMapInfo(tileMapData, this));
 		}
 
-		OnPropertyChanged(nameof(TileMap));
 		Save();
+		OnPropertyChanged(nameof(TileMap));
 	}
 
 	public void ClearTile(Vector2I tileIndex) {
@@ -97,7 +97,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 			Data.TileMap.Remove(tile);
 		}
 
-		OnPropertyChanged(nameof(TileMap));
 		Save();
+		OnPropertyChanged(nameof(TileMap));
 	}
 }
