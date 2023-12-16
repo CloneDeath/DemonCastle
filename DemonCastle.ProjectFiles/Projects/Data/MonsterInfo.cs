@@ -124,11 +124,15 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 	public AnimationInfoCollection Animations { get; }
 	public StateInfoCollection States { get; }
 
-	public ISpriteDefinition PreviewSpriteDefinition {
+	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
+
+	public Vector2 PreviewOrigin => PreviewFrame?.Origin ?? Vector2.Zero;
+
+	private IFrameInfo? PreviewFrame {
 		get {
 			var state = States.FirstOrDefault(s => s.Id == InitialState);
 			var animation = Animations.FirstOrDefault(a => a.Id == state?.Animation);
-			return animation?.Frames.First().SpriteDefinition ?? new NullSpriteDefinition();
+			return animation?.Frames.FirstOrDefault();
 		}
 	}
 
