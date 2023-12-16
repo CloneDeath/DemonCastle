@@ -4,7 +4,7 @@ using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
+namespace DemonCastle.Editor.Editors.Level.Area.View;
 
 public partial class AreaView : SelectableControl {
 	protected AreaInfo Area { get; }

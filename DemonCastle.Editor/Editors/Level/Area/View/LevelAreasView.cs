@@ -6,7 +6,7 @@ using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.AreaTiles;
+namespace DemonCastle.Editor.Editors.Level.Area.View;
 
 public partial class LevelAreasView : ControlView<ExpandingControl> {
 	private readonly LevelInfo _levelInfo;
