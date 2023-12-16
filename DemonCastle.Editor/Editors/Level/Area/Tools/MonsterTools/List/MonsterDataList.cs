@@ -1,10 +1,15 @@
+using System;
 using System.Collections.Specialized;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.List;
 
 public partial class MonsterDataList : VBoxContainer {
+	public event Action<MonsterDataInfo?>? MonsterSelected;
+
 	private AreaInfo? _area;
 
 	private Button AddMonster { get; }
@@ -18,9 +23,15 @@ public partial class MonsterDataList : VBoxContainer {
 		AddChild(Monsters = new ItemList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
+		Monsters.ItemSelected += Monsters_OnItemSelected;
 
 		AddChild(RemoveMonster = new Button { Text = "Remove Monster"});
 		RemoveMonster.Pressed += RemoveMonster_OnPressed;
+	}
+
+	private void Monsters_OnItemSelected(long index) {
+		var monster = _area?.Monsters[(int)index];
+		MonsterSelected?.Invoke(monster);
 	}
 
 	private void AddMonster_OnPressed() {
@@ -28,6 +39,10 @@ public partial class MonsterDataList : VBoxContainer {
 	}
 
 	private void RemoveMonster_OnPressed() {
+		var selected = Monsters.GetSelectedItems();
+		if (!selected.Any()) return;
+
+		_area?.Monsters.RemoveAt(selected[0]);
 	}
 
 	public override void _ExitTree() {
@@ -57,7 +72,7 @@ public partial class MonsterDataList : VBoxContainer {
 
 		if (_area == null) return;
 		foreach (var frame in _area.Monsters) {
-			Monsters.AddItem(frame.Id.ToString());
+			Monsters.AddItem(frame.MonsterId.ToString());
 		}
 	}
 }
