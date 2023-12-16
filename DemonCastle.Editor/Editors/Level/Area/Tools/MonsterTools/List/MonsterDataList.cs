@@ -53,9 +53,7 @@ public partial class MonsterDataList : VBoxContainer {
 	}
 
 	private void Reload() {
-		foreach (var child in Monsters.GetChildren()) {
-			child.QueueFree();
-		}
+		Monsters.Clear();
 
 		if (_area == null) return;
 		foreach (var frame in _area.Monsters) {
