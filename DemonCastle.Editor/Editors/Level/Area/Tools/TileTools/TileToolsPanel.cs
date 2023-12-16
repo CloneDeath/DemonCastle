@@ -21,9 +21,15 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
 		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
 
-		AddChild(TileSelector = new TileSelectorPanel(level.TileSet) {
+		var tileScroll = new ScrollContainer {
+			VerticalScrollMode = ScrollContainer.ScrollMode.Auto,
+			HorizontalScrollMode = ScrollContainer.ScrollMode.ShowNever,
 			SizeFlagsVertical = SizeFlags.ExpandFill,
 			CustomMinimumSize = new Vector2(0, 100)
+		};
+		AddChild(tileScroll);
+		tileScroll.AddChild(TileSelector = new TileSelectorPanel(level.TileSet) {
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		});
 		TileSelector.TileSelected += TileSelector_OnTileSelected;
 
