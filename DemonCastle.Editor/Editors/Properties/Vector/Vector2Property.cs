@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Editor.Properties;
 using Godot;
 
@@ -19,8 +18,8 @@ public partial class Vector2Property : VBoxContainer, IBaseProperty {
 	public Vector2 PropertyValue {
 		get => new((float)XBox.Value, (float)YBox.Value);
 		set {
-			if (Math.Abs(XBox.Value - value.X) > 0) XBox.Value = value.X;
-			if (Math.Abs(YBox.Value - value.Y) > 0) YBox.Value = value.Y;
+			XBox.SetValueNoSignal(value.X);
+			YBox.SetValueNoSignal(value.Y);
 		}
 	}
 
@@ -80,11 +79,11 @@ public partial class Vector2Property : VBoxContainer, IBaseProperty {
 	}
 
 	protected void OnXValueChange(double value) {
-		Binding.Set(new Vector2((int)value, (int)YBox.Value));
+		Binding.Set(new Vector2((float)value, (float)YBox.Value));
 	}
 
 	protected void OnYValueChange(double value) {
-		Binding.Set(new Vector2((int)XBox.Value, (int)value));
+		Binding.Set(new Vector2((float)XBox.Value, (float)value));
 	}
 
 	private void Binding_OnChanged(Vector2 value) {
