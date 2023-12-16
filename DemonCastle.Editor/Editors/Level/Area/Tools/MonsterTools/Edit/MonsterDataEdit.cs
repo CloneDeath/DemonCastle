@@ -9,10 +9,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.Edit;
 
 public partial class MonsterDataEdit : PropertyCollection {
-	public MonsterDataInfo? MonsterData { get; set; }
+	private readonly MonsterDataInfoProxy _proxy = new();
+	public MonsterDataInfo? MonsterData {
+		get => _proxy.Proxy;
+		set => _proxy.Proxy = value;
+	}
 
 	public MonsterDataEdit(ProjectInfo project) {
-
 		AddChild(new OptionButton());
 		AddChild(new TextEdit());
 

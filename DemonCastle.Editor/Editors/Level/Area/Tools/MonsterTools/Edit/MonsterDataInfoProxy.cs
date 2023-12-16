@@ -6,7 +6,8 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.Edit;
 
 public class MonsterDataInfoProxy : InfoProxy<MonsterDataInfo> {
 	protected override void NotifyProxyChanged() {
-
+		OnPropertyChanged(nameof(MonsterId));
+		OnPropertyChanged(nameof(Position));
 	}
 
 	public Guid MonsterId {
