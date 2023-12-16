@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.List;
 
 public partial class MonsterDataList : VBoxContainer {
+	private readonly ProjectInfo _project;
 	public event Action<MonsterDataInfo?>? MonsterSelected;
 
 	private AreaInfo? _area;
@@ -16,7 +19,10 @@ public partial class MonsterDataList : VBoxContainer {
 	private ItemList Monsters { get; }
 	private Button RemoveMonster { get; }
 
-	public MonsterDataList() {
+	public MonsterDataList(ProjectInfo project) {
+		_project = project;
+		Name = nameof(MonsterDataList);
+
 		AddChild(AddMonster = new Button { Text = "Add Monster"});
 		AddMonster.Pressed += AddMonster_OnPressed;
 
@@ -72,7 +78,10 @@ public partial class MonsterDataList : VBoxContainer {
 
 		if (_area == null) return;
 		foreach (var frame in _area.Monsters) {
-			Monsters.AddItem(frame.MonsterId.ToString());
+			var monster = _project.Monsters.FirstOrDefault(m => frame.MonsterId == m.Id);
+			var text = $"{monster?.Name ?? "<Empty>"} @ ({frame.Position.X}, {frame.Position.Y})";
+			var texture = monster?.PreviewTexture ?? new NullSpriteDefinition().Texture;
+			Monsters.AddItem(text, texture);
 		}
 	}
 }

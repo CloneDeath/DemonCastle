@@ -25,7 +25,7 @@ public partial class MonsterToolsPanel : VBoxContainer {
 	public MonsterToolsPanel(ProjectInfo project) {
 		Name = nameof(MonsterToolsPanel);
 
-		AddChild(MonsterList = new MonsterDataList {
+		AddChild(MonsterList = new MonsterDataList(project) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		MonsterList.MonsterSelected += MonsterList_OnMonsterSelected;
