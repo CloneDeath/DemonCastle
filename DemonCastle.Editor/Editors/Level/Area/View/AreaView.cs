@@ -10,7 +10,7 @@ public partial class AreaView : SelectableControl {
 	protected AreaInfo Area { get; }
 
 	protected Outline Outline { get; }
-	protected AreaTilesView Root { get; }
+	protected Tiles.AreaTilesView Root { get; }
 
 	private static readonly Color SelectedColor = new(Colors.White, 0.75f);
 	private static readonly Color DeselectedColor = new(Colors.White, 0.3f);
@@ -32,7 +32,7 @@ public partial class AreaView : SelectableControl {
 			Color = DeselectedColor
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
-		AddChild(Root = new AreaTilesView(area) {
+		AddChild(Root = new Tiles.AreaTilesView(area) {
 			MouseFilter = MouseFilterEnum.Pass
 		});
 	}

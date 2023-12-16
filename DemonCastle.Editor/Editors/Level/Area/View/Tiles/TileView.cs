@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 
-namespace DemonCastle.Editor.Editors.Level.Area.View;
+namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 
 public partial class TileView : SpriteDefinitionView {
 	protected TileMapInfo Tile { get; }

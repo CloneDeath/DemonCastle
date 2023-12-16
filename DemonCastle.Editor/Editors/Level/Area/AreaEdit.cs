@@ -1,5 +1,4 @@
 using System;
-using DemonCastle.Editor.Editors.Level.Area.AreaTiles;
 using DemonCastle.Editor.Editors.Level.Area.Details;
 using DemonCastle.Editor.Editors.Level.Area.Tools;
 using DemonCastle.ProjectFiles.Projects.Data;

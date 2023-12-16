@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.View;
+namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 
 public partial class AreaTilesView : Control {
 	private readonly AreaInfo _areaInfo;
