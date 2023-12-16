@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -15,6 +17,8 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
 		States = new StateInfoCollection(file, Resource.States);
 	}
+
+	public Guid Id => Resource.Id;
 
 	public string Name {
 		get => Resource.Name;
@@ -118,6 +122,18 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo, INotifyProperty
 
 	public AnimationInfoCollection Animations { get; }
 	public StateInfoCollection States { get; }
+
+	public Texture2D PreviewTexture {
+		get {
+			var state = States.FirstOrDefault(s => s.Id == InitialState);
+			var animation = Animations.FirstOrDefault(a => a.Id == state?.Animation);
+			var spriteData = animation?.Frames.First().SpriteDefinition ?? new NullSpriteDefinition();
+			return new AtlasTexture {
+				Atlas = spriteData.Texture,
+				Region = spriteData.Region
+			};
+		}
+	}
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

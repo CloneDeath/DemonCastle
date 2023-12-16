@@ -4,7 +4,7 @@ using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Reference;
 
 public partial class AreaReferenceProperty : BaseReferenceProperty<AreaInfo> {
 	public AreaReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<AreaInfo> options) : base(binding, options) {

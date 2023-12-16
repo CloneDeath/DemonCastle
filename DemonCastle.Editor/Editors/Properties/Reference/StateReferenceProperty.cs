@@ -4,7 +4,7 @@ using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Reference;
 
 public partial class StateReferenceProperty : BaseReferenceProperty<StateInfo> {
 	public StateReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<StateInfo> options) : base(binding, options) {

@@ -4,7 +4,7 @@ using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Reference;
 
 public partial class SpriteReferenceProperty : BaseReferenceProperty<ISpriteDefinition> {
 	public SpriteReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<ISpriteDefinition> options) : base(binding, options) {

@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
+using SpriteReferenceProperty = DemonCastle.Editor.Editors.Properties.Reference.SpriteReferenceProperty;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 

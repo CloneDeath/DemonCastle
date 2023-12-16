@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using DemonCastle.Editor.Editors.Properties.Reference;
 using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles;
@@ -86,6 +87,14 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return vector2IProperty;
 	}
 
+	public Vector2Property AddVector2<T>(string name, T target, Expression<Func<T, Vector2>> propertyExpression, Vector2PropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var vector2Property = new Vector2Property(new PropertyBinding<T, Vector2>(target, propertyExpression), options ?? new Vector2PropertyOptions()) {
+			DisplayName = name
+		};
+		AddChild(vector2Property);
+		return vector2Property;
+	}
+
 	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
 		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
 			DisplayName = name
@@ -114,6 +123,14 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		};
 		AddChild(areaReferenceProperty);
 		return areaReferenceProperty;
+	}
+
+	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<MonsterInfo> options) where T : INotifyPropertyChanged {
+		var monsterReferenceProperty = new MonsterReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		};
+		AddChild(monsterReferenceProperty);
+		return monsterReferenceProperty;
 	}
 
 	public void AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {

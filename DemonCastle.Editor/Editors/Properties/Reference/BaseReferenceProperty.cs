@@ -4,7 +4,7 @@ using System.Linq;
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Reference;
 
 public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 	protected abstract Texture2D? GetTexture(T option);

@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
+using SpriteReferenceProperty = DemonCastle.Editor.Editors.Properties.Reference.SpriteReferenceProperty;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
