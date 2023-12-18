@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -24,8 +22,6 @@ public class WeaponInfo : FileInfo<WeaponFile>, IListableInfo, INotifyPropertyCh
 	}
 
 	public AnimationInfoCollection Animations { get; }
-
-	public Guid GetAnimationId(string animationName) => Animations.FirstOrDefault(a => a.Name == animationName)?.Id ?? Guid.Empty;
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

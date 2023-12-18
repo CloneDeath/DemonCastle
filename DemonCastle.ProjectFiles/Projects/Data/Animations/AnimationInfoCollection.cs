@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,9 @@ public class AnimationInfoCollection : IEnumerableInfo<IAnimationInfo> {
 	protected void Save() => File.Save();
 
 	public IAnimationInfo this[int index] => Animations[index];
+
+	public Guid GetAnimationId(string animationName) => Animations.FirstOrDefault(a => a.Name == animationName)?.Id ?? Guid.Empty;
+
 
 	#region IEnumerable
 	public IEnumerator<IAnimationInfo> GetEnumerator() => Animations.GetEnumerator();

@@ -67,16 +67,16 @@ public partial class GamePlayer : CharacterBody2D {
 		var weaponSlot = characterFrame.Slots.FirstOrDefault(s => s.Name == "Weapon");
 
 		if (weaponSlot == null) {
-			Game.PlayNone();
+			Weapon.PlayNone();
 		}
 		else {
-			Game.Play(weaponSlot.Animation);
+			Weapon.Play(weaponSlot.Animation);
 		}
-		var weaponFrame = Game.CurrentFrame;
+		var weaponFrame = Weapon.CurrentFrame;
 
 		var characterFrameTopLeftOffset = characterFrame.SpriteDefinition.Region.Size * new Vector2(0.5f, 1);
 		var weaponFrameTopLeftOffset = weaponFrame?.SpriteDefinition.Region.Size * new Vector2(0.5f, 1) ?? Vector2.Zero;
-		Game.Position = (weaponSlot?.Position ?? Vector2.Zero) - characterFrameTopLeftOffset
+		Weapon.Position = (weaponSlot?.Position ?? Vector2.Zero) - characterFrameTopLeftOffset
 						+ weaponFrameTopLeftOffset - (weaponFrame?.Offset ?? Vector2.Zero);
 	}
 

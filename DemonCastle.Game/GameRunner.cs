@@ -7,7 +7,7 @@ namespace DemonCastle.Game;
 public partial class GameRunner : Control {
 	protected GameLevel Level { get; }
 	protected GamePlayer Player { get; }
-	public GameRunner(LevelInfo level, CharacterInfo player) {
+	public GameRunner(ProjectInfo project, LevelInfo level, CharacterInfo player) {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
@@ -23,7 +23,7 @@ public partial class GameRunner : Control {
 		};
 		subViewportContainer.AddChild(subViewport);
 
-		subViewport.AddChild(Level = new GameLevel(level));
+		subViewport.AddChild(Level = new GameLevel(project, level));
 		subViewport.AddChild(Player = new GamePlayer(level, player, new GameLogger()) {
 			Position = Level.StartingLocation
 		});

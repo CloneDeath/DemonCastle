@@ -22,13 +22,13 @@ public partial class Main : Control {
         ProjectSelectionMenu.QueueFree();
 
         AddChild(GameSetup = new GameSetup(project));
-        GameSetup.GameStart += OnGameStart;
+        GameSetup.GameStart += (level, character) => OnGameStart(project, level, character);
     }
 
-    private void OnGameStart(LevelInfo level, CharacterInfo character) {
+    private void OnGameStart(ProjectInfo project, LevelInfo level, CharacterInfo character) {
         GameSetup.QueueFree();
 
-        var gameRunner = new GameRunner(level, character);
+        var gameRunner = new GameRunner(project, level, character);
         AddChild(gameRunner);
         gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }

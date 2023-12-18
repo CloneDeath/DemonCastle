@@ -12,7 +12,7 @@ public partial class GamePlayer {
 	protected CharacterInfo Character { get; }
 
 	public CharacterAnimation Animation { get; }
-	public GameAnimation Game { get; }
+	public GameAnimation Weapon { get; }
 	public Area2D StairsDetection { get; }
 	public Area2D FloorDetection { get; }
 
@@ -30,7 +30,7 @@ public partial class GamePlayer {
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
-		AddChild(Game = new GameAnimation(character.DefaultWeaponInfo));
+		AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations));
 		AddChild(Animation = new CharacterAnimation(character));
 
 		AddChild(StairsDetection = new Area2D {

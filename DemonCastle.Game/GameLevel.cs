@@ -1,4 +1,5 @@
 using System.Linq;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
@@ -9,13 +10,13 @@ public partial class GameLevel : Node2D {
 
 	public Vector2 StartingLocation => Level.StartingLocation;
 
-	public GameLevel(LevelInfo level) {
+	public GameLevel(ProjectInfo project, LevelInfo level) {
 		Level = level;
 
 		Name = nameof(GameLevel);
 
 		foreach (var area in Level.Areas) {
-			AddChild(new GameArea(area, level) {
+			AddChild(new GameArea(project, level, area) {
 				Position = area.PositionOfArea.ToPixelPositionInLevel()
 			});
 		}
