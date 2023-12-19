@@ -44,8 +44,16 @@ public partial class CharacterFrameInfoDetails : PropertyCollection {
 			Text = "Delete Frame"
 		});
 		DeleteButton.Pressed += DeleteButton_OnPressed;
+	}
 
+	public override void _EnterTree() {
+		base._EnterTree();
 		_proxy.PropertyChanged += Proxy_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		_proxy.PropertyChanged -= Proxy_OnPropertyChanged;
 	}
 
 	private void Proxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
