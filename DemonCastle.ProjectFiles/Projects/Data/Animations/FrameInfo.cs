@@ -17,6 +17,9 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	Vector2I Offset { get; set; }
 	Vector2I Origin { get; }
 
+	Rect2I? HitBox { get; set; }
+	Rect2I? HurtBox { get; set; }
+
 	string SourceFile { get; set; }
 	Guid SpriteId { get; set; }
 	ISpriteDefinition SpriteDefinition { get; }
@@ -88,6 +91,24 @@ public class FrameInfo : IFrameInfo {
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Origin));
+		}
+	}
+
+	public Rect2I? HitBox {
+		get => FrameData.HitBox;
+		set {
+			FrameData.HitBox = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Rect2I? HurtBox {
+		get => FrameData.HurtBox;
+		set {
+			FrameData.HurtBox = value;
+			Save();
+			OnPropertyChanged();
 		}
 	}
 

@@ -20,6 +20,9 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		OnPropertyChanged(nameof(SpriteId));
 		OnPropertyChanged(nameof(SpriteDefinition));
 
+		OnPropertyChanged(nameof(HitBox));
+		OnPropertyChanged(nameof(HurtBox));
+
 		OnPropertyChanged(nameof(WeaponEnabled));
 		OnPropertyChanged(nameof(WeaponAnimation));
 		OnPropertyChanged(nameof(WeaponPosition));
@@ -63,6 +66,21 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 	}
 
 	public Vector2I Origin => Proxy?.Origin ?? Vector2I.Zero;
+
+	public Rect2I? HitBox {
+		get => Proxy?.HitBox;
+		set {
+			if (Proxy != null) Proxy.HitBox = value;
+		}
+	}
+
+	public Rect2I? HurtBox {
+		get => Proxy?.HurtBox;
+		set {
+			if (Proxy != null) Proxy.HurtBox = value;
+		}
+	}
+
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();

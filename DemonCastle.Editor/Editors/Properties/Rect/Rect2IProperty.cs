@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Properties;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.Rect;
 
 public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 	protected Label Label { get; }

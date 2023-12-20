@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using DemonCastle.Editor.Editors.Properties.Rect;
 using DemonCastle.Editor.Editors.Properties.Reference;
 using DemonCastle.Editor.Editors.Properties.Vector;
 using DemonCastle.Editor.Properties;
@@ -95,10 +96,20 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return vector2Property;
 	}
 
-	public void AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
+	public Rect2IProperty AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
+		var rect2IProperty = new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
 			DisplayName = name
-		});
+		};
+		AddChild(rect2IProperty);
+		return rect2IProperty;
+	}
+
+	public NullableRect2IProperty AddNullableRect2I<T>(string name, T target, Expression<Func<T, Rect2I?>> propertyExpression) where T : INotifyPropertyChanged {
+		var nullableRect2IProperty = new NullableRect2IProperty(new PropertyBinding<T, Rect2I?>(target, propertyExpression)) {
+			DisplayName = name
+		};
+		AddChild(nullableRect2IProperty);
+		return nullableRect2IProperty;
 	}
 
 	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {

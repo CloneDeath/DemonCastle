@@ -20,7 +20,15 @@ public class PropertyBinding<TObject, TProperty> : IPropertyBinding<TProperty>
 		Target.PropertyChanged += Target_OnPropertyChanged;
 	}
 
-	public TProperty Get() => (TProperty)(Property.GetValue(Target) ?? throw new NullReferenceException());
+	private static bool TPropertyIsNullable => Nullable.GetUnderlyingType(typeof(TProperty)) != null;
+
+	public TProperty Get() {
+		if (TPropertyIsNullable) {
+			return (TProperty)Property.GetValue(Target)!; // it's allowed to be null!
+		}
+		return (TProperty)(Property.GetValue(Target) ?? throw new NullReferenceException());
+	}
+
 	public void Set(TProperty value) {
 		if (Equals(Get(), value)) return;
 		Property.SetValue(Target, value);

@@ -15,6 +15,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
+	protected PropertyCollection HitBoxes { get; }
 	protected PropertyCollection AdditionalProperties { get; }
 
 	public IFrameInfo? FrameInfo {
@@ -28,8 +29,12 @@ public partial class FrameInfoDetails : PropertyCollection {
 		AddFloat("Duration", _proxy, p => p.Duration);
 		AddFile("Source", _proxy, file.Directory, p => p.SourceFile, FileType.SpriteSources);
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
-
 		AddOrigin("Origin", _proxy, p => p.Anchor, p => p.Offset);
+		AddChild(HitBoxes = new PropertyCollection {
+			Vertical = false
+		});
+		HitBoxes.AddNullableRect2I("HitBox", _proxy, p => p.HitBox);
+		HitBoxes.AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
 
 		AddChild(AdditionalProperties = new PropertyCollection());
 
