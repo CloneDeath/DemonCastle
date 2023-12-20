@@ -9,11 +9,13 @@ using SpriteReferenceProperty = DemonCastle.Editor.Editors.Properties.Reference.
 namespace DemonCastle.Editor.Editors.Animations.Editor.Frames;
 
 public partial class FrameInfoDetails : PropertyCollection {
-	private readonly FrameInfoProxy _proxy = new();
+	protected readonly FrameInfoProxy _proxy = new();
 
 	protected SpriteReferenceProperty SpriteReference { get; }
 	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
+
+	protected PropertyCollection AdditionalProperties { get; }
 
 	public IFrameInfo? FrameInfo {
 		get => _proxy.Proxy;
@@ -28,6 +30,8 @@ public partial class FrameInfoDetails : PropertyCollection {
 		SpriteReference = AddSpriteReference("Sprite", _proxy, p => p.SpriteId, _proxy.SpriteDefinitions);
 
 		AddOrigin("Origin", _proxy, p => p.Anchor, p => p.Offset);
+
+		AddChild(AdditionalProperties = new PropertyCollection());
 
 		AddChild(FrameInfoView = new FrameInfoView {
 			SizeFlagsVertical = SizeFlags.ExpandFill,
