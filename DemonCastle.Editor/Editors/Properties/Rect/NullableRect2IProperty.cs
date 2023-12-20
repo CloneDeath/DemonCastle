@@ -22,10 +22,12 @@ public partial class NullableRect2IProperty : VBoxContainer, IBaseProperty{
 		set {
 			if (value == null) {
 				CheckBox.ButtonPressed = false;
+				RefreshEditable();
 				return;
 			}
 
 			CheckBox.ButtonPressed = true;
+			RefreshEditable();
 			XBox.Value = value.Value.Position.X;
 			YBox.Value = value.Value.Position.Y;
 			WidthBox.Value = value.Value.Size.X;
@@ -84,6 +86,7 @@ public partial class NullableRect2IProperty : VBoxContainer, IBaseProperty{
 
 	private void CheckBox_OnToggled(bool buttonPressed) {
 		Binding.Set(PropertyValue);
+		RefreshEditable();
 	}
 
 	public override void _EnterTree() {
@@ -106,17 +109,19 @@ public partial class NullableRect2IProperty : VBoxContainer, IBaseProperty{
 
 	public virtual void Enable() {
 		CheckBox.Disabled = false;
-		XBox.Editable = true;
-		YBox.Editable = true;
-		WidthBox.Editable = true;
-		HeightBox.Editable = true;
+		RefreshEditable();
 	}
 
 	public virtual void Disable() {
 		CheckBox.Disabled = true;
-		XBox.Editable = false;
-		YBox.Editable = false;
-		WidthBox.Editable = false;
-		HeightBox.Editable = false;
+		RefreshEditable();
+	}
+
+	private void RefreshEditable() {
+		var enabled = !CheckBox.Disabled;
+		XBox.Editable = enabled && CheckBox.ButtonPressed;
+		YBox.Editable = enabled && CheckBox.ButtonPressed;
+		WidthBox.Editable = enabled && CheckBox.ButtonPressed;
+		HeightBox.Editable = enabled && CheckBox.ButtonPressed;
 	}
 }
