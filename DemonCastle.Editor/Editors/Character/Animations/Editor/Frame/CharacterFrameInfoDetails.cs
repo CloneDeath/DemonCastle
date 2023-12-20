@@ -6,7 +6,7 @@ namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 
 public partial class CharacterFrameInfoDetails : FrameInfoDetails {
 
-	public CharacterFrameInfoDetails(IFileInfo file) : base(file) {
+	public CharacterFrameInfoDetails(IFileInfo file) : base(file, new CharacterFrameInfoView()) {
 		Name = nameof(CharacterFrameInfoDetails);
 
 		AdditionalProperties.AddBoolean("Weapon Enabled", _proxy, p => p.WeaponEnabled);

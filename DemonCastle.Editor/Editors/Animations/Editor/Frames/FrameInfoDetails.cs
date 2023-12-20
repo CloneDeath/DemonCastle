@@ -23,7 +23,11 @@ public partial class FrameInfoDetails : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public FrameInfoDetails(IFileInfo file) {
+	public FrameInfoDetails(IFileInfo file) : this(file, new FrameInfoView()){
+
+	}
+
+	protected FrameInfoDetails(IFileInfo file, FrameInfoView infoView) {
 		Name = nameof(FrameInfoDetails);
 
 		AddFloat("Duration", _proxy, p => p.Duration);
@@ -38,9 +42,9 @@ public partial class FrameInfoDetails : PropertyCollection {
 
 		AddChild(AdditionalProperties = new PropertyCollection());
 
-		AddChild(FrameInfoView = new FrameInfoView {
-			SizeFlagsVertical = SizeFlags.ExpandFill,
-		});
+		FrameInfoView = infoView;
+		FrameInfoView.SizeFlagsVertical = SizeFlags.ExpandFill;
+		AddChild(FrameInfoView);
 		FrameInfoView.Load(_proxy);
 
 		AddChild(DeleteButton = new Button {
