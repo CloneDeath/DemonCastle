@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
+using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
@@ -19,6 +20,12 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	public FrameInfoView() {
 		MainControl.Zoom = 8;
 		Inner.AddChild(OriginTarget = new PositionTarget());
+		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(_proxy, p => p.HurtBox)) {
+			Color = Colors.Orange
+		});
+		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(_proxy, p => p.HitBox)) {
+			Color = Colors.Blue
+		});
 	}
 
 	public override void _ExitTree() {
