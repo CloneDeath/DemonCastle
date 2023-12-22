@@ -4,11 +4,11 @@ using Godot;
 namespace DemonCastle.Game.Animations.Generic;
 
 public partial class HitBoxNode : Area2D {
-	public HitBoxNode(Rect2I region, DebugState debug) {
+	public HitBoxNode(Rect2I region, Vector2 origin, DebugState debug) {
 		Name = nameof(HitBoxNode);
 
 		AddChild(new CollisionShape2D {
-			//Position = region.Position,
+			Position = -origin + region.Position + region.Size / 2,
 			Shape = new RectangleShape2D {
 				Size = region.Size
 			},
