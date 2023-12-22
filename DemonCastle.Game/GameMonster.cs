@@ -18,13 +18,15 @@ public partial class GameMonster : CharacterBody2D {
 			Position = new Vector2(0, -(float)Math.Floor(monster.Size.Y/2d)),
 			Shape = new RectangleShape2D {
 				Size = monster.Size
-			}
+			},
+			DebugColor = new Color(Colors.Green, 0.5f),
+			Visible = debug.ShowCollisions
 		});
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
 		GameAnimation animation;
-		AddChild(animation = new GameAnimation(monster.Animations));
+		AddChild(animation = new GameAnimation(monster.Animations, debug));
 
 		var currentState = monster.States.FirstOrDefault(m => m.Id == monster.InitialState);
 		animation.Play(currentState?.Animation ?? Guid.Empty);

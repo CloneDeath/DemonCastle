@@ -17,6 +17,7 @@ public partial class GameSetup : Container {
 	protected Button LaunchButton { get; }
 
 	protected CheckBox Debug_ShowPositions { get; }
+	protected CheckBox Debug_ShowCollisions { get; }
 	protected CheckBox Debug_ShowHitBoxes { get; }
 	protected CheckBox Debug_ShowHurtBoxes { get; }
 
@@ -57,6 +58,10 @@ public partial class GameSetup : Container {
 			Text = "Show Positions",
 			ButtonPressed = true
 		});
+		debugOptions.AddChild(Debug_ShowCollisions = new CheckBox {
+			Text = "Show Collisions",
+			ButtonPressed = true
+		});
 		debugOptions.AddChild(Debug_ShowHitBoxes = new CheckBox {
 			Text = "Show HitBoxes",
 			ButtonPressed = true
@@ -76,6 +81,7 @@ public partial class GameSetup : Container {
 	protected void OnLaunchButtonClicked() {
 		var debug = new DebugState {
 			ShowPositions = Debug_ShowPositions.ButtonPressed,
+			ShowCollisions = Debug_ShowCollisions.ButtonPressed,
 			ShowHitBoxes = Debug_ShowHitBoxes.ButtonPressed,
 			ShowHurtBoxes = Debug_ShowHurtBoxes.ButtonPressed
 		};

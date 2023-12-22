@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
@@ -10,7 +11,8 @@ public partial class AnimationInfoNode : Node2D {
 	protected IAnimationInfo Animation { get; }
 	protected PhasingNode Frames { get; }
 
-	public AnimationInfoNode(IAnimationInfo animation) {
+	public AnimationInfoNode(IAnimationInfo animation, DebugState debug) {
+		Name = nameof(AnimationInfoNode);
 		Animation = animation;
 
 		AddChild(Frames = new PhasingNode {
@@ -19,7 +21,7 @@ public partial class AnimationInfoNode : Node2D {
 		Frames.Complete += _ => Complete?.Invoke(this);
 		float totalOffset = 0;
 		foreach (var frame in Animation.Frames) {
-			Frames.AddPhase(new FrameInfoNode(frame) {
+			Frames.AddPhase(new FrameInfoNode(frame, debug) {
 				StartTime = totalOffset,
 				EndTime = totalOffset + frame.Duration
 			});

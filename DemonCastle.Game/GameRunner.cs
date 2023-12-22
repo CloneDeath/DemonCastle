@@ -30,4 +30,14 @@ public partial class GameRunner : Control {
 		});
 		subViewport.AddChild(new GameCamera(Player, Level));
 	}
+
+	public override void _EnterTree() {
+		base._EnterTree();
+		GetTree().DebugCollisionsHint = true;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		GetTree().DebugCollisionsHint = false;
+	}
 }

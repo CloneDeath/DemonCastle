@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Game.Animations.Generic;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
 
@@ -14,10 +15,12 @@ public partial class GameAnimation : Node2D {
 
 	public FrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as FrameInfo;
 
-	public GameAnimation(AnimationInfoCollection animations) {
+	public GameAnimation(AnimationInfoCollection animations, DebugState debug) {
+		Name = nameof(GameAnimation);
+
 		AnimationCollection = animations;
 		foreach (var animation in animations) {
-			var animationNode = new AnimationInfoNode(animation) {
+			var animationNode = new AnimationInfoNode(animation, debug) {
 				Visible = false
 			};
 			Animations[animationNode.AnimationId] = animationNode;

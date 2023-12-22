@@ -26,13 +26,15 @@ public partial class GamePlayer {
 			Position = new Vector2(0, -Character.Size.Y/2),
 			Shape = new RectangleShape2D {
 				Size = Character.Size
-			}
+			},
+			DebugColor = new Color(Colors.Green, 0.5f),
+			Visible = debug.ShowCollisions
 		});
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
-		AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations));
-		AddChild(Animation = new CharacterAnimation(character));
+		AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations, debug));
+		AddChild(Animation = new CharacterAnimation(character, debug));
 
 		AddChild(StairsDetection = new Area2D {
 			CollisionLayer = (uint) CollisionLayers.Player,
@@ -42,7 +44,8 @@ public partial class GamePlayer {
 		StairsDetection.AddChild(new CollisionShape2D {
 			Shape = new RectangleShape2D {
 				Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2)
-			}
+			},
+			Visible = debug.ShowCollisions
 		});
 
 		AddChild(FloorDetection = new Area2D {
@@ -52,7 +55,8 @@ public partial class GamePlayer {
 		FloorDetection.AddChild(new CollisionShape2D {
 			Shape = new RectangleShape2D {
 				Size = new Vector2(Character.Size.X, level.TileSize.Y / 4)
-			}
+			},
+			Visible = debug.ShowCollisions
 		});
 
 		AddChild(new DebugPosition2D(debug));
