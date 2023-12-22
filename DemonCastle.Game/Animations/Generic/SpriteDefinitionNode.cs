@@ -15,6 +15,7 @@ public partial class SpriteDefinitionNode : Sprite2D {
 			TransparentColor = definition.TransparentColor,
 			Threshold = definition.TransparentColorThreshold
 		};
-		Offset = origin;
+		Offset = -origin;
+		Centered = false;
 	}
 }
