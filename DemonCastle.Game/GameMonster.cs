@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DemonCastle.Game.Animations;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
@@ -9,7 +10,7 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameMonster : CharacterBody2D {
-	public GameMonster(MonsterInfo monster, MonsterDataInfo monsterData) {
+	public GameMonster(MonsterInfo monster, MonsterDataInfo monsterData, DebugState debug) {
 		Name = nameof(GameMonster);
 		Position = monsterData.MonsterPosition.ToPixelPositionInArea();
 
@@ -27,5 +28,7 @@ public partial class GameMonster : CharacterBody2D {
 
 		var currentState = monster.States.FirstOrDefault(m => m.Id == monster.InitialState);
 		animation.Play(currentState?.Animation ?? Guid.Empty);
+
+		AddChild(new DebugPosition2D(debug));
 	}
 }

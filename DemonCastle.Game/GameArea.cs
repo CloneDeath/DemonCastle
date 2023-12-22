@@ -1,4 +1,5 @@
 using System.Linq;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Tiles;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -10,7 +11,7 @@ namespace DemonCastle.Game;
 public partial class GameArea : Node2D {
 	private StaticBody2D Body { get; }
 
-	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area) {
+	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, DebugState debug) {
 		Name = nameof(GameArea);
 
 		foreach (var tileMapInfo in area.TileMap) {
@@ -23,7 +24,7 @@ public partial class GameArea : Node2D {
 		foreach (var monsterData in area.Monsters) {
 			var monster = project.Monsters.FirstOrDefault(m => m.Id == monsterData.MonsterId);
 			if (monster == null) continue;
-			AddChild(new GameMonster(monster, monsterData));
+			AddChild(new GameMonster(monster, monsterData, debug));
 		}
 		AddChild(Body = new StaticBody2D {
 			CollisionLayer = (uint)CollisionLayers.World

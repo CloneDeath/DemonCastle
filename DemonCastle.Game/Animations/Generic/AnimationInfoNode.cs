@@ -19,8 +19,10 @@ public partial class AnimationInfoNode : Node2D {
 		Frames.Complete += _ => Complete?.Invoke(this);
 		float totalOffset = 0;
 		foreach (var frame in Animation.Frames) {
-			var sprite = new SpriteDefinitionNode(frame.SpriteDefinition);
-			Frames.AddPhase(sprite, totalOffset, totalOffset + frame.Duration);
+			Frames.AddPhase(new FrameInfoNode(frame) {
+				StartTime = totalOffset,
+				EndTime = totalOffset + frame.Duration
+			});
 			totalOffset += frame.Duration;
 		}
 	}

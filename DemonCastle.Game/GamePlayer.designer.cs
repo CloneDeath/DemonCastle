@@ -1,4 +1,5 @@
 using DemonCastle.Game.Animations;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -16,7 +17,7 @@ public partial class GamePlayer {
 	public Area2D StairsDetection { get; }
 	public Area2D FloorDetection { get; }
 
-	public GamePlayer(LevelInfo level, CharacterInfo character, IGameLogger logger) {
+	public GamePlayer(LevelInfo level, CharacterInfo character, DebugState debug, IGameLogger logger) {
 		Level = level;
 		Character = character;
 		Logger = logger;
@@ -53,5 +54,7 @@ public partial class GamePlayer {
 				Size = new Vector2(Character.Size.X, level.TileSize.Y / 4)
 			}
 		});
+
+		AddChild(new DebugPosition2D(debug));
 	}
 }

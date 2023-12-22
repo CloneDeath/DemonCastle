@@ -2,11 +2,11 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Game.Animations.Generic; 
+namespace DemonCastle.Game.Animations.Generic;
 
 public partial class SpriteDefinitionNode : Sprite2D {
 	protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
-	public SpriteDefinitionNode(ISpriteDefinition definition) {
+	public SpriteDefinitionNode(ISpriteDefinition definition, Vector2I origin) {
 		Texture = definition.Texture;
 		RegionEnabled = true;
 		RegionRect = definition.Region;
@@ -15,6 +15,6 @@ public partial class SpriteDefinitionNode : Sprite2D {
 			TransparentColor = definition.TransparentColor,
 			Threshold = definition.TransparentColorThreshold
 		};
-		Offset = new Vector2(0, -definition.Region.Size.Y/2f);
+		Offset = origin;
 	}
 }

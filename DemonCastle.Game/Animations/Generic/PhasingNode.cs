@@ -34,6 +34,10 @@ public partial class PhasingNode : Node2D {
 			EndTime = endTime
 		};
 		child.AddChild(node);
+		AddPhase(child);
+	}
+
+	public void AddPhase(TemporalNode child) {
 		Nodes.Add(child);
 		AddChild(child);
 	}

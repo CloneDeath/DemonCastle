@@ -1,5 +1,6 @@
 using DemonCastle.Editor;
 using DemonCastle.Game;
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -22,13 +23,13 @@ public partial class Main : Control {
         ProjectSelectionMenu.QueueFree();
 
         AddChild(GameSetup = new GameSetup(project));
-        GameSetup.GameStart += (level, character) => OnGameStart(project, level, character);
+        GameSetup.GameStart += (level, character, debug) => OnGameStart(project, level, character, debug);
     }
 
-    private void OnGameStart(ProjectInfo project, LevelInfo level, CharacterInfo character) {
+    private void OnGameStart(ProjectInfo project, LevelInfo level, CharacterInfo character, DebugState debug) {
         GameSetup.QueueFree();
 
-        var gameRunner = new GameRunner(project, level, character);
+        var gameRunner = new GameRunner(project, level, character, debug);
         AddChild(gameRunner);
         gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }
