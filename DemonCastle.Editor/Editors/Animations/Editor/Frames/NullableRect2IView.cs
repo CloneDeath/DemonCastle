@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Properties;
 using Godot;
