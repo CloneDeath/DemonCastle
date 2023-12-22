@@ -1,3 +1,4 @@
+using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -9,7 +10,7 @@ public partial class GameTileStairs : Area2D {
 	public GameTileStairsNode Start { get; }
 	public GameTileStairsNode End { get; }
 
-	public GameTileStairs(TileInfo tile, StairData tileStairs) {
+	public GameTileStairs(TileInfo tile, StairData tileStairs, DebugState debug) {
 		Name = nameof(GameTileStairs);
 		CollisionLayer = (uint)CollisionLayers.World;
 		CollisionMask = (uint)CollisionLayers.Player;
@@ -19,7 +20,9 @@ public partial class GameTileStairs : Area2D {
 			Position = size/2,
 			Shape = new RectangleShape2D {
 				Size = size
-			}
+			},
+			DebugColor = new Color(Colors.Purple, 0.5f),
+			Visible = debug.ShowCollisions
 		});
 
 		AddChild(Start = new GameTileStairsNode(tileStairs, true) {

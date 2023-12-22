@@ -56,19 +56,19 @@ public partial class GameSetup : Container {
 		AddChild(debugOptions);
 		debugOptions.AddChild(Debug_ShowPositions = new CheckBox {
 			Text = "Show Positions",
-			ButtonPressed = true
+			ButtonPressed = false
 		});
 		debugOptions.AddChild(Debug_ShowCollisions = new CheckBox {
 			Text = "Show Collisions",
-			ButtonPressed = true
+			ButtonPressed = false
 		});
 		debugOptions.AddChild(Debug_ShowHitBoxes = new CheckBox {
 			Text = "Show HitBoxes",
-			ButtonPressed = true
+			ButtonPressed = false
 		});
 		debugOptions.AddChild(Debug_ShowHurtBoxes = new CheckBox {
 			Text = "Show HurtBoxes",
-			ButtonPressed = true
+			ButtonPressed = false
 		});
 	}
 

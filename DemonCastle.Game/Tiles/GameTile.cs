@@ -25,7 +25,7 @@ public partial class GameTile : Node2D {
 		});
 
 		SetupCollisions(debug);
-		SetupStairs();
+		SetupStairs(debug);
 	}
 
 	private void SetupCollisions(DebugState debug) {
@@ -42,9 +42,9 @@ public partial class GameTile : Node2D {
 		});
 	}
 
-	private void SetupStairs() {
+	private void SetupStairs(DebugState debug) {
 		if (_tile.Stairs == null) return;
 
-		AddChild(Stairs = new GameTileStairs(_tile, _tile.Stairs));
+		AddChild(Stairs = new GameTileStairs(_tile, _tile.Stairs, debug));
 	}
 }
