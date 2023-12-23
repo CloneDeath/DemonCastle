@@ -19,12 +19,12 @@ public partial class CharacterAnimation : Node2D {
 
 	public IFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame;
 
-	public CharacterAnimation(CharacterInfo character, DebugState debug) {
+	public CharacterAnimation(CharacterInfo character, IDamageable owner, DebugState debug) {
 		Name = nameof(CharacterAnimation);
 		Character = character;
 
 		foreach (var animation in character.Animations) {
-			var animationNode = new AnimationInfoNode(animation, debug) {
+			var animationNode = new AnimationInfoNode(animation, owner, debug) {
 				Visible = false
 			};
 			animationNode.Complete += AnimationNode_OnComplete;

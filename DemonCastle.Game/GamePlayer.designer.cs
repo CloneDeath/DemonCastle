@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
@@ -7,7 +8,7 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GamePlayer {
+public partial class GamePlayer : IDamageable {
 	protected IGameLogger Logger { get; }
 	protected LevelInfo Level { get; }
 	protected CharacterInfo Character { get; }
@@ -33,8 +34,8 @@ public partial class GamePlayer {
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
-		AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations, debug));
-		AddChild(Animation = new CharacterAnimation(character, debug));
+		AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations, this, debug));
+		AddChild(Animation = new CharacterAnimation(character, this, debug));
 
 		AddChild(StairsDetection = new Area2D {
 			CollisionLayer = (uint) CollisionLayers.Player,
@@ -60,5 +61,17 @@ public partial class GamePlayer {
 		});
 
 		AddChild(new DebugPosition2D(debug));
+	}
+
+	public Guid Id { get; } = Guid.NewGuid();
+
+	public int Hp { get; set; } = 10;
+	public int MaxHp => 10;
+
+	public void TakeDamage(int amount) {
+		Hp -= amount;
+		if (Hp <= 0) {
+			QueueFree();
+		}
 	}
 }

@@ -9,10 +9,14 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GameMonster : CharacterBody2D {
+public partial class GameMonster : CharacterBody2D, IDamageable {
+	private readonly MonsterInfo _monster;
+
 	public GameMonster(MonsterInfo monster, MonsterDataInfo monsterData, DebugState debug) {
+		_monster = monster;
 		Name = nameof(GameMonster);
 		Position = monsterData.MonsterPosition.ToPixelPositionInArea();
+		Hp = MaxHp;
 
 		AddChild(new CollisionShape2D {
 			Position = new Vector2(0, -(float)Math.Floor(monster.Size.Y/2d)),
@@ -26,11 +30,23 @@ public partial class GameMonster : CharacterBody2D {
 		CollisionMask = (uint) CollisionLayers.World;
 
 		GameAnimation animation;
-		AddChild(animation = new GameAnimation(monster.Animations, debug));
+		AddChild(animation = new GameAnimation(monster.Animations, this, debug));
 
 		var currentState = monster.States.FirstOrDefault(m => m.Id == monster.InitialState);
 		animation.Play(currentState?.Animation ?? Guid.Empty);
 
 		AddChild(new DebugPosition2D(debug));
+	}
+
+	public Guid Id { get; } = Guid.NewGuid();
+
+	public int Hp { get; set; }
+	public int MaxHp => _monster.Health;
+
+	public void TakeDamage(int amount) {
+		Hp -= amount;
+		if (Hp <= 0) {
+			QueueFree();
+		}
 	}
 }

@@ -1,10 +1,14 @@
+using System;
 using DemonCastle.Game.DebugNodes;
 using Godot;
 
 namespace DemonCastle.Game.Animations.Generic;
 
 public partial class HitBoxNode : Area2D {
-	public HitBoxNode(Rect2I region, Vector2 origin, DebugState debug) {
+	private readonly IDamageable _owner;
+
+	public HitBoxNode(Rect2I region, Vector2 origin, IDamageable owner, DebugState debug) {
+		_owner = owner;
 		Name = nameof(HitBoxNode);
 
 		AddChild(new CollisionShape2D {
@@ -15,5 +19,11 @@ public partial class HitBoxNode : Area2D {
 			DebugColor = new Color(Colors.Cyan, 0.5f),
 			Visible = debug.ShowHitBoxes
 		});
+	}
+
+	public Guid OwnerId => _owner.Id;
+
+	public void TakeDamage(int amount) {
+		_owner.TakeDamage(amount);
 	}
 }

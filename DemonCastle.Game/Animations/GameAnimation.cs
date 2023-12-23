@@ -15,12 +15,12 @@ public partial class GameAnimation : Node2D {
 
 	public FrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame as FrameInfo;
 
-	public GameAnimation(AnimationInfoCollection animations, DebugState debug) {
+	public GameAnimation(AnimationInfoCollection animations, IDamageable owner, DebugState debug) {
 		Name = nameof(GameAnimation);
 
 		AnimationCollection = animations;
 		foreach (var animation in animations) {
-			var animationNode = new AnimationInfoNode(animation, debug) {
+			var animationNode = new AnimationInfoNode(animation, owner, debug) {
 				Visible = false
 			};
 			Animations[animationNode.AnimationId] = animationNode;
