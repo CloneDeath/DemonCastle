@@ -14,7 +14,7 @@ using Path = System.IO.Path;
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class DirectoryNavigator {
-	public string Directory { get; }
+	public string Directory { get; protected set; }
 	protected ProjectResources ProjectResources { get; }
 	public string DirectoryName => new DirectoryInfo(Directory).Name;
 
@@ -94,6 +94,7 @@ public class DirectoryNavigator {
 					 ?? throw new NullReferenceException();
 		var fullPath = Path.Combine(parent.FullName, newName);
 		System.IO.Directory.Move(Directory, fullPath);
+		Directory = fullPath;
 	}
 
 	public void CreateFile<TFile>(string fileName, string extension, TFile data) {

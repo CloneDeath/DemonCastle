@@ -36,11 +36,13 @@ public class FileNavigator : DirectoryNavigator {
 		var newPath = Path.Combine(Directory, newName);
 		File.Move(FilePath, newPath);
 		FilePath = newPath;
+		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
 	}
 
 	public void MoveTo(DirectoryNavigator directory) {
 		var newPath = Path.Combine(directory.Directory, FileName);
 		File.Move(FilePath, newPath);
 		FilePath = newPath;
+		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
 	}
 }
