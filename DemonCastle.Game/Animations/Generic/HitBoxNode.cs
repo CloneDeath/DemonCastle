@@ -1,5 +1,6 @@
 using System;
 using DemonCastle.Game.DebugNodes;
+using DemonCastle.ProjectFiles;
 using Godot;
 
 namespace DemonCastle.Game.Animations.Generic;
@@ -19,6 +20,8 @@ public partial class HitBoxNode : Area2D {
 			DebugColor = new Color(Colors.Cyan, 0.5f),
 			Visible = debug.ShowHitBoxes
 		});
+		CollisionLayer = (uint) CollisionLayers.HitBox;
+		CollisionMask = (uint) CollisionLayers.HurtBox;
 	}
 
 	public Guid OwnerId => _owner.Id;

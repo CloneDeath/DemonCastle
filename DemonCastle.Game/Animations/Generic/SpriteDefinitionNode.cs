@@ -7,6 +7,7 @@ namespace DemonCastle.Game.Animations.Generic;
 public partial class SpriteDefinitionNode : Sprite2D {
 	protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 	public SpriteDefinitionNode(ISpriteDefinition definition, Vector2I origin) {
+		Name = $"{nameof(SpriteDefinitionNode)}-{definition.Name}";
 		Texture = definition.Texture;
 		RegionEnabled = true;
 		RegionRect = definition.Region;
