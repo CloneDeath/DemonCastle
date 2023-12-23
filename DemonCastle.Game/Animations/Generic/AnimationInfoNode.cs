@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -10,6 +11,9 @@ public partial class AnimationInfoNode : Node2D {
 	public event Action<AnimationInfoNode>? Complete;
 	protected IAnimationInfo Animation { get; }
 	protected PhasingNode Frames { get; }
+	protected List<FrameInfoNode> FrameNodes { get; } = new();
+
+	public bool Active { get; set; }
 
 	public AnimationInfoNode(IAnimationInfo animation, IDamageable owner, DebugState debug) {
 		Name = nameof(AnimationInfoNode);
@@ -21,10 +25,12 @@ public partial class AnimationInfoNode : Node2D {
 		Frames.Complete += _ => Complete?.Invoke(this);
 		float totalOffset = 0;
 		foreach (var frame in Animation.Frames) {
-			Frames.AddPhase(new FrameInfoNode(frame, owner, debug) {
+			var frameInfoNode = new FrameInfoNode(frame, owner, debug) {
 				StartTime = totalOffset,
 				EndTime = totalOffset + frame.Duration
-			});
+			};
+			FrameNodes.Add(frameInfoNode);
+			Frames.AddPhase(frameInfoNode);
 			totalOffset += frame.Duration;
 		}
 	}
@@ -48,5 +54,12 @@ public partial class AnimationInfoNode : Node2D {
 	public void Play() {
 		Frames.CurrentTime = 0;
 		Frames.Play();
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		foreach (var frameNode in FrameNodes) {
+			frameNode.AnimationActive = Active;
+		}
 	}
 }

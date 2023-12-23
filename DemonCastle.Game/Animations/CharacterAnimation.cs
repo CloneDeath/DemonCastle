@@ -50,10 +50,12 @@ public partial class CharacterAnimation : Node2D {
 		if (CurrentAnimation?.AnimationId == animationId) return;
 		if (CurrentAnimation != null) {
 			CurrentAnimation.Visible = false;
+			CurrentAnimation.Active = false;
 		}
 
 		CurrentAnimation = Animations[animationId];
 		CurrentAnimation.Visible = true;
+		CurrentAnimation.Active = true;
 		CurrentAnimation.Play();
 	}
 

@@ -24,9 +24,11 @@ public partial class HitBoxNode : Area2D {
 		CollisionMask = (uint) CollisionLayers.HurtBox;
 	}
 
+	public bool Active { get; set; }
 	public Guid OwnerId => _owner.Id;
 
 	public void TakeDamage(int amount) {
+		if (!Active) return;
 		_owner.TakeDamage(amount);
 	}
 }

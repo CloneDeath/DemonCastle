@@ -34,6 +34,7 @@ public partial class GameAnimation : Node2D {
 	public void Play(Guid animationId) {
 		if (CurrentAnimation?.AnimationId == animationId) return;
 		if (CurrentAnimation != null) {
+			CurrentAnimation.Active = false;
 			CurrentAnimation.Visible = false;
 		}
 
@@ -41,6 +42,7 @@ public partial class GameAnimation : Node2D {
 		if (CurrentAnimation == null) return;
 
 		CurrentAnimation.Visible = true;
+		CurrentAnimation.Active = true;
 		CurrentAnimation.Play();
 	}
 }

@@ -24,8 +24,11 @@ public partial class HurtBoxNode : Area2D {
 		CollisionMask = (uint) CollisionLayers.HitBox;
 	}
 
+	public bool Active { get; set; }
+
 	public override void _Process(double delta) {
 		base._Process(delta);
+		if (!Active) return;
 		foreach (var hitBox in GetOverlappingAreas().Cast<HitBoxNode>()) {
 			if (hitBox.OwnerId == _source.Id) continue;
 			hitBox.TakeDamage(1);
