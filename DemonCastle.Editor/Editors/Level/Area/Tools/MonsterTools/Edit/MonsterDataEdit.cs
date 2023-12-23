@@ -15,4 +15,10 @@ public partial class MonsterDataEdit : PropertyCollection {
 		AddMonsterReference("Monster", _proxy, p => p.MonsterId, project.Monsters);
 		AddVector2("Position", _proxy, p => p.Position);
 	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		if (MonsterData != null) Enable();
+		else Disable();
+	}
 }

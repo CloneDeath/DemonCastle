@@ -41,7 +41,9 @@ public partial class MonsterDataList : VBoxContainer {
 	}
 
 	private void AddMonster_OnPressed() {
-		_area?.Monsters.AppendNew();
+		var monster = _area?.Monsters.AppendNew();
+		Monsters.Select(Monsters.ItemCount - 1);
+		MonsterSelected?.Invoke(monster);
 	}
 
 	private void RemoveMonster_OnPressed() {
