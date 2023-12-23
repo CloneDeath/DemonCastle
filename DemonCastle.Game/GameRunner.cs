@@ -8,6 +8,8 @@ namespace DemonCastle.Game;
 public partial class GameRunner : Control {
 	protected GameLevel Level { get; }
 	protected GamePlayer Player { get; }
+	protected GameArea? CurrentArea { get; set; }
+
 	public GameRunner(ProjectInfo project, LevelInfo level, CharacterInfo player, DebugState debug) {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
@@ -40,4 +42,14 @@ public partial class GameRunner : Control {
 		base._ExitTree();
 		GetTree().DebugCollisionsHint = false;
 	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
+		if (CurrentArea == area) return;
+
+		CurrentArea = area;
+		CurrentArea?.OnPlayerEnter();
+	}
+
 }
