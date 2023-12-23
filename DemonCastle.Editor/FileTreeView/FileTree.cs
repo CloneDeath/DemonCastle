@@ -110,14 +110,14 @@ public partial class FileTree : Tree {
 	protected FileNavigator? SelectedFile {
 		get {
 			var selected = GetSelected();
-			return FileMap.TryGetValue(selected, out var value) ? value : null;
+			return FileMap.GetValueOrDefault(selected);
 		}
 	}
 
 	protected DirectoryNavigator? SelectedDirectory {
 		get {
 			var selected = GetSelected();
-			return DirectoryMap.TryGetValue(selected, out var value) ? value : null;
+			return DirectoryMap.GetValueOrDefault(selected);
 		}
 	}
 
