@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using DemonCastle.Game.Tiles;
 using Godot;
 
@@ -23,12 +22,13 @@ public class NormalState : IState {
 			return new NormalAttackState();
 		}
 
-		var stairs = player.GetNearbyStairs().FirstOrDefault();
-		var target = GetTargetInStairs(player, stairs);
-		if (stairs != null && target != null) {
+		var stairs = player.GetNearbyStairs();
+		foreach (var stair in stairs) {
+			var target = GetTargetInStairs(player, stair);
+			if (target == null) continue;
 			if (target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
 				!target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-				return new ApproachStairsState(stairs, target);
+				return new ApproachStairsState(stair, target);
 			}
 		}
 

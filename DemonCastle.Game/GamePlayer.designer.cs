@@ -46,6 +46,7 @@ public partial class GamePlayer : IDamageable {
 			Shape = new RectangleShape2D {
 				Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2)
 			},
+			DebugColor = new Color(Colors.Purple, 0.5f),
 			Visible = debug.ShowCollisions
 		});
 
