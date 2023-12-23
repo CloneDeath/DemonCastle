@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView;
 
 public partial class RenameDialog : ConfirmationDialog {
 	protected LineEdit LineEdit { get; }
@@ -9,14 +9,12 @@ public partial class RenameDialog : ConfirmationDialog {
 		get => LineEdit.Text;
 		set => LineEdit.Text = value;
 	}
-		
+
 	public RenameDialog() {
 		Name = nameof(RenameDialog);
 		Title = "Rename";
 		Exclusive = true;
 		MinSize += new Vector2I(0, 30);
-
-		AboutToPopup += OnAboutToShow;
 
 		var vbox = new VBoxContainer();
 		AddChild(vbox);
@@ -27,8 +25,12 @@ public partial class RenameDialog : ConfirmationDialog {
 		RegisterTextEnter(LineEdit);
 	}
 
-	protected void OnAboutToShow() {
+	public void SelectAll() {
 		LineEdit.SelectAll();
+	}
+
+	public void Select(int from = 0, int to = -1) {
+		LineEdit.Select(from, to);
 	}
 
 	public void FocusLineEdit() {

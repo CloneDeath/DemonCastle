@@ -127,15 +127,21 @@ public partial class FileTree : Tree {
 	}
 
 	protected void OnRename() {
-		ConfirmRename.Text = SelectedFile?.FileNameWithoutExtension
-							 ?? SelectedDirectory?.DirectoryName
-							 ?? string.Empty;
+		if (SelectedFile != null) {
+			ConfirmRename.Text = SelectedFile.FileName;
+			ConfirmRename.Select(0, SelectedFile.FileNameWithoutExtension.Length);
+		} else if (SelectedDirectory != null) {
+			ConfirmRename.Text = SelectedDirectory.DirectoryName;
+			ConfirmRename.SelectAll();
+		} else {
+			return;
+		}
 		ConfirmRename.PopupCentered();
 		ConfirmRename.FocusLineEdit();
 	}
 
 	protected void OnRenameConfirmed() {
-		SelectedFile?.RenameFile($"{ConfirmRename.Text}{SelectedFile.Extension}");
+		SelectedFile?.RenameFile($"{ConfirmRename.Text}");
 		SelectedDirectory?.RenameDirectory($"{ConfirmRename.Text}");
 		CreateTree();
 	}
