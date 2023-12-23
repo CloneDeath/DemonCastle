@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Icons;
+using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -26,6 +27,14 @@ public partial class TextFileEditor : BaseEditor {
 			Text = textInfo.Contents
 		});
 		TextEdit.TextChanged += TextEdit_OnTextChanged;
+	}
+
+	public override void _Input(InputEvent @event) {
+		base._Input(@event);
+		if (!@event.IsAction(InputActions.EditorSave)) return;
+
+		_textInfo.Save();
+		AcceptEvent();
 	}
 
 	private void TextEdit_OnTextChanged() {

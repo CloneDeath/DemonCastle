@@ -14,4 +14,6 @@ public class TextInfo {
 	public TextInfo(TextFileNavigator file) {
 		File = file;
 	}
+
+	public void Save() => File.Save();
 }
