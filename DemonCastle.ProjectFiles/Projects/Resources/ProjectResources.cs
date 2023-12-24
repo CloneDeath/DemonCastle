@@ -1,3 +1,4 @@
+using System.IO;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -11,6 +12,13 @@ public class ProjectResources {
 	protected TextFileNavigator GetTextFile(string path) => new(path, this);
 
 	public ProjectResources() {
+		AudioStreams = new ResourceCache<AudioStream>(path => {
+			var data = File.ReadAllBytes(path);
+			var sound = new AudioStreamWav();
+			sound.Data = data;
+			return sound;
+		});
+
 		Characters = new ResourceCache<CharacterInfo>(path
 			=> new CharacterInfo(GetFile<CharacterFile>(path)));
 
@@ -29,8 +37,7 @@ public class ProjectResources {
 		SpriteAtlases = new ResourceCache<SpriteAtlasInfo>(path
 			=> new SpriteAtlasInfo(GetFile<SpriteAtlasFile>(path)));
 
-		Textures = new ResourceCache<Texture2D>(path
-			=> {
+		Textures = new ResourceCache<Texture2D>(path => {
 			var image = new Image();
 			image.Load(path);
 			return ImageTexture.CreateFromImage(image);
@@ -42,6 +49,10 @@ public class ProjectResources {
 		Projects = new ResourceCache<ProjectInfo>(path
 			=> new ProjectInfo(GetFile<ProjectFile>(path)));
 	}
+
+	protected ResourceCache<AudioStream> AudioStreams { get; }
+	public AudioStream GetAudioStream(string path) => AudioStreams.Get(path);
+
 	protected ResourceCache<CharacterInfo> Characters { get; }
 	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
 

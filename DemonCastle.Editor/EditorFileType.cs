@@ -17,6 +17,7 @@ public static class EditorFileType {
 	public static IEditorFileType SpriteAtlas { get; } = new SpriteAtlasEditorFileType();
 	public static IEditorFileType SpriteGrid { get; } = new SpriteGridEditorFileType();
 	public static IEditorFileType Text { get; } = new TextEditorFileType();
+	public static IEditorFileType Wav { get; } = new WavEditorFileType();
 	public static IEditorFileType Weapon { get; } = new WeaponEditorFileType();
 
 	public static IEnumerable<IEditorFileType> CreatableFileTypes { get; } = new[] {
@@ -37,6 +38,7 @@ public static class EditorFileType {
 		SpriteAtlas,
 		SpriteGrid,
 		Text,
+		Wav,
 		Weapon
 	};
 }

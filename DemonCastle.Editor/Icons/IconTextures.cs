@@ -14,6 +14,7 @@ public static class IconTextures {
 	public static Texture2D OneToOneIcon { get; } = LoadTexture(nameof(OneToOneIcon));
 	public static Texture2D ProjectIcon { get; } = LoadTexture(nameof(ProjectIcon));
 	public static Texture2D RefreshIcon { get; } = LoadTexture(nameof(RefreshIcon));
+	public static Texture2D SoundIcon { get; } = LoadTexture(nameof(SoundIcon));
 	public static Texture2D SpriteAtlasIcon { get; } = LoadTexture(nameof(SpriteAtlasIcon));
 	public static Texture2D SpriteGridIcon { get; } = LoadTexture(nameof(SpriteGridIcon));
 	public static Texture2D TextFileIcon { get; } = LoadTexture(nameof(TextFileIcon));

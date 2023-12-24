@@ -24,6 +24,7 @@ public class FileNavigator : DirectoryNavigator {
 
 	public TextInfo ToTextInfo() => ProjectResources.GetText(FilePath);
 	public Texture2D ToTexture() => ProjectResources.GetTexture(FilePath);
+	public AudioStream ToAudioStream() => ProjectResources.GetAudioStream(FilePath);
 	public SpriteAtlasInfo ToSpriteAtlasInfo() => ProjectResources.GetSpriteAtlas(FilePath);
 	public SpriteGridInfo ToSpriteGridInfo() => ProjectResources.GetSpriteGrid(FilePath);
 	public CharacterInfo ToCharacterInfo() => ProjectResources.GetCharacter(FilePath);
