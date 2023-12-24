@@ -12,8 +12,10 @@ public static class FileType {
 	public static IFileType Character => new CharacterFileType();
 	public static IFileType Level => new LevelFileType();
 	public static IFileType Monster => new MonsterFileType();
+	public static IFileType Wav => new WavFileType();
 	public static IFileType Weapon => new WeaponFileType();
 
+	public static IEnumerable<IFileType> AudioSources => new[] { Wav };
 	public static IEnumerable<IFileType> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
 	public static IEnumerable<IFileType> RawTextureFiles => new[] { Png };
 }

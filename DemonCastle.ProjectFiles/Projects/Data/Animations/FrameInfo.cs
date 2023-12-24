@@ -20,6 +20,8 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	Rect2I? HitBox { get; set; }
 	Rect2I? HurtBox { get; set; }
 
+	string? Audio { get; set; }
+
 	string SourceFile { get; set; }
 	Guid SpriteId { get; set; }
 	ISpriteDefinition SpriteDefinition { get; }
@@ -107,6 +109,15 @@ public class FrameInfo : IFrameInfo {
 		get => FrameData.HurtBox;
 		set {
 			FrameData.HurtBox = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string? Audio {
+		get => FrameData.Audio;
+		set {
+			FrameData.Audio = value;
 			Save();
 			OnPropertyChanged();
 		}

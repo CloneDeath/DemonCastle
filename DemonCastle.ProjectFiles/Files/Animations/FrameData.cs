@@ -11,6 +11,7 @@ public class FrameData {
 	public FrameOrigin Origin { get; set; } = new();
 
 	public List<FrameSlotData> Slots { get; set; } = new();
+	public string? Audio { get; set; }
 
 	public Rect2I? HitBox { get; set; }
 	public Rect2I? HurtBox { get; set; }

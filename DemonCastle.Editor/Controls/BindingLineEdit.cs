@@ -4,6 +4,11 @@ using Godot;
 namespace DemonCastle.Editor.Controls;
 
 public partial class BindingLineEdit : WrapperControl<LineEdit> {
+	public bool ClearButtonEnabled {
+		get => Inner.ClearButtonEnabled;
+		set => Inner.ClearButtonEnabled = value;
+	}
+
 	protected IPropertyBinding<string>? PropertyBinding { get; set; }
 	public IPropertyBinding<string>? Binding {
 		get => PropertyBinding;

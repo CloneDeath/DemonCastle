@@ -23,6 +23,8 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		OnPropertyChanged(nameof(HitBox));
 		OnPropertyChanged(nameof(HurtBox));
 
+		OnPropertyChanged(nameof(Audio));
+
 		OnPropertyChanged(nameof(WeaponEnabled));
 		OnPropertyChanged(nameof(WeaponAnimation));
 		OnPropertyChanged(nameof(WeaponPosition));
@@ -78,6 +80,13 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		get => Proxy?.HurtBox;
 		set {
 			if (Proxy != null) Proxy.HurtBox = value;
+		}
+	}
+
+	public string? Audio {
+		get => Proxy?.Audio;
+		set {
+			if (Proxy != null) Proxy.Audio = value;
 		}
 	}
 

@@ -41,6 +41,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 		HitBoxes.AddChild(new VSeparator());
 		HitBoxes.AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
 
+		AddNullableFile("Audio", _proxy, file.Directory, p => p.Audio, FileType.AudioSources);
 		AddChild(AdditionalProperties = new PropertyCollection());
 
 		FrameInfoView = infoView;

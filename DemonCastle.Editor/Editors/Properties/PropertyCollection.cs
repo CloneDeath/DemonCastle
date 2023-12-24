@@ -48,6 +48,16 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return fileProperty;
 	}
 
+	public NullableFileProperty AddNullableFile<T>(string name, T target, string directory,
+												   Expression<Func<T, string?>> propertyExpression,
+												   IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
+		var fileProperty = new NullableFileProperty(new PropertyBinding<T,string?>(target, propertyExpression), directory, fileTypes) {
+			DisplayName = name
+		};
+		AddChild(fileProperty);
+		return fileProperty;
+	}
+
 	public void AddColor<T>(string name, T target,Expression<Func<T, Color>> propertyExpression) where T : INotifyPropertyChanged {
 		AddChild(new ColorProperty(new PropertyBinding<T, Color>(target, propertyExpression)) {
 			DisplayName = name
