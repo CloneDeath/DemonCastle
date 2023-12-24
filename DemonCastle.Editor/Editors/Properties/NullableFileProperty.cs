@@ -11,6 +11,7 @@ namespace DemonCastle.Editor.Editors.Properties;
 public partial class NullableFileProperty : NullableStringProperty {
 	protected string Directory { get; }
 	protected Button LoadButton { get; }
+	protected Button ClearButton { get; }
 	protected FileDialog OpenFileDialog { get; }
 
 	public event Action<string>? FileSelected;
@@ -20,6 +21,11 @@ public partial class NullableFileProperty : NullableStringProperty {
 		Directory = directory;
 
 		LineEdit.Editable = false;
+
+		AddChild(ClearButton = new Button {
+			Text = "x"
+		});
+		ClearButton.Pressed += ClearButton_OnClick;
 
 		AddChild(LoadButton = new Button {
 			Text = "..."
@@ -38,6 +44,12 @@ public partial class NullableFileProperty : NullableStringProperty {
 		OpenFileDialog.FileSelected += OnFileSelected;
 	}
 
+	protected void ClearButton_OnClick() {
+		PropertyValue = string.Empty;
+		FileSelected?.Invoke(string.Empty);
+		Binding.Set(PropertyValue);
+	}
+
 	protected void OnClick() {
 		var fullPath = string.Empty;
 		var directory = Directory;
@@ -53,6 +65,7 @@ public partial class NullableFileProperty : NullableStringProperty {
 	protected void OnFileSelected(string filePath) {
 		PropertyValue = RelativePath.GetRelativePath(Directory, filePath);
 		FileSelected?.Invoke(filePath);
+		Binding.Set(PropertyValue);
 	}
 
 	public override void Enable() {
