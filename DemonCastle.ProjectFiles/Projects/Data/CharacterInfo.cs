@@ -80,7 +80,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 		}
 	}
 
-	public WeaponInfo DefaultWeaponInfo => File.GetWeapon(DefaultWeapon);
+	public WeaponInfo? DefaultWeaponInfo => File.FileExists(DefaultWeapon) ? File.GetWeapon(DefaultWeapon) : null;
 
 	public Guid IdleAnimation {
 		get => Resource.IdleAnimation;
