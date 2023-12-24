@@ -38,6 +38,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 			Vertical = false
 		});
 		HitBoxes.AddNullableRect2I("HitBox", _proxy, p => p.HitBox);
+		HitBoxes.AddChild(new VSeparator());
 		HitBoxes.AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
 
 		AddChild(AdditionalProperties = new PropertyCollection());
