@@ -70,12 +70,14 @@ public partial class NullableFileProperty : NullableStringProperty {
 
 	public override void Enable() {
 		base.Enable();
+		ClearButton.Disabled = false;
 		LoadButton.Disabled = false;
 		LineEdit.Editable = false;
 	}
 
 	public override void Disable() {
 		base.Disable();
+		ClearButton.Disabled = true;
 		LoadButton.Disabled = true;
 		LineEdit.Editable = false;
 	}

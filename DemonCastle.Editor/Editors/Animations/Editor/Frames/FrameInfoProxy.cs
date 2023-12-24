@@ -24,6 +24,7 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		OnPropertyChanged(nameof(HurtBox));
 
 		OnPropertyChanged(nameof(Audio));
+		OnPropertyChanged(nameof(AudioStream));
 
 		OnPropertyChanged(nameof(WeaponEnabled));
 		OnPropertyChanged(nameof(WeaponAnimation));
@@ -90,6 +91,7 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 		}
 	}
 
+	public AudioStream? AudioStream => Proxy?.AudioStream;
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();

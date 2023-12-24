@@ -57,6 +57,11 @@ public class DirectoryNavigator {
 		throw new UnknownSpriteFileFormatException(path);
 	}
 
+	public AudioStream GetAudioStream(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetAudioStream(path);
+	}
+
 	public Texture2D GetTexture(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetTexture(path);

@@ -21,6 +21,7 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	Rect2I? HurtBox { get; set; }
 
 	string? Audio { get; set; }
+	AudioStream? AudioStream { get; }
 
 	string SourceFile { get; set; }
 	Guid SpriteId { get; set; }
@@ -120,8 +121,12 @@ public class FrameInfo : IFrameInfo {
 			FrameData.Audio = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(AudioStream));
 		}
 	}
+
+
+	public AudioStream? AudioStream => FrameData.Audio != null && File.FileExists(FrameData.Audio) ? File.GetAudioStream(FrameData.Audio) : null;
 
 	public Vector2I Origin => (SpriteDefinition.Region.Size - Vector2I.One) * (Anchor + Vector2I.One) / 2 + Offset;
 
