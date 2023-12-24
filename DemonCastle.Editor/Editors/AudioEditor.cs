@@ -9,6 +9,7 @@ public partial class AudioEditor : BaseEditor {
 	public override string TabText { get; }
 
 	private readonly AudioStreamPlayer _player;
+	private readonly Button _playButton;
 
 	public AudioEditor(FileNavigator file) {
 		Name = nameof(ImageEditor);
@@ -17,12 +18,13 @@ public partial class AudioEditor : BaseEditor {
 		AddChild(_player = new AudioStreamPlayer {
 			Stream = file.ToAudioStream()
 		});
+		AddChild(_playButton = new Button {
+			Text = "Play"
+		});
+		_playButton.Pressed += PlayButton_OnPressed;
 	}
 
-	public override void _Ready() {
-		base._Ready();
-
-
+	private void PlayButton_OnPressed() {
 		_player.Play();
 	}
 }
