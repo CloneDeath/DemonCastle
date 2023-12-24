@@ -43,11 +43,11 @@ public partial class GameArea : Node2D {
 		var areaSize = area.SizeOfArea.ToAreaScale();
 		for (var x = 0; x < areaSize.X; x++) {
 			SetBoundary(area, level, new Vector2I(x, -1), new Vector2I(x, 0), new Vector2I(x + 1, 0));
-			SetBoundary(area, level, new Vector2I(x, areaSize.Y+1), new Vector2I(x, areaSize.Y), new Vector2I(x+1, areaSize.Y));
+			SetBoundary(area, level, new Vector2I(x, areaSize.Y), new Vector2I(x, areaSize.Y), new Vector2I(x+1, areaSize.Y));
 		}
 		for (var y = 0; y < areaSize.Y; y++) {
 			SetBoundary(area, level, new Vector2I(-1, y), new Vector2I(0, y), new Vector2I(0, y + 1));
-			SetBoundary(area, level, new Vector2I(areaSize.X + 1, y), new Vector2I(areaSize.X, y), new Vector2I(areaSize.X, y+1));
+			SetBoundary(area, level, new Vector2I(areaSize.X, y), new Vector2I(areaSize.X, y), new Vector2I(areaSize.X, y+1));
 		}
 	}
 
