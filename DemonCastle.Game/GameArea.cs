@@ -10,10 +10,12 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameArea : Node2D {
+	private readonly DebugState _debug;
 	private StaticBody2D Body { get; }
 	private List<GameMonster> Monsters { get; } = new();
 
 	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, DebugState debug) {
+		_debug = debug;
 		Name = nameof(GameArea);
 
 		foreach (var tileMapInfo in area.TileMap) {
@@ -57,7 +59,9 @@ public partial class GameArea : Node2D {
 				Shape = new SegmentShape2D {
 					A = start * level.AreaScale.ToPixelSize(),
 					B = end * level.AreaScale.ToPixelSize()
-				}
+				},
+				DebugColor = new Color(Colors.Black, 0.5f),
+				Visible = _debug.ShowCollisions
 			});
 		}
 	}
