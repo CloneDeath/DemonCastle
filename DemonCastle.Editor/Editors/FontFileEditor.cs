@@ -17,8 +17,24 @@ public partial class FontFileEditor : BaseEditor {
 		AddChild(Lines = new VBoxContainer());
 		Lines.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
+		const string previewText = "The Quick Brown Fox Jumped Over the Lazy Dog";
+
 		Lines.AddChild(new Label {
-			Text = "The Quick Brown Fox Jumped Over the Lazy Dog",
+			Text = previewText,
+			LabelSettings = new LabelSettings {
+				Font = font.ToFont(),
+				FontSize = 72
+			}
+		});
+		Lines.AddChild(new Label {
+			Text = previewText.ToUpper(),
+			LabelSettings = new LabelSettings {
+				Font = font.ToFont(),
+				FontSize = 72
+			}
+		});
+		Lines.AddChild(new Label {
+			Text = previewText.ToLower(),
 			LabelSettings = new LabelSettings {
 				Font = font.ToFont(),
 				FontSize = 72
