@@ -68,7 +68,7 @@ public class TileInfo : INotifyPropertyChanged {
 	public Vector2[] Collision {
 		get => TileData.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
 		set {
-			TileData.Collision = value.Select(v => new Position2D { X = v.X, Y = v.Y }).ToList();
+			TileData.Collision = value.ToList();
 			Save();
 			OnPropertyChanged();
 		}

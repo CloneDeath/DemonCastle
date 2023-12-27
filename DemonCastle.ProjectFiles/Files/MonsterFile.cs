@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Files.Animations;
+using DemonCastle.ProjectFiles.Files.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -24,11 +25,6 @@ public class MonsterFile {
 
 	public List<AnimationData> Animations { get; set; } = new();
 	public List<MonsterStateData> States { get; set; } = new();
-}
-
-public class Size {
-	public int Width { get; set; } = 16;
-	public int Height { get; set; } = 16;
 }
 
 public class MonsterStateData {

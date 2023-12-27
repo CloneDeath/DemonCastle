@@ -12,8 +12,8 @@ public partial class GameTileStairsNode : Node2D {
 		_start = start;
 	}
 
-	private Position2D Self => _start ? _stairs.Start : _stairs.End;
-	private Position2D Other => _start ? _stairs.End : _stairs.Start;
+	private Vector2 Self => _start ? _stairs.Start : _stairs.End;
+	private Vector2 Other => _start ? _stairs.End : _stairs.Start;
 	public bool PointsUp => Self.Y > Other.Y;
 	public int Facing => Self.X < Other.X ? 1 : -1;
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Files;
 
@@ -25,20 +26,15 @@ public class TileData {
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public string Source { get; set; } = string.Empty;
 	public Guid SpriteId { get; set; }
-	public List<Position2D> Collision { get; set; } = new();
+	public List<Vector2> Collision { get; set; } = new();
 	public int Width { get; set; } = 1;
 	public int Height { get; set; } = 1;
 	public StairData? Stairs { get; set; }
 }
 
-public class Position2D {
-	public float X { get; set; }
-	public float Y { get; set; }
-}
-
 public class StairData {
-	public Position2D Start { get; set; } = new();
-	public Position2D End { get; set; } = new();
+	public Vector2 Start { get; set; }
+	public Vector2 End { get; set; }
 }
 
 public class AreaData {
@@ -54,7 +50,7 @@ public class AreaData {
 
 public class MonsterData {
 	public Guid MonsterId { get; set; }
-	public Position2D Position { get; set; } = new();
+	public Vector2 Position { get; set; }
 }
 
 public class TileMapData {

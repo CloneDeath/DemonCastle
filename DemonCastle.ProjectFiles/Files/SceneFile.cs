@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.ProjectFiles.Files.Common;
 using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -16,7 +17,7 @@ public class Element {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public ElementType Type { get; set; }
-	public Rect2I Region { get; set; }
+	public Region2I Region { get; set; } = new();
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
@@ -31,7 +32,7 @@ public class LabelElement : Element {
 	}
 
 	public string Text { get; set; } = string.Empty;
-	public Color Color { get; set; } = Colors.White;
+	public ColorData Color { get; set; } = Colors.White.ToColorData();
 }
 
 public class ColorRectElement : Element {
@@ -39,5 +40,5 @@ public class ColorRectElement : Element {
 		Type = ElementType.ColorRect;
 	}
 
-	public Color Color { get; set; } = Colors.White;
+	public ColorData Color { get; set; } = Colors.White.ToColorData();
 }

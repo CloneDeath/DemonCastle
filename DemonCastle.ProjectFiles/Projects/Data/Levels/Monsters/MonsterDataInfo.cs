@@ -1,5 +1,4 @@
 using System;
-using DemonCastle.ProjectFiles.Extensions;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -24,9 +23,9 @@ public class MonsterDataInfo : BaseInfo<MonsterData> {
 	}
 
 	public Vector2 Position {
-		get => Data.Position.ToVector2();
+		get => Data.Position;
 		set {
-			Data.Position = value.ToPosition2D();
+			Data.Position = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(MonsterPosition));

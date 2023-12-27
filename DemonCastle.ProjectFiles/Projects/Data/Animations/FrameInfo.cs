@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files.Animations;
+using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -98,18 +99,18 @@ public class FrameInfo : IFrameInfo {
 	}
 
 	public Rect2I? HitBox {
-		get => FrameData.HitBox;
+		get => FrameData.HitBox?.ToRect2I();
 		set {
-			FrameData.HitBox = value;
+			FrameData.HitBox = value?.ToRegion2I();
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public Rect2I? HurtBox {
-		get => FrameData.HurtBox;
+		get => FrameData.HurtBox?.ToRect2I();
 		set {
-			FrameData.HurtBox = value;
+			FrameData.HurtBox = value?.ToRegion2I();
 			Save();
 			OnPropertyChanged();
 		}

@@ -55,14 +55,14 @@ public partial class TileStairView : HBoxContainer {
 
 	private void ButtonStairsUp_OnPressed() {
 		_tile.Stairs = new StairData {
-			Start = new Position2D { X = 0, Y = 1 },
-			End = new Position2D { X = 1, Y = 0 }
+			Start = Vector2.Down,
+			End = Vector2.Right
 		};
 	}
 
 	private void ButtonStairsDown_OnPressed() {_tile.Stairs = new StairData {
-			Start = new Position2D { X = 0, Y = 0 },
-			End = new Position2D { X = 1, Y = 1 }
+			Start = Vector2.Zero,
+			End = Vector2.One
 		};
 	}
 

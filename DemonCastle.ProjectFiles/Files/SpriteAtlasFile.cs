@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Godot;
+using DemonCastle.ProjectFiles.Files.Common;
 
 namespace DemonCastle.ProjectFiles.Files;
 
@@ -12,16 +12,6 @@ public class SpriteAtlasFile {
 		Blue = 255
 	};
 	public List<SpriteAtlasData> Sprites { get; set; } = new();
-}
-
-public class ColorData {
-	public int Red { get; set; }
-	public int Green { get; set; }
-	public int Blue { get; set; }
-
-	public Color ToColor() {
-		return Color.Color8((byte)Red, (byte)Green, (byte)Blue);
-	}
 }
 
 public class SpriteAtlasData {
