@@ -15,6 +15,7 @@ public static class FileType {
 	public static IFileType SpriteAtlas => new SpriteAtlasFileType();
 	public static IFileType SpriteGrid => new SpriteGridFileType();
 	public static IFileType Text => new TextFileType();
+	public static IFileType Ttf => new TtfFileType();
 	public static IFileType Wav => new WavFileType();
 	public static IFileType Weapon => new WeaponFileType();
 

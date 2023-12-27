@@ -22,6 +22,12 @@ public class ProjectResources {
 		Characters = new ResourceCache<CharacterInfo>(path
 			=> new CharacterInfo(GetFile<CharacterFile>(path)));
 
+		Fonts = new ResourceCache<Font>(path => {
+			var font = new FontFile();
+			font.Data = File.ReadAllBytes(path);
+			return font;
+		});
+
 		Levels = new ResourceCache<LevelInfo>(path
 			=> new LevelInfo(GetFile<LevelFile>(path)));
 
@@ -58,6 +64,9 @@ public class ProjectResources {
 
 	protected ResourceCache<CharacterInfo> Characters { get; }
 	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
+
+	protected ResourceCache<Font> Fonts { get; }
+	public Font GetFont(string path) => Fonts.Get(path);
 
 	protected ResourceCache<LevelInfo> Levels { get; }
 	public LevelInfo GetLevel(string path) => Levels.Get(path);

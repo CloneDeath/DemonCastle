@@ -24,6 +24,7 @@ public class FileNavigator : DirectoryNavigator {
 
 	public AudioStream ToAudioStream() => ProjectResources.GetAudioStream(FilePath);
 	public CharacterInfo ToCharacterInfo() => ProjectResources.GetCharacter(FilePath);
+	public Font ToFont() => ProjectResources.GetFont(FilePath);
 	public LevelInfo ToLevelInfo() => ProjectResources.GetLevel(FilePath);
 	public MonsterInfo ToMonsterInfo() => ProjectResources.GetMonster(FilePath);
 	public ProjectInfo ToProjectInfo() => ProjectResources.GetProject(FilePath);
