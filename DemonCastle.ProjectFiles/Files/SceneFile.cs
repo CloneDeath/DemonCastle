@@ -9,18 +9,35 @@ namespace DemonCastle.ProjectFiles.Files;
 public class SceneFile {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public List<SceneElement> Elements { get; set; } = new();
+	public List<Element> Elements { get; set; } = new();
 }
 
-public class SceneElement {
+public class Element {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public SceneElementType Type { get; set; }
+	public ElementType Type { get; set; }
 	public Rect2I Region { get; set; }
-	public Dictionary<string, string> StringProperties { get; set; } = new();
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
-public enum SceneElementType {
-	Label
+public enum ElementType {
+	Label,
+	ColorRect
+}
+
+public class LabelElement : Element {
+	public LabelElement() {
+		Type = ElementType.Label;
+	}
+
+	public string Text { get; set; } = string.Empty;
+	public Color Color { get; set; } = Colors.White;
+}
+
+public class ColorRectElement : Element {
+	public ColorRectElement() {
+		Type = ElementType.ColorRect;
+	}
+
+	public Color Color { get; set; } = Colors.White;
 }
