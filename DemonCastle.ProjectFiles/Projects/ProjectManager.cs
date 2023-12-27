@@ -8,7 +8,6 @@ using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
-using Newtonsoft.Json;
 using HttpClient = System.Net.Http.HttpClient;
 
 namespace DemonCastle.ProjectFiles.Projects;
@@ -72,7 +71,7 @@ public class ProjectManager {
 			Name = projectName,
 			Version = Version.Current
 		};
-		File.WriteAllText(projectFilePath, JsonConvert.SerializeObject(projectFile));
+		File.WriteAllText(projectFilePath, Serializer.Serialize(projectFile));
 
         LocalProjectList.AddProject(projectFilePath);
 

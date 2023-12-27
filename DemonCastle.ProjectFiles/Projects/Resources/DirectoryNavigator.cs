@@ -7,7 +7,6 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
-using Newtonsoft.Json;
 using File = System.IO.File;
 using Path = System.IO.Path;
 
@@ -104,7 +103,7 @@ public class DirectoryNavigator {
 
 	public void CreateFile<TFile>(string fileName, string extension, TFile data) {
 		var file = $"{fileName}{extension}";
-		var contents = JsonConvert.SerializeObject(data);
+		var contents = Serializer.Serialize(data);
 		if (FileExists(file)) {
 			CreateFile(fileName, 0, extension, contents);
 		} else {

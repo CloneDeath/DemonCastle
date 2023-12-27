@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace DemonCastle.ProjectFiles.Projects;
 
@@ -14,8 +12,7 @@ public class LocalProjectList {
 		if (!File.Exists(GlobalPath)) return new ProjectListFile();
 
 		var contents = File.ReadAllText(GlobalPath);
-		return JsonConvert.DeserializeObject<ProjectListFile>(contents)
-			   ?? throw new NullReferenceException();
+		return Serializer.Deserialize<ProjectListFile>(contents);
 	}
 
 	public static IEnumerable<string> ProjectFiles => GetProjectList().Projects;
@@ -28,7 +25,7 @@ public class LocalProjectList {
 
 	private static void SaveProjectList(ProjectListFile project) {
 		project.Projects = project.Projects.Where(File.Exists).Distinct().ToList();
-		var content = JsonConvert.SerializeObject(project);
+		var content = Serializer.Serialize(project);
 		File.WriteAllText(GlobalPath, content);
 	}
 
