@@ -7,7 +7,6 @@ namespace DemonCastle.ProjectFiles;
 
 public static class Serializer {
 	private static JsonSerializerSettings Settings { get; } = new() {
-		TypeNameHandling = TypeNameHandling.Auto,
 		Formatting = Formatting.Indented,
 		Converters = new List<JsonConverter> { new ElementConverter() }
 	};
