@@ -4,14 +4,15 @@ using DemonCastle.ProjectFiles.FileTypes;
 namespace DemonCastle.ProjectFiles;
 
 public static class FileType {
-	public static IFileType Png => new PngFileType();
-	public static IFileType Project => new ProjectFileType();
-	public static IFileType SpriteAtlas => new SpriteAtlasFileType();
-	public static IFileType SpriteGrid => new SpriteGridFileType();
-	public static IFileType Text => new TextFileType();
 	public static IFileType Character => new CharacterFileType();
 	public static IFileType Level => new LevelFileType();
 	public static IFileType Monster => new MonsterFileType();
+	public static IFileType Png => new PngFileType();
+	public static IFileType Project => new ProjectFileType();
+	public static IFileType Scene => new SceneFileType();
+	public static IFileType SpriteAtlas => new SpriteAtlasFileType();
+	public static IFileType SpriteGrid => new SpriteGridFileType();
+	public static IFileType Text => new TextFileType();
 	public static IFileType Wav => new WavFileType();
 	public static IFileType Weapon => new WeaponFileType();
 

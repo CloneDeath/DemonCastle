@@ -14,6 +14,7 @@ public static class EditorFileType {
 	public static IEditorFileType Monster { get; } = new MonsterEditorFileType();
 	public static IEditorFileType Png { get; } = new PngEditorFileType();
 	public static IEditorFileType Project { get; } = new ProjectEditorFileType();
+	public static IEditorFileType Scene { get; } = new SceneEditorFileType();
 	public static IEditorFileType SpriteAtlas { get; } = new SpriteAtlasEditorFileType();
 	public static IEditorFileType SpriteGrid { get; } = new SpriteGridEditorFileType();
 	public static IEditorFileType Text { get; } = new TextEditorFileType();
@@ -25,8 +26,9 @@ public static class EditorFileType {
 		SpriteGrid,
 		Character,
 		Weapon,
+		Monster,
 		Level,
-		Monster
+		Scene
 	};
 
 	public static IEnumerable<IEditorFileType> All { get; } = new[] {
@@ -35,6 +37,7 @@ public static class EditorFileType {
 		Monster,
 		Png,
 		Project,
+		Scene,
 		SpriteAtlas,
 		SpriteGrid,
 		Text,
