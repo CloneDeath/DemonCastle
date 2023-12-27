@@ -7,8 +7,8 @@ namespace DemonCastle.ProjectFiles.Files.Elements;
 public static class ElementTypeMapping
 {
 	private static readonly Dictionary<ElementType, Type> TypeMap = new() {
-		{ ElementType.Label, typeof(LabelElement) },
-		{ ElementType.ColorRect, typeof(ColorRectElement) }
+		{ ElementType.Label, typeof(LabelElementData) },
+		{ ElementType.ColorRect, typeof(ColorRectElementData) }
 	};
 
 	public static Type GetType(ElementType elementType) {

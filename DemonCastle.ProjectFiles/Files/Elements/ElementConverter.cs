@@ -6,7 +6,7 @@ namespace DemonCastle.ProjectFiles.Files.Elements;
 
 public class ElementConverter : JsonConverter {
 	public override bool CanConvert(Type objectType) {
-		return objectType == typeof(Element);
+		return objectType == typeof(ElementData);
 	}
 
 	public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer) {

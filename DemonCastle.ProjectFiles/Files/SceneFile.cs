@@ -10,10 +10,10 @@ namespace DemonCastle.ProjectFiles.Files;
 public class SceneFile {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public List<Element> Elements { get; set; } = new();
+	public List<ElementData> Elements { get; set; } = new();
 }
 
-public class Element {
+public class ElementData {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public ElementType Type { get; set; }
@@ -26,8 +26,8 @@ public enum ElementType {
 	ColorRect
 }
 
-public class LabelElement : Element {
-	public LabelElement() {
+public class LabelElementData : ElementData {
+	public LabelElementData() {
 		Type = ElementType.Label;
 	}
 
@@ -35,8 +35,8 @@ public class LabelElement : Element {
 	public ColorData Color { get; set; } = Colors.White.ToColorData();
 }
 
-public class ColorRectElement : Element {
-	public ColorRectElement() {
+public class ColorRectElementData : ElementData {
+	public ColorRectElementData() {
 		Type = ElementType.ColorRect;
 	}
 

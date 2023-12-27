@@ -22,19 +22,16 @@ public partial class AnimationList : VBoxContainer {
 
 		AddChild(AddButton = new Button { Text = "Add" });
 		AddButton.Pressed += AddButton_OnPressed;
+
 		AddChild(Animations = new ItemList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		Animations.ItemSelected += Animations_OnItemSelected;
+
 		AddChild(RemoveButton = new Button { Text = "Remove" });
 		RemoveButton.Pressed += RemoveButton_OnPressed;
 
 		ReloadAnimations();
-	}
-
-	private void Animations_OnItemSelected(long index) {
-		var animation = _animations[(int)index];
-		AnimationSelected?.Invoke(animation);
 	}
 
 	public override void _EnterTree() {
@@ -49,6 +46,11 @@ public partial class AnimationList : VBoxContainer {
 
 	private void AddButton_OnPressed() {
 		_animations.AppendNew();
+	}
+
+	private void Animations_OnItemSelected(long index) {
+		var animation = _animations[(int)index];
+		AnimationSelected?.Invoke(animation);
 	}
 
 	private void RemoveButton_OnPressed() {
