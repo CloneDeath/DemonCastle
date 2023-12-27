@@ -5,6 +5,8 @@ namespace DemonCastle.ProjectFiles;
 
 public static class FileType {
 	public static IFileType Character => new CharacterFileType();
+	public static IFileType Jpeg => new JpegFileType();
+	public static IFileType Jpg => new JpgFileType();
 	public static IFileType Level => new LevelFileType();
 	public static IFileType Monster => new MonsterFileType();
 	public static IFileType Png => new PngFileType();
@@ -18,7 +20,7 @@ public static class FileType {
 
 	public static IEnumerable<IFileType> AudioSources => new[] { Wav };
 	public static IEnumerable<IFileType> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
-	public static IEnumerable<IFileType> RawTextureFiles => new[] { Png };
+	public static IEnumerable<IFileType> RawTextureFiles => new[] { Jpeg, Jpg, Png };
 }
 
 public interface IFileType {

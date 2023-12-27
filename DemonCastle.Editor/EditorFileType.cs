@@ -10,6 +10,8 @@ namespace DemonCastle.Editor;
 
 public static class EditorFileType {
 	public static IEditorFileType Character { get; } = new CharacterEditorFileType();
+	public static IEditorFileType Jpeg { get; } = new JpegEditorFileType();
+	public static IEditorFileType Jpg { get; } = new JpgEditorFileType();
 	public static IEditorFileType Level { get; } = new LevelEditorFileType();
 	public static IEditorFileType Monster { get; } = new MonsterEditorFileType();
 	public static IEditorFileType Png { get; } = new PngEditorFileType();
@@ -33,6 +35,8 @@ public static class EditorFileType {
 
 	public static IEnumerable<IEditorFileType> All { get; } = new[] {
 		Character,
+		Jpeg,
+		Jpg,
 		Level,
 		Monster,
 		Png,
