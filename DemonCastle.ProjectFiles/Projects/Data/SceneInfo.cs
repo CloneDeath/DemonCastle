@@ -1,6 +1,8 @@
 using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -13,6 +15,15 @@ public class SceneInfo : FileInfo<SceneFile> {
 		get => Resource.Name;
 		set {
 			Resource.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Size {
+		get => Resource.Size.ToVector2I();
+		set {
+			Resource.Size = value.ToSize();
 			Save();
 			OnPropertyChanged();
 		}
