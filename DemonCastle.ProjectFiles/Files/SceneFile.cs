@@ -10,6 +10,7 @@ namespace DemonCastle.ProjectFiles.Files;
 public class SceneFile {
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
+	public Size Size { get; set; } = new(256, 240);
 	public List<ElementData> Elements { get; set; } = new();
 }
 
