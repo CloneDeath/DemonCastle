@@ -9,5 +9,7 @@ public partial class SceneEditor : BaseEditor {
 
 	public SceneEditor(SceneInfo scene) {
 		TabText = scene.FileName;
+
+		AddChild(new SceneDetails(scene));
 	}
 }

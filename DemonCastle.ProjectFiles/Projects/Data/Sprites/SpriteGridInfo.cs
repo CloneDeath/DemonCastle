@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -9,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
-public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPropertyChanged {
+public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 	private List<SpriteGridDataInfo> SpriteData { get; }
 
 	public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
@@ -106,19 +104,4 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource, INotifyPr
 		OnPropertyChanged(nameof(Sprites));
 		OnPropertyChanged(nameof(GridSprites));
 	}
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }

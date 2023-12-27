@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -9,7 +6,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyPropertyChanged {
+public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
 	public CharacterInfo(FileNavigator<CharacterFile> file) : base(file) {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
 	}
@@ -173,19 +170,4 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo, INotifyProp
 	}
 
 	public Vector2 Size => new(Resource.Width, Resource.Height);
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }
