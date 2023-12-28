@@ -32,4 +32,13 @@ public class ColorRectElementInfo : BaseInfo<ColorRectElementData>, IElementInfo
 			OnPropertyChanged();
 		}
 	}
+
+	public Color Color {
+		get => Data.Color.ToColor();
+		set {
+			Data.Color = value.ToColorData();
+			Save();
+			OnPropertyChanged();
+		}
+	}
 }

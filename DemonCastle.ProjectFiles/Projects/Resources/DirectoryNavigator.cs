@@ -38,6 +38,11 @@ public class DirectoryNavigator {
 		return ProjectResources.GetWeapon(path);
 	}
 
+	public Font GetFont(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetFont(path);
+	}
+
 	public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);
 
 	public LevelInfo GetLevel(string localPath) {

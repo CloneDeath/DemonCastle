@@ -9,4 +9,5 @@ public interface IFileNavigator {
 	bool FileExists(string source);
 	ISpriteSource GetSprite(string source);
 	AudioStream GetAudioStream(string source);
+	Font GetFont(string source);
 }

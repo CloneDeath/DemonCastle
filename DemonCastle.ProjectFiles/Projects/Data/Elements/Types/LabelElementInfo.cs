@@ -51,6 +51,8 @@ public class LabelElementInfo : BaseInfo<LabelElementData>, IElementInfo {
 		}
 	}
 
+	public Font? Font => FontFile != null && File.FileExists(FontFile) ? File.GetFont(FontFile) : null;
+
 	public int FontSize {
 		get => Data.FontSize;
 		set {
