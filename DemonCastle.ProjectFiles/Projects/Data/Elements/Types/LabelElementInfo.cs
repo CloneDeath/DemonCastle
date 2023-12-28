@@ -1,5 +1,5 @@
 using System;
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
