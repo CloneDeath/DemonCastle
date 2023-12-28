@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Files.Common;
+using DemonCastle.ProjectFiles.Files.SceneEvents;
 using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -13,6 +14,7 @@ public class SceneFile {
 	public Size Size { get; set; } = new(256, 240);
 	public ColorAlphaData BackgroundColor { get; set; } = Colors.Black.ToColorAlphaData();
 	public List<ElementData> Elements { get; set; } = new();
+	public List<SceneEventData> Events { get; set; } = new();
 }
 
 public class ElementData {
