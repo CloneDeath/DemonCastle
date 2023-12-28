@@ -14,8 +14,8 @@ public class MonsterFile {
 	public int Health { get; set; } = 1;
 	public int Experience { get; set; } = 1;
 	public int Attack { get; set; } = 1;
-	public int PhysicalDefense { get; set; } = 0;
-	public int MagicalDefense { get; set; } = 0;
+	public int PhysicalDefense { get; set; }
+	public int MagicalDefense { get; set; }
 
 	public float MoveSpeed { get; set; } = 3;
 	public float JumpHeight { get; set; } = 3;

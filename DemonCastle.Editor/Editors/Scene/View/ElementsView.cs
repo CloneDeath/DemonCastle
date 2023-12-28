@@ -44,7 +44,7 @@ public partial class ElementsView : Control {
 		}
 	}
 
-	private Control GetElementView(IElementInfo element) {
+	private static Control GetElementView(IElementInfo element) {
 		return element.Type switch {
 			ElementType.Label => new LabelElementView((LabelElementInfo)element),
 			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),

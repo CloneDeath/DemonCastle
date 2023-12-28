@@ -22,20 +22,20 @@ public partial class ArrowGrid : GridContainer {
 				AddChild(_buttons[y, x] = new Button {
 					Text = emoji[y, x],
 					ToggleMode = true,
-					CustomMinimumSize = new Vector2(32, 32),
+					CustomMinimumSize = new Vector2(32, 32)
 				});
-				var coord = new Vector2I(x - 1, y - 1);
-				_buttons[y, x].Toggled += pressed => Button_OnToggled(coord, pressed);
+				var coordinate = new Vector2I(x - 1, y - 1);
+				_buttons[y, x].Toggled += pressed => Button_OnToggled(coordinate, pressed);
 			}
 		}
 
 		Refresh();
 	}
 
-	private void Button_OnToggled(Vector2I coord, bool buttonPressed) {
+	private void Button_OnToggled(Vector2I coordinate, bool buttonPressed) {
 		if (buttonPressed) {
-			Value = coord;
-		} else if (Value == coord) {
+			Value = coordinate;
+		} else if (Value == coordinate) {
 			Value = Vector2I.Zero;
 		}
 		Refresh();
@@ -70,8 +70,8 @@ public partial class ArrowGrid : GridContainer {
 	private void Refresh() {
 		for (var x = 0; x < 3; x++) {
 			for (var y = 0; y < 3; y++) {
-				var coord = new Vector2I(x - 1, y - 1);
-				_buttons[y, x].ButtonPressed = coord == _value;
+				var coordinate = new Vector2I(x - 1, y - 1);
+				_buttons[y, x].ButtonPressed = coordinate == _value;
 			}
 		}
 	}
