@@ -1,4 +1,5 @@
 using System;
+using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
@@ -10,6 +11,7 @@ public class ColorRectElementInfo : BaseInfo<ColorRectElementData>, IElementInfo
 	}
 
 	public Guid Id => Data.Id;
+	public ElementType Type => Data.Type;
 
 	public string Name {
 		get => Data.Name;

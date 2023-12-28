@@ -1,5 +1,7 @@
+using DemonCastle.Editor.Editors.Scene.Elements.Editor;
 using DemonCastle.Editor.Editors.Scene.Elements.List;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene;
@@ -11,7 +13,10 @@ public partial class SceneEditor : BaseEditor {
 	private HSplitContainer Split { get; }
 
 	private VBoxContainer Left { get; }
+	private ElementList ElementList { get; }
+
 	private HSplitContainer Right { get; }
+	private ElementEditor ElementEditor { get; }
 
 	public SceneEditor(SceneInfo scene) {
 		TabText = scene.FileName;
@@ -24,14 +29,15 @@ public partial class SceneEditor : BaseEditor {
 		});
 		{
 			Left.AddChild(new SceneDetails(scene));
-			Left.AddChild(new ElementList(scene.Elements) {
+			Left.AddChild(ElementList = new ElementList(scene.Elements) {
 				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
+			ElementList.ElementSelected += ElementList_OnElementSelected;
 		}
 
 		Split.AddChild(Right = new HSplitContainer());
 		{
-			Right.AddChild(new VBoxContainer {
+			Right.AddChild(ElementEditor = new ElementEditor {
 				CustomMinimumSize = new Vector2(300, 300)
 			});
 			Right.AddChild(new ColorRect {
@@ -39,5 +45,9 @@ public partial class SceneEditor : BaseEditor {
 				CustomMinimumSize = new Vector2(300, 300)
 			});
 		}
+	}
+
+	private void ElementList_OnElementSelected(IElementInfo obj) {
+		ElementEditor.LoadElement(obj);
 	}
 }
