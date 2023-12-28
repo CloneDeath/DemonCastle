@@ -12,7 +12,7 @@ public class LabelElementData : ElementData {
 
 	public string Text { get; set; } = string.Empty;
 	public string? FontFile { get; set; }
-	public int FontSize { get; set; } = 12;
+	public int FontSize { get; set; } = 16;
 	public ColorData Color { get; set; } = Colors.White.ToColorData();
 	public TextTransform TextTransform { get; set; } = TextTransform.None;
 }
