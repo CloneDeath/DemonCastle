@@ -47,7 +47,11 @@ public partial class SceneEditor : BaseEditor {
 		}
 	}
 
-	private void ElementList_OnElementSelected(IElementInfo obj) {
-		ElementEditor.LoadElement(obj);
+	private void ElementList_OnElementSelected(IElementInfo? obj) {
+		if (obj == null) {
+			ElementEditor.Clear();
+		} else {
+			ElementEditor.LoadElement(obj);
+		}
 	}
 }

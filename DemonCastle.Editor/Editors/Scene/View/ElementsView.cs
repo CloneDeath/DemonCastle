@@ -26,7 +26,7 @@ public partial class ElementsView : Control {
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_scene.Elements.CollectionChanged += Elements_OnCollectionChanged;
+		_scene.Elements.CollectionChanged -= Elements_OnCollectionChanged;
 	}
 
 	private void Elements_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {

@@ -8,7 +8,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Scene.Elements.List;
 
 public partial class ElementList : VBoxContainer {
-	public event Action<IElementInfo>? ElementSelected;
+	public event Action<IElementInfo?>? ElementSelected;
 
 	private readonly ElementInfoCollection _elements;
 
@@ -53,7 +53,8 @@ public partial class ElementList : VBoxContainer {
 
 	private void AddButton_OnIdPressed(long id) {
 		var type = (ElementType)id;
-		_elements.AppendNew(type);
+		var element = _elements.AppendNew(type);
+		ElementSelected?.Invoke(element);
 	}
 
 	private void Elements_OnItemSelected(long index) {
@@ -66,6 +67,7 @@ public partial class ElementList : VBoxContainer {
 		if (!selected.Any()) return;
 
 		_elements.RemoveAt(selected[0]);
+		ElementSelected?.Invoke(null);
 	}
 
 	private void Elements_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
@@ -78,5 +80,11 @@ public partial class ElementList : VBoxContainer {
 		foreach (var element in _elements) {
 			Elements.AddItem(element.Name);
 		}
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		RemoveButton.Disabled = !Elements.IsAnythingSelected();
 	}
 }

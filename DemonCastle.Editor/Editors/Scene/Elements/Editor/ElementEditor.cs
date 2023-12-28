@@ -15,10 +15,14 @@ public partial class ElementEditor : Container {
 		_file = file;
 	}
 
-	public void LoadElement(IElementInfo element) {
+	public void Clear() {
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
+	}
+
+	public void LoadElement(IElementInfo element) {
+		Clear();
 
 		var editor = GetEditor(_file, element);
 		AddChild(editor);
