@@ -8,37 +8,39 @@ public partial class FontFileEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.TextureIcon;
 	public override string TabText { get; }
 
+	protected ScrollContainer ScrollContainer { get; }
 	protected VBoxContainer Lines { get; }
 
 	public FontFileEditor(FileNavigator font) {
 		Name = nameof(ImageEditor);
 		TabText = font.FileName;
 
-		AddChild(Lines = new VBoxContainer());
-		Lines.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+		AddChild(ScrollContainer = new ScrollContainer());
+		ScrollContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+
+		ScrollContainer.AddChild(Lines = new VBoxContainer());
 
 		const string previewText = "The Quick Brown Fox Jumped Over the Lazy Dog";
+		var sizes = new[] { 72, 36, 24, 12, 10, 8, 6 };
 
-		Lines.AddChild(new Label {
-			Text = previewText,
-			LabelSettings = new LabelSettings {
+		foreach (var size in sizes) {
+			var labelSettings = new LabelSettings {
 				Font = font.ToFont(),
-				FontSize = 72
-			}
-		});
-		Lines.AddChild(new Label {
-			Text = previewText.ToUpper(),
-			LabelSettings = new LabelSettings {
-				Font = font.ToFont(),
-				FontSize = 72
-			}
-		});
-		Lines.AddChild(new Label {
-			Text = previewText.ToLower(),
-			LabelSettings = new LabelSettings {
-				Font = font.ToFont(),
-				FontSize = 72
-			}
-		});
+				FontSize = size
+			};
+			var textLine = $"{labelSettings.FontSize}: {previewText}";
+			Lines.AddChild(new Label {
+				Text = textLine,
+				LabelSettings = labelSettings
+			});
+			Lines.AddChild(new Label {
+				Text = textLine.ToUpper(),
+				LabelSettings = labelSettings
+			});
+			Lines.AddChild(new Label {
+				Text = textLine.ToLower(),
+				LabelSettings = labelSettings
+			});
+		}
 	}
 }
