@@ -28,7 +28,7 @@ public partial class ElementEditor : Container {
 	private static Control GetEditor(IFileInfo file, IElementInfo element) {
 		return element.Type switch {
 			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
-			ElementType.ColorRect => new ElementDetails(element),
+			ElementType.ColorRect => new ColorRectElementDetails((ColorRectElementInfo)element),
 			_ => throw new ArgumentOutOfRangeException(nameof(element))
 		};
 	}
