@@ -28,7 +28,7 @@ public static class ElementInfoFactory {
 		return type switch {
 			ElementType.Label => new LabelElementData { Name = "Label" },
 			ElementType.ColorRect => new ColorRectElementData { Name = "Color Rectangle" },
-			ElementType.Sprite => new SpriteElementData{ Name = "Sprrite"},
+			ElementType.Sprite => new SpriteElementData{ Name = "Sprite" },
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
 	}
