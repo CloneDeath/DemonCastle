@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Specialized;
-using DemonCastle.Editor.Editors.Scene.View.ElementTypes;
-using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Elements;
-using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene.View;
@@ -39,16 +34,8 @@ public partial class ElementsView : Control {
 		}
 
 		foreach (var element in _scene.Elements) {
-			var elementView = GetElementView(element);
+			var elementView = EditorElementFactory.GetView(element);
 			AddChild(elementView);
 		}
-	}
-
-	private static Control GetElementView(IElementInfo element) {
-		return element.Type switch {
-			ElementType.Label => new LabelElementView((LabelElementInfo)element),
-			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),
-			_ => throw new ArgumentOutOfRangeException(nameof(element))
-		};
 	}
 }
