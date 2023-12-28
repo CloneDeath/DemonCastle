@@ -43,6 +43,24 @@ public partial class FileTree : Tree {
 
 	public void Refresh() => CreateTree();
 
+	public void Collapse() {
+		var root = GetRoot();
+		root.Collapsed = false;
+
+		foreach (var child in root.GetChildren()) {
+			child.SetCollapsedRecursive(true);
+		}
+	}
+
+	public void Expand() {
+		var root = GetRoot();
+		root.Collapsed = false;
+
+		foreach (var child in root.GetChildren()) {
+			child.SetCollapsedRecursive(false);
+		}
+	}
+
 	protected void CreateTree() {
 		Clear();
 		FileMap.Clear();

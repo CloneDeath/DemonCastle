@@ -3,11 +3,13 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView;
 
 public partial class ExplorerPanel : Container {
 	protected FlowContainer Controls { get; }
 	protected Button RefreshButton { get; }
+	protected Button CollapseButton { get; }
+	protected Button ExpandButton { get; }
 	protected FileTree FileTree { get; }
 
 	public event Action<FileNavigator> FileActivated {
@@ -29,18 +31,38 @@ public partial class ExplorerPanel : Container {
 				Icon = IconTextures.RefreshIcon,
 				TooltipText = "Refresh"
 			});
-			RefreshButton.Pressed += RefreshButtonOnPressed;
+			RefreshButton.Pressed += RefreshButton_OnPressed;
+
+			Controls.AddChild(CollapseButton = new Button {
+				Text = "-",
+				TooltipText = "Collapse"
+			});
+			CollapseButton.Pressed += CollapseButton_OnPressed;
+
+			Controls.AddChild(ExpandButton = new Button {
+				Text = "+",
+				TooltipText = "Expand"
+			});
+			ExpandButton.Pressed += ExpandButton_OnPressed;
 		}
 		AddChild(FileTree = new FileTree(directoryNavigator) {
 			AnchorRight = 1,
 			AnchorBottom = 1,
-			OffsetTop = 30,
+			OffsetTop = 35,
 			OffsetRight = -5,
 			OffsetBottom = -5
 		});
 	}
 
-	private void RefreshButtonOnPressed() {
+	private void RefreshButton_OnPressed() {
 		FileTree.Refresh();
+	}
+
+	private void CollapseButton_OnPressed() {
+		FileTree.Collapse();
+	}
+
+	private void ExpandButton_OnPressed() {
+		FileTree.Expand();
 	}
 }
