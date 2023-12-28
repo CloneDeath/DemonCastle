@@ -1,6 +1,7 @@
 using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
+using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -9,6 +10,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 public class SceneInfo : FileInfo<SceneFile> {
 	public SceneInfo(FileNavigator<SceneFile> file) : base(file) {
 		Elements = new ElementInfoCollection(file, Resource.Elements);
+		Events = new SceneEventInfoCollection(file, Resource.Events);
 	}
 
 	public string Name {
@@ -39,4 +41,5 @@ public class SceneInfo : FileInfo<SceneFile> {
 	}
 
 	public ElementInfoCollection Elements { get; }
+	public SceneEventInfoCollection Events { get; }
 }

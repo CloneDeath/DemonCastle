@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Elements.List;
+namespace DemonCastle.Editor.Editors.Scene.Elements;
 
 public partial class ElementList : VBoxContainer {
 	public event Action<IElementInfo?>? ElementSelected;

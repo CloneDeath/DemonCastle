@@ -1,13 +1,15 @@
+using DemonCastle.Editor.Editors.Scene.Events.Editor;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
+using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Elements.Editor;
+namespace DemonCastle.Editor.Editors.Scene;
 
-public partial class ElementEditor : Container {
+public partial class SceneItemEditor : Container {
 	private readonly IFileInfo _file;
 
-	public ElementEditor(IFileInfo file) {
+	public SceneItemEditor(IFileInfo file) {
 		_file = file;
 	}
 
@@ -21,6 +23,14 @@ public partial class ElementEditor : Container {
 		Clear();
 
 		var editor = EditorElementFactory.GetEditor(_file, element);
+		AddChild(editor);
+		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+	}
+
+	public void LoadEvent(SceneEventInfo sceneEvent) {
+		Clear();
+
+		var editor = new SceneEventEditor(sceneEvent);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 	}

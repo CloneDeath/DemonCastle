@@ -1,9 +1,10 @@
-using DemonCastle.Editor.Editors.Scene.Elements.Editor;
-using DemonCastle.Editor.Editors.Scene.Elements.List;
+using DemonCastle.Editor.Editors.Scene.Events;
 using DemonCastle.Editor.Editors.Scene.View;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
+using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
+using ElementList = DemonCastle.Editor.Editors.Scene.Elements.ElementList;
 
 namespace DemonCastle.Editor.Editors.Scene;
 
@@ -14,10 +15,12 @@ public partial class SceneEditor : BaseEditor {
 	private HSplitContainer Split { get; }
 
 	private VBoxContainer Left { get; }
+	private TabContainer LeftTabs { get; }
 	private ElementList ElementList { get; }
+	private SceneEventsList EventsList { get; }
 
 	private HSplitContainer Right { get; }
-	private ElementEditor ElementEditor { get; }
+	private SceneItemEditor SceneItemEditor { get; }
 
 	public SceneEditor(SceneInfo scene) {
 		TabText = scene.FileName;
@@ -30,15 +33,23 @@ public partial class SceneEditor : BaseEditor {
 		});
 		{
 			Left.AddChild(new SceneDetails(scene));
-			Left.AddChild(ElementList = new ElementList(scene.Elements) {
+
+			Left.AddChild(LeftTabs = new TabContainer {
 				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
+
+			LeftTabs.AddChild(ElementList = new ElementList(scene.Elements));
 			ElementList.ElementSelected += ElementList_OnElementSelected;
+			LeftTabs.SetTabTitle(0, "Elements");
+
+			LeftTabs.AddChild(EventsList = new SceneEventsList(scene.Events));
+			EventsList.SceneEventSelected += EventList_OnEventSelected;
+			LeftTabs.SetTabTitle(1, "Events");
 		}
 
 		Split.AddChild(Right = new HSplitContainer());
 		{
-			Right.AddChild(ElementEditor = new ElementEditor(scene) {
+			Right.AddChild(SceneItemEditor = new SceneItemEditor(scene) {
 				CustomMinimumSize = new Vector2(425, 300)
 			});
 			Right.AddChild(new SceneView(scene) {
@@ -47,11 +58,19 @@ public partial class SceneEditor : BaseEditor {
 		}
 	}
 
+	private void EventList_OnEventSelected(SceneEventInfo? obj) {
+		if (obj == null) {
+			SceneItemEditor.Clear();
+		} else {
+			SceneItemEditor.LoadEvent(obj);
+		}
+	}
+
 	private void ElementList_OnElementSelected(IElementInfo? obj) {
 		if (obj == null) {
-			ElementEditor.Clear();
+			SceneItemEditor.Clear();
 		} else {
-			ElementEditor.LoadElement(obj);
+			SceneItemEditor.LoadElement(obj);
 		}
 	}
 }
