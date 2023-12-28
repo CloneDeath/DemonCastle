@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Files.Animations;
 using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
@@ -34,33 +33,29 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	void Delete();
 }
 
-public class FrameInfo : IFrameInfo {
+public class FrameInfo : BaseInfo<FrameData>, IFrameInfo {
 	protected IAnimationInfo Animation { get; }
-	protected IFileNavigator File { get; }
-	protected FrameData FrameData { get; }
 
-	public FrameInfo(IAnimationInfo animation, IFileNavigator file, FrameData data) {
+	public FrameInfo(IAnimationInfo animation, IFileNavigator file, FrameData data) : base(file, data) {
 		Animation = animation;
-		File = file;
-		FrameData = data;
 		Slots = new FrameSlotInfoCollection(file, data.Slots);
 	}
 
 	protected IEnumerableInfo<IFrameInfo> Frames => Animation.Frames;
 
 	public float Duration {
-		get => FrameData.Duration;
+		get => Data.Duration;
 		set {
-			FrameData.Duration = value;
+			Data.Duration = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public string SourceFile {
-		get => FrameData.Source;
+		get => Data.Source;
 		set {
-			FrameData.Source = value;
+			Data.Source = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(SpriteId));
@@ -69,9 +64,9 @@ public class FrameInfo : IFrameInfo {
 	}
 
 	public Guid SpriteId {
-		get => FrameData.SpriteId;
+		get => Data.SpriteId;
 		set {
-			FrameData.SpriteId = value;
+			Data.SpriteId = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(SpriteDefinition));
@@ -79,9 +74,9 @@ public class FrameInfo : IFrameInfo {
 	}
 
 	public Vector2I Anchor {
-		get => FrameData.Origin.Anchor;
+		get => Data.Origin.Anchor;
 		set {
-			FrameData.Origin.Anchor = value;
+			Data.Origin.Anchor = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Origin));
@@ -89,9 +84,9 @@ public class FrameInfo : IFrameInfo {
 	}
 
 	public Vector2I Offset {
-		get => FrameData.Origin.Offset;
+		get => Data.Origin.Offset;
 		set {
-			FrameData.Origin.Offset = value;
+			Data.Origin.Offset = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Origin));
@@ -99,27 +94,27 @@ public class FrameInfo : IFrameInfo {
 	}
 
 	public Rect2I? HitBox {
-		get => FrameData.HitBox?.ToRect2I();
+		get => Data.HitBox?.ToRect2I();
 		set {
-			FrameData.HitBox = value?.ToRegion2I();
+			Data.HitBox = value?.ToRegion2I();
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public Rect2I? HurtBox {
-		get => FrameData.HurtBox?.ToRect2I();
+		get => Data.HurtBox?.ToRect2I();
 		set {
-			FrameData.HurtBox = value?.ToRegion2I();
+			Data.HurtBox = value?.ToRegion2I();
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public string? Audio {
-		get => FrameData.Audio;
+		get => Data.Audio;
 		set {
-			FrameData.Audio = value;
+			Data.Audio = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(AudioStream));
@@ -127,38 +122,20 @@ public class FrameInfo : IFrameInfo {
 	}
 
 
-	public AudioStream? AudioStream => FrameData.Audio != null && File.FileExists(FrameData.Audio) ? File.GetAudioStream(FrameData.Audio) : null;
+	public AudioStream? AudioStream => Data.Audio != null && File.FileExists(Data.Audio) ? File.GetAudioStream(Data.Audio) : null;
 
 	public Vector2I Origin => (SpriteDefinition.Region.Size - Vector2I.One) * (Anchor + Vector2I.One) / 2 + Offset;
 
-	protected ISpriteSource SpriteSource => File.FileExists(FrameData.Source)
-												? File.GetSprite(FrameData.Source)
+	protected ISpriteSource SpriteSource => File.FileExists(Data.Source)
+												? File.GetSprite(Data.Source)
 												: new NullSpriteSource();
 
 	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 
-	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == FrameData.SpriteId)
+	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == Data.SpriteId)
 												 ?? new NullSpriteDefinition();
 
 	public IEnumerableInfo<IFrameSlotInfo> Slots { get; }
 
-
-	protected void Save() => File.Save();
-
 	public void Delete() => Frames.Remove(this);
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }
