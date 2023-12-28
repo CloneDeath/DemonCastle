@@ -178,4 +178,12 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		offset.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 		AddChild(group);
 	}
+
+	public EnumProperty<TEnum> AddEnum<T, TEnum>(string name, T target, Expression<Func<T, TEnum>> propertyExpression) where T : INotifyPropertyChanged where TEnum : struct, Enum {
+		var enumProperty = new EnumProperty<TEnum>(new PropertyBinding<T, TEnum>(target, propertyExpression)) {
+			DisplayName = name
+		};
+		AddChild(enumProperty);
+		return enumProperty;
+	}
 }
