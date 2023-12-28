@@ -22,6 +22,7 @@ public static class FileType {
 	public static IEnumerable<IFileType> AudioSources => new[] { Wav };
 	public static IEnumerable<IFileType> SpriteSources => new[] { SpriteAtlas, SpriteGrid };
 	public static IEnumerable<IFileType> RawTextureFiles => new[] { Jpeg, Jpg, Png };
+	public static IEnumerable<IFileType> FontFiles => new[] { Ttf };
 }
 
 public interface IFileType {

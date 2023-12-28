@@ -38,8 +38,8 @@ public partial class SceneEditor : BaseEditor {
 
 		Split.AddChild(Right = new HSplitContainer());
 		{
-			Right.AddChild(ElementEditor = new ElementEditor {
-				CustomMinimumSize = new Vector2(300, 300)
+			Right.AddChild(ElementEditor = new ElementEditor(scene) {
+				CustomMinimumSize = new Vector2(425, 300)
 			});
 			Right.AddChild(new SceneView(scene) {
 				CustomMinimumSize = new Vector2(300, 300)

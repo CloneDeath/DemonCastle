@@ -10,5 +10,6 @@ public partial class ElementDetails : PropertyCollection {
 
 		AddChild(new Label { Text = element.Type.ToString() });
 		AddString("Name", element, e => e.Name);
+		AddRect2I("Region", element, e => e.Region);
 	}
 }

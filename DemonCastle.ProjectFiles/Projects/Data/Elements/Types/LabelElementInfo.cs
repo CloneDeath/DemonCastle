@@ -1,7 +1,9 @@
 using System;
 using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 
@@ -17,6 +19,60 @@ public class LabelElementInfo : BaseInfo<LabelElementData>, IElementInfo {
 		get => Data.Name;
 		set {
 			Data.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Rect2I Region {
+		get => Data.Region.ToRect2I();
+		set {
+			Data.Region = value.ToRegion2I();
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string Text {
+		get => Data.Text;
+		set {
+			Data.Text = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string? FontFile {
+		get => Data.FontFile;
+		set {
+			Data.FontFile = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public int FontSize {
+		get => Data.FontSize;
+		set {
+			Data.FontSize = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Color Color {
+		get => Data.Color.ToColor();
+		set {
+			Data.Color = value.ToColorData();
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public TextTransform TextTransform {
+		get => Data.TextTransform;
+		set {
+			Data.TextTransform = value;
 			Save();
 			OnPropertyChanged();
 		}
