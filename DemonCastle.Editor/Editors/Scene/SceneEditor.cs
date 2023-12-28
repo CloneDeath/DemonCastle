@@ -1,5 +1,6 @@
 using DemonCastle.Editor.Editors.Scene.Elements.Editor;
 using DemonCastle.Editor.Editors.Scene.Elements.List;
+using DemonCastle.Editor.Editors.Scene.View;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using Godot;
@@ -40,8 +41,7 @@ public partial class SceneEditor : BaseEditor {
 			Right.AddChild(ElementEditor = new ElementEditor {
 				CustomMinimumSize = new Vector2(300, 300)
 			});
-			Right.AddChild(new ColorRect {
-				Color = Colors.Red,
+			Right.AddChild(new SceneView(scene) {
 				CustomMinimumSize = new Vector2(300, 300)
 			});
 		}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using DemonCastle.Editor.Editors.Properties.Color;
 using DemonCastle.Editor.Editors.Properties.Rect;
 using DemonCastle.Editor.Editors.Properties.Reference;
 using DemonCastle.Editor.Editors.Properties.Vector;
@@ -14,7 +15,6 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
-using Vector2IProperty = DemonCastle.Editor.Editors.Properties.Vector.Vector2IProperty;
 
 namespace DemonCastle.Editor.Editors.Properties;
 
@@ -58,10 +58,12 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return fileProperty;
 	}
 
-	public void AddColor<T>(string name, T target,Expression<Func<T, Color>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new ColorProperty(new PropertyBinding<T, Color>(target, propertyExpression)) {
+	public ColorProperty AddColor<T>(string name, T target,Expression<Func<T, Godot.Color>> propertyExpression, ColorPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var colorProperty = new ColorProperty(new PropertyBinding<T, Godot.Color>(target, propertyExpression), options ?? new ColorPropertyOptions()) {
 			DisplayName = name
-		});
+		};
+		AddChild(colorProperty);
+		return colorProperty;
 	}
 
 	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {

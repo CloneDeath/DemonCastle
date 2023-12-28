@@ -29,5 +29,14 @@ public class SceneInfo : FileInfo<SceneFile> {
 		}
 	}
 
+	public Color BackgroundColor {
+		get => Resource.BackgroundColor.ToColor();
+		set {
+			Resource.BackgroundColor = value.ToColorAlphaData();
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public ElementInfoCollection Elements { get; }
 }
