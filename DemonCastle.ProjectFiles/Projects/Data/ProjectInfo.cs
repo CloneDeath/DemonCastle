@@ -6,16 +6,37 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class ProjectInfo : IListableInfo {
-	public FileNavigator<ProjectFile> File { get; }
-	protected ProjectFile Project => File.Resource;
-	public string FileName => File.FileName;
-
-	public ProjectInfo(FileNavigator<ProjectFile> file) {
-		File = file;
+public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
+	public ProjectInfo(FileNavigator<ProjectFile> file) : base(file) {
 	}
 
-	public string Name => Project.Name;
+	public string Name {
+		get => Resource.Name;
+		set {
+			Resource.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string Version {
+		get => Resource.Version;
+		set {
+			Resource.Version = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string StartScene {
+		get => Resource.StartScene;
+		set {
+			Resource.StartScene = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 
 	public IEnumerable<CharacterInfo> Characters => File.GetFilesAndSubFiles()
 														.Where(f => f.Extension == FileType.Character.Extension)
@@ -30,6 +51,7 @@ public class ProjectInfo : IListableInfo {
 												.Select(f => f.ToMonsterInfo());
 
 	public string FilePath => File.FilePath;
+	public FileNavigator FileNavigator => File;
 
 
 	protected static string GodotLocal => "user://";

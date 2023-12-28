@@ -5,6 +5,7 @@ using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
+using ProjectEditor = DemonCastle.Editor.Editors.Project.ProjectEditor;
 
 namespace DemonCastle.Editor.EditorFileTypes;
 

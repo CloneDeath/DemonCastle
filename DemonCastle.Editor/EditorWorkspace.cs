@@ -19,7 +19,7 @@ public partial class EditorWorkspace : Control {
 			AnchorBottom = 1
 		});
 
-		SplitContainer.AddChild(Explorer = new ExplorerPanel(project.File) {
+		SplitContainer.AddChild(Explorer = new ExplorerPanel(project.FileNavigator) {
 			CustomMinimumSize = new Vector2(250, 0)
 		});
 		Explorer.FileActivated += ExplorerOnFileActivated;
