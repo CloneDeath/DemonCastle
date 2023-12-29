@@ -1,13 +1,14 @@
 using System.ComponentModel;
-using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Game.Animations.Generic;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
+using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.View.ElementTypes;
+namespace DemonCastle.Game.Scenes.ElementTypes;
 
-public partial class SpriteElementView : SpriteDefinitionView {
+public partial class SpriteElementView : SpriteDefinitionNode {
 	private readonly SpriteElementInfo _element;
 
-	public SpriteElementView(SpriteElementInfo element) {
+	public SpriteElementView(SpriteElementInfo element) : base(element.SpriteDefinition, Vector2I.Zero){
 		_element = element;
 		Name = nameof(SpriteElementView);
 		Refresh();
@@ -30,7 +31,6 @@ public partial class SpriteElementView : SpriteDefinitionView {
 
 	private void Refresh() {
 		Position = _element.Region.Position;
-		Size = _element.Region.Size;
 		Load(_element.SpriteDefinition);
 	}
 }

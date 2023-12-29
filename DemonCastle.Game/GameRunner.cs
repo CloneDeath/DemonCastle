@@ -1,10 +1,12 @@
 using DemonCastle.Game.DebugNodes;
+using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GameRunner : Control {
+	public GameScene Scene { get; }
 	public GameLevel? Level { get; }
 	public GamePlayer? Player { get; }
 	protected GameArea? CurrentArea { get; set; }
@@ -14,6 +16,8 @@ public partial class GameRunner : Control {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
+		AddChild(Scene = new GameScene());
+		Scene.Load(project.StartScene);
 		/*
 		var subViewportContainer = new SubViewportContainer {
 			Stretch = false,

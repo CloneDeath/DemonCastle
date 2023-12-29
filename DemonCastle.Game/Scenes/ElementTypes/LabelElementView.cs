@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.View.ElementTypes;
+namespace DemonCastle.Game.Scenes.ElementTypes;
 
 public partial class LabelElementView : Label {
 	private readonly LabelElementInfo _element;

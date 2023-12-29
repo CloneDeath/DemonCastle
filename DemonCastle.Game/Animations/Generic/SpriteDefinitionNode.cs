@@ -8,15 +8,18 @@ public partial class SpriteDefinitionNode : Sprite2D {
 	protected TransparentColorSpriteShader TransparentColorSpriteShader { get; }
 	public SpriteDefinitionNode(ISpriteDefinition definition, Vector2I origin) {
 		Name = $"{nameof(SpriteDefinitionNode)}-{definition.Name}";
-		Texture = definition.Texture;
 		RegionEnabled = true;
-		RegionRect = definition.Region;
-		FlipH = definition.FlipHorizontal;
-		Material = TransparentColorSpriteShader = new TransparentColorSpriteShader {
-			TransparentColor = definition.TransparentColor,
-			Threshold = definition.TransparentColorThreshold
-		};
+		Material = TransparentColorSpriteShader = new TransparentColorSpriteShader();
 		Offset = -origin;
 		Centered = false;
+		Load(definition);
+	}
+
+	protected void Load(ISpriteDefinition definition) {
+		Texture = definition.Texture;
+		RegionRect = definition.Region;
+		FlipH = definition.FlipHorizontal;
+		TransparentColorSpriteShader.TransparentColor = definition.TransparentColor;
+		TransparentColorSpriteShader.Threshold = definition.TransparentColorThreshold;
 	}
 }

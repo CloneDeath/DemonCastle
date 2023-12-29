@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.View.ElementTypes;
+namespace DemonCastle.Game.Scenes.ElementTypes;
 
 public partial class LevelViewElementView : ColorRect {
 	private readonly LevelViewElementInfo _element;

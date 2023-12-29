@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Scene.Events.Editor;
+using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
@@ -22,7 +23,7 @@ public partial class SceneItemEditor : Container {
 	public void LoadElement(IElementInfo element) {
 		Clear();
 
-		var editor = EditorElementFactory.GetEditor(_file, element);
+		var editor = ElementDetailsFactory.GetEditor(_file, element);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 	}

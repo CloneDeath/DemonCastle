@@ -2,7 +2,7 @@ using System.Collections.Specialized;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.View;
+namespace DemonCastle.Game.Scenes;
 
 public partial class ElementsView : Control {
 	private readonly SceneInfo _scene;
@@ -34,7 +34,7 @@ public partial class ElementsView : Control {
 		}
 
 		foreach (var element in _scene.Elements) {
-			var elementView = EditorElementFactory.GetView(element);
+			var elementView = ElementViewFactory.GetView(element);
 			AddChild(elementView);
 		}
 	}
