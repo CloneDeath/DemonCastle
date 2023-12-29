@@ -26,17 +26,17 @@ public class DirectoryNavigator {
 		ProjectResources = resources;
 	}
 
-	public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
+	public AudioStream GetAudioStream(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetAudioStream(path);
+	}
 
 	public CharacterInfo GetCharacter(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetCharacter(path);
 	}
 
-	public WeaponInfo GetWeapon(string localPath) {
-		var path = Path.Combine(Directory, localPath);
-		return ProjectResources.GetWeapon(path);
-	}
+	public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
 
 	public Font GetFont(string localPath) {
 		var path = Path.Combine(Directory, localPath);
@@ -61,11 +61,6 @@ public class DirectoryNavigator {
 		throw new UnknownSpriteFileFormatException(path);
 	}
 
-	public AudioStream GetAudioStream(string localPath) {
-		var path = Path.Combine(Directory, localPath);
-		return ProjectResources.GetAudioStream(path);
-	}
-
 	public Texture2D GetTexture(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetTexture(path);
@@ -74,6 +69,11 @@ public class DirectoryNavigator {
 	public TextInfo GetText(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetText(path);
+	}
+
+	public WeaponInfo GetWeapon(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetWeapon(path);
 	}
 
 	public IEnumerable<FileNavigator> GetFilesAndSubFiles() {
