@@ -1,12 +1,16 @@
+using System;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GameRunner : Control {
-	public GameScene Scene { get; }
+public partial class GameRunner : Control, IGameState {
+	private SceneStack SceneStack { get; }
+
 	public GameLevel? Level { get; }
 	public GamePlayer? Player { get; }
 	protected GameArea? CurrentArea { get; set; }
@@ -16,8 +20,9 @@ public partial class GameRunner : Control {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(Scene = new GameScene());
-		Scene.Load(project.StartScene);
+		AddChild(SceneStack = new SceneStack(this));
+		SetScene(project.StartScene);
+
 		/*
 		var subViewportContainer = new SubViewportContainer {
 			Stretch = false,
@@ -59,4 +64,18 @@ public partial class GameRunner : Control {
 		CurrentArea = area;
 		CurrentArea?.OnPlayerEnter();
 	}
+
+	public void SetCharacter(CharacterInfo character) {
+		throw new NotImplementedException();
+	}
+
+	public void SetLevel(LevelInfo level) {
+		throw new NotImplementedException();
+	}
+
+	public void SetScene(SceneInfo scene) => SceneStack.Set(scene);
+	public void PushScene(SceneInfo scene) => SceneStack.Push(scene);
+	public void PopScene(int number) => SceneStack.Pop(number);
+
+	public IInputState Input => throw new NotImplementedException();
 }

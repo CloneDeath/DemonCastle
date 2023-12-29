@@ -1,5 +1,7 @@
+using System;
 using DemonCastle.ProjectFiles.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
@@ -7,13 +9,14 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	public SceneEventConditionInfo(IFileNavigator file, SceneEventConditionData data) : base(file, data) { }
 
 	private void Clear() {
-		Data.And = null;
-		Data.Or = null;
+		//Data.And = null;
+		//Data.Or = null;
 		Data.AnyInput = null;
 		Data.Input = null;
 	}
 
-	public SceneEventConditionData[]? And {
+	/*
+	public SceneEventConditionInfoCollection And {
 		get => Data.And;
 		set {
 			Clear();
@@ -23,7 +26,7 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 		}
 	}
 
-	public SceneEventConditionData[]? Or {
+	public SceneEventConditionInfoCollection? Or {
 		get => Data.Or;
 		set {
 			Clear();
@@ -32,6 +35,8 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 			OnPropertyChanged();
 		}
 	}
+
+	*/
 
 	public KeyState? AnyInput {
 		get => Data.AnyInput;
@@ -61,5 +66,19 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 			Save();
 			OnPropertyChanged();
 		}
+	}
+
+	public bool IsConditionMet(IGameState game, SceneState scene) {
+		return (AnyInput != null && game.Input.AnyInputIsInState(AnyInput.Value)) ||
+			   (Input != null && game.Input.InputIsInState(Input.Action, Input.State)) ||
+			   (ThisScene != null && IsThisSceneConditionMet(ThisScene.Value, scene));
+	}
+
+	private static bool IsThisSceneConditionMet(SceneChangeEvent thisScene, SceneState scene) {
+		return thisScene switch {
+			SceneChangeEvent.Enter => scene.OnEnter,
+			SceneChangeEvent.Exit => scene.OnExit,
+			_ => throw new InvalidOperationException()
+		};
 	}
 }

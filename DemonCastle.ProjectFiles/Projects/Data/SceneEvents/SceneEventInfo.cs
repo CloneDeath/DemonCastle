@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
@@ -20,4 +21,10 @@ public class SceneEventInfo : BaseInfo<SceneEventData> {
 
 	public SceneEventConditionInfo When { get; }
 	public SceneEventActionInfoCollection Then { get; }
+
+	public void TriggerEvent(IGameState gameState, SceneState sceneState) {
+		if (When.IsConditionMet(gameState, sceneState)) {
+			Then.TriggerActions(gameState);
+		}
+	}
 }

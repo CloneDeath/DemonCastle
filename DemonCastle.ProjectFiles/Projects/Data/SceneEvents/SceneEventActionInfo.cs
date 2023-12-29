@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
@@ -34,6 +35,12 @@ public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
 			Save();
 			OnPropertyChanged();
 		}
+	}
+
+	public void TriggerAction(IGameState game) {
+		Scene.TriggerAction(game);
+		if (SetCharacter != null) game.SetCharacter(File.GetCharacter(SetCharacter));
+		if (SetLevel != null) game.SetLevel(File.GetLevel(SetLevel));
 	}
 }
 
@@ -80,5 +87,12 @@ public class SceneChangeActionInfo : BaseInfo<SceneEventActionData> {
 			Save();
 			OnPropertyChanged();
 		}
+	}
+
+	public void TriggerAction(IGameState gameState) {
+		if (!IsSet) return;
+		if (Set != null) gameState.SetScene(File.GetScene(Set));
+		if (Push != null) gameState.PushScene(File.GetScene(Push));
+		if (Pop != null) gameState.PopScene(Pop.Value);
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
@@ -13,6 +14,12 @@ public class SceneEventActionInfoCollection : ObservableCollectionInfo<SceneEven
 	}
 
 	protected override void Save() => _file.Save();
+
+	public void TriggerActions(IGameState gameState) {
+		foreach (var action in this) {
+			action.TriggerAction(gameState);
+		}
+	}
 }
 
 public class SceneEventActionInfoFactory : IInfoFactory<SceneEventActionInfo, SceneEventActionData> {

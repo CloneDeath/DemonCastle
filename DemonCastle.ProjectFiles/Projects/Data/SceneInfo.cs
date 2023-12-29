@@ -3,7 +3,9 @@ using DemonCastle.ProjectFiles.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 using Godot;
+using SceneState = DemonCastle.ProjectFiles.State.SceneState;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -42,4 +44,10 @@ public class SceneInfo : FileInfo<SceneFile> {
 
 	public ElementInfoCollection Elements { get; }
 	public SceneEventInfoCollection Events { get; }
+
+	public void TriggerEvents(IGameState gameState, SceneState sceneState) {
+		foreach (var sceneEvent in Events) {
+			sceneEvent.TriggerEvent(gameState, sceneState);
+		}
+	}
 }

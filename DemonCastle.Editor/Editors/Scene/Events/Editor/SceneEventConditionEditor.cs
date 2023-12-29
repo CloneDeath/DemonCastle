@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
 using DemonCastle.ProjectFiles.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
@@ -12,7 +11,7 @@ public partial class SceneEventConditionEditor : HFlowContainer {
 		AddChild(new Label { Text = "When" });
 
 		AddChild(new ChoiceTree {
-			{ "All Of",
+			/*{ "All Of",
 				when.And != null,
 				c => {
 					when.And ??= Array.Empty<SceneEventConditionData>();
@@ -25,7 +24,7 @@ public partial class SceneEventConditionEditor : HFlowContainer {
 					when.Or ??= Array.Empty<SceneEventConditionData>();
 					c.AddChild(new Label { Text = "Any Of (NOT IMPLEMENTED)" });
 				}
-			},
+			},*/
 			{ "The Action",
 				when.Input != null,
 				c => {

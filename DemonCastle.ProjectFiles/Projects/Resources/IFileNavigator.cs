@@ -1,3 +1,5 @@
+using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 
@@ -7,7 +9,10 @@ public interface IFileNavigator {
 	void Save();
 	string Directory { get; }
 	bool FileExists(string source);
-	ISpriteSource GetSprite(string source);
 	AudioStream GetAudioStream(string source);
+	CharacterInfo GetCharacter(string character);
 	Font GetFont(string source);
+	LevelInfo GetLevel(string level);
+	SceneInfo GetScene(string source);
+	ISpriteSource GetSprite(string source);
 }

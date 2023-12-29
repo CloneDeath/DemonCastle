@@ -4,8 +4,8 @@ using Newtonsoft.Json.Converters;
 namespace DemonCastle.ProjectFiles.Files.SceneEvents;
 
 public class SceneEventConditionData {
-	public SceneEventConditionData[]? And { get; set; }
-	public SceneEventConditionData[]? Or { get; set; }
+	//public SceneEventConditionData[]? And { get; set; }
+	//public SceneEventConditionData[]? Or { get; set; }
 	public KeyState? AnyInput { get; set; }
 	public InputConditionData? Input { get; set; }
 	public SceneChangeEvent? ThisScene { get; set; }
