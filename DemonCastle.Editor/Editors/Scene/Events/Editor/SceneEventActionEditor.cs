@@ -15,7 +15,7 @@ public partial class SceneEventActionEditor : HFlowContainer {
 
 	private readonly Button DeleteButton;
 
-	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo then) {
+	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo action) {
 		Name = nameof(SceneEventActionEditor);
 		AddChild(DeleteButton = new Button { Text = "X" });
 		DeleteButton.Pressed += () => Deleted?.Invoke();
@@ -23,18 +23,18 @@ public partial class SceneEventActionEditor : HFlowContainer {
 		AddChild(new ChoiceTree {
 			{
 				"Scene",
-				then.Scene.IsSet,
+				action.Scene.IsSet,
 				sceneControl => {
-					then.Scene.IsSet = true;
+					action.Scene.IsSet = true;
 					sceneControl.AddChild(new Label { Text = "should" });
 					sceneControl.AddChild(new ChoiceTree {
 						{
 							"Set",
-							then.Scene.Set != null,
+							action.Scene.Set != null,
 							setControl => {
-								then.Scene.Set ??= string.Empty;
+								action.Scene.Set ??= string.Empty;
 								setControl.AddChild(new Label { Text = "to" });
-								var binding = new CallbackBinding<string>(() => then.Scene.Set, v => then.Scene.Set = v);
+								var binding = new CallbackBinding<string>(() => action.Scene.Set, v => action.Scene.Set = v);
 								setControl.AddChild(new FileProperty(binding, file.Directory, new[] { FileType.Scene }){
 									SizeFlagsHorizontal = SizeFlags.ExpandFill
 								});
@@ -42,10 +42,10 @@ public partial class SceneEventActionEditor : HFlowContainer {
 						},
 						{
 							"Push",
-							then.Scene.Push != null,
+							action.Scene.Push != null,
 							pushControl => {
-								then.Scene.Push ??= string.Empty;
-								var binding = new CallbackBinding<string>(() => then.Scene.Push, v => then.Scene.Push = v);
+								action.Scene.Push ??= string.Empty;
+								var binding = new CallbackBinding<string>(() => action.Scene.Push, v => action.Scene.Push = v);
 								pushControl.AddChild(new FileProperty(binding, file.Directory, new[] { FileType.Scene }) {
 									SizeFlagsHorizontal = SizeFlags.ExpandFill
 								});
@@ -53,14 +53,36 @@ public partial class SceneEventActionEditor : HFlowContainer {
 						},
 						{
 							"Pop",
-							then.Scene.Pop != null,
+							action.Scene.Pop != null,
 							popControl => {
-								then.Scene.Pop ??= 1;
-								var binding = new CallbackBinding<int>(() => then.Scene.Pop ?? 1, v => then.Scene.Pop = v);
+								action.Scene.Pop ??= 1;
+								var binding = new CallbackBinding<int>(() => action.Scene.Pop ?? 1, v => action.Scene.Pop = v);
 								popControl.AddChild(new IntegerProperty(binding));
 								popControl.AddChild(new Label { Text = "scenes" });
 							}
 						}
+					});
+				}
+			},
+			{
+				"Set Character",
+				action.SetCharacter != null,
+				c => {
+					action.SetCharacter ??= string.Empty;
+					var binding = new CallbackBinding<string>(() => action.SetCharacter, v => action.SetCharacter = v);
+					c.AddChild(new FileProperty(binding, file.Directory, new[] { FileType.Character }) {
+						SizeFlagsHorizontal = SizeFlags.ExpandFill
+					});
+				}
+			},
+			{
+				"Set Level",
+				action.SetLevel != null,
+				c => {
+					action.SetLevel ??= string.Empty;
+					var binding = new CallbackBinding<string>(() => action.SetLevel, v => action.SetLevel = v);
+					c.AddChild(new FileProperty(binding, file.Directory, new[] { FileType.Level }) {
+						SizeFlagsHorizontal = SizeFlags.ExpandFill
 					});
 				}
 			}

@@ -9,6 +9,24 @@ public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
 	}
 
 	public SceneChangeActionInfo Scene { get; }
+
+	public string? SetCharacter {
+		get => Data.SetCharacter;
+		set {
+			Data.SetCharacter = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public string? SetLevel {
+		get => Data.SetLevel;
+		set {
+			Data.SetLevel = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
 }
 
 public class SceneChangeActionInfo : BaseInfo<SceneEventActionData> {
