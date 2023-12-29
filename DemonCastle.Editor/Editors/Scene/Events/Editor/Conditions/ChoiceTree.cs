@@ -9,6 +9,7 @@ public partial class ChoiceTree : HFlowContainer, IEnumerable<ChoiceTreeOption> 
 	private readonly List<ChoiceTreeOption> _options = new();
 	private readonly OptionButton _choice;
 	private readonly HFlowContainer _overflow;
+	private bool _itemSelected;
 
 	public ChoiceTree() {
 		Name = nameof(ChoiceTree);
@@ -35,10 +36,16 @@ public partial class ChoiceTree : HFlowContainer, IEnumerable<ChoiceTreeOption> 
 	public void Add(string text, bool selected, Action<Control> onSelect) {
 		_options.Add(new ChoiceTreeOption(onSelect));
 		_choice.AddItem(text);
-		if (!selected) return;
 
-		_choice.Selected = _options.Count - 1;
-		onSelect(_overflow);
+		if (selected) {
+			_itemSelected = true;
+			_choice.Selected = _options.Count - 1;
+			onSelect(_overflow);
+		}
+
+		if (!_itemSelected) {
+			_choice.Selected = -1;
+		}
 	}
 
 	#region IEnumerable
