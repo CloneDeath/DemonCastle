@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Editor.Editors.Properties.File;
 using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
 using DemonCastle.Editor.Properties;
@@ -10,9 +11,14 @@ using IntegerProperty = DemonCastle.Editor.Editors.Properties.IntegerProperty;
 namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
 
 public partial class SceneEventActionEditor : HFlowContainer {
+	public event Action? Deleted;
+
+	private readonly Button DeleteButton;
+
 	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo then) {
 		Name = nameof(SceneEventActionEditor);
-		AddChild(new Label{Text = "Then"});
+		AddChild(DeleteButton = new Button { Text = "X" });
+		DeleteButton.Pressed += () => Deleted?.Invoke();
 
 		AddChild(new ChoiceTree {
 			{

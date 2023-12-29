@@ -6,7 +6,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 public class SceneEventInfo : BaseInfo<SceneEventData> {
 	public SceneEventInfo(IFileNavigator file, SceneEventData data) : base(file, data) {
 		When = new SceneEventConditionInfo(file, data.When);
-		Then = new SceneEventActionInfo(file, data.Then);
+		Then = new SceneEventActionInfoCollection(file, data.Then);
 	}
 
 	public string Name {
@@ -19,5 +19,5 @@ public class SceneEventInfo : BaseInfo<SceneEventData> {
 	}
 
 	public SceneEventConditionInfo When { get; }
-	public SceneEventActionInfo Then { get; }
+	public SceneEventActionInfoCollection Then { get; }
 }
