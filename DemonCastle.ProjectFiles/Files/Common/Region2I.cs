@@ -3,6 +3,14 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Files.Common;
 
 public class Region2I {
+	public Region2I() : this(0, 0, 0, 0) {}
+	public Region2I(int x, int y, int width, int height) {
+		X = x;
+		Y = y;
+		Width = width;
+		Height = height;
+	}
+
 	public int X { get; set; }
 	public int Y { get; set; }
 	public int Width { get; set; }

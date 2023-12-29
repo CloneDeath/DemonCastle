@@ -28,5 +28,6 @@ public class ElementData {
 public enum ElementType {
 	Label,
 	ColorRect,
-	Sprite
+	Sprite,
+	LevelView
 }

@@ -15,6 +15,7 @@ public class EditorElementFactory {
 			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.ColorRect => new ColorRectElementDetails((ColorRectElementInfo)element),
 			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
+			ElementType.LevelView => new LevelViewElementDetails((LevelViewElementInfo)element),
 			_ => throw new InvalidOperationException()
 		};
 	}
@@ -24,6 +25,7 @@ public class EditorElementFactory {
 			ElementType.Label => new LabelElementView((LabelElementInfo)element),
 			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),
 			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
+			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element),
 			_ => throw new ArgumentOutOfRangeException(nameof(element))
 		};
 	}
