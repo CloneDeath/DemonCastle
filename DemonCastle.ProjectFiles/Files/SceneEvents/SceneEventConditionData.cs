@@ -8,6 +8,7 @@ public class SceneEventConditionData {
 	public SceneEventConditionData[]? Or { get; set; }
 	public KeyState? AnyInput { get; set; }
 	public InputConditionData? Input { get; set; }
+	public SceneChangeEvent? ThisScene { get; set; }
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
@@ -30,4 +31,10 @@ public enum PlayerAction {
 	Left,
 	Right,
 	Start
+}
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum SceneChangeEvent {
+	Enter,
+	Exit
 }

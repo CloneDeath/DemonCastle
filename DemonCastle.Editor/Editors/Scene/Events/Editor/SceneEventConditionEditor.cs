@@ -41,6 +41,13 @@ public partial class SceneEventConditionEditor : HFlowContainer {
 					c.AddChild(new Label { Text = "is" });
 					c.AddChild(new ChoiceEnum<KeyState>(when.AnyInput, v => when.AnyInput = v));
 				}
+			},
+			{ "This Scene",
+				when.ThisScene != null,
+				c => {
+					c.AddChild(new Label { Text = "on" });
+					c.AddChild(new ChoiceEnum<SceneChangeEvent>(when.ThisScene, v => when.ThisScene = v));
+				}
 			}
 		});
 	}

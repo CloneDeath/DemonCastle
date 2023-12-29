@@ -52,4 +52,14 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 			OnPropertyChanged();
 		}
 	}
+
+	public SceneChangeEvent? ThisScene {
+		get => Data.ThisScene;
+		set {
+			Clear();
+			Data.ThisScene = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
 }
