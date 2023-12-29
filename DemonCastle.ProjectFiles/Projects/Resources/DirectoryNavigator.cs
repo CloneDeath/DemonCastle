@@ -43,11 +43,16 @@ public class DirectoryNavigator {
 		return ProjectResources.GetFont(path);
 	}
 
-	public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);
-
 	public LevelInfo GetLevel(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetLevel(path);
+	}
+
+	public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);
+
+	public SceneInfo GetScene(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetScene(path);
 	}
 
 	public ISpriteSource GetSprite(string localPath) {
@@ -61,14 +66,14 @@ public class DirectoryNavigator {
 		throw new UnknownSpriteFileFormatException(path);
 	}
 
-	public Texture2D GetTexture(string localPath) {
-		var path = Path.Combine(Directory, localPath);
-		return ProjectResources.GetTexture(path);
-	}
-
 	public TextInfo GetText(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetText(path);
+	}
+
+	public Texture2D GetTexture(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetTexture(path);
 	}
 
 	public WeaponInfo GetWeapon(string localPath) {
