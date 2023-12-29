@@ -28,7 +28,7 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 		}
 	}
 
-	public string StartScene {
+	public string StartSceneFile {
 		get => Resource.StartScene;
 		set {
 			Resource.StartScene = value;

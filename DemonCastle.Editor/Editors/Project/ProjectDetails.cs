@@ -10,6 +10,6 @@ public partial class ProjectDetails : PropertyCollection {
 
 		AddString("Name", project, p => p.Name);
 		AddString("Version", project, p => p.Version);
-		AddFile("Start Scene", project, project.Directory, p => p.StartScene, new[] { FileType.Scene });
+		AddFile("Start Scene", project, project.Directory, p => p.StartSceneFile, new[] { FileType.Scene });
 	}
 }
