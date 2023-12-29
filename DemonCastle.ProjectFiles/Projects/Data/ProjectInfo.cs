@@ -37,6 +37,8 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 		}
 	}
 
+	public SceneInfo StartScene => File.GetScene(StartSceneFile);
+
 
 	public IEnumerable<CharacterInfo> Characters => File.GetFilesAndSubFiles()
 														.Where(f => f.Extension == FileType.Character.Extension)
