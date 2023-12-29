@@ -8,7 +8,9 @@ public partial class SceneEventEditor : PropertyCollection {
 		Name = nameof(SceneEventEditor);
 
 		AddString("Name", sceneEvent, e => e.Name);
-		AddChild(new SceneEventConditionEditor(sceneEvent.When));
+		AddChild(new SceneEventConditionEditor(sceneEvent.When) {
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
+		});
 		AddChild(new SceneEventActionEditor(sceneEvent.Then));
 	}
 }

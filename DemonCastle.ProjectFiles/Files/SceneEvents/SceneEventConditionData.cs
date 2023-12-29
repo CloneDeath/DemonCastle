@@ -12,10 +12,10 @@ public class SceneEventConditionData {
 
 [JsonConverter(typeof(StringEnumConverter))]
 public enum KeyState {
-	IsPressed,
-	IsReleased,
-	IsDown,
-	IsUp
+	Pressed,
+	Released,
+	Down,
+	Up
 }
 
 public class InputConditionData {
