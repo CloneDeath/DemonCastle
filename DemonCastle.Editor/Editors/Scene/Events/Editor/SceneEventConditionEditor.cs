@@ -6,11 +6,15 @@ namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
 public partial class SceneEventConditionEditor : HFlowContainer {
 	public SceneEventConditionEditor(SceneEventConditionInfo when) {
 		Name = nameof(SceneEventConditionEditor);
-		AddChild(new Label{Text = "When"});
+		AddChild(new Label { Text = "When" });
 
 		OptionButton optionButton;
 		AddChild(optionButton = new OptionButton());
-		optionButton.AddItem("Button");
+		optionButton.AddItem("All of");
+		optionButton.AddItem("Any of");
+		optionButton.AddItem("the Action");
+		optionButton.AddItem("any Action");
+		optionButton.Selected = -1;
 
 		AddChild(new Label{Text = "is"});
 		OptionButton optionButton2;

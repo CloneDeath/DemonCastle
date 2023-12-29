@@ -4,26 +4,30 @@ using Newtonsoft.Json.Converters;
 namespace DemonCastle.ProjectFiles.Files.SceneEvents;
 
 public class SceneEventConditionData {
-	public SceneEventButtonCondition? Button { get; set; }
-}
-
-public class SceneEventButtonCondition {
-	public ButtonAction? IsPressed { get; set; }
-	public ButtonAction? IsReleased { get; set; }
-	public ButtonAction? IsDown { get; set; }
-	public ButtonAction? IsUp { get; set; }
+	public SceneEventConditionData[]? And { get; set; }
+	public SceneEventConditionData[]? Or { get; set; }
+	public KeyState? AnyInput { get; set; }
+	public InputConditionData? Input { get; set; }
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
-public enum ButtonAction {
+public enum KeyState {
+	IsPressed,
+	IsReleased,
+	IsDown,
+	IsUp
+}
+
+public class InputConditionData {
+	public KeyState State { get; set; }
+	public PlayerAction Action { get; set; }
+}
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum PlayerAction {
 	Up,
 	Down,
 	Left,
 	Right,
-	A,
-	B,
-	X,
-	Y,
-	Start,
-	Select
+	Start
 }
