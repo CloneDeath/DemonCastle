@@ -8,11 +8,18 @@ public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
 		Scene = new SceneChangeActionInfo(file, data);
 	}
 
+	private void Clear() {
+		Data.Scene = null;
+		Data.SetCharacter = null;
+		Data.SetLevel = null;
+	}
+
 	public SceneChangeActionInfo Scene { get; }
 
 	public string? SetCharacter {
 		get => Data.SetCharacter;
 		set {
+			Clear();
 			Data.SetCharacter = value;
 			Save();
 			OnPropertyChanged();
@@ -22,6 +29,7 @@ public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
 	public string? SetLevel {
 		get => Data.SetLevel;
 		set {
+			Clear();
 			Data.SetLevel = value;
 			Save();
 			OnPropertyChanged();
