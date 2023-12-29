@@ -1,19 +1,20 @@
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GameRunner : Control {
-	protected GameLevel Level { get; }
-	protected GamePlayer Player { get; }
+	protected GameLevel? Level { get; }
+	protected GamePlayer? Player { get; }
 	protected GameArea? CurrentArea { get; set; }
 
-	public GameRunner(ProjectInfo project, LevelInfo level, CharacterInfo player, DebugState debug) {
+	public GameRunner(ProjectInfo project, DebugState? debug = null) {
+		debug ??= new DebugState();
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
+		/*
 		var subViewportContainer = new SubViewportContainer {
 			Stretch = false,
 			Scale = Vector2.One * 3
@@ -31,6 +32,7 @@ public partial class GameRunner : Control {
 			Position = Level.StartingLocation
 		});
 		subViewport.AddChild(new GameCamera(Player, Level));
+		*/
 	}
 
 	public override void _EnterTree() {
@@ -45,11 +47,12 @@ public partial class GameRunner : Control {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
+		if (Level == null || Player == null) return;
+
 		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
 		if (CurrentArea == area) return;
 
 		CurrentArea = area;
 		CurrentArea?.OnPlayerEnter();
 	}
-
 }
