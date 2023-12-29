@@ -27,7 +27,7 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 		}
 	}
 
-	public Rect2IProperty(IPropertyBinding<Rect2I> binding) {
+	public Rect2IProperty(IPropertyBinding<Rect2I> binding, Rect2IPropertyOptions options) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
 
@@ -38,8 +38,8 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 		HBoxContainer.AddChild(XBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue : 0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().Position.X
 		});
 		XBox.ValueChanged += OnValueChange;
@@ -48,8 +48,8 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 		HBoxContainer.AddChild(YBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue : 0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().Position.Y
 		});
 		YBox.ValueChanged += OnValueChange;
@@ -58,8 +58,8 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 		HBoxContainer.AddChild(WidthBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue : 0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().Size.X
 		});
 		WidthBox.ValueChanged += OnValueChange;
@@ -68,8 +68,8 @@ public partial class Rect2IProperty : VBoxContainer, IBaseProperty {
 		HBoxContainer.AddChild(HeightBox = new SpinBox {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
-			MinValue = 0,
-			MaxValue = double.MaxValue,
+			MinValue = options.AllowNegative ? int.MinValue : 0,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get().Size.Y
 		});
 		HeightBox.ValueChanged += OnValueChange;

@@ -108,8 +108,8 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return vector2Property;
 	}
 
-	public Rect2IProperty AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression) where T : INotifyPropertyChanged {
-		var rect2IProperty = new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression)) {
+	public Rect2IProperty AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression, Rect2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var rect2IProperty = new Rect2IProperty(new PropertyBinding<T, Rect2I>(target, propertyExpression), options ?? new Rect2IPropertyOptions()) {
 			DisplayName = name
 		};
 		AddChild(rect2IProperty);

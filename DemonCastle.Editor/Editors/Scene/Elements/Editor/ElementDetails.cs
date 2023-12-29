@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Properties.Rect;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using Godot;
 
@@ -10,6 +11,6 @@ public partial class ElementDetails : PropertyCollection {
 
 		AddChild(new Label { Text = element.Type.ToString() });
 		AddString("Name", element, e => e.Name);
-		AddRect2I("Region", element, e => e.Region);
+		AddRect2I("Region", element, e => e.Region, new Rect2IPropertyOptions { AllowNegative = true });
 	}
 }
