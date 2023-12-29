@@ -17,5 +17,9 @@ public class CallbackBinding<TProperty> : IPropertyBinding<TProperty> {
 		Changed?.Invoke(value);
 	}
 
+	public void TriggerChanged(TProperty value) {
+		Changed?.Invoke(value);
+	}
+
 	public event Action<TProperty>? Changed;
 }

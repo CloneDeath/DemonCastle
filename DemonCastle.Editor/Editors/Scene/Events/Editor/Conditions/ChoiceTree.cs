@@ -39,8 +39,7 @@ public partial class ChoiceTree : HFlowContainer, IEnumerable<ChoiceTreeOption> 
 
 		if (selected) {
 			_itemSelected = true;
-			_choice.Selected = _options.Count - 1;
-			onSelect(_overflow);
+			Choice_OnItemSelected(_options.Count - 1);
 		}
 
 		if (!_itemSelected) {

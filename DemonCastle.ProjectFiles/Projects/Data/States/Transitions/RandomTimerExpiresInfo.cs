@@ -10,7 +10,7 @@ public class RandomTimerExpiresInfo : BaseInfo<MonsterStateTransitionEvent> {
 	public bool IsSet {
 		get => Data.RandomTimerExpires != null;
 		set {
-			Data.RandomTimerExpires = value ? new RandomTimerExpires() : null;
+			Data.RandomTimerExpires = value ? Data.RandomTimerExpires ?? new RandomTimerExpires() : null;
 			Save();
 			OnPropertyChanged();
 		}

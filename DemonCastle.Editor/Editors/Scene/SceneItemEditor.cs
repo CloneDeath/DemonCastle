@@ -30,7 +30,7 @@ public partial class SceneItemEditor : Container {
 	public void LoadEvent(SceneEventInfo sceneEvent) {
 		Clear();
 
-		var editor = new SceneEventEditor(sceneEvent);
+		var editor = new SceneEventEditor(_file, sceneEvent);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 	}

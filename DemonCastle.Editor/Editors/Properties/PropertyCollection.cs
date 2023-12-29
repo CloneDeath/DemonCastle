@@ -38,20 +38,20 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		Vertical = true;
 	}
 
-	public FileProperty AddFile<T>(string name, T target, string directory,
-						   Expression<Func<T, string>> propertyExpression,
-						   IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
-		var fileProperty = new FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
+	public File.FileProperty AddFile<T>(string name, T target, string directory,
+										Expression<Func<T, string>> propertyExpression,
+										IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
+		var fileProperty = new File.FileProperty(new PropertyBinding<T,string>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
 		};
 		AddChild(fileProperty);
 		return fileProperty;
 	}
 
-	public NullableFileProperty AddNullableFile<T>(string name, T target, string directory,
-												   Expression<Func<T, string?>> propertyExpression,
-												   IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
-		var fileProperty = new NullableFileProperty(new PropertyBinding<T,string?>(target, propertyExpression), directory, fileTypes) {
+	public File.NullableFileProperty AddNullableFile<T>(string name, T target, string directory,
+														Expression<Func<T, string?>> propertyExpression,
+														IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
+		var fileProperty = new File.NullableFileProperty(new PropertyBinding<T,string?>(target, propertyExpression), directory, fileTypes) {
 			DisplayName = name
 		};
 		AddChild(fileProperty);

@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles;
 using Godot;
 using Path = System.IO.Path;
 
-namespace DemonCastle.Editor.Editors.Properties;
+namespace DemonCastle.Editor.Editors.Properties.File;
 
 public partial class NullableFileProperty : NullableStringProperty {
 	protected string Directory { get; }
