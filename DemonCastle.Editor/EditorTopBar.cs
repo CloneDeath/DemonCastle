@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace DemonCastle.Editor.TopBar;
+namespace DemonCastle.Editor;
 
 public partial class EditorTopBar : HBoxContainer {
 	private Button PlayButton { get; }
@@ -12,7 +12,7 @@ public partial class EditorTopBar : HBoxContainer {
 		Name = nameof(EditorTopBar);
 
 		AddChild(PlayButton = new Button {
-			Text = "Play"
+			Text = "Play Level"
 		});
 		PlayButton.Pressed += PlayButtonOnPressed;
 	}

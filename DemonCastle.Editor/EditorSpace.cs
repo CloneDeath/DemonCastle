@@ -1,4 +1,3 @@
-using DemonCastle.Editor.TopBar;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
