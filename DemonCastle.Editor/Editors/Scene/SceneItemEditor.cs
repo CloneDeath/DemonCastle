@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Editors.Scene.Events.Editor;
-using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
