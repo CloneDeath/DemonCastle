@@ -5,8 +5,8 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameRunner : Control {
-	protected GameLevel? Level { get; }
-	protected GamePlayer? Player { get; }
+	public GameLevel? Level { get; }
+	public GamePlayer? Player { get; }
 	protected GameArea? CurrentArea { get; set; }
 
 	public GameRunner(ProjectInfo project, DebugState? debug = null) {

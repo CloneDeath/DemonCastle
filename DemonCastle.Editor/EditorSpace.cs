@@ -47,7 +47,7 @@ public partial class EditorSpace : CanvasLayer {
 		var gameSetup = new GameSetup(Project);
 		gameSetup.GameStart += (level, character, debug) => {
 			gameSetup.QueueFree();
-			var runner = new GameRunner(Project, level, character, debug);
+			var runner = new GameRunner(Project, debug);
 			PlayWindow.AddChild(runner);
 			runner.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		};
