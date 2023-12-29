@@ -1,16 +1,23 @@
 using DemonCastle.Editor;
 using DemonCastle.Game;
-using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle;
 
 public partial class Main : Control {
-    protected GameSetup GameSetup { get; set; }
-    protected EditorSpace EditorSpace { get; set; }
+    protected ProjectSelectionMenu ProjectSelectionMenu { get; }
+
+    protected GameSetup? GameSetup { get; set; }
+    protected EditorSpace? EditorSpace { get; set; }
+
+    public Main() {
+        AddChild(ProjectSelectionMenu = new ProjectSelectionMenu());
+        ProjectSelectionMenu.ProjectLoaded += OnProjectLoaded;
+        ProjectSelectionMenu.ProjectEdit += OnProjectEdit;
+    }
+
 
     public override void _Ready() {
         base._Ready();
@@ -22,14 +29,7 @@ public partial class Main : Control {
     protected void OnProjectLoaded(ProjectInfo project) {
         ProjectSelectionMenu.QueueFree();
 
-        AddChild(GameSetup = new GameSetup(project));
-        GameSetup.GameStart += (level, character, debug) => OnGameStart(project, level, character, debug);
-    }
-
-    private void OnGameStart(ProjectInfo project, LevelInfo level, CharacterInfo character, DebugState debug) {
-        GameSetup.QueueFree();
-
-        var gameRunner = new GameRunner(project, level, character, debug);
+        var gameRunner = new GameRunner(project);
         AddChild(gameRunner);
         gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }
