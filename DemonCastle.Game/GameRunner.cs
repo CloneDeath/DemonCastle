@@ -23,6 +23,7 @@ public partial class GameRunner : Control, IGameState {
 		AddChild(SceneStack = new SceneStack(this));
 		SetScene(project.StartScene);
 
+
 		/*
 		var subViewportContainer = new SubViewportContainer {
 			Stretch = false,
@@ -41,6 +42,7 @@ public partial class GameRunner : Control, IGameState {
 			Position = Level.StartingLocation
 		});
 		subViewport.AddChild(new GameCamera(Player, Level));
+
 		*/
 	}
 
@@ -77,5 +79,5 @@ public partial class GameRunner : Control, IGameState {
 	public void PushScene(SceneInfo scene) => SceneStack.Push(scene);
 	public void PopScene(int number) => SceneStack.Pop(number);
 
-	public IInputState Input => throw new NotImplementedException();
+	public IInputState Input => new InputState();
 }

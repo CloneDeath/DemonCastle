@@ -30,7 +30,8 @@ public enum PlayerAction {
 	Down,
 	Left,
 	Right,
-	Start
+	Jump,
+	Attack
 }
 
 [JsonConverter(typeof(StringEnumConverter))]

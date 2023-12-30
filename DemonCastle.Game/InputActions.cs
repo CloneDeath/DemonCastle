@@ -11,6 +11,8 @@ public static class InputActions {
 	public const string PlayerJump = nameof(PlayerJump);
 	public const string PlayerAttack = nameof(PlayerAttack);
 
+	public static readonly string[] PlayerActions = { PlayerMoveLeft, PlayerMoveRight, PlayerMoveUp, PlayerMoveDown, PlayerJump, PlayerAttack };
+
 	public const string EditorSubmit = nameof(EditorSubmit);
 	public const string EditorClick = nameof(EditorClick);
 	public const string EditorRightClick = nameof(EditorRightClick);
