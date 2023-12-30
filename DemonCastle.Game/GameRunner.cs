@@ -10,9 +10,9 @@ namespace DemonCastle.Game;
 
 public partial class GameRunner : Control, IGameState {
 	private SceneStack SceneStack { get; }
+	public GameLevel Level { get; }
+	public GamePlayer Player { get; }
 
-	public GameLevel? Level { get; }
-	public GamePlayer? Player { get; }
 	protected GameArea? CurrentArea { get; set; }
 
 	public GameRunner(ProjectInfo project, DebugState? debug = null) {
@@ -24,26 +24,14 @@ public partial class GameRunner : Control, IGameState {
 		SetScene(project.StartScene);
 
 
-		/*
-		var subViewportContainer = new SubViewportContainer {
-			Stretch = false,
-			Scale = Vector2.One * 3
-		};
-		AddChild(subViewportContainer);
-		subViewportContainer.SetAnchorsPreset(LayoutPreset.FullRect);
+		var subViewport = new SubViewport();
+		AddChild(subViewport);
 
-		var subViewport = new SubViewport {
-			Size = level.AreaScale.ToPixelSize()
-		};
-		subViewportContainer.AddChild(subViewport);
-
-		subViewport.AddChild(Level = new GameLevel(project, level, debug));
+		subViewport.AddChild(Level = new GameLevel(project, debug));
 		subViewport.AddChild(Player = new GamePlayer(level, player, debug, new GameLogger()) {
 			Position = Level.StartingLocation
 		});
 		subViewport.AddChild(new GameCamera(Player, Level));
-
-		*/
 	}
 
 	public override void _EnterTree() {
@@ -58,7 +46,6 @@ public partial class GameRunner : Control, IGameState {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		if (Level == null || Player == null) return;
 
 		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
 		if (CurrentArea == area) return;
@@ -72,7 +59,8 @@ public partial class GameRunner : Control, IGameState {
 	}
 
 	public void SetLevel(LevelInfo level) {
-		throw new NotImplementedException();
+		Level.LoadLevel(level);
+		Player.Position = Level.StartingLocation;
 	}
 
 	public void SetScene(SceneInfo scene) => SceneStack.Set(scene);
