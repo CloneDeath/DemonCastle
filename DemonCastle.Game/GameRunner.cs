@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -21,17 +20,17 @@ public partial class GameRunner : Control, IGameState {
 		TextureFilter = TextureFilterEnum.Nearest;
 
 		AddChild(SceneStack = new SceneStack(this));
-		SetScene(project.StartScene);
-
 
 		var subViewport = new SubViewport();
 		AddChild(subViewport);
 
 		subViewport.AddChild(Level = new GameLevel(project, debug));
-		subViewport.AddChild(Player = new GamePlayer(level, player, debug, new GameLogger()) {
+		subViewport.AddChild(Player = new GamePlayer(debug, new GameLogger()) {
 			Position = Level.StartingLocation
 		});
 		subViewport.AddChild(new GameCamera(Player, Level));
+
+		SetScene(project.StartScene);
 	}
 
 	public override void _EnterTree() {
@@ -55,7 +54,7 @@ public partial class GameRunner : Control, IGameState {
 	}
 
 	public void SetCharacter(CharacterInfo character) {
-		throw new NotImplementedException();
+		Player.LoadCharacter(character);
 	}
 
 	public void SetLevel(LevelInfo level) {

@@ -9,41 +9,34 @@ using Godot;
 namespace DemonCastle.Game.Animations;
 
 public partial class CharacterAnimation : Node2D {
+	private readonly IDamageable _owner;
+	private readonly DebugState _debug;
 	public bool IsComplete { get; private set; }
 	public Guid AnimationId => CurrentAnimation?.AnimationId ?? Guid.Empty;
 
-	protected readonly CharacterInfo Character;
+	protected CharacterInfo? Character;
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 
 	protected AnimationInfoNode? CurrentAnimation;
 
 	public IFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame;
 
-	public CharacterAnimation(CharacterInfo character, IDamageable owner, DebugState debug) {
+	public CharacterAnimation(IDamageable owner, DebugState debug) {
+		_owner = owner;
+		_debug = debug;
 		Name = nameof(CharacterAnimation);
-		Character = character;
-
-		foreach (var animation in character.Animations) {
-			var animationNode = new AnimationInfoNode(animation, owner, debug) {
-				Visible = false
-			};
-			animationNode.Complete += AnimationNode_OnComplete;
-			Animations[animationNode.AnimationId] = animationNode;
-			AddChild(animationNode);
-		}
-		PlayIdle();
 	}
 
-	public void PlayIdle() => Play(Character.IdleAnimation);
-	public void PlayWalk() => Play(Character.WalkAnimation);
-	public void PlayJump() => Play(Character.JumpAnimation);
-	public void PlayCrouch() => Play(Character.CrouchAnimation);
-	public void PlayStairsUp() => Play(Character.StairsUpAnimation);
-	public void PlayStairsDown() => Play(Character.StairsDownAnimation);
-	public void PlayStandAttack() => Play(Character.StandAttackAnimation);
-	public void PlayJumpAttack() => Play(Character.JumpAttackAnimation);
-	public void PlayStairsUpAttack() => Play(Character.StairsUpAttackAnimation);
-	public void PlayStairsDownAttack() => Play(Character.StairsDownAttackAnimation);
+	public void PlayIdle() => Play(Character?.IdleAnimation ?? Guid.Empty);
+	public void PlayWalk() => Play(Character?.WalkAnimation ?? Guid.Empty);
+	public void PlayJump() => Play(Character?.JumpAnimation ?? Guid.Empty);
+	public void PlayCrouch() => Play(Character?.CrouchAnimation ?? Guid.Empty);
+	public void PlayStairsUp() => Play(Character?.StairsUpAnimation ?? Guid.Empty);
+	public void PlayStairsDown() => Play(Character?.StairsDownAnimation ?? Guid.Empty);
+	public void PlayStandAttack() => Play(Character?.StandAttackAnimation ?? Guid.Empty);
+	public void PlayJumpAttack() => Play(Character?.JumpAttackAnimation ?? Guid.Empty);
+	public void PlayStairsUpAttack() => Play(Character?.StairsUpAttackAnimation ?? Guid.Empty);
+	public void PlayStairsDownAttack() => Play(Character?.StairsDownAttackAnimation ?? Guid.Empty);
 
 	protected void Play(Guid animationId) {
 		IsComplete = false;
@@ -62,5 +55,23 @@ public partial class CharacterAnimation : Node2D {
 	private void AnimationNode_OnComplete(AnimationInfoNode infoNode) {
 		if (infoNode.AnimationId != CurrentAnimation?.AnimationId) return;
 		IsComplete = true;
+	}
+
+	public void SetCharacter(CharacterInfo character) {
+		foreach (var animation in Animations.Values) {
+			animation.QueueFree();
+		}
+		Animations.Clear();
+		Character = character;
+
+		foreach (var animation in character.Animations) {
+			var animationNode = new AnimationInfoNode(animation, _owner, _debug) {
+				Visible = false
+			};
+			animationNode.Complete += AnimationNode_OnComplete;
+			Animations[animationNode.AnimationId] = animationNode;
+			AddChild(animationNode);
+		}
+		PlayIdle();
 	}
 }

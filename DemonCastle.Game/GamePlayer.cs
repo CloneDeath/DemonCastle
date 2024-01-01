@@ -14,19 +14,22 @@ namespace DemonCastle.Game;
 
 public partial class GamePlayer : CharacterBody2D, IDamageable {
 	protected IGameLogger Logger { get; }
-	protected LevelInfo Level { get; }
-	protected CharacterInfo Character { get; }
+	protected LevelInfo? Level { get; set; }
+	protected CharacterInfo? Character { get; set; }
 
 	public CharacterAnimation Animation { get; }
-	public GameAnimation? Weapon { get; }
+	public GameAnimation Weapon { get; }
 	public Area2D StairsDetection { get; }
+	protected CollisionShape2D StairsShape { get; }
 	public Area2D FloorDetection { get; }
+	protected CollisionShape2D FloorShape { get; }
+	protected CollisionShape2D CollisionShape { get; }
 
 	private IFrameInfo? PreviousFrame;
 
-	public float WalkSpeed => Character.WalkSpeed * Level.TileSize.X;
-	public float Gravity => Character.Gravity * Level.TileSize.Y;
-	public float JumpHeight => Character.JumpHeight * Level.TileSize.Y;
+	public float WalkSpeed => (Character?.WalkSpeed ?? 0) * (Level?.TileSize.X ?? 0);
+	public float Gravity => (Character?.Gravity ?? 0) * (Level?.TileSize.Y ?? 0);
+	public float JumpHeight => (Character?.JumpHeight ?? 0) * (Level?.TileSize.Y ?? 0);
 	public int Facing { get; set; } = 1;
 
 	private IState State = new NormalState();
@@ -35,36 +38,25 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	private bool _jump;
 	private bool _applyGravity = true;
 
-	public GamePlayer(LevelInfo level, CharacterInfo character, DebugState debug, IGameLogger logger) {
-		Level = level;
-		Character = character;
+	public GamePlayer(DebugState debug, IGameLogger logger) {
 		Logger = logger;
 
-		AddChild(new CollisionShape2D {
-			Position = new Vector2(0, -Character.Size.Y/2),
-			Shape = new RectangleShape2D {
-				Size = Character.Size
-			},
+		AddChild(CollisionShape = new CollisionShape2D {
 			DebugColor = new Color(Colors.Green, 0.5f),
 			Visible = debug.ShowCollisions
 		});
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
-		if (character.DefaultWeaponInfo != null) {
-			AddChild(Weapon = new GameAnimation(character.DefaultWeaponInfo.Animations, this, debug));
-		}
-		AddChild(Animation = new CharacterAnimation(character, this, debug));
+		AddChild(Weapon = new GameAnimation(this, debug));
+		AddChild(Animation = new CharacterAnimation(this, debug));
 
 		AddChild(StairsDetection = new Area2D {
 			CollisionLayer = (uint) CollisionLayers.Player,
 			CollisionMask = (uint) CollisionLayers.World,
 			Monitoring = true
 		});
-		StairsDetection.AddChild(new CollisionShape2D {
-			Shape = new RectangleShape2D {
-				Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2f)
-			},
+		StairsDetection.AddChild(StairsShape = new CollisionShape2D {
 			DebugColor = new Color(Colors.Purple, 0.5f),
 			Visible = debug.ShowCollisions
 		});
@@ -73,10 +65,7 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 			CollisionLayer = (uint) CollisionLayers.Player,
 			CollisionMask = (uint) CollisionLayers.World
 		});
-		FloorDetection.AddChild(new CollisionShape2D {
-			Shape = new RectangleShape2D {
-				Size = new Vector2(Character.Size.X, level.TileSize.Y / 4f)
-			},
+		FloorDetection.AddChild(FloorShape = new CollisionShape2D {
 			Visible = debug.ShowCollisions
 		});
 
@@ -134,13 +123,11 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 		var characterFrame = Animation.CurrentFrame;
 		if (characterFrame == null) return;
 		if (characterFrame == PreviousFrame) return;
-		if (Weapon == null) return;
 
 		var weaponSlot = characterFrame.Slots.FirstOrDefault(s => s.Name == "Weapon");
 		if (weaponSlot == null) {
 			Weapon.PlayNone();
-		}
-		else {
+		} else {
 			Weapon.Play(weaponSlot.Animation);
 		}
 
@@ -157,27 +144,16 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	public void MoveRight() => _moveDirection = Vector2.Right;
 	public void MoveLeft() => _moveDirection = Vector2.Left;
 	public void StopMoving() => _moveDirection = Vector2.Zero;
-
-	public void MoveTowards(Vector2 target) {
-		var direction = target - GlobalPosition;
-		_moveDirection = direction.Normalized();
-	}
+	public void MoveTowards(Vector2 target) => _moveDirection = (target - GlobalPosition).Normalized();
 
 	public IEnumerable<Tiles.GameTileStairs> GetNearbyStairs() {
 		return StairsDetection.GetOverlappingAreas().Where(a => a is Tiles.GameTileStairs).Cast<Tiles.GameTileStairs>();
 	}
 
-	public void Jump() {
-		_jump = true;
-	}
+	public void Jump() => _jump = true;
 
-	public void EnableWorldCollisions() {
-		CollisionMask = (uint)CollisionLayers.World;
-	}
-
-	public void DisableWorldCollisions() {
-		CollisionMask = 0;
-	}
+	public void EnableWorldCollisions() => CollisionMask |= (uint)CollisionLayers.World;
+	public void DisableWorldCollisions() => CollisionMask &= ~(uint)CollisionLayers.World;
 
 	public void EnableGravity() {
 		if (_applyGravity) return;
@@ -193,7 +169,30 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 		_applyGravity = false;
 	}
 
-	public bool IsStandingOnFloor() {
-		return FloorDetection.GetOverlappingBodies().Any();
+	public bool IsStandingOnFloor() => FloorDetection.GetOverlappingBodies().Any();
+
+	public void LoadCharacter(CharacterInfo character) {
+		Character = character;
+		Animation.SetCharacter(character);
+		Weapon.SetAnimation(character.DefaultWeaponInfo?.Animations);
+		CollisionShape.Position = new Vector2(0, -Character.Size.Y / 2);
+		CollisionShape.Shape = new RectangleShape2D {
+			Size = Character.Size
+		};
+		SetFloorShape();
+	}
+
+	public void LoadLevel(LevelInfo level) {
+		Level = level;
+		StairsShape.Shape = new RectangleShape2D {
+			Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2f)
+		};
+		SetFloorShape();
+	}
+
+	private void SetFloorShape() {
+		FloorShape.Shape = new RectangleShape2D {
+			Size = new Vector2(Character?.Size.X ?? 0, Level?.TileSize.Y ?? 0 / 4f)
+		};
 	}
 }

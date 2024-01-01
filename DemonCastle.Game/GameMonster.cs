@@ -35,7 +35,8 @@ public partial class GameMonster : CharacterBody2D, IDamageable {
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
-		AddChild(_animation = new GameAnimation(monster.Animations, this, debug));
+		AddChild(_animation = new GameAnimation(this, debug));
+		_animation.SetAnimation(monster.Animations);
 		AddChild(new DebugPosition2D(debug));
 
 		Reset();
