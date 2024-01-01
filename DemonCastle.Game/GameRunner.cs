@@ -59,6 +59,7 @@ public partial class GameRunner : Control, IGameState {
 	public void SetLevel(LevelInfo level) {
 		Level.LoadLevel(level);
 		Player.LoadLevel(level);
+		LevelViewport.Size = level.AreaScale.ToPixelSize();
 	}
 
 	public void SetScene(SceneInfo scene) => SceneStack.Set(scene);
