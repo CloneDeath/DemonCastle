@@ -152,8 +152,8 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 
 	public void Jump() => _jump = true;
 
-	public void EnableWorldCollisions() => CollisionMask |= (uint)CollisionLayers.World;
-	public void DisableWorldCollisions() => CollisionMask &= ~(uint)CollisionLayers.World;
+	public void EnableWorldCollisions() => CollisionMask = (uint)CollisionLayers.World;
+	public void DisableWorldCollisions() => CollisionMask = 0;
 
 	public void EnableGravity() {
 		if (_applyGravity) return;
