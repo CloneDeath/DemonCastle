@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -47,7 +48,10 @@ public partial class GameRunner : Control, IGameState {
 
 		Size = SceneStack.SceneSize;
 		PivotOffset = SceneStack.SceneSize / 2;
-		Position = (GetParentAreaSize() / 2) - (SceneStack.SceneSize / 2);
+		Position = GetParentAreaSize() / 2 - SceneStack.SceneSize / 2;
+		var screenScale = (GetParentAreaSize() / SceneStack.SceneSize).Floor();
+		var screenFactor = Math.Max(1, Math.Min(screenScale.X, screenScale.Y));
+		Scale = Vector2.One * screenFactor;
 
 		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
 		if (CurrentArea == area) return;
