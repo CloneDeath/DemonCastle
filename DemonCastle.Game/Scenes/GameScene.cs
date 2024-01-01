@@ -14,6 +14,8 @@ public partial class GameScene : Control {
 		Name = nameof(GameScene);
 	}
 
+	public Vector2 SceneSize => _scene?.Size ?? Vector2.Zero;
+
 	public void Load(SceneInfo scene) {
 		_scene?.TriggerEvents(_gameState, new SceneState {
 			OnExit = true

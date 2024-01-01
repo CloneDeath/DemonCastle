@@ -9,6 +9,8 @@ public partial class SceneStack : Control {
 	private readonly IGameState _gameState;
 	private readonly Stack<GameScene> _stack = new();
 
+	public Vector2 SceneSize => _stack.TryPeek(out var scene) ? scene.SceneSize : Vector2.Zero;
+
 	public SceneStack(IGameState gameState) {
 		_gameState = gameState;
 	}

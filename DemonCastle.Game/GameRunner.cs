@@ -45,6 +45,10 @@ public partial class GameRunner : Control, IGameState {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
+		Size = SceneStack.SceneSize;
+		PivotOffset = SceneStack.SceneSize / 2;
+		Position = (GetParentAreaSize() / 2) - (SceneStack.SceneSize / 2);
+
 		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
 		if (CurrentArea == area) return;
 
