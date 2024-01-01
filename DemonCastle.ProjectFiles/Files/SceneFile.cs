@@ -26,8 +26,9 @@ public class ElementData {
 
 [JsonConverter(typeof(StringEnumConverter))]
 public enum ElementType {
-	Label,
 	ColorRect,
-	Sprite,
-	LevelView
+	HealthBar,
+	Label,
+	LevelView,
+	Sprite
 }

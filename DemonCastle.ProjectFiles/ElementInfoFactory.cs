@@ -11,37 +11,43 @@ namespace DemonCastle.ProjectFiles;
 
 public static class ElementInfoFactory {
 	public static readonly Dictionary<ElementType, Type> TypeMap = new() {
-		{ ElementType.Label, typeof(LabelElementData) },
 		{ ElementType.ColorRect, typeof(ColorRectElementData) },
-		{ ElementType.Sprite, typeof(SpriteElementData) },
-		{ ElementType.LevelView, typeof(LevelViewElementData) }
+		{ ElementType.HealthBar, typeof(HealthBarElementData) },
+		{ ElementType.Label, typeof(LabelElementData) },
+		{ ElementType.LevelView, typeof(LevelViewElementData) },
+		{ ElementType.Sprite, typeof(SpriteElementData) }
 	};
 
 	public static IElementInfo CreateInfo(IFileNavigator file, ElementData data) {
 		return data.Type switch {
-			ElementType.Label => new LabelElementInfo(file, (LabelElementData)data),
 			ElementType.ColorRect => new ColorRectElementInfo(file, (ColorRectElementData)data),
-			ElementType.Sprite => new SpriteElementInfo(file, (SpriteElementData)data),
+			ElementType.HealthBar => new HealthBarElementInfo(file, (HealthBarElementData)data),
+			ElementType.Label => new LabelElementInfo(file, (LabelElementData)data),
 			ElementType.LevelView => new LevelViewElementInfo(file, (LevelViewElementData)data),
+			ElementType.Sprite => new SpriteElementInfo(file, (SpriteElementData)data),
 			_ => throw new ArgumentOutOfRangeException(nameof(data), data.Type, null)
 		};
 	}
 
 	public static ElementData CreateData(ElementType type) {
 		return type switch {
-			ElementType.Label => new LabelElementData {
-				Name = "Label",
-				Text = "Text"
-			},
 			ElementType.ColorRect => new ColorRectElementData {
 				Name = "Color Rectangle",
 				Region = new Region2I(0, 0, 16, 16)
 			},
-			ElementType.Sprite => new SpriteElementData{ Name = "Sprite" },
+			ElementType.HealthBar => new HealthBarElementData {
+				Name = "Health Bar",
+				Region = new Region2I(0, 0, 16, 16)
+			},
+			ElementType.Label => new LabelElementData {
+				Name = "Label",
+				Text = "Text"
+			},
 			ElementType.LevelView => new LevelViewElementData {
 				Name = "Level View",
 				Region = new Region2I(0, 0, 64, 64)
 			},
+			ElementType.Sprite => new SpriteElementData { Name = "Sprite" },
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
 	}

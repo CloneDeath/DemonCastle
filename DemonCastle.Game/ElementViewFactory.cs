@@ -11,10 +11,11 @@ namespace DemonCastle.Game;
 public static class ElementViewFactory {
 	public static Node GetView(IElementInfo element, IGameState gameState) {
 		return element.Type switch {
-			ElementType.Label => new LabelElementView((LabelElementInfo)element),
 			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),
-			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
+			ElementType.HealthBar => new HealthBarElementView((HealthBarElementInfo)element),
+			ElementType.Label => new LabelElementView((LabelElementInfo)element),
 			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, gameState),
+			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
 			_ => throw new ArgumentOutOfRangeException(nameof(element))
 		};
 	}

@@ -11,10 +11,11 @@ namespace DemonCastle.Editor;
 public static class ElementDetailsFactory {
 	public static Control GetEditor(IFileInfo file, IElementInfo element) {
 		return element.Type switch {
-			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.ColorRect => new ColorRectElementDetails((ColorRectElementInfo)element),
-			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
+			ElementType.HealthBar => new HealthBarElementDetails(file, (HealthBarElementInfo)element),
+			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.LevelView => new LevelViewElementDetails((LevelViewElementInfo)element),
+			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
 			_ => throw new InvalidOperationException()
 		};
 	}
