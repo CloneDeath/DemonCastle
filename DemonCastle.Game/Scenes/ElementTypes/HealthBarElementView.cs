@@ -2,13 +2,17 @@ using System.ComponentModel;
 using DemonCastle.Game.Animations.Generic;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using Godot;
+using Container = Godot.Container;
 
 namespace DemonCastle.Game.Scenes.ElementTypes;
 
-public partial class HealthBarElementView : SpriteDefinitionNode {
+public partial class HealthBarElementView : Container {
 	private readonly HealthBarElementInfo _element;
 
-	public HealthBarElementView(HealthBarElementInfo element) : base(element.SpriteDefinition, Vector2I.Zero){
+	private int ElementWidth => _element.SpriteDefinition.Region.Size.X;
+	private int NumberOfElements => _element.Region.Size.X / ElementWidth;
+
+	public HealthBarElementView(HealthBarElementInfo element) {
 		_element = element;
 		Name = nameof(HealthBarElementView);
 		Refresh();
@@ -30,6 +34,15 @@ public partial class HealthBarElementView : SpriteDefinitionNode {
 
 	private void Refresh() {
 		Position = _element.Region.Position;
-		Load(_element.SpriteDefinition);
+
+		foreach (var child in GetChildren()) {
+			child.QueueFree();
+		}
+
+		for (var x = 0; x < NumberOfElements; x++) {
+			AddChild(new SpriteDefinitionNode(_element.SpriteDefinition, Vector2I.Zero) {
+				Position = new Vector2(x * ElementWidth, 0)
+			});
+		}
 	}
 }
