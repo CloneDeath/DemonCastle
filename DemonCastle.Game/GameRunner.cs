@@ -66,5 +66,5 @@ public partial class GameRunner : Control, IGameState {
 	public void PopScene(int number) => SceneStack.Pop(number);
 
 	public IInputState Input => new InputState();
-	public Texture2D LevelView => new ViewportTexture { ViewportPath = GetPathTo(LevelViewport) };
+	public Texture2D LevelView => LevelViewport.GetTexture();
 }

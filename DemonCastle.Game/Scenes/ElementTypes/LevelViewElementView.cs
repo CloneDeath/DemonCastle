@@ -11,7 +11,10 @@ public partial class LevelViewElementView : TextureRect {
 	public LevelViewElementView(LevelViewElementInfo element, IGameState gameState) {
 		_element = element;
 		Name = nameof(LevelViewElementView);
-		Texture = gameState.LevelView;
+		Texture = new AtlasTexture {
+			Atlas = gameState.LevelView,
+			Region = new Rect2(Vector2.Zero, element.Region.Size)
+		};
 
 		Refresh();
 	}
