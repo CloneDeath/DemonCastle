@@ -27,7 +27,7 @@ public partial class GameScene : Control {
 			Size = scene.Size,
 			Color = scene.BackgroundColor
 		});
-		AddChild(new ElementsView(scene));
+		AddChild(new ElementsView(scene, _gameState));
 		_scene.TriggerEvents(_gameState, new SceneState {
 			OnEnter = true
 		});

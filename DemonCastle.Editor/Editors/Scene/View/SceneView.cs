@@ -14,7 +14,7 @@ public partial class SceneView : ControlView<ColorRect> {
 		_scene = scene;
 		Name = nameof(SceneView);
 
-		Inner.AddChild(Elements = new ElementsView(scene));
+		Inner.AddChild(Elements = new ElementsView(scene, new NullGameState()));
 		Elements.SetAnchorsPreset(LayoutPreset.FullRect);
 	}
 

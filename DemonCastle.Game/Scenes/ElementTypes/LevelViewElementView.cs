@@ -1,16 +1,17 @@
 using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.Scenes.ElementTypes;
 
-public partial class LevelViewElementView : ColorRect {
+public partial class LevelViewElementView : TextureRect {
 	private readonly LevelViewElementInfo _element;
 
-	public LevelViewElementView(LevelViewElementInfo element) {
+	public LevelViewElementView(LevelViewElementInfo element, IGameState gameState) {
 		_element = element;
 		Name = nameof(LevelViewElementView);
-		Color = Colors.Silver;
+		Texture = gameState.LevelView;
 
 		Refresh();
 	}

@@ -11,6 +11,7 @@ public partial class GameRunner : Control, IGameState {
 	private SceneStack SceneStack { get; }
 	public GameLevel Level { get; }
 	public GamePlayer Player { get; }
+	private SubViewport LevelViewport { get; }
 
 	protected GameArea? CurrentArea { get; set; }
 
@@ -21,14 +22,12 @@ public partial class GameRunner : Control, IGameState {
 
 		AddChild(SceneStack = new SceneStack(this));
 
-		var subViewport = new SubViewport();
-		AddChild(subViewport);
-
-		subViewport.AddChild(Level = new GameLevel(project, debug));
-		subViewport.AddChild(Player = new GamePlayer(debug, new GameLogger()) {
+		AddChild(LevelViewport = new SubViewport());
+		LevelViewport.AddChild(Level = new GameLevel(project, debug));
+		LevelViewport.AddChild(Player = new GamePlayer(debug, new GameLogger()) {
 			Position = Level.StartingLocation
 		});
-		subViewport.AddChild(new GameCamera(Player, Level));
+		LevelViewport.AddChild(new GameCamera(Player, Level));
 
 		SetScene(project.StartScene);
 	}
@@ -67,4 +66,5 @@ public partial class GameRunner : Control, IGameState {
 	public void PopScene(int number) => SceneStack.Pop(number);
 
 	public IInputState Input => new InputState();
+	public Texture2D LevelView => new ViewportTexture { ViewportPath = GetPathTo(LevelViewport) };
 }

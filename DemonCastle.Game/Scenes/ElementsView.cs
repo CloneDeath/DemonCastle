@@ -1,14 +1,17 @@
 using System.Collections.Specialized;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.Scenes;
 
 public partial class ElementsView : Control {
 	private readonly SceneInfo _scene;
+	private readonly IGameState _gameState;
 
-	public ElementsView(SceneInfo scene) {
+	public ElementsView(SceneInfo scene, IGameState gameState) {
 		_scene = scene;
+		_gameState = gameState;
 		Name = nameof(ElementsView);
 
 		RefreshElements();
@@ -34,7 +37,7 @@ public partial class ElementsView : Control {
 		}
 
 		foreach (var element in _scene.Elements) {
-			var elementView = ElementViewFactory.GetView(element);
+			var elementView = ElementViewFactory.GetView(element, _gameState);
 			AddChild(elementView);
 		}
 	}
