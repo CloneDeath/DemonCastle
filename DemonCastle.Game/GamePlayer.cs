@@ -188,11 +188,12 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 			Size = new Vector2(level.TileSize.X * 3, level.TileSize.Y / 2f)
 		};
 		SetFloorShape();
+		Position = Level.StartingLocation;
 	}
 
 	private void SetFloorShape() {
 		FloorShape.Shape = new RectangleShape2D {
-			Size = new Vector2(Character?.Size.X ?? 0, Level?.TileSize.Y ?? 0 / 4f)
+			Size = new Vector2(Character?.Size.X ?? 0, (Level?.TileSize.Y ?? 0) / 4f)
 		};
 	}
 }

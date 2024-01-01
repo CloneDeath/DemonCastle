@@ -58,7 +58,7 @@ public partial class GameRunner : Control, IGameState {
 
 	public void SetLevel(LevelInfo level) {
 		Level.LoadLevel(level);
-		Player.Position = Level.StartingLocation;
+		Player.LoadLevel(level);
 	}
 
 	public void SetScene(SceneInfo scene) => SceneStack.Set(scene);
