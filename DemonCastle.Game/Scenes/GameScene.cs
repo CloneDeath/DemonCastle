@@ -33,6 +33,12 @@ public partial class GameScene : Control {
 		});
 	}
 
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		_scene?.TriggerEvents(_gameState, new SceneState());
+	}
+
 	public void Unload() {
 		_scene?.TriggerEvents(_gameState, new SceneState {
 			OnExit = true
