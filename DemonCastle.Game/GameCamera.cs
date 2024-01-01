@@ -17,7 +17,7 @@ public partial class GameCamera : Camera2D {
 		base._Process(delta);
 		SetLimits();
 
-		Position = _player.Position;
+		Position = _player.Position.Round();
 	}
 
 	private void SetLimits() {

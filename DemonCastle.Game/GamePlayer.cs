@@ -92,6 +92,8 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
+		Animation.GlobalPosition = GlobalPosition.Round();
+
 		var nextState = State.Update(this, delta);
 		if (nextState != null) {
 			State.OnExit(this);
