@@ -69,6 +69,9 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	}
 
 	public bool IsConditionMet(IGameState game, SceneState scene) {
+		if ((scene.OnEnter || scene.OnExit) && ThisScene == null) {
+			return false;
+		}
 		return (AnyInput != null && game.Input.AnyInputIsInState(AnyInput.Value)) ||
 			   (Input != null && game.Input.InputIsInState(Input.Action, Input.State)) ||
 			   (ThisScene != null && IsThisSceneConditionMet(ThisScene.Value, scene));
