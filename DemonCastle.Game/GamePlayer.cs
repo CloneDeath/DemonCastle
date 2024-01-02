@@ -74,12 +74,11 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 
 	public Guid Id { get; } = Guid.NewGuid();
 
-	public int Hp { get; set; } = 10;
-	public int MaxHp => 10;
+	public PlayerVariables PlayerState { get; } = new();
 
 	public void TakeDamage(int amount) {
-		Hp -= amount;
-		if (Hp <= 0) {
+		PlayerState.HP -= amount;
+		if (PlayerState.HP <= 0) {
 			QueueFree();
 		}
 	}

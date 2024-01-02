@@ -1,16 +1,17 @@
-using System;
 using System.ComponentModel;
-using DemonCastle.ProjectFiles.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.Scenes.ElementTypes;
 
 public partial class LabelElementView : Label {
 	private readonly LabelElementInfo _element;
+	private readonly IGameState _gameState;
 
-	public LabelElementView(LabelElementInfo element) {
+	public LabelElementView(LabelElementInfo element, IGameState gameState) {
 		_element = element;
+		_gameState = gameState;
 		Name = nameof(LabelElementView);
 		LabelSettings = new LabelSettings();
 		Refresh();
@@ -33,12 +34,7 @@ public partial class LabelElementView : Label {
 	private void Refresh() {
 		Position = _element.Region.Position;
 		Size = _element.Region.Size;
-		Text = _element.TextTransform switch {
-			TextTransform.None => _element.Text,
-			TextTransform.Lowercase => _element.Text.ToLower(),
-			TextTransform.Uppercase => _element.Text.ToUpper(),
-			_ => throw new NotImplementedException()
-		};
+		Text = new TextFinalizer(_gameState, _element.TextTransform).Finalize(_element.Text);
 
 		LabelSettings.Font = _element.Font;
 		LabelSettings.FontSize = _element.FontSize;

@@ -11,7 +11,7 @@ namespace DemonCastle.Game;
 public partial class GameRunner : Control, IGameState {
 	private SceneStack SceneStack { get; }
 	public GameLevel Level { get; }
-	public GamePlayer Player { get; }
+	public GamePlayer GamePlayer { get; }
 	private SubViewport LevelViewport { get; }
 
 	protected GameArea? CurrentArea { get; set; }
@@ -25,10 +25,10 @@ public partial class GameRunner : Control, IGameState {
 
 		AddChild(LevelViewport = new SubViewport());
 		LevelViewport.AddChild(Level = new GameLevel(project, debug));
-		LevelViewport.AddChild(Player = new GamePlayer(debug, new GameLogger()) {
+		LevelViewport.AddChild(GamePlayer = new GamePlayer(debug, new GameLogger()) {
 			Position = Level.StartingLocation
 		});
-		LevelViewport.AddChild(new GameCamera(Player, Level));
+		LevelViewport.AddChild(new GameCamera(GamePlayer, Level));
 
 		SetScene(project.StartScene);
 	}
@@ -53,7 +53,7 @@ public partial class GameRunner : Control, IGameState {
 		var screenFactor = Math.Max(1, Math.Min(screenScale.X, screenScale.Y));
 		Scale = Vector2.One * screenFactor;
 
-		var area = Level.GetGameAreaAtPoint((Vector2I)Player.Position);
+		var area = Level.GetGameAreaAtPoint((Vector2I)GamePlayer.Position);
 		if (CurrentArea == area) return;
 
 		CurrentArea = area;
@@ -61,12 +61,12 @@ public partial class GameRunner : Control, IGameState {
 	}
 
 	public void SetCharacter(CharacterInfo character) {
-		Player.LoadCharacter(character);
+		GamePlayer.LoadCharacter(character);
 	}
 
 	public void SetLevel(LevelInfo level) {
 		Level.LoadLevel(level);
-		Player.LoadLevel(level);
+		GamePlayer.LoadLevel(level);
 		LevelViewport.Size = level.AreaScale.ToPixelSize();
 	}
 
@@ -76,4 +76,5 @@ public partial class GameRunner : Control, IGameState {
 
 	public IInputState Input => new InputState();
 	public Texture2D LevelView => LevelViewport.GetTexture();
+	public IPlayerState Player => GamePlayer.PlayerState;
 }

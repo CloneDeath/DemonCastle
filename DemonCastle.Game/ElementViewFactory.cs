@@ -13,7 +13,7 @@ public static class ElementViewFactory {
 		return element.Type switch {
 			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),
 			ElementType.HealthBar => new HealthBarElementView((HealthBarElementInfo)element),
-			ElementType.Label => new LabelElementView((LabelElementInfo)element),
+			ElementType.Label => new LabelElementView((LabelElementInfo)element, gameState),
 			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, gameState),
 			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
 			_ => throw new ArgumentOutOfRangeException(nameof(element))

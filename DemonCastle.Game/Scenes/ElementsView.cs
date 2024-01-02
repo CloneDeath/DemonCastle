@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -36,7 +37,7 @@ public partial class ElementsView : Control {
 			child.QueueFree();
 		}
 
-		foreach (var element in _scene.Elements) {
+		foreach (var element in _scene.Elements.Reverse()) {
 			var elementView = ElementViewFactory.GetView(element, _gameState);
 			AddChild(elementView);
 		}

@@ -7,6 +7,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Scene.View;
 
 public class NullGameState : IGameState {
+	public IPlayerState Player { get; } = new NullPlayerState();
 	public void SetCharacter(CharacterInfo character) {	}
 	public void SetLevel(LevelInfo level) {	}
 	public void PushScene(SceneInfo scene) { }
@@ -30,4 +31,11 @@ public class NullGameState : IGameState {
 public class NullInputState : IInputState {
 	public bool AnyInputIsInState(KeyState state) => false;
 	public bool InputIsInState(PlayerAction action, KeyState state) => false;
+}
+
+public class NullPlayerState : IPlayerState {
+	public int HP => 9;
+	public int MP => 9;
+	public int Lives => 3;
+	public int Score => 42;
 }
