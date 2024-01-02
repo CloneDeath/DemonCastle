@@ -27,14 +27,16 @@ public class TextFinalizer {
 		return GetVariable(variable, format);
 	}
 
+	public static readonly IReadOnlyDictionary<string, Func<IGameState, int>> IntegerValues = new Dictionary<string, Func<IGameState, int>> {
+		{ "Player.HP", state => state.Player.HP },
+		{ "Player.MP", state => state.Player.MP },
+		{ "Player.Lives", state => state.Player.Lives },
+		{ "Player.Score", state => state.Player.Score }
+	};
+
 	private string GetVariable(string variable, string format) {
-		var intValues = new Dictionary<string, int> {
-			{ "Player.HP", _gameState.Player.HP },
-			{ "Player.MP", _gameState.Player.MP },
-			{ "Player.Lives", _gameState.Player.Lives },
-			{ "Player.Score", _gameState.Player.Score }
-		};
-		if (intValues.TryGetValue(variable, out var value)) {
+		if (IntegerValues.TryGetValue(variable, out var function)) {
+			var value = function(_gameState);
 			return value.ToString(format);
 		}
 
