@@ -16,7 +16,7 @@ public class TextFinalizer {
 	}
 
 	public string Finalize(string text) {
-		var regex = new Regex(@"(?<!\\)\{(?<variable>.*?)(:(?<format>.*))?\}", RegexOptions.IgnoreCase);
+		var regex = new Regex(@"(?<!\\)\{(?<variable>.*?)(:(?<format>.*?))?\}", RegexOptions.IgnoreCase);
 		var replaced = regex.Replace(text, VariableMatchEvaluator);
 		return GetTransformedText(replaced);
 	}
