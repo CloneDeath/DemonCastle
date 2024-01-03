@@ -1,4 +1,4 @@
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
@@ -10,7 +10,7 @@ public class ThisMonsterWhenClause : IWhenClause {
 
 	public void MakeSelected(WhenInfo when) {
 		if (when.Self != null) return;
-		when.Self = SelfEvents.Killed;
+		when.Self = SelfEvent.Killed;
 	}
 
 	public void MakeUnselected(WhenInfo when) {

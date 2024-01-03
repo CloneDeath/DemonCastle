@@ -1,11 +1,11 @@
-using DemonCastle.ProjectFiles.Files.SceneEvents;
+using DemonCastle.ProjectFiles.Files.Actions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
-public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
-	public SceneEventActionInfo(IFileNavigator file, SceneEventActionData data) : base(file, data) {
+public class SceneEventActionInfo : BaseInfo<SceneActionData> {
+	public SceneEventActionInfo(IFileNavigator file, SceneActionData data) : base(file, data) {
 		Scene = new SceneChangeActionInfo(file, data);
 	}
 
@@ -44,8 +44,8 @@ public class SceneEventActionInfo : BaseInfo<SceneEventActionData> {
 	}
 }
 
-public class SceneChangeActionInfo : BaseInfo<SceneEventActionData> {
-	public SceneChangeActionInfo(IFileNavigator file, SceneEventActionData data) : base(file, data) { }
+public class SceneChangeActionInfo : BaseInfo<SceneActionData> {
+	public SceneChangeActionInfo(IFileNavigator file, SceneActionData data) : base(file, data) { }
 
 	public bool IsSet {
 		get => Data.Scene != null;

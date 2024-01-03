@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Resources;

@@ -1,4 +1,4 @@
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.ProjectFiles.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
@@ -8,7 +8,7 @@ public class WhenInfo : BaseInfo<MonsterStateTransitionEvent> {
 		RandomTimerExpires = new RandomTimerExpiresInfo(File, data);
 	}
 
-	public SelfEvents? Self {
+	public SelfEvent? Self {
 		get => Data.Self;
 		set {
 			Data.Self = value;

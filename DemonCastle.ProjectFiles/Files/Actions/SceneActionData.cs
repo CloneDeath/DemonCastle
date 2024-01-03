@@ -1,6 +1,6 @@
-namespace DemonCastle.ProjectFiles.Files.SceneEvents;
+namespace DemonCastle.ProjectFiles.Files.Actions;
 
-public class SceneEventActionData {
+public class SceneActionData {
 	public SceneChangeActionData? Scene { get; set; }
 	public string? SetCharacter { get; set; }
 	public string? SetLevel { get; set; }
