@@ -5,6 +5,7 @@ namespace DemonCastle.ProjectFiles;
 
 public static class FileType {
 	public static IFileType Character => new CharacterFileType();
+	public static IFileType Item => new ItemFileType();
 	public static IFileType Jpeg => new JpegFileType();
 	public static IFileType Jpg => new JpgFileType();
 	public static IFileType Level => new LevelFileType();

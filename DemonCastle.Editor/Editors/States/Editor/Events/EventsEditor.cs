@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Editors.Monster.States.Editor.Events.Actions;
+using DemonCastle.Editor.Editors.States.Editor.Events.Actions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Events;
+namespace DemonCastle.Editor.Editors.States.Editor.Events;
 
 public partial class EventsEditor : VBoxContainer {
 	private readonly StateInfoProxy _proxy = new();

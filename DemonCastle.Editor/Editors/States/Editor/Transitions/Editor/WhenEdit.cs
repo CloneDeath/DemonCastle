@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor.WhenClauses;
+using DemonCastle.Editor.Editors.States.Editor.Transitions.Editor.WhenClauses;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor;
 
 public partial class WhenEdit : HFlowContainer {
 	private readonly TransitionInfoProxy _proxy = new();

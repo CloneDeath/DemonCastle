@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor.WhenClauses;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor.WhenClauses;
 
 public interface IWhenClause {
 	public string Clause { get; }

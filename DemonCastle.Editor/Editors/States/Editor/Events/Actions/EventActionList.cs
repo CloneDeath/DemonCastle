@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Events.Actions;
+namespace DemonCastle.Editor.Editors.States.Editor.Events.Actions;
 
 public partial class EventActionList : ItemList {
 	public EventActionList() {

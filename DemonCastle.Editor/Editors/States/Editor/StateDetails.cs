@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor;
+namespace DemonCastle.Editor.Editors.States.Editor;
 
 public partial class StateDetails : PropertyCollection {
 	private readonly StateInfoProxy _proxy = new();

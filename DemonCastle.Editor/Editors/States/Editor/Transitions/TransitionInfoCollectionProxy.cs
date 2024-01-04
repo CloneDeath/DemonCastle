@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions;
 
 public class TransitionInfoCollectionProxy : IEnumerableInfo<EntityStateTransitionInfo> {
 	private StateInfo? _proxy;

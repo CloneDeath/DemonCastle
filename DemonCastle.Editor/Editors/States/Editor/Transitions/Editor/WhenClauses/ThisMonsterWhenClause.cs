@@ -2,7 +2,7 @@ using DemonCastle.ProjectFiles.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor.WhenClauses;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor.WhenClauses;
 
 public class ThisMonsterWhenClause : IWhenClause {
 	public string Clause => "this monster";

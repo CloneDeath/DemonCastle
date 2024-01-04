@@ -1,24 +1,22 @@
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.BaseEntity;
+using DemonCastle.ProjectFiles.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.Monster;
 
-public partial class MonsterDetails : PropertyCollection {
-	public MonsterDetails(MonsterInfo monster) {
+public partial class MonsterDetails : BaseEntityDetails<MonsterInfo, MonsterFile> {
+	public MonsterDetails(MonsterInfo monster) : base(monster) {
 		Name = nameof(MonsterDetails);
 
-		AddString("Name", monster, m => m.Name);
+		CustomProperties.AddInteger("Health", monster, m => m.Health);
+		CustomProperties.AddInteger("Experience", monster, m => m.Experience);
+		CustomProperties.AddInteger("Attack", monster, m => m.Attack);
+		CustomProperties.AddInteger("PhysicalDefense", monster, m => m.PhysicalDefense);
+		CustomProperties.AddInteger("MagicalDefense", monster, m => m.MagicalDefense);
 
-		AddInteger("Health", monster, m => m.Health);
-		AddInteger("Experience", monster, m => m.Experience);
-		AddInteger("Attack", monster, m => m.Attack);
-		AddInteger("PhysicalDefense", monster, m => m.PhysicalDefense);
-		AddInteger("MagicalDefense", monster, m => m.MagicalDefense);
-
-		AddFloat("Move Speed", monster, m => m.MoveSpeed);
-		AddFloat("Jump Height", monster, m => m.JumpHeight);
-		AddFloat("Gravity", monster, m => m.Gravity);
-		AddVector2I("Size", monster, m => m.Size);
-		AddStateReference("Initial State", monster, m => m.InitialState, monster.States);
+		CustomProperties.AddFloat("Move Speed", monster, m => m.MoveSpeed);
+		CustomProperties.AddFloat("Jump Height", monster, m => m.JumpHeight);
+		CustomProperties.AddFloat("Gravity", monster, m => m.Gravity);
+		CustomProperties.AddVector2I("Size", monster, m => m.Size);
 	}
 }

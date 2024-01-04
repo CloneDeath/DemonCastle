@@ -1,11 +1,11 @@
-using DemonCastle.Editor.Editors.Monster.States.Editor;
-using DemonCastle.Editor.Editors.Monster.States.List;
+using DemonCastle.Editor.Editors.States.Editor;
+using DemonCastle.Editor.Editors.States.List;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States;
+namespace DemonCastle.Editor.Editors.States;
 
 public partial class StatesEditor : HSplitContainer {
 	protected StateList StateList { get; }

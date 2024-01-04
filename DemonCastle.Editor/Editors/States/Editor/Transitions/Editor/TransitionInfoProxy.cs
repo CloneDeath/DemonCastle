@@ -1,7 +1,7 @@
 using System;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor;
 
 public class TransitionInfoProxy : InfoProxy<EntityStateTransitionInfo> {
 	protected override void NotifyProxyChanged() {

@@ -1,8 +1,8 @@
 using System;
-using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
+using DemonCastle.Editor.Editors.States.Editor.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor;
+namespace DemonCastle.Editor.Editors.States.Editor;
 
 public class StateInfoProxy : InfoProxy<StateInfo> {
 	protected override void NotifyProxyChanged() {

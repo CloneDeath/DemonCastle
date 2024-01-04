@@ -1,7 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor.WhenClauses;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor.WhenClauses;
 
 public class ARandomTimerWhenClause : IWhenClause {
 	public string Clause => "a random timer";

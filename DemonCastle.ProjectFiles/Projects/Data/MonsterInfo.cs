@@ -1,31 +1,11 @@
-using System;
-using System.Linq;
 using DemonCastle.ProjectFiles.Files;
-using DemonCastle.ProjectFiles.Projects.Data.Animations;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
-using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo {
-	public MonsterInfo(FileNavigator<MonsterFile> file) : base(file) {
-		Animations = new AnimationInfoCollection(file, Resource.Animations);
-		States = new StateInfoCollection(file, Resource.States);
-	}
-
-	public Guid Id => Resource.Id;
-
-	public string Name {
-		get => Resource.Name;
-		set {
-			Resource.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
+public class MonsterInfo : BaseEntityInfo<MonsterFile> {
+	public MonsterInfo(FileNavigator<MonsterFile> file) : base(file) { }
 
 	public int Health {
 		get => Resource.Health;
@@ -108,31 +88,4 @@ public class MonsterInfo : FileInfo<MonsterFile>, IListableInfo {
 			OnPropertyChanged();
 		}
 	}
-
-	public Guid InitialState {
-		get => Resource.InitialState;
-		set {
-			Resource.InitialState = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
-
-	public AnimationInfoCollection Animations { get; }
-	public StateInfoCollection States { get; }
-
-	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
-
-	public Vector2 PreviewOrigin => PreviewFrame?.Origin ?? Vector2.Zero;
-
-	private IFrameInfo? PreviewFrame {
-		get {
-			var state = States.FirstOrDefault(s => s.Id == InitialState);
-			var animation = Animations.FirstOrDefault(a => a.Id == state?.Animation);
-			return animation?.Frames.FirstOrDefault();
-		}
-	}
-
-	public Texture2D PreviewTexture => new AtlasTexture
-		{ Atlas = PreviewSpriteDefinition.Texture, Region = PreviewSpriteDefinition.Region };
 }

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
-using DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.List;
+using DemonCastle.Editor.Editors.States.Editor.Transitions.Editor;
+using DemonCastle.Editor.Editors.States.Editor.Transitions.List;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions;
 
 public partial class TransitionsEditor : HSplitContainer {
 	private readonly StateInfoProxy _proxy = new();

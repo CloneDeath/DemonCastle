@@ -3,7 +3,7 @@ using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.Editor;
 
 public partial class TransitionEdit : PropertyCollection {
 	private readonly TransitionInfoProxy _proxy = new();

@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.Editor.Editors.Monster.States.List;
+using DemonCastle.Editor.Editors.States.List;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.List;
+namespace DemonCastle.Editor.Editors.States.Editor.Transitions.List;
 
 public partial class TransitionList : VBoxContainer {
 	public event Action<EntityStateTransitionInfo>? TransitionSelected;

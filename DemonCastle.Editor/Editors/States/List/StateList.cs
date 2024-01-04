@@ -5,7 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Monster.States.List;
+namespace DemonCastle.Editor.Editors.States.List;
 
 public partial class StateList : VBoxContainer {
 	public event Action<StateInfo>? StateSelected;
