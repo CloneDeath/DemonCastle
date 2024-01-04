@@ -1,10 +1,10 @@
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.ProjectFiles.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-public class WhenInfo : BaseInfo<MonsterStateTransitionEvent> {
-	public WhenInfo(IFileNavigator file, MonsterStateTransitionEvent data) : base(file, data) {
+public class WhenInfo : BaseInfo<EntityStateTransitionEvent> {
+	public WhenInfo(IFileNavigator file, EntityStateTransitionEvent data) : base(file, data) {
 		RandomTimerExpires = new RandomTimerExpiresInfo(File, data);
 	}
 

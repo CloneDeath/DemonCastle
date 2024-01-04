@@ -1,11 +1,11 @@
 using System;
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.ProjectFiles.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-public class RandomTimerExpiresInfo : BaseInfo<MonsterStateTransitionEvent> {
-	public RandomTimerExpiresInfo(IFileNavigator file, MonsterStateTransitionEvent data) : base(file, data) { }
+public class RandomTimerExpiresInfo : BaseInfo<EntityStateTransitionEvent> {
+	public RandomTimerExpiresInfo(IFileNavigator file, EntityStateTransitionEvent data) : base(file, data) { }
 
 	public bool IsSet {
 		get => Data.RandomTimerExpires != null;

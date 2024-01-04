@@ -8,28 +8,28 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-public class TransitionInfoCollection : IEnumerableInfo<TransitionInfo> {
+public class EntityStateTransitionInfoCollection : IEnumerableInfo<EntityStateTransitionInfo> {
 	protected IFileNavigator File { get; }
-	protected List<MonsterStateTransitionData> FileTransitions { get; }
-	protected ObservableCollection<TransitionInfo> Transitions { get; }
+	protected List<EntityStateTransitionData> FileTransitions { get; }
+	protected ObservableCollection<EntityStateTransitionInfo> Transitions { get; }
 
-	public TransitionInfoCollection(IFileNavigator file, List<MonsterStateTransitionData> transitions) {
+	public EntityStateTransitionInfoCollection(IFileNavigator file, List<EntityStateTransitionData> transitions) {
 		File = file;
 		FileTransitions = transitions;
-		Transitions = new ObservableCollection<TransitionInfo>(transitions.Select(data => new TransitionInfo(file, data)).ToList());
+		Transitions = new ObservableCollection<EntityStateTransitionInfo>(transitions.Select(data => new EntityStateTransitionInfo(file, data)).ToList());
 		Transitions.CollectionChanged += Transitions_OnCollectionChanged;
 	}
 
-	public TransitionInfo AppendNew() {
-		var transitionData = new MonsterStateTransitionData();
+	public EntityStateTransitionInfo AppendNew() {
+		var transitionData = new EntityStateTransitionData();
 		FileTransitions.Add(transitionData);
 		Save();
-		var transitionInfo = new TransitionInfo(File, transitionData);
+		var transitionInfo = new EntityStateTransitionInfo(File, transitionData);
 		Transitions.Add(transitionInfo);
 		return transitionInfo;
 	}
 
-	public void Remove(TransitionInfo item) {
+	public void Remove(EntityStateTransitionInfo item) {
 		var index = Transitions.IndexOf(item);
 		FileTransitions.RemoveAt(index);
 		Save();
@@ -44,10 +44,10 @@ public class TransitionInfoCollection : IEnumerableInfo<TransitionInfo> {
 
 	protected void Save() => File.Save();
 
-	public TransitionInfo this[int index] => Transitions[index];
+	public EntityStateTransitionInfo this[int index] => Transitions[index];
 
 	#region IEnumerable
-	public IEnumerator<TransitionInfo> GetEnumerator() => Transitions.GetEnumerator();
+	public IEnumerator<EntityStateTransitionInfo> GetEnumerator() => Transitions.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

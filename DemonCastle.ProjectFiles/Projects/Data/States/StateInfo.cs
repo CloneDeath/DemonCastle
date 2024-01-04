@@ -11,15 +11,15 @@ namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
 public class StateInfo : INotifyPropertyChanged {
 	protected IFileNavigator File { get; }
-	protected MonsterStateData State { get; }
+	protected EntityStateData State { get; }
 
-	public StateInfo(IFileNavigator file, MonsterStateData state) {
+	public StateInfo(IFileNavigator file, EntityStateData state) {
 		File = file;
 		State = state;
-		OnEnter = new ActionInfoCollection(file, state.OnEnter);
-		OnUpdate = new ActionInfoCollection(file, state.OnUpdate);
-		OnExit = new ActionInfoCollection(file, state.OnExit);
-		Transitions = new TransitionInfoCollection(file, state.Transitions);
+		OnEnter = new EntityActionInfoCollection(file, state.OnEnter);
+		OnUpdate = new EntityActionInfoCollection(file, state.OnUpdate);
+		OnExit = new EntityActionInfoCollection(file, state.OnExit);
+		Transitions = new EntityStateTransitionInfoCollection(file, state.Transitions);
 	}
 
 	public Guid Id => State.Id;
@@ -42,10 +42,10 @@ public class StateInfo : INotifyPropertyChanged {
 		}
 	}
 
-	public ActionInfoCollection OnEnter { get; }
-	public ActionInfoCollection OnUpdate { get; }
-	public ActionInfoCollection OnExit { get; }
-	public TransitionInfoCollection Transitions { get; }
+	public EntityActionInfoCollection OnEnter { get; }
+	public EntityActionInfoCollection OnUpdate { get; }
+	public EntityActionInfoCollection OnExit { get; }
+	public EntityStateTransitionInfoCollection Transitions { get; }
 
 	protected void Save() => File.Save();
 

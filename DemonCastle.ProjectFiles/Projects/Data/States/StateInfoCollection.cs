@@ -10,10 +10,10 @@ namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
 public class StateInfoCollection : IEnumerableInfo<StateInfo> {
 	protected IFileNavigator File { get; }
-	protected List<MonsterStateData> FileStates { get; }
+	protected List<EntityStateData> FileStates { get; }
 	protected ObservableCollection<StateInfo> States { get; }
 
-	public StateInfoCollection(IFileNavigator file, List<MonsterStateData> states) {
+	public StateInfoCollection(IFileNavigator file, List<EntityStateData> states) {
 		File = file;
 		FileStates = states;
 		States = new ObservableCollection<StateInfo>(states.Select(data => new StateInfo(file, data)).ToList());
@@ -21,7 +21,7 @@ public class StateInfoCollection : IEnumerableInfo<StateInfo> {
 	}
 
 	public StateInfo AppendNew() {
-		var stateData = new MonsterStateData {
+		var stateData = new EntityStateData {
 			Name = "state"
 		};
 		FileStates.Add(stateData);

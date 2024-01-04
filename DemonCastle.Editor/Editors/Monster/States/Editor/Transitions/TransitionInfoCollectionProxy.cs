@@ -8,7 +8,7 @@ using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
 namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions;
 
-public class TransitionInfoCollectionProxy : IEnumerableInfo<TransitionInfo> {
+public class TransitionInfoCollectionProxy : IEnumerableInfo<EntityStateTransitionInfo> {
 	private StateInfo? _proxy;
 
 	public StateInfo? Proxy {
@@ -26,19 +26,19 @@ public class TransitionInfoCollectionProxy : IEnumerableInfo<TransitionInfo> {
 	}
 
 	#region IEnumerable
-	public IEnumerator<TransitionInfo> GetEnumerator() => _proxy?.Transitions.GetEnumerator() ?? new List<TransitionInfo>().GetEnumerator();
+	public IEnumerator<EntityStateTransitionInfo> GetEnumerator() => _proxy?.Transitions.GetEnumerator() ?? new List<EntityStateTransitionInfo>().GetEnumerator();
 
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 
 	public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
-	public TransitionInfo this[int index] => _proxy?.Transitions[index] ?? throw new IndexOutOfRangeException();
+	public EntityStateTransitionInfo this[int index] => _proxy?.Transitions[index] ?? throw new IndexOutOfRangeException();
 
-	public TransitionInfo AppendNew() =>
+	public EntityStateTransitionInfo AppendNew() =>
 		_proxy?.Transitions.AppendNew() ?? throw new Exception("Can not add transition to null proxy");
 
-	public void Remove(TransitionInfo item) {
+	public void Remove(EntityStateTransitionInfo item) {
 		_proxy?.Transitions.Remove(item);
 	}
 

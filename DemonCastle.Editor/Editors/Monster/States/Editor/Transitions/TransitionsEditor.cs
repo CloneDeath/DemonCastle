@@ -31,7 +31,7 @@ public partial class TransitionsEditor : HSplitContainer {
 		});
 	}
 
-	private void Transitions_OnTransitionSelected(TransitionInfo obj) {
+	private void Transitions_OnTransitionSelected(EntityStateTransitionInfo obj) {
 		TransitionEdit.Transition = obj;
 	}
 

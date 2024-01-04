@@ -4,8 +4,8 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-public class TransitionInfo : BaseInfo<MonsterStateTransitionData> {
-	public TransitionInfo(IFileNavigator file, MonsterStateTransitionData data) : base(file, data) {
+public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData> {
+	public EntityStateTransitionInfo(IFileNavigator file, EntityStateTransitionData data) : base(file, data) {
 		When = new WhenInfo(file, data.When);
 	}
 

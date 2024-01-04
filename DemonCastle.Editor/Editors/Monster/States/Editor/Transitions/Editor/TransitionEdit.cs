@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.Editor;
 public partial class TransitionEdit : PropertyCollection {
 	private readonly TransitionInfoProxy _proxy = new();
 
-	public TransitionInfo? Transition {
+	public EntityStateTransitionInfo? Transition {
 		get => _proxy.Proxy;
 		set {
 			_proxy.Proxy = value;

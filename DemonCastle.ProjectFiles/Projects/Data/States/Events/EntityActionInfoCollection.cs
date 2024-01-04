@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.ProjectFiles.Files.Actions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Events;
 
-public class ActionInfoCollection : IEnumerableInfo<ActionInfo> {
+public class EntityActionInfoCollection : IEnumerableInfo<EntityActionInfo> {
 	protected IFileNavigator File { get; }
-	protected List<MonsterStateActionData> FileActions { get; }
-	protected ObservableCollection<ActionInfo> Actions { get; }
+	protected List<EntityActionData> FileActions { get; }
+	protected ObservableCollection<EntityActionInfo> Actions { get; }
 
-	public ActionInfoCollection(IFileNavigator file, List<MonsterStateActionData> actions) {
+	public EntityActionInfoCollection(IFileNavigator file, List<EntityActionData> actions) {
 		File = file;
 		FileActions = actions;
-		Actions = new ObservableCollection<ActionInfo>(actions.Select(data => new ActionInfo(file, data)).ToList());
+		Actions = new ObservableCollection<EntityActionInfo>(actions.Select(data => new EntityActionInfo(file, data)).ToList());
 		Actions.CollectionChanged += Actions_OnCollectionChanged;
 	}
 
-	public ActionInfo AppendNew() {
-		var stateData = new MonsterStateActionData();
+	public EntityActionInfo AppendNew() {
+		var stateData = new EntityActionData();
 		FileActions.Add(stateData);
 		Save();
-		var actionInfo = new ActionInfo(File, stateData);
+		var actionInfo = new EntityActionInfo(File, stateData);
 		Actions.Add(actionInfo);
 		return actionInfo;
 	}
 
-	public void Remove(ActionInfo item) {
+	public void Remove(EntityActionInfo item) {
 		var index = Actions.IndexOf(item);
 		FileActions.RemoveAt(index);
 		Save();
@@ -44,10 +44,10 @@ public class ActionInfoCollection : IEnumerableInfo<ActionInfo> {
 
 	protected void Save() => File.Save();
 
-	public ActionInfo this[int index] => Actions[index];
+	public EntityActionInfo this[int index] => Actions[index];
 
 	#region IEnumerable
-	public IEnumerator<ActionInfo> GetEnumerator() => Actions.GetEnumerator();
+	public IEnumerator<EntityActionInfo> GetEnumerator() => Actions.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

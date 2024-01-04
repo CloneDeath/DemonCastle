@@ -9,9 +9,9 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Monster.States.Editor.Transitions.List;
 
 public partial class TransitionList : VBoxContainer {
-	public event Action<TransitionInfo>? TransitionSelected;
+	public event Action<EntityStateTransitionInfo>? TransitionSelected;
 
-	private readonly IEnumerableInfo<TransitionInfo> _transitions;
+	private readonly IEnumerableInfo<EntityStateTransitionInfo> _transitions;
 	private ItemList Transitions { get; }
 	private Button AddButton { get; }
 	private Button RemoveButton { get; }
@@ -26,7 +26,7 @@ public partial class TransitionList : VBoxContainer {
 		}
 	}
 
-	public TransitionList(IEnumerableInfo<TransitionInfo> transitions) {
+	public TransitionList(IEnumerableInfo<EntityStateTransitionInfo> transitions) {
 		_transitions = transitions;
 
 		Name = nameof(StateList);
