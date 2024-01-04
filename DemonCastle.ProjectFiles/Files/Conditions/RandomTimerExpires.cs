@@ -1,4 +1,4 @@
-namespace DemonCastle.ProjectFiles.Files.BaseEntity;
+namespace DemonCastle.ProjectFiles.Files.Conditions;
 
 public class RandomTimerExpires {
 	public Duration Start { get; set; } = new();

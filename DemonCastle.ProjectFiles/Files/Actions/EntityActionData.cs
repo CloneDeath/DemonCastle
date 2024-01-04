@@ -1,6 +1,6 @@
-namespace DemonCastle.ProjectFiles.Files.BaseEntity;
+namespace DemonCastle.ProjectFiles.Files.Actions;
 
-public class MonsterStateActionData {
+public class EntityActionData {
 	public FaceAction? Face { get; set; }
 	public MoveAction? Move { get; set; }
 	public SelfAction? Self { get; set; }

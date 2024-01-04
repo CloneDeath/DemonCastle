@@ -1,6 +1,6 @@
-namespace DemonCastle.ProjectFiles.Files.BaseEntity;
+namespace DemonCastle.ProjectFiles.Files.Conditions;
 
-public class MonsterStateTransitionEvent {
+public class EntityStateTransitionEvent {
 	public SelfEvent? Self { get; set; }
 	public AnimationEvent? Animation { get; set; }
 	public RandomTimerExpires? RandomTimerExpires { get; set; }

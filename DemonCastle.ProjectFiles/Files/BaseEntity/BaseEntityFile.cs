@@ -12,5 +12,5 @@ public abstract class BaseEntityFile {
 	public Guid InitialState { get; set; } = Guid.Empty;
 
 	public List<AnimationData> Animations { get; set; } = new();
-	public List<MonsterStateData> States { get; set; } = new();
+	public List<EntityStateData> States { get; set; } = new();
 }
