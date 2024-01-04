@@ -8,6 +8,7 @@ public static class IconTextures {
 	public static Texture2D FolderIcon { get; } = LoadTexture(nameof(FolderIcon));
 	public static Texture2D FontIcon { get; } = LoadTexture(nameof(FontIcon));
 	public static Texture2D GridIcon { get; } = LoadTexture(nameof(GridIcon));
+	public static Texture2D ItemIcon { get; } = LoadTexture(nameof(ItemIcon));
 	public static Texture2D LevelIcon { get; } = LoadTexture(nameof(LevelIcon));
 	public static Texture2D MagnifyMinusIcon { get; } = LoadTexture(nameof(MagnifyMinusIcon));
 	public static Texture2D MagnifyPlusIcon { get; } = LoadTexture(nameof(MagnifyPlusIcon));
