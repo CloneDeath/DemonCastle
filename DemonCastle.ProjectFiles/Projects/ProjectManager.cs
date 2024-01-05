@@ -22,8 +22,9 @@ public class ProjectManager {
 		if (Directory.Exists(GlobalPath)) {
 			Directory.Delete(GlobalPath, true);
 		}
-		await DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
+		await DownloadProject("https://github.com/CloneDeath/DemonCastle/archive/refs/heads/master.zip");
 		await DownloadProject("https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip");
+		await DownloadProject("https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip");
 	}
 
 	public static async Task DownloadProject(string url) {
