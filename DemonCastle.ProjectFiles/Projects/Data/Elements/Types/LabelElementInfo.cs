@@ -1,7 +1,7 @@
 using System;
 using DemonCastle.Files;
 using DemonCastle.Files.Common;
-using DemonCastle.Files.Elements.Types;
+using DemonCastle.Files.Elements;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 

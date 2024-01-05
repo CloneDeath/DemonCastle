@@ -1,8 +1,7 @@
 using System;
 
-namespace DemonCastle.Files.Elements.Types;
+namespace DemonCastle.Files.Elements;
 
-[ElementType(ElementType.Sprite)]
 public class SpriteElementData : ElementData {
 	public SpriteElementData() {
 		Type = ElementType.Sprite;

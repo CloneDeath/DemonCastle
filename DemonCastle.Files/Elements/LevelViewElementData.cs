@@ -1,6 +1,5 @@
-namespace DemonCastle.Files.Elements.Types;
+namespace DemonCastle.Files.Elements;
 
-[ElementType(ElementType.LevelView)]
 public class LevelViewElementData : ElementData {
 	public LevelViewElementData() {
 		Type = ElementType.LevelView;

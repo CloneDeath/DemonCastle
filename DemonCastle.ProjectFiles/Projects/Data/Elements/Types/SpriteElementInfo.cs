@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.Files.Common;
-using DemonCastle.Files.Elements.Types;
+using DemonCastle.Files.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;

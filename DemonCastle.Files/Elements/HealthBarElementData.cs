@@ -1,8 +1,7 @@
 using System;
 
-namespace DemonCastle.Files.Elements.Types;
+namespace DemonCastle.Files.Elements;
 
-[ElementType(ElementType.HealthBar)]
 public class HealthBarElementData : ElementData {
 	public HealthBarElementData() {
 		Type = ElementType.HealthBar;

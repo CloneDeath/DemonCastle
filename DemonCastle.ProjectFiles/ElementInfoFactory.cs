@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.Files;
 using DemonCastle.Files.Common;
-using DemonCastle.Files.Elements.Types;
+using DemonCastle.Files.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;

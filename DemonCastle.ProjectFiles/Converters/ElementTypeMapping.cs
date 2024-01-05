@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DemonCastle.Files;
 
-namespace DemonCastle.Files.Elements;
+namespace DemonCastle.ProjectFiles.Converters;
 
 public static class ElementTypeMapping {
 	public static Type GetType(ElementType elementType) {

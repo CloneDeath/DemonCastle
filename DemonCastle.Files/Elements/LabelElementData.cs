@@ -3,9 +3,8 @@ using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DemonCastle.Files.Elements.Types;
+namespace DemonCastle.Files.Elements;
 
-[ElementType(ElementType.Label)]
 public class LabelElementData : ElementData {
 	public LabelElementData() {
 		Type = ElementType.Label;

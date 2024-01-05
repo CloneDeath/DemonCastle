@@ -1,9 +1,8 @@
 using DemonCastle.Files.Common;
 using Godot;
 
-namespace DemonCastle.Files.Elements.Types;
+namespace DemonCastle.Files.Elements;
 
-[ElementType(ElementType.ColorRect)]
 public class ColorRectElementData : ElementData {
 	public ColorRectElementData() {
 		Type = ElementType.ColorRect;
