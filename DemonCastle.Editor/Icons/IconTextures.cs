@@ -4,6 +4,7 @@ namespace DemonCastle.Editor.Icons;
 
 public static class IconTextures {
 	public static Texture2D AddIcon { get; } = LoadTexture(nameof(AddIcon));
+	public static Texture2D AsepriteIcon { get; } = LoadTexture(nameof(AsepriteIcon));
 	public static Texture2D CharacterIcon { get; } = LoadTexture(nameof(CharacterIcon));
 	public static Texture2D FolderIcon { get; } = LoadTexture(nameof(FolderIcon));
 	public static Texture2D FontIcon { get; } = LoadTexture(nameof(FontIcon));

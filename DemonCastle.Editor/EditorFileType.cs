@@ -9,6 +9,7 @@ using Godot;
 namespace DemonCastle.Editor;
 
 public static class EditorFileType {
+	public static IEditorFileType Aseprite { get; } = new AsepriteEditorFileType();
 	public static IEditorFileType Character { get; } = new CharacterEditorFileType();
 	public static IEditorFileType Item { get; } = new ItemEditorFileType();
 	public static IEditorFileType Jpeg { get; } = new JpegEditorFileType();
@@ -37,6 +38,7 @@ public static class EditorFileType {
 	};
 
 	public static IEnumerable<IEditorFileType> All { get; } = new[] {
+		Aseprite,
 		Character,
 		Item,
 		Jpeg,
