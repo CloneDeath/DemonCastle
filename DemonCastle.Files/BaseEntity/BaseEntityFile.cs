@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Files.Animations;
+using Newtonsoft.Json;
 
 namespace DemonCastle.Files.BaseEntity;
 
 public abstract class BaseEntityFile {
+	[JsonProperty(Order = -3)]
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
 
+	[JsonProperty(Order = -2)]
+	public string Name { get; set; } = string.Empty;
 
 	public Guid InitialState { get; set; } = Guid.Empty;
 
