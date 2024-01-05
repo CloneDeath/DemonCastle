@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files.SceneEvents;
+using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 

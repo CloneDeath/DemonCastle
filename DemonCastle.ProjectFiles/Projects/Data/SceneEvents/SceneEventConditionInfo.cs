@@ -1,5 +1,5 @@
 using System;
-using DemonCastle.ProjectFiles.Files.SceneEvents;
+using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 

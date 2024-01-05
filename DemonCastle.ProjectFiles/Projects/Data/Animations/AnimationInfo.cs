@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using DemonCastle.ProjectFiles.Files.Animations;
+using DemonCastle.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;

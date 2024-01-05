@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using DemonCastle.ProjectFiles.Files.Elements.Types;
+using DemonCastle.Files.Elements.Types;
 using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.Game.Scenes;

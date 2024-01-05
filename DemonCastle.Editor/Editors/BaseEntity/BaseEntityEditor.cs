@@ -1,6 +1,6 @@
 using DemonCastle.Editor.Editors.Animations;
 using DemonCastle.Editor.Editors.States;
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 

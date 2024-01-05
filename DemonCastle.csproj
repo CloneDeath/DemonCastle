@@ -6,11 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="DemonCastle.Files\**" />
     <Compile Remove="DemonCastle.ProjectFiles\**" />
     <Compile Remove="DemonCastle.Game\**" />
     <Compile Remove="DemonCastle.Editor\**" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Remove="DemonCastle.Files\**" />
     <EmbeddedResource Remove="DemonCastle.ProjectFiles\**" />
     <EmbeddedResource Remove="DemonCastle.Game\**" />
     <EmbeddedResource Remove="DemonCastle.Editor\**" />

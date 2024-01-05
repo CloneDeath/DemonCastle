@@ -1,5 +1,5 @@
-using DemonCastle.ProjectFiles.Files;
-using DemonCastle.ProjectFiles.Files.Common;
+using DemonCastle.Files;
+using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Resources;

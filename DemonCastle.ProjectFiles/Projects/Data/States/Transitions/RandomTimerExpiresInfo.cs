@@ -1,5 +1,5 @@
 using System;
-using DemonCastle.ProjectFiles.Files.Conditions;
+using DemonCastle.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;

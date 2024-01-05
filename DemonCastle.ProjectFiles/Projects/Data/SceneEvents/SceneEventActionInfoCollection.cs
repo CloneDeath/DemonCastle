@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DemonCastle.ProjectFiles.Files.Actions;
+using DemonCastle.Files.Actions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 

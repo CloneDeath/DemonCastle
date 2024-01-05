@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.Files;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;

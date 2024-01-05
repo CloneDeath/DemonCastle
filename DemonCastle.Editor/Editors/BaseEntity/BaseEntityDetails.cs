@@ -1,6 +1,6 @@
 using DemonCastle.Editor.Editors.Monster;
 using DemonCastle.Editor.Editors.Properties;
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.BaseEntity;

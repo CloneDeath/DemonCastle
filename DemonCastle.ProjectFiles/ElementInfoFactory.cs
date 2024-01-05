@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DemonCastle.ProjectFiles.Files;
-using DemonCastle.ProjectFiles.Files.Common;
-using DemonCastle.ProjectFiles.Files.Elements.Types;
+using DemonCastle.Files;
+using DemonCastle.Files.Common;
+using DemonCastle.Files.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;

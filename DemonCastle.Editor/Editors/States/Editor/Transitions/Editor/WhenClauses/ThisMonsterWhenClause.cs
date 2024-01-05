@@ -1,4 +1,4 @@
-using DemonCastle.ProjectFiles.Files.Conditions;
+using DemonCastle.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using Godot;
 

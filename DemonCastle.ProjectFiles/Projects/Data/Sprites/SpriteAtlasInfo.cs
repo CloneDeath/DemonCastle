@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files;
-using DemonCastle.ProjectFiles.Files.Common;
+using DemonCastle.Files;
+using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;

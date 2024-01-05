@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files.BaseEntity;
+using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DemonCastle.ProjectFiles.Files.Animations;
+using DemonCastle.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 

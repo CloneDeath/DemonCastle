@@ -1,7 +1,7 @@
 using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Level;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles.Files;
+using DemonCastle.Files;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;

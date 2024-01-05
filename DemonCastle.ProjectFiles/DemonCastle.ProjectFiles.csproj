@@ -22,4 +22,7 @@
 	    <DependentUpon>AreaPosition.cs</DependentUpon>
 	  </Compile>
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\DemonCastle.Files\DemonCastle.Files.csproj" />
+	</ItemGroup>
 </Project>

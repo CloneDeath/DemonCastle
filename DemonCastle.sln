@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle.Game", "DemonCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle.Editor", "DemonCastle.Editor\DemonCastle.Editor.csproj", "{0CA29EBA-3862-4BCE-99FD-CE5E2DB49302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonCastle.Files", "DemonCastle.Files\DemonCastle.Files.csproj", "{4DA2183E-52F2-4A91-899D-342D33A2B17F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -39,5 +41,11 @@ Global
 		{0CA29EBA-3862-4BCE-99FD-CE5E2DB49302}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
 		{0CA29EBA-3862-4BCE-99FD-CE5E2DB49302}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
 		{0CA29EBA-3862-4BCE-99FD-CE5E2DB49302}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DA2183E-52F2-4A91-899D-342D33A2B17F}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
