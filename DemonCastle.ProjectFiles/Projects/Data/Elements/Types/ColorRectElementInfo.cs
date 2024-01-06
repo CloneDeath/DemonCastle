@@ -22,6 +22,7 @@ public class ColorRectElementInfo : BaseInfo<ColorRectElementData>, IElementInfo
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

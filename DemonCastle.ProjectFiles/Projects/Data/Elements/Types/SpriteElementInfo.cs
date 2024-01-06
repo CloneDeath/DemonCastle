@@ -26,6 +26,7 @@ public class SpriteElementInfo : BaseInfo<SpriteElementData>, IElementInfo {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

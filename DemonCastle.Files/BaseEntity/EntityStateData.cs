@@ -5,9 +5,9 @@ using DemonCastle.Files.Actions;
 namespace DemonCastle.Files.BaseEntity;
 
 public class EntityStateData {
-	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
-	public Guid Animation { get; set; } = Guid.Empty;
+	public Guid Id = Guid.NewGuid();
+	public string Name = string.Empty;
+	public Guid Animation = Guid.Empty;
 	public List<EntityStateTransitionData> Transitions { get; set; } = new();
 
 	public List<EntityActionData> OnEnter { get; set; } = new();

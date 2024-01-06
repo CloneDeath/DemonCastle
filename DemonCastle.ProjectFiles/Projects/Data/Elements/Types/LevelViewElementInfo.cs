@@ -22,6 +22,7 @@ public class LevelViewElementInfo : BaseInfo<LevelViewElementData>, IElementInfo
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

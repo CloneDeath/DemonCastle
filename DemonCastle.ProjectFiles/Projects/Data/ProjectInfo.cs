@@ -18,6 +18,7 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

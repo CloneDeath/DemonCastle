@@ -30,6 +30,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo, IE
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 
@@ -61,6 +62,6 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo, IE
 
 	public Texture2D PreviewTexture => new AtlasTexture
 		{ Atlas = PreviewSpriteDefinition.Texture, Region = PreviewSpriteDefinition.Region };
-	
+
 	public EntityStateInfo? RetrieveEntityStateInfo(Guid stateId) => States.FirstOrDefault(s => s.Id == stateId);
 }

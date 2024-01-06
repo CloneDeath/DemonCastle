@@ -15,6 +15,7 @@ public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
 	}
 
 	public Guid Id => Data.Id;
+
 	public string ListLabel => Name;
 
 	public string Name {
@@ -23,6 +24,7 @@ public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

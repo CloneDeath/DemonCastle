@@ -12,7 +12,11 @@ public class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, ILista
 
 	public string Name {
 		get => Data.Name;
-		set => SaveField(ref Data.Name, value);
+		set {
+			if (SaveField(ref Data.Name, value)) {
+				OnPropertyChanged(ListLabel);
+			}
+		}
 	}
 
 	public VariableDataType DataType {
