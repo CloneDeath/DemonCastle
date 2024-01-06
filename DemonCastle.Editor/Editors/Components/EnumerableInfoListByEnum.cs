@@ -1,11 +1,12 @@
 using System;
+using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class EnumerableInfoListByEnum<TInfo, TEnum> : EnumerableInfoList<TInfo>
-	where TInfo : class, IListableInfo
+	where TInfo : class, IListableInfo, INotifyPropertyChanged
 	where TEnum : struct, Enum {
 
 	private readonly IEnumerableInfoByEnum<TInfo, TEnum> _data;
