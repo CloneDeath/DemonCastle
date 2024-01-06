@@ -5,10 +5,10 @@ using Newtonsoft.Json.Converters;
 namespace DemonCastle.Files.Variables;
 
 public class VariableDeclarationData {
-	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
-	public VariableDataType DataType { get; set; }
-	public object? DefaultValue { get; set; }
+	public Guid Id = Guid.NewGuid();
+	public string Name = string.Empty;
+	public VariableDataType DataType;
+	public object? DefaultValue;
 }
 
 [JsonConverter(typeof(StringEnumConverter))]

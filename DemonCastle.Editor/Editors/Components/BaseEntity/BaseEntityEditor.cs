@@ -1,9 +1,9 @@
 using DemonCastle.Editor.Editors.Components.Animations;
 using DemonCastle.Editor.Editors.Components.States;
-using DemonCastle.Editor.Editors.Components.Variables;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
+using VariableDeclarationsEditor = DemonCastle.Editor.Editors.Components.VariableDeclarations.VariableDeclarationsEditor;
 
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
@@ -27,7 +27,7 @@ public abstract partial class BaseEntityEditor<TInfo, TFile> : BaseEditor
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 
-		RightArea.AddChild(new VariableEditor());
+		RightArea.AddChild(new VariableDeclarationsEditor(entity.Variables));
 		RightArea.SetTabTitle(0, "Variables");
 		RightArea.AddChild(new AnimationsEditor(entity, entity.Animations));
 		RightArea.SetTabTitle(1, "Animations");

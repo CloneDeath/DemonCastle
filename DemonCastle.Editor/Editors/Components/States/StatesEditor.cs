@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Editors.Components.States.Editor;
-using DemonCastle.Editor.Editors.Components.States.List;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
@@ -8,23 +7,23 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.States;
 
 public partial class StatesEditor : HSplitContainer {
-	protected StateList StateList { get; }
+	protected EnumerableInfoList<EntityStateInfo> StateList { get; }
 	protected StateEditor StateEditor { get; }
 
 	public StatesEditor(IEnumerableInfo<EntityStateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(StatesEditor);
 
-		AddChild(StateList = new StateList(states){
+		AddChild(StateList = new EnumerableInfoList<EntityStateInfo>(states){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
-		StateList.StateSelected += StateList_OnStateSelected;
+		StateList.ItemSelected += StateList_OnItemSelected;
 
 		AddChild(StateEditor = new StateEditor(animations, states) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}
 
-	protected void StateList_OnStateSelected(EntityStateInfo stateInfo) {
+	protected void StateList_OnItemSelected(EntityStateInfo stateInfo) {
 		StateEditor.LoadState(stateInfo);
 	}
 }

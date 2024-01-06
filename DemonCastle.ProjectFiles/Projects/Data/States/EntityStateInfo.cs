@@ -6,7 +6,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
-public class EntityStateInfo : BaseInfo<EntityStateData> {
+public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
 	public EntityStateInfo(IFileNavigator file, EntityStateData state) : base(file, state) {
 		OnEnter = new EntityActionInfoCollection(file, state.OnEnter);
 		OnUpdate = new EntityActionInfoCollection(file, state.OnUpdate);

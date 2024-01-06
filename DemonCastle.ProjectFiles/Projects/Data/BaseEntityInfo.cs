@@ -5,6 +5,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -16,6 +17,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 	protected BaseEntityInfo(FileNavigator<TFile> file) : base(file) {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
 		States = new EntityStateInfoCollection(file, Resource.States);
+		Variables = new VariableDeclarationInfoCollection(file, Resource.Variables);
 	}
 
 	public Guid Id => Resource.Id;
@@ -41,6 +43,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 
 	public AnimationInfoCollection Animations { get; }
 	public EntityStateInfoCollection States { get; }
+	public VariableDeclarationInfoCollection Variables { get; }
 
 	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
 

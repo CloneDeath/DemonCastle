@@ -24,7 +24,7 @@ public partial class TransitionsEditor : HSplitContainer {
 		AddChild(Transitions = new TransitionList(_proxy.Transitions) {
 			CustomMinimumSize = new Vector2(300, 0)
 		});
-		Transitions.TransitionSelected += Transitions_OnTransitionSelected;
+		Transitions.ItemSelected += Transitions_OnTransitionSelected;
 
 		AddChild(TransitionEdit = new TransitionEdit(options) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
