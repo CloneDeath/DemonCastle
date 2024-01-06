@@ -38,19 +38,19 @@ public class StairData {
 }
 
 public class AreaData {
-	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
-	public int X { get; set; }
-	public int Y { get; set; }
-	public int Width { get; set; } = 1;
-	public int Height { get; set; } = 1;
+	public Guid Id = Guid.NewGuid();
+	public string Name = string.Empty;
+	public int X;
+	public int Y;
+	public int Width = 1;
+	public int Height = 1;
 	public List<MonsterData> Monsters { get; set; } = new();
 	public List<TileMapData> TileMap { get; set; } = new();
 }
 
 public class MonsterData {
-	public Guid MonsterId { get; set; }
-	public Vector2 Position { get; set; }
+	public Guid MonsterId;
+	public Vector2 Position;
 }
 
 public class TileMapData {

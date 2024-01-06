@@ -5,10 +5,10 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class BaseInfo : INotifyPropertyChanged {
+public abstract class BaseInfo : INotifyPropertyChanged {
 	protected IFileNavigator File { get; }
 
-	public BaseInfo(IFileNavigator file) {
+	protected BaseInfo(IFileNavigator file) {
 		File = file;
 	}
 
@@ -31,10 +31,10 @@ public class BaseInfo : INotifyPropertyChanged {
 	#endregion
 }
 
-public class BaseInfo<T> : BaseInfo {
+public abstract class BaseInfo<T> : BaseInfo {
 	protected T Data { get; }
 
-	public BaseInfo(IFileNavigator file, T data) : base(file) {
+	protected BaseInfo(IFileNavigator file, T data) : base(file) {
 		Data = data;
 	}
 }

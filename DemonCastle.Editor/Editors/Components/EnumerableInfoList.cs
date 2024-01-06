@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
@@ -7,9 +9,10 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class EnumerableInfoList<TInfo> : VBoxContainer
-	where TInfo : class, IListableInfo {
+	where TInfo : class, INotifyPropertyChanged, IListableInfo {
 	public event Action<TInfo?>? ItemSelected;
 
+	private readonly List<TInfo> _subscribed = new();
 	private readonly IEnumerableInfo<TInfo> _data;
 	private bool _enabled = true;
 
@@ -64,11 +67,18 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	public override void _EnterTree() {
 		base._EnterTree();
 		_data.CollectionChanged += Data_OnCollectionChanged;
+
+		ReloadItems();
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 		_data.CollectionChanged -= Data_OnCollectionChanged;
+
+		foreach (var item in _subscribed) {
+			item.PropertyChanged -= InfoItem_OnPropertyChanged;
+		}
+		_subscribed.Clear();
 	}
 
 	private void AddButton_OnPressed() {
@@ -89,11 +99,26 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	}
 
 	private void ReloadItems() {
+		foreach (var item in _subscribed) {
+			item.PropertyChanged -= InfoItem_OnPropertyChanged;
+		}
+		_subscribed.Clear();
 		Items.Clear();
 
 		foreach (var item in _data) {
+			_subscribed.Add(item);
+			item.PropertyChanged += InfoItem_OnPropertyChanged;
 			Items.AddItem(item.ListLabel);
 		}
+	}
+
+	private void InfoItem_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName != nameof(IListableInfo.ListLabel)) return;
+
+		if (sender is not TInfo item) return;
+
+		var index = _subscribed.IndexOf(item);
+		Items.SetItemText(index, item.ListLabel);
 	}
 
 	protected void OnItemSelected(TInfo? item) {
