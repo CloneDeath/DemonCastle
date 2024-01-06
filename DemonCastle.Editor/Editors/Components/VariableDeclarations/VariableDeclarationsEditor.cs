@@ -7,13 +7,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations;
 
 public partial class VariableDeclarationsEditor : HSplitContainer {
-	protected EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType> VariableList { get; }
+	protected EnumerableInfoListByEnum<VariableDeclarationInfo, VariableType> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
-	public VariableDeclarationsEditor(ProjectInfo project, IEnumerableInfoByEnum<VariableDeclarationInfo, VariableDataType> variables) {
+	public VariableDeclarationsEditor(ProjectInfo project, IEnumerableInfoByEnum<VariableDeclarationInfo, VariableType> variables) {
 		Name = nameof(VariableDeclarationsEditor);
 
-		AddChild(VariableList = new EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType>(variables){
+		AddChild(VariableList = new EnumerableInfoListByEnum<VariableDeclarationInfo, VariableType>(variables){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		VariableList.ItemSelected += VariableList_OnItemSelected;

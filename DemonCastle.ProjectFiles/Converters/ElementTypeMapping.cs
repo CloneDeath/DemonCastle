@@ -10,7 +10,7 @@ public class ElementTypeMapping : IEnumTypeMapping {
 	public string NameOfEnumField => nameof(ElementData.Type);
 
 	public Type GetDataType(Enum elementType) {
-		var types = ElementInfoFactory.GetTypesWith<ElementTypeAttribute>();
+		var types = InfoFactory.GetTypesWith<ElementTypeAttribute>();
 		foreach (var type in types) {
 			var attribute = type.GetCustomAttribute<ElementTypeAttribute>();
 			if (attribute?.ElementType == (ElementType)elementType) {
@@ -22,14 +22,6 @@ public class ElementTypeMapping : IEnumTypeMapping {
 
 	public Enum GetEnumValue(Type type) {
 		var attribute = type.GetCustomAttribute<ElementTypeAttribute>();
-		return attribute?.ElementType ?? throw new NotSupportedException($"Type {type} does not have an ElementTypeAttribute.");
+		return attribute?.ElementType ?? throw new NotSupportedException($"Type {type} does not have an {nameof(ElementTypeAttribute)}.");
 	}
-}
-
-public interface IEnumTypeMapping {
-	public Type EnumType { get; }
-	public Type BaseDataType { get; }
-	public string NameOfEnumField { get; }
-	public Type GetDataType(Enum enumValue);
-	public Enum GetEnumValue(Type type);
 }

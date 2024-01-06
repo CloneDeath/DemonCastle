@@ -1,20 +1,12 @@
-using System;
-using DemonCastle.Editor.Editors.Components.Properties.Reference;
-using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor.DataTypes;
 
 public partial class MonsterVariableDeclarationDetails : VariableDeclarationDetails {
-	public MonsterVariableDeclarationDetails(ProjectInfo project, VariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
+	public MonsterVariableDeclarationDetails(ProjectInfo project, MonsterVariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
 		Name = nameof(MonsterVariableDeclarationDetails);
 
-		AddChild(new MonsterReferenceProperty(new CallbackBinding<Guid>(
-				() => Guid.Parse((string)(variableDeclaration.DefaultValue ?? Guid.Empty.ToString())),
-				value => variableDeclaration.DefaultValue = value.ToString()),
-			project.Monsters) {
-			DisplayName = "Default Value"
-		});
+		AddMonsterReference("Default Value", variableDeclaration, v => v.DefaultValue, project.Monsters);
 	}
 }

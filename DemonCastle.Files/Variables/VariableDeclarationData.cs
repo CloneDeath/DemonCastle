@@ -7,17 +7,26 @@ namespace DemonCastle.Files.Variables;
 public class VariableDeclarationData {
 	public Guid Id = Guid.NewGuid();
 	public string Name = "Variable";
-	public VariableDataType DataType;
-	public object? DefaultValue;
+	public VariableType Type;
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
-public enum VariableDataType {
+public enum VariableType {
 	Boolean,
 	Integer,
-	Decimal,
+	Float,
 	String,
 	Monster,
 	Item,
 	Vector2I
+}
+
+
+[AttributeUsage(AttributeTargets.Class)]
+public class VariableTypeAttribute : Attribute {
+	public VariableType VariableType { get; }
+
+	public VariableTypeAttribute(VariableType variableType) {
+		VariableType = variableType;
+	}
 }

@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor.DataType
 using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
@@ -28,14 +29,14 @@ public partial class VariableDeclarationEditor : Control {
 	}
 
 	private VariableDeclarationDetails GetEditor(VariableDeclarationInfo variableDeclaration) {
-		return variableDeclaration.DataType switch {
-			VariableDataType.Boolean => new BooleanVariableDeclarationDetails(variableDeclaration),
-			VariableDataType.Integer => new IntegerVariableDeclarationDetails(variableDeclaration),
-			VariableDataType.Decimal => new DecimalVariableDeclarationDetails(variableDeclaration),
-			VariableDataType.String => new StringVariableDeclarationDetails(variableDeclaration),
-			VariableDataType.Monster => new MonsterVariableDeclarationDetails(_project, variableDeclaration),
-			VariableDataType.Item => new ItemVariableDeclarationDetails(_project, variableDeclaration),
-			VariableDataType.Vector2I => new Vector2IVariableDeclarationDetails(variableDeclaration),
+		return variableDeclaration.Type switch {
+			VariableType.Boolean => new BooleanVariableDeclarationDetails((BooleanVariableDeclarationInfo)variableDeclaration),
+			VariableType.Integer => new IntegerVariableDeclarationDetails((IntegerVariableDeclarationInfo)variableDeclaration),
+			VariableType.Float => new FloatVariableDeclarationDetails((FloatVariableDeclarationInfo)variableDeclaration),
+			VariableType.String => new StringVariableDeclarationDetails((StringVariableDeclarationInfo)variableDeclaration),
+			VariableType.Monster => new MonsterVariableDeclarationDetails(_project, (MonsterVariableDeclarationInfo)variableDeclaration),
+			VariableType.Item => new ItemVariableDeclarationDetails(_project, (ItemVariableDeclarationInfo)variableDeclaration),
+			VariableType.Vector2I => new Vector2IVariableDeclarationDetails((Vector2IVariableDeclarationInfo)variableDeclaration),
 			_ => throw new NotSupportedException()
 		};
 	}

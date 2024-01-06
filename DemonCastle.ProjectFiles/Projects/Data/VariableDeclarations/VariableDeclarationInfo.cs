@@ -4,11 +4,12 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 
-public class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, IListableInfo {
-	public VariableDeclarationInfo(IFileNavigator file, VariableDeclarationData data) : base(file, data) { }
+public abstract class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, IListableInfo {
+	protected VariableDeclarationInfo(IFileNavigator file, VariableDeclarationData data) : base(file, data) { }
 
 	public Guid Id => Data.Id;
 	public string ListLabel => Name;
+	public VariableType Type => Data.Type;
 
 	public string Name {
 		get => Data.Name;
@@ -17,15 +18,5 @@ public class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, ILista
 				OnPropertyChanged(nameof(ListLabel));
 			}
 		}
-	}
-
-	public VariableDataType DataType {
-		get => Data.DataType;
-		set => SaveField(ref Data.DataType, value);
-	}
-
-	public object? DefaultValue {
-		get => Data.DefaultValue;
-		set => SaveField(ref Data.DefaultValue, value);
 	}
 }

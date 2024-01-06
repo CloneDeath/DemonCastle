@@ -114,6 +114,14 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
+	public ItemReferenceProperty AddItemReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ItemInfo> options) where T : INotifyPropertyChanged {
+		var itemReferenceProperty = new ItemReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		};
+		AddChild(itemReferenceProperty);
+		return itemReferenceProperty;
+	}
+
 	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<MonsterInfo> options) where T : INotifyPropertyChanged {
 		var monsterReferenceProperty = new MonsterReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name

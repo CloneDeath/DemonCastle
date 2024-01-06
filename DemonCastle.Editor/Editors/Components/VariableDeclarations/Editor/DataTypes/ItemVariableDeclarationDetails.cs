@@ -1,20 +1,12 @@
-using System;
-using DemonCastle.Editor.Editors.Components.Properties.Reference;
-using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor.DataTypes;
 
 public partial class ItemVariableDeclarationDetails : VariableDeclarationDetails {
-	public ItemVariableDeclarationDetails(ProjectInfo project, VariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
+	public ItemVariableDeclarationDetails(ProjectInfo project, ItemVariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
 		Name = nameof(ItemVariableDeclarationDetails);
 
-		AddChild(new ItemReferenceProperty(new CallbackBinding<Guid>(
-				() => Guid.Parse((string)(variableDeclaration.DefaultValue ?? Guid.Empty.ToString())),
-				value => variableDeclaration.DefaultValue = value.ToString()),
-			project.Items) {
-			DisplayName = "Default Value"
-		});
+		AddItemReference("Default Value", variableDeclaration, v => v.DefaultValue, project.Items);
 	}
 }

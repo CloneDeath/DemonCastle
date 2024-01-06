@@ -13,7 +13,7 @@ public class ElementInfoCollection : ObservableCollectionInfo<IElementInfo, Elem
 	protected override void Save() => _file.Save();
 
 	public IElementInfo AppendNew(ElementType type) {
-		var elementData = ElementInfoFactory.CreateElementTypeData(type);
+		var elementData = InfoFactory.CreateElementTypeData(type);
 		return Add(elementData);
 	}
 }
@@ -25,6 +25,6 @@ public class ElementInfoDataFactory : IInfoFactory<IElementInfo, ElementData> {
 		_file = file;
 	}
 
-	public IElementInfo CreateInfo(ElementData data) => ElementInfoFactory.CreateInfo(_file, data);
+	public IElementInfo CreateInfo(ElementData data) => InfoFactory.CreateInfo(_file, data);
 	public ElementData CreateData() => new();
 }
