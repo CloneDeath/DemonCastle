@@ -26,7 +26,7 @@ public class HealthBarElementInfo : BaseInfo<HealthBarElementData>, IElementInfo
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

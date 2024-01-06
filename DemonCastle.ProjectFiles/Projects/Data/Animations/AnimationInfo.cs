@@ -18,7 +18,7 @@ public class AnimationInfo : BaseInfo<AnimationData>, IAnimationInfo {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

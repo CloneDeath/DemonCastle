@@ -17,7 +17,7 @@ public class WeaponInfo : FileInfo<WeaponFile>, IListableInfo {
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

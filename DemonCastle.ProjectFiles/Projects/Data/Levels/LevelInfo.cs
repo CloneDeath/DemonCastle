@@ -24,7 +24,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

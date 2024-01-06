@@ -14,7 +14,7 @@ public class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, ILista
 		get => Data.Name;
 		set {
 			if (SaveField(ref Data.Name, value)) {
-				OnPropertyChanged(ListLabel);
+				OnPropertyChanged(nameof(ListLabel));
 			}
 		}
 	}

@@ -22,7 +22,7 @@ public class LabelElementInfo : BaseInfo<LabelElementData>, IElementInfo {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

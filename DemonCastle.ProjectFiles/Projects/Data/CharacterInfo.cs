@@ -19,7 +19,7 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 

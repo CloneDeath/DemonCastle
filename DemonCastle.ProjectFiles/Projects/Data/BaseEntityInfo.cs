@@ -30,7 +30,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo, IE
 			Resource.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 
