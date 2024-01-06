@@ -18,14 +18,9 @@ public partial class TextFileEditor : BaseEditor {
 		_textInfo = textInfo;
 
 		AddChild(TextEdit = new TextEdit {
-			AnchorRight = 1,
-			AnchorBottom = 1,
-			OffsetLeft = 5,
-			OffsetTop = 5,
-			OffsetBottom = -5,
-			OffsetRight = -5,
 			Text = textInfo.Contents
 		});
+		TextEdit.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 		TextEdit.TextChanged += TextEdit_OnTextChanged;
 	}
 
