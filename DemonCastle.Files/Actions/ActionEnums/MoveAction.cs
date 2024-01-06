@@ -1,12 +1,12 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DemonCastle.Files.Actions;
+namespace DemonCastle.Files.Actions.ActionEnums;
 
 [JsonConverter(typeof(StringEnumConverter))]
-public enum FaceAction {
-	TowardsClosestPlayer,
-	AwayFromClosestPlayer,
+public enum MoveAction {
+	Forward,
+	Backward,
 	Left,
 	Right
 }

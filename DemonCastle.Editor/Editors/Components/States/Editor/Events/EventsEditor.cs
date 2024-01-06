@@ -1,5 +1,5 @@
-using DemonCastle.Editor.Editors.Components.States.Editor.Events.Actions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
@@ -13,6 +13,7 @@ public partial class EventsEditor : VBoxContainer {
 	}
 
 	private ItemList Events { get; }
+	private EntityActionCollectionEditor ActionList { get; }
 
 	public EventsEditor() {
 		Name = nameof(EventsEditor);
@@ -23,9 +24,23 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnEnter");
 		Events.AddItem("OnUpdate");
 		Events.AddItem("OnExit");
+		Events.ItemSelected += Events_OnItemSelected;
 
-		AddChild(new EventActionList {
+		AddChild(ActionList = new EntityActionCollectionEditor {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
+	}
+
+	private void Events_OnItemSelected(long index) {
+		if (State == null) return;
+		var actionSet = index switch {
+			0 => State.OnEnter,
+			1 => State.OnUpdate,
+			2 => State.OnExit,
+			_ => null
+		};
+		if (actionSet == null) return;
+
+		ActionList.Load(actionSet);
 	}
 }
