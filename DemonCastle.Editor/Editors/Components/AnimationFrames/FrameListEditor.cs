@@ -36,7 +36,7 @@ public partial class FrameListEditor : VBoxContainer {
 		}
 	}
 
-	public void Load(IAnimationInfo animation) {
+	public void Load(IAnimationInfo? animation) {
 		if (_current != null) {
 			_current.Frames.CollectionChanged -= Frames_OnCollectionChanged;
 		}

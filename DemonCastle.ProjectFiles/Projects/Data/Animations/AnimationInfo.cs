@@ -1,48 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using DemonCastle.Files.Animations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class AnimationInfo : IAnimationInfo {
-	public AnimationInfo(IFileNavigator file, AnimationData animation) {
-		File = file;
-		Animation = animation;
+public class AnimationInfo : BaseInfo<AnimationData>, IAnimationInfo {
+	public AnimationInfo(IFileNavigator file, AnimationData animation) : base(file, animation) {
 		Frames = new FrameInfoCollection(file, this, animation.Frames);
 	}
 
-	protected IFileNavigator File { get; }
-	protected AnimationData Animation { get; }
-	public IEnumerableInfo<IFrameInfo> Frames { get; }
-
-	public Guid Id => Animation.Id;
+	public Guid Id => Data.Id;
+	public string ListLabel => Name;
 
 	public string Name {
-		get => Animation.Name;
+		get => Data.Name;
 		set {
-			Animation.Name = value;
+			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 
-	protected void Save() => File.Save();
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
+	public IEnumerableInfo<IFrameInfo> Frames { get; }
 }
