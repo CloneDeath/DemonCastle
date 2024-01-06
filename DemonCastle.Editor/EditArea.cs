@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DemonCastle.Editor.Editors;
+using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -21,11 +22,19 @@ public partial class EditArea : TabContainer {
 		AddToGroup(nameof(EditArea));
 
 		GetChild<TabBar>(0, true).TabCloseDisplayPolicy = TabBar.CloseButtonDisplayPolicy.ShowActiveOnly;
-		GetChild<TabBar>(0, true).TabClosePressed += OnTabButtonPressed;
+		GetChild<TabBar>(0, true).TabClosePressed += OnTabCloseButtonPressed;
 
 		AddChild(ErrorWindow = new AcceptDialog {
 			Exclusive = true
 		}, false, InternalMode.Back);
+	}
+
+	public override void _Input(InputEvent @event) {
+		base._Input(@event);
+		if (!@event.IsAction(InputActions.EditorClose)) return;
+
+		OnTabCloseButtonPressed(CurrentTab);
+		AcceptEvent();
 	}
 
 	public void ShowEditorFor(FileNavigator file) {
@@ -64,7 +73,7 @@ public partial class EditArea : TabContainer {
 		       throw new NotSupportedException($"No Editor for {file.Extension}");
 	}
 
-	private void OnTabButtonPressed(long tab) {
+	private void OnTabCloseButtonPressed(long tab) {
 		var control = GetTabControl((int)tab);
 		var mapItem = EditorFileMap.FirstOrDefault(t => t.Value == control);
 		if (mapItem.Key != null) EditorFileMap.Remove(mapItem.Key);

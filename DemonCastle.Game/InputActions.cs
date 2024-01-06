@@ -18,6 +18,7 @@ public static class InputActions {
 	public const string EditorRightClick = nameof(EditorRightClick);
 	public const string EditorRename = nameof(EditorRename);
 	public const string EditorSave = nameof(EditorSave);
+	public const string EditorClose = nameof(EditorClose);
 
 	public static void RegisterActions() {
 		RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
@@ -32,6 +33,10 @@ public static class InputActions {
 		RegisterAction(PlayerMoveDown, Key.Down, Key.S);
 		RegisterAction(EditorSave, new InputEventKey {
 			Keycode = Key.S,
+			CtrlPressed = true
+		});
+		RegisterAction(EditorClose, new InputEventKey {
+			Keycode = Key.W,
 			CtrlPressed = true
 		});
 	}

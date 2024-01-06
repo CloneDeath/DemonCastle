@@ -11,8 +11,8 @@ public partial class ItemVariableDeclarationDetails : VariableDeclarationDetails
 		Name = nameof(ItemVariableDeclarationDetails);
 
 		AddChild(new ItemReferenceProperty(new CallbackBinding<Guid>(
-			() => (Guid)(variableDeclaration.DefaultValue ?? Guid.Empty),
-			value => variableDeclaration.DefaultValue = value),
+				() => Guid.Parse((string)(variableDeclaration.DefaultValue ?? Guid.Empty.ToString())),
+				value => variableDeclaration.DefaultValue = value.ToString()),
 			project.Items) {
 			DisplayName = "Default Value"
 		});

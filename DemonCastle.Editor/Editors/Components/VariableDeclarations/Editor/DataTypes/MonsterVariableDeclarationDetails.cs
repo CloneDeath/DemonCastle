@@ -11,8 +11,8 @@ public partial class MonsterVariableDeclarationDetails : VariableDeclarationDeta
 		Name = nameof(MonsterVariableDeclarationDetails);
 
 		AddChild(new MonsterReferenceProperty(new CallbackBinding<Guid>(
-			() => (Guid)(variableDeclaration.DefaultValue ?? Guid.Empty),
-			value => variableDeclaration.DefaultValue = value),
+				() => Guid.Parse((string)(variableDeclaration.DefaultValue ?? Guid.Empty.ToString())),
+				value => variableDeclaration.DefaultValue = value.ToString()),
 			project.Monsters) {
 			DisplayName = "Default Value"
 		});
