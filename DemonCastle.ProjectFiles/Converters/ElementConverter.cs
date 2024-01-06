@@ -20,17 +20,17 @@ public class ElementConverter : JsonConverter {
 		}
 
 		var elementType = typeToken.ToObject<ElementType>();
-		var targetType = ElementTypeMapping.GetType(elementType);
+		var targetType = ElementTypeMapping.GetDataType(elementType);
 
 		return jsonObject.ToObject(targetType, serializer) ?? throw new NullReferenceException();
 	}
 
 	public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) {
 		var type = value?.GetType() ?? throw new NullReferenceException();
-		var typeEnum = ElementTypeMapping.GetTypeEnum(type);
+		var enumValue = ElementTypeMapping.GetEnumValue(type);
 
 		var jsonObject = JObject.FromObject(value, serializer);
-		jsonObject.AddFirst(new JProperty("Type", typeEnum));
+		jsonObject.AddFirst(new JProperty("Type", enumValue));
 
 		jsonObject.WriteTo(writer);
 	}
