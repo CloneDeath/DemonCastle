@@ -4,9 +4,9 @@ using DemonCastle.Files.Actions.DataValues;
 namespace DemonCastle.Files.Actions;
 
 public class EntityActionData {
-	public FaceAction? Face { get; set; }
-	public MoveAction? Move { get; set; }
-	public SelfAction? Self { get; set; }
+	public FaceAction? Face;
+	public MoveAction? Move;
+	public SelfAction? Self;
 
 	public ReferenceData? SpawnMonster { get; set; }
 	public ReferenceData? SpawnItem { get; set; }
