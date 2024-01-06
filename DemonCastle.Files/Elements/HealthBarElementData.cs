@@ -3,6 +3,7 @@ using DemonCastle.Files.Common;
 
 namespace DemonCastle.Files.Elements;
 
+[ElementType(ElementType.HealthBar)]
 public class HealthBarElementData : ElementData {
 	public HealthBarElementData() {
 		Name = "Health Bar";

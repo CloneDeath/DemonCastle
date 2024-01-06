@@ -3,6 +3,7 @@ using Godot;
 
 namespace DemonCastle.Files.Elements;
 
+[ElementType(ElementType.ColorRect)]
 public class ColorRectElementData : ElementData {
 	public ColorRectElementData() {
 		Name = "Color Rectangle";

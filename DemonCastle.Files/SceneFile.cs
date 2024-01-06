@@ -32,3 +32,12 @@ public enum ElementType {
 	LevelView,
 	Sprite
 }
+
+[AttributeUsage(AttributeTargets.Class)]
+public class ElementTypeAttribute : Attribute {
+	public ElementType ElementType { get; }
+
+	public ElementTypeAttribute(ElementType elementType) {
+		ElementType = elementType;
+	}
+}

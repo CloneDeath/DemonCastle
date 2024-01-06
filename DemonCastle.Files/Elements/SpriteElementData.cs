@@ -2,6 +2,7 @@ using System;
 
 namespace DemonCastle.Files.Elements;
 
+[ElementType(ElementType.Sprite)]
 public class SpriteElementData : ElementData {
 	public SpriteElementData() {
 		Name = "Sprite";

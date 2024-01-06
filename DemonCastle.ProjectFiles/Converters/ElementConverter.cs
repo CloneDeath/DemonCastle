@@ -1,36 +1,47 @@
 using System;
-using DemonCastle.Files;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DemonCastle.ProjectFiles.Converters;
 
 public class ElementConverter : JsonConverter {
+	private readonly IEnumTypeMapping[] _mappings;
+
+	public ElementConverter(params IEnumTypeMapping[] mappings) {
+		_mappings = mappings;
+	}
+
 	public override bool CanConvert(Type objectType) {
-		return objectType == typeof(ElementData);
+		foreach (var mapping in _mappings) {
+			if (objectType == mapping.BaseDataType) return true;
+		}
+		return false;
 	}
 
 	public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer) {
-		var jsonObject = JObject.Load(reader);
-		var typeToken = jsonObject["Type"];
+		var mapping = _mappings.FirstOrDefault(m => m.BaseDataType == objectType) ?? throw new NullReferenceException();
 
-		if (typeToken == null)
-		{
-			throw new JsonSerializationException("Missing Type field.");
+		var jsonObject = JObject.Load(reader);
+		var typeToken = jsonObject[mapping.NameOfEnumField];
+		if (typeToken == null) {
+			throw new JsonSerializationException($"Missing {mapping.NameOfEnumField} field.");
 		}
 
-		var elementType = typeToken.ToObject<ElementType>();
-		var targetType = ElementTypeMapping.GetDataType(elementType);
+		var enumValue = (Enum?)typeToken.ToObject(mapping.EnumType) ?? throw new NullReferenceException();
+		var targetType = mapping.GetDataType(enumValue);
 
 		return jsonObject.ToObject(targetType, serializer) ?? throw new NullReferenceException();
 	}
 
 	public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) {
 		var type = value?.GetType() ?? throw new NullReferenceException();
-		var enumValue = ElementTypeMapping.GetEnumValue(type);
+		var mapping = _mappings.FirstOrDefault(m => m.BaseDataType == type) ?? throw new NullReferenceException();
+
+		var enumValue = mapping.GetEnumValue(type);
 
 		var jsonObject = JObject.FromObject(value, serializer);
-		jsonObject.AddFirst(new JProperty("Type", enumValue));
+		jsonObject.AddFirst(new JProperty(mapping.NameOfEnumField, enumValue));
 
 		jsonObject.WriteTo(writer);
 	}

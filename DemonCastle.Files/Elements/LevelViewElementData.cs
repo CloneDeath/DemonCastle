@@ -2,6 +2,7 @@ using DemonCastle.Files.Common;
 
 namespace DemonCastle.Files.Elements;
 
+[ElementType(ElementType.LevelView)]
 public class LevelViewElementData : ElementData {
 	public LevelViewElementData() {
 		Name = "Level View";
