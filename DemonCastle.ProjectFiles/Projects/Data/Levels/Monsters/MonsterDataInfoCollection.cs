@@ -21,8 +21,7 @@ public class MonsterDataInfoFactory : IInfoFactory<MonsterDataInfo, MonsterData>
 		_area = area;
 		_file = file;
 	}
+
 	public MonsterDataInfo CreateInfo(MonsterData data) => new(_file, _area, data);
-	public MonsterData CreateData() {
-		return new MonsterData();
-	}
+	public MonsterData CreateData() => new();
 }

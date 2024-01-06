@@ -15,7 +15,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 
 	protected BaseEntityInfo(FileNavigator<TFile> file) : base(file) {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
-		States = new StateInfoCollection(file, Resource.States);
+		States = new EntityStateInfoCollection(file, Resource.States);
 	}
 
 	public Guid Id => Resource.Id;
@@ -40,7 +40,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 	}
 
 	public AnimationInfoCollection Animations { get; }
-	public StateInfoCollection States { get; }
+	public EntityStateInfoCollection States { get; }
 
 	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
 
