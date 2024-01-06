@@ -31,23 +31,11 @@ public static class ElementInfoFactory {
 
 	public static ElementData CreateData(ElementType type) {
 		return type switch {
-			ElementType.ColorRect => new ColorRectElementData {
-				Name = "Color Rectangle",
-				Region = new Region2I(0, 0, 16, 16)
-			},
-			ElementType.HealthBar => new HealthBarElementData {
-				Name = "Health Bar",
-				Region = new Region2I(0, 0, 16, 16)
-			},
-			ElementType.Label => new LabelElementData {
-				Name = "Label",
-				Text = "Text"
-			},
-			ElementType.LevelView => new LevelViewElementData {
-				Name = "Level View",
-				Region = new Region2I(0, 0, 64, 64)
-			},
-			ElementType.Sprite => new SpriteElementData { Name = "Sprite" },
+			ElementType.ColorRect => new ColorRectElementData(),
+			ElementType.HealthBar => new HealthBarElementData(),
+			ElementType.Label => new LabelElementData(),
+			ElementType.LevelView => new LevelViewElementData(),
+			ElementType.Sprite => new SpriteElementData(),
 			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
 		};
 	}

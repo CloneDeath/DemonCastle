@@ -4,6 +4,7 @@ namespace DemonCastle.Files.Elements;
 
 public class SpriteElementData : ElementData {
 	public SpriteElementData() {
+		Name = "Sprite";
 		Type = ElementType.Sprite;
 	}
 
