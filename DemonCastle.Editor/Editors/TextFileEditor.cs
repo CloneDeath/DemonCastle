@@ -31,7 +31,7 @@ public partial class TextFileEditor : BaseEditor {
 
 	public override void _Input(InputEvent @event) {
 		base._Input(@event);
-		if (!@event.IsAction(InputActions.EditorSave)) return;
+		if (!@event.IsAction(InputActions.EditorSave, true)) return;
 
 		_textInfo.Save();
 		AcceptEvent();

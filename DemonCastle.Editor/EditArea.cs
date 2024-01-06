@@ -31,7 +31,7 @@ public partial class EditArea : TabContainer {
 
 	public override void _Input(InputEvent @event) {
 		base._Input(@event);
-		if (!@event.IsAction(InputActions.EditorClose)) return;
+		if (!@event.IsAction(InputActions.EditorClose, true)) return;
 
 		OnTabCloseButtonPressed(CurrentTab);
 		AcceptEvent();
