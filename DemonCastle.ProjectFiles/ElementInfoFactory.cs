@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using DemonCastle.Files;
 using DemonCastle.Files.Elements;
-using DemonCastle.ProjectFiles.Converters;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Resources;
