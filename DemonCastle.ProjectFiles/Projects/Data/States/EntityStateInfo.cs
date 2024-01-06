@@ -7,11 +7,11 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
 public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
-	public EntityStateInfo(IFileNavigator file, EntityStateData state) : base(file, state) {
+	public EntityStateInfo(IFileNavigator file, IEntityStateInfoRetriever states, EntityStateData state) : base(file, state) {
 		OnEnter = new EntityActionInfoCollection(file, state.OnEnter);
 		OnUpdate = new EntityActionInfoCollection(file, state.OnUpdate);
 		OnExit = new EntityActionInfoCollection(file, state.OnExit);
-		Transitions = new EntityStateTransitionInfoCollection(file, state.Transitions);
+		Transitions = new EntityStateTransitionInfoCollection(file, states, state.Transitions);
 	}
 
 	public Guid Id => Data.Id;

@@ -5,18 +5,19 @@ using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
+public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo, IEntityStateInfoRetriever
 	where TFile : BaseEntityFile {
 
 	protected BaseEntityInfo(FileNavigator<TFile> file) : base(file) {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
-		States = new EntityStateInfoCollection(file, Resource.States);
+		States = new EntityStateInfoCollection(file, this, Resource.States);
 		Variables = new VariableDeclarationInfoCollection(file, Resource.Variables);
 	}
 
@@ -60,4 +61,6 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 
 	public Texture2D PreviewTexture => new AtlasTexture
 		{ Atlas = PreviewSpriteDefinition.Texture, Region = PreviewSpriteDefinition.Region };
+	
+	public EntityStateInfo? RetrieveEntityStateInfo(Guid stateId) => States.FirstOrDefault(s => s.Id == stateId);
 }

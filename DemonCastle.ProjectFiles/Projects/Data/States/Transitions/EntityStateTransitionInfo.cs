@@ -5,12 +5,15 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
 public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IListableInfo {
-	public EntityStateTransitionInfo(IFileNavigator file, EntityStateTransitionData data) : base(file, data) {
+	private readonly IEntityStateInfoRetriever _states;
+
+	public EntityStateTransitionInfo(IFileNavigator file, IEntityStateInfoRetriever states, EntityStateTransitionData data) : base(file, data) {
+		_states = states;
 		When = new WhenInfo(file, data.When);
 	}
 
 	public Guid Id => Data.Id;
-	public string ListLabel => $"[{Name}]: -> {TargetState}";
+	public string ListLabel => $"[{Name}]: -> {TargetStateInfo?.ListLabel ?? "None"}";
 
 	public string Name {
 		get => Data.Name;
@@ -31,4 +34,6 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 	}
 
 	public WhenInfo When { get; }
+
+	public EntityStateInfo? TargetStateInfo => _states.RetrieveEntityStateInfo(TargetState);
 }

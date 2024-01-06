@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using DemonCastle.Files.BaseEntity;
+using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
 public class EntityStateInfoCollection : ObservableCollectionInfo<EntityStateInfo, EntityStateData> {
 	private readonly IFileNavigator _file;
-	public EntityStateInfoCollection(IFileNavigator file, List<EntityStateData> data) : base(new EntityStateInfoFactory(file), data) {
+	public EntityStateInfoCollection(IFileNavigator file, IEntityStateInfoRetriever states, List<EntityStateData> data) : base(new EntityStateInfoFactory(file, states), data) {
 		_file = file;
 	}
 
@@ -15,11 +16,13 @@ public class EntityStateInfoCollection : ObservableCollectionInfo<EntityStateInf
 
 public class EntityStateInfoFactory : IInfoFactory<EntityStateInfo, EntityStateData> {
 	private readonly IFileNavigator _file;
+	private readonly IEntityStateInfoRetriever _states;
 
-	public EntityStateInfoFactory(IFileNavigator file) {
+	public EntityStateInfoFactory(IFileNavigator file, IEntityStateInfoRetriever states) {
 		_file = file;
+		_states = states;
 	}
 
-	public EntityStateInfo CreateInfo(EntityStateData data) => new(_file, data);
+	public EntityStateInfo CreateInfo(EntityStateData data) => new(_file, _states, data);
 	public EntityStateData CreateData() => new();
 }
