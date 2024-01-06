@@ -40,11 +40,18 @@ public static class InfoFactory {
 		};
 	}
 
-	public static ElementData CreateElementTypeData(ElementType type) {
+	public static ElementData CreateData(ElementType type) {
 		var dataType = new ElementTypeMapping().GetDataType(type);
 		if (dataType == null) throw new NotSupportedException();
 		return (ElementData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
 	}
+
+	public static VariableDeclarationData CreateData(VariableType type) {
+		var dataType = new VariableTypeMapping().GetDataType(type);
+		if (dataType == null) throw new NotSupportedException();
+		return (VariableDeclarationData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
+	}
+
 
 	public static IEnumerable<Type> GetTypesWith<TAttribute>() where TAttribute : Attribute {
 		var assembly = typeof(TAttribute).Assembly;
