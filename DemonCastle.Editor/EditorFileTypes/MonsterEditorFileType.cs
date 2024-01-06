@@ -15,5 +15,5 @@ public class MonsterEditorFileType : MonsterFileType, IEditorFileType {
 		Name = "monster"
 	};
 
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new MonsterEditor(file.ToMonsterInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new MonsterEditor(project, file.ToMonsterInfo());
 }

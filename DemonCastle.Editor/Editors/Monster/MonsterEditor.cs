@@ -7,6 +7,6 @@ namespace DemonCastle.Editor.Editors.Monster;
 public partial class MonsterEditor : Components.BaseEntity.BaseEntityEditor<MonsterInfo, MonsterFile> {
 	public override Texture2D TabIcon => EditorFileType.Monster.Icon;
 
-	public MonsterEditor(MonsterInfo monster) : base(monster, new MonsterDetails(monster)) {
+	public MonsterEditor(ProjectInfo project, MonsterInfo monster) : base(project, monster, new MonsterDetails(monster)) {
 	}
 }

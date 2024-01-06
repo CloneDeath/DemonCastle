@@ -15,5 +15,5 @@ public class ItemEditorFileType : ItemFileType, IEditorFileType {
 		Name = "item"
 	};
 
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ItemEditor(file.ToItemInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ItemEditor(project, file.ToItemInfo());
 }

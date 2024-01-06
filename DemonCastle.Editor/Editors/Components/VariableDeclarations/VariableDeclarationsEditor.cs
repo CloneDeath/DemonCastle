@@ -10,7 +10,7 @@ public partial class VariableDeclarationsEditor : HSplitContainer {
 	protected EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
-	public VariableDeclarationsEditor(IEnumerableInfoByEnum<VariableDeclarationInfo, VariableDataType> variables) {
+	public VariableDeclarationsEditor(ProjectInfo project, IEnumerableInfoByEnum<VariableDeclarationInfo, VariableDataType> variables) {
 		Name = nameof(VariableDeclarationsEditor);
 
 		AddChild(VariableList = new EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType>(variables){
@@ -18,7 +18,7 @@ public partial class VariableDeclarationsEditor : HSplitContainer {
 		});
 		VariableList.ItemSelected += VariableList_OnItemSelected;
 
-		AddChild(VariableEditor = new VariableDeclarationEditor {
+		AddChild(VariableEditor = new VariableDeclarationEditor(project) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

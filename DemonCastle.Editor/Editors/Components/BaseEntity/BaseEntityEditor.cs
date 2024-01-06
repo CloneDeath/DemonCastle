@@ -15,7 +15,7 @@ public abstract partial class BaseEntityEditor<TInfo, TFile> : BaseEditor
 	protected HSplitContainer SplitContainer { get; }
 	protected TabContainer RightArea { get; }
 
-	protected BaseEntityEditor(TInfo entity, Control detailsPanel) {
+	protected BaseEntityEditor(ProjectInfo project, TInfo entity, Control detailsPanel) {
 		TabText = entity.FileName;
 
 		AddChild(SplitContainer = new HSplitContainer());
@@ -27,7 +27,7 @@ public abstract partial class BaseEntityEditor<TInfo, TFile> : BaseEditor
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 
-		RightArea.AddChild(new VariableDeclarationsEditor(entity.Variables));
+		RightArea.AddChild(new VariableDeclarationsEditor(project, entity.Variables));
 		RightArea.SetTabTitle(0, "Variables");
 		RightArea.AddChild(new AnimationsEditor(entity, entity.Animations));
 		RightArea.SetTabTitle(1, "Animations");

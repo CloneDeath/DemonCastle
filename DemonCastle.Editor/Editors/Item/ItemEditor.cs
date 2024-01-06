@@ -8,5 +8,5 @@ namespace DemonCastle.Editor.Editors.Item;
 public partial class ItemEditor : Components.BaseEntity.BaseEntityEditor<ItemInfo, ItemFile> {
 	public override Texture2D TabIcon => IconTextures.ItemIcon;
 
-	public ItemEditor(ItemInfo item) : base(item, new ItemDetails(item)) { }
+	public ItemEditor(ProjectInfo project, ItemInfo item) : base(project, item, new ItemDetails(item)) { }
 }
