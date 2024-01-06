@@ -1,10 +1,9 @@
-using DemonCastle.Editor.Editors.BaseEntity;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.Monster;
 
-public partial class MonsterDetails : BaseEntityDetails<MonsterInfo, MonsterFile> {
+public partial class MonsterDetails : Components.BaseEntity.BaseEntityDetails<MonsterInfo, MonsterFile> {
 	public MonsterDetails(MonsterInfo monster) : base(monster) {
 		Name = nameof(MonsterDetails);
 

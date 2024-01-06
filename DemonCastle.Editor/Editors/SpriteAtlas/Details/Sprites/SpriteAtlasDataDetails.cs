@@ -1,5 +1,5 @@
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 

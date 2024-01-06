@@ -1,5 +1,5 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Details;
 

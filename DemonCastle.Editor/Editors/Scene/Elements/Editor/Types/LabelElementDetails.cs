@@ -1,5 +1,5 @@
 using System.Linq;
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles;

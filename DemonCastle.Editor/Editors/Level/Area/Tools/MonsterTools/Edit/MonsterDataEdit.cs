@@ -1,6 +1,6 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.Edit;
 

@@ -1,6 +1,6 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.Project;
 

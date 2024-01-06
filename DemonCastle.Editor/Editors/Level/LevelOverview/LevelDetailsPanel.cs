@@ -1,4 +1,4 @@
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 

@@ -1,5 +1,5 @@
-using DemonCastle.Editor.Editors.Animations.Editor;
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Components.Animations.Editor;
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor;

@@ -1,9 +1,9 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.Editor.Editors.SpriteGrid.Details;
 using DemonCastle.Editor.Editors.SpriteGrid.View;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 

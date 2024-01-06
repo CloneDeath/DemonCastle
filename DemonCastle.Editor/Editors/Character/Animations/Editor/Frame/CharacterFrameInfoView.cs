@@ -1,5 +1,5 @@
-using DemonCastle.Editor.Editors.Animations.Editor.Frames;
 using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Editor.Editors.Components.Animations.Editor.Frames;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;

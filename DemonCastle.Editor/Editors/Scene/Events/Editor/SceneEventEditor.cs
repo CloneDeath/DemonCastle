@@ -1,6 +1,6 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
 

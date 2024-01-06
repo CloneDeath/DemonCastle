@@ -1,6 +1,6 @@
-using DemonCastle.Editor.Editors.Properties;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.Editor.Editors.Components.Properties;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid.Details;
 

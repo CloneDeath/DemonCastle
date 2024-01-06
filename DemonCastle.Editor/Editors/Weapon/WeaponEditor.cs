@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Editors.Animations;
 using DemonCastle.Editor.Editors.Weapon.Details;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
+using AnimationsEditor = DemonCastle.Editor.Editors.Components.Animations.AnimationsEditor;
 
 namespace DemonCastle.Editor.Editors.Weapon;
 

@@ -1,6 +1,6 @@
-using DemonCastle.Editor.Editors.Animations.Editor.Frames;
-using DemonCastle.Editor.Editors.Properties.Vector;
+using DemonCastle.Editor.Editors.Components.Properties.Vector;
 using DemonCastle.ProjectFiles.Projects.Data;
+using FrameInfoDetails = DemonCastle.Editor.Editors.Components.Animations.Editor.Frames.FrameInfoDetails;
 
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 

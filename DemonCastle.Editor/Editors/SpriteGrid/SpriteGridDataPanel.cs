@@ -1,8 +1,8 @@
-using DemonCastle.Editor.Editors.Properties;
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.SpriteGrid; 
+namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridDataPanel : PanelContainer {
 	protected SpriteGridDataInfo SpriteData { get; }
@@ -13,7 +13,7 @@ public partial class SpriteGridDataPanel : PanelContainer {
 	protected DeleteSpriteDataDialog DeleteConfirmation { get; }
 	public SpriteGridDataPanel(SpriteGridDataInfo spriteData) {
 		SpriteData = spriteData;
-			
+
 		AddChild(Properties = new PropertyCollection());
 		Properties.AddString("Name", spriteData, x => x.Name);
 		Properties.AddInteger("X", spriteData, x => x.X);
@@ -31,7 +31,7 @@ public partial class SpriteGridDataPanel : PanelContainer {
 			Text = "Delete"
 		});
 		DeleteButton.Pressed += OnDeleteButtonPressed;
-			
+
 		AddChild(DeleteConfirmation = new DeleteSpriteDataDialog());
 		DeleteConfirmation.Confirmed += OnDeleteConfirmed;
 	}
