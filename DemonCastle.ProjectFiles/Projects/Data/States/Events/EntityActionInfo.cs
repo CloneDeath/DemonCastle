@@ -5,20 +5,23 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Events;
 
 public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
-	public EntityActionInfo(IFileNavigator file, EntityActionData data) : base(file, data) { }
-
-	public string ListLabel {
-		get {
-			if (Face != null) return $"Face {Face}";
-			if (Move != null) return $"Move {Move}";
-			if (Self != null) return $"Self {Self}";
-			return "<Empty>";
-		}
+	public EntityActionInfo(IFileNavigator file, EntityActionData data) : base(file, data) {
+		SpawnItem = new ActionSpawnItemInfo(file, data);
+		SpawnMonster = new ActionSpawnMonsterInfo(file, data);
 	}
+
+	public string ListLabel =>
+		Face != null ? $"Face {Face}"
+		: Move != null ? $"Move {Move}"
+		: Self != null ? $"Self {Self}"
+		: SpawnItem.IsSet ? SpawnItem.ListLabel
+		: SpawnMonster.IsSet ? SpawnMonster.ListLabel
+		: "<Empty>";
 
 	public FaceAction? Face {
 		get => Data.Face;
 		set {
+			Data.Clear();
 			if (SaveField(ref Data.Face, value)) {
 				OnPropertyChanged(nameof(ListLabel));
 			}
@@ -28,6 +31,7 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 	public MoveAction? Move {
 		get => Data.Move;
 		set {
+			Data.Clear();
 			if (SaveField(ref Data.Move, value)) {
 				OnPropertyChanged(nameof(ListLabel));
 			}
@@ -37,9 +41,13 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 	public SelfAction? Self {
 		get => Data.Self;
 		set {
+			Data.Clear();
 			if (SaveField(ref Data.Self, value)) {
 				OnPropertyChanged(nameof(ListLabel));
 			}
 		}
 	}
+
+	public ActionSpawnItemInfo SpawnItem { get; }
+	public ActionSpawnMonsterInfo SpawnMonster { get; }
 }
