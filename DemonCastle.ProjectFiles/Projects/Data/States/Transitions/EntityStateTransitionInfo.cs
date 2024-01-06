@@ -13,7 +13,7 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 	}
 
 	public Guid Id => Data.Id;
-	public string ListLabel => $"[{Name}]: -> {TargetStateInfo?.ListLabel ?? "None"}";
+	public string ListLabel => $"[{Name}] -> {TargetStateInfo?.ListLabel ?? "None"}";
 
 	public string Name {
 		get => Data.Name;
@@ -21,6 +21,7 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 
@@ -30,6 +31,8 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 			Data.TargetState = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(ListLabel));
+			OnPropertyChanged(nameof(TargetStateInfo));
 		}
 	}
 
