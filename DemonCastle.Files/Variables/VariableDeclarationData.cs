@@ -18,5 +18,6 @@ public enum VariableDataType {
 	Decimal,
 	String,
 	Monster,
-	Item
+	Item,
+	Vector2I
 }
