@@ -26,7 +26,7 @@ public partial class StateEditor : VSplitContainer {
 		TabContainer.SetTabTitle(1, "Transitions");
 	}
 
-	public void LoadState(EntityStateInfo state) {
+	public void LoadState(EntityStateInfo? state) {
 		Details.State = state;
 		EventsEditor.State = state;
 		TransitionsEditor.State = state;

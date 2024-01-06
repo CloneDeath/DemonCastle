@@ -5,10 +5,10 @@ using Newtonsoft.Json.Linq;
 
 namespace DemonCastle.ProjectFiles.Converters;
 
-public class ElementConverter : JsonConverter {
+public class EnumTypeConverter : JsonConverter {
 	private readonly IEnumTypeMapping[] _mappings;
 
-	public ElementConverter(params IEnumTypeMapping[] mappings) {
+	public EnumTypeConverter(params IEnumTypeMapping[] mappings) {
 		_mappings = mappings;
 	}
 

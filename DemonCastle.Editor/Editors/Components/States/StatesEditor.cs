@@ -23,7 +23,7 @@ public partial class StatesEditor : HSplitContainer {
 		});
 	}
 
-	protected void StateList_OnItemSelected(EntityStateInfo stateInfo) {
+	protected void StateList_OnItemSelected(EntityStateInfo? stateInfo) {
 		StateEditor.LoadState(stateInfo);
 	}
 }
