@@ -35,7 +35,7 @@ public partial class VariableDeclarationEditor : Control {
 			VariableDataType.String => new StringVariableDeclarationDetails(variableDeclaration),
 			VariableDataType.Monster => new MonsterVariableDeclarationDetails(_project, variableDeclaration),
 			VariableDataType.Item => new ItemVariableDeclarationDetails(_project, variableDeclaration),
-			VariableDataType.Vector2I => new Vector2IVariableDeclarationDetails(_project, variableDeclaration),
+			VariableDataType.Vector2I => new Vector2IVariableDeclarationDetails(variableDeclaration),
 			_ => throw new NotSupportedException()
 		};
 	}

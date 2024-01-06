@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Files;
-using DemonCastle.Files.Common;
 using DemonCastle.Files.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
@@ -30,13 +29,8 @@ public static class ElementInfoFactory {
 	}
 
 	public static ElementData CreateData(ElementType type) {
-		return type switch {
-			ElementType.ColorRect => new ColorRectElementData(),
-			ElementType.HealthBar => new HealthBarElementData(),
-			ElementType.Label => new LabelElementData(),
-			ElementType.LevelView => new LevelViewElementData(),
-			ElementType.Sprite => new SpriteElementData(),
-			_ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-		};
+		var dataType = TypeMap.GetValueOrDefault(type);
+		if (dataType == null) throw new NotSupportedException();
+		return (ElementData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
 	}
 }
