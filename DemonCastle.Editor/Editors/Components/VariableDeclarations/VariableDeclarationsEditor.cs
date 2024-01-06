@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations;
 
-public partial class VariableDeclarationsEditor : Control {
+public partial class VariableDeclarationsEditor : HSplitContainer {
 	protected EnumerableInfoList<VariableDeclarationInfo> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
@@ -23,6 +23,6 @@ public partial class VariableDeclarationsEditor : Control {
 	}
 
 	protected void VariableList_OnItemSelected(VariableDeclarationInfo variableDeclaration) {
-		VariableEditor.LoadState(variableDeclaration);
+		VariableEditor.Load(variableDeclaration);
 	}
 }

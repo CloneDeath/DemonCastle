@@ -6,7 +6,7 @@ namespace DemonCastle.Files.Variables;
 
 public class VariableDeclarationData {
 	public Guid Id = Guid.NewGuid();
-	public string Name = string.Empty;
+	public string Name = "Variable";
 	public VariableDataType DataType;
 	public object? DefaultValue;
 }
