@@ -22,7 +22,7 @@ public partial class TransitionEdit : PropertyCollection {
 		Name = nameof(TransitionEdit);
 
 		AddString("Name", _proxy, t => t.Name);
-		AddStateReference("Target State", _proxy, t => t.TargetState, options);
 		AddChild(WhenEdit = new WhenEdit());
+		AddStateReference("Transition to", _proxy, t => t.TargetState, options);
 	}
 }
