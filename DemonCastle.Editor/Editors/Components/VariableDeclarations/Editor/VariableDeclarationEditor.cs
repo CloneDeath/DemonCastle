@@ -34,7 +34,7 @@ public partial class VariableDeclarationEditor : Control {
 			VariableDataType.Decimal => new DecimalVariableDeclarationDetails(variableDeclaration),
 			VariableDataType.String => new StringVariableDeclarationDetails(variableDeclaration),
 			VariableDataType.Monster => new MonsterVariableDeclarationDetails(_project, variableDeclaration),
-			//VariableDataType.Item => expr,
+			VariableDataType.Item => new ItemVariableDeclarationDetails(_project, variableDeclaration),
 			_ => throw new NotSupportedException()
 		};
 	}

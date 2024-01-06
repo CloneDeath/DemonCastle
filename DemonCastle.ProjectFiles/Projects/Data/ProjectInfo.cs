@@ -54,6 +54,10 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 												.Where(f => f.Extension == FileType.Monster.Extension)
 												.Select(f => f.ToMonsterInfo());
 
+	public IEnumerable<ItemInfo> Items => File.GetFilesAndSubFiles()
+											  .Where(f => f.Extension == FileType.Item.Extension)
+											  .Select(f => f.ToItemInfo());
+
 	public string FilePath => File.FilePath;
 	public FileNavigator FileNavigator => File;
 
