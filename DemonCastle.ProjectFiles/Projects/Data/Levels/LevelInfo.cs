@@ -16,6 +16,17 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		_areas = Resource.Areas.Select(area => new AreaInfo(file, area, this)).ToList();
 	}
 
+	public string ListLabel => Name;
+
+	public string Name {
+		get => Resource.Name;
+		set {
+			Resource.Name = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
 	public LevelTileSet TileSet { get; }
 
 	public Vector2I TileSize {
@@ -64,15 +75,6 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 									   + TileSize / new Vector2(1 / 2f, 1);
 
 	public TileSize AreaScale => new(AreaSize, TileSize);
-
-	public string Name {
-		get => Resource.Name;
-		set {
-			Resource.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
 
 	public AreaInfo CreateArea() {
 		var area = new AreaData();

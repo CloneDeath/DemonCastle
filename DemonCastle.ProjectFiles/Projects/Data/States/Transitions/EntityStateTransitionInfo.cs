@@ -9,14 +9,8 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 		When = new WhenInfo(file, data.When);
 	}
 
-	public Guid Id {
-		get => Data.Id;
-		set {
-			Data.Id = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
+	public Guid Id => Data.Id;
+	public string ListLabel => $"[{Name}]: -> {TargetState}";
 
 	public string Name {
 		get => Data.Name;

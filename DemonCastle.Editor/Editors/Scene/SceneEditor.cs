@@ -1,10 +1,11 @@
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Scene.Events;
 using DemonCastle.Editor.Editors.Scene.View;
+using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
-using ElementList = DemonCastle.Editor.Editors.Scene.Elements.ElementList;
 
 namespace DemonCastle.Editor.Editors.Scene;
 
@@ -16,7 +17,7 @@ public partial class SceneEditor : BaseEditor {
 
 	private VBoxContainer Left { get; }
 	private TabContainer LeftTabs { get; }
-	private ElementList ElementList { get; }
+	private EnumerableInfoListByEnum<IElementInfo, ElementType> ElementList { get; }
 	private SceneEventsList EventsList { get; }
 
 	private HSplitContainer Right { get; }
@@ -38,8 +39,8 @@ public partial class SceneEditor : BaseEditor {
 				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
 
-			LeftTabs.AddChild(ElementList = new ElementList(scene.Elements));
-			ElementList.ElementSelected += ElementList_OnElementSelected;
+			LeftTabs.AddChild(ElementList = new EnumerableInfoListByEnum<IElementInfo, ElementType>(scene.Elements));
+			ElementList.ItemSelected += ElementList_OnElementSelected;
 			LeftTabs.SetTabTitle(0, "Elements");
 
 			LeftTabs.AddChild(EventsList = new SceneEventsList(scene.Events));

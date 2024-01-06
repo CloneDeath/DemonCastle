@@ -15,6 +15,7 @@ public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
 	}
 
 	public Guid Id => Data.Id;
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Data.Name;

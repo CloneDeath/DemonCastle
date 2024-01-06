@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Elements;
 
-public interface IElementInfo : INotifyPropertyChanged {
+public interface IElementInfo : INotifyPropertyChanged, IListableInfo {
 	Guid Id { get; }
 	ElementType Type { get; }
 	string Name { get; set; }

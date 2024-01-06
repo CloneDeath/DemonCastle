@@ -11,6 +11,8 @@ public class CharacterInfo : FileInfo<CharacterFile>, IListableInfo {
 		Animations = new AnimationInfoCollection(file, Resource.Animations);
 	}
 
+	public string ListLabel => Name;
+
 	public string Name {
 		get => Resource.Name;
 		set {

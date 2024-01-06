@@ -1,64 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Elements;
 
-public class ElementInfoCollection : IEnumerableInfo<IElementInfo> {
-	protected IFileNavigator File { get; }
-	protected List<ElementData> FileElements { get; }
-	protected ObservableCollection<IElementInfo> Elements { get; }
-
-	public ElementInfoCollection(IFileNavigator file, List<ElementData> elements) {
-		File = file;
-		FileElements = elements;
-		Elements = new ObservableCollection<IElementInfo>(elements.Select(data => ElementInfoFactory.CreateInfo(file, data))
-																  .ToList());
-		Elements.CollectionChanged += Elements_OnCollectionChanged;
+public class ElementInfoCollection : ObservableCollectionInfo<IElementInfo, ElementData>, IEnumerableInfoByEnum<IElementInfo, ElementType> {
+	private readonly IFileNavigator _file;
+	public ElementInfoCollection(IFileNavigator file, List<ElementData> data) : base(new ElementInfoDataFactory(file), data) {
+		_file = file;
 	}
 
-	public IElementInfo this[int index] => Elements[index];
+	protected override void Save() => _file.Save();
 
-	public IElementInfo AppendNew() => throw new System.NotImplementedException();
 	public IElementInfo AppendNew(ElementType type) {
 		var elementData = ElementInfoFactory.CreateData(type);
-		FileElements.Add(elementData);
-		Save();
-		var elementInfo = ElementInfoFactory.CreateInfo(File, elementData);
-		Elements.Add(elementInfo);
-		return elementInfo;
+		return Add(elementData);
+	}
+}
+
+public class ElementInfoDataFactory : IInfoFactory<IElementInfo, ElementData> {
+	private readonly IFileNavigator _file;
+
+	public ElementInfoDataFactory(IFileNavigator file) {
+		_file = file;
 	}
 
-	public void Remove(IElementInfo item) {
-		var index = Elements.IndexOf(item);
-		FileElements.RemoveAt(index);
-		Save();
-		Elements.RemoveAt(index);
-	}
-
-	public void RemoveAt(int index) {
-		FileElements.RemoveAt(index);
-		Save();
-		Elements.RemoveAt(index);
-	}
-
-	protected void Save() => File.Save();
-
-
-	#region IEnumerable
-	public IEnumerator<IElementInfo> GetEnumerator() => Elements.GetEnumerator();
-	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-	#endregion
-
-
-	#region INotifyCollectionChanged
-	public event NotifyCollectionChangedEventHandler? CollectionChanged;
-	private void Elements_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
-		CollectionChanged?.Invoke(this, e);
-	}
-	#endregion
+	public IElementInfo CreateInfo(ElementData data) => ElementInfoFactory.CreateInfo(_file, data);
+	public ElementData CreateData() => new();
 }

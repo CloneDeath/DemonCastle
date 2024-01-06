@@ -7,44 +7,58 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class EnumerableInfoList<TInfo> : VBoxContainer
-	where TInfo : IListableInfo {
-	public event Action<TInfo>? ItemSelected;
+	where TInfo : class, IListableInfo {
+	public event Action<TInfo?>? ItemSelected;
 
 	private readonly IEnumerableInfo<TInfo> _data;
 	private bool _enabled = true;
 
+	private Button? AddButton { get; set; }
 	private ItemList Items { get; }
-	private Button AddButton { get; }
 	private Button RemoveButton { get; }
 
 	public EnumerableInfoList(IEnumerableInfo<TInfo> data) {
 		_data = data;
 		Name = nameof(EnumerableInfoList<TInfo>);
 
-		AddChild(AddButton = new Button { Text = "Add" });
+		AddButton = new Button { Text = "Add" };
 		AddButton.Pressed += AddButton_OnPressed;
-		AddChild(Items = new ItemList {
+
+		Items = new ItemList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
-		});
+		};
 		Items.ItemSelected += Items_OnItemSelected;
-		AddChild(RemoveButton = new Button { Text = "Remove" });
+
+		RemoveButton = new Button { Text = "Remove" };
 		RemoveButton.Pressed += RemoveButton_OnPressed;
+	}
+
+	public override void _Ready() {
+		base._Ready();
+
+		AppendAddButton();
+		AddChild(Items);
+		AddChild(RemoveButton);
 
 		ReloadItems();
 	}
 
-	public bool Enabled {
+	protected virtual void AppendAddButton() {
+		AddChild(AddButton);
+	}
+
+	public virtual bool Enabled {
 		get => _enabled;
 		set {
 			_enabled = value;
-			AddButton.Disabled = !value;
+			if (AddButton != null) AddButton.Disabled = !value;
 			RemoveButton.Disabled = !value;
 		}
 	}
 
 	private void Items_OnItemSelected(long index) {
-		var animation = _data[(int)index];
-		ItemSelected?.Invoke(animation);
+		var item = _data[(int)index];
+		OnItemSelected(item);
 	}
 
 	public override void _EnterTree() {
@@ -58,7 +72,8 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	}
 
 	private void AddButton_OnPressed() {
-		_data.AppendNew();
+		var item = _data.AppendNew();
+		OnItemSelected(item);
 	}
 
 	private void RemoveButton_OnPressed() {
@@ -66,6 +81,7 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 		if (!selected.Any()) return;
 
 		_data.RemoveAt(selected[0]);
+		OnItemSelected(null);
 	}
 
 	private void Data_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
@@ -76,9 +92,17 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 		Items.Clear();
 
 		foreach (var item in _data) {
-			Items.AddItem(GetName(item));
+			Items.AddItem(item.ListLabel);
 		}
 	}
 
-	protected virtual string GetName(TInfo item) => item.Name;
+	protected void OnItemSelected(TInfo? item) {
+		ItemSelected?.Invoke(item);
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		RemoveButton.Disabled = !Items.IsAnythingSelected();
+	}
 }

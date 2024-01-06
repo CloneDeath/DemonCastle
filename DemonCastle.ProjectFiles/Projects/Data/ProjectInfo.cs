@@ -10,6 +10,8 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 	public ProjectInfo(FileNavigator<ProjectFile> file) : base(file) {
 	}
 
+	public string ListLabel => Name;
+
 	public string Name {
 		get => Resource.Name;
 		set {

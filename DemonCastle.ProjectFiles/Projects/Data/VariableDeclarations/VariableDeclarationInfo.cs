@@ -8,6 +8,7 @@ public class VariableDeclarationInfo : BaseInfo<VariableDeclarationData>, ILista
 	public VariableDeclarationInfo(IFileNavigator file, VariableDeclarationData data) : base(file, data) { }
 
 	public Guid Id => Data.Id;
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Data.Name;

@@ -21,6 +21,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo
 	}
 
 	public Guid Id => Resource.Id;
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Resource.Name;

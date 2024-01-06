@@ -7,10 +7,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
 
 public partial class VariableDeclarationEditor : Control {
-	public void Load(VariableDeclarationInfo variableDeclaration) {
+	public void Clear() {
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
+	}
+	public void Load(VariableDeclarationInfo variableDeclaration) {
+		Clear();
 
 		var editor = GetEditor(variableDeclaration);
 		AddChild(editor);

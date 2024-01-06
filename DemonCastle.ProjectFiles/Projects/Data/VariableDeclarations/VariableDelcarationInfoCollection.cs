@@ -4,13 +4,21 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 
-public class VariableDeclarationInfoCollection : ObservableCollectionInfo<VariableDeclarationInfo, VariableDeclarationData> {
+public class VariableDeclarationInfoCollection : ObservableCollectionInfo<VariableDeclarationInfo, VariableDeclarationData>,
+												 IEnumerableInfoByEnum<VariableDeclarationInfo, VariableDataType>{
 	private readonly IFileNavigator _file;
 	public VariableDeclarationInfoCollection(IFileNavigator file, List<VariableDeclarationData> data) : base(new VariableDeclarationInfoFactory(file), data) {
 		_file = file;
 	}
 
 	protected override void Save() => _file.Save();
+
+	public VariableDeclarationInfo AppendNew(VariableDataType type) {
+		var variable = new VariableDeclarationData {
+			DataType = type
+		};
+		return Add(variable);
+	}
 }
 
 public class VariableDeclarationInfoFactory : IInfoFactory<VariableDeclarationInfo, VariableDeclarationData> {

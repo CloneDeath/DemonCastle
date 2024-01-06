@@ -14,6 +14,7 @@ public class LabelElementInfo : BaseInfo<LabelElementData>, IElementInfo {
 
 	public Guid Id => Data.Id;
 	public ElementType Type => Data.Type;
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Data.Name;

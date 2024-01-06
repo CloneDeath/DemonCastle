@@ -14,6 +14,7 @@ public class ColorRectElementInfo : BaseInfo<ColorRectElementData>, IElementInfo
 
 	public Guid Id => Data.Id;
 	public ElementType Type => Data.Type;
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Data.Name;

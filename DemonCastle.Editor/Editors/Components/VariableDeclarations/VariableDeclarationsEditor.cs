@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
+using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using Godot;
@@ -6,13 +7,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations;
 
 public partial class VariableDeclarationsEditor : HSplitContainer {
-	protected EnumerableInfoList<VariableDeclarationInfo> VariableList { get; }
+	protected EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
-	public VariableDeclarationsEditor(IEnumerableInfo<VariableDeclarationInfo> variables) {
+	public VariableDeclarationsEditor(IEnumerableInfoByEnum<VariableDeclarationInfo, VariableDataType> variables) {
 		Name = nameof(VariableDeclarationsEditor);
 
-		AddChild(VariableList = new EnumerableInfoList<VariableDeclarationInfo>(variables){
+		AddChild(VariableList = new EnumerableInfoListByEnum<VariableDeclarationInfo, VariableDataType>(variables){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		VariableList.ItemSelected += VariableList_OnItemSelected;
@@ -22,7 +23,8 @@ public partial class VariableDeclarationsEditor : HSplitContainer {
 		});
 	}
 
-	protected void VariableList_OnItemSelected(VariableDeclarationInfo variableDeclaration) {
-		VariableEditor.Load(variableDeclaration);
+	protected void VariableList_OnItemSelected(VariableDeclarationInfo? variableDeclaration) {
+		if (variableDeclaration != null) VariableEditor.Load(variableDeclaration);
+		else VariableEditor.Clear();
 	}
 }
