@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Projects.Data.States;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor;
 
-public class StateInfoProxy : InfoProxy<StateInfo> {
+public class StateInfoProxy : InfoProxy<EntityStateInfo> {
 	protected override void NotifyProxyChanged() {
 		Transitions.Proxy = Proxy;
 		OnPropertyChanged(nameof(Id));

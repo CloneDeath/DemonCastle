@@ -9,9 +9,9 @@ using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Transitions;
 
 public class TransitionInfoCollectionProxy : IEnumerableInfo<EntityStateTransitionInfo> {
-	private StateInfo? _proxy;
+	private EntityStateInfo? _proxy;
 
-	public StateInfo? Proxy {
+	public EntityStateInfo? Proxy {
 		get => _proxy;
 		set {
 			if (_proxy != null) {

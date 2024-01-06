@@ -11,7 +11,7 @@ public partial class StatesEditor : HSplitContainer {
 	protected StateList StateList { get; }
 	protected StateEditor StateEditor { get; }
 
-	public StatesEditor(IEnumerableInfo<StateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
+	public StatesEditor(IEnumerableInfo<EntityStateInfo> states, IEnumerableInfo<IAnimationInfo> animations) {
 		Name = nameof(StatesEditor);
 
 		AddChild(StateList = new StateList(states){
@@ -24,7 +24,7 @@ public partial class StatesEditor : HSplitContainer {
 		});
 	}
 
-	protected void StateList_OnStateSelected(StateInfo stateInfo) {
+	protected void StateList_OnStateSelected(EntityStateInfo stateInfo) {
 		StateEditor.LoadState(stateInfo);
 	}
 }

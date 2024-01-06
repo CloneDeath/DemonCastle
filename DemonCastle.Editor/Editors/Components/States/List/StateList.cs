@@ -8,14 +8,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.States.List;
 
 public partial class StateList : VBoxContainer {
-	public event Action<StateInfo>? StateSelected;
+	public event Action<EntityStateInfo>? StateSelected;
 
-	private readonly IEnumerableInfo<StateInfo> _states;
+	private readonly IEnumerableInfo<EntityStateInfo> _states;
 	private ItemList Animations { get; }
 	private Button AddButton { get; }
 	private Button RemoveButton { get; }
 
-	public StateList(IEnumerableInfo<StateInfo> states) {
+	public StateList(IEnumerableInfo<EntityStateInfo> states) {
 		_states = states;
 
 		Name = nameof(StateList);

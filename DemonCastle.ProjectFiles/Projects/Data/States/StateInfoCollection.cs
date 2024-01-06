@@ -8,30 +8,30 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States;
 
-public class StateInfoCollection : IEnumerableInfo<StateInfo> {
+public class StateInfoCollection : IEnumerableInfo<EntityStateInfo> {
 	protected IFileNavigator File { get; }
 	protected List<EntityStateData> FileStates { get; }
-	protected ObservableCollection<StateInfo> States { get; }
+	protected ObservableCollection<EntityStateInfo> States { get; }
 
 	public StateInfoCollection(IFileNavigator file, List<EntityStateData> states) {
 		File = file;
 		FileStates = states;
-		States = new ObservableCollection<StateInfo>(states.Select(data => new StateInfo(file, data)).ToList());
+		States = new ObservableCollection<EntityStateInfo>(states.Select(data => new EntityStateInfo(file, data)).ToList());
 		States.CollectionChanged += Animations_OnCollectionChanged;
 	}
 
-	public StateInfo AppendNew() {
+	public EntityStateInfo AppendNew() {
 		var stateData = new EntityStateData {
 			Name = "state"
 		};
 		FileStates.Add(stateData);
 		Save();
-		var stateInfo = new StateInfo(File, stateData);
+		var stateInfo = new EntityStateInfo(File, stateData);
 		States.Add(stateInfo);
 		return stateInfo;
 	}
 
-	public void Remove(StateInfo item) {
+	public void Remove(EntityStateInfo item) {
 		var index = States.IndexOf(item);
 		FileStates.RemoveAt(index);
 		Save();
@@ -46,10 +46,10 @@ public class StateInfoCollection : IEnumerableInfo<StateInfo> {
 
 	protected void Save() => File.Save();
 
-	public StateInfo this[int index] => States[index];
+	public EntityStateInfo this[int index] => States[index];
 
 	#region IEnumerable
-	public IEnumerator<StateInfo> GetEnumerator() => States.GetEnumerator();
+	public IEnumerator<EntityStateInfo> GetEnumerator() => States.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	#endregion
 

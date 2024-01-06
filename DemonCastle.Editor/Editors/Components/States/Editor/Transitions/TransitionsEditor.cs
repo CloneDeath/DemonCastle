@@ -10,7 +10,7 @@ namespace DemonCastle.Editor.Editors.Components.States.Editor.Transitions;
 public partial class TransitionsEditor : HSplitContainer {
 	private readonly StateInfoProxy _proxy = new();
 
-	public StateInfo? State {
+	public EntityStateInfo? State {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}
@@ -18,7 +18,7 @@ public partial class TransitionsEditor : HSplitContainer {
 	private TransitionList Transitions { get; }
 	private TransitionEdit TransitionEdit { get; }
 
-	public TransitionsEditor(IEnumerable<StateInfo> options) {
+	public TransitionsEditor(IEnumerable<EntityStateInfo> options) {
 		Name = nameof(TransitionsEditor);
 
 		AddChild(Transitions = new TransitionList(_proxy.Transitions) {

@@ -7,7 +7,7 @@ namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 public partial class EventsEditor : VBoxContainer {
 	private readonly StateInfoProxy _proxy = new();
 
-	public StateInfo? State {
+	public EntityStateInfo? State {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}

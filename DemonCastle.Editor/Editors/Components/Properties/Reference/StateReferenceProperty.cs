@@ -6,15 +6,15 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
-public partial class StateReferenceProperty : BaseReferenceProperty<StateInfo> {
-	public StateReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<StateInfo> options) : base(binding, options) {
+public partial class StateReferenceProperty : BaseReferenceProperty<EntityStateInfo> {
+	public StateReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<EntityStateInfo> options) : base(binding, options) {
 		Name = nameof(StateReferenceProperty);
 	}
 
-	protected override Texture2D? GetTexture(StateInfo option) {
+	protected override Texture2D? GetTexture(EntityStateInfo option) {
 		return null;
 	}
 
-	protected override Guid GetGuid(StateInfo option) => option.Id;
-	protected override string GetName(StateInfo option) => option.Name;
+	protected override Guid GetGuid(EntityStateInfo option) => option.Id;
+	protected override string GetName(EntityStateInfo option) => option.Name;
 }

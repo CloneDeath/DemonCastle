@@ -8,7 +8,7 @@ namespace DemonCastle.Editor.Editors.Components.States.Editor;
 public partial class StateDetails : PropertyCollection {
 	private readonly StateInfoProxy _proxy = new();
 
-	public StateInfo? State {
+	public EntityStateInfo? State {
 		get => _proxy.Proxy;
 		set => _proxy.Proxy = value;
 	}

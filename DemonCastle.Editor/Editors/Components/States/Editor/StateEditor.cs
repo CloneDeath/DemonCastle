@@ -14,7 +14,7 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(IEnumerableInfo<IAnimationInfo> animations, IEnumerable<StateInfo> states) {
+	public StateEditor(IEnumerableInfo<IAnimationInfo> animations, IEnumerable<EntityStateInfo> states) {
 		Name = nameof(StateEditor);
 
 		AddChild(Details = new StateDetails(animations));
@@ -26,7 +26,7 @@ public partial class StateEditor : VSplitContainer {
 		TabContainer.SetTabTitle(1, "Transitions");
 	}
 
-	public void LoadState(StateInfo state) {
+	public void LoadState(EntityStateInfo state) {
 		Details.State = state;
 		EventsEditor.State = state;
 		TransitionsEditor.State = state;

@@ -134,7 +134,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return spriteReferenceProperty;
 	}
 
-	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<StateInfo> options) where T : INotifyPropertyChanged {
+	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<EntityStateInfo> options) where T : INotifyPropertyChanged {
 		var stateReferenceProperty = new StateReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};

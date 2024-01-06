@@ -18,7 +18,7 @@ public partial class TransitionEdit : PropertyCollection {
 
 	private WhenEdit WhenEdit { get; }
 
-	public TransitionEdit(IEnumerable<StateInfo> options) {
+	public TransitionEdit(IEnumerable<EntityStateInfo> options) {
 		Name = nameof(TransitionEdit);
 
 		AddString("Name", _proxy, t => t.Name);
