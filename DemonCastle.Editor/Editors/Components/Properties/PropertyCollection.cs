@@ -40,6 +40,40 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		Vertical = true;
 	}
 
+	public void AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
+		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		});
+	}
+
+	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
+		AddChild(new AnchorProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
+	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AreaInfo> options) where T : INotifyPropertyChanged {
+		var areaReferenceProperty = new AreaReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+			DisplayName = name
+		};
+		AddChild(areaReferenceProperty);
+		return areaReferenceProperty;
+	}
+
+	public void AddBoolean<T>(string name, T target, Expression<Func<T, bool>> propertyExpression) where T : INotifyPropertyChanged{
+		AddChild(new BooleanProperty(new PropertyBinding<T,bool>(target, propertyExpression)) {
+			DisplayName = name
+		});
+	}
+
+	public ColorProperty AddColor<T>(string name, T target,Expression<Func<T, Godot.Color>> propertyExpression, ColorPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var colorProperty = new ColorProperty(new PropertyBinding<T, Godot.Color>(target, propertyExpression), options ?? new ColorPropertyOptions()) {
+			DisplayName = name
+		};
+		AddChild(colorProperty);
+		return colorProperty;
+	}
+
 	public FileProperty AddFile<T>(string name, T target, string directory,
 								   Expression<Func<T, string>> propertyExpression,
 								   IEnumerable<IFileType> fileTypes) where T : INotifyPropertyChanged {
@@ -60,26 +94,12 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return fileProperty;
 	}
 
-	public ColorProperty AddColor<T>(string name, T target,Expression<Func<T, Godot.Color>> propertyExpression, ColorPropertyOptions? options = null) where T : INotifyPropertyChanged {
-		var colorProperty = new ColorProperty(new PropertyBinding<T, Godot.Color>(target, propertyExpression), options ?? new ColorPropertyOptions()) {
+	public EnumProperty<TEnum> AddEnum<T, TEnum>(string name, T target, Expression<Func<T, TEnum>> propertyExpression) where T : INotifyPropertyChanged where TEnum : struct, Enum {
+		var enumProperty = new EnumProperty<TEnum>(new PropertyBinding<T, TEnum>(target, propertyExpression)) {
 			DisplayName = name
 		};
-		AddChild(colorProperty);
-		return colorProperty;
-	}
-
-	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
-		var stringProperty = new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {
-			DisplayName = name
-		};
-		AddChild(stringProperty);
-		return stringProperty;
-	}
-
-	public void AddInteger<T>(string name, T target, Expression<Func<T, int>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new IntegerProperty(new PropertyBinding<T,int>(target, propertyExpression)) {
-			DisplayName = name
-		});
+		AddChild(enumProperty);
+		return enumProperty;
 	}
 
 	public void AddFloat<T>(string name, T target, Expression<Func<T, float>> propertyExpression) where T : INotifyPropertyChanged {
@@ -88,26 +108,29 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
-	public void AddBoolean<T>(string name, T target, Expression<Func<T, bool>> propertyExpression) where T : INotifyPropertyChanged{
-		AddChild(new BooleanProperty(new PropertyBinding<T,bool>(target, propertyExpression)) {
+	public void AddInteger<T>(string name, T target, Expression<Func<T, int>> propertyExpression) where T : INotifyPropertyChanged {
+		AddChild(new IntegerProperty(new PropertyBinding<T,int>(target, propertyExpression)) {
 			DisplayName = name
 		});
 	}
 
-	public Vector2IProperty AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression, Vector2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
-		var vector2IProperty = new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression), options ?? new Vector2IPropertyOptions()) {
+	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<MonsterInfo> options) where T : INotifyPropertyChanged {
+		var monsterReferenceProperty = new MonsterReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
-		AddChild(vector2IProperty);
-		return vector2IProperty;
+		AddChild(monsterReferenceProperty);
+		return monsterReferenceProperty;
 	}
 
-	public Vector2Property AddVector2<T>(string name, T target, Expression<Func<T, Vector2>> propertyExpression, Vector2PropertyOptions? options = null) where T : INotifyPropertyChanged {
-		var vector2Property = new Vector2Property(new PropertyBinding<T, Vector2>(target, propertyExpression), options ?? new Vector2PropertyOptions()) {
-			DisplayName = name
+	public void AddOrigin<T>(string name, T target, Expression<Func<T, Vector2I>> anchorExpression, Expression<Func<T, Vector2I>> offsetExpression) where T : INotifyPropertyChanged {
+		var group = new NamedPropertyCollection {
+			DisplayName = name,
+			Vertical = false
 		};
-		AddChild(vector2Property);
-		return vector2Property;
+		group.AddAnchor("Anchor", target, anchorExpression);
+		var offset = group.AddVector2I("Offset", target, offsetExpression, new Vector2IPropertyOptions { AllowNegative = true, Vertical = true });
+		offset.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+		AddChild(group);
 	}
 
 	public Rect2IProperty AddRect2I<T>(string name, T target, Expression<Func<T, Rect2I>> propertyExpression, Rect2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
@@ -142,50 +165,27 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return stateReferenceProperty;
 	}
 
-	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AreaInfo> options) where T : INotifyPropertyChanged {
-		var areaReferenceProperty = new AreaReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
+		var stringProperty = new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {
 			DisplayName = name
 		};
-		AddChild(areaReferenceProperty);
-		return areaReferenceProperty;
+		AddChild(stringProperty);
+		return stringProperty;
 	}
 
-	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<MonsterInfo> options) where T : INotifyPropertyChanged {
-		var monsterReferenceProperty = new MonsterReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+	public Vector2IProperty AddVector2I<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression, Vector2IPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var vector2IProperty = new Vector2IProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression), options ?? new Vector2IPropertyOptions()) {
 			DisplayName = name
 		};
-		AddChild(monsterReferenceProperty);
-		return monsterReferenceProperty;
+		AddChild(vector2IProperty);
+		return vector2IProperty;
 	}
 
-	public void AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
-		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
-			DisplayName = name
-		});
-	}
-
-	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new AnchorProperty(new PropertyBinding<T, Vector2I>(target, propertyExpression)) {
-			DisplayName = name
-		});
-	}
-
-	public void AddOrigin<T>(string name, T target, Expression<Func<T, Vector2I>> anchorExpression, Expression<Func<T, Vector2I>> offsetExpression) where T : INotifyPropertyChanged {
-		var group = new NamedPropertyCollection {
-			DisplayName = name,
-			Vertical = false
-		};
-		group.AddAnchor("Anchor", target, anchorExpression);
-		var offset = group.AddVector2I("Offset", target, offsetExpression, new Vector2IPropertyOptions { AllowNegative = true, Vertical = true });
-		offset.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-		AddChild(group);
-	}
-
-	public EnumProperty<TEnum> AddEnum<T, TEnum>(string name, T target, Expression<Func<T, TEnum>> propertyExpression) where T : INotifyPropertyChanged where TEnum : struct, Enum {
-		var enumProperty = new EnumProperty<TEnum>(new PropertyBinding<T, TEnum>(target, propertyExpression)) {
+	public Vector2Property AddVector2<T>(string name, T target, Expression<Func<T, Vector2>> propertyExpression, Vector2PropertyOptions? options = null) where T : INotifyPropertyChanged {
+		var vector2Property = new Vector2Property(new PropertyBinding<T, Vector2>(target, propertyExpression), options ?? new Vector2PropertyOptions()) {
 			DisplayName = name
 		};
-		AddChild(enumProperty);
-		return enumProperty;
+		AddChild(vector2Property);
+		return vector2Property;
 	}
 }
