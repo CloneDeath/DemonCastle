@@ -1,15 +1,16 @@
 using System;
-using System.Linq;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
+using DemonCastle.Game.EntityStates;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GameMonster : CharacterBody2D, IDamageable {
+public partial class GameMonster : CharacterBody2D, IDamageable, IEntityState {
 	private readonly MonsterInfo _monster;
 	private readonly MonsterDataInfo _monsterData;
 	private readonly GameAnimation _animation;
@@ -18,8 +19,9 @@ public partial class GameMonster : CharacterBody2D, IDamageable {
 
 	public int Hp { get; set; }
 	public int MaxHp => _monster.Health;
+	public EntityStateMachine StateMachine { get; }
 
-	public GameMonster(MonsterInfo monster, MonsterDataInfo monsterData, DebugState debug) {
+	public GameMonster(IGameState game, MonsterInfo monster, MonsterDataInfo monsterData, DebugState debug) {
 		_monster = monster;
 		_monsterData = monsterData;
 		Name = nameof(GameMonster);
@@ -39,12 +41,14 @@ public partial class GameMonster : CharacterBody2D, IDamageable {
 		_animation.SetAnimation(monster.Animations);
 		AddChild(new DebugPosition2D(debug));
 
+		StateMachine = new EntityStateMachine(game, this, monster.InitialState, monster.States);
+
 		Reset();
 	}
 
 	public void TakeDamage(int amount) {
 		Hp -= amount;
-		if (Hp <= 0) {
+		if (_monster.DespawnOnDeath && Hp <= 0) {
 			_animation.PlayNone();
 		}
 	}
@@ -53,7 +57,16 @@ public partial class GameMonster : CharacterBody2D, IDamageable {
 		Position = _monsterData.MonsterPosition.ToPixelPositionInArea();
 		Hp = MaxHp;
 
-		var currentState = _monster.States.FirstOrDefault(m => m.Id == _monster.InitialState);
-		_animation.Play(currentState?.Animation ?? Guid.Empty);
+		StateMachine.Reset();
 	}
+
+	#region IEntityStatea
+	public void SetFacing(int facing) {
+		throw new NotImplementedException();
+	}
+
+	public Vector2 AreaPosition => Position;
+
+	public void SetAnimation(Guid animationId) => _animation.Play(animationId);
+	#endregion
 }

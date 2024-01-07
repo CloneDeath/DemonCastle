@@ -1,5 +1,5 @@
 using System;
-using DemonCastle.Game.States;
+using DemonCastle.Game.PlayerStates;
 using Godot;
 
 namespace DemonCastle.Game;

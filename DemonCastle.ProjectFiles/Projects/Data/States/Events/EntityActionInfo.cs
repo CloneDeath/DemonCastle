@@ -1,6 +1,8 @@
+using System;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Events;
 
@@ -50,4 +52,25 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 
 	public ActionSpawnItemInfo SpawnItem { get; }
 	public ActionSpawnMonsterInfo SpawnMonster { get; }
+
+	public void Execute(IGameState game, IEntityState entity) {
+		if (Face != null) {
+			var face = Face switch {
+				FaceAction.Left => -1,
+				FaceAction.Right => 1,
+				FaceAction.TowardsClosestPlayer => game.Player.Position.X < entity.AreaPosition.X ? -1 : 1,
+				FaceAction.AwayFromClosestPlayer => game.Player.Position.X < entity.AreaPosition.X ? 1 : -1,
+				_ => throw new NotSupportedException()
+			};
+			entity.SetFacing(face);
+		} else if (Move != null) {
+			throw new NotImplementedException();
+		} else if (Self != null) {
+			throw new NotImplementedException();
+		} else if (SpawnItem.IsSet) {
+			throw new NotImplementedException();
+		} else if (SpawnMonster.IsSet) {
+			throw new NotImplementedException();
+		}
+	}
 }

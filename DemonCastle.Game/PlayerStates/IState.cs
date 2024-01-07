@@ -1,4 +1,4 @@
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public interface IState {
 	void OnEnter(GamePlayer player);

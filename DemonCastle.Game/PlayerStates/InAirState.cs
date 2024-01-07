@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public class InAirState : IState {
 	public void OnEnter(GamePlayer player) {

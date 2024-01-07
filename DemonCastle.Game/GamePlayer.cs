@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
-using DemonCastle.Game.States;
+using DemonCastle.Game.PlayerStates;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;

@@ -20,4 +20,5 @@ public interface IPlayerState {
 	public int MP { get; }
 	public int Lives { get; }
 	public int Score { get; }
+	Vector2 Position { get; }
 }

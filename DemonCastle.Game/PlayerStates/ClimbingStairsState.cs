@@ -1,7 +1,7 @@
 using System.Linq;
 using Godot;
 
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public class ClimbingStairsState : IState {
 	private readonly Tiles.GameTileStairs _stairs;

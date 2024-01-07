@@ -5,6 +5,7 @@ using DemonCastle.Game.Tiles;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
@@ -14,7 +15,7 @@ public partial class GameArea : Node2D {
 	private StaticBody2D Body { get; }
 	private List<GameMonster> Monsters { get; } = new();
 
-	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, DebugState debug) {
+	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, IGameState game, DebugState debug) {
 		_debug = debug;
 		Name = nameof(GameArea);
 
@@ -28,7 +29,7 @@ public partial class GameArea : Node2D {
 		foreach (var monsterData in area.Monsters) {
 			var monster = project.Monsters.FirstOrDefault(m => m.Id == monsterData.MonsterId);
 			if (monster == null) continue;
-			var gameMonster = new GameMonster(monster, monsterData, debug);
+			var gameMonster = new GameMonster(game, monster, monsterData, debug);
 			Monsters.Add(gameMonster);
 			AddChild(gameMonster);
 		}

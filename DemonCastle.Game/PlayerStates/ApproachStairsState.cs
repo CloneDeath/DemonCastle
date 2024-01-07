@@ -2,7 +2,7 @@ using System.Linq;
 using DemonCastle.Game.Tiles;
 using Godot;
 
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public class ApproachStairsState : IState {
 	private readonly GameTileStairs _stairs;

@@ -38,4 +38,5 @@ public class NullPlayerState : IPlayerState {
 	public int MP => 9;
 	public int Lives => 3;
 	public int Score => 42;
+	public Vector2 Position => Vector2.Zero;
 }

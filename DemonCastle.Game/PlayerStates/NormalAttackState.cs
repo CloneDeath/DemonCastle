@@ -1,4 +1,4 @@
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public class NormalAttackState : IState {
 	public void OnEnter(GamePlayer player) {

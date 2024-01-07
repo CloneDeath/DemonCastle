@@ -2,7 +2,7 @@ using System;
 using DemonCastle.Game.Tiles;
 using Godot;
 
-namespace DemonCastle.Game.States;
+namespace DemonCastle.Game.PlayerStates;
 
 public class NormalState : IState {
 	public void OnEnter(GamePlayer player) {

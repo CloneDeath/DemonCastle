@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -12,6 +14,8 @@ public class EntityStateInfoCollection : ObservableCollectionInfo<EntityStateInf
 	}
 
 	protected override void Save() => _file.Save();
+
+	public EntityStateInfo? Get(Guid id) => this.FirstOrDefault(s => s.Id == id);
 }
 
 public class EntityStateInfoFactory : IInfoFactory<EntityStateInfo, EntityStateData> {
