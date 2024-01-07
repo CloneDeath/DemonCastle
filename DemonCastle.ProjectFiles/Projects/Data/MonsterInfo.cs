@@ -88,4 +88,9 @@ public class MonsterInfo : BaseEntityInfo<MonsterFile> {
 			OnPropertyChanged();
 		}
 	}
+
+	public bool DespawnOnDeath {
+		get => Resource.DespawnOnDeath;
+		set => SaveField(ref Resource.DespawnOnDeath, value);
+	}
 }

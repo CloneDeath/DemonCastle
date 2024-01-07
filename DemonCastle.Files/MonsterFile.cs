@@ -14,4 +14,6 @@ public class MonsterFile : BaseEntityFile {
 	public float JumpHeight { get; set; } = 3;
 	public float Gravity { get; set; } = 100;
 	public Size Size { get; set; } = new();
+
+	public bool DespawnOnDeath = true;
 }

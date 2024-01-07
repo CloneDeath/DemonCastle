@@ -17,5 +17,6 @@ public partial class MonsterDetails : Components.BaseEntity.BaseEntityDetails<Mo
 		CustomProperties.AddFloat("Jump Height", monster, m => m.JumpHeight);
 		CustomProperties.AddFloat("Gravity", monster, m => m.Gravity);
 		CustomProperties.AddVector2I("Size", monster, m => m.Size);
+		CustomProperties.AddBoolean("Despawn on Death", monster, m => m.DespawnOnDeath);
 	}
 }
