@@ -66,7 +66,13 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 		} else if (Move != null) {
 			throw new NotImplementedException();
 		} else if (Self != null) {
-			throw new NotImplementedException();
+			switch (Self) {
+				case SelfAction.Despawn:
+					entity.Despawn();
+					break;
+				default:
+					throw new NotSupportedException();
+			}
 		} else if (SpawnItem.IsSet) {
 			throw new NotImplementedException();
 		} else if (SpawnMonster.IsSet) {

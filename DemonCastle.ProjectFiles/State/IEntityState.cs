@@ -9,4 +9,5 @@ public interface IEntityState {
 	bool WasKilled { get; }
 	void SetAnimation(Guid animationId);
 	void ChangeStateTo(Guid stateId);
+	void Despawn();
 }

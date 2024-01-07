@@ -48,7 +48,7 @@ public partial class GameMonster : CharacterBody2D, IDamageable, IEntityState {
 	public void TakeDamage(int amount) {
 		Hp -= amount;
 		if (_monster.DespawnOnDeath && Hp <= 0) {
-			_animation.PlayNone();
+			Despawn();
 		}
 	}
 
@@ -69,5 +69,9 @@ public partial class GameMonster : CharacterBody2D, IDamageable, IEntityState {
 
 	public void SetAnimation(Guid animationId) => _animation.Play(animationId);
 	public void ChangeStateTo(Guid stateId) => StateMachine.ChangeState(stateId);
+	public void Despawn() {
+		_animation.PlayNone();
+		StateMachine.ChangeState(Guid.Empty);
+	}
 	#endregion
 }
