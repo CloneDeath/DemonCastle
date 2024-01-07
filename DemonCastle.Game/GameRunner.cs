@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -9,6 +10,7 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameRunner : Control, IGameState {
+	private readonly ProjectInfo _project;
 	private SceneStack SceneStack { get; }
 	public GameLevel Level { get; }
 	public GamePlayer GamePlayer { get; }
@@ -17,6 +19,7 @@ public partial class GameRunner : Control, IGameState {
 	protected GameArea? CurrentArea { get; set; }
 
 	public GameRunner(ProjectInfo project, DebugState? debug = null) {
+		_project = project;
 		debug ??= new DebugState();
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
@@ -78,7 +81,9 @@ public partial class GameRunner : Control, IGameState {
 	public Texture2D LevelView => LevelViewport.GetTexture();
 
 	public void SpawnItem(Guid itemId, Vector2 position) {
-		throw new NotImplementedException();
+		if (CurrentArea == null) return;
+		var item = _project.Items.First(i => i.Id == itemId);
+		CurrentArea.SpawnItem(item, position);
 	}
 
 	public IPlayerState Player => GamePlayer.PlayerState;

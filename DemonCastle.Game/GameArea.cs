@@ -11,11 +11,13 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameArea : Node2D {
+	private readonly IGameState _game;
 	private readonly DebugState _debug;
 	private StaticBody2D Body { get; }
 	private List<GameMonster> Monsters { get; } = new();
 
 	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, IGameState game, DebugState debug) {
+		_game = game;
 		_debug = debug;
 		Name = nameof(GameArea);
 
@@ -38,6 +40,13 @@ public partial class GameArea : Node2D {
 		});
 
 		AddVoidBoundaries(area, level);
+	}
+
+	public void SpawnItem(ItemInfo item, Vector2 position) {
+		var gameItem = new GameItem(_game, item, _debug) {
+			Position = position
+		};
+		AddChild(gameItem);
 	}
 
 	private void AddVoidBoundaries(AreaInfo area, LevelInfo level) {
