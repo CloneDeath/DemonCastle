@@ -20,6 +20,7 @@ public partial class GameSetup : Container {
 	protected CheckBox Debug_ShowCollisions { get; }
 	protected CheckBox Debug_ShowHitBoxes { get; }
 	protected CheckBox Debug_ShowHurtBoxes { get; }
+	protected CheckBox Debug_LogStateChanges { get; }
 
 	public GameSetup(ProjectInfo project) {
 		Name = nameof(GameSetup);
@@ -70,6 +71,10 @@ public partial class GameSetup : Container {
 			Text = "Show HurtBoxes",
 			ButtonPressed = false
 		});
+		debugOptions.AddChild(Debug_LogStateChanges = new CheckBox {
+			Text = "Log State Changes",
+			ButtonPressed = false
+		});
 	}
 
 	public override void _Process(double delta) {
@@ -83,7 +88,8 @@ public partial class GameSetup : Container {
 			ShowPositions = Debug_ShowPositions.ButtonPressed,
 			ShowCollisions = Debug_ShowCollisions.ButtonPressed,
 			ShowHitBoxes = Debug_ShowHitBoxes.ButtonPressed,
-			ShowHurtBoxes = Debug_ShowHurtBoxes.ButtonPressed
+			ShowHurtBoxes = Debug_ShowHurtBoxes.ButtonPressed,
+			LogStateChanges = Debug_LogStateChanges.ButtonPressed
 		};
 		GameStart?.Invoke(LevelInfoList.SelectedItem, CharacterInfoList.SelectedItem, debug);
 	}
