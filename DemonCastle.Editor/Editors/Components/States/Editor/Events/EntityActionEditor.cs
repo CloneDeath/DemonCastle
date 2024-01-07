@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.Editor.Editors.Components.Properties.Vector;
 using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -87,6 +89,33 @@ public partial class EntityActionEditor : MarginContainer {
 		});
 
 		/* Offset */
+		c.AddChild(new Label { Text = "with offset"});
+		c.AddChild(new ChoiceTree {
+			{
+				"Value",
+				spawnInfo.Offset.Value != null,
+				o => {
+					spawnInfo.Offset.Value ??= Vector2I.Zero;
+					var binding = new CallbackBinding<Vector2I>(
+						() => spawnInfo.Offset.Value ?? Vector2I.Zero,
+						v => spawnInfo.Offset.Value = v);
+					o.AddChild(new Vector2IProperty(binding, new Vector2IPropertyOptions {
+						AllowNegative = true
+					}));
+				}
+			},
+			{
+				"Variable",
+				spawnInfo.Offset.Variable != null,
+				o => {
+					spawnInfo.Offset.Variable ??= Guid.Empty;
+					o.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
+						entity.Variables,
+						v => v.Id == spawnInfo.Instance.Variable,
+						v => spawnInfo.Instance.Variable = v.Id));
+				}
+			}
+		});
 
 		/* Relative To */
 		c.AddChild(new Label { Text = "relative to" });
