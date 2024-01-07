@@ -1,5 +1,4 @@
 using DemonCastle.Files.BaseEntity;
-using DemonCastle.Files.Common;
 
 namespace DemonCastle.Files;
 
@@ -13,7 +12,6 @@ public class MonsterFile : BaseEntityFile {
 	public float MoveSpeed { get; set; } = 3;
 	public float JumpHeight { get; set; } = 3;
 	public float Gravity { get; set; } = 100;
-	public Size Size { get; set; } = new();
 
 	public bool DespawnOnDeath = true;
 }

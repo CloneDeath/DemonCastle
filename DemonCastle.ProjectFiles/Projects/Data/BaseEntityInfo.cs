@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DemonCastle.Files.BaseEntity;
+using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
@@ -14,6 +15,8 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public interface IBaseEntityInfo : IListableInfo {
 	public Guid Id { get; }
+	Guid InitialState { get; }
+	public Vector2I Size { get; }
 	public AnimationInfoCollection Animations { get; }
 	public EntityStateInfoCollection States { get; }
 	public VariableDeclarationInfoCollection Variables { get; }
@@ -41,11 +44,19 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, 
 		}
 	}
 
-
 	public Guid InitialState {
 		get => Resource.InitialState;
 		set {
 			Resource.InitialState = value;
+			Save();
+			OnPropertyChanged();
+		}
+	}
+
+	public Vector2I Size {
+		get => Resource.Size.ToVector2I();
+		set {
+			Resource.Size = value.ToSize();
 			Save();
 			OnPropertyChanged();
 		}

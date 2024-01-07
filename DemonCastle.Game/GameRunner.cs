@@ -76,5 +76,10 @@ public partial class GameRunner : Control, IGameState {
 
 	public IInputState Input => new InputState();
 	public Texture2D LevelView => LevelViewport.GetTexture();
+
+	public void SpawnItem(Guid itemId, Vector2 position) {
+		throw new NotImplementedException();
+	}
+
 	public IPlayerState Player => GamePlayer.PlayerState;
 }

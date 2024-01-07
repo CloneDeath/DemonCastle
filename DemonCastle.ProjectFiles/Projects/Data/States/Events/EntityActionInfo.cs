@@ -3,6 +3,7 @@ using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
+using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Events;
 
@@ -74,7 +75,12 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 					throw new NotSupportedException();
 			}
 		} else if (SpawnItem.IsSet) {
-			throw new NotImplementedException();
+			var itemId = SpawnItem.Instance.GetValue(entity);
+			Vector2 position = SpawnItem.Offset.GetValue(entity);
+			if (SpawnItem.RelativeTo == RelativeTo.Self) {
+				position += entity.AreaPosition;
+			}
+			game.SpawnItem(itemId, position);
 		} else if (SpawnMonster.IsSet) {
 			throw new NotImplementedException();
 		}

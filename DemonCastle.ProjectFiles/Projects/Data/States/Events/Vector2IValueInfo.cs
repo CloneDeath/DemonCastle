@@ -1,6 +1,8 @@
 using System;
 using DemonCastle.Files.Actions.Values;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Events;
@@ -26,5 +28,11 @@ public class Vector2IValueInfo : BaseInfo<Vector2IValueData>, IListableInfo {
 			Data.Clear();
 			SaveField(ref Data.Variable, value);
 		}
+	}
+
+	public Vector2I GetValue(IEntityState entity) {
+		if (Value.HasValue) return Value.Value;
+		if (Variable.HasValue) return entity.Variables.GetVector2I(Variable.Value);
+		throw new IncompleteDataException(File.FilePath);
 	}
 }

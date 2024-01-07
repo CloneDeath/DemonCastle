@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -26,6 +27,8 @@ public class NullGameState : IGameState {
 			}
 		}
 	};
+
+	public void SpawnItem(Guid itemId, Vector2 position) { }
 }
 
 public class NullInputState : IInputState {

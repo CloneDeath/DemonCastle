@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
@@ -13,6 +14,7 @@ public interface IGameState {
 	void SetScene(SceneInfo scene);
 	IInputState Input { get; }
 	Texture2D LevelView { get; }
+	void SpawnItem(Guid itemId, Vector2 position);
 }
 
 public interface IPlayerState {

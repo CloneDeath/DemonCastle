@@ -8,6 +8,7 @@ namespace DemonCastle.ProjectFiles.Projects.Resources;
 public interface IFileNavigator {
 	void Save();
 	string Directory { get; }
+	string FilePath { get; }
 	bool FileExists(string source);
 	AudioStream GetAudioStream(string source);
 	CharacterInfo GetCharacter(string character);
