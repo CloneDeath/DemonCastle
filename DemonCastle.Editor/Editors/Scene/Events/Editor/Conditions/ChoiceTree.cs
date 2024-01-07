@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
 
-public partial class ChoiceTree : HFlowContainer, IEnumerable<ChoiceTreeOption> {
+public partial class ChoiceTree : VBoxContainer, IEnumerable<ChoiceTreeOption> {
 	private readonly List<ChoiceTreeOption> _options = new();
 	private readonly OptionButton _choice;
 	private readonly HFlowContainer _overflow;
