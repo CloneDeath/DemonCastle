@@ -8,4 +8,9 @@ namespace DemonCastle.Files.Actions.Values;
 public class ReferenceData {
 	public Guid? Id;
 	public Guid? Variable;
+
+	public void Clear() {
+		Id = null;
+		Variable = null;
+	}
 }

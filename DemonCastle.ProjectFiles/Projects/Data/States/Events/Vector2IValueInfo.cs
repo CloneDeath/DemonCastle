@@ -14,11 +14,17 @@ public class Vector2IValueInfo : BaseInfo<Vector2IValueData>, IListableInfo {
 
 	public Vector2I? Value {
 		get => Data.Value;
-		set => SaveField(ref Data.Value, value);
+		set {
+			Data.Clear();
+			SaveField(ref Data.Value, value);
+		}
 	}
 
 	public Guid? Variable {
 		get => Data.Variable;
-		set => SaveField(ref Data.Variable, value);
+		set {
+			Data.Clear();
+			SaveField(ref Data.Variable, value);
+		}
 	}
 }

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.Properties.Vector;
 using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
+using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
@@ -46,7 +48,7 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnItem.IsSet,
 				c => {
 					entityAction.SpawnItem.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnItem, project.Items, entity);
+                    SetUpSpawnControls(c, entityAction.SpawnItem, project.Items, entity, VariableType.Item);
 				}
 			},
 			{
@@ -54,13 +56,13 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnMonster.IsSet,
 				c => {
 					entityAction.SpawnMonster.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnMonster, project.Monsters, entity);
+                    SetUpSpawnControls(c, entityAction.SpawnMonster, project.Monsters, entity, VariableType.Monster);
 				}
 			}
 		});
 	}
 
-	protected virtual void SetUpSpawnControls<T>(Control c, ActionSpawnInfo spawnInfo, IEnumerable<T> options, IBaseEntityInfo entity)
+	protected virtual void SetUpSpawnControls<T>(Control c, ActionSpawnInfo spawnInfo, IEnumerable<T> options, IBaseEntityInfo entity, VariableType type)
 		where T : IBaseEntityInfo {
 		/* Instance */
 		c.AddChild(new ChoiceTree {
@@ -81,7 +83,7 @@ public partial class EntityActionEditor : MarginContainer {
 				i => {
 					spawnInfo.Instance.Variable ??= Guid.Empty;
 					i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
-						entity.Variables,
+						entity.Variables.Where(v => v.Type == type),
 						v => v.Id == spawnInfo.Instance.Variable,
 						v => spawnInfo.Instance.Variable = v.Id));
 				}
@@ -110,7 +112,7 @@ public partial class EntityActionEditor : MarginContainer {
 				o => {
 					spawnInfo.Offset.Variable ??= Guid.Empty;
 					o.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
-						entity.Variables,
+						entity.Variables.Where(v => v.Type == VariableType.Vector2I),
 						v => v.Id == spawnInfo.Instance.Variable,
 						v => spawnInfo.Instance.Variable = v.Id));
 				}

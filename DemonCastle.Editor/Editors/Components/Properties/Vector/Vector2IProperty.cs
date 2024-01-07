@@ -12,7 +12,10 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 
 	public string DisplayName {
 		get => Label.Text;
-		set => Label.Text = value;
+		set {
+			Label.Text = value;
+			Label.Visible = !string.IsNullOrWhiteSpace(value);
+		}
 	}
 
 	public Vector2I PropertyValue {
@@ -27,7 +30,9 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
 
-		AddChild(Label = new Label());
+		AddChild(Label = new Label {
+			Visible = false
+		});
 
 		AddChild(BoxContainer = options.Vertical ? new VBoxContainer() : new HBoxContainer());
 

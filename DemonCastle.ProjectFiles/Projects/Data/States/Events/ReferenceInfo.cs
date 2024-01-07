@@ -13,11 +13,17 @@ public class ReferenceInfo : BaseInfo<ReferenceData>, IListableInfo {
 
 	public Guid? Id {
 		get => Data.Id;
-		set => SaveField(ref Data.Id, value);
+		set {
+			Data.Clear();
+			SaveField(ref Data.Id, value);
+		}
 	}
 
 	public Guid? Variable {
 		get => Data.Variable;
-		set => SaveField(ref Data.Variable, value);
+		set {
+			Data.Clear();
+			SaveField(ref Data.Variable, value);
+		}
 	}
 }
