@@ -1,7 +1,6 @@
 using System;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
-using DemonCastle.Game.EntityStates;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
@@ -41,7 +40,7 @@ public partial class GameMonster : CharacterBody2D, IDamageable, IEntityState {
 		_animation.SetAnimation(monster.Animations);
 		AddChild(new DebugPosition2D(debug));
 
-		StateMachine = new EntityStateMachine(game, this, monster.InitialState, monster.States);
+		AddChild(StateMachine = new EntityStateMachine(game, this, monster.InitialState, monster.States));
 
 		Reset();
 	}
@@ -66,7 +65,9 @@ public partial class GameMonster : CharacterBody2D, IDamageable, IEntityState {
 	}
 
 	public Vector2 AreaPosition => Position;
+	public bool WasKilled => Hp < 0;
 
 	public void SetAnimation(Guid animationId) => _animation.Play(animationId);
+	public void ChangeStateTo(Guid stateId) => StateMachine.ChangeState(stateId);
 	#endregion
 }

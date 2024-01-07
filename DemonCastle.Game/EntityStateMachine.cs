@@ -1,10 +1,11 @@
 using System;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.State;
+using Godot;
 
-namespace DemonCastle.Game.EntityStates;
+namespace DemonCastle.Game;
 
-public class EntityStateMachine {
+public partial class EntityStateMachine : Node {
 	private readonly IGameState _game;
 	private readonly IEntityState _entity;
 	private readonly Guid _initialState;
@@ -18,7 +19,15 @@ public class EntityStateMachine {
 		_entity = entity;
 		_initialState = initialState;
 		_states = states;
-		_currentStateId = initialState;
+		Reset();
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		if (CurrentState == null) return;
+
+		CurrentState.OnUpdate.Execute(_game, _entity);
+		CurrentState.Transitions.CheckAndTriggerTransitions(_game, _entity);
 	}
 
 	public void Reset() {
@@ -26,7 +35,7 @@ public class EntityStateMachine {
         ChangeState(_initialState);
 	}
 
-	private void ChangeState(Guid stateId) {
+	public void ChangeState(Guid stateId) {
 		CurrentState?.OnExit.Execute(_game, _entity);
 		_currentStateId = stateId;
 		CurrentState?.OnEnter.Execute(_game, _entity);

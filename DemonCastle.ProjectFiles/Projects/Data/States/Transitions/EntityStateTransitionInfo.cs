@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
@@ -39,4 +40,10 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 	public WhenInfo When { get; }
 
 	public EntityStateInfo? TargetStateInfo => _states.RetrieveEntityStateInfo(TargetState);
+
+	public void CheckAndTriggerTransition(IGameState game, IEntityState entity) {
+		if (When.IsConditionMet(game, entity)) {
+			entity.ChangeStateTo(TargetState);
+		}
+	}
 }

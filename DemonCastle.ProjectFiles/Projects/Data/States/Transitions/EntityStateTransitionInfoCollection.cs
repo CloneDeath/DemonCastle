@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
@@ -11,6 +12,12 @@ public class EntityStateTransitionInfoCollection : ObservableCollectionInfo<Enti
 	}
 
 	protected override void Save() => _file.Save();
+
+	public void CheckAndTriggerTransitions(IGameState game, IEntityState entity) {
+		foreach (var transition in this) {
+			transition.CheckAndTriggerTransition(game, entity);
+		}
+	}
 }
 
 public class EntityStateTransitionInfoFactory : IInfoFactory<EntityStateTransitionInfo, EntityStateTransitionData> {
