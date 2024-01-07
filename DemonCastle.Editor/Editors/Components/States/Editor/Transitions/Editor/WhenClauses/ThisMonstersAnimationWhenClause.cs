@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor.WhenClauses;
 
 public class ThisMonstersAnimationWhenClause : IWhenClause {
-	public string Clause => "this monster's animation";
+	public string Clause => "this entity's animation";
 	public bool IsSelected(WhenInfo when) => when.Animation != null;
 
 	public void MakeSelected(WhenInfo when) {

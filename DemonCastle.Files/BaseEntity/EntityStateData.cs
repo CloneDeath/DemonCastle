@@ -6,7 +6,7 @@ namespace DemonCastle.Files.BaseEntity;
 
 public class EntityStateData {
 	public Guid Id = Guid.NewGuid();
-	public string Name = string.Empty;
+	public string Name = "State";
 	public Guid Animation = Guid.Empty;
 	public List<EntityStateTransitionData> Transitions { get; set; } = new();
 
