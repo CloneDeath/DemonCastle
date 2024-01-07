@@ -9,7 +9,14 @@ public partial class EventsEditor : VBoxContainer {
 
 	public EntityStateInfo? State {
 		get => _proxy.Proxy;
-		set => _proxy.Proxy = value;
+		set {
+			_proxy.Proxy = value;
+			if (Events.IsAnythingSelected()) {
+				Events_OnItemSelected(Events.GetSelectedItems()[0]);
+			} else {
+				ActionList.Clear();
+			}
+		}
 	}
 
 	private ItemList Events { get; }
@@ -32,7 +39,11 @@ public partial class EventsEditor : VBoxContainer {
 	}
 
 	private void Events_OnItemSelected(long index) {
-		if (State == null) return;
+		if (State == null) {
+			ActionList.Clear();
+			return;
+		}
+
 		var actionSet = index switch {
 			0 => State.OnEnter,
 			1 => State.OnUpdate,

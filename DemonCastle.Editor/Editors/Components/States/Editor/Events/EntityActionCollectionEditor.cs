@@ -24,10 +24,14 @@ public partial class EntityActionCollectionEditor : HSplitContainer {
 		});
 	}
 
-	public void Load(EntityActionInfoCollection actionSet) {
+	public void Clear() {
 		foreach (var child in Left.GetChildren().Concat(Right.GetChildren())) {
 			child.QueueFree();
 		}
+	}
+
+	public void Load(EntityActionInfoCollection actionSet) {
+		Clear();
 
 		var list = new EnumerableInfoList<EntityActionInfo>(actionSet);
 		Left.AddChild(list);
