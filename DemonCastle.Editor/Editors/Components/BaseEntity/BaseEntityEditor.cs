@@ -31,7 +31,7 @@ public abstract partial class BaseEntityEditor<TInfo, TFile> : BaseEditor
 		RightArea.SetTabTitle(0, "Variables");
 		RightArea.AddChild(new AnimationsEditor(entity, entity.Animations));
 		RightArea.SetTabTitle(1, "Animations");
-		RightArea.AddChild(new StatesEditor(entity.States, entity.Animations));
+		RightArea.AddChild(new StatesEditor(project, entity));
 		RightArea.SetTabTitle(2, "States");
 	}
 }

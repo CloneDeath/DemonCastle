@@ -1,13 +1,17 @@
+using System;
+using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
 public partial class EntityActionEditor : MarginContainer {
-	public EntityActionEditor(EntityActionInfo entityAction) {
+	public EntityActionEditor(ProjectInfo project, IBaseEntityInfo entity, EntityActionInfo entityAction) {
 		Name = nameof(EntityActionEditor);
 
 		AddChild(new ChoiceTree {
@@ -40,8 +44,7 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnItem.IsSet,
 				c => {
 					entityAction.SpawnItem.IsSet = true;
-					c.AddChild(new Label { Text = "relative to" });
-					c.AddChild(new ChoiceEnum<RelativeTo>(entityAction.SpawnItem.RelativeTo, v => entityAction.SpawnItem.RelativeTo = v));
+                    SetUpSpawnControls(c, entityAction.SpawnItem, project.Items, entity);
 				}
 			},
 			{
@@ -49,10 +52,44 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnMonster.IsSet,
 				c => {
 					entityAction.SpawnMonster.IsSet = true;
-					c.AddChild(new Label { Text = "relative to" });
-					c.AddChild(new ChoiceEnum<RelativeTo>(entityAction.SpawnMonster.RelativeTo, v => entityAction.SpawnMonster.RelativeTo = v));
+                    SetUpSpawnControls(c, entityAction.SpawnMonster, project.Monsters, entity);
 				}
 			}
 		});
+	}
+
+	protected virtual void SetUpSpawnControls<T>(Control c, ActionSpawnInfo spawnInfo, IEnumerable<T> options, IBaseEntityInfo entity)
+		where T : IBaseEntityInfo {
+		/* Instance */
+		c.AddChild(new ChoiceTree {
+			{
+				"Id",
+				spawnInfo.Instance.Id != null,
+				i => {
+					spawnInfo.Instance.Id ??= Guid.Empty;
+					i.AddChild(new ChoiceReferenceList<T>(
+						options,
+						v => v.Id == spawnInfo.Instance.Id,
+						v => spawnInfo.Instance.Id = v.Id));
+				}
+			},
+			{
+				"Variable",
+				spawnInfo.Instance.Variable != null,
+				i => {
+					spawnInfo.Instance.Variable ??= Guid.Empty;
+					i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
+						entity.Variables,
+						v => v.Id == spawnInfo.Instance.Variable,
+						v => spawnInfo.Instance.Variable = v.Id));
+				}
+			}
+		});
+
+		/* Offset */
+
+		/* Relative To */
+		c.AddChild(new Label { Text = "relative to" });
+		c.AddChild(new ChoiceEnum<RelativeTo>(spawnInfo.RelativeTo, v => spawnInfo.RelativeTo = v));
 	}
 }

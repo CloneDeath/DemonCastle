@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components.States.Editor.Events;
 using DemonCastle.Editor.Editors.Components.States.Editor.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
@@ -14,15 +12,15 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(IEnumerableInfo<IAnimationInfo> animations, IEnumerable<EntityStateInfo> states) {
+	public StateEditor(ProjectInfo project, IBaseEntityInfo entity) {
 		Name = nameof(StateEditor);
 
-		AddChild(Details = new StateDetails(animations));
+		AddChild(Details = new StateDetails(entity.Animations));
 
 		AddChild(TabContainer = new TabContainer());
-		TabContainer.AddChild(EventsEditor = new EventsEditor());
+		TabContainer.AddChild(EventsEditor = new EventsEditor(project, entity));
 		TabContainer.SetTabTitle(0, "Events");
-		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(states));
+		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(entity.States));
 		TabContainer.SetTabTitle(1, "Transitions");
 	}
 

@@ -1,3 +1,4 @@
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
@@ -14,7 +15,7 @@ public partial class EventsEditor : VBoxContainer {
 	private ItemList Events { get; }
 	private EntityActionCollectionEditor ActionList { get; }
 
-	public EventsEditor() {
+	public EventsEditor(ProjectInfo project, IBaseEntityInfo entity) {
 		Name = nameof(EventsEditor);
 
 		AddChild(Events = new ItemList {
@@ -25,7 +26,7 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnExit");
 		Events.ItemSelected += Events_OnItemSelected;
 
-		AddChild(ActionList = new EntityActionCollectionEditor {
+		AddChild(ActionList = new EntityActionCollectionEditor(project, entity) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}

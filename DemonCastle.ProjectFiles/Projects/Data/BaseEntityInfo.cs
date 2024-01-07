@@ -12,7 +12,14 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IListableInfo, IEntityStateInfoRetriever
+public interface IBaseEntityInfo : IListableInfo {
+	public Guid Id { get; }
+	public AnimationInfoCollection Animations { get; }
+	public EntityStateInfoCollection States { get; }
+	public VariableDeclarationInfoCollection Variables { get; }
+}
+
+public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, IEntityStateInfoRetriever
 	where TFile : BaseEntityFile {
 
 	protected BaseEntityInfo(FileNavigator<TFile> file) : base(file) {
