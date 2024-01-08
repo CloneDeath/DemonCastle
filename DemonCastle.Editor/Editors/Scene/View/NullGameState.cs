@@ -1,5 +1,6 @@
 using System;
 using DemonCastle.Files.SceneEvents;
+using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.State;
@@ -9,6 +10,8 @@ namespace DemonCastle.Editor.Editors.Scene.View;
 
 public class NullGameState : IGameState {
 	public IPlayerState Player { get; } = new NullPlayerState();
+	public ICurrentArea? CurrentArea { get; } = new NullAreaState();
+
 	public void SetCharacter(CharacterInfo character) {	}
 	public void SetLevel(LevelInfo level) {	}
 	public void PushScene(SceneInfo scene) { }
@@ -42,4 +45,8 @@ public class NullPlayerState : IPlayerState {
 	public int Lives => 3;
 	public int Score => 42;
 	public Vector2 Position => Vector2.Zero;
+}
+
+public class NullAreaState : ICurrentArea {
+	public AreaPosition Position { get; } = new(Vector2I.Zero, Vector2I.One * 10, Vector2I.One * 16);
 }

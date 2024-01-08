@@ -8,11 +8,13 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GamePlayer : CharacterBody2D, IDamageable {
+	private readonly IGameState _game;
 	protected IGameLogger Logger { get; }
 	protected LevelInfo? Level { get; set; }
 	protected CharacterInfo? Character { get; set; }
@@ -38,8 +40,10 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	private bool _jump;
 	private bool _applyGravity = true;
 
-	public GamePlayer(DebugState debug, IGameLogger logger) {
+	public GamePlayer(IGameState game, DebugState debug, IGameLogger logger) {
+		_game = game;
 		Logger = logger;
+		PlayerState = new PlayerVariables(this);
 
 		AddChild(CollisionShape = new CollisionShape2D {
 			DebugColor = new Color(Colors.Green, 0.5f),
@@ -74,7 +78,8 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 
 	public Guid Id { get; } = Guid.NewGuid();
 
-	public PlayerVariables PlayerState { get; } = new();
+	public PlayerVariables PlayerState { get; }
+	public Vector2 PositionInArea => GlobalPosition - (_game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
 
 	public void TakeDamage(int amount) {
 		PlayerState.HP -= amount;

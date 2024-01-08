@@ -3,6 +3,7 @@ using System.Linq;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.Tiles;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.State;
@@ -11,12 +12,16 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameArea : Node2D {
+	private readonly AreaInfo _area;
 	private readonly IGameState _game;
 	private readonly DebugState _debug;
 	private StaticBody2D Body { get; }
 	private List<GameMonster> Monsters { get; } = new();
 
+	public AreaPosition AreaPosition => _area.PositionOfArea;
+
 	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, IGameState game, DebugState debug) {
+		_area = area;
 		_game = game;
 		_debug = debug;
 		Name = nameof(GameArea);

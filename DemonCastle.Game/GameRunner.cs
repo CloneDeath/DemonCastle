@@ -1,22 +1,22 @@
 using System;
 using System.Linq;
 using DemonCastle.Game.DebugNodes;
+using DemonCastle.Game.GameStates;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
-using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GameRunner : Control, IGameState {
+public partial class GameRunner : Control {
 	private readonly ProjectInfo _project;
-	private SceneStack SceneStack { get; }
+	public SceneStack SceneStack { get; }
 	public GameLevel Level { get; }
 	public GamePlayer GamePlayer { get; }
-	private SubViewport LevelViewport { get; }
+	public SubViewport LevelViewport { get; }
 
-	protected GameArea? CurrentArea { get; set; }
+	public GameArea? CurrentArea { get; set; }
 
 	public GameRunner(ProjectInfo project, DebugState? debug = null) {
 		_project = project;
@@ -24,16 +24,18 @@ public partial class GameRunner : Control, IGameState {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		AddChild(SceneStack = new SceneStack(this));
+		var gameState = new GameState(this);
+
+		AddChild(SceneStack = new SceneStack(gameState));
 
 		AddChild(LevelViewport = new SubViewport());
-		LevelViewport.AddChild(Level = new GameLevel(project, this, debug));
-		LevelViewport.AddChild(GamePlayer = new GamePlayer(debug, new GameLogger(debug)) {
+		LevelViewport.AddChild(Level = new GameLevel(project, gameState, debug));
+		LevelViewport.AddChild(GamePlayer = new GamePlayer(gameState, debug, new GameLogger(debug)) {
 			Position = Level.StartingLocation
 		});
 		LevelViewport.AddChild(new GameCamera(GamePlayer, Level));
 
-		SetScene(project.StartScene);
+		SceneStack.Set(project.StartScene);
 	}
 
 	public override void _EnterTree() {
@@ -63,9 +65,7 @@ public partial class GameRunner : Control, IGameState {
 		CurrentArea?.OnPlayerEnter();
 	}
 
-	public void SetCharacter(CharacterInfo character) {
-		GamePlayer.LoadCharacter(character);
-	}
+	public void SetCharacter(CharacterInfo character) => GamePlayer.LoadCharacter(character);
 
 	public void SetLevel(LevelInfo level) {
 		Level.LoadLevel(level);
@@ -73,18 +73,9 @@ public partial class GameRunner : Control, IGameState {
 		LevelViewport.Size = level.AreaScale.ToPixelSize();
 	}
 
-	public void SetScene(SceneInfo scene) => SceneStack.Set(scene);
-	public void PushScene(SceneInfo scene) => SceneStack.Push(scene);
-	public void PopScene(int number) => SceneStack.Pop(number);
-
-	public IInputState Input => new InputState();
-	public Texture2D LevelView => LevelViewport.GetTexture();
-
 	public void SpawnItem(Guid itemId, Vector2 position) {
 		if (CurrentArea == null) return;
 		var item = _project.Items.First(i => i.Id == itemId);
 		CurrentArea.SpawnItem(item, position);
 	}
-
-	public IPlayerState Player => GamePlayer.PlayerState;
 }
