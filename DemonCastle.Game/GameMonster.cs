@@ -30,10 +30,10 @@ public partial class GameMonster : GameBaseEntity {
 	}
 
 	public override void Reset() {
-		base.Reset();
-
 		Position = _monsterData.MonsterPosition.ToPixelPositionInArea();
 		Hp = MaxHp;
+
+		base.Reset();
 	}
 
 	public override bool WasKilled => Hp < 0;
