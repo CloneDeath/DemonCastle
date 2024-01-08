@@ -7,6 +7,7 @@ using DemonCastle.Files.Elements;
 using DemonCastle.Files.Variables;
 using DemonCastle.Files.Variables.VariableTypes;
 using DemonCastle.ProjectFiles.Converters;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
@@ -23,7 +24,7 @@ public static class InfoFactory {
 			ElementType.Label => new LabelElementInfo(file, (LabelElementData)data),
 			ElementType.LevelView => new LevelViewElementInfo(file, (LevelViewElementData)data),
 			ElementType.Sprite => new SpriteElementInfo(file, (SpriteElementData)data),
-			_ => throw new ArgumentOutOfRangeException(nameof(data), data.Type, null)
+			_ => throw new InvalidEnumValueException<ElementType>(data.Type)
 		};
 	}
 
@@ -36,7 +37,7 @@ public static class InfoFactory {
 			VariableType.Monster => new MonsterVariableDeclarationInfo(file, (MonsterVariableDeclarationData)data),
 			VariableType.Item => new ItemVariableDeclarationInfo(file, (ItemVariableDeclarationData)data),
 			VariableType.Vector2I => new Vector2IVariableDeclarationInfo(file, (Vector2IVariableDeclarationData)data),
-			_ => throw new ArgumentOutOfRangeException(nameof(data), data.Type, null)
+			_ => throw new InvalidEnumValueException<VariableType>(data.Type)
 		};
 	}
 

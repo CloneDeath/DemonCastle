@@ -1,6 +1,6 @@
-using System;
 using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor.DataTypes;
 using DemonCastle.Files.Variables;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;
@@ -37,7 +37,7 @@ public partial class VariableDeclarationEditor : Control {
 			VariableType.Monster => new MonsterVariableDeclarationDetails(_project, (MonsterVariableDeclarationInfo)variableDeclaration),
 			VariableType.Item => new ItemVariableDeclarationDetails(_project, (ItemVariableDeclarationInfo)variableDeclaration),
 			VariableType.Vector2I => new Vector2IVariableDeclarationDetails((Vector2IVariableDeclarationInfo)variableDeclaration),
-			_ => throw new NotSupportedException()
+			_ => throw new InvalidEnumValueException<VariableType>(variableDeclaration.Type)
 		};
 	}
 }

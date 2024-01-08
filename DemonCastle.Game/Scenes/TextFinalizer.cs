@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DemonCastle.Files.Elements;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.Game.Scenes;
@@ -48,7 +49,7 @@ public class TextFinalizer {
 			TextTransform.None => replaced,
 			TextTransform.Lowercase => replaced.ToLower(),
 			TextTransform.Uppercase => replaced.ToUpper(),
-			_ => throw new NotSupportedException()
+			_ => throw new InvalidEnumValueException<TextTransform>(_transform)
 		};
 	}
 }

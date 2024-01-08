@@ -1,5 +1,5 @@
-using System;
 using DemonCastle.Files.SceneEvents;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 
@@ -81,7 +81,7 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 		return thisScene switch {
 			SceneChangeEvent.Enter => scene.OnEnter,
 			SceneChangeEvent.Exit => scene.OnExit,
-			_ => throw new InvalidOperationException()
+			_ => throw new InvalidEnumValueException<SceneChangeEvent>(thisScene)
 		};
 	}
 }

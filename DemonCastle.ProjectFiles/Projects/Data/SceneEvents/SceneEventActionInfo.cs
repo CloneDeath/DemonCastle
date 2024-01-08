@@ -1,4 +1,5 @@
 using DemonCastle.Files.Actions;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 
@@ -38,9 +39,17 @@ public class SceneEventActionInfo : BaseInfo<SceneActionData> {
 	}
 
 	public void TriggerAction(IGameState game) {
-		Scene.TriggerAction(game);
-		if (SetCharacter != null) game.SetCharacter(File.GetCharacter(SetCharacter));
-		if (SetLevel != null) game.SetLevel(File.GetLevel(SetLevel));
+		if (Scene.IsSet) Scene.TriggerAction(game);
+		else if (SetCharacter != null) game.SetCharacter(File.GetCharacter(SetCharacter));
+		else if (SetLevel != null) game.SetLevel(File.GetLevel(SetLevel));
+		else throw new IncompleteDataException(File.FilePath);
+	}
+
+	public override string ToString() {
+		return SetCharacter != null ? $"Set Character: {SetCharacter}"
+			   : SetLevel != null ? $"Set Level: {SetLevel}"
+			   : Scene.IsSet ? $"Scene: {Scene}"
+			   : "Invalid Action";
 	}
 }
 
@@ -92,7 +101,16 @@ public class SceneChangeActionInfo : BaseInfo<SceneActionData> {
 	public void TriggerAction(IGameState gameState) {
 		if (!IsSet) return;
 		if (Set != null) gameState.SetScene(File.GetScene(Set));
-		if (Push != null) gameState.PushScene(File.GetScene(Push));
-		if (Pop != null) gameState.PopScene(Pop.Value);
+		else if (Push != null) gameState.PushScene(File.GetScene(Push));
+		else if (Pop != null) gameState.PopScene(Pop.Value);
+		else throw new IncompleteDataException(File.FilePath);
+	}
+
+	public override string ToString() {
+		return !IsSet ? "<null>"
+			   : Set != null ? $"Set: {Set}"
+			   : Push != null ? $"Push: {Push}"
+			   : Pop != null ? $"Pop: {Pop}"
+			   : "Invalid Action";
 	}
 }

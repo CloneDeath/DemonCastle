@@ -1,6 +1,6 @@
-using System;
 using DemonCastle.Files;
 using DemonCastle.Game.Scenes.ElementTypes;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.State;
@@ -16,7 +16,7 @@ public static class ElementViewFactory {
 			ElementType.Label => new LabelElementView((LabelElementInfo)element, gameState),
 			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, gameState),
 			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
-			_ => throw new ArgumentOutOfRangeException(nameof(element))
+			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};
 	}
 }

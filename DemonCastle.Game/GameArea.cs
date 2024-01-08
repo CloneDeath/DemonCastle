@@ -20,6 +20,8 @@ public partial class GameArea : Node2D {
 
 	public AreaPosition AreaPosition => _area.PositionOfArea;
 
+	private readonly List<Node> _spawned = new();
+
 	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, IGameState game, DebugState debug) {
 		_area = area;
 		_game = game;
@@ -52,6 +54,7 @@ public partial class GameArea : Node2D {
 			Position = position
 		};
 		AddChild(gameItem);
+		_spawned.Add(gameItem);
 	}
 
 	private void AddVoidBoundaries(AreaInfo area, LevelInfo level) {
@@ -84,6 +87,9 @@ public partial class GameArea : Node2D {
 	public void OnPlayerEnter() {
 		foreach (var monster in Monsters) {
 			monster.Reset();
+		}
+		foreach (var entity in _spawned) {
+			entity.QueueFree();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -55,13 +56,13 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 	public ActionSpawnMonsterInfo SpawnMonster { get; }
 
 	public void Execute(IGameState game, IEntityState entity) {
-		if (Face != null) {
-			var face = Face switch {
+		if (Face.HasValue) {
+			var face = Face.Value switch {
 				FaceAction.Left => -1,
 				FaceAction.Right => 1,
 				FaceAction.TowardsClosestPlayer => game.Player.Position.X < entity.AreaPosition.X ? -1 : 1,
 				FaceAction.AwayFromClosestPlayer => game.Player.Position.X < entity.AreaPosition.X ? 1 : -1,
-				_ => throw new NotSupportedException()
+				_ => throw new InvalidEnumValueException<FaceAction>(Face.Value)
 			};
 			entity.SetFacing(face);
 		} else if (Move != null) {
@@ -85,4 +86,6 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 			throw new NotImplementedException();
 		}
 	}
+
+	public override string ToString() => ListLabel;
 }

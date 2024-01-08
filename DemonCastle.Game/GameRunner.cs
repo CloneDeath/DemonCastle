@@ -68,9 +68,9 @@ public partial class GameRunner : Control {
 	public void SetCharacter(CharacterInfo character) => GamePlayer.LoadCharacter(character);
 
 	public void SetLevel(LevelInfo level) {
-		Level.LoadLevel(level);
-		GamePlayer.LoadLevel(level);
 		LevelViewport.Size = level.AreaScale.ToPixelSize();
+		GamePlayer.LoadLevel(level);
+		Level.LoadLevel(level);
 	}
 
 	public void SpawnItem(Guid itemId, Vector2 position) {

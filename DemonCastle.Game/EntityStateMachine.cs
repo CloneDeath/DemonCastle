@@ -19,7 +19,6 @@ public partial class EntityStateMachine : Node {
 		_entity = entity;
 		_initialState = initialState;
 		_states = states;
-		Reset();
 	}
 
 	public override void _Process(double delta) {

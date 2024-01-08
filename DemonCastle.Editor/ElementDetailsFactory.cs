@@ -1,6 +1,6 @@
-using System;
 using DemonCastle.Editor.Editors.Scene.Elements.Editor.Types;
 using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
@@ -16,7 +16,7 @@ public static class ElementDetailsFactory {
 			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.LevelView => new LevelViewElementDetails((LevelViewElementInfo)element),
 			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
-			_ => throw new InvalidOperationException()
+			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};
 	}
 }

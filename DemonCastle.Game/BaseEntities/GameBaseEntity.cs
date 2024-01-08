@@ -51,8 +51,8 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 	}
 
 	public virtual void Reset() {
-		_stateMachine.Reset();
 		_variables.Reset();
+		_stateMachine.Reset();
 	}
 
 	#region IEntityState

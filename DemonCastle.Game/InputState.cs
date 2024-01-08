@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DemonCastle.Files.SceneEvents;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
@@ -19,7 +20,7 @@ public class InputState : IInputState {
 			KeyState.Released => Input.IsActionJustReleased(actionName),
 			KeyState.Down => Input.IsActionPressed(actionName),
 			KeyState.Up => !Input.IsActionPressed(actionName),
-			_ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
+			_ => throw new InvalidEnumValueException<KeyState>(state)
 		};
 	}
 
@@ -30,6 +31,6 @@ public class InputState : IInputState {
 		PlayerAction.Right => InputActions.PlayerMoveRight,
 		PlayerAction.Jump => InputActions.PlayerJump,
 		PlayerAction.Attack => InputActions.PlayerAttack,
-		_ => throw new ArgumentOutOfRangeException(nameof(action), action, null)
+		_ => throw new InvalidEnumValueException<PlayerAction>(action)
 	};
 }
