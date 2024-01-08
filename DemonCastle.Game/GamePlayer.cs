@@ -84,7 +84,7 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	public void TakeDamage(int amount) {
 		PlayerState.HP -= amount;
 		if (PlayerState.HP <= 0) {
-			QueueFree();
+			Visible = false;
 		}
 	}
 
@@ -97,6 +97,8 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 		base._Process(delta);
 
 		Animation.GlobalPosition = GlobalPosition.Round();
+
+		if (PlayerState.HP <= 0) return;
 
 		var nextState = State.Update(this, delta);
 		if (nextState != null) {

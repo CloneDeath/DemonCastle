@@ -13,6 +13,8 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 
+	private int _facing = 1;
+
 	public Guid Id { get; } = Guid.NewGuid();
 
 	protected GameBaseEntity(IGameState game, IBaseEntityInfo entity, DebugState debug) {
@@ -38,6 +40,12 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 		_variables = new BaseEntityVariables(entity);
 	}
 
+	public override void _Process(double delta) {
+		base._Process(delta);
+
+		_animation.Scale = new Vector2(_facing, 1);
+	}
+
 	public virtual void TakeDamage(int amount) {
 
 	}
@@ -49,7 +57,7 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 
 	#region IEntityState
 	public void SetFacing(int facing) {
-		throw new NotImplementedException();
+		_facing = facing > 0 ? 1 : -1;
 	}
 
 	public Vector2 AreaPosition => Position;
