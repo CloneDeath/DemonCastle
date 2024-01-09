@@ -16,7 +16,7 @@ public partial class AnimationInfoNode : Node2D {
 	public bool Active { get; set; }
 
 	public AnimationInfoNode(IAnimationInfo animation, IDamageable owner, DebugState debug) {
-		Name = nameof(AnimationInfoNode);
+		Name = $"{nameof(AnimationInfoNode)} {animation.Name}";
 		Animation = animation;
 
 		AddChild(Frames = new PhasingNode {

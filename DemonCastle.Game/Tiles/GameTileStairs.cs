@@ -12,6 +12,7 @@ public partial class GameTileStairs : Area2D {
 
 	public GameTileStairs(TileInfo tile, StairData tileStairs, DebugState debug) {
 		Name = nameof(GameTileStairs);
+
 		CollisionLayer = (uint)CollisionLayers.World;
 		CollisionMask = (uint)CollisionLayers.Player;
 

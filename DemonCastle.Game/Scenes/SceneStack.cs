@@ -12,6 +12,8 @@ public partial class SceneStack : Control {
 	public Vector2 SceneSize => _stack.TryPeek(out var scene) ? scene.SceneSize : Vector2.Zero;
 
 	public SceneStack(IGameState gameState) {
+		Name = nameof(SceneStack);
+
 		_gameState = gameState;
 	}
 

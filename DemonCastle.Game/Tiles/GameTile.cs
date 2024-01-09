@@ -17,6 +17,7 @@ public partial class GameTile : Node2D {
 		Name = nameof(GameTile);
 
 		AddChild(new Sprite2D {
+			Name = "TileTexture",
 			Texture = tile.Texture,
 			RegionEnabled = true,
 			RegionRect = tile.Region,
@@ -31,6 +32,7 @@ public partial class GameTile : Node2D {
 	private void SetupCollisions(DebugState debug) {
 		if (!_tile.Collision.Any()) return;
 		AddChild(Body = new StaticBody2D {
+			Name = "CollisionBody",
 			CollisionLayer = (uint)CollisionLayers.World
 		});
 		Body.AddChild(new CollisionShape2D {

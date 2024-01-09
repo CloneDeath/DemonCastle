@@ -30,11 +30,12 @@ public partial class GameArea : Node2D {
 		_area = area;
 		_logger = logger;
 		_debug = debug;
-		Name = nameof(GameArea);
+		Name = $"{nameof(GameArea)}@{area.PositionOfArea.AreaIndex}";
 
 		foreach (var tileMapInfo in area.TileMap) {
 			var tileInfo = tileMapInfo.Tile;
 			AddChild(new GameTile(tileInfo, debug) {
+				Name = $"{nameof(GameTile)}@{tileMapInfo.Position.ToTileIndex()}",
 				Position = tileMapInfo.Position.ToPixelPositionInArea()
 			});
 		}
@@ -47,6 +48,7 @@ public partial class GameArea : Node2D {
 			AddChild(gameMonster);
 		}
 		AddChild(Body = new StaticBody2D {
+			Name = "AreaBoundaries",
 			CollisionLayer = (uint)CollisionLayers.World
 		});
 
@@ -59,6 +61,7 @@ public partial class GameArea : Node2D {
 		};
 		AddChild(gameItem);
 		_spawned.Add(gameItem);
+		gameItem.Reset();
 	}
 
 	private void AddVoidBoundaries(AreaInfo area, LevelInfo level) {
@@ -78,6 +81,7 @@ public partial class GameArea : Node2D {
 		var otherArea = level.GetAreaAt(otherAreaPosition);
 		if (otherArea == null) {
 			Body.AddChild(new CollisionShape2D {
+				Name = $"VoidBoundary@{start}:{end}",
 				Shape = new SegmentShape2D {
 					A = start * level.AreaScale.ToPixelSize(),
 					B = end * level.AreaScale.ToPixelSize()

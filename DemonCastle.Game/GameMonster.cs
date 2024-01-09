@@ -18,7 +18,7 @@ public partial class GameMonster : GameBaseEntity {
 		: base(game, level, monster, logger, debug) {
 		_monster = monster;
 		_monsterData = monsterData;
-		Name = nameof(GameMonster);
+		Name = $"{nameof(GameMonster)} {monster.Name} ({Id})";
 	}
 
 	public override float MoveSpeed => _monster.MoveSpeed * Level.TileSize.X;

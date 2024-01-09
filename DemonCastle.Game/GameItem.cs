@@ -7,7 +7,10 @@ using DemonCastle.ProjectFiles.State;
 namespace DemonCastle.Game;
 
 public partial class GameItem : GameBaseEntity {
-	public GameItem(IGameState game, LevelInfo level, ItemInfo item, IGameLogger logger, DebugState debug) : base(game, level, item, logger, debug) { }
+	public GameItem(IGameState game, LevelInfo level, ItemInfo item, IGameLogger logger, DebugState debug) : base(game,
+		level, item, logger, debug) {
+		Name = $"{nameof(GameItem)} {item.Name} ({Id})";
+	}
 	public override bool WasKilled => false;
 
 	public override float MoveSpeed => 0;
