@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.Animations;
+using DemonCastle.Game.BaseEntities;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.Game.PlayerStates;
 using DemonCastle.ProjectFiles;
@@ -13,9 +13,7 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GamePlayer : CharacterBody2D, IDamageable {
-	private readonly IGameState _game;
-	protected IGameLogger Logger { get; }
+public partial class GamePlayer : PlayerEntityCommon {
 	protected LevelInfo? Level { get; set; }
 	protected CharacterInfo? Character { get; set; }
 
@@ -25,32 +23,23 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 	protected CollisionShape2D StairsShape { get; }
 	public Area2D FloorDetection { get; }
 	protected CollisionShape2D FloorShape { get; }
-	protected CollisionShape2D CollisionShape { get; }
 
 	private IFrameInfo? PreviousFrame;
 
-	public float WalkSpeed => (Character?.WalkSpeed ?? 0) * (Level?.TileSize.X ?? 0);
-	public float Gravity => (Character?.Gravity ?? 0) * (Level?.TileSize.Y ?? 0);
+	public override float MoveSpeed => (Character?.WalkSpeed ?? 0) * (Level?.TileSize.X ?? 0);
+	protected override float Gravity => (Character?.Gravity ?? 0) * (Level?.TileSize.Y ?? 0);
 	public float JumpHeight => (Character?.JumpHeight ?? 0) * (Level?.TileSize.Y ?? 0);
-	public int Facing { get; set; } = 1;
 
 	private IState State = new NormalState();
 
-	private Vector2 _moveDirection;
 	private bool _jump;
 	private bool _applyGravity = true;
 
-	public GamePlayer(IGameState game, DebugState debug, IGameLogger logger) {
-		_game = game;
-		Logger = logger;
-		PlayerState = new PlayerVariables(this);
+	public GamePlayer(IGameState game, IGameLogger logger, DebugState debug)
+		: base(game, logger, debug) {
+		Name = nameof(GamePlayer);
 
-		AddChild(CollisionShape = new CollisionShape2D {
-			DebugColor = new Color(Colors.Green, 0.5f),
-			Visible = debug.ShowCollisions
-		});
-		CollisionLayer = (uint) CollisionLayers.Player;
-		CollisionMask = (uint) CollisionLayers.World;
+		PlayerState = new PlayerVariables(this);
 
 		AddChild(Weapon = new GameAnimation(this, debug));
 		AddChild(Animation = new CharacterAnimation(this, debug));
@@ -72,16 +61,12 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 		FloorDetection.AddChild(FloorShape = new CollisionShape2D {
 			Visible = debug.ShowCollisions
 		});
-
-		AddChild(new DebugPosition2D(debug));
 	}
 
-	public Guid Id { get; } = Guid.NewGuid();
-
 	public PlayerVariables PlayerState { get; }
-	public Vector2 PositionInArea => GlobalPosition - (_game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
+	public Vector2 PositionInArea => GlobalPosition - (Game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
 
-	public void TakeDamage(int amount) {
+	public override void TakeDamage(int amount) {
 		PlayerState.HP -= amount;
 		if (PlayerState.HP <= 0) {
 			Visible = false;
@@ -114,9 +99,9 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 
 		if (_applyGravity) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
-			Velocity = new Vector2(_moveDirection.X * WalkSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+			Velocity = new Vector2(_moveDirection.X * MoveSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
 		} else {
-			Velocity = _moveDirection * WalkSpeed;
+			Velocity = _moveDirection * MoveSpeed;
 		}
 
 		StopMoving();
@@ -151,7 +136,6 @@ public partial class GamePlayer : CharacterBody2D, IDamageable {
 
 	public void MoveRight() => _moveDirection = Vector2.Right;
 	public void MoveLeft() => _moveDirection = Vector2.Left;
-	public void StopMoving() => _moveDirection = Vector2.Zero;
 	public void MoveTowards(Vector2 target) => _moveDirection = (target - GlobalPosition).Normalized();
 
 	public IEnumerable<Tiles.GameTileStairs> GetNearbyStairs() {

@@ -1,40 +1,28 @@
 using System;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.BaseEntities;
 
-public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, IDamageable {
+public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState {
 	private readonly BaseEntityVariables _variables;
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 
-	private int _facing = 1;
-
-	public Guid Id { get; } = Guid.NewGuid();
-
-	protected GameBaseEntity(IGameState game, IBaseEntityInfo entity, DebugState debug) {
+	protected GameBaseEntity(IGameState game, IBaseEntityInfo entity, IGameLogger logger, DebugState debug)
+		: base(game, logger, debug) {
 		Name = nameof(GameBaseEntity);
 
-		AddChild(new CollisionShape2D {
-			Position = new Vector2(0, -(float)Math.Floor(entity.Size.Y/2d)),
-			Shape = new RectangleShape2D {
-				Size = entity.Size
-			},
-			DebugColor = new Color(Colors.Green, 0.5f),
-			Visible = debug.ShowCollisions
-		});
-		CollisionLayer = (uint) CollisionLayers.Player;
-		CollisionMask = (uint) CollisionLayers.World;
-
+		CollisionShape.Position = new Vector2(0, -(float)Math.Floor(entity.Size.Y / 2d));
+		CollisionShape.Shape = new RectangleShape2D {
+			Size = entity.Size
+		};
 
 		AddChild(_animation = new GameAnimation(this, debug));
 		_animation.SetAnimation(entity.Animations);
-		AddChild(new DebugPosition2D(debug));
 
 		AddChild(_stateMachine = new EntityStateMachine(game, this, entity.InitialState, entity.States));
 		_variables = new BaseEntityVariables(entity);
@@ -43,11 +31,11 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		_animation.Scale = new Vector2(_facing, 1);
-	}
+		Velocity = _moveDirection * MoveSpeed;
+		StopMoving();
+		MoveAndSlide();
 
-	public virtual void TakeDamage(int amount) {
-
+		_animation.Scale = new Vector2(Facing, 1);
 	}
 
 	public virtual void Reset() {
@@ -56,10 +44,7 @@ public abstract partial class GameBaseEntity : CharacterBody2D, IEntityState, ID
 	}
 
 	#region IEntityState
-	public void SetFacing(int facing) {
-		_facing = facing > 0 ? 1 : -1;
-	}
-
+	public void SetFacing(int facing) => Facing = facing;
 	public Vector2 AreaPosition => Position;
 	public abstract bool WasKilled { get; }
 	public IVariables Variables => _variables;

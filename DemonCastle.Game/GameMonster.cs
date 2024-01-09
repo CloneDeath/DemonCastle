@@ -13,12 +13,15 @@ public partial class GameMonster : GameBaseEntity {
 	public int Hp { get; set; }
 	public int MaxHp => _monster.Health;
 
-	public GameMonster(IGameState game, MonsterInfo monster, MonsterDataInfo monsterData, DebugState debug)
-		: base(game, monster, debug) {
+	public GameMonster(IGameState game, MonsterInfo monster, MonsterDataInfo monsterData, IGameLogger logger, DebugState debug)
+		: base(game, monster, logger, debug) {
 		_monster = monster;
 		_monsterData = monsterData;
 		Name = nameof(GameMonster);
 	}
+
+	public override float MoveSpeed => _monster.MoveSpeed;
+	protected override float Gravity => _monster.Gravity;
 
 	public override void TakeDamage(int amount) {
 		base.TakeDamage(amount);

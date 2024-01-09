@@ -29,8 +29,9 @@ public partial class GameRunner : Control {
 		AddChild(SceneStack = new SceneStack(gameState));
 
 		AddChild(LevelViewport = new SubViewport());
-		LevelViewport.AddChild(Level = new GameLevel(project, gameState, debug));
-		LevelViewport.AddChild(GamePlayer = new GamePlayer(gameState, debug, new GameLogger(debug)) {
+		var logger = new GameLogger(debug);
+		LevelViewport.AddChild(Level = new GameLevel(project, gameState, logger, debug));
+		LevelViewport.AddChild(GamePlayer = new GamePlayer(gameState, logger, debug) {
 			Position = Level.StartingLocation
 		});
 		LevelViewport.AddChild(new GameCamera(GamePlayer, Level));
