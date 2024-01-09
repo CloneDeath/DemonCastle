@@ -81,7 +81,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Animation.GlobalPosition = GlobalPosition.Round();
+		AlignAnimationNodes();
 
 		if (PlayerState.HP <= 0) return;
 
@@ -92,10 +92,6 @@ public partial class GamePlayer : PlayerEntityCommon {
 			State.OnEnter(this);
 			Logger.StateChanged(State);
 		}
-
-		UpdateWeaponFrame();
-
-		PreviousFrame = Animation.CurrentFrame ?? null;
 
 		if (_applyGravity) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
@@ -109,7 +105,11 @@ public partial class GamePlayer : PlayerEntityCommon {
 
 		MoveAndSlide();
 
+		UpdateWeaponFrame();
+		PreviousFrame = Animation.CurrentFrame ?? null;
+
 		Animation.Scale = new Vector2(Facing, 1);
+		AlignAnimationNodes();
 	}
 
 	private void UpdateWeaponFrame() {
@@ -134,8 +134,10 @@ public partial class GamePlayer : PlayerEntityCommon {
 		return time * Gravity;
 	}
 
-	public void MoveRight() => _moveDirection = Vector2.Right;
-	public void MoveLeft() => _moveDirection = Vector2.Left;
+	protected override void AlignAnimationNodes() {
+		Animation.GlobalPosition = GlobalPosition.Round();
+	}
+
 	public void MoveTowards(Vector2 target) => _moveDirection = (target - GlobalPosition).Normalized();
 
 	public IEnumerable<Tiles.GameTileStairs> GetNearbyStairs() {

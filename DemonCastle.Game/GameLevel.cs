@@ -44,7 +44,7 @@ public partial class GameLevel : Node2D {
 		_areaMap.Clear();
 
 		foreach (var area in Level.Areas) {
-			var gameArea = new GameArea(_project, level, area, _game, _logger, _debug) {
+			var gameArea = new GameArea(_game, _project, level, area, _logger, _debug) {
 				Position = area.PositionOfArea.ToPixelPositionInLevel()
 			};
 			_areaMap[area] = gameArea;

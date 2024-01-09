@@ -12,8 +12,9 @@ using Godot;
 namespace DemonCastle.Game;
 
 public partial class GameArea : Node2D {
-	private readonly AreaInfo _area;
 	private readonly IGameState _game;
+	private readonly LevelInfo _level;
+	private readonly AreaInfo _area;
 	private readonly IGameLogger _logger;
 	private readonly DebugState _debug;
 	private StaticBody2D Body { get; }
@@ -23,9 +24,10 @@ public partial class GameArea : Node2D {
 
 	private readonly List<Node> _spawned = new();
 
-	public GameArea(ProjectInfo project, LevelInfo level, AreaInfo area, IGameState game, IGameLogger logger, DebugState debug) {
-		_area = area;
+	public GameArea(IGameState game, ProjectInfo project, LevelInfo level, AreaInfo area, IGameLogger logger, DebugState debug) {
 		_game = game;
+		_level = level;
+		_area = area;
 		_logger = logger;
 		_debug = debug;
 		Name = nameof(GameArea);
@@ -40,7 +42,7 @@ public partial class GameArea : Node2D {
 		foreach (var monsterData in area.Monsters) {
 			var monster = project.Monsters.FirstOrDefault(m => m.Id == monsterData.MonsterId);
 			if (monster == null) continue;
-			var gameMonster = new GameMonster(game, monster, monsterData, logger, debug);
+			var gameMonster = new GameMonster(game, level, monster, monsterData, logger, debug);
 			Monsters.Add(gameMonster);
 			AddChild(gameMonster);
 		}
@@ -52,7 +54,7 @@ public partial class GameArea : Node2D {
 	}
 
 	public void SpawnItem(ItemInfo item, Vector2 position) {
-		var gameItem = new GameItem(_game, item, _logger, _debug) {
+		var gameItem = new GameItem(_game, _level, item, _logger, _debug) {
 			Position = position
 		};
 		AddChild(gameItem);

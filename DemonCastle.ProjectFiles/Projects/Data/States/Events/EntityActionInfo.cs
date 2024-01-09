@@ -65,8 +65,23 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 				_ => throw new InvalidEnumValueException<FaceAction>(Face.Value)
 			};
 			entity.SetFacing(face);
-		} else if (Move != null) {
-			throw new NotImplementedException();
+		} else if (Move.HasValue) {
+			switch (Move.Value) {
+				case MoveAction.Left:
+					entity.MoveLeft();
+					break;
+				case MoveAction.Right:
+					entity.MoveRight();
+					break;
+				case MoveAction.Forward:
+					entity.MoveForward();
+					break;
+				case MoveAction.Backward:
+					entity.MoveBackward();
+					break;
+				default:
+					throw new InvalidEnumValueException<MoveAction>(Move.Value);
+			}
 		} else if (Self != null) {
 			switch (Self) {
 				case SelfAction.Despawn:
@@ -84,6 +99,8 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 			game.SpawnItem(itemId, position);
 		} else if (SpawnMonster.IsSet) {
 			throw new NotImplementedException();
+		} else {
+			throw new IncompleteDataException(File.FilePath);
 		}
 	}
 

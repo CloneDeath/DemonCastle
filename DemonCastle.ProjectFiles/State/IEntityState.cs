@@ -11,6 +11,11 @@ public interface IEntityState {
 	void SetAnimation(Guid animationId);
 	void ChangeStateTo(Guid stateId);
 	void Despawn();
+	
+	void MoveLeft();
+	void MoveRight();
+	void MoveForward();
+	void MoveBackward();
 }
 
 public interface IVariables {

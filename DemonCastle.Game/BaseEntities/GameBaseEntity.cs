@@ -2,18 +2,21 @@ using System;
 using DemonCastle.Game.Animations;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.BaseEntities;
 
 public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState {
+	protected readonly LevelInfo Level;
 	private readonly BaseEntityVariables _variables;
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 
-	protected GameBaseEntity(IGameState game, IBaseEntityInfo entity, IGameLogger logger, DebugState debug)
+	protected GameBaseEntity(IGameState game, LevelInfo level, IBaseEntityInfo entity, IGameLogger logger, DebugState debug)
 		: base(game, logger, debug) {
+		Level = level;
 		Name = nameof(GameBaseEntity);
 
 		CollisionShape.Position = new Vector2(0, -(float)Math.Floor(entity.Size.Y / 2d));
@@ -36,6 +39,11 @@ public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState 
 		MoveAndSlide();
 
 		_animation.Scale = new Vector2(Facing, 1);
+		AlignAnimationNodes();
+	}
+
+	protected override void AlignAnimationNodes() {
+		_animation.GlobalPosition = GlobalPosition.Round();
 	}
 
 	public virtual void Reset() {
