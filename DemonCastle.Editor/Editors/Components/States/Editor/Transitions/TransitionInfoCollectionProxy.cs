@@ -45,4 +45,8 @@ public class TransitionInfoCollectionProxy : IEnumerableInfo<EntityStateTransiti
 	public void RemoveAt(int index) {
 		_proxy?.Transitions.RemoveAt(index);
 	}
+
+	public void Move(int oldIndex, int newIndex) {
+		_proxy?.Transitions.Move(oldIndex, newIndex);
+	}
 }

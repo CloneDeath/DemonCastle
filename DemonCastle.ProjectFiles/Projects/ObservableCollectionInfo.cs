@@ -53,6 +53,12 @@ public abstract class ObservableCollectionInfo<TInfo, TData> : IEnumerableInfo<T
 
 	public TInfo this[int index] => InfoItems[index];
 
+	public void Move(int oldIndex, int newIndex) {
+		(DataItems[newIndex], DataItems[oldIndex]) = (DataItems[oldIndex], DataItems[newIndex]);
+		Save();
+		InfoItems.Move(oldIndex, newIndex);
+	}
+
 	#region IEnumerable
 	public IEnumerator<TInfo> GetEnumerator() => InfoItems.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

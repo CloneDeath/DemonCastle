@@ -20,7 +20,8 @@ public partial class EnumerableInfoListByEnum<TInfo, TEnum> : EnumerableInfoList
 
 		AddButton = new MenuButton {
 			Flat = false,
-			Text = "Add..."
+			Text = "Add...",
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		};
 		AddButton.GetPopup().IdPressed += AddButton_OnIdPressed;
 		var types = Enum.GetValues<TEnum>();
@@ -30,8 +31,8 @@ public partial class EnumerableInfoListByEnum<TInfo, TEnum> : EnumerableInfoList
 		}
 	}
 
-	protected override void AppendAddButton() {
-		AddChild(AddButton);
+	protected override void AppendAddButton(Control parent) {
+		parent.AddChild(AddButton);
 	}
 
 	private void AddButton_OnIdPressed(long id) {

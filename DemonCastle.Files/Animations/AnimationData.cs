@@ -5,6 +5,6 @@ namespace DemonCastle.Files.Animations;
 
 public class AnimationData {
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Name { get; set; } = string.Empty;
+	public string Name { get; set; } = "animation";
 	public List<FrameData> Frames { get; set; } = new();
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -16,7 +17,10 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	private readonly IEnumerableInfo<TInfo> _data;
 	private bool _enabled = true;
 
-	private Button? AddButton { get; set; }
+	private HBoxContainer TopButtons { get; }
+	private Button AddButton { get; }
+	private Button MoveUpButton { get; }
+	private Button MoveDownButton { get; }
 	private ItemList Items { get; }
 	private Button RemoveButton { get; }
 
@@ -24,8 +28,21 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 		_data = data;
 		Name = nameof(EnumerableInfoList<TInfo>);
 
-		AddButton = new Button { Text = "Add" };
-		AddButton.Pressed += AddButton_OnPressed;
+		TopButtons = new HBoxContainer();
+
+		{
+			AddButton = new Button {
+				Text = "Add",
+				SizeFlagsHorizontal = SizeFlags.ExpandFill
+			};
+			AddButton.Pressed += AddButton_OnPressed;
+
+			MoveUpButton = new Button { Icon = IconTextures.UpIcon };
+			MoveUpButton.Pressed += MoveUp_ButtonOnPressed;
+
+			MoveDownButton = new Button { Icon = IconTextures.DownIcon };
+			MoveDownButton.Pressed += MoveDownButton_OnPressed;
+		}
 
 		Items = new ItemList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
@@ -39,22 +56,62 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	public override void _Ready() {
 		base._Ready();
 
-		AppendAddButton();
+		AddChild(TopButtons);
+		AppendAddButton(TopButtons);
+		TopButtons.AddChild(MoveUpButton);
+		TopButtons.AddChild(MoveDownButton);
 		AddChild(Items);
 		AddChild(RemoveButton);
 
 		ReloadItems();
 	}
 
-	protected virtual void AppendAddButton() {
-		AddChild(AddButton);
+	public override void _Process(double delta) {
+		base._Process(delta);
+		var anythingSelected = SelectedIndex.HasValue;
+
+		MoveUpButton.Disabled = !anythingSelected || SelectedIndex <= 0;
+		MoveDownButton.Disabled = !anythingSelected || SelectedIndex >= _data.Count() - 1;
+		RemoveButton.Disabled = !anythingSelected;
+	}
+
+	protected int? SelectedIndex {
+		get {
+			var selected = Items.GetSelectedItems();
+			return selected.Any() ? selected[0] : null;
+		}
+		set {
+			if (value is null) {
+				Items.DeselectAll();
+			} else {
+				Items.Select(value.Value);
+			}
+		}
+	}
+
+	protected virtual void AppendAddButton(Control parent) {
+		parent.AddChild(AddButton);
+	}
+
+	private void MoveUp_ButtonOnPressed() {
+		var index = SelectedIndex;
+		if (index is null or < 1) return;
+		_data.Move(index.Value, index.Value - 1);
+		SelectedIndex = index - 1;
+	}
+
+	private void MoveDownButton_OnPressed() {
+		var index = SelectedIndex;
+		if (index is null || index >= _data.Count() - 1) return;
+		_data.Move(index.Value, index.Value + 1);
+		SelectedIndex = index + 1;
 	}
 
 	public virtual bool Enabled {
 		get => _enabled;
 		set {
 			_enabled = value;
-			if (AddButton != null) AddButton.Disabled = !value;
+			AddButton.Disabled = !value;
 			RemoveButton.Disabled = !value;
 		}
 	}
@@ -123,11 +180,5 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 
 	protected void OnItemSelected(TInfo? item) {
 		ItemSelected?.Invoke(item);
-	}
-
-	public override void _Process(double delta) {
-		base._Process(delta);
-
-		RemoveButton.Disabled = !Items.IsAnythingSelected();
 	}
 }
