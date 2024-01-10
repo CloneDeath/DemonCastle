@@ -18,11 +18,8 @@ public partial class SceneStack : Control {
 	}
 
 	public void Set(SceneInfo scene) {
-		var gameScene = new GameScene(_gameState);
-		_stack.Clear();
-		_stack.Push(gameScene);
-		gameScene.Load(scene);
-		AddChild(gameScene);
+		Pop(_stack.Count);
+		Push(scene);
 	}
 
 	public void Push(SceneInfo scene) {

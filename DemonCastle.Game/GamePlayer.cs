@@ -80,6 +80,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
+		if (Character == null) return;
 
 		AlignAnimationNodes();
 

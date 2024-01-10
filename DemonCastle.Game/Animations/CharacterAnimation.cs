@@ -46,7 +46,9 @@ public partial class CharacterAnimation : Node2D {
 			CurrentAnimation.Active = false;
 		}
 
-		CurrentAnimation = Animations[animationId];
+		if (!Animations.TryGetValue(animationId, out var animation)) return;
+
+		CurrentAnimation = animation;
 		CurrentAnimation.Visible = true;
 		CurrentAnimation.Active = true;
 		CurrentAnimation.Play();
