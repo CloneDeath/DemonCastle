@@ -5,8 +5,8 @@ using Godot;
 
 namespace DemonCastle.Editor.FileTreeView;
 
-public partial class ExplorerPanel : Container {
-	protected FlowContainer Controls { get; }
+public partial class ExplorerPanel : VBoxContainer {
+	protected HFlowContainer Controls { get; }
 	protected Button RefreshButton { get; }
 	protected Button CollapseButton { get; }
 	protected Button ExpandButton { get; }
@@ -20,11 +20,8 @@ public partial class ExplorerPanel : Container {
 	public ExplorerPanel(DirectoryNavigator directoryNavigator) {
 		Name = nameof(ExplorerPanel);
 
-		AddChild(Controls = new FlowContainer {
-			AnchorRight = 1,
-			OffsetRight = -5,
-			OffsetTop = 2,
-			OffsetBottom = 25
+		AddChild(Controls = new HFlowContainer {
+			Alignment = FlowContainer.AlignmentMode.End
 		});
 		{
 			Controls.AddChild(RefreshButton = new Button {
@@ -46,11 +43,7 @@ public partial class ExplorerPanel : Container {
 			ExpandButton.Pressed += ExpandButton_OnPressed;
 		}
 		AddChild(FileTree = new FileTree(directoryNavigator) {
-			AnchorRight = 1,
-			AnchorBottom = 1,
-			OffsetTop = 35,
-			OffsetRight = -5,
-			OffsetBottom = -5
+			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}
 
