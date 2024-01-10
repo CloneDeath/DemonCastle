@@ -34,13 +34,13 @@ public partial class ExplorerPanel : Container {
 			RefreshButton.Pressed += RefreshButton_OnPressed;
 
 			Controls.AddChild(CollapseButton = new Button {
-				Text = "-",
+				Icon = IconTextures.CollapseIcon,
 				TooltipText = "Collapse"
 			});
 			CollapseButton.Pressed += CollapseButton_OnPressed;
 
 			Controls.AddChild(ExpandButton = new Button {
-				Text = "+",
+				Icon = IconTextures.ExpandIcon,
 				TooltipText = "Expand"
 			});
 			ExpandButton.Pressed += ExpandButton_OnPressed;

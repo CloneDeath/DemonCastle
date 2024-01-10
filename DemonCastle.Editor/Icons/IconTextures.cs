@@ -6,6 +6,9 @@ public static class IconTextures {
 	public static Texture2D AddIcon { get; } = LoadTexture(nameof(AddIcon));
 	public static Texture2D AsepriteIcon { get; } = LoadTexture(nameof(AsepriteIcon));
 	public static Texture2D CharacterIcon { get; } = LoadTexture(nameof(CharacterIcon));
+	public static Texture2D CollapseIcon { get; } = LoadTexture(nameof(CollapseIcon));
+	public static Texture2D DownIcon { get; } = LoadTexture(nameof(DownIcon));
+	public static Texture2D ExpandIcon { get; } = LoadTexture(nameof(ExpandIcon));
 	public static Texture2D FolderIcon { get; } = LoadTexture(nameof(FolderIcon));
 	public static Texture2D FontIcon { get; } = LoadTexture(nameof(FontIcon));
 	public static Texture2D GridIcon { get; } = LoadTexture(nameof(GridIcon));
@@ -24,6 +27,7 @@ public static class IconTextures {
 	public static Texture2D TextFileIcon { get; } = LoadTexture(nameof(TextFileIcon));
 	public static Texture2D TextureIcon { get; } = LoadTexture(nameof(TextureIcon));
 	public static Texture2D UnknownIcon { get; } = LoadTexture(nameof(UnknownIcon));
+	public static Texture2D UpIcon { get; } = LoadTexture(nameof(UpIcon));
 	public static Texture2D WeaponIcon { get; } = LoadTexture(nameof(WeaponIcon));
 
 	private static Texture2D LoadTexture(string textureName) {
