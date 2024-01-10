@@ -10,6 +10,7 @@ public static class FileType {
 	public static IFileType Jpeg => new JpegFileType();
 	public static IFileType Jpg => new JpgFileType();
 	public static IFileType Level => new LevelFileType();
+	public static IFileType Md => new MdFileType();
 	public static IFileType Monster => new MonsterFileType();
 	public static IFileType Png => new PngFileType();
 	public static IFileType Project => new ProjectFileType();

@@ -15,6 +15,7 @@ public static class EditorFileType {
 	public static IEditorFileType Jpeg { get; } = new JpegEditorFileType();
 	public static IEditorFileType Jpg { get; } = new JpgEditorFileType();
 	public static IEditorFileType Level { get; } = new LevelEditorFileType();
+	public static IEditorFileType Md { get; } = new MdEditorFileType();
 	public static IEditorFileType Monster { get; } = new MonsterEditorFileType();
 	public static IEditorFileType Png { get; } = new PngEditorFileType();
 	public static IEditorFileType Project { get; } = new ProjectEditorFileType();
@@ -44,6 +45,7 @@ public static class EditorFileType {
 		Jpeg,
 		Jpg,
 		Level,
+		Md,
 		Monster,
 		Png,
 		Project,
