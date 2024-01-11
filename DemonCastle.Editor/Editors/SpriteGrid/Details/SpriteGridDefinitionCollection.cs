@@ -24,7 +24,7 @@ public partial class SpriteGridDefinitionCollection : VBoxContainer {
 		});
 		AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
 
-		AddChild(SpriteSelector = new SpriteSelectorPanel(spriteGrid) {
+		AddChild(SpriteSelector = new SpriteSelectorPanel(spriteGrid.GridSprites) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;

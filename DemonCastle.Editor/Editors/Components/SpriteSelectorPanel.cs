@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
@@ -12,7 +12,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 	private readonly List<SelectableSprite> _selection = new();
 	private ISpriteDefinition? _spriteDefinition;
 
-	public ISpriteSource SpriteSource { get; }
+	public IEnumerableInfo<ISpriteDefinition> Sprites { get; }
 
 	public ISpriteDefinition? SpriteDefinition {
 		get => _spriteDefinition;
@@ -25,27 +25,22 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 
 	public event Action<ISpriteDefinition?>? SpriteSelected;
 
-	public SpriteSelectorPanel(ISpriteSource spriteSource) {
-		SpriteSource = spriteSource;
+	public SpriteSelectorPanel(IEnumerableInfo<ISpriteDefinition> sprites) {
+		Sprites = sprites;
 		Reload();
 	}
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		if (SpriteSource is INotifyPropertyChanged notifySource) {
-			notifySource.PropertyChanged += SpriteSource_OnPropertyChanged;
-		}
+		Sprites.CollectionChanged += Sprites_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		if (SpriteSource is INotifyPropertyChanged notifySource) {
-			notifySource.PropertyChanged -= SpriteSource_OnPropertyChanged;
-		}
+		Sprites.CollectionChanged -= Sprites_OnCollectionChanged;
 	}
 
-	private void SpriteSource_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName != nameof(SpriteSource.Sprites)) return;
+	private void Sprites_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		var selected = GetSelectedSprite();
 		Reload();
 		SelectSpriteDefinition(selected);
@@ -66,7 +61,7 @@ public partial class SpriteSelectorPanel : HFlowContainer {
 		}
 		_selection.Clear();
 
-		foreach (var sprite in SpriteSource.Sprites) {
+		foreach (var sprite in Sprites) {
 			var c = new SelectableSprite(sprite);
 			AddChild(c);
 			_selection.Add(c);

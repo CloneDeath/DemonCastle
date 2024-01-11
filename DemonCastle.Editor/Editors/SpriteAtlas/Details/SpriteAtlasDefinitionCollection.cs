@@ -28,7 +28,7 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 		});
 		AddSpriteButton.Pressed += AddSpriteButton_OnPressed;
 
-		AddChild(SpriteSelector = new SpriteSelectorPanel(spriteAtlas) {
+		AddChild(SpriteSelector = new SpriteSelectorPanel(spriteAtlas.AtlasSprites) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		SpriteSelector.SpriteSelected += SpriteSelector_OnSpriteSelected;
