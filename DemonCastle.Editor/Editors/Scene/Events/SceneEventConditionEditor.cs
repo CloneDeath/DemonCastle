@@ -1,9 +1,9 @@
-using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
+namespace DemonCastle.Editor.Editors.Scene.Events;
 
 public partial class SceneEventConditionEditor : HFlowContainer {
 	public SceneEventConditionEditor(SceneEventConditionInfo when) {

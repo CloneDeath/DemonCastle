@@ -1,8 +1,8 @@
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
-using DemonCastle.Editor.Editors.Components.Properties;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
+namespace DemonCastle.Editor.Editors.Scene.Events;
 
 public partial class SceneEventEditor : PropertyCollection {
 	public SceneEventEditor(IFileInfo file, SceneEventInfo sceneEvent) {

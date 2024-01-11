@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.ProjectFiles.Projects.Data;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+namespace DemonCastle.Editor.Editors.Scene.Events.Conditions;
 
 public partial class ChoiceReferenceList<T> : ChoiceTree
 	where T : IListableInfo {

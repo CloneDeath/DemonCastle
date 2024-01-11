@@ -181,4 +181,6 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	protected void OnItemSelected(TInfo? item) {
 		ItemSelected?.Invoke(item);
 	}
+
+	public void ClearSelection() => Items.DeselectAll();
 }

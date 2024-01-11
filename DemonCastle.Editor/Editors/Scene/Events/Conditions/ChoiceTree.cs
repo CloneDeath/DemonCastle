@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+namespace DemonCastle.Editor.Editors.Scene.Events.Conditions;
 
 public partial class ChoiceTree : VBoxContainer, IEnumerable<ChoiceTreeOption> {
 	private readonly List<ChoiceTreeOption> _options = new();

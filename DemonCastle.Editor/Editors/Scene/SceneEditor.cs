@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.Editor.Editors.Scene.Events;
 using DemonCastle.Editor.Editors.Scene.View;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -18,7 +17,7 @@ public partial class SceneEditor : BaseEditor {
 	private VBoxContainer Left { get; }
 	private TabContainer LeftTabs { get; }
 	private EnumerableInfoListByEnum<IElementInfo, ElementType> ElementList { get; }
-	private SceneEventsList EventsList { get; }
+	private EnumerableInfoList<SceneEventInfo> EventsList { get; }
 
 	private HSplitContainer Right { get; }
 	private SceneItemEditor SceneItemEditor { get; }
@@ -38,13 +37,14 @@ public partial class SceneEditor : BaseEditor {
 			Left.AddChild(LeftTabs = new TabContainer {
 				SizeFlagsVertical = SizeFlags.ExpandFill
 			});
+			LeftTabs.TabSelected += LeftTabs_OnTabSelected;
 
 			LeftTabs.AddChild(ElementList = new EnumerableInfoListByEnum<IElementInfo, ElementType>(scene.Elements));
 			ElementList.ItemSelected += ElementList_OnElementSelected;
 			LeftTabs.SetTabTitle(0, "Elements");
 
-			LeftTabs.AddChild(EventsList = new SceneEventsList(scene.Events));
-			EventsList.SceneEventSelected += EventList_OnEventSelected;
+			LeftTabs.AddChild(EventsList = new EnumerableInfoList<SceneEventInfo>(scene.Events));
+			EventsList.ItemSelected += EventList_OnEventSelected;
 			LeftTabs.SetTabTitle(1, "Events");
 		}
 
@@ -57,6 +57,12 @@ public partial class SceneEditor : BaseEditor {
 				CustomMinimumSize = new Vector2(300, 300)
 			});
 		}
+	}
+
+	private void LeftTabs_OnTabSelected(long tab) {
+		ElementList.ClearSelection();
+		EventsList.ClearSelection();
+		SceneItemEditor.Clear();
 	}
 
 	private void EventList_OnEventSelected(SceneEventInfo? obj) {

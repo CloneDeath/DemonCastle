@@ -4,11 +4,13 @@ using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 
-public class SceneEventInfo : BaseInfo<SceneEventData> {
+public class SceneEventInfo : BaseInfo<SceneEventData>, IListableInfo {
 	public SceneEventInfo(IFileNavigator file, SceneEventData data) : base(file, data) {
 		When = new SceneEventConditionInfo(file, data.When);
 		Then = new SceneEventActionInfoCollection(file, data.Then);
 	}
+
+	public string ListLabel => Name;
 
 	public string Name {
 		get => Data.Name;
@@ -16,6 +18,7 @@ public class SceneEventInfo : BaseInfo<SceneEventData> {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(ListLabel);
 		}
 	}
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+namespace DemonCastle.Editor.Editors.Scene.Events.Conditions;
 
 public partial class ChoiceEnum<TEnum> : ChoiceTree where TEnum : struct, Enum {
 	public ChoiceEnum(TEnum? current, Action<TEnum> selected) {

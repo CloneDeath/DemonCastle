@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Editor.Editors.Components.Properties.Vector;
-using DemonCastle.Editor.Editors.Scene.Events.Editor.Conditions;
+using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Actions.ActionEnums;

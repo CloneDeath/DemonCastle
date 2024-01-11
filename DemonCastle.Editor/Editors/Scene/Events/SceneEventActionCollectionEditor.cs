@@ -3,7 +3,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Events.Editor;
+namespace DemonCastle.Editor.Editors.Scene.Events;
 
 public partial class SceneEventActionCollectionEditor : VBoxContainer {
 	private readonly IFileInfo _file;
