@@ -1,8 +1,8 @@
 using System;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
-using SpriteSelectorPanel = DemonCastle.Editor.Editors.Components.SpriteSelectorPanel;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid.Details;
 
@@ -40,7 +40,7 @@ public partial class SpriteGridDefinitionCollection : VBoxContainer {
 	}
 
 	private void AddSpriteButton_OnPressed() {
-		var sprite = _spriteGrid.CreateSprite();
+		var sprite = _spriteGrid.GridSprites.AppendNew();
 		SelectSprite(sprite);
 	}
 }

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -8,14 +6,13 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
-	private List<SpriteGridDataInfo> SpriteData { get; }
 
 	public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
-		SpriteData = Resource.Sprites.Select(s => new SpriteGridDataInfo(this, s)).ToList();
+		GridSprites = new SpriteDefinitionCollection<SpriteGridDataInfo, SpriteGridData>(file, new SpriteGridInfoFactory(this), Resource.Sprites);
 	}
 
-	public IEnumerable<SpriteGridDataInfo> GridSprites => SpriteData;
-	public IEnumerable<ISpriteDefinition> Sprites => SpriteData;
+	public SpriteDefinitionCollection<SpriteGridDataInfo, SpriteGridData> GridSprites { get; }
+	public IEnumerableInfo<ISpriteDefinition> Sprites => GridSprites;
 
 	public Texture2D Texture => File.GetTexture(Resource.File);
 
@@ -84,24 +81,5 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 			Save();
 			OnPropertyChanged();
 		}
-	}
-
-	public SpriteGridDataInfo CreateSprite() {
-		var spriteData = new SpriteGridData();
-		Resource.Sprites.Add(spriteData);
-		var spriteGridDataInfo = new SpriteGridDataInfo(this, spriteData);
-		SpriteData.Add(spriteGridDataInfo);
-		Save();
-		OnPropertyChanged(nameof(Sprites));
-		OnPropertyChanged(nameof(GridSprites));
-		return spriteGridDataInfo;
-	}
-
-	public void Remove(SpriteGridData data, SpriteGridDataInfo spriteGridDataInfo) {
-		Resource.Sprites.Remove(data);
-		SpriteData.Remove(spriteGridDataInfo);
-		Save();
-		OnPropertyChanged(nameof(Sprites));
-		OnPropertyChanged(nameof(GridSprites));
 	}
 }

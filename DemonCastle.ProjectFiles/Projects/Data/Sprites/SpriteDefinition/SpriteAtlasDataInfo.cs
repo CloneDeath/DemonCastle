@@ -10,12 +10,12 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 	public SpriteAtlasData Data { get; }
 
-	public SpriteAtlasDataInfo(SpriteAtlasInfo spriteAtlasInfo, SpriteAtlasData data) {
-		SpriteAtlasInfo = spriteAtlasInfo;
+	public SpriteAtlasDataInfo(SpriteAtlasInfo spriteAtlas, SpriteAtlasData data) {
+		SpriteAtlas = spriteAtlas;
 		Data = data;
 	}
 
-	protected SpriteAtlasInfo SpriteAtlasInfo { get; }
+	protected SpriteAtlasInfo SpriteAtlas { get; }
 
 	public Guid Id => Data.Id;
 
@@ -124,12 +124,12 @@ public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 		}
 	}
 
-	public Texture2D Texture => SpriteAtlasInfo.Texture;
+	public Texture2D Texture => SpriteAtlas.Texture;
 
-	public Color TransparentColor => SpriteAtlasInfo.TransparentColor;
+	public Color TransparentColor => SpriteAtlas.TransparentColor;
 	public float TransparentColorThreshold => 0.001f;
 
-	protected void Save() => SpriteAtlasInfo.Save();
+	protected void Save() => SpriteAtlas.Save();
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;

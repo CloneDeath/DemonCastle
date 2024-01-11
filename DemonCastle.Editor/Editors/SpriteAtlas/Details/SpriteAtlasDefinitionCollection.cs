@@ -1,9 +1,9 @@
 using System;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
-using SpriteSelectorPanel = DemonCastle.Editor.Editors.Components.SpriteSelectorPanel;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details;
 
@@ -63,7 +63,7 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 	}
 
 	private void AddSpriteButton_OnPressed() {
-		var sprite = _spriteAtlas.CreateSprite();
+		var sprite = _spriteAtlas.AtlasSprites.AppendNew();
 		SelectSprite(sprite);
 		SpriteSelected?.Invoke(sprite);
 	}
@@ -71,7 +71,7 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 	private void DeleteButton_OnPressed() {
 		var selectedSprite = _proxy.Proxy;
 		if (selectedSprite == null) return;
-		_spriteAtlas.DeleteSprite(selectedSprite);
+		_spriteAtlas.AtlasSprites.Remove(selectedSprite);
 		SelectSprite(null);
 		SpriteSelected?.Invoke(null);
 	}

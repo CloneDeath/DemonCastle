@@ -70,7 +70,7 @@ public class SpriteGridDataInfo : ISpriteDefinition, INotifyPropertyChanged {
 	public float TransparentColorThreshold => 0.001f;
 
 	public void Save() => SpriteGrid.Save();
-	public void Remove() => SpriteGrid.Remove(Data, this);
+	public void Remove() => SpriteGrid.GridSprites.Remove(this);
 
 	#region INotifyPropertyChanged
 	public event PropertyChangedEventHandler? PropertyChanged;
