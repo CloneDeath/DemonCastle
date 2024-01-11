@@ -15,6 +15,40 @@ public partial class FileTree : Tree {
 	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 
+	protected DirectoryNavigator Root { get; }
+	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
+	protected FilePopupMenu FilePopupMenu { get; }
+	protected DeleteDialog ConfirmDelete { get; }
+	protected RenameDialog ConfirmRename { get; }
+
+	public FileTree(DirectoryNavigator rootDirectory) {
+		Name = nameof(FileTree);
+		Root = rootDirectory;
+		AllowRmbSelect = true;
+
+		AddChild(ConfirmRename = new RenameDialog());
+		ConfirmRename.Confirmed += OnRenameConfirmed;
+
+		AddChild(ConfirmDelete = new DeleteDialog());
+		ConfirmDelete.Confirmed += OnDeleteConfirmed;
+
+		AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
+		DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
+		DirectoryPopupMenu.CreateEditorFile += OnCreateEditorFileSelected;
+		DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
+		DirectoryPopupMenu.OpenFolder += OnOpenFolder;
+		DirectoryPopupMenu.RenameDirectory += OnRename;
+		DirectoryPopupMenu.DeleteDirectory += OnDelete;
+
+		AddChild(FilePopupMenu = new FilePopupMenu());
+		FilePopupMenu.RenameFile += OnRename;
+		FilePopupMenu.DeleteFile += OnDelete;
+
+		CreateTree();
+		ItemActivated += FileActivated;
+		ItemMouseSelected += OnItemSelected;
+	}
+
 	public override void _GuiInput(InputEvent @event) {
 		base._GuiInput(@event);
 		if (Input.IsActionJustPressed(InputActions.EditorRename)) {
