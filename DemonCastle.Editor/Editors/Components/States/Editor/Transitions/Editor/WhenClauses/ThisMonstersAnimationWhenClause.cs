@@ -17,7 +17,7 @@ public class ThisMonstersAnimationWhenClause : IWhenClause {
 		when.Animation = null;
 	}
 
-	public Control GetControl(WhenInfo when) {
+	public Control GetControl() {
 		var control = new HBoxContainer();
 		control.AddChild(new Label { Text = "is" });
 

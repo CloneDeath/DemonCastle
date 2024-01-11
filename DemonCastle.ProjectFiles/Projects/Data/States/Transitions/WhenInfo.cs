@@ -30,7 +30,7 @@ public class WhenInfo : BaseInfo<EntityStateTransitionEvent> {
 
 	public RandomTimerExpiresInfo RandomTimerExpires { get; }
 
-	public bool IsConditionMet(IGameState game, IEntityState entity) {
+	public bool IsConditionMet(IEntityState entity) {
 		if (Self != null) {
 			return entity.WasKilled;
 		}

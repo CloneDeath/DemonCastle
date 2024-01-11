@@ -55,7 +55,7 @@ public partial class WhenEdit : HFlowContainer {
 			if (i == index) {
 				if (clause.IsSelected(when)) continue;
 				clause.MakeSelected(when);
-				ClauseParams.AddChild(clause.GetControl(when));
+				ClauseParams.AddChild(clause.GetControl());
 			} else {
 				if (!clause.IsSelected(when)) continue;
 				clause.MakeUnselected(when);
@@ -79,7 +79,7 @@ public partial class WhenEdit : HFlowContainer {
 			if (!clause.IsSelected(when)) continue;
 
 			clause.MakeSelected(when);
-			ClauseParams.AddChild(clause.GetControl(when));
+			ClauseParams.AddChild(clause.GetControl());
 			Clause.Selected = i;
 			break;
 		}

@@ -8,5 +8,5 @@ public interface IWhenClause {
 	public bool IsSelected(WhenInfo when);
 	public void MakeSelected(WhenInfo when);
 	public void MakeUnselected(WhenInfo when);
-	public Control GetControl(WhenInfo when);
+	public Control GetControl();
 }

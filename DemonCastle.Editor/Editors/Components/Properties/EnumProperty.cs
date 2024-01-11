@@ -13,8 +13,6 @@ public partial class EnumProperty<TEnum> : BaseProperty where TEnum : struct, En
 	protected IPropertyBinding<TEnum> Binding { get; }
 	protected OptionButton OptionButton { get; }
 
-	public event Action<TEnum>? ItemSelected;
-
 	public TEnum PropertyValue {
 		get => OptionButton.Selected < 0 ? _options[0] : _options[OptionButton.Selected];
 		set => OptionButton.Selected = _options.IndexOf(value);
@@ -61,9 +59,6 @@ public partial class EnumProperty<TEnum> : BaseProperty where TEnum : struct, En
 
 	private void OnItemSelected(long index) {
 		Binding.Set(index < 0 ? _options[0] : _options[(int)index]);
-		if (index > 0) {
-			ItemSelected?.Invoke(_options[(int)index]);
-		}
 	}
 
 	public override void Enable() {

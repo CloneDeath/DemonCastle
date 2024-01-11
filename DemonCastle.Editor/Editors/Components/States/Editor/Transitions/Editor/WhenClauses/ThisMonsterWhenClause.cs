@@ -17,7 +17,7 @@ public class ThisMonsterWhenClause : IWhenClause {
 		when.Self = null;
 	}
 
-	public Control GetControl(WhenInfo when) {
+	public Control GetControl() {
 		var control = new HBoxContainer();
 		control.AddChild(new Label { Text = "is" });
 

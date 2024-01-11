@@ -16,7 +16,7 @@ public class ARandomTimerWhenClause : IWhenClause {
 		when.RandomTimerExpires.IsSet = false;
 	}
 
-	public Control GetControl(WhenInfo when) {
+	public Control GetControl() {
 		var control = new HBoxContainer();
 		control.AddChild(new Label { Text = "between" });
 		control.AddChild(new SpinBox { Value = 1 });

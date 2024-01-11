@@ -13,9 +13,9 @@ public class EntityStateTransitionInfoCollection : ObservableCollectionInfo<Enti
 
 	protected override void Save() => _file.Save();
 
-	public void CheckAndTriggerTransitions(IGameState game, IEntityState entity) {
+	public void CheckAndTriggerTransitions(IEntityState entity) {
 		foreach (var transition in this) {
-			transition.CheckAndTriggerTransition(game, entity);
+			transition.CheckAndTriggerTransition(entity);
 		}
 	}
 }

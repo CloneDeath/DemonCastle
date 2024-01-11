@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using DemonCastle.Files.Elements;
 using DemonCastle.Game.Animations.Generic;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -35,6 +36,18 @@ public partial class HealthBarElementView : Container {
 					Refresh();
 				}
 				break;
+			case HealthBarSource.PlayerMP:
+				if (e.PropertyName is nameof(_game.Player.MP) or nameof(_game.Player.MaxMP)) {
+					Refresh();
+				}
+				break;
+			case HealthBarSource.PlayerLives:
+				if (e.PropertyName is nameof(_game.Player.Lives) or nameof(_game.Player.MaxLives)) {
+					Refresh();
+				}
+				break;
+			default:
+				throw new InvalidEnumValueException<HealthBarSource>(_element.Source);
 		}
 	}
 
