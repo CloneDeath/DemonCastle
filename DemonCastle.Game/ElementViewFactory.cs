@@ -9,12 +9,12 @@ using Godot;
 namespace DemonCastle.Game;
 
 public static class ElementViewFactory {
-	public static Node GetView(IElementInfo element, IGameState gameState) {
+	public static Node GetView(IElementInfo element, IGameState game) {
 		return element.Type switch {
 			ElementType.ColorRect => new ColorRectElementView((ColorRectElementInfo)element),
-			ElementType.HealthBar => new HealthBarElementView((HealthBarElementInfo)element),
-			ElementType.Label => new LabelElementView((LabelElementInfo)element, gameState),
-			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, gameState),
+			ElementType.HealthBar => new HealthBarElementView((HealthBarElementInfo)element, game),
+			ElementType.Label => new LabelElementView((LabelElementInfo)element, game),
+			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, game),
 			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
 			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};

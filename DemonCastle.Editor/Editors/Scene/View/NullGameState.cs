@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -41,10 +42,15 @@ public class NullInputState : IInputState {
 
 public class NullPlayerState : IPlayerState {
 	public int HP => 9;
+	public int MaxHP => 9;
 	public int MP => 9;
+	public int MaxMP => 9;
 	public int Lives => 3;
+	public int? MaxLives => 9;
 	public int Score => 42;
 	public Vector2 Position => Vector2.Zero;
+	
+	public event PropertyChangedEventHandler? PropertyChanged;
 }
 
 public class NullAreaState : ICurrentArea {
