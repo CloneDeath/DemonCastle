@@ -1,9 +1,9 @@
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.Rect;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
 using Godot;
-using DemonCastle.Editor.Editors.Components.Properties;
 
-namespace DemonCastle.Editor.Editors.Scene.Elements.Editor;
+namespace DemonCastle.Editor.Editors.Scene.Elements;
 
 public partial class ElementDetails : PropertyCollection {
 	public ElementDetails(IElementInfo element) {

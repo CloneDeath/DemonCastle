@@ -1,6 +1,6 @@
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 
-namespace DemonCastle.Editor.Editors.Scene.Elements.Editor.Types;
+namespace DemonCastle.Editor.Editors.Scene.Elements.Types;
 
 public partial class ColorRectElementDetails : ElementDetails {
 	public ColorRectElementDetails(ColorRectElementInfo element) : base(element) {

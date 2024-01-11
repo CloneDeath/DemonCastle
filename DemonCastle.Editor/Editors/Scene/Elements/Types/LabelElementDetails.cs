@@ -7,7 +7,7 @@ using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Scene.Elements.Editor.Types;
+namespace DemonCastle.Editor.Editors.Scene.Elements.Types;
 
 public partial class LabelElementDetails : ElementDetails {
 	public LabelElementDetails(IFileInfo file, LabelElementInfo element) : base(element) {

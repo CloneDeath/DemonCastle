@@ -1,5 +1,7 @@
 using System;
 using DemonCastle.Files.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace DemonCastle.Files.Elements;
 
@@ -13,4 +15,12 @@ public class HealthBarElementData : ElementData {
 
 	public string SpriteFile { get; set; } = string.Empty;
 	public Guid SpriteId { get; set; } = Guid.Empty;
+	public HealthBarSource Source { get; set; } = HealthBarSource.PlayerHP;
+}
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum HealthBarSource {
+	PlayerHP,
+	PlayerMP,
+	PlayerLives
 }

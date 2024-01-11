@@ -1,4 +1,4 @@
-using DemonCastle.Editor.Editors.Scene.Elements.Editor.Types;
+using DemonCastle.Editor.Editors.Scene.Elements.Types;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
