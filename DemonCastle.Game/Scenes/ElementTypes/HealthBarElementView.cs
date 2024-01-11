@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using DemonCastle.Files.Elements;
 using DemonCastle.Game.Animations.Generic;
@@ -61,6 +62,28 @@ public partial class HealthBarElementView : Container {
 		Refresh();
 	}
 
+	private int Value {
+		get {
+			return _element.Source switch {
+				HealthBarSource.PlayerHP => _game.Player.HP,
+				HealthBarSource.PlayerMP => _game.Player.MP,
+				HealthBarSource.PlayerLives => _game.Player.Lives,
+				_ => throw new InvalidEnumValueException<HealthBarSource>(_element.Source)
+			};
+		}
+	}
+
+	private int? MaxValue {
+		get {
+			return _element.Source switch {
+				HealthBarSource.PlayerHP => _game.Player.MaxHP,
+				HealthBarSource.PlayerMP => _game.Player.MaxMP,
+				HealthBarSource.PlayerLives => _game.Player.MaxLives,
+				_ => throw new InvalidEnumValueException<HealthBarSource>(_element.Source)
+			};
+		}
+	}
+
 	private void Refresh() {
 		Position = _element.Region.Position;
 
@@ -68,10 +91,20 @@ public partial class HealthBarElementView : Container {
 			child.QueueFree();
 		}
 
-		for (var x = 0; x < NumberOfElements; x++) {
+		for (var x = 0; x < NumberOfElementsToDisplay; x++) {
 			AddChild(new SpriteDefinitionNode(_element.SpriteDefinition, Vector2I.Zero) {
 				Position = new Vector2(x * ElementWidth, 0)
 			});
+		}
+	}
+
+	private int NumberOfElementsToDisplay {
+		get {
+			if (!MaxValue.HasValue) {
+				return Math.Min(Value, NumberOfElements);
+			}
+			var percentage = Value * 1f / MaxValue.Value;
+			return (int)Math.Ceiling(NumberOfElements * percentage);
 		}
 	}
 }
