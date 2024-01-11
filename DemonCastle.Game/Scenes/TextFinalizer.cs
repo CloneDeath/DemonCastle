@@ -36,12 +36,10 @@ public class TextFinalizer {
 	};
 
 	private string GetVariable(string variable, string format) {
-		if (IntegerValues.TryGetValue(variable, out var function)) {
-			var value = function(_gameState);
-			return value.ToString(format);
-		}
+		if (!IntegerValues.TryGetValue(variable, out var function)) return variable;
 
-		return variable;
+		var value = function(_gameState);
+		return value.ToString(format);
 	}
 
 	private string GetTransformedText(string replaced) {

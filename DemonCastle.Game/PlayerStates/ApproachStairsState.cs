@@ -18,11 +18,11 @@ public class ApproachStairsState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		if (_target.PointsUp && !Input.IsActionPressed(InputActions.PlayerMoveUp)) {
-			return new NormalState();
-		}
-		if (!_target.PointsUp && !Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-			return new NormalState();
+		switch (_target.PointsUp) {
+			case true when !Input.IsActionPressed(InputActions.PlayerMoveUp):
+				return new NormalState();
+			case false when !Input.IsActionPressed(InputActions.PlayerMoveDown):
+				return new NormalState();
 		}
 
 		player.Facing = _target.GlobalPosition.X > player.GlobalPosition.X ? 1 : -1;

@@ -51,7 +51,7 @@ public class NormalState : IState {
 		return null;
 	}
 
-	private static GameTileStairsNode? GetTargetInStairs(GamePlayer player, GameTileStairs? stairs) {
+	private static GameTileStairsNode? GetTargetInStairs(Node2D player, GameTileStairs? stairs) {
 		if (stairs == null) return null;
 		var startYDist = Math.Abs(stairs.Start.GlobalPosition.Y - player.GlobalPosition.Y);
 		var endYDist = Math.Abs(stairs.End.GlobalPosition.Y - player.GlobalPosition.Y);

@@ -16,19 +16,11 @@ public class ClimbingStairsState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		if (Input.IsActionPressed(InputActions.PlayerMoveUp)) {
-			return MoveTowards(player, UpTarget);
-		}
-		if (Input.IsActionPressed(InputActions.PlayerMoveDown)) {
-			return MoveTowards(player, DownTarget);
-		}
-		if (Input.IsActionPressed(InputActions.PlayerMoveLeft)) {
-			return MoveTowards(player, LeftTarget);
-		}
-		if (Input.IsActionPressed(InputActions.PlayerMoveRight)) {
-			return MoveTowards(player, RightTarget);
-		}
-		return null;
+		return Input.IsActionPressed(InputActions.PlayerMoveUp) ? MoveTowards(player, UpTarget)
+			   : Input.IsActionPressed(InputActions.PlayerMoveDown) ? MoveTowards(player, DownTarget)
+			   : Input.IsActionPressed(InputActions.PlayerMoveLeft) ? MoveTowards(player, LeftTarget)
+			   : Input.IsActionPressed(InputActions.PlayerMoveRight) ? MoveTowards(player, RightTarget)
+			   : null;
 	}
 
 	private IState? MoveTowards(GamePlayer player, Node2D target) {

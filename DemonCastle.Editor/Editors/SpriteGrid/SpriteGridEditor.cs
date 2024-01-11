@@ -4,6 +4,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 
@@ -15,6 +16,8 @@ public partial class SpriteGridEditor : BaseEditor {
 	protected VBoxContainer LeftContainer { get; }
 	protected PropertyCollection SpriteGridDetails { get; }
 	protected SpriteGridDefinitionCollection SpriteCollection { get; }
+	protected SpriteDetails SpriteDetails { get; }
+
 	protected SpriteGridTextureView TextureView { get; }
 
 	public SpriteGridEditor(SpriteGridInfo spriteGrid) {
@@ -31,9 +34,18 @@ public partial class SpriteGridEditor : BaseEditor {
 			LeftContainer.AddChild(SpriteGridDetails = new SpriteGridDetails(spriteGrid) {
 				CustomMinimumSize = new Vector2(410, 0)
 			});
+
 			LeftContainer.AddChild(SpriteCollection = new SpriteGridDefinitionCollection(spriteGrid));
+			SpriteCollection.SpriteSelected += SpriteCollection_OnSpriteSelected;
+
+			LeftContainer.AddChild(SpriteDetails = new SpriteDetails());
+			SpriteDetails.Disable();
 		}
 
 		SplitContainer.AddChild(TextureView = new SpriteGridTextureView(spriteGrid));
+	}
+
+	private void SpriteCollection_OnSpriteSelected(SpriteGridDataInfo? data) {
+		SpriteDetails.Proxy = data;
 	}
 }
