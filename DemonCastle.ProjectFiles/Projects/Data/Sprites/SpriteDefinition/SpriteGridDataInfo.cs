@@ -11,6 +11,18 @@ public class SpriteGridDataInfo : ISpriteDefinition {
 	public SpriteGridDataInfo(SpriteGridInfo spriteGrid, SpriteGridData data) {
 		SpriteGrid = spriteGrid;
 		Data = data;
+		spriteGrid.PropertyChanged += SpriteGrid_OnPropertyChanged;
+	}
+
+	private void SpriteGrid_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName is nameof(SpriteGridInfo.Width)
+			or nameof(SpriteGridInfo.Height)
+			or nameof(SpriteGridInfo.XOffset)
+			or nameof(SpriteGridInfo.YOffset)
+			or nameof(SpriteGridInfo.XSeparation)
+			or nameof(SpriteGridInfo.YSeparation)) {
+			OnPropertyChanged(nameof(Region));
+		}
 	}
 
 	protected SpriteGridData Data { get; }
