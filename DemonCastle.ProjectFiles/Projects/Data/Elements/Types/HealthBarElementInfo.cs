@@ -57,6 +57,11 @@ public class HealthBarElementInfo : BaseInfo<HealthBarElementData>, IElementInfo
 		}
 	}
 
+	public HealthBarSource Source {
+		get => Data.Source;
+		set => SaveField(ref Data.Source, value);
+	}
+
 	protected ISpriteSource SpriteSource => File.FileExists(Data.SpriteFile)
 												? File.GetSprite(Data.SpriteFile)
 												: new NullSpriteSource();

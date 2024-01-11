@@ -15,7 +15,7 @@ public class HealthBarElementData : ElementData {
 
 	public string SpriteFile { get; set; } = string.Empty;
 	public Guid SpriteId { get; set; } = Guid.Empty;
-	public HealthBarSource Source { get; set; } = HealthBarSource.PlayerHP;
+	public HealthBarSource Source = HealthBarSource.PlayerHP;
 }
 
 [JsonConverter(typeof(StringEnumConverter))]

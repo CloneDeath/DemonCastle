@@ -10,5 +10,6 @@ public partial class HealthBarElementDetails : ElementDetails {
 
 		AddFile("Sprite File", element, file.Directory, e => e.SpriteFile, FileType.SpriteSources);
 		AddSpriteReference("Sprite", element, e => e.SpriteId, element.SpriteDefinitions);
+		AddEnum("Source", element, e => e.Source);
 	}
 }
