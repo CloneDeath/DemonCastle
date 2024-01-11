@@ -17,6 +17,8 @@ public partial class LabelElementDetails : ElementDetails {
 		AddNullableFile("Font", element, file.Directory, e => e.FontFile, FileType.FontFiles);
 		AddInteger("Font Size", element, e => e.FontSize);
 		AddColor("Color", element, e => e.Color);
+		AddEnum("Horizontal Alignment", element, e => e.HorizontalAlignment);
+		AddEnum("Vertical Alignment", element, e => e.VerticalAlignment);
 		AddEnum("Text Transform", element, e => e.TextTransform);
 	}
 }

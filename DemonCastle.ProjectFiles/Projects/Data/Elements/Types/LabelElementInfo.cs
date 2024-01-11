@@ -4,6 +4,8 @@ using DemonCastle.Files.Common;
 using DemonCastle.Files.Elements;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
+using HorizontalAlignment = DemonCastle.Files.Elements.HorizontalAlignment;
+using VerticalAlignment = DemonCastle.Files.Elements.VerticalAlignment;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 
@@ -71,6 +73,16 @@ public class LabelElementInfo : BaseInfo<LabelElementData>, IElementInfo {
 			Save();
 			OnPropertyChanged();
 		}
+	}
+
+	public HorizontalAlignment HorizontalAlignment {
+		get => Data.HorizontalAlignment;
+		set => SaveField(ref Data.HorizontalAlignment, value);
+	}
+
+	public VerticalAlignment VerticalAlignment {
+		get => Data.VerticalAlignment;
+		set => SaveField(ref Data.VerticalAlignment, value);
 	}
 
 	public TextTransform TextTransform {

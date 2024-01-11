@@ -40,7 +40,8 @@ public class SpriteAtlasInfoFactory : IInfoFactory<SpriteAtlasDataInfo, SpriteAt
 			X = lastSprite?.X + lastSprite?.Width ?? 0,
 			Y = lastSprite?.Y ?? 0,
 			Height = lastSprite?.Height ?? 16,
-			Width = lastSprite?.Width ?? 16
+			Width = lastSprite?.Width ?? 16,
+			FlipHorizontal = lastSprite?.FlipHorizontal ?? false
 		};
 	}
 }
@@ -53,5 +54,12 @@ public class SpriteGridInfoFactory : IInfoFactory<SpriteGridDataInfo, SpriteGrid
 	}
 
 	public SpriteGridDataInfo CreateInfo(SpriteGridData data) => new(_spriteGrid, data);
-	public SpriteGridData CreateData() => new();
+	public SpriteGridData CreateData() {
+		var lastSprite = _spriteGrid.Sprites.LastOrDefault() as SpriteGridDataInfo;
+		return new SpriteGridData {
+			X = lastSprite?.X + 1 ?? 0,
+			Y = lastSprite?.Y ?? 0,
+			FlipHorizontal = lastSprite?.FlipHorizontal ?? false
+		};
+	}
 }
