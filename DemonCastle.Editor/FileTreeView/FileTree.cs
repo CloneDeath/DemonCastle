@@ -45,7 +45,7 @@ public partial class FileTree : Tree {
 		FilePopupMenu.DeleteFile += OnDelete;
 
 		CreateTree();
-		ItemActivated += FileActivated;
+		ItemActivated += OnItemActivated;
 		ItemMouseSelected += OnItemSelected;
 	}
 
@@ -56,11 +56,14 @@ public partial class FileTree : Tree {
 		}
 	}
 
-	protected void FileActivated() {
+	protected void OnItemActivated() {
 		var selected = GetSelected();
-		if (selected == null || !FileMap.ContainsKey(selected)) return;
-
-		OnFileActivated?.Invoke(FileMap[selected]);
+		if (selected == null) return;
+		if (FileMap.TryGetValue(selected, out var value)) {
+			OnFileActivated?.Invoke(value);
+		} else if (DirectoryMap.ContainsKey(selected)) {
+			selected.Collapsed = !selected.Collapsed;
+		}
 	}
 
 	protected void OnItemSelected(Vector2 position, long button) {
@@ -209,6 +212,7 @@ public partial class FileTree : Tree {
 		CreateTree();
 	}
 
+	#region Drag-and-drop
 	public override Variant _GetDragData(Vector2 atPosition) {
 		DropModeFlags = (int) DropModeFlagsEnum.OnItem;
 
@@ -254,4 +258,5 @@ public partial class FileTree : Tree {
 				break;
 		}
 	}
+	#endregion
 }
