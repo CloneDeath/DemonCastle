@@ -10,16 +10,16 @@ using Godot;
 namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
-	public event Action<FileNavigator>? OnFileActivated;
-
-	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
-	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
-
 	protected DirectoryNavigator Root { get; }
 	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
 	protected FilePopupMenu FilePopupMenu { get; }
 	protected DeleteDialog ConfirmDelete { get; }
 	protected RenameDialog ConfirmRename { get; }
+
+	public event Action<FileNavigator>? OnFileActivated;
+
+	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
+	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 
 	public FileTree(DirectoryNavigator rootDirectory) {
 		Name = nameof(FileTree);
