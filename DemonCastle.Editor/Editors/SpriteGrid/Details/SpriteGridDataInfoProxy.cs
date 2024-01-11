@@ -8,7 +8,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid.Details;
 
-public class SpriteGridDataInfoProxy : INotifyPropertyChanged, ISpriteDefinition {
+public class SpriteGridDataInfoProxy : ISpriteDefinition {
 	private SpriteGridDataInfo? _proxy;
 
 	public SpriteGridDataInfo? Proxy {

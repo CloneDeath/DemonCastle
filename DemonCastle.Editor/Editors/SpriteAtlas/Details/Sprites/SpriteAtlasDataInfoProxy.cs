@@ -8,7 +8,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 
-public class SpriteAtlasDataInfoProxy : INotifyPropertyChanged, ISpriteDefinition {
+public class SpriteAtlasDataInfoProxy : ISpriteDefinition {
 	private SpriteAtlasDataInfo? _proxy;
 
 	public SpriteAtlasDataInfo? Proxy {

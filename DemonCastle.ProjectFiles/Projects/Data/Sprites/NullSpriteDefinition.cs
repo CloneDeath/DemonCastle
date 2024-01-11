@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 
@@ -18,4 +21,19 @@ public class NullSpriteDefinition : ISpriteDefinition {
 	public bool FlipHorizontal => false;
 	public Color TransparentColor => Colors.Transparent;
 	public float TransparentColorThreshold => 0.01f;
+
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler? PropertyChanged;
+
+	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+
+	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
+		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+		field = value;
+		OnPropertyChanged(propertyName);
+		return true;
+	}
+	#endregion
 }

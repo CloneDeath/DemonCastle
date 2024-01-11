@@ -21,8 +21,8 @@ public partial class SpriteDefinitionView : CenterContainer {
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		if (_definition is INotifyPropertyChanged definitionNotify) {
-			definitionNotify.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
+		if (_definition != null) {
+			_definition.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
 		}
 	}
 
@@ -35,12 +35,12 @@ public partial class SpriteDefinitionView : CenterContainer {
 	}
 
 	public void Load(ISpriteDefinition? definition) {
-		if (_definition is INotifyPropertyChanged oldDefinition) {
-			oldDefinition.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
+		if (_definition != null) {
+			_definition.PropertyChanged -= DefinitionNotify_OnPropertyChanged;
 		}
 		_definition = definition;
-		if (_definition is INotifyPropertyChanged newDefinition) {
-			newDefinition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
+		if (_definition != null) {
+			_definition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
 		}
 
 		Rect.Texture = _definition != null

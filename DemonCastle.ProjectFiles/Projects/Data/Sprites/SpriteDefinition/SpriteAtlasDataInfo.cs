@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 
-public class SpriteAtlasDataInfo : ISpriteDefinition, INotifyPropertyChanged {
+public class SpriteAtlasDataInfo : ISpriteDefinition {
 	public SpriteAtlasData Data { get; }
 
 	public SpriteAtlasDataInfo(SpriteAtlasInfo spriteAtlas, SpriteAtlasData data) {

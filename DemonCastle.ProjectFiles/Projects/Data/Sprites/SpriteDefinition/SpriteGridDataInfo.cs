@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 
-public class SpriteGridDataInfo : ISpriteDefinition, INotifyPropertyChanged {
+public class SpriteGridDataInfo : ISpriteDefinition {
 	public SpriteGridDataInfo(SpriteGridInfo spriteGrid, SpriteGridData data) {
 		SpriteGrid = spriteGrid;
 		Data = data;
