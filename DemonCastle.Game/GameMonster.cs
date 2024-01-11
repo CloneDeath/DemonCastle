@@ -24,13 +24,12 @@ public partial class GameMonster : GameBaseEntity {
 	public override float MoveSpeed => _monster.MoveSpeed * Level.TileSize.X;
 	protected override float Gravity => _monster.Gravity;
 
-	public override void TakeDamage(int amount) {
-		base.TakeDamage(amount);
-
+	protected override bool ApplyDamage(int amount) {
 		Hp -= amount;
 		if (_monster.DespawnOnDeath && Hp <= 0) {
 			Despawn();
 		}
+		return true;
 	}
 
 	public override void Reset() {

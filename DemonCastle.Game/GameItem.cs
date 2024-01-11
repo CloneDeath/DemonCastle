@@ -15,4 +15,5 @@ public partial class GameItem : GameBaseEntity {
 
 	public override float MoveSpeed => 0;
 	protected override float Gravity => 0;
+	protected override bool ApplyDamage(int amount) => false;
 }

@@ -25,6 +25,8 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 
 	protected Vector2 _moveDirection = Vector2.Zero;
 
+	protected HitInvulnerabilityTracker InvulnerabilityTracker { get; }
+
 	protected PlayerEntityCommon(IGameState game, IGameLogger logger, DebugState debug) {
 		Game = game;
 		Logger = logger;
@@ -38,12 +40,18 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 		CollisionLayer = (uint) CollisionLayers.Player;
 		CollisionMask = (uint) CollisionLayers.World;
 
+		AddChild(InvulnerabilityTracker = new HitInvulnerabilityTracker());
 		AddChild(new DebugPosition2D(debug));
 	}
 
-	public virtual void TakeDamage(int amount) {
-
+	public void TakeDamage(int amount) {
+		if (InvulnerabilityTracker.IsInvulnerable) return;
+		if (ApplyDamage(amount)) {
+			InvulnerabilityTracker.EntityHasTakenDamage();
+		}
 	}
+
+	protected abstract bool ApplyDamage(int amount);
 
 	public void MoveRight() => _moveDirection = Vector2.Right;
 	public void MoveLeft() => _moveDirection = Vector2.Left;

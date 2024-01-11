@@ -66,11 +66,12 @@ public partial class GamePlayer : PlayerEntityCommon {
 	public PlayerVariables PlayerState { get; }
 	public Vector2 PositionInArea => GlobalPosition - (Game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
 
-	public override void TakeDamage(int amount) {
+	protected override bool ApplyDamage(int amount) {
 		PlayerState.HP -= amount;
 		if (PlayerState.HP <= 0) {
 			Visible = false;
 		}
+		return true;
 	}
 
 	public override void _EnterTree() {
