@@ -1,16 +1,19 @@
 using System.Collections.Specialized;
 using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
+using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game.Scenes.ElementTypes;
 
 public partial class OptionListElementView : VBoxContainer {
 	private readonly OptionListElementInfo _element;
+	private readonly IGameState _game;
 
-	public OptionListElementView(OptionListElementInfo element) {
+	public OptionListElementView(OptionListElementInfo element, IGameState game) {
 		_element = element;
-		Name = nameof(LabelElementView);
+		_game = game;
+		Name = nameof(OptionListElementView);
 		Refresh();
 	}
 
@@ -43,10 +46,53 @@ public partial class OptionListElementView : VBoxContainer {
 		}
 
 		foreach (var option in _element.Options) {
-			var label = new Label {
-				Text = option.Text
-			};
-			AddChild(label);
+			AddChild(new OptionView(_element, option, _game));
 		}
+	}
+}
+
+public partial class OptionView : Label {
+	private readonly OptionListElementInfo _optionList;
+	private readonly OptionInfo _option;
+	private readonly IGameState _game;
+
+	public OptionView(OptionListElementInfo optionList, OptionInfo option, IGameState game) {
+		_optionList = optionList;
+		_option = option;
+		_game = game;
+
+		Name = nameof(OptionView);
+
+		LabelSettings = new LabelSettings();
+
+		Refresh();
+	}
+
+	public override void _EnterTree() {
+		base._EnterTree();
+		_optionList.PropertyChanged += OptionList_OnPropertyChanged;
+		_option.PropertyChanged += Option_OnPropertyChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		_optionList.PropertyChanged -= OptionList_OnPropertyChanged;
+		_option.PropertyChanged -= Option_OnPropertyChanged;
+	}
+
+	private void OptionList_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		Refresh();
+	}
+
+	private void Option_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		Refresh();
+	}
+
+	public void Refresh() {
+		Text = new TextFinalizer(_game, _optionList.TextTransform).Finalize(_option.Text);
+
+		LabelSettings.Font = _optionList.Font;
+		LabelSettings.FontSize = _optionList.FontSize;
+		LabelSettings.FontColor = _optionList.Color;
 	}
 }

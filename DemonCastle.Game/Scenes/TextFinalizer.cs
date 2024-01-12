@@ -8,11 +8,11 @@ using DemonCastle.ProjectFiles.State;
 namespace DemonCastle.Game.Scenes;
 
 public class TextFinalizer {
-	private readonly IGameState _gameState;
+	private readonly IGameState _game;
 	private readonly TextTransform _transform;
 
-	public TextFinalizer(IGameState gameState, TextTransform transform) {
-		_gameState = gameState;
+	public TextFinalizer(IGameState game, TextTransform transform) {
+		_game = game;
 		_transform = transform;
 	}
 
@@ -38,7 +38,7 @@ public class TextFinalizer {
 	private string GetVariable(string variable, string format) {
 		if (!IntegerValues.TryGetValue(variable, out var function)) return variable;
 
-		var value = function(_gameState);
+		var value = function(_game);
 		return value.ToString(format);
 	}
 
