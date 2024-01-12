@@ -1,5 +1,4 @@
 using DemonCastle.ProjectFiles;
-using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 
