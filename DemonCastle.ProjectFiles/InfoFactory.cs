@@ -24,6 +24,7 @@ public static class InfoFactory {
 			ElementType.Label => new LabelElementInfo(file, (LabelElementData)data),
 			ElementType.LevelView => new LevelViewElementInfo(file, (LevelViewElementData)data),
 			ElementType.Sprite => new SpriteElementInfo(file, (SpriteElementData)data),
+			ElementType.OptionList => new OptionListElementInfo(file, (OptionListElementData)data),
 			_ => throw new InvalidEnumValueException<ElementType>(data.Type)
 		};
 	}

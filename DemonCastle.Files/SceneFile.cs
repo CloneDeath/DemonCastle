@@ -30,7 +30,8 @@ public enum ElementType {
 	HealthBar,
 	Label,
 	LevelView,
-	Sprite
+	Sprite,
+	OptionList
 }
 
 [AttributeUsage(AttributeTargets.Class)]

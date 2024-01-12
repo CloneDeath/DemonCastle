@@ -16,6 +16,7 @@ public static class ElementDetailsFactory {
 			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.LevelView => new LevelViewElementDetails((LevelViewElementInfo)element),
 			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
+			ElementType.OptionList => new OptionListElementDetails(file, (OptionListElementInfo)element),
 			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};
 	}

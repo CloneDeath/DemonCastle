@@ -6,7 +6,7 @@ public class InvalidEnumValueException<TEnum> : Exception {
 	public TEnum Value { get; }
 
 	public InvalidEnumValueException(TEnum value)
-		: base($"Invalid {typeof(TEnum).Namespace} value encountered: {value}") {
+		: base($"Invalid {typeof(TEnum).Name} value encountered: {value}") {
 		Value = value;
 	}
 }

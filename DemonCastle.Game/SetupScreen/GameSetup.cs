@@ -29,20 +29,18 @@ public partial class GameSetup : Container {
 			Text = "Characters:",
 			Position = new Vector2(10, 10)
 		});
-		AddChild(CharacterInfoList = new InfoItemList<CharacterInfo> {
+		AddChild(CharacterInfoList = new InfoItemList<CharacterInfo>(project.Characters) {
 			Position = CharactersLabel.Position + new Vector2(0, 30)
 		});
-		CharacterInfoList.Load(project.Characters);
 		CharacterInfoList.Select(0);
 
 		AddChild(LevelsLabel = new Label {
 			Text = "Levels:",
 			Position = CharactersLabel.Position + new Vector2(310, 0)
 		});
-		AddChild(LevelInfoList = new InfoItemList<LevelInfo> {
+		AddChild(LevelInfoList = new InfoItemList<LevelInfo>(project.Levels) {
 			Position = LevelsLabel.Position + new Vector2(0, 30)
 		});
-		LevelInfoList.Load(project.Levels);
 		LevelInfoList.Select(0);
 
 		AddChild(LaunchButton = new Button {

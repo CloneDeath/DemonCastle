@@ -16,6 +16,7 @@ public static class ElementViewFactory {
 			ElementType.Label => new LabelElementView((LabelElementInfo)element, game),
 			ElementType.LevelView => new LevelViewElementView((LevelViewElementInfo)element, game),
 			ElementType.Sprite => new SpriteElementView((SpriteElementInfo)element),
+			ElementType.OptionList => new OptionListElementView((OptionListElementInfo)element),
 			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};
 	}
