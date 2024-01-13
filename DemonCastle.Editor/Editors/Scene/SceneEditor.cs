@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Scene.View;
+using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
@@ -22,6 +24,15 @@ public partial class SceneEditor : BaseEditor {
 	private HSplitContainer Right { get; }
 	private SceneItemEditor SceneItemEditor { get; }
 
+	private static readonly Dictionary<ElementType, Texture2D> ElementTypeIconMap = new() {
+		{ ElementType.ColorRect, IconTextures.ColorRectElementIcon },
+		{ ElementType.HealthBar, IconTextures.HealthBarElementIcon },
+		{ ElementType.Label, IconTextures.LabelElementIcon },
+		{ ElementType.LevelView, IconTextures.LevelViewElementIcon },
+		{ ElementType.Sprite, IconTextures.SpriteElementIcon },
+		{ ElementType.OptionList, IconTextures.OptionListElementIcon },
+	};
+
 	public SceneEditor(SceneInfo scene) {
 		TabText = scene.FileName;
 
@@ -39,7 +50,8 @@ public partial class SceneEditor : BaseEditor {
 			});
 			LeftTabs.TabSelected += LeftTabs_OnTabSelected;
 
-			LeftTabs.AddChild(ElementList = new InfoCollectionEditorByEnum<IElementInfo, ElementType>(scene.Elements));
+			LeftTabs.AddChild(ElementList = new InfoCollectionEditorByEnum<IElementInfo, ElementType>(scene.Elements,
+								  ElementTypeIconMap, i => i.Type));
 			ElementList.ItemSelected += ElementList_OnElementSelected;
 			LeftTabs.SetTabTitle(0, "Elements");
 

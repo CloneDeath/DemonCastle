@@ -21,7 +21,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	private Button AddButton { get; }
 	private Button MoveUpButton { get; }
 	private Button MoveDownButton { get; }
-	private ItemList Items { get; }
+	protected ItemList Items { get; }
 	private Button RemoveButton { get; }
 
 	public InfoCollectionEditor(IEnumerableInfo<TInfo> data) {
@@ -29,7 +29,6 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		Name = nameof(InfoCollectionEditor<TInfo>);
 
 		TopButtons = new HBoxContainer();
-
 		{
 			AddButton = new Button {
 				Text = "Add",
@@ -156,7 +155,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		ReloadItems();
 	}
 
-	private void ReloadItems() {
+	protected virtual void ReloadItems() {
 		foreach (var item in _subscribed) {
 			item.PropertyChanged -= InfoItem_OnPropertyChanged;
 		}
