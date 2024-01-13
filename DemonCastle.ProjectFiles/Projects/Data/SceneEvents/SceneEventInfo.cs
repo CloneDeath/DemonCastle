@@ -18,7 +18,7 @@ public class SceneEventInfo : BaseInfo<SceneEventData>, IListableInfo {
 			Data.Name = value;
 			Save();
 			OnPropertyChanged();
-			OnPropertyChanged(ListLabel);
+			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
 
