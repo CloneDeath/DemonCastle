@@ -11,7 +11,7 @@ public class TextFileNavigator : FileNavigator {
 		Resource = File.ReadAllText(filePath);
 	}
 
-	public void Save() {
+	public override void Save() {
 		File.WriteAllText(FilePath, Resource);
 	}
 }

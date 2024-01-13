@@ -14,7 +14,6 @@ public class FileNavigator : DirectoryNavigator {
 	public string Extension => Path.GetExtension(FilePath);
 	public string FileNameWithoutExtension => Path.GetFileNameWithoutExtension(FileName);
 
-	public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
 	public FileNavigator(string filePath, ProjectResources resources)
 		: base(Path.GetDirectoryName(filePath) ?? throw new NullReferenceException(), resources) {
 		FilePath = filePath;
@@ -49,4 +48,6 @@ public class FileNavigator : DirectoryNavigator {
 		FilePath = newPath;
 		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
 	}
+
+	public virtual void Save() {}
 }

@@ -31,10 +31,22 @@ public partial class EditArea : TabContainer {
 
 	public override void _Input(InputEvent @event) {
 		base._Input(@event);
-		if (!@event.IsAction(InputActions.EditorClose, true)) return;
+		if (@event.IsAction(InputActions.EditorClose, true)) {
+			OnTabCloseButtonPressed(CurrentTab);
+			AcceptEvent();
+		} else if (@event.IsAction(InputActions.EditorSave, true)) {
+			var navigator = GetFileNavigator(CurrentTab);
+			navigator?.Save();
+			AcceptEvent();
+		}
+	}
 
-		OnTabCloseButtonPressed(CurrentTab);
-		AcceptEvent();
+	private FileNavigator? GetFileNavigator(int tab) {
+		var control = GetTabControl(tab);
+		if (control == null) return null;
+
+		var mapItem = EditorFileMap.FirstOrDefault(t => t.Value == control);
+		return mapItem.Key;
 	}
 
 	public void ShowEditorFor(FileNavigator file) {
@@ -77,8 +89,8 @@ public partial class EditArea : TabContainer {
 		var control = GetTabControl((int)tab);
 		if (control == null) return;
 
-		var mapItem = EditorFileMap.FirstOrDefault(t => t.Value == control);
-		if (mapItem.Key != null) EditorFileMap.Remove(mapItem.Key);
+		var fileNavigator = GetFileNavigator((int)tab);
+		if (fileNavigator != null) EditorFileMap.Remove(fileNavigator);
 		control.QueueFree();
 	}
 }
