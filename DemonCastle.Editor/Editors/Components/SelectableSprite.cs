@@ -1,4 +1,4 @@
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
 namespace DemonCastle.Editor.Editors.Components;
 

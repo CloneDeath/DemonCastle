@@ -3,9 +3,9 @@ using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
 using Godot;
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using SpriteReferenceProperty = DemonCastle.Editor.Editors.Components.Properties.Reference.SpriteReferenceProperty;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;

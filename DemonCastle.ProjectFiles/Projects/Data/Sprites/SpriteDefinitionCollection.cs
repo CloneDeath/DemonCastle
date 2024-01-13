@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;

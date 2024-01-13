@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
@@ -43,13 +43,7 @@ public partial class SpriteDefinitionView : CenterContainer {
 			_definition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
 		}
 
-		Rect.Texture = _definition != null
-						   ? new AtlasTexture {
-							   Atlas = _definition.Texture,
-							   Region = _definition.Region,
-							   FilterClip = true
-						   }
-						   : null;
+		Rect.Texture = _definition?.ToTexture();
 		Rect.TextureFilter = TextureFilterEnum.Nearest;
 		Rect.FlipH = _definition?.FlipHorizontal ?? false;
 		Rect.Material = new TransparentColorSpriteShader {

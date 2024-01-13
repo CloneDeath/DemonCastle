@@ -1,5 +1,5 @@
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 
 namespace DemonCastle.Game.Animations.Generic;

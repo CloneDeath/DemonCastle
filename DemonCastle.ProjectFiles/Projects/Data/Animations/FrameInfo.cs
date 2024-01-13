@@ -5,7 +5,7 @@ using System.Linq;
 using DemonCastle.Files.Animations;
 using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 

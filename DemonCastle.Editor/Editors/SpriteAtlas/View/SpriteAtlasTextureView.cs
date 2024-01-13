@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.View;
 

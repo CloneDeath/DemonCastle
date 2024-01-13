@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Editor.Properties;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
@@ -11,13 +11,7 @@ public partial class SpriteReferenceProperty : BaseReferenceProperty<ISpriteDefi
 		Name = nameof(SpriteReferenceProperty);
 	}
 
-	protected override Texture2D GetTexture(ISpriteDefinition option) {
-		return new AtlasTexture {
-			Atlas = option.Texture,
-			Region = option.Region,
-			FilterClip = true
-		};
-	}
+	protected override Texture2D GetTexture(ISpriteDefinition option) => option.ToTexture();
 
 	protected override Guid GetGuid(ISpriteDefinition option) => option.Id;
 	protected override string GetName(ISpriteDefinition option) => option.Name;

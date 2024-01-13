@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.Dragging;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 using DraggableRegion = DemonCastle.Editor.Editors.Components.Dragging.DraggableRegion;
 

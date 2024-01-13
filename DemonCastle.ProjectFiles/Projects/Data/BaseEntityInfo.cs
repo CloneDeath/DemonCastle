@@ -4,7 +4,7 @@ using DemonCastle.Files.BaseEntity;
 using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
@@ -78,8 +78,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, 
 		}
 	}
 
-	public Texture2D PreviewTexture => new AtlasTexture
-		{ Atlas = PreviewSpriteDefinition.Texture, Region = PreviewSpriteDefinition.Region };
+	public Texture2D PreviewTexture => PreviewSpriteDefinition.ToTexture();
 
 	public EntityStateInfo? RetrieveEntityStateInfo(Guid stateId) => States.FirstOrDefault(s => s.Id == stateId);
 }

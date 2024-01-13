@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using DemonCastle.Files;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
 public class SpriteGridDataInfo : ISpriteDefinition {
 	public SpriteGridDataInfo(SpriteGridInfo spriteGrid, SpriteGridData data) {

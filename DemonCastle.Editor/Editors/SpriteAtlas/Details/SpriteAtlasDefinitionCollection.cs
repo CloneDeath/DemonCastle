@@ -2,7 +2,7 @@ using System;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.SpriteAtlas.Details.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinition;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas.Details;
