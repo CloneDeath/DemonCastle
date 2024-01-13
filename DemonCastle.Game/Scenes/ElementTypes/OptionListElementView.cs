@@ -69,6 +69,7 @@ public partial class OptionListElementView : VBoxContainer {
 		}
 
 		ClampSelectedOption();
+		if (!_element.Options.Any()) return;
 		if (_game.Input.InputIsInState(PlayerAction.Attack, KeyState.Pressed)) {
 			_element.Options[_selectedOption].OnSelect.TriggerActions(_game);
 		}
@@ -79,7 +80,7 @@ public partial class OptionListElementView : VBoxContainer {
 	}
 
 	private void ClampSelectedOption() {
-		_selectedOption = Math.Clamp(_selectedOption, 0, _element.Options.Count() - 1);
+		_selectedOption = _element.Options.Any() ? Math.Clamp(_selectedOption, 0, _element.Options.Count() - 1) : 0;
 	}
 }
 
