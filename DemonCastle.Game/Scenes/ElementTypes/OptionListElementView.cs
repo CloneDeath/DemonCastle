@@ -67,7 +67,12 @@ public partial class OptionListElementView : VBoxContainer {
 		} else if (_game.Input.InputIsInState(PlayerAction.Up, KeyState.Pressed)) {
 			_selectedOption--;
 		}
+
 		ClampSelectedOption();
+		if (_game.Input.InputIsInState(PlayerAction.Attack, KeyState.Pressed)) {
+			_element.Options[_selectedOption].OnSelect.TriggerActions(_game);
+		}
+
 		for (var i = 0; i < _options.Count; i++) {
 			_options[i].IsSelected = i == _selectedOption;
 		}
@@ -82,7 +87,7 @@ public partial class OptionView : Label {
 	private readonly OptionListElementInfo _optionList;
 	private readonly OptionInfo _option;
 	private readonly IGameState _game;
-	private bool _isSelected = false;
+	private bool _isSelected;
 
 	public OptionView(OptionListElementInfo optionList, OptionInfo option, IGameState game) {
 		_optionList = optionList;
