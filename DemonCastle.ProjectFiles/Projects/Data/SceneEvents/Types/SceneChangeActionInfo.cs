@@ -11,8 +11,10 @@ public class SceneChangeActionInfo : BaseInfo<SceneActionData> {
 	public bool IsSet {
 		get => Data.Scene != null;
 		set {
-			Data.Clear();
-			Data.Scene = value ? Data.Scene ?? new SceneChangeActionData() : null;
+			if (IsSet == value) return;
+			var newValue = value ? Data.Scene ?? new SceneChangeActionData() : null;
+			if (value) Data.Clear();
+			Data.Scene = newValue;
 			Save();
 			OnPropertyChanged();
 		}
