@@ -1,19 +1,14 @@
-using System.ComponentModel;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
-using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
-using SpriteReferenceProperty = DemonCastle.Editor.Editors.Components.Properties.Reference.SpriteReferenceProperty;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class TileDetails : PropertyCollection {
 	private readonly TileProxy TileProxy = new();
-
-	protected SpriteReferenceProperty SpriteIdProperty { get; }
 
 	public TileInfo? Proxy {
 		get => TileProxy.Proxy;
@@ -32,27 +27,21 @@ public partial class TileDetails : PropertyCollection {
 		CustomMinimumSize = new Vector2I(160, 100);
 
 		AddString("Name", TileProxy, x => x.Name);
-		AddFile("Source", TileProxy, levelDirectory,  t => t.SourceFile, FileType.SpriteSources);
-		SpriteIdProperty = AddSpriteReference("Sprite", TileProxy, x => x.SpriteId, TileProxy.SpriteOptions);
-		SpriteIdProperty.ItemSelected += SpriteIdProperty_OnSpriteSelected;
+		var spriteReference = AddSpriteDefinition(TileProxy, levelDirectory,
+			e => e.SourceFile,
+			e => e.SpriteId,
+			t => t.SpriteOptions);
+		spriteReference.ItemSelected += SpriteIdProperty_OnItemSelected;
 		AddVector2I("Span", TileProxy, x => x.Span);
 		AddChild(new TileCollisionView(TileProxy));
 		AddChild(new TileStairView(TileProxy));
 
 		Disable();
-
-		TileProxy.PropertyChanged += TileProxy_OnPropertyChanged;
 	}
 
-	private void SpriteIdProperty_OnSpriteSelected(ISpriteDefinition obj) {
+	private void SpriteIdProperty_OnItemSelected(ISpriteDefinition obj) {
 		if (string.IsNullOrEmpty(TileProxy.Name)) {
 			TileProxy.Name = obj.Name;
 		}
-	}
-
-	private void TileProxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName is not (nameof(TileProxy.SpriteId) or nameof(TileProxy.SourceFile))) return;
-		SpriteIdProperty.LoadOptions(TileProxy.SpriteOptions);
-		SpriteIdProperty.PropertyValue = TileProxy.SpriteId;
 	}
 }

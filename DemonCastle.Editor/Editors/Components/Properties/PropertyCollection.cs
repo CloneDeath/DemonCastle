@@ -157,6 +157,19 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return nullableRect2IProperty;
 	}
 
+	public SpriteReferenceProperty AddSpriteDefinition<T>(T target, string directory,
+														  Expression<Func<T, string>> fileExpression,
+														  Expression<Func<T, Guid>> spriteExpression,
+														  Func<T, IEnumerable<ISpriteDefinition>> getOptions)
+		where T : INotifyPropertyChanged {
+		var fileProperty = AddFile("Sprite File", target, directory, fileExpression, FileType.SpriteSources);
+		var spriteProperty = AddSpriteReference("Sprite", target, spriteExpression, getOptions(target));
+		fileProperty.FileSelected += _ => {
+			spriteProperty.LoadOptions(getOptions(target));
+		};
+		return spriteProperty;
+	}
+
 	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
 		var spriteReferenceProperty = new SpriteReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name

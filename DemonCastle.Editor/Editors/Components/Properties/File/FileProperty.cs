@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Editor.Properties;
@@ -11,6 +12,8 @@ public partial class FileProperty : StringProperty {
 	protected string Directory { get; }
 	protected Button LoadButton { get; }
 	protected FileDialog OpenFileDialog { get; }
+
+	public event Action<string>? FileSelected;
 
 	public FileProperty(IPropertyBinding<string> binding, string directory, IEnumerable<IFileType> fileTypes)
 		: base(binding) {
@@ -45,6 +48,7 @@ public partial class FileProperty : StringProperty {
 
 	protected void OnFileSelected(string filePath) {
 		PropertyValue = RelativePath.GetRelativePath(Directory, filePath);
+		FileSelected?.Invoke(filePath);
 	}
 
 	public override void Enable() {
