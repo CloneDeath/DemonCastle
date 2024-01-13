@@ -23,6 +23,10 @@ public partial class SceneStack : Control {
 	}
 
 	public void Push(SceneInfo scene) {
+		if (_stack.TryPeek(out var current)) {
+			current.IsActive = false;
+		}
+
 		var gameScene = new GameScene(_gameState);
 		_stack.Push(gameScene);
 		gameScene.Load(scene);
@@ -34,6 +38,10 @@ public partial class SceneStack : Control {
 			var gameScene = _stack.Pop();
 			gameScene.Unload();
 			gameScene.QueueFree();
+		}
+
+		if (_stack.TryPeek(out var scene)) {
+			scene.IsActive = true;
 		}
 	}
 }

@@ -13,12 +13,14 @@ namespace DemonCastle.Game.Scenes.ElementTypes;
 public partial class OptionListElementView : VBoxContainer {
 	private readonly OptionListElementInfo _element;
 	private readonly IGameState _game;
+	private readonly ISceneState _scene;
 	private int _selectedOption;
 	private readonly List<OptionView> _options = new();
 
-	public OptionListElementView(OptionListElementInfo element, IGameState game) {
+	public OptionListElementView(OptionListElementInfo element, IGameState game, ISceneState scene) {
 		_element = element;
 		_game = game;
+		_scene = scene;
 		Name = nameof(OptionListElementView);
 		Refresh();
 	}
@@ -62,6 +64,8 @@ public partial class OptionListElementView : VBoxContainer {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
+		if (!_scene.IsActive) return;
+
 		if (_game.Input.InputIsInState(PlayerAction.Down, KeyState.Pressed)) {
 			_selectedOption++;
 		} else if (_game.Input.InputIsInState(PlayerAction.Up, KeyState.Pressed)) {

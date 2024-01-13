@@ -9,10 +9,12 @@ namespace DemonCastle.Game.Scenes;
 public partial class ElementsView : Control {
 	private readonly SceneInfo _scene;
 	private readonly IGameState _gameState;
+	private readonly ISceneState _sceneState;
 
-	public ElementsView(SceneInfo scene, IGameState gameState) {
+	public ElementsView(SceneInfo scene, IGameState gameState, ISceneState sceneState) {
 		_scene = scene;
 		_gameState = gameState;
+		_sceneState = sceneState;
 		Name = nameof(ElementsView);
 
 		RefreshElements();
@@ -38,8 +40,12 @@ public partial class ElementsView : Control {
 		}
 
 		foreach (var element in _scene.Elements.Reverse()) {
-			var elementView = ElementViewFactory.GetView(element, _gameState);
+			var elementView = ElementViewFactory.GetView(element, _gameState, _sceneState);
 			AddChild(elementView);
 		}
 	}
+}
+
+public interface ISceneState {
+	public bool IsActive { get; }
 }
