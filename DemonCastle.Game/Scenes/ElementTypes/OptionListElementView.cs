@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
+using DemonCastle.Files.SceneEvents;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -9,6 +13,8 @@ namespace DemonCastle.Game.Scenes.ElementTypes;
 public partial class OptionListElementView : VBoxContainer {
 	private readonly OptionListElementInfo _element;
 	private readonly IGameState _game;
+	private int _selectedOption;
+	private readonly List<OptionView> _options = new();
 
 	public OptionListElementView(OptionListElementInfo element, IGameState game) {
 		_element = element;
@@ -38,16 +44,37 @@ public partial class OptionListElementView : VBoxContainer {
 	}
 
 	private void Refresh() {
+		ClampSelectedOption();
 		Position = _element.Region.Position;
 		Size = _element.Region.Size;
 
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
+		_options.Clear();
 
 		foreach (var option in _element.Options) {
-			AddChild(new OptionView(_element, option, _game));
+			var optionView = new OptionView(_element, option, _game);
+			_options.Add(optionView);
+			AddChild(optionView);
 		}
+	}
+
+	public override void _Process(double delta) {
+		base._Process(delta);
+		if (_game.Input.InputIsInState(PlayerAction.Down, KeyState.Pressed)) {
+			_selectedOption++;
+		} else if (_game.Input.InputIsInState(PlayerAction.Up, KeyState.Pressed)) {
+			_selectedOption--;
+		}
+		ClampSelectedOption();
+		for (var i = 0; i < _options.Count; i++) {
+			_options[i].IsSelected = i == _selectedOption;
+		}
+	}
+
+	private void ClampSelectedOption() {
+		_selectedOption = Math.Clamp(_selectedOption, 0, _element.Options.Count() - 1);
 	}
 }
 
@@ -55,6 +82,7 @@ public partial class OptionView : Label {
 	private readonly OptionListElementInfo _optionList;
 	private readonly OptionInfo _option;
 	private readonly IGameState _game;
+	private bool _isSelected = false;
 
 	public OptionView(OptionListElementInfo optionList, OptionInfo option, IGameState game) {
 		_optionList = optionList;
@@ -66,6 +94,14 @@ public partial class OptionView : Label {
 		LabelSettings = new LabelSettings();
 
 		Refresh();
+	}
+
+	public bool IsSelected {
+		get => _isSelected;
+		set {
+			_isSelected = value;
+			Refresh();
+		}
 	}
 
 	public override void _EnterTree() {
@@ -89,7 +125,8 @@ public partial class OptionView : Label {
 	}
 
 	public void Refresh() {
-		Text = new TextFinalizer(_game, _optionList.TextTransform).Finalize(_option.Text);
+		var text = $"{(IsSelected ? "> " : "")}{_option.Text}";
+		Text = new TextFinalizer(_game, _optionList.TextTransform).Finalize(text);
 
 		LabelSettings.Font = _optionList.Font;
 		LabelSettings.FontSize = _optionList.FontSize;
