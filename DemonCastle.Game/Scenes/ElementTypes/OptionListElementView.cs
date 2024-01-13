@@ -70,7 +70,7 @@ public partial class OptionListElementView : VBoxContainer {
 
 		ClampSelectedOption();
 		if (!_element.Options.Any()) return;
-		if (_game.Input.InputIsInState(PlayerAction.Attack, KeyState.Pressed)) {
+		if (_game.Input.InputIsInState(PlayerAction.Accept, KeyState.Pressed)) {
 			_element.Options[_selectedOption].OnSelect.TriggerActions(_game);
 		}
 
