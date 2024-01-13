@@ -140,6 +140,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 
 	private void AddButton_OnPressed() {
 		var item = _data.AppendNew();
+		Items.Select(_data.Count() - 1);
 		OnItemSelected(item);
 	}
 

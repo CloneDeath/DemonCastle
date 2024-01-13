@@ -29,6 +29,7 @@ public partial class OptionListElementDetails : ElementDetails {
 
 	private void Options_OnItemSelected(OptionInfo? obj) {
 		_details?.QueueFree();
+		_details = null;
 		if (obj == null) return;
 
 		_details = new OptionDetails(_file, obj) {
