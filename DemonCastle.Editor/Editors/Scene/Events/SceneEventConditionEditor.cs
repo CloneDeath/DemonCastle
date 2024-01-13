@@ -1,5 +1,5 @@
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
-using DemonCastle.Files.SceneEvents;
+using DemonCastle.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using DemonCastle.Files.SceneEvents;
+using DemonCastle.Files.Conditions;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
 using DemonCastle.ProjectFiles.State;
 using Godot;

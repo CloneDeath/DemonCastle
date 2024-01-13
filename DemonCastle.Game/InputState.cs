@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DemonCastle.Files.SceneEvents;
+using DemonCastle.Files.Conditions;
 using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -31,6 +31,8 @@ public class InputState : IInputState {
 		PlayerAction.Right => InputActions.PlayerMoveRight,
 		PlayerAction.Jump => InputActions.PlayerJump,
 		PlayerAction.Attack => InputActions.PlayerAttack,
+		PlayerAction.Accept => InputActions.PlayerAccept,
+		PlayerAction.Cancel => InputActions.PlayerCancel,
 		_ => throw new InvalidEnumValueException<PlayerAction>(action)
 	};
 }

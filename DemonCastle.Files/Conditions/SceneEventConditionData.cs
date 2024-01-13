@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DemonCastle.Files.SceneEvents;
+namespace DemonCastle.Files.Conditions;
 
 public class SceneEventConditionData {
 	//public SceneEventConditionData[]? And { get; set; }
@@ -31,7 +31,9 @@ public enum PlayerAction {
 	Left,
 	Right,
 	Jump,
-	Attack
+	Attack,
+	Accept,
+	Cancel
 }
 
 [JsonConverter(typeof(StringEnumConverter))]
