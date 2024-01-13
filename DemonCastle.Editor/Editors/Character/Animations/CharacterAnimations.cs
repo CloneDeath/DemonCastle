@@ -1,5 +1,5 @@
 using DemonCastle.Editor.Editors.Character.Animations.Editor;
-using DemonCastle.Editor.Editors.Character.Animations.List;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -7,23 +7,23 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class CharacterAnimations : HSplitContainer {
-	protected AnimationCollectionEdit AnimationList { get; }
+	protected EnumerableInfoList<IAnimationInfo> AnimationList { get; }
 	protected CharacterAnimationEditor AnimationEditor { get; }
 
 	public CharacterAnimations(CharacterInfo character) {
 		Name = nameof(CharacterAnimations);
 
-		AddChild(AnimationList = new AnimationCollectionEdit(character.Animations){
+		AddChild(AnimationList = new EnumerableInfoList<IAnimationInfo>(character.Animations){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
-		AnimationList.AnimationSelected += AnimationList_OnAnimationSelected;
+		AnimationList.ItemSelected += AnimationList_OnAnimationSelected;
 
 		AddChild(AnimationEditor = new CharacterAnimationEditor(character) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}
 
-	protected void AnimationList_OnAnimationSelected(IAnimationInfo animationInfo) {
+	protected void AnimationList_OnAnimationSelected(IAnimationInfo? animationInfo) {
 		AnimationEditor.LoadAnimation(animationInfo);
 	}
 }

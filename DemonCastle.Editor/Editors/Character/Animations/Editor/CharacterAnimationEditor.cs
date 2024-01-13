@@ -25,12 +25,11 @@ public partial class CharacterAnimationEditor : VSplitContainer {
 		AddChild(FrameDetails = new CharacterFrameInfoDetails(character));
 	}
 
-
 	private void FrameList_OnFrameSelected(IFrameInfo? frame) {
 		FrameDetails.FrameInfo = frame;
 	}
 
-	public void LoadAnimation(IAnimationInfo animation) {
+	public void LoadAnimation(IAnimationInfo? animation) {
 		Details.CharacterAnimation = animation;
 		FrameList.Load(animation);
 	}
