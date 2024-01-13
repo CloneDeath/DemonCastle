@@ -59,6 +59,28 @@ public abstract class ObservableCollectionInfo<TInfo, TData> : IEnumerableInfo<T
 		InfoItems.Move(oldIndex, newIndex);
 	}
 
+	public bool CanMoveUp(TInfo action) {
+		var index = InfoItems.IndexOf(action);
+		return index > 0;
+	}
+
+	public void MoveUp(TInfo action) {
+		if (!CanMoveUp(action)) return;
+		var index = InfoItems.IndexOf(action);
+		Move(index, index - 1);
+	}
+
+	public bool CanMoveDown(TInfo action) {
+		var index = InfoItems.IndexOf(action);
+		return index < InfoItems.Count - 1;
+	}
+
+	public void MoveDown(TInfo action) {
+		if (!CanMoveDown(action)) return;
+		var index = InfoItems.IndexOf(action);
+		Move(index, index + 1);
+	}
+
 	#region IEnumerable
 	public IEnumerator<TInfo> GetEnumerator() => InfoItems.GetEnumerator();
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

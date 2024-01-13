@@ -46,12 +46,7 @@ public partial class SceneEventActionCollectionEditor : VBoxContainer {
 		}
 
 		foreach (var action in _then) {
-			SceneEventActionEditor editor;
-			Actions.AddChild(editor = new SceneEventActionEditor(_file, action));
-			editor.Deleted += () => {
-				editor.QueueFree();
-				_then.Remove(action);
-			};
+			Actions.AddChild(new SceneEventActionEditor(_file, action, _then));
 		}
 	}
 }

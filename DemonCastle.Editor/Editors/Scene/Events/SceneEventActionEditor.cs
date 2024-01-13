@@ -1,6 +1,6 @@
-using System;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
+using DemonCastle.Editor.Icons;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
 using DemonCastle.ProjectFiles;
@@ -12,15 +12,25 @@ using IntegerProperty = DemonCastle.Editor.Editors.Components.Properties.Integer
 
 namespace DemonCastle.Editor.Editors.Scene.Events;
 
-public partial class SceneEventActionEditor : HFlowContainer {
-	public event Action? Deleted;
+public partial class SceneEventActionEditor : HBoxContainer {
+	private readonly SceneEventActionInfo _action;
+	private readonly SceneEventActionInfoCollection _collection;
 
 	private readonly Button DeleteButton;
 
-	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo action) {
+	private readonly Button MoveUpButton;
+	private readonly Button MoveDownButton;
+
+	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo action, SceneEventActionInfoCollection collection) {
+		_action = action;
+		_collection = collection;
 		Name = nameof(SceneEventActionEditor);
-		AddChild(DeleteButton = new Button { Text = "X" });
-		DeleteButton.Pressed += () => Deleted?.Invoke();
+
+		AddChild(DeleteButton = new Button {
+			Icon = IconTextures.DeleteIcon,
+			TooltipText = "Delete Action"
+		});
+		DeleteButton.Pressed += DeleteButton_OnPressed;
 
 		AddChild(new ChoiceTree {
 			{
@@ -100,5 +110,30 @@ public partial class SceneEventActionEditor : HFlowContainer {
 				}
 			}
 		});
+
+		VBoxContainer moveButtons;
+		AddChild(moveButtons = new VBoxContainer());
+
+		moveButtons.AddChild(MoveUpButton = new Button {
+			Icon = IconTextures.UpIcon,
+			TooltipText = "Move Up"
+		});
+		MoveUpButton.Pressed += MoveUpButton_OnPressed;
+		MoveUpButton.Disabled = !_collection.CanMoveUp(_action);
+
+		moveButtons.AddChild(MoveDownButton = new Button {
+			Icon = IconTextures.DownIcon,
+			TooltipText = "Move Down"
+		});
+		MoveDownButton.Pressed += MoveDownButton_OnPressed;
+		MoveDownButton.Disabled = !_collection.CanMoveDown(_action);
 	}
+
+	private void DeleteButton_OnPressed() {
+		_collection.Remove(_action);
+		QueueFree();
+	}
+
+	private void MoveUpButton_OnPressed() => _collection.MoveUp(_action);
+	private void MoveDownButton_OnPressed() => _collection.MoveDown(_action);
 }
