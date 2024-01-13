@@ -37,11 +37,8 @@ public partial class GameLevel : Node2D {
 	}
 
 	public void LoadLevel(LevelInfo level) {
-		foreach (var child in GetChildren()) {
-			child.QueueFree();
-		}
+		ClearLevel();
 		Level = level;
-		_areaMap.Clear();
 
 		foreach (var area in Level.Areas) {
 			var gameArea = new GameArea(_game, _project, level, area, _logger, _debug) {
@@ -50,5 +47,17 @@ public partial class GameLevel : Node2D {
 			_areaMap[area] = gameArea;
 			AddChild(gameArea);
 		}
+	}
+
+	public void Reset() {
+		ClearLevel();
+		Level = null;
+	}
+
+	private void ClearLevel() {
+		foreach (var child in GetChildren()) {
+			child.QueueFree();
+		}
+		_areaMap.Clear();
 	}
 }

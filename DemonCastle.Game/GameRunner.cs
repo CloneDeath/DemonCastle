@@ -81,4 +81,12 @@ public partial class GameRunner : Control {
 		var item = _project.Items.First(i => i.Id == itemId);
 		CurrentArea.SpawnItem(item, position);
 	}
+
+	public void Restart() {
+		GamePlayer.Reset();
+		Level.Reset();
+		SceneStack.Set(_project.StartScene);
+	}
+
+	public void Quit() => GetTree().Quit();
 }

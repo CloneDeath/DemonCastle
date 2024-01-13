@@ -61,4 +61,6 @@ public partial class GameAnimation : Node2D {
 		}
 		PlayNone();
 	}
+
+	public void Reset() => SetAnimation(null);
 }

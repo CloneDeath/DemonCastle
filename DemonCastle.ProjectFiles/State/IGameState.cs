@@ -18,6 +18,8 @@ public interface IGameState {
 	IInputState Input { get; }
 	Texture2D LevelView { get; }
 	void SpawnItem(Guid itemId, Vector2 position);
+	void Restart();
+	void Quit();
 }
 
 public interface ICurrentArea {

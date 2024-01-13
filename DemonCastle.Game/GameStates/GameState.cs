@@ -26,4 +26,6 @@ public class GameState : IGameState {
 	public IInputState Input => new InputState();
 	public Texture2D LevelView => _runner.LevelViewport.GetTexture();
 	public void SpawnItem(Guid itemId, Vector2 position) => _runner.SpawnItem(itemId, position);
+	public void Restart() => _runner.Restart();
+	public void Quit() => _runner.Quit();
 }

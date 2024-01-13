@@ -60,10 +60,7 @@ public partial class CharacterAnimation : Node2D {
 	}
 
 	public void SetCharacter(CharacterInfo character) {
-		foreach (var animation in Animations.Values) {
-			animation.QueueFree();
-		}
-		Animations.Clear();
+		ClearAnimations();
 		Character = character;
 
 		foreach (var animation in character.Animations) {
@@ -75,5 +72,17 @@ public partial class CharacterAnimation : Node2D {
 			AddChild(animationNode);
 		}
 		PlayIdle();
+	}
+
+	public void Reset() {
+		ClearAnimations();
+		Character = null;
+	}
+
+	private void ClearAnimations() {
+		foreach (var animation in Animations.Values) {
+			animation.QueueFree();
+		}
+		Animations.Clear();
 	}
 }

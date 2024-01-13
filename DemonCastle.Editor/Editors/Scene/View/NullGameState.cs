@@ -35,6 +35,8 @@ public class NullGameState : IGameState {
 	};
 
 	public void SpawnItem(Guid itemId, Vector2 position) { }
+	public void Restart() { }
+	public void Quit() { }
 }
 
 public class NullInputState : IInputState {

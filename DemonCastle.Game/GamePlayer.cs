@@ -192,4 +192,11 @@ public partial class GamePlayer : PlayerEntityCommon {
 			Size = new Vector2(Character?.Size.X ?? 0, (Level?.TileSize.Y ?? 0) / 4f)
 		};
 	}
+
+	public void Reset() {
+		Character = null;
+		Level = null;
+		Animation.Reset();
+		Weapon.Reset();
+	}
 }

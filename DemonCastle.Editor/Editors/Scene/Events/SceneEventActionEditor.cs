@@ -1,6 +1,8 @@
 using System;
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Editor.Properties;
+using DemonCastle.Files.Actions;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
@@ -21,6 +23,17 @@ public partial class SceneEventActionEditor : HFlowContainer {
 		DeleteButton.Pressed += () => Deleted?.Invoke();
 
 		AddChild(new ChoiceTree {
+			{
+				"Game",
+				action.Game.HasValue,
+				gameControl => {
+					action.Game ??= GameAction.Quit;
+					var binding = new CallbackBinding<GameAction>(() => action.Game.Value, v => action.Game = v);
+					gameControl.AddChild(new EnumProperty<GameAction>(binding) {
+						SizeFlagsHorizontal = SizeFlags.ExpandFill
+					});
+				}
+			},
 			{
 				"Scene",
 				action.Scene.IsSet,
