@@ -11,7 +11,13 @@ public static class InputActions {
 	public const string PlayerJump = nameof(PlayerJump);
 	public const string PlayerAttack = nameof(PlayerAttack);
 
-	public static readonly string[] PlayerActions = { PlayerMoveLeft, PlayerMoveRight, PlayerMoveUp, PlayerMoveDown, PlayerJump, PlayerAttack };
+	public const string PlayerAccept = nameof(PlayerAccept);
+	public const string PlayerCancel = nameof(PlayerCancel);
+
+	public static readonly string[] PlayerActions = {
+		PlayerMoveLeft, PlayerMoveRight, PlayerMoveUp, PlayerMoveDown, PlayerJump, PlayerAttack,
+		PlayerAccept, PlayerCancel
+	};
 
 	public const string EditorSubmit = nameof(EditorSubmit);
 	public const string EditorClick = nameof(EditorClick);
@@ -23,14 +29,17 @@ public static class InputActions {
 	public static void RegisterActions() {
 		RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
 		RegisterAction(PlayerMoveRight, Key.Right, Key.D);
+		RegisterAction(PlayerMoveUp, Key.Up, Key.W);
+		RegisterAction(PlayerMoveDown, Key.Down, Key.S);
 		RegisterAction(PlayerJump, Key.Space, Key.Z);
 		RegisterAction(PlayerAttack, Key.F, Key.X);
+		RegisterAction(PlayerAccept, Key.F, Key.X, Key.Enter, Key.KpEnter, Key.Space);
+		RegisterAction(PlayerCancel, Key.Q, Key.Z, Key.Backspace, Key.Escape);
+
 		RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
 		RegisterAction(EditorClick, MouseButton.Left);
 		RegisterAction(EditorRightClick, MouseButton.Right);
 		RegisterAction(EditorRename, Key.F2);
-		RegisterAction(PlayerMoveUp, Key.Up, Key.W);
-		RegisterAction(PlayerMoveDown, Key.Down, Key.S);
 		RegisterAction(EditorSave, new InputEventKey {
 			Keycode = Key.S,
 			CtrlPressed = true
