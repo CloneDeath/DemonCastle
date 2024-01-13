@@ -7,13 +7,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character.Animations;
 
 public partial class CharacterAnimations : HSplitContainer {
-	protected EnumerableInfoList<IAnimationInfo> AnimationList { get; }
+	protected InfoCollectionEditor<IAnimationInfo> AnimationList { get; }
 	protected CharacterAnimationEditor AnimationEditor { get; }
 
 	public CharacterAnimations(CharacterInfo character) {
 		Name = nameof(CharacterAnimations);
 
-		AddChild(AnimationList = new EnumerableInfoList<IAnimationInfo>(character.Animations){
+		AddChild(AnimationList = new InfoCollectionEditor<IAnimationInfo>(character.Animations){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		AnimationList.ItemSelected += AnimationList_OnAnimationSelected;

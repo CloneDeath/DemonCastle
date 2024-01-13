@@ -6,13 +6,13 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.States;
 
 public partial class StatesEditor : HSplitContainer {
-	protected EnumerableInfoList<EntityStateInfo> StateList { get; }
+	protected InfoCollectionEditor<EntityStateInfo> StateList { get; }
 	protected StateEditor StateEditor { get; }
 
 	public StatesEditor(ProjectInfo project, IBaseEntityInfo entity) {
 		Name = nameof(StatesEditor);
 
-		AddChild(StateList = new EnumerableInfoList<EntityStateInfo>(entity.States){
+		AddChild(StateList = new InfoCollectionEditor<EntityStateInfo>(entity.States){
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		StateList.ItemSelected += StateList_OnItemSelected;

@@ -9,7 +9,7 @@ namespace DemonCastle.Editor.Editors.Scene.Elements.Types;
 
 public partial class OptionListElementDetails : ElementDetails {
 	private readonly IFileInfo _file;
-	private readonly EnumerableInfoList<OptionInfo> _options;
+	private readonly InfoCollectionEditor<OptionInfo> _options;
 	private OptionDetails? _details;
 
 	public OptionListElementDetails(IFileInfo file, OptionListElementInfo element) : base(element) {
@@ -21,7 +21,7 @@ public partial class OptionListElementDetails : ElementDetails {
 		AddColor("Color", element, e => e.Color);
 		AddEnum("Text Transform", element, e => e.TextTransform);
 
-		AddChild(_options = new EnumerableInfoList<OptionInfo>(element.Options) {
+		AddChild(_options = new InfoCollectionEditor<OptionInfo>(element.Options) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		_options.ItemSelected += Options_OnItemSelected;

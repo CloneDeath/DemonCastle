@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
 
-public partial class EnumerableInfoListByEnum<TInfo, TEnum> : EnumerableInfoList<TInfo>
+public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEditor<TInfo>
 	where TInfo : class, IListableInfo, INotifyPropertyChanged
 	where TEnum : struct, Enum {
 
@@ -13,10 +13,10 @@ public partial class EnumerableInfoListByEnum<TInfo, TEnum> : EnumerableInfoList
 
 	private MenuButton AddButton { get; }
 
-	public EnumerableInfoListByEnum(IEnumerableInfoByEnum<TInfo, TEnum> data) : base(data) {
+	public InfoCollectionEditorByEnum(IEnumerableInfoByEnum<TInfo, TEnum> data) : base(data) {
 		_data = data;
 
-		Name = nameof(EnumerableInfoListByEnum<TInfo, TEnum>);
+		Name = nameof(InfoCollectionEditorByEnum<TInfo, TEnum>);
 
 		AddButton = new MenuButton {
 			Flat = false,

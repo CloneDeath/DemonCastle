@@ -9,7 +9,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
 
-public partial class EnumerableInfoList<TInfo> : VBoxContainer
+public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	where TInfo : class, INotifyPropertyChanged, IListableInfo {
 	public event Action<TInfo?>? ItemSelected;
 
@@ -24,9 +24,9 @@ public partial class EnumerableInfoList<TInfo> : VBoxContainer
 	private ItemList Items { get; }
 	private Button RemoveButton { get; }
 
-	public EnumerableInfoList(IEnumerableInfo<TInfo> data) {
+	public InfoCollectionEditor(IEnumerableInfo<TInfo> data) {
 		_data = data;
-		Name = nameof(EnumerableInfoList<TInfo>);
+		Name = nameof(InfoCollectionEditor<TInfo>);
 
 		TopButtons = new HBoxContainer();
 

@@ -14,13 +14,13 @@ public partial class TransitionsEditor : HSplitContainer {
 		set => _proxy.Proxy = value;
 	}
 
-	private EnumerableInfoList<EntityStateTransitionInfo> Transitions { get; }
+	private InfoCollectionEditor<EntityStateTransitionInfo> Transitions { get; }
 	private TransitionEdit TransitionEdit { get; }
 
 	public TransitionsEditor(IEnumerable<EntityStateInfo> options) {
 		Name = nameof(TransitionsEditor);
 
-		AddChild(Transitions = new EnumerableInfoList<EntityStateTransitionInfo>(_proxy.Transitions) {
+		AddChild(Transitions = new InfoCollectionEditor<EntityStateTransitionInfo>(_proxy.Transitions) {
 			CustomMinimumSize = new Vector2(300, 0)
 		});
 		Transitions.ItemSelected += Transitions_OnTransitionSelected;

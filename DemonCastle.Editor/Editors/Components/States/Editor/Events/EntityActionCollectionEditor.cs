@@ -33,7 +33,7 @@ public partial class EntityActionCollectionEditor : HSplitContainer {
 	public void Load(EntityActionInfoCollection actionSet) {
 		Clear();
 
-		var list = new EnumerableInfoList<EntityActionInfo>(actionSet);
+		var list = new InfoCollectionEditor<EntityActionInfo>(actionSet);
 		Left.AddChild(list);
 		list.SetAnchorsPreset(LayoutPreset.FullRect);
 		list.ItemSelected += List_OnItemSelected;

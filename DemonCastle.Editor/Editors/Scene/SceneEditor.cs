@@ -16,8 +16,8 @@ public partial class SceneEditor : BaseEditor {
 
 	private VBoxContainer Left { get; }
 	private TabContainer LeftTabs { get; }
-	private EnumerableInfoListByEnum<IElementInfo, ElementType> ElementList { get; }
-	private EnumerableInfoList<SceneEventInfo> EventsList { get; }
+	private InfoCollectionEditorByEnum<IElementInfo, ElementType> ElementList { get; }
+	private InfoCollectionEditor<SceneEventInfo> EventsList { get; }
 
 	private HSplitContainer Right { get; }
 	private SceneItemEditor SceneItemEditor { get; }
@@ -39,11 +39,11 @@ public partial class SceneEditor : BaseEditor {
 			});
 			LeftTabs.TabSelected += LeftTabs_OnTabSelected;
 
-			LeftTabs.AddChild(ElementList = new EnumerableInfoListByEnum<IElementInfo, ElementType>(scene.Elements));
+			LeftTabs.AddChild(ElementList = new InfoCollectionEditorByEnum<IElementInfo, ElementType>(scene.Elements));
 			ElementList.ItemSelected += ElementList_OnElementSelected;
 			LeftTabs.SetTabTitle(0, "Elements");
 
-			LeftTabs.AddChild(EventsList = new EnumerableInfoList<SceneEventInfo>(scene.Events));
+			LeftTabs.AddChild(EventsList = new InfoCollectionEditor<SceneEventInfo>(scene.Events));
 			EventsList.ItemSelected += EventList_OnEventSelected;
 			LeftTabs.SetTabTitle(1, "Events");
 		}
