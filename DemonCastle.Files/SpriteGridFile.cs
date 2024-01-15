@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace DemonCastle.Files;
 
-public class SpriteGridFile {
+public class SpriteGridFile : IGameFile {
+	public int FileVersion => 1;
 	public string File { get; set; } = string.Empty;
 	public int Width { get; set; } = 16;
 	public int Height { get; set; } = 16;

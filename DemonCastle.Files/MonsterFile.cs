@@ -2,7 +2,8 @@ using DemonCastle.Files.BaseEntity;
 
 namespace DemonCastle.Files;
 
-public class MonsterFile : BaseEntityFile {
+public class MonsterFile : BaseEntityFile , IGameFile {
+	public int FileVersion => 1;
 	public int Health { get; set; } = 1;
 	public int Experience { get; set; } = 1;
 	public int Attack { get; set; } = 1;

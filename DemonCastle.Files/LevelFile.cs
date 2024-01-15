@@ -4,7 +4,8 @@ using Godot;
 
 namespace DemonCastle.Files;
 
-public class LevelFile {
+public class LevelFile : IGameFile {
+	public int FileVersion => 1;
 	public string Name { get; set; } = string.Empty;
 	public int TileWidth { get; set; } = 16;
 	public int TileHeight { get; set; } = 16;

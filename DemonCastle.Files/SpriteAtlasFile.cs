@@ -4,7 +4,8 @@ using DemonCastle.Files.Common;
 
 namespace DemonCastle.Files;
 
-public class SpriteAtlasFile {
+public class SpriteAtlasFile : IGameFile {
+	public int FileVersion => 1;
 	public string File { get; set; } = string.Empty;
 	public ColorData TransparentColor { get; set; } = new() {
 		Red = 255,

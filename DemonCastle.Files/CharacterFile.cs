@@ -4,7 +4,9 @@ using DemonCastle.Files.Animations;
 
 namespace DemonCastle.Files;
 
-public class CharacterFile {
+public class CharacterFile : IGameFile {
+	public int FileVersion => 1;
+
 	public string Name { get; set; } = string.Empty;
 	public bool Enabled { get; set; } = true;
 	public float WalkSpeed { get; set; } = 3;

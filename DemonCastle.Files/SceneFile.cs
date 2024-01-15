@@ -8,7 +8,8 @@ using Newtonsoft.Json.Converters;
 
 namespace DemonCastle.Files;
 
-public class SceneFile {
+public class SceneFile : IGameFile {
+	public int FileVersion => 1;
 	public string Name { get; set; } = string.Empty;
 	public Guid Id { get; set; } = Guid.NewGuid();
 	public Size Size { get; set; } = new(256, 240);
