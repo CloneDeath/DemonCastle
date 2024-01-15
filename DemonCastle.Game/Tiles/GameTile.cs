@@ -22,7 +22,7 @@ public partial class GameTile : Node2D {
 			RegionEnabled = true,
 			RegionRect = tile.Region,
 			Centered = false,
-			Scale = tile.Span * tile.TileSize / tile.Region.Size
+			Scale = tile.Size * tile.TileSize / tile.Region.Size
 		});
 
 		SetupCollisions(debug);
@@ -37,7 +37,7 @@ public partial class GameTile : Node2D {
 		});
 		Body.AddChild(new CollisionShape2D {
 			Shape = new ConvexPolygonShape2D {
-				Points = _tile.Collision.Select(v => v * _tile.TileSize * _tile.Span).ToArray()
+				Points = _tile.Collision.Select(v => v * _tile.TileSize * _tile.Size).ToArray()
 			},
 			DebugColor = new Color(Colors.Aqua, 0.5f),
 			Visible = debug.ShowCollisions

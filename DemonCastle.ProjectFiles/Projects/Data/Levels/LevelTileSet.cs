@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
+using DemonCastle.Files.Animations;
+using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -26,9 +28,24 @@ public class LevelTileSet {
 
 	public TileInfo CreateTile() {
 		var lastTile = Level.Tiles.LastOrDefault();
-		var tileData = new TileData {
-			Source = lastTile?.Source ?? string.Empty
-		};
+		var tileData = new TileData();
+		if (lastTile != null) {
+			var previousState = lastTile.States.FirstOrDefault(s => s.Id == lastTile.InitialState);
+			var previousAnimation = lastTile.Animations.FirstOrDefault(a => a.Id == previousState?.Animation);
+			var previousFrame = previousAnimation?.Frames.FirstOrDefault();
+			var animation = new AnimationData();
+			tileData.Animations.Add(animation);
+			animation.Frames.Add(new FrameData {
+				Source = previousFrame?.Source ?? string.Empty,
+				SpriteId = previousFrame?.SpriteId ?? Guid.Empty
+			});
+
+			var state = new EntityStateData {
+				Animation = animation.Id
+			};
+			tileData.States.Add(state);
+			tileData.InitialState = state.Id;
+		}
 		Level.Tiles.Add(tileData);
 		File.Save();
 

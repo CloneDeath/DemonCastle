@@ -31,13 +31,13 @@ public partial class TileView : SpriteDefinitionView {
 				Load(Tile.Sprite);
 				LoadScale();
 				break;
-			case nameof(Tile.Span):
+			case nameof(Tile.Size):
 				LoadScale();
 				break;
 		}
 	}
 
 	private void LoadScale() {
-		Scale = Tile.TileScale * Tile.Span / Tile.Region.Size;
+		Scale = Tile.TileScale * Tile.Size / Tile.Region.Size;
 	}
 }

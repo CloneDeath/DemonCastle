@@ -3,83 +3,87 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public class MonsterInfo : BaseEntityInfo<MonsterFile> {
-	public MonsterInfo(FileNavigator<MonsterFile> file) : base(file) { }
+public class MonsterInfo : BaseEntityInfo<MonsterFile>, IFileInfo {
+	public MonsterInfo(FileNavigator<MonsterFile> file) : base(file, file.Resource) { }
+
+	public string FileName => File.FileName;
+	public string Directory => File.Directory;
+	void IFileInfo.Save() => base.Save();
 
 	public int Health {
-		get => Resource.Health;
+		get => Data.Health;
 		set {
-			Resource.Health = value;
+			Data.Health = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public int Experience {
-		get => Resource.Experience;
+		get => Data.Experience;
 		set {
-			Resource.Experience = value;
+			Data.Experience = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public int Attack {
-		get => Resource.Attack;
+		get => Data.Attack;
 		set {
-			Resource.Attack = value;
+			Data.Attack = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public int PhysicalDefense {
-		get => Resource.PhysicalDefense;
+		get => Data.PhysicalDefense;
 		set {
-			Resource.PhysicalDefense = value;
+			Data.PhysicalDefense = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public int MagicalDefense {
-		get => Resource.MagicalDefense;
+		get => Data.MagicalDefense;
 		set {
-			Resource.MagicalDefense = value;
+			Data.MagicalDefense = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public float MoveSpeed {
-		get => Resource.MoveSpeed;
+		get => Data.MoveSpeed;
 		set {
-			Resource.MoveSpeed = value;
+			Data.MoveSpeed = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public float JumpHeight {
-		get => Resource.JumpHeight;
+		get => Data.JumpHeight;
 		set {
-			Resource.JumpHeight = value;
+			Data.JumpHeight = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public float Gravity {
-		get => Resource.Gravity;
+		get => Data.Gravity;
 		set {
-			Resource.Gravity = value;
+			Data.Gravity = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public bool DespawnOnDeath {
-		get => Resource.DespawnOnDeath;
-		set => SaveField(ref Resource.DespawnOnDeath, value);
+		get => Data.DespawnOnDeath;
+		set => SaveField(ref Data.DespawnOnDeath, value);
 	}
 }

@@ -29,7 +29,7 @@ public class TileProxy : INotifyPropertyChanged {
 			OnPropertyChanged(nameof(SpriteId));
 			OnPropertyChanged(nameof(Directory));
 			OnPropertyChanged(nameof(SpriteOptions));
-			OnPropertyChanged(nameof(Span));
+			OnPropertyChanged(nameof(Size));
 			OnPropertyChanged(nameof(Collision));
 			OnPropertyChanged(nameof(Stairs));
 		}
@@ -56,10 +56,10 @@ public class TileProxy : INotifyPropertyChanged {
 		}
 	}
 
-	public Vector2I Span {
-		get => _proxy?.Span ?? Vector2I.One;
+	public Vector2I Size {
+		get => _proxy?.Size ?? Vector2I.One;
 		set {
-			if (_proxy != null) _proxy.Span = value;
+			if (_proxy != null) _proxy.Size = value;
 		}
 	}
 

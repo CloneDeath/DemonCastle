@@ -1,44 +1,33 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
+using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 using TileData = DemonCastle.Files.TileData;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
-public class TileInfo : INotifyPropertyChanged {
-	public TileInfo(FileNavigator<LevelFile> level, TileData tileData) {
-		TileData = tileData;
+public class TileInfo : BaseEntityInfo<TileData> {
+	protected FileNavigator<LevelFile> Level { get; }
+
+	public TileInfo(FileNavigator<LevelFile> level, TileData tileData) : base(level, tileData) {
 		Level = level;
 	}
 
-	protected TileData TileData { get; }
-	protected FileNavigator<LevelFile> Level { get; }
 	public Vector2I TileSize => new(Level.Resource.TileWidth, Level.Resource.TileHeight);
 
 	public string Directory => Level.Directory;
 
-	public Guid Id => TileData.Id;
-
-	public string Name {
-		get => TileData.Name;
-		set {
-			TileData.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
-	}
-
 	public string SourceFile {
-		get => TileData.Source;
+		get => PreviewFrame?.SourceFile ?? string.Empty;
 		set {
-			TileData.Source = value;
+			var frame = GetOrCreatePreviewFrame();
+			frame.SourceFile = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Sprite));
@@ -46,65 +35,60 @@ public class TileInfo : INotifyPropertyChanged {
 	}
 
 	public Guid SpriteId {
-		get => TileData.SpriteId;
+		get => PreviewFrame?.SpriteId ?? Guid.Empty;
 		set {
-			TileData.SpriteId = value;
+			var frame = GetOrCreatePreviewFrame();
+			frame.SpriteId = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Sprite));
 		}
 	}
 
-	public Vector2I Span {
-		get => new(TileData.Width, TileData.Height);
-		set {
-			TileData.Width = value.X;
-			TileData.Height = value.Y;
-			Save();
-			OnPropertyChanged();
-		}
+	private IFrameInfo GetOrCreatePreviewFrame() {
+		if (PreviewFrame != null) return PreviewFrame;
+		var animation = GetOrCreateInitialAnimation();
+		var frame = animation.Frames.FirstOrDefault() ?? animation.Frames.AppendNew();
+		return frame;
+	}
+
+	private IAnimationInfo GetOrCreateInitialAnimation() {
+		var state = GetOrCreateInitialState();
+		var animation = Animations.FirstOrDefault(a => a.Id == state.Animation) ??
+						Animations.FirstOrDefault() ?? Animations.AppendNew();
+		state.Animation = animation.Id;
+		return animation;
+	}
+
+	private EntityStateInfo GetOrCreateInitialState() {
+		var state = States.FirstOrDefault(s => s.Id == InitialState) ?? States.FirstOrDefault() ?? States.AppendNew();
+		InitialState = state.Id;
+		return state;
 	}
 
 	public Vector2[] Collision {
-		get => TileData.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
+		get => Data.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
 		set {
-			TileData.Collision = value.ToList();
+			Data.Collision = value.ToList();
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	public StairData? Stairs {
-		get => TileData.Stairs;
+		get => Data.Stairs;
 		set {
-			TileData.Stairs = value;
+			Data.Stairs = value;
 			Save();
 			OnPropertyChanged();
 		}
 	}
 
 	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
-	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == TileData.SpriteId)
+	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == SpriteId)
 										  ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteOptions => Source.Sprites;
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
 	public bool FlipHorizontal => Sprite.FlipHorizontal;
-
-	private void Save() => Level.Save();
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }

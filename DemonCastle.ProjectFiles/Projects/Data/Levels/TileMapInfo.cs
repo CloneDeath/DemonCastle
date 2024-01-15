@@ -27,8 +27,8 @@ public class TileMapInfo : INotifyPropertyChanged {
 			case nameof(Tile.Sprite):
 				OnPropertyChanged(nameof(Sprite));
 				break;
-			case nameof(Tile.Span):
-				OnPropertyChanged(nameof(Span));
+			case nameof(Tile.Size):
+				OnPropertyChanged(nameof(Size));
 				break;
 		}
 	}
@@ -43,11 +43,11 @@ public class TileMapInfo : INotifyPropertyChanged {
 		set => TileMapData.TileId = value;
 	}
 
-	public Vector2I Span => Tile.Span;
+	public Vector2I Size => Tile.Size;
 	public Rect2 Region => Sprite.Region;
 
 	public bool Contains(Vector2I tileIndex) {
-		var bounds = new Rect2I(Position.ToTileIndex(), Span);
+		var bounds = new Rect2I(Position.ToTileIndex(), Size);
 		return bounds.HasPoint(tileIndex);
 	}
 

@@ -1,6 +1,9 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Newtonsoft.Json.Linq;
 
@@ -40,12 +43,25 @@ public class GameFileMigrator {
 
 public static class MigratorFactory {
 	public static FileMigrator GetMigrator<T>(int version) {
-		throw new NotImplementedException();
+		var migrator = GetMigratorFor<T>();
+		if (migrator == null) throw new MissingMigratorException(typeof(T), version);
+		var method = migrator.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ToVersionAttribute>()?.Version == version);
+		if (method == null) throw new MissingMigratorException(typeof(T), version);
+		return new FileMigrator(method);
+	}
+
+	private static Type? GetMigratorFor<T>() {
+		var assembly = typeof(MigratorFactory).Assembly;
+		return assembly.GetTypes().FirstOrDefault(type => type.GetCustomAttribute<MigrationTypeAttribute>()?.Type == typeof(T));
 	}
 }
 
 public class FileMigrator {
-	public void Migrate(JObject file) {
-		throw new NotImplementedException();
+	private readonly MethodInfo _method;
+
+	public FileMigrator(MethodInfo method) {
+		_method = method;
 	}
+
+	public void Migrate(JObject file) => _method.Invoke(null, new object?[] { file });
 }

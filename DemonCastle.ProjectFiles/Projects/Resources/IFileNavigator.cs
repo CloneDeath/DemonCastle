@@ -9,6 +9,7 @@ public interface IFileNavigator {
 	void Save();
 	string Directory { get; }
 	string FilePath { get; }
+	string FileName { get; }
 	bool FileExists(string source);
 	AudioStream GetAudioStream(string source);
 	CharacterInfo GetCharacter(string character);

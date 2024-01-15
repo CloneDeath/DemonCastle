@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using DemonCastle.Files.BaseEntity;
+using DemonCastle.Files.Common;
 using Godot;
 
 namespace DemonCastle.Files;
 
 public class LevelFile : IGameFile {
-	public int FileVersion => 1;
+	public int FileVersion => 2;
 	public string Name { get; set; } = string.Empty;
 	public int TileWidth { get; set; } = 16;
 	public int TileHeight { get; set; } = 16;
@@ -22,14 +24,12 @@ public class StartingData {
 	public int Y { get; set; }
 }
 
-public class TileData {
-	public string Name { get; set; } = string.Empty;
-	public Guid Id { get; set; } = Guid.NewGuid();
-	public string Source { get; set; } = string.Empty;
-	public Guid SpriteId { get; set; }
+public class TileData : BaseEntityFile {
+	public TileData() {
+		Size = new Size(1, 1);
+	}
+
 	public List<Vector2> Collision { get; set; } = new();
-	public int Width { get; set; } = 1;
-	public int Height { get; set; } = 1;
 	public StairData? Stairs { get; set; }
 }
 

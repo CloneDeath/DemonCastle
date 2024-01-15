@@ -16,7 +16,7 @@ public partial class GameTileStairs : Area2D {
 		CollisionLayer = (uint)CollisionLayers.World;
 		CollisionMask = (uint)CollisionLayers.Player;
 
-		var size = tile.TileSize * tile.Span;
+		var size = tile.TileSize * tile.Size;
 		AddChild(new CollisionShape2D {
 			Position = size/2,
 			Shape = new RectangleShape2D {
@@ -27,10 +27,10 @@ public partial class GameTileStairs : Area2D {
 		});
 
 		AddChild(Start = new GameTileStairsNode(tileStairs, true) {
-			Position = new Vector2(tileStairs.Start.X, tileStairs.Start.Y) * tile.TileSize * tile.Span
+			Position = new Vector2(tileStairs.Start.X, tileStairs.Start.Y) * tile.TileSize * tile.Size
 		});
 		AddChild(End = new GameTileStairsNode(tileStairs, false) {
-			Position = new Vector2(tileStairs.End.X, tileStairs.End.Y) * tile.TileSize * tile.Span
+			Position = new Vector2(tileStairs.End.X, tileStairs.End.Y) * tile.TileSize * tile.Size
 		});
 	}
 }

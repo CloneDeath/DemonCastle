@@ -22,22 +22,22 @@ public interface IBaseEntityInfo : IListableInfo {
 	public VariableDeclarationInfoCollection Variables { get; }
 }
 
-public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, IEntityStateInfoRetriever
-	where TFile : BaseEntityFile {
+public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, IEntityStateInfoRetriever
+	where TData : BaseEntityFile {
 
-	protected BaseEntityInfo(FileNavigator<TFile> file) : base(file) {
-		Animations = new AnimationInfoCollection(file, Resource.Animations);
-		States = new EntityStateInfoCollection(file, this, Resource.States);
-		Variables = new VariableDeclarationInfoCollection(file, Resource.Variables);
+	protected BaseEntityInfo(IFileNavigator file, TData data) : base(file, data) {
+		Animations = new AnimationInfoCollection(file, Data.Animations);
+		States = new EntityStateInfoCollection(file, this, Data.States);
+		Variables = new VariableDeclarationInfoCollection(file, Data.Variables);
 	}
 
-	public Guid Id => Resource.Id;
+	public Guid Id => Data.Id;
 	public string ListLabel => Name;
 
 	public string Name {
-		get => Resource.Name;
+		get => Data.Name;
 		set {
-			Resource.Name = value;
+			Data.Name = value;
 			Save();
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(ListLabel));
@@ -45,18 +45,14 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, 
 	}
 
 	public Guid InitialState {
-		get => Resource.InitialState;
-		set {
-			Resource.InitialState = value;
-			Save();
-			OnPropertyChanged();
-		}
+		get => Data.InitialState;
+		set => SaveField(ref Data.InitialState, value);
 	}
 
 	public Vector2I Size {
-		get => Resource.Size.ToVector2I();
+		get => Data.Size.ToVector2I();
 		set {
-			Resource.Size = value.ToSize();
+			Data.Size = value.ToSize();
 			Save();
 			OnPropertyChanged();
 		}
@@ -70,7 +66,7 @@ public abstract class BaseEntityInfo<TFile> : FileInfo<TFile>, IBaseEntityInfo, 
 
 	public Vector2 PreviewOrigin => PreviewFrame?.Origin ?? Vector2.Zero;
 
-	private IFrameInfo? PreviewFrame {
+	protected IFrameInfo? PreviewFrame {
 		get {
 			var state = States.FirstOrDefault(s => s.Id == InitialState);
 			var animation = Animations.FirstOrDefault(a => a.Id == state?.Animation);

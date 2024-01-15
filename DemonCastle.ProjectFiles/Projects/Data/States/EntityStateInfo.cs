@@ -30,11 +30,7 @@ public class EntityStateInfo : BaseInfo<EntityStateData>, IListableInfo {
 
 	public Guid Animation {
 		get => Data.Animation;
-		set {
-			Data.Animation = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Animation, value);
 	}
 
 	public EntityActionInfoCollection OnEnter { get; }

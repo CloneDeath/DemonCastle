@@ -32,7 +32,7 @@ public partial class TileDetails : PropertyCollection {
 			e => e.SpriteId,
 			t => t.SpriteOptions);
 		spriteReference.ItemSelected += SpriteIdProperty_OnItemSelected;
-		AddVector2I("Span", TileProxy, x => x.Span);
+		AddVector2I("Span", TileProxy, x => x.Size);
 		AddChild(new TileCollisionView(TileProxy));
 		AddChild(new TileStairView(TileProxy));
 
