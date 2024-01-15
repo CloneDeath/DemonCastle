@@ -15,6 +15,7 @@ public partial class LevelEditor : BaseEditor {
 
 	protected VSplitContainer SplitContainer { get; }
 	protected LevelOverviewEdit LevelOverview { get; }
+	protected Button ExpandCollapseButton { get; }
 	protected AreaEdit Area { get; }
 
 	public LevelEditor(ProjectInfo project, LevelInfo level) {
@@ -29,8 +30,24 @@ public partial class LevelEditor : BaseEditor {
 
 		SplitContainer.AddChild(LevelOverview = new LevelOverviewEdit(level));
 		LevelOverview.AreaSelected += LevelOverview_OnAreaSelected;
-		SplitContainer.AddChild(Area = new AreaEdit(project, level));
+
+		VBoxContainer bottom;
+		SplitContainer.AddChild(bottom = new VBoxContainer());
+		bottom.AddChild(ExpandCollapseButton = new Button {
+			Text = "Collapse"
+		});
+		ExpandCollapseButton.Pressed += ExpandCollapseButton_OnPressed;
+
+		bottom.AddChild(Area = new AreaEdit(project, level) {
+			SizeFlagsVertical = SizeFlags.ExpandFill
+		});
 		Area.AreaSelected += Area_OnAreaSelected;
+	}
+
+	private void ExpandCollapseButton_OnPressed() {
+		SplitContainer.Collapsed = !SplitContainer.Collapsed;
+		LevelOverview.Visible = !SplitContainer.Collapsed;
+		ExpandCollapseButton.Text = SplitContainer.Collapsed ? "Expand" : "Collapse";
 	}
 
 	private void Area_OnAreaSelected(AreaInfo area) {

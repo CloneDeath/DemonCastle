@@ -15,9 +15,7 @@ public partial class LevelOverviewEdit : HSplitContainer {
 		Name = nameof(LevelOverviewEdit);
 
 		AddChild(DetailsPanel = new LevelDetailsPanel(level));
-		AddChild(Minimap = new MinimapView(level) {
-			CustomMinimumSize = new Vector2(0, 150)
-		});
+		AddChild(Minimap = new MinimapView(level));
 		Minimap.AreaSelected += Minimap_OnAreaSelected;
 	}
 
