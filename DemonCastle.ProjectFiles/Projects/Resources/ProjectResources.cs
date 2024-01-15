@@ -3,15 +3,17 @@ using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Migration;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class ProjectResources {
-	protected FileNavigator<T> GetFile<T>(string path) => new(path, this);
 	protected TextFileNavigator GetTextFile(string path) => new(path, this);
 
 	public ProjectResources() {
+		var migrator = new GameFileMigrator(this);
+
 		AudioStreams = new ResourceCache<AudioStream>(path => {
 			var data = File.ReadAllBytes(path);
 			var sound = new AudioStreamWav();
@@ -20,10 +22,10 @@ public class ProjectResources {
 		});
 
 		Characters = new ResourceCache<CharacterInfo>(path
-			=> new CharacterInfo(GetFile<CharacterFile>(path)));
+			=> new CharacterInfo(migrator.GetFile<CharacterFile>(path)));
 
 		Items = new ResourceCache<ItemInfo>(path
-			=> new ItemInfo(GetFile<ItemFile>(path)));
+			=> new ItemInfo(migrator.GetFile<ItemFile>(path)));
 
 		Fonts = new ResourceCache<Font>(path => {
 			var font = new FontFile();
@@ -32,22 +34,22 @@ public class ProjectResources {
 		});
 
 		Levels = new ResourceCache<LevelInfo>(path
-			=> new LevelInfo(GetFile<LevelFile>(path)));
+			=> new LevelInfo(migrator.GetFile<LevelFile>(path)));
 
 		Monsters = new ResourceCache<MonsterInfo>(path
-			=> new MonsterInfo(GetFile<MonsterFile>(path)));
+			=> new MonsterInfo(migrator.GetFile<MonsterFile>(path)));
 
 		Projects = new ResourceCache<ProjectInfo>(path
-			=> new ProjectInfo(GetFile<ProjectFile>(path)));
+			=> new ProjectInfo(migrator.GetFile<ProjectFile>(path)));
 
 		Scenes = new ResourceCache<SceneInfo>(path
-			=> new SceneInfo(GetFile<SceneFile>(path)));
+			=> new SceneInfo(migrator.GetFile<SceneFile>(path)));
 
 		SpriteGrids = new ResourceCache<SpriteGridInfo>(path
-			=> new SpriteGridInfo(GetFile<SpriteGridFile>(path)));
+			=> new SpriteGridInfo(migrator.GetFile<SpriteGridFile>(path)));
 
 		SpriteAtlases = new ResourceCache<SpriteAtlasInfo>(path
-			=> new SpriteAtlasInfo(GetFile<SpriteAtlasFile>(path)));
+			=> new SpriteAtlasInfo(migrator.GetFile<SpriteAtlasFile>(path)));
 
 		Texts = new ResourceCache<TextInfo>(path
 			=> new TextInfo(GetTextFile(path)));
@@ -59,7 +61,7 @@ public class ProjectResources {
 		});
 
 		Weapons = new ResourceCache<WeaponInfo>(path
-			=> new WeaponInfo(GetFile<WeaponFile>(path)));
+			=> new WeaponInfo(migrator.GetFile<WeaponFile>(path)));
 	}
 
 	protected ResourceCache<AudioStream> AudioStreams { get; }
