@@ -167,7 +167,17 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		fileProperty.FileSelected += _ => {
 			spriteProperty.LoadOptions(getOptions(target));
 		};
+
+		target.PropertyChanged += TargetOnPropertyChanged;
+		spriteProperty.TreeExiting += () => {
+			target.PropertyChanged -= TargetOnPropertyChanged;
+		};
+
 		return spriteProperty;
+
+		void TargetOnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+			spriteProperty.LoadOptions(getOptions(target));
+		}
 	}
 
 	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {

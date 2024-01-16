@@ -65,6 +65,8 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 				OptionButton.AddItem(name, i);
 			}
 		}
+
+		PropertyValue = Binding.Get();
 	}
 
 	private void Binding_OnChanged(Guid value) {
