@@ -45,7 +45,7 @@ public static class MigratorFactory {
 	public static FileMigrator GetMigrator<T>(int version) {
 		var migrator = GetMigratorFor<T>();
 		if (migrator == null) throw new MissingMigratorException(typeof(T), version);
-		var method = migrator.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ToVersionAttribute>()?.Version == version);
+		var method = migrator.GetMethods().FirstOrDefault(m => m.GetCustomAttribute<ToVersionAttribute>()?.Version == version + 1);
 		if (method == null) throw new MissingMigratorException(typeof(T), version);
 		return new FileMigrator(method);
 	}
