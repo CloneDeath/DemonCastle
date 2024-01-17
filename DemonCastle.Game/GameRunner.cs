@@ -39,6 +39,7 @@ public partial class GameRunner : Control {
 		LevelViewport.AddChild(new GameCamera(GamePlayer, Level));
 
 		SceneStack.Set(project.StartScene);
+		AddChild(new FramePerSecondLabel());
 	}
 
 	public override void _EnterTree() {
