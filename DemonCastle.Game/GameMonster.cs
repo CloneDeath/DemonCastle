@@ -32,6 +32,8 @@ public partial class GameMonster : GameBaseEntity {
 		return true;
 	}
 
+	protected override bool IsImmobile => false;
+
 	public override void Reset() {
 		Position = _monsterData.MonsterPosition.ToPixelPositionInArea();
 		Hp = MaxHp;

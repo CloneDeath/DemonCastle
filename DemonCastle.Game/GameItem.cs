@@ -11,6 +11,8 @@ public partial class GameItem : GameBaseEntity {
 		level, item, logger, debug) {
 		Name = $"{nameof(GameItem)} {item.Name} ({Id})";
 	}
+
+	protected override bool IsImmobile => false;
 	public override bool WasKilled => false;
 
 	public override float MoveSpeed => 0;

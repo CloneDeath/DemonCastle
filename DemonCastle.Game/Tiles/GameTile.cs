@@ -56,5 +56,6 @@ public partial class GameTile : GameBaseEntity {
 	public override float MoveSpeed => 0;
 	protected override float Gravity => 0;
 	protected override bool ApplyDamage(int amount) => false;
+	protected override bool IsImmobile => true;
 	public override bool WasKilled => false;
 }

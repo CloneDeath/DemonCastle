@@ -14,6 +14,8 @@ public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState 
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 
+	protected abstract bool IsImmobile { get; }
+
 	protected GameBaseEntity(IGameState game, LevelInfo level, IBaseEntityInfo entity, IGameLogger logger, DebugState debug)
 		: base(game, logger, debug) {
 		Level = level;
@@ -36,7 +38,7 @@ public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState 
 
 		Velocity = _moveDirection * MoveSpeed;
 		StopMoving();
-		MoveAndSlide();
+		if (!IsImmobile) MoveAndSlide();
 
 		_animation.Scale = new Vector2(Facing, 1);
 		AlignAnimationNodes();
