@@ -34,7 +34,7 @@ public partial class GameArea : Node2D {
 
 		foreach (var tileMapInfo in area.TileMap) {
 			var tileInfo = tileMapInfo.Tile;
-			AddChild(new GameTile(tileInfo, debug) {
+			AddChild(new GameTile(game, level, tileInfo, logger, debug) {
 				Name = $"{nameof(GameTile)}@{tileMapInfo.Position.ToTileIndex()}",
 				Position = tileMapInfo.Position.ToPixelPositionInArea()
 			});
