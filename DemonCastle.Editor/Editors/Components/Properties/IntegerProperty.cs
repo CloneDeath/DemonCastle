@@ -12,7 +12,7 @@ public partial class IntegerProperty : BaseProperty {
 		set => SpinBox.Value = value;
 	}
 
-	public IntegerProperty(IPropertyBinding<int> binding) {
+	public IntegerProperty(IPropertyBinding<int> binding, IntegerPropertyOptions? options = null) {
 		Name = nameof(IntegerProperty);
 		Binding = binding;
 
@@ -20,8 +20,9 @@ public partial class IntegerProperty : BaseProperty {
 			CustomMinimumSize = new Vector2(20, 20),
 			SizeFlagsHorizontal = SizeFlags.ExpandFill,
 			Rounded = true,
+			AllowLesser = options?.AllowNegative ?? false,
 			MinValue = 0,
-			MaxValue = double.MaxValue,
+			MaxValue = int.MaxValue,
 			Value = Binding.Get()
 		});
 		SpinBox.ValueChanged += OnValueChange;

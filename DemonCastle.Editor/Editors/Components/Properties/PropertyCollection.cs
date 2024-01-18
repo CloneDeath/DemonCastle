@@ -108,8 +108,8 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
-	public void AddInteger<T>(string name, T target, Expression<Func<T, int>> propertyExpression) where T : INotifyPropertyChanged {
-		AddChild(new IntegerProperty(new PropertyBinding<T,int>(target, propertyExpression)) {
+	public void AddInteger<T>(string name, T target, Expression<Func<T, int>> propertyExpression, IntegerPropertyOptions? options = null) where T : INotifyPropertyChanged {
+		AddChild(new IntegerProperty(new PropertyBinding<T,int>(target, propertyExpression), options) {
 			DisplayName = name
 		});
 	}
