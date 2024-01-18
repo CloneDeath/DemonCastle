@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.ComponentModel;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
 
@@ -14,12 +15,18 @@ public partial class TileLayerView : Control {
 
 	public override void _EnterTree() {
 		base._EnterTree();
+		_layer.PropertyChanged += Layer_OnPropertyChanged;
 		_layer.TileMap.CollectionChanged += TileMap_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
+		_layer.PropertyChanged -= Layer_OnPropertyChanged;
 		_layer.TileMap.CollectionChanged -= TileMap_OnCollectionChanged;
+	}
+
+	private void Layer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		ReloadLayer();
 	}
 
 	private void TileMap_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
