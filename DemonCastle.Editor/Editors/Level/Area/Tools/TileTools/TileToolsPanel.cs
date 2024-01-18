@@ -7,6 +7,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 public partial class TileToolsPanel : VBoxContainer {
 	protected LevelInfo Level { get; }
 
+	protected readonly TileLayerEditor _tileLayerEditor;
 	protected Button AddTileButton { get; }
 	protected Button DeleteTileButton { get; }
 	protected TileSelectorPanel TileSelector { get; }
@@ -16,7 +17,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
-		AddChild(new TileLayerEditor());
+		AddChild(_tileLayerEditor = new TileLayerEditor());
 
 		AddChild(AddTileButton = new Button { Text = "Add Tile" });
 		AddTileButton.Pressed += AddTileButtonOnPressed;
@@ -65,5 +66,9 @@ public partial class TileToolsPanel : VBoxContainer {
 		Level.TileSet.DeleteTile(tile);
 		TileSelector.Reload();
 		TileDetails.Proxy = null;
+	}
+
+	public void LoadArea(AreaInfo? value) {
+		_tileLayerEditor.LoadLayers(value?.TileMapLayers);
 	}
 }

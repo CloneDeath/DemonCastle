@@ -13,7 +13,10 @@ public partial class ToolsPanel : TabContainer {
 
 	public AreaInfo? Area {
 		get => _monsterToolsPanel.Area;
-		set => _monsterToolsPanel.Area = value;
+		set {
+			_tileToolsPanel.LoadArea(value);
+			_monsterToolsPanel.Area = value;
+		}
 	}
 
 	public ToolsPanel(ProjectInfo project, LevelInfo level) {
