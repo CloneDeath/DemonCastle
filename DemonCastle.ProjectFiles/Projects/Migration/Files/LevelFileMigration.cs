@@ -12,7 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Migration.Files;
 [MigrationType(typeof(LevelFile))]
 public static class LevelFileMigration {
 	[ToVersion(2)]
-	public static void Migrate(JObject file) {
+	public static void MakeTilesEntities(JObject file) {
 		var tiles = file[nameof(LevelFile.Tiles)] ?? new JArray();
 		foreach (var tile in tiles.Cast<JObject>()) {
 			var width = tile.Value<int>("Width");
@@ -40,6 +40,24 @@ public static class LevelFileMigration {
 			tile[nameof(TileData.States)] = JArray.FromObject(new List<EntityStateData> { state });
 			tile.Remove("Source");
 			tile.Remove("SpriteId");
+		}
+	}
+
+	[ToVersion(3)]
+	public static void AddTileLayers(JObject file) {
+		var areas = file[nameof(LevelFile.Areas)] ?? new JArray();
+		foreach (var area in areas.Cast<JObject>()) {
+			var tileMap = area["TileMap"];
+			area.Remove("TileMap");
+
+			var layers = JArray.FromObject(new List<TileMapLayerData> {
+				new() {
+					Name = "Default",
+					ZIndex = 0
+				}
+			});
+			area[nameof(AreaData.TileMapLayers)] = layers;
+			layers[0][nameof(TileMapLayerData.TileMap)] = tileMap;
 		}
 	}
 }

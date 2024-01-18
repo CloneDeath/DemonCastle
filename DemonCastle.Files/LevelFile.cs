@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.Files.Common;
 using Godot;
+using Newtonsoft.Json;
 
 namespace DemonCastle.Files;
 
 public class LevelFile : IGameFile {
-	public int FileVersion => 2;
+	[JsonProperty(Order = -1)]
+	public int FileVersion => 3;
 	public string Name { get; set; } = string.Empty;
 	public int TileWidth { get; set; } = 16;
 	public int TileHeight { get; set; } = 16;
