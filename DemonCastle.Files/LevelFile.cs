@@ -46,12 +46,23 @@ public class AreaData {
 	public int Width = 1;
 	public int Height = 1;
 	public List<MonsterData> Monsters { get; set; } = new();
-	public List<TileMapData> TileMap { get; set; } = new();
+	public List<TileMapLayerData> TileMapLayers { get; set; } = new() {
+		new TileMapLayerData() {
+			Name = "Default",
+			ZIndex = 0
+		}
+	};
 }
 
 public class MonsterData {
 	public Guid MonsterId;
 	public Vector2 Position;
+}
+
+public class TileMapLayerData {
+	public string Name = "Layer";
+	public int ZIndex;
+	public List<TileMapData> TileMap { get; set; } = new();
 }
 
 public class TileMapData {

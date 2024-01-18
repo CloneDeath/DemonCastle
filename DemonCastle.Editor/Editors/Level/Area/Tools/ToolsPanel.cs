@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools;

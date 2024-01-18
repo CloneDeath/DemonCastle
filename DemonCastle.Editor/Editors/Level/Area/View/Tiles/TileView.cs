@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 

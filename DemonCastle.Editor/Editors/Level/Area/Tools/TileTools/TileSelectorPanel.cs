@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;

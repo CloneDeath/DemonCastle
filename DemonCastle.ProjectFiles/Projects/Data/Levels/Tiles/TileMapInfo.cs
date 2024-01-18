@@ -1,23 +1,20 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
-public class TileMapInfo : INotifyPropertyChanged {
-	protected TileMapData TileMapData { get; }
+public class TileMapInfo : BaseInfo<TileMapData> {
 	protected AreaInfo AreaInfo { get; }
 
 	public TileInfo Tile => AreaInfo.GetTileInfo(TileId);
 	public ISpriteDefinition Sprite => Tile.Sprite;
 
-	public TileMapInfo(TileMapData tileMapData, AreaInfo areaInfo) {
-		TileMapData = tileMapData;
+	public TileMapInfo(IFileNavigator file, TileMapData data, AreaInfo areaInfo) : base(file, data) {
 		AreaInfo = areaInfo;
 		Tile.PropertyChanged += Tile_OnPropertyChanged;
 	}
@@ -34,13 +31,13 @@ public class TileMapInfo : INotifyPropertyChanged {
 	}
 
 	protected LevelTileSet TileSet => AreaInfo.LevelTileSet;
-	protected Vector2I TileIndex => new(TileMapData.X, TileMapData.Y);
+	protected Vector2I TileIndex => new(Data.X, Data.Y);
 
 	public Vector2I TileScale => AreaInfo.TileSize;
 	public TilePosition Position => new(TileIndex, AreaInfo.PositionOfArea, TileScale);
 	public Guid TileId {
-		get => TileMapData.TileId;
-		set => TileMapData.TileId = value;
+		get => Data.TileId;
+		set => Data.TileId = value;
 	}
 
 	public Vector2I Size => Tile.Size;
@@ -50,19 +47,4 @@ public class TileMapInfo : INotifyPropertyChanged {
 		var bounds = new Rect2I(Position.ToTileIndex(), Size);
 		return bounds.HasPoint(tileIndex);
 	}
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }

@@ -10,7 +10,7 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 using TileData = DemonCastle.Files.TileData;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
 public class TileInfo : BaseEntityInfo<TileData> {
 	protected FileNavigator<LevelFile> Level { get; }
