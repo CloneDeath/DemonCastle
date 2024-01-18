@@ -12,8 +12,11 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class TileLayerEditor : HBoxContainer {
 	private IEnumerableInfo<TileMapLayerInfo>? _layers;
-	private readonly OptionButton _options;
 	private readonly List<TileMapLayerInfo> _observed = new();
+
+	private readonly OptionButton _options;
+	private readonly Button _addButton;
+	private readonly Button _deleteButton;
 
 	public TileMapLayerInfo? SelectedLayer {
 		get {
@@ -30,10 +33,26 @@ public partial class TileLayerEditor : HBoxContainer {
 			Text = "<None>",
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		});
-		AddChild(new Button { Icon = IconTextures.AddIcon });
-		AddChild(new Button { Icon = IconTextures.DeleteIcon });
+		_options.ItemSelected += Options_OnItemSelected;
+		AddChild(_addButton = new Button { Icon = IconTextures.AddIcon });
+		_addButton.Pressed += AddButton_OnPressed;
+		AddChild(_deleteButton = new Button { Icon = IconTextures.DeleteIcon });
+		_deleteButton.Pressed += DeleteButton_OnPressed;
 
 		ReloadOptions();
+	}
+
+	private void Options_OnItemSelected(long index) {
+		_deleteButton.Disabled = _layers == null || index < 0;
+	}
+
+	private void AddButton_OnPressed() {
+		_layers?.AppendNew();
+	}
+
+	private void DeleteButton_OnPressed() {
+		if (SelectedLayer == null) return;
+		_layers?.Remove(SelectedLayer);
 	}
 
 	public override void _ExitTree() {
@@ -53,6 +72,8 @@ public partial class TileLayerEditor : HBoxContainer {
 		_observed.Clear();
 		_options.Clear();
 
+		_addButton.Disabled = _layers == null;
+		_deleteButton.Disabled = _layers == null;
 		_options.Disabled = _layers == null;
 		if (_layers == null) {
 			_options.Selected = -1;
@@ -74,6 +95,7 @@ public partial class TileLayerEditor : HBoxContainer {
 						?? ((IEnumerable<TileMapLayerInfo>)_observed).Reverse().MinBy(l => Math.Abs(l.ZIndex));
 			_options.Selected = layer == null ? -1 : _observed.IndexOf(layer);
 		}
+		_deleteButton.Disabled = _options.Selected < 0;
 	}
 
 	private void Layer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
