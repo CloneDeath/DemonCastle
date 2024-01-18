@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3135jlbnsqhg"
-path="res://.godot/imported/AddIcon.png-a4a60d0ba65c5877159766e4e746bb29.ctex"
+uid="uid://dsjkqvaxw3yt0"
+path="res://.godot/imported/AddFrameIcon.png-a01e7e9f478c746f8bc8be5c0d3ad749.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DemonCastle.Editor/Icons/AddIcon.png"
-dest_files=["res://.godot/imported/AddIcon.png-a4a60d0ba65c5877159766e4e746bb29.ctex"]
+source_file="res://DemonCastle.Editor/Icons/AddFrameIcon.png"
+dest_files=["res://.godot/imported/AddFrameIcon.png-a01e7e9f478c746f8bc8be5c0d3ad749.ctex"]
 
 [params]
 

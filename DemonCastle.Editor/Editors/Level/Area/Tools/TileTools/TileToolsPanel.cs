@@ -16,6 +16,8 @@ public partial class TileToolsPanel : VBoxContainer {
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
+		AddChild(new TileLayerEditor());
+
 		AddChild(AddTileButton = new Button { Text = "Add Tile" });
 		AddTileButton.Pressed += AddTileButtonOnPressed;
 

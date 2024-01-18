@@ -20,7 +20,7 @@ public partial class FrameListEditor : VBoxContainer {
 		});
 
 		FrameContainer.AddChild(AddFrameButton = new Button {
-			Icon = IconTextures.AddIcon,
+			Icon = IconTextures.AddFrameIcon,
 			IconAlignment = HorizontalAlignment.Center,
 			TooltipText = "Add Frame",
 			CustomMinimumSize = new Vector2(60, 60),
