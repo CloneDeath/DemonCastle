@@ -30,14 +30,10 @@ public partial class GameArea : Node2D {
 		_area = area;
 		_logger = logger;
 		_debug = debug;
-		Name = $"{nameof(GameArea)}@{area.PositionOfArea.AreaIndex}";
+		Name = $"{nameof(GameArea)}@{area.PositionOfArea.AreaIndex} ({area.Name})";
 
-		foreach (var tileMapInfo in area.TileMap) {
-			var tileInfo = tileMapInfo.Tile;
-			AddChild(new GameTile(game, level, tileInfo, logger, debug) {
-				Name = $"{nameof(GameTile)}@{tileMapInfo.Position.ToTileIndex()}",
-				Position = tileMapInfo.Position.ToPixelPositionInArea()
-			});
+		foreach (var layer in area.TileMapLayers) {
+			AddChild(new GameTileLayer(game, level, layer, logger, debug));
 		}
 
 		foreach (var monsterData in area.Monsters) {
