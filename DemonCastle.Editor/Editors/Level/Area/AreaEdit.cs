@@ -57,10 +57,10 @@ public partial class AreaEdit : HSplitContainer {
 		var selectedTile = Tools.SelectedTile;
 		if (selectedTile == null) return;
 
-		area.SetTile(cell, selectedTile.Id);
+		area.SetTile(cell, 0, selectedTile.Id);
 	}
 
 	private static void LevelAreasView_OnAreaTileCleared(AreaInfo area, Vector2I cell) {
-		area.ClearTile(cell);
+		area.ClearTile(cell, 0);
 	}
 }

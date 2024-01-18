@@ -1,29 +1,28 @@
-using System.ComponentModel;
+using System.Collections.Specialized;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 
 public partial class AreaTilesView : Control {
-	private readonly AreaInfo _areaInfo;
+	private readonly AreaInfo _area;
 
-	public AreaTilesView(AreaInfo areaInfo) {
-		_areaInfo = areaInfo;
+	public AreaTilesView(AreaInfo area) {
+		_area = area;
 		ReloadArea();
 	}
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		_areaInfo.PropertyChanged += AreaInfo_OnPropertyChanged;
+		_area.TileMapLayers.CollectionChanged += TileMapLayers_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_areaInfo.PropertyChanged -= AreaInfo_OnPropertyChanged;
+		_area.TileMapLayers.CollectionChanged -= TileMapLayers_OnCollectionChanged;
 	}
 
-	private void AreaInfo_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName != nameof(_areaInfo.TileMap)) return;
+	private void TileMapLayers_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		ReloadArea();
 	}
 
@@ -32,9 +31,8 @@ public partial class AreaTilesView : Control {
 			child.QueueFree();
 		}
 
-		foreach (var tileMapInfo in _areaInfo.TileMap) {
-			var tileView = new TileView(tileMapInfo);
-			AddChild(tileView);
+		foreach (var layer in _area.TileMapLayers) {
+			AddChild(new TileLayerView(layer));
 		}
 	}
 }
