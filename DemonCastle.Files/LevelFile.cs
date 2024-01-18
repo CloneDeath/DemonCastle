@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.Files.Common;
 using Godot;
-using Newtonsoft.Json;
 
 namespace DemonCastle.Files;
 
 public class LevelFile : IGameFile {
-	[JsonProperty(Order = -1)]
 	public int FileVersion => 3;
 	public string Name { get; set; } = string.Empty;
+	public Guid Id { get; set; } = Guid.NewGuid();
 	public int TileWidth { get; set; } = 16;
 	public int TileHeight { get; set; } = 16;
 	public int AreaWidth { get; set; } = 16;
@@ -48,12 +47,7 @@ public class AreaData {
 	public int Width = 1;
 	public int Height = 1;
 	public List<MonsterData> Monsters { get; set; } = new();
-	public List<TileMapLayerData> TileMapLayers { get; set; } = new() {
-		new TileMapLayerData() {
-			Name = "Default",
-			ZIndex = 0
-		}
-	};
+	public List<TileMapLayerData> TileMapLayers { get; set; } = new();
 }
 
 public class MonsterData {

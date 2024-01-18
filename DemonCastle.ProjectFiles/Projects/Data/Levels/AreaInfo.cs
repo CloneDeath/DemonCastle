@@ -31,7 +31,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public LevelTileSet LevelTileSet => Level.TileSet;
 	public MonsterDataInfoCollection Monsters { get; }
-	public IEnumerableInfo<TileMapLayerInfo> TileMapLayers { get; }
+	public ObservableCollectionInfo<TileMapLayerInfo, TileMapLayerData> TileMapLayers { get; }
 
 	public Vector2I AreaPosition {
 		get => new(Data.X, Data.Y);
@@ -67,25 +67,22 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public void SetTile(Vector2I tileIndex, int zIndex, Guid tileId) {
 		var layer = GetOrCreateLayer(zIndex);
-		var info = layer.TileMap.FirstOrDefault(info => info.Contains(tileIndex));
-		if (info != null) {
-			info.TileId = tileId;
-		}
-		else {
-			layer.TileMap.Add(new TileMapData {
-				X = tileIndex.X,
-				Y = tileIndex.Y,
-				TileId = tileId
-			});
-		}
+		var info = layer.TileMap.FirstOrDefault(info => info.Contains(tileIndex)) ?? layer.TileMap.Add(new TileMapData {
+			X = tileIndex.X,
+			Y = tileIndex.Y,
+			TileId = tileId
+		});
+
+		info.TileId = tileId;
 
 		OnPropertyChanged(nameof(TileMap));
 	}
 
 	private TileMapLayerInfo GetOrCreateLayer(int zIndex) {
-		var layer = TileMapLayers.FirstOrDefault(l => l.ZIndex == zIndex) ?? TileMapLayers.AppendNew();
-		layer.ZIndex = zIndex;
-		return layer;
+		return TileMapLayers.FirstOrDefault(l => l.ZIndex == zIndex) ?? TileMapLayers.Add(new TileMapLayerData {
+			Name = zIndex == 0 ? "Default" : "Layer",
+			ZIndex = zIndex
+		});
 	}
 
 	public void ClearTile(Vector2I tileIndex, int zIndex) {
