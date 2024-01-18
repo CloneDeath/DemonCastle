@@ -18,5 +18,5 @@ public class TileMapLayerInfo : BaseInfo<TileMapLayerData> {
 		set => SaveField(ref Data.ZIndex, value);
 	}
 
-	public IEnumerableInfo<TileMapInfo> TileMap { get; }
+	public ObservableCollectionInfo<TileMapInfo, TileMapData> TileMap { get; }
 }

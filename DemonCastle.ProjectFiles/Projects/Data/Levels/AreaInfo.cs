@@ -15,7 +15,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 	public AreaInfo(IFileNavigator file, AreaData area, LevelInfo level) : base(file, area) {
 		Level = level;
 		Monsters = new MonsterDataInfoCollection(file, this, area.Monsters);
-		TileMapLayers = new InfoList<TileMapLayerInfo, TileMapLayerData>(file, area.TileMapLayers, data => new TileMapLayerInfo(file, data));
+		TileMapLayers = new InfoList<TileMapLayerInfo, TileMapLayerData>(file, area.TileMapLayers, data => new TileMapLayerInfo(file, data, this));
 	}
 
 	public Guid Id => Data.Id;
@@ -72,18 +72,13 @@ public class AreaInfo : BaseInfo<AreaData> {
 			info.TileId = tileId;
 		}
 		else {
-			var tile = layer.TileMap.AppendNew();
-			tile.Position = tileIndex;
-			var tileMapData = new TileMapData {
+			layer.TileMap.Add(new TileMapData {
 				X = tileIndex.X,
 				Y = tileIndex.Y,
 				TileId = tileId
-			};
-			Data.TileMap.Add(tileMapData);
-			_tileMapInfos.Add(new TileMapInfo(tileMapData, this));
+			});
 		}
 
-		Save();
 		OnPropertyChanged(nameof(TileMap));
 	}
 
@@ -93,18 +88,12 @@ public class AreaInfo : BaseInfo<AreaData> {
 		return layer;
 	}
 
-	public void ClearTile(Vector2I tileIndex) {
-		var info = _tileMapInfos.Find(info => info.Contains(tileIndex));
+	public void ClearTile(Vector2I tileIndex, int zIndex) {
+		var layer = GetOrCreateLayer(zIndex);
+		var info = layer.TileMap.FirstOrDefault(info => info.Contains(tileIndex));
 		if (info == null) return;
-		_tileMapInfos.Remove(info);
+		layer.TileMap.Remove(info);
 
-		var infoPosition = info.Position.ToTileIndex();
-		var tile = Data.TileMap.FirstOrDefault(t => t.X == infoPosition.X && t.Y == infoPosition.Y);
-		if (tile != null) {
-			Data.TileMap.Remove(tile);
-		}
-
-		Save();
 		OnPropertyChanged(nameof(TileMap));
 	}
 }
