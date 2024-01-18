@@ -35,5 +35,6 @@ public partial class TileLayerView : Control {
 			var tileView = new TileView(tile);
 			AddChild(tileView);
 		}
+		ZIndex = _layer.ZIndex;
 	}
 }

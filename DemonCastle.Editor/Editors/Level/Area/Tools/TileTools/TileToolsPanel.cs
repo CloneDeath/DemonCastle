@@ -45,6 +45,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	}
 
 	public TileInfo? SelectedTile => TileSelector.SelectedTile;
+	public TileMapLayerInfo? SelectedLayer => _tileLayerEditor.SelectedLayer;
 
 	public override void _Process(double delta) {
 		base._Process(delta);

@@ -68,6 +68,10 @@ public partial class TileLayerEditor : VBoxContainer {
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (_layers != null) _layers.CollectionChanged -= Layers_OnCollectionChanged;
+		foreach (var layer in _observed) {
+			layer.PropertyChanged -= Layer_OnPropertyChanged;
+		}
+		_observed.Clear();
 	}
 
 	private void Layers_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {

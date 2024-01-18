@@ -29,4 +29,5 @@ public partial class ToolsPanel : TabContainer {
 	}
 
 	public TileInfo? SelectedTile => _tileToolsPanel.SelectedTile;
+	public TileMapLayerInfo? SelectedLayer => _tileToolsPanel.SelectedLayer;
 }
