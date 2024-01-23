@@ -11,15 +11,15 @@ public partial class CharacterEditor : BaseEditor {
 
 	protected HSplitContainer SplitContainer { get; }
 
-	public CharacterEditor(CharacterInfo characterInfo) {
+	public CharacterEditor(CharacterInfo character) {
 		Name = nameof(CharacterEditor);
-		TabText = characterInfo.FileName;
+		TabText = character.FileName;
 		CustomMinimumSize = new Vector2I(600, 300);
 
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
-		SplitContainer.AddChild(new CharacterDetails(characterInfo));
-		SplitContainer.AddChild(new CharacterAnimations(characterInfo));
+		SplitContainer.AddChild(new CharacterDetails(character));
+		SplitContainer.AddChild(new CharacterAnimations(character));
 	}
 }

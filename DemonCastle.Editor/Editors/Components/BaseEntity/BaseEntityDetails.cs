@@ -4,8 +4,8 @@ using DemonCastle.ProjectFiles.Projects.Data;
 
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
-public abstract partial class BaseEntityDetails : PropertyCollection {
-	protected BaseEntityDetails(IBaseEntityInfo entity) {
+public partial class BaseEntityDetails : PropertyCollection {
+	public BaseEntityDetails(IBaseEntityInfo entity) {
 		Name = nameof(MonsterDetails);
 
 		AddString("Name", entity, m => m.Name, InternalMode.Front);
