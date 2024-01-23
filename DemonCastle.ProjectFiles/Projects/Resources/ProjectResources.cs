@@ -3,6 +3,7 @@ using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Migration;
 using Godot;
 
@@ -54,6 +55,9 @@ public class ProjectResources {
 		Texts = new ResourceCache<TextInfo>(path
 			=> new TextInfo(GetTextFile(path)));
 
+		TileSets = new ResourceCache<TileSetInfo>(path
+			=> new TileSetInfo(migrator.GetFile<TileSetFile>(path)));
+
 		Textures = new ResourceCache<Texture2D>(path => {
 			var image = new Image();
 			image.Load(path);
@@ -96,6 +100,9 @@ public class ProjectResources {
 
 	protected ResourceCache<TextInfo> Texts { get; }
 	public TextInfo GetText(string path) => Texts.Get(path);
+
+	protected ResourceCache<TileSetInfo> TileSets { get; }
+	public TileSetInfo GetTileSet(string path) => TileSets.Get(path);
 
 	protected ResourceCache<Texture2D> Textures { get; }
 	public Texture2D GetTexture(string path) => Textures.Get(path);

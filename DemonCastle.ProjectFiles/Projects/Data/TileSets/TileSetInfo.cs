@@ -1,9 +1,9 @@
 using System;
 using DemonCastle.Files;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
-using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
+
+namespace DemonCastle.ProjectFiles.Projects.Data.TileSets;
 
 public class TileSetInfo : FileInfo<TileSetFile> {
 	public TileSetInfo(FileNavigator<TileSetFile> file) : base(file) {

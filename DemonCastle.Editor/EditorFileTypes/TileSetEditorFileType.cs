@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors;
+using DemonCastle.Editor.Editors.TileSet;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -10,5 +11,5 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class TileSetEditorFileType : TileSetFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.TileSetIcon;
 	public object CreateFileInstance() => string.Empty;
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new TextFileEditor(file.ToTextInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new TileSetEditor(file.ToTileSet());
 }

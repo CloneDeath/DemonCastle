@@ -2,6 +2,7 @@ using System;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using Godot;
 using Path = System.IO.Path;
 using File = System.IO.File;
@@ -32,6 +33,7 @@ public class FileNavigator : DirectoryNavigator {
 	public SpriteAtlasInfo ToSpriteAtlasInfo() => ProjectResources.GetSpriteAtlas(FilePath);
 	public SpriteGridInfo ToSpriteGridInfo() => ProjectResources.GetSpriteGrid(FilePath);
 	public TextInfo ToTextInfo() => ProjectResources.GetText(FilePath);
+	public TileSetInfo ToTileSet() => ProjectResources.GetTileSet(FilePath);
 	public Texture2D ToTexture() => ProjectResources.GetTexture(FilePath);
 	public WeaponInfo ToWeaponInfo() => ProjectResources.GetWeapon(FilePath);
 
