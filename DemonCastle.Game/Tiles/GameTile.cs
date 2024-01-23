@@ -26,7 +26,7 @@ public partial class GameTile : GameBaseEntity {
 			RegionEnabled = true,
 			RegionRect = tile.Region,
 			Centered = false,
-			Scale = tile.Size * tile.TileSize / tile.Region.Size
+			Scale = tile.Size * level.TileSize / tile.Region.Size
 		});
 
 		SetupCollisions(debug);
@@ -41,7 +41,7 @@ public partial class GameTile : GameBaseEntity {
 		});
 		Body.AddChild(new CollisionShape2D {
 			Shape = new ConvexPolygonShape2D {
-				Points = _tile.Collision.Select(v => v * _tile.TileSize * _tile.Size).ToArray()
+				Points = _tile.Collision.Select(v => v * Level.TileSize * _tile.Size).ToArray()
 			},
 			DebugColor = new Color(Colors.Aqua, 0.5f),
 			Visible = debug.ShowCollisions
@@ -51,7 +51,7 @@ public partial class GameTile : GameBaseEntity {
 	private void SetupStairs(DebugState debug) {
 		if (_tile.Stairs == null) return;
 
-		AddChild(Stairs = new GameTileStairs(_tile, _tile.Stairs, debug));
+		AddChild(Stairs = new GameTileStairs(Level, _tile, _tile.Stairs, debug));
 	}
 
 	public override float MoveSpeed => 0;

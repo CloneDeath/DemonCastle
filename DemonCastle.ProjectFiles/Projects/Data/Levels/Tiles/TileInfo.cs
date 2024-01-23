@@ -16,8 +16,6 @@ public class TileInfo : BaseEntityInfo<TileData> {
 	public TileInfo(IFileNavigator file, TileData tileData) : base(file, tileData) {
 	}
 
-	public Vector2I TileSize => new(Level.Resource.TileWidth, Level.Resource.TileHeight);
-
 	public string SourceFile {
 		get => PreviewFrame?.SourceFile ?? string.Empty;
 		set {
