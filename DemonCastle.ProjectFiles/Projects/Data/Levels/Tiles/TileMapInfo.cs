@@ -3,7 +3,6 @@ using System.ComponentModel;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
-using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -31,7 +30,6 @@ public class TileMapInfo : BaseInfo<TileMapData> {
 		}
 	}
 
-	protected TileInfoCollection TileSet => AreaInfo.LevelTileSet;
 	protected Vector2I TileIndex => new(Data.X, Data.Y);
 
 	public Vector2I TileScale => AreaInfo.TileSize;
