@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.Files.Common;
@@ -13,8 +14,9 @@ using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
-public interface IBaseEntityInfo : IListableInfo {
+public interface IBaseEntityInfo : IListableInfo, INotifyPropertyChanged {
 	public Guid Id { get; }
+	public string Name { get; }
 	Guid InitialState { get; }
 	public Vector2I Size { get; }
 	public AnimationInfoCollection Animations { get; }

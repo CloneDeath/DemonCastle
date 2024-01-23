@@ -188,19 +188,21 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return spriteReferenceProperty;
 	}
 
-	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<EntityStateInfo> options) where T : INotifyPropertyChanged {
+	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression,
+													   IEnumerable<EntityStateInfo> options, InternalMode @internal = InternalMode.Disabled) where T : INotifyPropertyChanged {
 		var stateReferenceProperty = new StateReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
-		AddChild(stateReferenceProperty);
+		AddChild(stateReferenceProperty, @internal: @internal);
 		return stateReferenceProperty;
 	}
 
-	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression) where T : INotifyPropertyChanged {
+	public StringProperty AddString<T>(string name, T target, Expression<Func<T, string>> propertyExpression,
+									   InternalMode @internal = InternalMode.Disabled) where T : INotifyPropertyChanged {
 		var stringProperty = new StringProperty(new PropertyBinding<T, string>(target, propertyExpression)) {
 			DisplayName = name
 		};
-		AddChild(stringProperty);
+		AddChild(stringProperty, @internal: @internal);
 		return stringProperty;
 	}
 
