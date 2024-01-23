@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DemonCastle.Files.BaseEntity;
-using DemonCastle.Files.Common;
 using Godot;
 
 namespace DemonCastle.Files;
@@ -23,20 +21,6 @@ public class StartingData {
 	public Guid AreaId { get; set; }
 	public int X { get; set; }
 	public int Y { get; set; }
-}
-
-public class TileData : BaseEntityFile {
-	public TileData() {
-		Size = new Size(1, 1);
-	}
-
-	public List<Vector2> Collision { get; set; } = new();
-	public StairData? Stairs { get; set; }
-}
-
-public class StairData {
-	public Vector2 Start { get; set; }
-	public Vector2 End { get; set; }
 }
 
 public class AreaData {
