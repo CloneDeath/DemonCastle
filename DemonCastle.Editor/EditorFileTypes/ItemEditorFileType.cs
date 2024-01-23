@@ -10,7 +10,7 @@ using Godot;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class ItemEditorFileType : ItemFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.ItemIcon;
+	public Texture2D Icon => IconTextures.File.ItemIcon;
 	public object CreateFileInstance() => new ItemFile {
 		Name = "item"
 	};

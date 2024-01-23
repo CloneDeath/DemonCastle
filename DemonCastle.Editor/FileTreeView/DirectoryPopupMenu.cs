@@ -37,7 +37,7 @@ public partial class DirectoryPopupMenu : PopupMenu {
 		 .Concat(new[]{
 			 new PopupAction {
 				 Text = "Create Text File",
-				 Icon = IconTextures.TextFileIcon,
+				 Icon = IconTextures.File.TextFileIcon,
 				 Action = () => CreateTextFile?.Invoke()
 			 },
 			 new PopupAction {

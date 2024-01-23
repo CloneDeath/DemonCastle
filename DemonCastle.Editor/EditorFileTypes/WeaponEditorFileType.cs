@@ -10,7 +10,7 @@ using Godot;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class WeaponEditorFileType : WeaponFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.WeaponIcon;
+	public Texture2D Icon => IconTextures.File.WeaponIcon;
 	public object CreateFileInstance() => new WeaponFile {
 		Name = "weapon"
 	};

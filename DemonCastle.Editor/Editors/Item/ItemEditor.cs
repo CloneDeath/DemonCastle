@@ -7,7 +7,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Item;
 
 public partial class ItemEditor : BaseEntityEditor<ItemInfo, ItemFile> {
-	public override Texture2D TabIcon => IconTextures.ItemIcon;
+	public override Texture2D TabIcon => IconTextures.File.ItemIcon;
 
 	public ItemEditor(ProjectInfo project, ItemInfo item) : base(project, item, item, new ItemDetails(item)) { }
 }

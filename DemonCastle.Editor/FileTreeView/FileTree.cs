@@ -131,7 +131,7 @@ public partial class FileTree : Tree {
 
 	protected static Texture2D GetIconForFile(string extension) {
 		return EditorFileType.All.FirstOrDefault(e => e.Extension == extension)?.Icon
-			   ?? IconTextures.UnknownIcon;
+			   ?? IconTextures.File.UnknownIcon;
 	}
 
 	public void OnAddDirectorySelected() {

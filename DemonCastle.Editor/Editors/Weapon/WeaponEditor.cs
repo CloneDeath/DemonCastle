@@ -7,7 +7,7 @@ using AnimationsEditor = DemonCastle.Editor.Editors.Components.Animations.Animat
 namespace DemonCastle.Editor.Editors.Weapon;
 
 public partial class WeaponEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.WeaponIcon;
+	public override Texture2D TabIcon => IconTextures.File.WeaponIcon;
 	public override string TabText { get; }
 
 	protected HSplitContainer SplitContainer { get; }

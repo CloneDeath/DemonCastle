@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Project;
 
 public partial class ProjectEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.ProjectIcon;
+	public override Texture2D TabIcon => IconTextures.File.ProjectIcon;
 	public override string TabText { get; }
 
 	private ProjectDetails Details { get; }

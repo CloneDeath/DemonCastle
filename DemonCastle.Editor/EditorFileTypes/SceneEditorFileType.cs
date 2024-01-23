@@ -10,7 +10,7 @@ using Godot;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class SceneEditorFileType : SceneFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.SceneIcon;
+	public Texture2D Icon => IconTextures.File.SceneIcon;
 	public object CreateFileInstance() => new SceneFile {
 		Name = "scene"
 	};

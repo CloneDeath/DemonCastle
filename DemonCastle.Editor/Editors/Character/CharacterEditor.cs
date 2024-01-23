@@ -6,7 +6,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Character;
 
 public partial class CharacterEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.CharacterIcon;
+	public override Texture2D TabIcon => IconTextures.File.CharacterIcon;
 	public override string TabText { get; }
 
 	protected HSplitContainer SplitContainer { get; }

@@ -6,7 +6,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors;
 
 public partial class TextFileEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.TextFileIcon;
+	public override Texture2D TabIcon => IconTextures.File.TextFileIcon;
 	public override string TabText { get; }
 	private readonly TextInfo _textInfo;
 

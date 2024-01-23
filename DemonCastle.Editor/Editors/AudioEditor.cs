@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors;
 
 public partial class AudioEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.SoundIcon;
+	public override Texture2D TabIcon => IconTextures.File.SoundIcon;
 	public override string TabText { get; }
 
 	private readonly AudioStreamPlayer _player;

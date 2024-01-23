@@ -8,7 +8,7 @@ using AreaEdit = DemonCastle.Editor.Editors.Level.Area.AreaEdit;
 namespace DemonCastle.Editor.Editors.Level;
 
 public partial class LevelEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.LevelIcon;
+	public override Texture2D TabIcon => IconTextures.File.LevelIcon;
 	public override string TabText { get; }
 
 	protected LevelInfo Level { get; }

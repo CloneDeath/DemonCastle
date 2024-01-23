@@ -9,7 +9,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.SpriteGridIcon;
+	public override Texture2D TabIcon => IconTextures.File.SpriteGridIcon;
 	public override string TabText { get; }
 
 	protected HSplitContainer SplitContainer { get; }

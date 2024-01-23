@@ -5,7 +5,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors;
 
 public partial class FontFileEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.TextureIcon;
+	public override Texture2D TabIcon => IconTextures.File.TextureIcon;
 	public override string TabText { get; }
 
 	protected ScrollContainer ScrollContainer { get; }

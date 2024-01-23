@@ -10,7 +10,7 @@ using ProjectEditor = DemonCastle.Editor.Editors.Project.ProjectEditor;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class ProjectEditorFileType : ProjectFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.ProjectIcon;
+	public Texture2D Icon => IconTextures.File.ProjectIcon;
 
 	public object CreateFileInstance() => new ProjectFile {
 		Name = "project"

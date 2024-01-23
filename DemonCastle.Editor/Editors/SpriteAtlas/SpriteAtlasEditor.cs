@@ -9,7 +9,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
-    public override Texture2D TabIcon => IconTextures.SpriteAtlasIcon;
+    public override Texture2D TabIcon => IconTextures.File.SpriteAtlasIcon;
     public override string TabText { get; }
 
     protected HSplitContainer SplitContainer { get; }

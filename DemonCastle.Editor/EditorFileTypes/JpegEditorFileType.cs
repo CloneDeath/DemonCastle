@@ -8,7 +8,7 @@ using Godot;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class JpegEditorFileType : JpegFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.TextureIcon;
+	public Texture2D Icon => IconTextures.File.TextureIcon;
 
 	public object CreateFileInstance() => string.Empty;
 

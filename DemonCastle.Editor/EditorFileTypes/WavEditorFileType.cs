@@ -8,7 +8,7 @@ using Godot;
 namespace DemonCastle.Editor.EditorFileTypes;
 
 public class WavEditorFileType : WavFileType, IEditorFileType {
-	public Texture2D Icon => IconTextures.SoundIcon;
+	public Texture2D Icon => IconTextures.File.SoundIcon;
 
 	public object CreateFileInstance() => string.Empty;
 
