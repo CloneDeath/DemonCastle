@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
@@ -8,9 +9,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected LevelInfo Level { get; }
 
 	protected readonly Layers.TileLayerEditor _tileLayerEditor;
-	protected Button AddTileButton { get; }
-	protected Button DeleteTileButton { get; }
-	protected TileSelectorPanel TileSelector { get; }
+	protected TileInfoCollectionEditor TileCollectionEditor { get; }
 	protected TileDetails TileDetails { get; }
 
 	public TileToolsPanel(LevelInfo level) {
@@ -18,54 +17,17 @@ public partial class TileToolsPanel : VBoxContainer {
 		Level = level;
 
 		AddChild(_tileLayerEditor = new Layers.TileLayerEditor());
-
-		AddChild(AddTileButton = new Button { Text = "Add Tile" });
-		AddTileButton.Pressed += AddTileButtonOnPressed;
-
-		AddChild(DeleteTileButton = new Button { Text = "Delete Tile" });
-		DeleteTileButton.Pressed += DeleteTileButtonOnPressed;
-
-		var tileScroll = new ScrollContainer {
-			VerticalScrollMode = ScrollContainer.ScrollMode.Auto,
-			HorizontalScrollMode = ScrollContainer.ScrollMode.ShowNever,
-			SizeFlagsVertical = SizeFlags.ExpandFill,
-			CustomMinimumSize = new Vector2(0, 100)
-		};
-		AddChild(tileScroll);
-		tileScroll.AddChild(TileSelector = new TileSelectorPanel(level.TileSet) {
-			SizeFlagsHorizontal = SizeFlags.ExpandFill
-		});
-		TileSelector.TileSelected += TileSelector_OnTileSelected;
-
+		AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
+		TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
 		AddChild(TileDetails = new TileDetails(level.Directory));
 	}
 
-	private void TileSelector_OnTileSelected(TileInfo? obj) {
+	private void TileCollectionEditor_OnTileSelected(TileInfo? obj) {
 		TileDetails.Proxy = obj;
 	}
 
-	public TileInfo? SelectedTile => TileSelector.SelectedTile;
+	public TileInfo? SelectedTile => TileCollectionEditor.SelectedTile;
 	public TileMapLayerInfo? SelectedLayer => _tileLayerEditor.SelectedLayer;
-
-	public override void _Process(double delta) {
-		base._Process(delta);
-
-		var itemSelected = TileSelector.SelectedTile != null;
-		DeleteTileButton.Disabled = !itemSelected;
-	}
-
-	private void AddTileButtonOnPressed() {
-		var tile = Level.TileSet.AppendNew();
-		TileSelector.SelectedTile = tile;
-		TileDetails.Proxy = tile;
-	}
-
-	private void DeleteTileButtonOnPressed() {
-		var tile = TileSelector.SelectedTile;
-		if (tile == null) return;
-		Level.TileSet.Remove(tile);
-		TileDetails.Proxy = null;
-	}
 
 	public void LoadArea(AreaInfo? value) {
 		_tileLayerEditor.LoadLayers(value?.TileMapLayers);

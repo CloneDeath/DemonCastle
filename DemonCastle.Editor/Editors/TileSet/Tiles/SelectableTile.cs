@@ -2,7 +2,7 @@ using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
+namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
 public partial class SelectableTile : SelectableControl {
 	protected SpriteDefinitionView SpriteDefinitionView { get; }
@@ -14,9 +14,13 @@ public partial class SelectableTile : SelectableControl {
 		Name = nameof(SelectableTile);
 		Tile = tile;
 
+		DefaultCursorShape = CursorShape.PointingHand;
+		SelectedCursorShape = CursorShape.Arrow;
+
 		AddChild(SpriteDefinitionView = new SpriteDefinitionView(tile.Sprite));
 		AddChild(Outline = new Outline {
-			Visible = false
+			Visible = false,
+			MouseFilter = MouseFilterEnum.Pass
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect);
 	}

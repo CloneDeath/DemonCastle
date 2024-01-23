@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using DemonCastle.Editor.Editors.Components;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
-using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
+namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
 public partial class TileSelectorPanel : HFlowContainer {
 	private readonly List<SelectableTile> _selection = new();
 	private TileInfo? _selectedTile;
 
-	public TileInfoCollection TileSet { get; }
+	public IEnumerableInfo<TileInfo> TileSet { get; }
 
 	public TileInfo? SelectedTile {
 		get => _selectedTile;
@@ -25,7 +25,7 @@ public partial class TileSelectorPanel : HFlowContainer {
 
 	public event Action<TileInfo?>? TileSelected;
 
-	public TileSelectorPanel(TileInfoCollection tileSet) {
+	public TileSelectorPanel(IEnumerableInfo<TileInfo> tileSet) {
 		TileSet = tileSet;
 		Reload();
 	}
