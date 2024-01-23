@@ -13,15 +13,10 @@ using TileData = DemonCastle.Files.TileData;
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
 public class TileInfo : BaseEntityInfo<TileData> {
-	protected FileNavigator<LevelFile> Level { get; }
-
-	public TileInfo(FileNavigator<LevelFile> level, TileData tileData) : base(level, tileData) {
-		Level = level;
+	public TileInfo(IFileNavigator file, TileData tileData) : base(file, tileData) {
 	}
 
 	public Vector2I TileSize => new(Level.Resource.TileWidth, Level.Resource.TileHeight);
-
-	public string Directory => Level.Directory;
 
 	public string SourceFile {
 		get => PreviewFrame?.SourceFile ?? string.Empty;
@@ -84,7 +79,7 @@ public class TileInfo : BaseEntityInfo<TileData> {
 		}
 	}
 
-	protected ISpriteSource Source => Level.FileExists(SourceFile) ? Level.GetSprite(SourceFile) : new NullSpriteSource();
+	protected ISpriteSource Source => File.FileExists(SourceFile) ? File.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == SpriteId)
 										  ?? new NullSpriteDefinition();
 	public IEnumerable<ISpriteDefinition> SpriteOptions => Source.Sprites;

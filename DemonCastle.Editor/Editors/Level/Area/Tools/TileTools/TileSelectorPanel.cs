@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
@@ -11,7 +12,7 @@ public partial class TileSelectorPanel : HFlowContainer {
 	private readonly List<SelectableTile> _selection = new();
 	private TileInfo? _selectedTile;
 
-	public LevelTileSet TileSet { get; }
+	public TileInfoCollection TileSet { get; }
 
 	public TileInfo? SelectedTile {
 		get => _selectedTile;
@@ -24,15 +25,19 @@ public partial class TileSelectorPanel : HFlowContainer {
 
 	public event Action<TileInfo?>? TileSelected;
 
-	public TileSelectorPanel(LevelTileSet tileSet) {
+	public TileSelectorPanel(TileInfoCollection tileSet) {
 		TileSet = tileSet;
 		Reload();
 	}
 
-	private void OnTileSelected(SelectableControl selection) {
-		if (selection is not SelectableTile selectableTile) return;
-		SelectedTile = selectableTile.Tile;
-		TileSelected?.Invoke(SelectedTile);
+	public override void _EnterTree() {
+		base._EnterTree();
+		TileSet.CollectionChanged += TileSet_OnCollectionChanged;
+	}
+
+	public override void _ExitTree() {
+		base._ExitTree();
+		TileSet.CollectionChanged -= TileSet_OnCollectionChanged;
 	}
 
 	private void SelectTileInfo(TileInfo? tile) {
@@ -42,17 +47,27 @@ public partial class TileSelectorPanel : HFlowContainer {
 		TileSelected?.Invoke(SelectedTile);
 	}
 
-	public void Reload() {
+	private void TileSet_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		Reload();
+	}
+
+	private void Reload() {
 		foreach (var node in GetChildren()) {
 			node.QueueFree();
 		}
 		_selection.Clear();
 
-		foreach (var tile in TileSet.Tiles) {
+		foreach (var tile in TileSet) {
 			var c = new SelectableTile(tile);
 			AddChild(c);
 			_selection.Add(c);
 			c.Selected += OnTileSelected;
 		}
+	}
+
+	private void OnTileSelected(SelectableControl selection) {
+		if (selection is not SelectableTile selectableTile) return;
+		SelectedTile = selectableTile.Tile;
+		TileSelected?.Invoke(SelectedTile);
 	}
 }

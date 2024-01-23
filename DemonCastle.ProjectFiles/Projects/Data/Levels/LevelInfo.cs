@@ -4,6 +4,7 @@ using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -13,7 +14,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 	private readonly List<AreaInfo> _areas;
 
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
-		TileSet = new LevelTileSet(file.Resource, File);
+		TileSet = new TileInfoCollection(file, Resource.Tiles);
 		_areas = Resource.Areas.Select(area => new AreaInfo(file, area, this)).ToList();
 	}
 
@@ -29,7 +30,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		}
 	}
 
-	public LevelTileSet TileSet { get; }
+	public TileInfoCollection TileSet { get; }
 
 	public Vector2I TileSize {
 		get => new(Resource.TileWidth, Resource.TileHeight);

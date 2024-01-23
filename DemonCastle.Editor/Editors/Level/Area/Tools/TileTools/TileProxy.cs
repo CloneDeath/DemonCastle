@@ -27,7 +27,6 @@ public class TileProxy : INotifyPropertyChanged {
 			OnPropertyChanged(nameof(Name));
 			OnPropertyChanged(nameof(SourceFile));
 			OnPropertyChanged(nameof(SpriteId));
-			OnPropertyChanged(nameof(Directory));
 			OnPropertyChanged(nameof(SpriteOptions));
 			OnPropertyChanged(nameof(Size));
 			OnPropertyChanged(nameof(Collision));
@@ -77,7 +76,6 @@ public class TileProxy : INotifyPropertyChanged {
 		}
 	}
 
-	public string Directory => _proxy?.Directory ?? string.Empty;
 	public IEnumerable<ISpriteDefinition> SpriteOptions => _proxy?.SpriteOptions ?? Array.Empty<ISpriteDefinition>();
 
 	private void Proxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {

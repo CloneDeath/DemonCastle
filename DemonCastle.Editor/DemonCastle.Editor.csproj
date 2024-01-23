@@ -11,6 +11,7 @@
 		<ProjectReference Include="..\DemonCastle.ProjectFiles\DemonCastle.ProjectFiles.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Include="Editors\TileSet\TileSetEditor" />
 	  <Content Include="Icons\*.aseprite" />
 	  <Content Include="Icons\*.png" />
 	  <Content Include="Icons\*.png.import" />

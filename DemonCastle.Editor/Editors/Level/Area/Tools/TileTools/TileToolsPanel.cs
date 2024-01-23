@@ -55,8 +55,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	}
 
 	private void AddTileButtonOnPressed() {
-		var tile = Level.TileSet.CreateTile();
-		TileSelector.Reload();
+		var tile = Level.TileSet.AppendNew();
 		TileSelector.SelectedTile = tile;
 		TileDetails.Proxy = tile;
 	}
@@ -64,8 +63,7 @@ public partial class TileToolsPanel : VBoxContainer {
 	private void DeleteTileButtonOnPressed() {
 		var tile = TileSelector.SelectedTile;
 		if (tile == null) return;
-		Level.TileSet.DeleteTile(tile);
-		TileSelector.Reload();
+		Level.TileSet.Remove(tile);
 		TileDetails.Proxy = null;
 	}
 

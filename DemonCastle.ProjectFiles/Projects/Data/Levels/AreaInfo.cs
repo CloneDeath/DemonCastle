@@ -4,6 +4,7 @@ using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
@@ -29,7 +30,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 		}
 	}
 
-	public LevelTileSet LevelTileSet => Level.TileSet;
+	public TileInfoCollection LevelTileSet => Level.TileSet;
 	public MonsterDataInfoCollection Monsters { get; }
 	public ObservableCollectionInfo<TileMapLayerInfo, TileMapLayerData> TileMapLayers { get; }
 
@@ -61,7 +62,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public Vector2I TileSize => Level.TileSize;
 	public Vector2I AreaSize => Level.AreaSize;
-	public LevelTileSet TileSet => Level.TileSet;
+	public TileInfoCollection TileSet => Level.TileSet;
 
 	public TileInfo GetTileInfo(Guid tileId) => Level.GetTileInfo(tileId);
 
