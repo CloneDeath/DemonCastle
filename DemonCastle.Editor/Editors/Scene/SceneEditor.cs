@@ -30,7 +30,7 @@ public partial class SceneEditor : BaseEditor {
 		{ ElementType.Label, IconTextures.LabelElementIcon },
 		{ ElementType.LevelView, IconTextures.LevelViewElementIcon },
 		{ ElementType.Sprite, IconTextures.SpriteElementIcon },
-		{ ElementType.OptionList, IconTextures.OptionListElementIcon },
+		{ ElementType.OptionList, IconTextures.OptionListElementIcon }
 	};
 
 	public SceneEditor(SceneInfo scene) {
