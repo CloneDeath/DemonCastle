@@ -52,6 +52,7 @@ public partial class TileInfoCollectionEditor : VBoxContainer {
 		var tile = TileSelector.SelectedTile;
 		if (tile == null) return;
 		_tiles.Remove(tile);
+		TileSelector.SelectedTile = null;
 		TileSelected?.Invoke(null);
 	}
 
