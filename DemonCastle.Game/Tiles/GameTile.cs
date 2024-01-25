@@ -27,16 +27,9 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 
 		Name = nameof(GameTile);
 
-		AddChild(new Sprite2D {
-			Name = "TileTexture",
-			Texture = tile.Texture,
-			RegionEnabled = true,
-			RegionRect = tile.Region,
-			Centered = false,
-			Scale = tile.Size * level.TileSize / tile.Region.Size
+		AddChild(_animation = new GameAnimation(this, debug) {
+			Position = tile.Size * level.TileSize / 2
 		});
-
-		AddChild(_animation = new GameAnimation(this, debug));
 		_animation.SetAnimation(tile.Animations);
 
 		AddChild(_stateMachine = new EntityStateMachine(game, this, tile.InitialState, tile.States));
@@ -44,6 +37,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 
 		SetupCollisions(debug);
 		SetupStairs(debug);
+		_stateMachine.Reset();
 	}
 
 	private void SetupCollisions(DebugState debug) {
