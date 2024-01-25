@@ -76,6 +76,13 @@ public class TileProxy : INotifyPropertyChanged {
 		}
 	}
 
+	public Guid InitialState {
+		get => _proxy?.InitialState ?? Guid.Empty;
+		set {
+			if (_proxy != null) _proxy.InitialState = value;
+		}
+	}
+
 	public IEnumerable<ISpriteDefinition> SpriteOptions => _proxy?.SpriteOptions ?? Array.Empty<ISpriteDefinition>();
 
 	private void Proxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {

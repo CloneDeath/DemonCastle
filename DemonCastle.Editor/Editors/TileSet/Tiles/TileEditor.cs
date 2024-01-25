@@ -12,12 +12,12 @@ public partial class TileEditor : HSplitContainer {
 	public TileEditor(ProjectInfo project, IFileInfo tileSet) {
 		Name = nameof(TileEditor);
 
-		AddChild(Details = new TileDetails(project.Directory));
+		AddChild(Details = new TileDetails());
 		AddChild(Tabs = new BaseEntityTabContainer(project, tileSet));
 	}
 
 	public void Load(TileInfo? tile) {
-		Details.Proxy = tile;
+		Details.Tile = tile;
 		Tabs.Load(tile);
 	}
 }

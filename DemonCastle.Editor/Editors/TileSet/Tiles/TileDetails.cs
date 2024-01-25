@@ -1,47 +1,30 @@
+using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components.Properties;
-using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
-using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
+using DemonCastle.Editor.Editors.Components.Properties.Reference;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
-using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
-using Godot;
+using DemonCastle.ProjectFiles.Projects.Data.States;
 
 namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
 public partial class TileDetails : PropertyCollection {
-	private readonly TileProxy TileProxy = new();
+	private readonly TileProxy _tile = new();
+	private readonly StateReferenceProperty _stateReference;
 
-	public TileInfo? Proxy {
-		get => TileProxy.Proxy;
+	public TileInfo? Tile {
+		get => _tile.Proxy;
 		set {
-			TileProxy.Proxy = value;
-			if (value == null) {
-				Disable();
-			} else {
-				Enable();
-			}
+			_tile.Proxy = value;
+			_stateReference.LoadOptions(value == null ? new List<EntityStateInfo>() : value.States);
+			if (value == null) Disable();
+			else Enable();
 		}
 	}
 
-	public TileDetails(string levelDirectory) {
+	public TileDetails() {
 		Name = nameof(TileDetails);
-		CustomMinimumSize = new Vector2I(160, 100);
 
-		AddString("Name", TileProxy, x => x.Name);
-		var spriteReference = AddSpriteDefinition(TileProxy, levelDirectory,
-			e => e.SourceFile,
-			e => e.SpriteId,
-			t => t.SpriteOptions);
-		spriteReference.ItemSelected += SpriteIdProperty_OnItemSelected;
-		AddVector2I("Span", TileProxy, x => x.Size);
-		AddChild(new TileCollisionView(TileProxy));
-		AddChild(new TileStairView(TileProxy));
-
-		Disable();
-	}
-
-	private void SpriteIdProperty_OnItemSelected(ISpriteDefinition obj) {
-		if (string.IsNullOrEmpty(TileProxy.Name)) {
-			TileProxy.Name = obj.Name;
-		}
+		AddString("Name", _tile, m => m.Name, InternalMode.Front);
+		AddVector2I("Size", _tile, p => p.Size);
+		_stateReference = AddStateReference("Initial State", _tile, m => m.InitialState, new List<EntityStateInfo>(), InternalMode.Back);
 	}
 }

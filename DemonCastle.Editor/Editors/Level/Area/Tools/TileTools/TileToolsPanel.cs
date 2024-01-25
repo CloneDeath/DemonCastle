@@ -10,7 +10,7 @@ public partial class TileToolsPanel : VBoxContainer {
 
 	protected readonly Layers.TileLayerEditor _tileLayerEditor;
 	protected TileInfoCollectionEditor TileCollectionEditor { get; }
-	protected TileDetails TileDetails { get; }
+	protected LevelTileDetails TileDetails { get; }
 
 	public TileToolsPanel(LevelInfo level) {
 		Name = nameof(TileToolsPanel);
@@ -19,7 +19,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		AddChild(_tileLayerEditor = new Layers.TileLayerEditor());
 		AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
 		TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
-		AddChild(TileDetails = new TileDetails(level.Directory));
+		AddChild(TileDetails = new LevelTileDetails(level.Directory));
 	}
 
 	private void TileCollectionEditor_OnTileSelected(TileInfo? obj) {
