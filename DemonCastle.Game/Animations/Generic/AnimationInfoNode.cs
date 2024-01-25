@@ -13,7 +13,16 @@ public partial class AnimationInfoNode : Node2D {
 	protected PhasingNode Frames { get; }
 	protected List<FrameInfoNode> FrameNodes { get; } = new();
 
-	public bool Active { get; set; }
+	private bool _active;
+	public bool Active {
+		get => _active;
+		set {
+			_active = value;
+			foreach (var frameNode in FrameNodes) {
+				frameNode.AnimationActive = value;
+			}
+		}
+	}
 
 	public AnimationInfoNode(IAnimationInfo animation, IDamageable owner, DebugState debug) {
 		Name = $"{nameof(AnimationInfoNode)} {animation.Name}";
@@ -54,12 +63,5 @@ public partial class AnimationInfoNode : Node2D {
 	public void Play() {
 		Frames.CurrentTime = 0;
 		Frames.Play();
-	}
-
-	public override void _Process(double delta) {
-		base._Process(delta);
-		foreach (var frameNode in FrameNodes) {
-			frameNode.AnimationActive = Active;
-		}
 	}
 }
