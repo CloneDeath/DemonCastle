@@ -1,8 +1,8 @@
+using DemonCastle.Editor.Editors.Components.Animations;
 using DemonCastle.Editor.Editors.Weapon.Details;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
-using AnimationsEditor = DemonCastle.Editor.Editors.Components.Animations.AnimationsEditor;
 
 namespace DemonCastle.Editor.Editors.Weapon;
 
@@ -23,8 +23,9 @@ public partial class WeaponEditor : BaseEditor {
 		SplitContainer.AddChild(new WeaponDetails(weapon) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
-		SplitContainer.AddChild(new AnimationsEditor(weapon, weapon.Animations) {
-			CustomMinimumSize = new Vector2(300, 300)
+		SplitContainer.AddChild(new AnimationsEditor(weapon) {
+			CustomMinimumSize = new Vector2(300, 300),
+			Animations = weapon.Animations
 		});
 	}
 }

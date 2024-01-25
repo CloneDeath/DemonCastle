@@ -12,16 +12,22 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(ProjectInfo project, IBaseEntityInfo entity) {
+	public StateEditor(ProjectInfo project) {
 		Name = nameof(StateEditor);
 
-		AddChild(Details = new StateDetails(entity.Animations));
+		AddChild(Details = new StateDetails());
 
 		AddChild(TabContainer = new TabContainer());
-		TabContainer.AddChild(EventsEditor = new EventsEditor(project, entity));
+		TabContainer.AddChild(EventsEditor = new EventsEditor(project));
 		TabContainer.SetTabTitle(0, "Events");
-		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(entity.States));
+		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor());
 		TabContainer.SetTabTitle(1, "Transitions");
+	}
+
+	public void LoadEntity(IBaseEntityInfo? entity) {
+		Details.Animations = entity?.Animations;
+		EventsEditor.Entity = entity;
+		TransitionsEditor.EntityStates = entity?.States;
 	}
 
 	public void LoadState(EntityStateInfo? state) {

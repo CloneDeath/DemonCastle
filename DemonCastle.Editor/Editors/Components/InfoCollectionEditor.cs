@@ -14,18 +14,26 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	public event Action<TInfo?>? ItemSelected;
 
 	private readonly List<TInfo> _subscribed = new();
-	private readonly IEnumerableInfo<TInfo> _data;
+	private IEnumerableInfo<TInfo>? _data;
 	private bool _enabled = true;
 
 	private HBoxContainer TopButtons { get; }
 	private Button AddButton { get; }
 	private Button MoveUpButton { get; }
 	private Button MoveDownButton { get; }
-	protected ItemList Items { get; }
+	protected ItemList ItemList { get; }
 	private Button RemoveButton { get; }
 
-	public InfoCollectionEditor(IEnumerableInfo<TInfo> data) {
+	public IEnumerableInfo<TInfo>? Items {
+		get => _data;
+		set => Load(value);
+	}
+
+	public InfoCollectionEditor(IEnumerableInfo<TInfo> data) : this() {
 		_data = data;
+	}
+
+	public InfoCollectionEditor() {
 		Name = nameof(InfoCollectionEditor<TInfo>);
 
 		TopButtons = new HBoxContainer();
@@ -43,14 +51,16 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 			MoveDownButton.Pressed += MoveDownButton_OnPressed;
 		}
 
-		Items = new ItemList {
+		ItemList = new ItemList {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		};
-		Items.ItemSelected += Items_OnItemSelected;
+		ItemList.ItemSelected += ItemListOnItemListSelected;
 
 		RemoveButton = new Button { Text = "Remove" };
 		RemoveButton.Pressed += RemoveButton_OnPressed;
 	}
+
+	private int LastItemIndex => (_data?.Count() ?? 0) - 1;
 
 	public override void _Ready() {
 		base._Ready();
@@ -59,7 +69,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		AppendAddButton(TopButtons);
 		TopButtons.AddChild(MoveUpButton);
 		TopButtons.AddChild(MoveDownButton);
-		AddChild(Items);
+		AddChild(ItemList);
 		AddChild(RemoveButton);
 
 		ReloadItems();
@@ -70,41 +80,25 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		var anythingSelected = SelectedIndex.HasValue;
 
 		MoveUpButton.Disabled = !anythingSelected || SelectedIndex <= 0;
-		MoveDownButton.Disabled = !anythingSelected || SelectedIndex >= _data.Count() - 1;
+		MoveDownButton.Disabled = !anythingSelected || SelectedIndex >= LastItemIndex;
 		RemoveButton.Disabled = !anythingSelected;
 	}
 
 	protected int? SelectedIndex {
 		get {
-			var selected = Items.GetSelectedItems();
+			var selected = ItemList.GetSelectedItems();
 			return selected.Any() ? selected[0] : null;
 		}
 		set {
 			if (value is null) {
-				Items.DeselectAll();
+				ItemList.DeselectAll();
 			} else {
-				Items.Select(value.Value);
+				ItemList.Select(value.Value);
 			}
 		}
 	}
 
-	protected virtual void AppendAddButton(Control parent) {
-		parent.AddChild(AddButton);
-	}
-
-	private void MoveUp_ButtonOnPressed() {
-		var index = SelectedIndex;
-		if (index is null or < 1) return;
-		_data.Move(index.Value, index.Value - 1);
-		SelectedIndex = index - 1;
-	}
-
-	private void MoveDownButton_OnPressed() {
-		var index = SelectedIndex;
-		if (index is null || index >= _data.Count() - 1) return;
-		_data.Move(index.Value, index.Value + 1);
-		SelectedIndex = index + 1;
-	}
+	protected virtual void AppendAddButton(Control parent) => parent.AddChild(AddButton);
 
 	public virtual bool Enabled {
 		get => _enabled;
@@ -115,21 +109,22 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		}
 	}
 
-	private void Items_OnItemSelected(long index) {
+	private void ItemListOnItemListSelected(long index) {
+		if (_data == null) return;
+
 		var item = _data[(int)index];
 		OnItemSelected(item);
 	}
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		_data.CollectionChanged += Data_OnCollectionChanged;
-
+		if (_data != null) _data.CollectionChanged += Data_OnCollectionChanged;
 		ReloadItems();
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_data.CollectionChanged -= Data_OnCollectionChanged;
+		if (_data != null) _data.CollectionChanged -= Data_OnCollectionChanged;
 
 		foreach (var item in _subscribed) {
 			item.PropertyChanged -= InfoItem_OnPropertyChanged;
@@ -138,20 +133,49 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	}
 
 	private void AddButton_OnPressed() {
+		if (_data == null) return;
+
 		var item = _data.AppendNew();
-		Items.Select(_data.Count() - 1);
+		ItemList.Select(LastItemIndex);
 		OnItemSelected(item);
 	}
 
 	private void RemoveButton_OnPressed() {
-		var selected = Items.GetSelectedItems();
+		if (_data == null) return;
+
+		var selected = ItemList.GetSelectedItems();
 		if (!selected.Any()) return;
 
 		_data.RemoveAt(selected[0]);
 		OnItemSelected(null);
 	}
 
+	private void MoveUp_ButtonOnPressed() {
+		if (_data == null) return;
+
+		var index = SelectedIndex;
+		if (index is null or < 1) return;
+		_data.Move(index.Value, index.Value - 1);
+		SelectedIndex = index - 1;
+	}
+
+	private void MoveDownButton_OnPressed() {
+		if (_data == null) return;
+
+		var index = SelectedIndex;
+		if (index is null || index >= LastItemIndex) return;
+		_data.Move(index.Value, index.Value + 1);
+		SelectedIndex = index + 1;
+	}
+
 	private void Data_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		ReloadItems();
+	}
+
+	public void Load(IEnumerableInfo<TInfo>? data) {
+		if (_data != null) _data.CollectionChanged -= Data_OnCollectionChanged;
+		_data = data;
+		if (_data != null) _data.CollectionChanged += Data_OnCollectionChanged;
 		ReloadItems();
 	}
 
@@ -160,12 +184,13 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 			item.PropertyChanged -= InfoItem_OnPropertyChanged;
 		}
 		_subscribed.Clear();
-		Items.Clear();
+		ItemList.Clear();
+		if (_data == null) return;
 
 		foreach (var item in _data) {
 			_subscribed.Add(item);
 			item.PropertyChanged += InfoItem_OnPropertyChanged;
-			Items.AddItem(item.ListLabel);
+			ItemList.AddItem(item.ListLabel);
 		}
 	}
 
@@ -175,12 +200,9 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		if (sender is not TInfo item) return;
 
 		var index = _subscribed.IndexOf(item);
-		Items.SetItemText(index, item.ListLabel);
+		ItemList.SetItemText(index, item.ListLabel);
 	}
 
-	protected void OnItemSelected(TInfo? item) {
-		ItemSelected?.Invoke(item);
-	}
-
-	public void ClearSelection() => Items.DeselectAll();
+	protected void OnItemSelected(TInfo? item) => ItemSelected?.Invoke(item);
+	public void ClearSelection() => ItemList.DeselectAll();
 }

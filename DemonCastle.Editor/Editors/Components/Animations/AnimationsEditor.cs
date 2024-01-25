@@ -9,10 +9,15 @@ public partial class AnimationsEditor : HSplitContainer {
 	private InfoCollectionEditor<IAnimationInfo> AnimationList { get; }
 	private AnimationEditor AnimationEditor { get; }
 
-	public AnimationsEditor(IFileInfo file, IEnumerableInfo<IAnimationInfo> animations) {
+	public IEnumerableInfo<IAnimationInfo>? Animations {
+		get => AnimationList.Items;
+		set => AnimationList.Items = value;
+	}
+
+	public AnimationsEditor(IFileInfo file) {
 		Name = nameof(AnimationsEditor);
 
-		AddChild(AnimationList = new InfoCollectionEditor<IAnimationInfo>(animations) {
+		AddChild(AnimationList = new InfoCollectionEditor<IAnimationInfo> {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		AnimationList.ItemSelected += AnimationList_OnItemSelected;
@@ -20,6 +25,10 @@ public partial class AnimationsEditor : HSplitContainer {
 		AddChild(AnimationEditor = new AnimationEditor(file) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
+	}
+
+	public void Load(IEnumerableInfo<IAnimationInfo>? animations) {
+		AnimationList.Load(animations);
 	}
 
 	private void AnimationList_OnItemSelected(IAnimationInfo? animation) {

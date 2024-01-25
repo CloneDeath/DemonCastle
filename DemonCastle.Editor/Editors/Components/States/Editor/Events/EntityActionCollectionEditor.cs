@@ -7,13 +7,13 @@ namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
 public partial class EntityActionCollectionEditor : HSplitContainer {
 	private readonly ProjectInfo _project;
-	private readonly IBaseEntityInfo _entity;
 	private Control Left { get; }
 	private Control Right { get; }
 
-	public EntityActionCollectionEditor(ProjectInfo project, IBaseEntityInfo entity) {
+	public IBaseEntityInfo? Entity { get; set; }
+
+	public EntityActionCollectionEditor(ProjectInfo project) {
 		_project = project;
-		_entity = entity;
 		Name = nameof(EntityActionCollectionEditor);
 
 		AddChild(Left = new MarginContainer {
@@ -22,12 +22,6 @@ public partial class EntityActionCollectionEditor : HSplitContainer {
 		AddChild(Right = new MarginContainer {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
-	}
-
-	public void Clear() {
-		foreach (var child in Left.GetChildren().Concat(Right.GetChildren())) {
-			child.QueueFree();
-		}
 	}
 
 	public void Load(EntityActionInfoCollection actionSet) {
@@ -39,14 +33,21 @@ public partial class EntityActionCollectionEditor : HSplitContainer {
 		list.ItemSelected += List_OnItemSelected;
 	}
 
+	public void Clear() {
+		foreach (var child in Left.GetChildren().Concat(Right.GetChildren())) {
+			child.QueueFree();
+		}
+	}
+
 	private void List_OnItemSelected(EntityActionInfo? obj) {
 		foreach (var child in Right.GetChildren()) {
 			child.QueueFree();
 		}
 
 		if (obj == null) return;
+		if (Entity == null) return;
 
-		var editor = new EntityActionEditor(_project, _entity, obj);
+		var editor = new EntityActionEditor(_project, Entity, obj);
 		Right.AddChild(editor);
 		editor.SetAnchorsPreset(LayoutPreset.FullRect);
 	}

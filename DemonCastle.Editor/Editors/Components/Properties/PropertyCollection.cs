@@ -40,10 +40,12 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		Vertical = true;
 	}
 
-	public void AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
-		AddChild(new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+	public AnimationNameProperty AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
+		var animationNameProperty = new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
-		});
+		};
+		AddChild(animationNameProperty);
+		return animationNameProperty;
 	}
 
 	public void AddAnchor<T>(string name, T target, Expression<Func<T, Vector2I>> propertyExpression) where T : INotifyPropertyChanged {

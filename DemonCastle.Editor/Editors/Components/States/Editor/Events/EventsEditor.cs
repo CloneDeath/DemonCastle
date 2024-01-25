@@ -19,10 +19,15 @@ public partial class EventsEditor : VBoxContainer {
 		}
 	}
 
+	public IBaseEntityInfo? Entity {
+		get => ActionList.Entity;
+		set => ActionList.Entity = value;
+	}
+
 	private ItemList Events { get; }
 	private EntityActionCollectionEditor ActionList { get; }
 
-	public EventsEditor(ProjectInfo project, IBaseEntityInfo entity) {
+	public EventsEditor(ProjectInfo project) {
 		Name = nameof(EventsEditor);
 
 		AddChild(Events = new ItemList {
@@ -33,7 +38,7 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnExit");
 		Events.ItemSelected += Events_OnItemSelected;
 
-		AddChild(ActionList = new EntityActionCollectionEditor(project, entity) {
+		AddChild(ActionList = new EntityActionCollectionEditor(project) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}

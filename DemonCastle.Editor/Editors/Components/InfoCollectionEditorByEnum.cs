@@ -11,14 +11,19 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 	where TInfo : class, IListableInfo, INotifyPropertyChanged
 	where TEnum : struct, Enum {
 
-	private readonly IEnumerableInfoByEnum<TInfo, TEnum> _data;
+	private IEnumerableInfoByEnum<TInfo, TEnum>? _data;
 	private readonly IReadOnlyDictionary<TEnum, Texture2D>? _iconMap;
 	private readonly Func<TInfo, TEnum>? _getEnum;
 
 	private MenuButton AddButton { get; }
 
-	public InfoCollectionEditorByEnum(IEnumerableInfoByEnum<TInfo, TEnum> data, IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null, Func<TInfo, TEnum>? getEnum = null) : base(data) {
+	public InfoCollectionEditorByEnum(IEnumerableInfoByEnum<TInfo, TEnum> data,
+									  IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null,
+									  Func<TInfo, TEnum>? getEnum = null) : this(iconMap, getEnum) {
 		_data = data;
+	}
+
+	public InfoCollectionEditorByEnum(IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null, Func<TInfo, TEnum>? getEnum = null) {
 		_iconMap = iconMap;
 		_getEnum = getEnum;
 
@@ -44,6 +49,8 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 	}
 
 	private void AddButton_OnIdPressed(long id) {
+		if (_data == null) return;
+
 		var values = Enum.GetValues<TEnum>();
 		var type = values[(int)id];
 		var element = _data.AppendNew(type);
@@ -62,12 +69,14 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 		base.ReloadItems();
 		if (_iconMap == null) return;
 		if (_getEnum == null) return;
+		if (_data == null) return;
+		
 		for (var i = 0; i < _data.Count(); i++) {
 			var item = _data[i];
 			var value = _getEnum(item);
 			var icon = _iconMap.GetValueOrDefault(value);
 			if (icon != null) {
-				Items.SetItemIcon(i, icon);
+				ItemList.SetItemIcon(i, icon);
 			}
 		}
 	}
