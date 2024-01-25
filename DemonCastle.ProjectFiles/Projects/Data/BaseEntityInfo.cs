@@ -48,7 +48,12 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 
 	public Guid InitialState {
 		get => Data.InitialState;
-		set => SaveField(ref Data.InitialState, value);
+		set {
+			if (SaveField(ref Data.InitialState, value)) {
+				OnPropertyChanged(nameof(PreviewSpriteDefinition));
+				OnPropertyChanged(nameof(PreviewTexture));
+			}
+		}
 	}
 
 	public Vector2I Size {

@@ -17,7 +17,7 @@ public partial class SelectableTile : SelectableControl {
 		DefaultCursorShape = CursorShape.PointingHand;
 		SelectedCursorShape = CursorShape.Arrow;
 
-		AddChild(SpriteDefinitionView = new SpriteDefinitionView(tile.Sprite));
+		AddChild(SpriteDefinitionView = new SpriteDefinitionView(tile.PreviewSpriteDefinition));
 		AddChild(Outline = new Outline {
 			Visible = false,
 			MouseFilter = MouseFilterEnum.Pass
@@ -36,8 +36,8 @@ public partial class SelectableTile : SelectableControl {
 	}
 
 	private void Tile_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		if (e.PropertyName == nameof(Tile.Sprite)) {
-			SpriteDefinitionView.Load(Tile.Sprite);
+		if (e.PropertyName == nameof(Tile.PreviewSpriteDefinition)) {
+			SpriteDefinitionView.Load(Tile.PreviewSpriteDefinition);
 		}
 	}
 
