@@ -33,7 +33,7 @@ public partial class GameArea : Node2D {
 		Name = $"{nameof(GameArea)}@{area.PositionOfArea.AreaIndex} ({area.Name})";
 
 		foreach (var layer in area.TileMapLayers) {
-			AddChild(new GameTileLayer(game, level, layer, logger, debug));
+			AddChild(new GameTileLayer(game, level, layer, debug));
 		}
 
 		foreach (var monsterData in area.Monsters) {
