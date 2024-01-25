@@ -1,4 +1,5 @@
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.Editor.Editors.Components.Properties.File;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Editor.Properties;
@@ -7,8 +8,6 @@ using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 using Godot;
-using FileProperty = DemonCastle.Editor.Editors.Components.Properties.File.FileProperty;
-using IntegerProperty = DemonCastle.Editor.Editors.Components.Properties.IntegerProperty;
 
 namespace DemonCastle.Editor.Editors.Scene.Events;
 

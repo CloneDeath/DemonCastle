@@ -1,11 +1,11 @@
 using DemonCastle.Editor.Editors;
+using DemonCastle.Editor.Editors.Project;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
-using ProjectEditor = DemonCastle.Editor.Editors.Project.ProjectEditor;
 
 namespace DemonCastle.Editor.EditorFileTypes;
 

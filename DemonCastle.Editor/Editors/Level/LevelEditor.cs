@@ -1,9 +1,9 @@
+using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Level.LevelOverview;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
-using AreaEdit = DemonCastle.Editor.Editors.Level.Area.AreaEdit;
 
 namespace DemonCastle.Editor.Editors.Level;
 

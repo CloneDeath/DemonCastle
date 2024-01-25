@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.Reference;
+using DemonCastle.Editor.Editors.TileSet.Tiles.Collision;
+using DemonCastle.Editor.Editors.TileSet.Tiles.Stairs;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.States;
-using TileCollisionView = DemonCastle.Editor.Editors.TileSet.Tiles.Collision.TileCollisionView;
-using TileStairView = DemonCastle.Editor.Editors.TileSet.Tiles.Stairs.TileStairView;
 
 namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
