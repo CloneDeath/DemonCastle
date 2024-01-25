@@ -3,6 +3,8 @@ using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.Reference;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using TileCollisionView = DemonCastle.Editor.Editors.TileSet.Tiles.Collision.TileCollisionView;
+using TileStairView = DemonCastle.Editor.Editors.TileSet.Tiles.Stairs.TileStairView;
 
 namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
@@ -25,6 +27,8 @@ public partial class TileDetails : PropertyCollection {
 
 		AddString("Name", _tile, m => m.Name, InternalMode.Front);
 		AddVector2I("Size", _tile, p => p.Size);
+		AddChild(new TileCollisionView(_tile));
+		AddChild(new TileStairView(_tile));
 		_stateReference = AddStateReference("Initial State", _tile, m => m.InitialState, new List<EntityStateInfo>(), InternalMode.Back);
 	}
 }

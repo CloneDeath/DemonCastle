@@ -1,10 +1,10 @@
 using DemonCastle.Editor.Editors.Components.Properties;
-using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
-using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
+using TileCollisionView = DemonCastle.Editor.Editors.TileSet.Tiles.Collision.TileCollisionView;
+using TileStairView = DemonCastle.Editor.Editors.TileSet.Tiles.Stairs.TileStairView;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 

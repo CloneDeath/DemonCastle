@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using DemonCastle.Editor.Editors.TileSet.Tiles;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
+namespace DemonCastle.Editor.Editors.TileSet.Tiles.Collision;
 
 public partial class TileCollisionView : HBoxContainer {
 	private readonly TileProxy _tile;
