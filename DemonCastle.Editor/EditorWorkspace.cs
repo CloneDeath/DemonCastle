@@ -13,11 +13,8 @@ public partial class EditorWorkspace : Control {
 	public EditorWorkspace(ProjectInfo project) {
 		Name = nameof(EditorWorkspace);
 
-		AddChild(SplitContainer = new HSplitContainer {
-			Name = nameof(HSplitContainer),
-			AnchorRight = 1,
-			AnchorBottom = 1
-		});
+		AddChild(SplitContainer = new HSplitContainer());
+		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
 
 		SplitContainer.AddChild(Explorer = new ExplorerPanel(project.FileNavigator) {
 			CustomMinimumSize = new Vector2(250, 0)

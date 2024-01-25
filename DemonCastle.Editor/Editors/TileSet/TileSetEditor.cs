@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors.Components.BaseEntity;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
@@ -13,7 +12,7 @@ public partial class TileSetEditor : BaseEditor {
 
 	protected HSplitContainer SplitContainer { get; }
 	protected TileInfoCollectionEditor TileList { get; }
-	protected BaseEntityTabContainer Tabs { get; }
+	protected TileEditor TileEditor { get; }
 
 	public TileSetEditor(ProjectInfo project, TileSetInfo tileSet) {
 		TabText = tileSet.FileName;
@@ -21,7 +20,9 @@ public partial class TileSetEditor : BaseEditor {
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
-		var leftSide = new VBoxContainer();
+		var leftSide = new VBoxContainer {
+			CustomMinimumSize = new Vector2(100, 0)
+		};
 		SplitContainer.AddChild(leftSide);
 		{
 			leftSide.AddChild(new TileSetDetails(tileSet));
@@ -30,10 +31,8 @@ public partial class TileSetEditor : BaseEditor {
 			});
 			TileList.TileSelected += TileList_OnTileSelected;
 		}
-		SplitContainer.AddChild(Tabs = new BaseEntityTabContainer(project, tileSet));
+		SplitContainer.AddChild(TileEditor = new TileEditor(project, tileSet));
 	}
 
-	private void TileList_OnTileSelected(TileInfo? tile) {
-		Tabs.Load(tile);
-	}
+	private void TileList_OnTileSelected(TileInfo? tile) => TileEditor.Load(tile);
 }

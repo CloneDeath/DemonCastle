@@ -1,11 +1,11 @@
+using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Stairs;
-using Godot;
-using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
+using Godot;
 
-namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
+namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
 public partial class TileDetails : PropertyCollection {
 	private readonly TileProxy TileProxy = new();

@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Collision;
+using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.Files;
 using Godot;
 
