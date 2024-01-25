@@ -24,6 +24,7 @@ public partial class StatesEditor : HSplitContainer {
 
 	public void Load(IBaseEntityInfo? entity) {
 		StateList.Load(entity?.States);
+		StateEditor.LoadEntity(entity);
 	}
 
 	protected void StateList_OnItemSelected(EntityStateInfo? stateInfo) {
