@@ -28,7 +28,8 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		Name = nameof(GameTile);
 
 		AddChild(_animation = new GameAnimation(this, debug) {
-			Position = tile.Size * level.TileSize / 2
+			Position = tile.Size * level.TileSize / 2,
+			Scale = tile.Size * level.TileSize / tile.Region.Size
 		});
 		_animation.SetAnimation(tile.Animations);
 
