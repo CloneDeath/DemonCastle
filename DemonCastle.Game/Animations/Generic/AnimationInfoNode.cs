@@ -10,7 +10,7 @@ namespace DemonCastle.Game.Animations.Generic;
 public partial class AnimationInfoNode : Node2D {
 	public event Action<AnimationInfoNode>? Complete;
 	protected IAnimationInfo Animation { get; }
-	protected PhasingNode Frames { get; }
+	protected PhasingNode? Frames { get; }
 	protected List<FrameInfoNode> FrameNodes { get; } = new();
 
 	private bool _active;
@@ -28,19 +28,30 @@ public partial class AnimationInfoNode : Node2D {
 		Name = $"{nameof(AnimationInfoNode)} {animation.Name}";
 		Animation = animation;
 
-		AddChild(Frames = new PhasingNode {
-			Duration = Animation.Frames.Sum(f => f.Duration)
-		});
-		Frames.Complete += _ => Complete?.Invoke(this);
-		float totalOffset = 0;
-		foreach (var frame in Animation.Frames) {
+		if (Animation.Frames.Count() == 1) {
+			var frame = Animation.Frames.First();
 			var frameInfoNode = new FrameInfoNode(frame, owner, debug) {
-				StartTime = totalOffset,
-				EndTime = totalOffset + frame.Duration
+				StartTime = 0,
+				EndTime = frame.Duration
 			};
 			FrameNodes.Add(frameInfoNode);
-			Frames.AddPhase(frameInfoNode);
-			totalOffset += frame.Duration;
+			AddChild(frameInfoNode);
+		} else {
+			AddChild(Frames = new PhasingNode {
+				Duration = Animation.Frames.Sum(f => f.Duration)
+			});
+
+			Frames.Complete += _ => Complete?.Invoke(this);
+			float totalOffset = 0;
+			foreach (var frame in Animation.Frames) {
+				var frameInfoNode = new FrameInfoNode(frame, owner, debug) {
+					StartTime = totalOffset,
+					EndTime = totalOffset + frame.Duration
+				};
+				FrameNodes.Add(frameInfoNode);
+				Frames.AddPhase(frameInfoNode);
+				totalOffset += frame.Duration;
+			}
 		}
 	}
 
@@ -48,6 +59,8 @@ public partial class AnimationInfoNode : Node2D {
 
 	public IFrameInfo? CurrentFrame {
 		get {
+			if (Frames == null) return Animation.Frames.FirstOrDefault();
+
 			var currentTime = Frames.CurrentTime;
 			foreach (var frame in Animation.Frames) {
 				if (currentTime < frame.Duration) {
@@ -61,6 +74,7 @@ public partial class AnimationInfoNode : Node2D {
 	}
 
 	public void Play() {
+		if (Frames == null) return;
 		Frames.CurrentTime = 0;
 		Frames.Play();
 	}
