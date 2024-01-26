@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using DemonCastle.Editor.Icons;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
@@ -14,9 +14,7 @@ public partial class TileLayerEditor : VBoxContainer {
 	private IEnumerableInfo<TileMapLayerInfo>? _layers;
 	private readonly List<TileMapLayerInfo> _observed = new();
 
-	private readonly OptionButton _options;
-	private readonly Button _addButton;
-	private readonly Button _deleteButton;
+	private AddRemoveOptionButton _options;
 	private readonly TileLayerDetails _details;
 
 	public TileMapLayerInfo? SelectedLayer {
@@ -29,37 +27,28 @@ public partial class TileLayerEditor : VBoxContainer {
 	public TileLayerEditor() {
 		Name = nameof(TileLayerEditor);
 
-		HBoxContainer top;
-		AddChild(top = new HBoxContainer());
-
-		top.AddChild(new Label { Text = "Layers" });
-		top.AddChild(_options = new OptionButton {
-			Text = "<None>",
-			SizeFlagsHorizontal = SizeFlags.ExpandFill
+		AddChild(_options = new AddRemoveOptionButton {
+			Label = "Layer"
 		});
 		_options.ItemSelected += Options_OnItemSelected;
-		top.AddChild(_addButton = new Button { Icon = IconTextures.AddIcon });
-		_addButton.Pressed += AddButton_OnPressed;
-		top.AddChild(_deleteButton = new Button { Icon = IconTextures.DeleteIcon });
-		_deleteButton.Pressed += DeleteButton_OnPressed;
-
+		_options.AddPressed += Options_OnAddPressed;
+		_options.RemovePressed += Options_OnRemovePressed;
 		AddChild(_details = new TileLayerDetails());
 
 		ReloadOptions();
 	}
 
 	private void Options_OnItemSelected(long index) {
-		_deleteButton.Disabled = _layers == null || index < 0;
 		_details.Layer = SelectedLayer;
 	}
 
-	private void AddButton_OnPressed() {
+	private void Options_OnAddPressed() {
 		var layer = _layers?.AppendNew();
 		_details.Layer = layer;
 		_options.Selected = layer == null ? -1 : _observed.IndexOf(layer);
 	}
 
-	private void DeleteButton_OnPressed() {
+	private void Options_OnRemovePressed() {
 		if (SelectedLayer == null) return;
 		_layers?.Remove(SelectedLayer);
 		_details.Layer = null;
@@ -86,8 +75,6 @@ public partial class TileLayerEditor : VBoxContainer {
 		_observed.Clear();
 		_options.Clear();
 
-		_addButton.Disabled = _layers == null;
-		_deleteButton.Disabled = _layers == null;
 		_options.Disabled = _layers == null;
 		if (_layers == null) {
 			_details.Layer = null;
@@ -113,7 +100,6 @@ public partial class TileLayerEditor : VBoxContainer {
 			_options.Selected = layer == null ? -1 : _observed.IndexOf(layer);
 			_details.Layer = layer;
 		}
-		_deleteButton.Disabled = _options.Selected < 0;
 	}
 
 	private void Layer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
