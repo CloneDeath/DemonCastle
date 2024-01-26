@@ -32,7 +32,9 @@ public partial class AreaTilesView : Control {
 		}
 
 		foreach (var layer in _area.TileMapLayers) {
-			AddChild(new TileLayerView(layer));
+			AddChild(new TileLayerView(layer) {
+				MouseFilter = MouseFilterEnum.Pass
+			});
 		}
 	}
 }
