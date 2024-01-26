@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.State;
 using Godot;
@@ -29,6 +30,8 @@ public partial class EntityStateMachine : Node {
 		CurrentState.Transitions.CheckAndTriggerTransitions(_entity);
 	}
 
+	private bool ProcessingShouldBeDisabled => CurrentState == null || !CurrentState.OnUpdate.Any() && !CurrentState.Transitions.Any();
+
 	public void Reset() {
 		_currentStateId = Guid.Empty;
         ChangeState(_initialState);
@@ -39,5 +42,7 @@ public partial class EntityStateMachine : Node {
 		_currentStateId = stateId;
 		CurrentState?.OnEnter.Execute(_game, _entity);
 		_entity.SetAnimation(CurrentState?.Animation ?? Guid.Empty);
+
+		ProcessMode = ProcessingShouldBeDisabled ? ProcessModeEnum.Disabled : ProcessModeEnum.Inherit;
 	}
 }
