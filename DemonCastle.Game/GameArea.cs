@@ -89,11 +89,16 @@ public partial class GameArea : Node2D {
 	}
 
 	public void OnPlayerEnter() {
+		ProcessMode = ProcessModeEnum.Inherit;
 		foreach (var monster in Monsters) {
 			monster.Reset();
 		}
 		foreach (var entity in _spawned) {
 			entity.QueueFree();
 		}
+	}
+
+	public void OnPlayerExit() {
+		ProcessMode = ProcessModeEnum.Disabled;
 	}
 }

@@ -65,6 +65,7 @@ public partial class GameRunner : Control {
 		var area = Level.GetGameAreaAtPoint((Vector2I)GamePlayer.Position);
 		if (CurrentArea == area) return;
 
+		CurrentArea?.OnPlayerExit();
 		CurrentArea = area;
 		CurrentArea?.OnPlayerEnter();
 	}
