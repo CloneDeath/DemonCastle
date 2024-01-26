@@ -21,11 +21,10 @@ public partial class FrameInfoNode : TemporalNode {
 		});
 	}
 
-	public override void _Process(double delta) {
-		base._Process(delta);
+	protected override void OnCurrentTimeChanged() {
+		base.OnCurrentTimeChanged();
 		if (_hitBox != null) _hitBox.Active = AnimationActive && Active;
 		if (_hurtBox != null) _hurtBox.Active = AnimationActive && Active;
-
 		if (AnimationActive && Active && _audioPlayer is { Playing: false }) {
 			_audioPlayer.Play();
 		}
