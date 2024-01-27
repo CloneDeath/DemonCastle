@@ -10,7 +10,7 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class JpegEditorFileType : JpegFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.TextureIcon;
 
-	public object CreateFileInstance() => string.Empty;
+	public object CreateFileInstance(string name) => string.Empty;
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ImageEditor(file);
 }

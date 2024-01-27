@@ -11,6 +11,6 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class SpriteAtlasEditorFileType : SpriteAtlasFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.SpriteAtlasIcon;
-	public object CreateFileInstance() => new SpriteAtlasFile();
+	public object CreateFileInstance(string name) => new SpriteAtlasFile();
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new SpriteAtlasEditor(file.ToSpriteAtlasInfo());
 }

@@ -9,6 +9,6 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class AsepriteEditorFileType : AsepriteFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.AsepriteIcon;
-	public object CreateFileInstance() => string.Empty;
+	public object CreateFileInstance(string name) => string.Empty;
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ImageEditor(file);
 }

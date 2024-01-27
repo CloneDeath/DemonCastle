@@ -11,6 +11,6 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class SpriteGridEditorFileType : SpriteGridFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.SpriteGridIcon;
-	public object CreateFileInstance() => new SpriteGridFile();
+	public object CreateFileInstance(string name) => new SpriteGridFile();
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new SpriteGridEditor(file.ToSpriteGridInfo());
 }

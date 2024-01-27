@@ -11,6 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class TileSetEditorFileType : TileSetFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.TileSetIcon;
-	public object CreateFileInstance() => new TileSetFile();
+	public object CreateFileInstance(string name) => new TileSetFile {
+		Name = name
+	};
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new TileSetEditor(project, file.ToTileSetInfo());
 }

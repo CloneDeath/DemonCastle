@@ -12,8 +12,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class ProjectEditorFileType : ProjectFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.ProjectIcon;
 
-	public object CreateFileInstance() => new ProjectFile {
-		Name = "project"
+	public object CreateFileInstance(string name) => new ProjectFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ProjectEditor(file.ToProjectInfo());

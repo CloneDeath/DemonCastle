@@ -146,22 +146,28 @@ public partial class FileTree : Tree {
 		CreateTree();
 	}
 
-	public void OnCreateEditorFileSelected(IEditorFileType fileType) {
+	public async void OnCreateEditorFileSelected(IEditorFileType fileType) {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
-		var dirNav = DirectoryMap[selected];
 
-		dirNav.CreateFile(fileType.Name, fileType.Extension, fileType.CreateFileInstance());
+		var name = await GetNameDialog.GetName();
+		if (name.EndsWith(fileType.Extension)) {
+			name = name[..^fileType.Extension.Length];
+		}
+		var dirNav = DirectoryMap[selected];
+		dirNav.CreateFile(name, fileType.Extension, fileType.CreateFileInstance(name));
 
 		CreateTree();
 	}
 
 
-	public void OnCreateTextFileSelected() {
+	public async void OnCreateTextFileSelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
+
+		var name = await GetNameDialog.GetName();
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateEmptyFile("text", FileType.Text.Extension);
+		dirNav.CreateEmptyFile(name, FileType.Text.Extension);
 
 		CreateTree();
 	}

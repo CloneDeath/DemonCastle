@@ -11,8 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class CharacterEditorFileType : CharacterFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.CharacterIcon;
-	public object CreateFileInstance() => new CharacterFile {
-		Name = "character"
+	public object CreateFileInstance(string name) => new CharacterFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new CharacterEditor(file.ToCharacterInfo());

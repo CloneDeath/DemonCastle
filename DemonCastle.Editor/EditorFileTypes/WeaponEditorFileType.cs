@@ -11,8 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class WeaponEditorFileType : WeaponFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.WeaponIcon;
-	public object CreateFileInstance() => new WeaponFile {
-		Name = "weapon"
+	public object CreateFileInstance(string name) => new WeaponFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new WeaponEditor(file.ToWeaponInfo());

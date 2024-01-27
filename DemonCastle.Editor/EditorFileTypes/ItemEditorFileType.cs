@@ -11,8 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class ItemEditorFileType : ItemFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.ItemIcon;
-	public object CreateFileInstance() => new ItemFile {
-		Name = "item"
+	public object CreateFileInstance(string name) => new ItemFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new ItemEditor(project, file.ToItemInfo());

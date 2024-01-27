@@ -64,6 +64,6 @@ public static class EditorFileType {
 
 public interface IEditorFileType : IFileType {
 	Texture2D Icon { get; }
-	object CreateFileInstance();
+	object CreateFileInstance(string name);
 	BaseEditor GetEditor(ProjectInfo project, FileNavigator file);
 }

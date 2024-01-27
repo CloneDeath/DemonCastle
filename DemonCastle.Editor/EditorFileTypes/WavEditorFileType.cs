@@ -10,7 +10,7 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class WavEditorFileType : WavFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.SoundIcon;
 
-	public object CreateFileInstance() => string.Empty;
+	public object CreateFileInstance(string name) => string.Empty;
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new AudioEditor(file);
 }

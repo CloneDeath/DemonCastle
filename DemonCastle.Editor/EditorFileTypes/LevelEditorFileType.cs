@@ -11,8 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class LevelEditorFileType : LevelFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.LevelIcon;
-	public object CreateFileInstance() => new LevelFile {
-		Name = "level"
+	public object CreateFileInstance(string name) => new LevelFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new LevelEditor(project, file.ToLevelInfo());

@@ -11,8 +11,8 @@ namespace DemonCastle.Editor.EditorFileTypes;
 
 public class MonsterEditorFileType : MonsterFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.MonsterIcon;
-	public object CreateFileInstance() => new MonsterFile {
-		Name = "monster"
+	public object CreateFileInstance(string name) => new MonsterFile {
+		Name = name
 	};
 
 	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new MonsterEditor(project, file.ToMonsterInfo());
