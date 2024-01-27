@@ -12,7 +12,6 @@ public partial class FrameInfoDetails : PropertyCollection {
 	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
 
-	protected PropertyCollection HitBoxes { get; }
 	protected PropertyCollection AdditionalProperties { get; }
 
 	public IFrameInfo? FrameInfo {
@@ -33,12 +32,11 @@ public partial class FrameInfoDetails : PropertyCollection {
 			e => e.SpriteId,
 			e => e.SpriteDefinitions);
 		AddOrigin("Origin", _proxy, p => p.Anchor, p => p.Offset);
-		AddChild(HitBoxes = new PropertyCollection {
-			Vertical = false
-		});
-		HitBoxes.AddNullableRect2I("HitBox", _proxy, p => p.HitBox);
-		HitBoxes.AddChild(new VSeparator());
-		HitBoxes.AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
+
+		AddChild(new HSeparator());
+		AddNullableRect2I("HitBox", _proxy, p => p.HitBox);
+		AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
+		AddChild(new HSeparator());
 
 		AddNullableFile("Audio", _proxy, file.Directory, p => p.Audio, FileType.AudioSources);
 		AddChild(AdditionalProperties = new PropertyCollection());
