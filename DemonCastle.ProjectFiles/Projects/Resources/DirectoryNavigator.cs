@@ -18,10 +18,6 @@ public class DirectoryNavigator {
 	protected ProjectResources ProjectResources { get; }
 	public string DirectoryName => new DirectoryInfo(Directory).Name;
 
-	public DirectoryNavigator(string directory)
-		: this(directory, new ProjectResources())
-	{ }
-
 	public DirectoryNavigator(string directory, ProjectResources resources) {
 		Directory = directory;
 		ProjectResources = resources;
@@ -76,6 +72,8 @@ public class DirectoryNavigator {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetTileSet(path);
 	}
+
+	public TileSetInfo GetTileSet(Guid tileSetId) => ProjectResources.GetTileSet(tileSetId);
 
 	public Texture2D GetTexture(string localPath) {
 		var path = Path.Combine(Directory, localPath);

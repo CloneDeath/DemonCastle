@@ -63,7 +63,9 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public Vector2I TileSize => Level.TileSize;
 
-	public TileInfo GetTileInfo(Guid tileId) => Level.GetTileInfo(tileId);
+	public TileInfo GetTileInfo(Guid tileId) => Level.GetTileInfo(tileId) ??
+												TileSetIds.SelectMany(id => File.GetTileSet(id).TileSet)
+														  .First(t => t.Id == tileId);
 
 	public void SetTile(Vector2I tileIndex, int zIndex, Guid tileId) {
 		var layer = GetOrCreateLayer(zIndex);

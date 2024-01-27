@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -10,9 +12,12 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Resources;
 
 public class ProjectResources {
+	private DirectoryNavigator Root { get; }
+
 	protected TextFileNavigator GetTextFile(string path) => new(path, this);
 
-	public ProjectResources() {
+	public ProjectResources(string root) {
+		Root = new DirectoryNavigator(root, this);
 		var migrator = new GameFileMigrator(this);
 
 		AudioStreams = new ResourceCache<AudioStream>(path => {
@@ -103,6 +108,11 @@ public class ProjectResources {
 
 	protected ResourceCache<TileSetInfo> TileSets { get; }
 	public TileSetInfo GetTileSet(string path) => TileSets.Get(path);
+
+	public TileSetInfo GetTileSet(Guid id) => Root.GetFilesAndSubFiles()
+												  .Where(f => f.Extension == FileType.TileSet.Extension)
+												  .Select(f => f.ToTileSetInfo())
+												  .First(t => t.Id == id);
 
 	protected ResourceCache<Texture2D> Textures { get; }
 	public Texture2D GetTexture(string path) => Textures.Get(path);

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ public class FileNavigator<T> : FileNavigator, IFileNavigator {
 	public T Resource { get; }
 	private Task _saveTask = Task.CompletedTask;
 
-	public FileNavigator(string filePath) : this(filePath, new ProjectResources()) { }
+	public FileNavigator(string filePath) : this(filePath, new ProjectResources(Path.GetDirectoryName(filePath) ?? throw new NullReferenceException())) { }
 	public FileNavigator(string filePath, ProjectResources resources)
 		: base(filePath, resources) {
 		var fileContents = File.ReadAllText(filePath);

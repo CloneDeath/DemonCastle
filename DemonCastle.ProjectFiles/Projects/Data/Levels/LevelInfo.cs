@@ -96,5 +96,5 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		return _areas.FirstOrDefault(a => a.Region.ContainsAreaIndex(position.AreaIndex));
 	}
 
-	public TileInfo GetTileInfo(Guid tileId) => TileSet.GetTileInfo(tileId);
+	public TileInfo? GetTileInfo(Guid tileId) => TileSet.GetTileInfo(tileId);
 }

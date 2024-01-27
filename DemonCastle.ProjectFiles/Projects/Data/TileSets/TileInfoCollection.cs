@@ -17,7 +17,7 @@ public class TileInfoCollection : ObservableCollectionInfo<TileInfo, TileData> {
 
 	protected override void Save() => _file.Save();
 
-	public TileInfo GetTileInfo(Guid tileId) => this.First(t => t.Id == tileId);
+	public TileInfo? GetTileInfo(Guid tileId) => this.FirstOrDefault(t => t.Id == tileId);
 }
 
 public class TileInfoFactory : IInfoFactory<TileInfo, TileData> {

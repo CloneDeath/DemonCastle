@@ -1,6 +1,8 @@
+using System;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Resources;
@@ -17,4 +19,5 @@ public interface IFileNavigator {
 	LevelInfo GetLevel(string level);
 	SceneInfo GetScene(string source);
 	ISpriteSource GetSprite(string source);
+	TileSetInfo GetTileSet(Guid tileSetId);
 }
