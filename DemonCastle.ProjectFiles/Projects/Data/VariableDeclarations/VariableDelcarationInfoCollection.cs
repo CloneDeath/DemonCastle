@@ -15,8 +15,9 @@ public class VariableDeclarationInfoCollection : ObservableCollectionInfo<Variab
 
 	protected override void Save() => _file.Save();
 
-	public VariableDeclarationInfo AppendNew(VariableType type) {
+	public VariableDeclarationInfo AppendNew(VariableType type, string name) {
 		var variable = InfoFactory.CreateData(type);
+		variable.Name = name;
 		return Add(variable);
 	}
 

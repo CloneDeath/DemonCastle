@@ -12,8 +12,9 @@ public class ElementInfoCollection : ObservableCollectionInfo<IElementInfo, Elem
 
 	protected override void Save() => _file.Save();
 
-	public IElementInfo AppendNew(ElementType type) {
+	public IElementInfo AppendNew(ElementType type, string name) {
 		var elementData = InfoFactory.CreateData(type);
+		elementData.Name = name;
 		return Add(elementData);
 	}
 }

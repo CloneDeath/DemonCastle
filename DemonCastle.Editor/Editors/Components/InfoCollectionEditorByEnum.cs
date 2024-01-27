@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DemonCastle.Editor.FileTreeView;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -9,6 +10,8 @@ namespace DemonCastle.Editor.Editors.Components;
 public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEditor<TInfo>
 	where TInfo : class, IListableInfo, INotifyPropertyChanged
 	where TEnum : struct, Enum {
+
+	protected GetNameDialog GetNameDialog { get; }
 
 	private IEnumerableInfoByEnum<TInfo, TEnum>? _data;
 	private readonly IReadOnlyDictionary<TEnum, Texture2D>? _iconMap;
@@ -26,6 +29,8 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 		Name = nameof(InfoCollectionEditorByEnum<TInfo, TEnum>);
 
 		AddButton = CreateAddButton();
+
+		AddChild(GetNameDialog = new GetNameDialog());
 	}
 
 	public InfoCollectionEditorByEnum(IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null, Func<TInfo, TEnum>? getEnum = null) {
@@ -35,6 +40,8 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 		Name = nameof(InfoCollectionEditorByEnum<TInfo, TEnum>);
 
 		AddButton = CreateAddButton();
+
+		AddChild(GetNameDialog = new GetNameDialog());
 	}
 
 	private MenuButton CreateAddButton() {
@@ -58,12 +65,14 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 		parent.AddChild(AddButton);
 	}
 
-	private void AddButton_OnIdPressed(long id) {
+	private async void AddButton_OnIdPressed(long id) {
 		if (_data == null) return;
+		var name = await GetNameDialog.GetName();
+		if (name == null) return;
 
 		var values = Enum.GetValues<TEnum>();
 		var type = values[(int)id];
-		var element = _data.AppendNew(type);
+		var element = _data.AppendNew(type, name);
 		OnItemSelected(element);
 	}
 
