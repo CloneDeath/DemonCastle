@@ -17,6 +17,8 @@ public partial class TileSetSelector : VBoxContainer {
 	private readonly ProjectInfo _project;
 	private ObservableList<Guid>? _tileSets;
 
+	public event Action<Guid?>? TileSetIdSelected;
+
 	public Guid? SelectedGuid {
 		get {
 			if (Options.Selected < 0) return null;
@@ -80,10 +82,12 @@ public partial class TileSetSelector : VBoxContainer {
 			_tileSets.Add(tileSet.Id);
 		}
 		SelectedGuid = tileSet.Id;
+		TileSetIdSelected?.Invoke(tileSet.Id);
 	}
 
 	private void Options_OnItemSelected(long index) {
 		CheckRemoveButton();
+		TileSetIdSelected?.Invoke(SelectedGuid);
 	}
 
 	private void CheckRemoveButton() {
@@ -113,6 +117,7 @@ public partial class TileSetSelector : VBoxContainer {
 		Options.AddItem("[Level Tiles]");
 		Options.SetItemMetadata(0, Guid.Empty.ToString());
 		CheckRemoveButton();
+		TileSetIdSelected?.Invoke(SelectedGuid);
 
 		if (_tileSets == null) return;
 
