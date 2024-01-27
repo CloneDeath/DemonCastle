@@ -11,6 +11,7 @@ public partial class ExpandingControl : Control {
 		if (children.Count <= 0) {
 			Size = Vector2.Zero;
 			CustomMinimumSize = Vector2.Zero;
+			return;
 		}
 
 		var minimumBounds = GetBounds(children[0]);
