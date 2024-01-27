@@ -12,7 +12,7 @@ public partial class EditorTopBar : HBoxContainer {
 		Name = nameof(EditorTopBar);
 
 		AddChild(PlayButton = new Button {
-			Text = "Play Level"
+			Text = "Test Game"
 		});
 		PlayButton.Pressed += PlayButtonOnPressed;
 	}
