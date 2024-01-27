@@ -30,6 +30,7 @@ public class AreaData {
 	public int Y;
 	public int Width = 1;
 	public int Height = 1;
+	public List<Guid> TileSetIds { get; set; } = new();
 	public List<MonsterData> Monsters { get; set; } = new();
 	public List<TileMapLayerData> TileMapLayers { get; set; } = new();
 }

@@ -22,7 +22,7 @@ public partial class ToolsPanel : TabContainer {
 	public ToolsPanel(ProjectInfo project, LevelInfo level) {
 		Name = nameof(ToolsPanel);
 
-		AddChild(_tileToolsPanel = new TileToolsPanel(level));
+		AddChild(_tileToolsPanel = new TileToolsPanel(project, level));
 		SetTabTitle(0, "Tiles");
 		AddChild(_monsterToolsPanel = new MonsterToolsPanel(project));
 		SetTabTitle(1, "Monsters");

@@ -33,7 +33,7 @@ public class FileNavigator : DirectoryNavigator {
 	public SpriteAtlasInfo ToSpriteAtlasInfo() => ProjectResources.GetSpriteAtlas(FilePath);
 	public SpriteGridInfo ToSpriteGridInfo() => ProjectResources.GetSpriteGrid(FilePath);
 	public TextInfo ToTextInfo() => ProjectResources.GetText(FilePath);
-	public TileSetInfo ToTileSet() => ProjectResources.GetTileSet(FilePath);
+	public TileSetInfo ToTileSetInfo() => ProjectResources.GetTileSet(FilePath);
 	public Texture2D ToTexture() => ProjectResources.GetTexture(FilePath);
 	public WeaponInfo ToWeaponInfo() => ProjectResources.GetWeapon(FilePath);
 

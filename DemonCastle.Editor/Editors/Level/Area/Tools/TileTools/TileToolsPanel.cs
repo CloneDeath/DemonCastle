@@ -1,5 +1,6 @@
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
@@ -14,12 +15,12 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected TileInfoCollectionEditor TileCollectionEditor { get; }
 	protected LevelTileDetails TileDetails { get; }
 
-	public TileToolsPanel(LevelInfo level) {
+	public TileToolsPanel(ProjectInfo project, LevelInfo level) {
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
 		AddChild(_tileLayerEditor = new Layers.TileLayerEditor());
-		AddChild(TileSetSelector = new TileSetSelector());
+		AddChild(TileSetSelector = new TileSetSelector(project));
 		AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
 		TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
 		AddChild(TileDetails = new LevelTileDetails(level.Directory));
@@ -34,5 +35,6 @@ public partial class TileToolsPanel : VBoxContainer {
 
 	public void LoadArea(AreaInfo? value) {
 		_tileLayerEditor.LoadLayers(value?.TileMapLayers);
+		TileSetSelector.LoadArea(value);
 	}
 }

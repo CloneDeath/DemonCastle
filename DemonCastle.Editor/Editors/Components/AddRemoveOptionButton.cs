@@ -5,6 +5,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class AddRemoveOptionButton : HBoxContainer {
+	private bool _removeDisabled;
+
 	private readonly Label _label;
 	private readonly OptionButton _options;
 	private readonly Button _addButton;
@@ -28,7 +30,7 @@ public partial class AddRemoveOptionButton : HBoxContainer {
 	}
 
 	private void Options_OnItemSelected(long index) {
-		_removeButton.Disabled = index < 0;
+		_removeButton.Disabled = index < 0 || _removeDisabled;
 		ItemSelected?.Invoke(index);
 	}
 
@@ -42,7 +44,15 @@ public partial class AddRemoveOptionButton : HBoxContainer {
 		set {
 			_options.Disabled = value;
 			_addButton.Disabled = value;
+			_removeButton.Disabled = value || _options.Selected < 0 || _removeDisabled;
+		}
+	}
+
+	public bool RemoveDisabled {
+		get => _removeButton.Disabled;
+		set {
 			_removeButton.Disabled = value || _options.Selected < 0;
+			_removeDisabled = value;
 		}
 	}
 
@@ -50,7 +60,7 @@ public partial class AddRemoveOptionButton : HBoxContainer {
 		get => _options.Selected;
 		set {
 			_options.Selected = value;
-			_removeButton.Disabled = _options.Disabled || value < 0;
+			_removeButton.Disabled = _options.Disabled || value < 0 || _removeDisabled;
 		}
 	}
 
@@ -62,4 +72,7 @@ public partial class AddRemoveOptionButton : HBoxContainer {
 	public void Clear() => _options.Clear();
 	public int GetSelectedId() => _options.GetSelectedId();
 	public void AddItem(string label, int id = -1) => _options.AddItem(label, id);
+	public void SetItemMetadata(int idx, Variant metadata) => _options.SetItemMetadata(idx, metadata);
+	public Variant GetItemMetadata(int idx) => _options.GetItemMetadata(idx);
+	public int ItemCount => _options.ItemCount;
 }

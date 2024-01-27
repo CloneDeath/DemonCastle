@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
@@ -58,6 +59,10 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 	public IEnumerable<ItemInfo> Items => File.GetFilesAndSubFiles()
 											  .Where(f => f.Extension == FileType.Item.Extension)
 											  .Select(f => f.ToItemInfo());
+
+	public IEnumerable<TileSetInfo> TileSets => File.GetFilesAndSubFiles()
+													.Where(f => f.Extension == FileType.TileSet.Extension)
+													.Select(f => f.ToTileSetInfo());
 
 	public string FilePath => File.FilePath;
 	public FileNavigator FileNavigator => File;
