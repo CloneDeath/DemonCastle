@@ -11,6 +11,7 @@ public partial class GameSetup : VBoxContainer {
 	protected CheckBox Debug_ShowCollisions { get; }
 	protected CheckBox Debug_ShowHitBoxes { get; }
 	protected CheckBox Debug_ShowHurtBoxes { get; }
+	protected CheckBox Debug_ShowFramesPerSecond { get; }
 	protected CheckBox Debug_LogStateChanges { get; }
 
 	protected Button LaunchButton { get; }
@@ -35,6 +36,10 @@ public partial class GameSetup : VBoxContainer {
 			Text = "Show HurtBoxes",
 			ButtonPressed = false
 		});
+		AddChild(Debug_ShowFramesPerSecond = new CheckBox {
+			Text = "Show Frames Per Second",
+			ButtonPressed = false
+		});
 		AddChild(Debug_LogStateChanges = new CheckBox {
 			Text = "Log State Changes",
 			ButtonPressed = false
@@ -52,6 +57,7 @@ public partial class GameSetup : VBoxContainer {
 			ShowCollisions = Debug_ShowCollisions.ButtonPressed,
 			ShowHitBoxes = Debug_ShowHitBoxes.ButtonPressed,
 			ShowHurtBoxes = Debug_ShowHurtBoxes.ButtonPressed,
+			ShowFramesPerSecond = Debug_ShowFramesPerSecond.ButtonPressed,
 			LogStateChanges = Debug_LogStateChanges.ButtonPressed
 		};
 		GameStart?.Invoke(debug);
