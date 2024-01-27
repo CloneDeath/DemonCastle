@@ -15,6 +15,7 @@ public partial class FileTree : Tree {
 	protected FilePopupMenu FilePopupMenu { get; }
 	protected DeleteDialog ConfirmDelete { get; }
 	protected RenameDialog ConfirmRename { get; }
+	protected GetNameDialog GetNameDialog { get; }
 
 	public event Action<FileNavigator>? OnFileActivated;
 
@@ -25,6 +26,8 @@ public partial class FileTree : Tree {
 		Name = nameof(FileTree);
 		Root = rootDirectory;
 		AllowRmbSelect = true;
+
+		AddChild(GetNameDialog = new GetNameDialog());
 
 		AddChild(ConfirmRename = new RenameDialog());
 		ConfirmRename.Confirmed += OnRenameConfirmed;
@@ -134,11 +137,12 @@ public partial class FileTree : Tree {
 			   ?? IconTextures.File.UnknownIcon;
 	}
 
-	public void OnAddDirectorySelected() {
+	public async void OnAddDirectorySelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
+		var name = await GetNameDialog.GetName();
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateDirectory("directory");
+		dirNav.CreateDirectory(name);
 		CreateTree();
 	}
 
