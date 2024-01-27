@@ -45,6 +45,7 @@ public partial class GetNameDialog : ConfirmationDialog {
 
 	public Task<string?> GetName() {
 		_taskCompletionSource = new TaskCompletionSource<string?>();
+		LineEdit.Clear();
 		PopupCentered();
 		FocusLineEdit();
 		return _taskCompletionSource.Task;
