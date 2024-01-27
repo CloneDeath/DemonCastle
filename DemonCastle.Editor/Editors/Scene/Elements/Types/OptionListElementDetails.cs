@@ -4,6 +4,7 @@ using DemonCastle.Editor.Editors.Scene.Events;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Elements.Types;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene.Elements.Types;
 
@@ -21,10 +22,14 @@ public partial class OptionListElementDetails : ElementDetails {
 		AddColor("Color", element, e => e.Color);
 		AddEnum("Text Transform", element, e => e.TextTransform);
 
+		AddChild(new HSeparator());
+
 		AddChild(_options = new InfoCollectionEditor<OptionInfo>(element.Options) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		_options.ItemSelected += Options_OnItemSelected;
+
+		AddChild(new HSeparator());
 	}
 
 	private void Options_OnItemSelected(OptionInfo? obj) {
