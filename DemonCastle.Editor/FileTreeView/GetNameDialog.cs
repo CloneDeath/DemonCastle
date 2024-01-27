@@ -41,15 +41,15 @@ public partial class GetNameDialog : ConfirmationDialog {
 		LineEdit.GrabFocus();
 	}
 
-	private TaskCompletionSource<string>? _taskCompletionSource;
+	private TaskCompletionSource<string?>? _taskCompletionSource;
 
-	public Task<string> GetName() {
-		_taskCompletionSource = new TaskCompletionSource<string>();
+	public Task<string?> GetName() {
+		_taskCompletionSource = new TaskCompletionSource<string?>();
 		PopupCentered();
 		FocusLineEdit();
 		return _taskCompletionSource.Task;
 	}
 
 	private void OnConfirmed() => _taskCompletionSource?.SetResult(LineEdit.Text);
-	private void OnCanceled() => _taskCompletionSource?.SetCanceled();
+	private void OnCanceled() => _taskCompletionSource?.SetResult(null);
 }

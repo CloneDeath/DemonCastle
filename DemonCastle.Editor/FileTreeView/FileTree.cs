@@ -141,6 +141,7 @@ public partial class FileTree : Tree {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 		var name = await GetNameDialog.GetName();
+		if (name == null) return;
 		var dirNav = DirectoryMap[selected];
 		dirNav.CreateDirectory(name);
 		CreateTree();
@@ -151,6 +152,7 @@ public partial class FileTree : Tree {
 		if (!DirectoryMap.ContainsKey(selected)) return;
 
 		var name = await GetNameDialog.GetName();
+		if (name == null) return;
 		if (name.EndsWith(fileType.Extension)) {
 			name = name[..^fileType.Extension.Length];
 		}
@@ -166,6 +168,7 @@ public partial class FileTree : Tree {
 		if (!DirectoryMap.ContainsKey(selected)) return;
 
 		var name = await GetNameDialog.GetName();
+		if (name == null) return;
 		var dirNav = DirectoryMap[selected];
 		dirNav.CreateEmptyFile(name, FileType.Text.Extension);
 
