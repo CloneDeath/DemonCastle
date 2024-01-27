@@ -140,6 +140,7 @@ public partial class FileTree : Tree {
 	public async void OnAddDirectorySelected() {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
+		GetNameDialog.Title = "New Directory";
 		var name = await GetNameDialog.GetName();
 		if (name == null) return;
 		var dirNav = DirectoryMap[selected];
@@ -151,6 +152,7 @@ public partial class FileTree : Tree {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 
+		GetNameDialog.Title = $"New {fileType.Name}";
 		var name = await GetNameDialog.GetName();
 		if (name == null) return;
 		if (name.EndsWith(fileType.Extension)) {
@@ -167,6 +169,7 @@ public partial class FileTree : Tree {
 		var selected = GetSelected();
 		if (!DirectoryMap.ContainsKey(selected)) return;
 
+		GetNameDialog.Title = "New Text File";
 		var name = await GetNameDialog.GetName();
 		if (name == null) return;
 		var dirNav = DirectoryMap[selected];

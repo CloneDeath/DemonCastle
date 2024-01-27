@@ -13,7 +13,7 @@ public partial class GetNameDialog : ConfirmationDialog {
 
 	public GetNameDialog() {
 		Name = nameof(RenameDialog);
-		Title = "New File/Directory";
+		Title = "Get Name";
 		Exclusive = true;
 		MinSize += new Vector2I(0, 30);
 

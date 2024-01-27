@@ -13,6 +13,11 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 
 	protected GetNameDialog GetNameDialog { get; }
 
+	public string NewItemPopupTitle {
+		get => GetNameDialog.Title;
+		set => GetNameDialog.Title = value;
+	}
+
 	private IEnumerableInfoByEnum<TInfo, TEnum>? _data;
 	private readonly IReadOnlyDictionary<TEnum, Texture2D>? _iconMap;
 	private readonly Func<TInfo, TEnum>? _getEnum;
@@ -30,7 +35,9 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 
 		AddButton = CreateAddButton();
 
-		AddChild(GetNameDialog = new GetNameDialog());
+		AddChild(GetNameDialog = new GetNameDialog{
+			Title = "New Item"
+		});
 	}
 
 	public InfoCollectionEditorByEnum(IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null, Func<TInfo, TEnum>? getEnum = null) {
@@ -41,7 +48,9 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 
 		AddButton = CreateAddButton();
 
-		AddChild(GetNameDialog = new GetNameDialog());
+		AddChild(GetNameDialog = new GetNameDialog {
+			Title = "New Item"
+		});
 	}
 
 	private MenuButton CreateAddButton() {

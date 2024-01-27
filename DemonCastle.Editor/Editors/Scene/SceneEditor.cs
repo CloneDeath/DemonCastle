@@ -41,7 +41,9 @@ public partial class SceneEditor : BaseEditor {
 			LeftTabs.TabSelected += LeftTabs_OnTabSelected;
 
 			LeftTabs.AddChild(ElementList = new InfoCollectionEditorByEnum<IElementInfo, ElementType>(scene.Elements,
-								  ElementTypeIcons.Map, i => i.Type));
+								  ElementTypeIcons.Map, i => i.Type) {
+								  NewItemPopupTitle = "New Element"
+							  });
 			ElementList.ItemSelected += ElementList_OnElementSelected;
 			LeftTabs.SetTabTitle(0, "Elements");
 
