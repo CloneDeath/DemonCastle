@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -19,8 +18,14 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 
 	public InfoCollectionEditorByEnum(IEnumerableInfoByEnum<TInfo, TEnum> data,
 									  IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null,
-									  Func<TInfo, TEnum>? getEnum = null) : this(iconMap, getEnum) {
+									  Func<TInfo, TEnum>? getEnum = null) : base(data) {
 		_data = data;
+		_iconMap = iconMap;
+		_getEnum = getEnum;
+
+		Name = nameof(InfoCollectionEditorByEnum<TInfo, TEnum>);
+
+		AddButton = CreateAddButton();
 	}
 
 	public InfoCollectionEditorByEnum(IReadOnlyDictionary<TEnum, Texture2D>? iconMap = null, Func<TInfo, TEnum>? getEnum = null) {
@@ -29,19 +34,24 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 
 		Name = nameof(InfoCollectionEditorByEnum<TInfo, TEnum>);
 
-		AddButton = new MenuButton {
+		AddButton = CreateAddButton();
+	}
+
+	private MenuButton CreateAddButton() {
+		var addButton = new MenuButton {
 			Flat = false,
 			Text = "Add...",
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		};
-		AddButton.GetPopup().IdPressed += AddButton_OnIdPressed;
+		addButton.GetPopup().IdPressed += AddButton_OnIdPressed;
 		var types = Enum.GetValues<TEnum>();
 		for (var index = 0; index < types.Length; index++) {
 			var type = types[index];
-			AddButton.GetPopup().AddItem(Enum.GetName(type), index);
-			var icon = iconMap?.GetValueOrDefault(type);
-			if (icon != null) AddButton.GetPopup().SetItemIcon(index, icon);
+			addButton.GetPopup().AddItem(Enum.GetName(type), index);
+			var icon = _iconMap?.GetValueOrDefault(type);
+			if (icon != null) addButton.GetPopup().SetItemIcon(index, icon);
 		}
+		return addButton;
 	}
 
 	protected override void AppendAddButton(Control parent) {
@@ -65,19 +75,16 @@ public partial class InfoCollectionEditorByEnum<TInfo, TEnum> : InfoCollectionEd
 		}
 	}
 
-	protected override void ReloadItems() {
-		base.ReloadItems();
-		if (_iconMap == null) return;
-		if (_getEnum == null) return;
-		if (_data == null) return;
-		
-		for (var i = 0; i < _data.Count(); i++) {
-			var item = _data[i];
-			var value = _getEnum(item);
-			var icon = _iconMap.GetValueOrDefault(value);
-			if (icon != null) {
-				ItemList.SetItemIcon(i, icon);
-			}
-		}
+	protected override int AddItemListItem(TInfo item) {
+		if (_getEnum == null || _iconMap == null) return ItemList.AddItem(item.ListLabel);
+
+		var value = _getEnum(item);
+		var icon = _iconMap.GetValueOrDefault(value);
+		return ItemList.AddItem(item.ListLabel, icon);
+	}
+
+	public void Load(IEnumerableInfoByEnum<TInfo, TEnum>? data) {
+		base.Load(data);
+		_data = data;
 	}
 }

@@ -172,7 +172,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		ReloadItems();
 	}
 
-	public void Load(IEnumerableInfo<TInfo>? data) {
+	public virtual void Load(IEnumerableInfo<TInfo>? data) {
 		if (_data != null) _data.CollectionChanged -= Data_OnCollectionChanged;
 		_data = data;
 		if (_data != null) _data.CollectionChanged += Data_OnCollectionChanged;
@@ -190,8 +190,12 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		foreach (var item in _data) {
 			_subscribed.Add(item);
 			item.PropertyChanged += InfoItem_OnPropertyChanged;
-			ItemList.AddItem(item.ListLabel);
+			AddItemListItem(item);
 		}
+	}
+
+	protected virtual int AddItemListItem(TInfo item) {
+		return ItemList.AddItem(item.ListLabel);
 	}
 
 	private void InfoItem_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
