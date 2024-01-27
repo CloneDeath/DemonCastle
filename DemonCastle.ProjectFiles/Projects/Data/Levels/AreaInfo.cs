@@ -15,7 +15,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 	public AreaInfo(IFileNavigator file, AreaData area, LevelInfo level) : base(file, area) {
 		Level = level;
 
-		TileSetIds = new ObservableList<Guid>(area.TileSetIds);
+		TileSetIds = new ObservableList<Guid>(file, area.TileSetIds);
 		Monsters = new MonsterDataInfoCollection(file, this, area.Monsters);
 		TileMapLayers = new InfoList<TileMapLayerInfo, TileMapLayerData>(file, area.TileMapLayers, data => new TileMapLayerInfo(file, data, this));
 	}

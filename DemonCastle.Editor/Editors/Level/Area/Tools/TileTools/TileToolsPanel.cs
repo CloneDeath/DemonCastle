@@ -20,7 +20,7 @@ public partial class TileToolsPanel : VBoxContainer {
 		Level = level;
 
 		AddChild(_tileLayerEditor = new Layers.TileLayerEditor());
-		AddChild(TileSetSelector = new TileSetSelector(project));
+		AddChild(TileSetSelector = new TileSetSelector(project, level.Directory));
 		AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
 		TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
 		AddChild(TileDetails = new LevelTileDetails(level.Directory));

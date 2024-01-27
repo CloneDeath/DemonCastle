@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using Godot;
 using File = System.IO.File;
 using Path = System.IO.Path;
@@ -69,6 +70,11 @@ public class DirectoryNavigator {
 	public TextInfo GetText(string localPath) {
 		var path = Path.Combine(Directory, localPath);
 		return ProjectResources.GetText(path);
+	}
+
+	public TileSetInfo GetTileSet(string localPath) {
+		var path = Path.Combine(Directory, localPath);
+		return ProjectResources.GetTileSet(path);
 	}
 
 	public Texture2D GetTexture(string localPath) {
