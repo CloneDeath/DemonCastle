@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
@@ -11,11 +10,9 @@ using Godot;
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 
 public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
-	private readonly List<AreaInfo> _areas;
-
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
 		TileSet = new TileInfoCollection(file, Resource.Tiles);
-		_areas = Resource.Areas.Select(area => new AreaInfo(file, area, this)).ToList();
+		Areas = new InfoList<AreaInfo, AreaData>(file, Resource.Areas, area => new AreaInfo(file, area, this));
 	}
 
 	public string ListLabel => Name;
@@ -71,7 +68,7 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 		}
 	}
 
-	public IEnumerable<AreaInfo> Areas => _areas;
+	public IEnumerableInfo<AreaInfo> Areas { get; }
 
 	public Vector2 StartingLocation => GetAreaById(Resource.StartingPosition.AreaId).TilePosition
 									   + TileSize * new Vector2(Resource.StartingPosition.X, Resource.StartingPosition.Y)
@@ -79,22 +76,9 @@ public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 
 	public TileSize AreaScale => new(AreaSize, TileSize);
 
-	public AreaInfo CreateArea() {
-		var area = new AreaData();
-		Resource.Areas.Add(area);
-		var areaInfo = new AreaInfo(File, area, this);
-		_areas.Add(areaInfo);
-		OnPropertyChanged(nameof(Areas));
-		return areaInfo;
-	}
+	private AreaInfo GetAreaById(Guid id) => Areas.First(a => a.Id == id);
 
-	private AreaInfo GetAreaById(Guid id) {
-		return _areas.First(a => a.Id == id);
-	}
-
-	public AreaInfo? GetAreaAt(AreaPosition position) {
-		return _areas.FirstOrDefault(a => a.Region.ContainsAreaIndex(position.AreaIndex));
-	}
+	public AreaInfo? GetAreaAt(AreaPosition position) => Areas.FirstOrDefault(a => a.Region.ContainsAreaIndex(position.AreaIndex));
 
 	public TileInfo? GetTileInfo(Guid tileId) => TileSet.GetTileInfo(tileId);
 }

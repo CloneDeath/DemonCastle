@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
 public partial class StateReferenceProperty : BaseReferenceProperty<EntityStateInfo> {
-	public StateReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<EntityStateInfo> options) : base(binding, options) {
+	public StateReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<EntityStateInfo> options) : base(binding, options) {
 		Name = nameof(StateReferenceProperty);
 	}
 

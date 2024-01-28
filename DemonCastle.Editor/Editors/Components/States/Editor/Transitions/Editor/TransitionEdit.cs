@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
@@ -18,7 +18,7 @@ public partial class TransitionEdit : PropertyCollection {
 
 	private WhenEdit WhenEdit { get; }
 
-	public TransitionEdit(IEnumerable<EntityStateInfo> options) {
+	public TransitionEdit(IEnumerableInfo<EntityStateInfo> options) {
 		Name = nameof(TransitionEdit);
 
 		AddString("Name", _proxy, t => t.Name);

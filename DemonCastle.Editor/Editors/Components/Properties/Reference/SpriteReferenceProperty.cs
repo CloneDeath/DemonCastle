@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
 public partial class SpriteReferenceProperty : BaseReferenceProperty<ISpriteDefinition> {
-	public SpriteReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<ISpriteDefinition> options) : base(binding, options) {
+	public SpriteReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<ISpriteDefinition> options) : base(binding, options) {
 		Name = nameof(SpriteReferenceProperty);
 	}
 

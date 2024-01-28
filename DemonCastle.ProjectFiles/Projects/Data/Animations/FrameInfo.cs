@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DemonCastle.Files.Animations;
@@ -26,7 +25,7 @@ public interface IFrameInfo : INotifyPropertyChanged {
 	string SourceFile { get; set; }
 	Guid SpriteId { get; set; }
 	ISpriteDefinition SpriteDefinition { get; }
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions { get; }
+	public IEnumerableInfo<ISpriteDefinition> SpriteDefinitions { get; }
 
 	IEnumerableInfo<IFrameSlotInfo> Slots { get; }
 
@@ -130,7 +129,7 @@ public class FrameInfo : BaseInfo<FrameData>, IFrameInfo {
 												? File.GetSprite(Data.Source)
 												: new NullSpriteSource();
 
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
+	public IEnumerableInfo<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 
 	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == Data.SpriteId)
 												 ?? new NullSpriteDefinition();

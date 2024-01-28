@@ -6,12 +6,12 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations;
 
-public partial class VariableDeclarationsEditor : HSplitContainer {
+public partial class VariableCollectionEditor : HSplitContainer {
 	protected InfoCollectionEditorByEnum<VariableDeclarationInfo, VariableType> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
-	public VariableDeclarationsEditor(ProjectInfo project) {
-		Name = nameof(VariableDeclarationsEditor);
+	public VariableCollectionEditor(ProjectInfo project) {
+		Name = nameof(VariableCollectionEditor);
 
 		AddChild(VariableList = new InfoCollectionEditorByEnum<VariableDeclarationInfo, VariableType> {
 			CustomMinimumSize = new Vector2(300, 300)

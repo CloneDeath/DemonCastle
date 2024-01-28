@@ -21,4 +21,5 @@ public class NullEnumerableInfo<T> : IEnumerableInfo<T> {
 
 	public void RemoveAt(int index) {}
 	public void Move(int oldIndex, int newIndex) => throw new Exception("Cannot move items in a null enumerable.");
+	public int IndexOf(T option) => -1;
 }

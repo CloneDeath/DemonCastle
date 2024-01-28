@@ -54,7 +54,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
-	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<AreaInfo> options) where T : INotifyPropertyChanged {
+	public AreaReferenceProperty AddAreaReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<AreaInfo> options) where T : INotifyPropertyChanged {
 		var areaReferenceProperty = new AreaReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
@@ -116,7 +116,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		});
 	}
 
-	public ItemReferenceProperty AddItemReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ItemInfo> options) where T : INotifyPropertyChanged {
+	public ItemReferenceProperty AddItemReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<ItemInfo> options) where T : INotifyPropertyChanged {
 		var itemReferenceProperty = new ItemReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
@@ -124,7 +124,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		return itemReferenceProperty;
 	}
 
-	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<MonsterInfo> options) where T : INotifyPropertyChanged {
+	public MonsterReferenceProperty AddMonsterReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<MonsterInfo> options) where T : INotifyPropertyChanged {
 		var monsterReferenceProperty = new MonsterReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
@@ -162,7 +162,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 	public SpriteReferenceProperty AddSpriteDefinition<T>(T target, string directory,
 														  Expression<Func<T, string>> fileExpression,
 														  Expression<Func<T, Guid>> spriteExpression,
-														  Func<T, IEnumerable<ISpriteDefinition>> getOptions)
+														  Func<T, IEnumerableInfo<ISpriteDefinition>> getOptions)
 		where T : INotifyPropertyChanged {
 		var fileProperty = AddFile("Sprite File", target, directory, fileExpression, FileType.SpriteSources);
 		var spriteProperty = AddSpriteReference("Sprite", target, spriteExpression, getOptions(target));
@@ -182,7 +182,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		}
 	}
 
-	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerable<ISpriteDefinition> options) where T : INotifyPropertyChanged {
+	public SpriteReferenceProperty AddSpriteReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<ISpriteDefinition> options) where T : INotifyPropertyChanged {
 		var spriteReferenceProperty = new SpriteReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
@@ -191,7 +191,7 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 	}
 
 	public StateReferenceProperty AddStateReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression,
-													   IEnumerable<EntityStateInfo> options, InternalMode @internal = InternalMode.Disabled) where T : INotifyPropertyChanged {
+													   IEnumerableInfo<EntityStateInfo> options, InternalMode @internal = InternalMode.Disabled) where T : INotifyPropertyChanged {
 		var stateReferenceProperty = new StateReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};

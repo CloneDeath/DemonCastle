@@ -35,4 +35,5 @@ public class EnumerableInfoProxy<T> : IEnumerableInfo<T>
 	public void Remove(T item) => _proxy?.Remove(item);
 	public void RemoveAt(int index) => _proxy?.RemoveAt(index);
 	public void Move(int oldIndex, int newIndex) => _proxy?.Move(oldIndex, newIndex);
+	public int IndexOf(T option) => _proxy?.IndexOf(option) ?? -1;
 }

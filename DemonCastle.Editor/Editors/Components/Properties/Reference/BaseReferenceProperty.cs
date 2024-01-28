@@ -1,7 +1,8 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
@@ -11,7 +12,7 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 	protected abstract Guid GetGuid(T option);
 	protected abstract string GetName(T option);
 
-	private List<T> _options = new();
+	private IEnumerableInfo<T>? _options;
 
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
@@ -19,14 +20,15 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 	public event Action<T>? ItemSelected;
 
 	public Guid PropertyValue {
-		get => OptionButton.Selected < 0 ? Guid.Empty : GetGuid(_options[OptionButton.Selected]);
+		get => _options == null || OptionButton.Selected < 0 ? Guid.Empty : GetGuid(_options[OptionButton.Selected]);
 		set {
+			if (_options == null) return;
 			var option = _options.FirstOrDefault(o => GetGuid(o) == value);
 			OptionButton.Selected = option == null ? -1 : _options.IndexOf(option);
 		}
 	}
 
-	protected BaseReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<T> options) {
+	protected BaseReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<T> options) {
 		Name = nameof(BaseReferenceProperty<T>);
 		Binding = binding;
 
@@ -50,11 +52,25 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 		Binding.Changed -= Binding_OnChanged;
 	}
 
-	public void LoadOptions(IEnumerable<T> options) {
-		_options = options.ToList();
+	public void LoadOptions(IEnumerableInfo<T> options) {
+		if (_options != null) _options.CollectionChanged -= Options_OnCollectionChanged;
+		_options = options;
+		if (_options != null) _options.CollectionChanged += Options_OnCollectionChanged;
+
+		ReloadOptions();
+	}
+
+	private void Options_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		ReloadOptions();
+
+	}
+
+	private void ReloadOptions() {
 		OptionButton.Clear();
 
-		for (var i = 0; i < _options.Count; i++) {
+		if (_options == null) return;
+
+		for (var i = 0; i < _options.Count(); i++) {
 			var option = _options[i];
 			var texture = GetTexture(option);
 			var name = GetName(option);
@@ -74,6 +90,7 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 	}
 
 	private void OnItemSelected(long index) {
+		if (_options == null) return;
 		Binding.Set(index < 0 ? Guid.Empty : GetGuid(_options[(int)index]));
 		if (index > 0) {
 			ItemSelected?.Invoke(_options[(int)index]);

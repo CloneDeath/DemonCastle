@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
@@ -83,7 +83,7 @@ public class TileProxy : INotifyPropertyChanged {
 		}
 	}
 
-	public IEnumerable<ISpriteDefinition> SpriteOptions => _proxy?.SpriteOptions ?? Array.Empty<ISpriteDefinition>();
+	public IEnumerableInfo<ISpriteDefinition> SpriteOptions => _proxy?.SpriteOptions ?? new NullEnumerableInfo<ISpriteDefinition>();
 
 	private void Proxy_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		PropertyChanged?.Invoke(this, e);

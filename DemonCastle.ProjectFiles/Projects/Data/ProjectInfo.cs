@@ -3,12 +3,14 @@ using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.TileSets;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 	public ProjectInfo(FileNavigator<ProjectFile> file) : base(file) {
+		Variables = new VariableDeclarationInfoCollection(file, Resource.Variables);
 	}
 
 	public string ListLabel => Name;
@@ -40,6 +42,8 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 			OnPropertyChanged();
 		}
 	}
+
+	public VariableDeclarationInfoCollection Variables { get; }
 
 	public SceneInfo StartScene => File.GetScene(StartSceneFile);
 

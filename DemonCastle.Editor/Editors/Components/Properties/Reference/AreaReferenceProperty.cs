@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using DemonCastle.Editor.Properties;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
 public partial class AreaReferenceProperty : BaseReferenceProperty<AreaInfo> {
-	public AreaReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<AreaInfo> options) : base(binding, options) {
+	public AreaReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<AreaInfo> options) : base(binding, options) {
 		Name = nameof(AreaReferenceProperty);
 	}
 

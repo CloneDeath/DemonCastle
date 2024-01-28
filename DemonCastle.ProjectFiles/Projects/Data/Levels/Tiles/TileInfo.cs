@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -80,7 +79,7 @@ public class TileInfo : BaseEntityInfo<TileData> {
 	protected ISpriteSource Source => File.FileExists(SourceFile) ? File.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == SpriteId)
 										  ?? new NullSpriteDefinition();
-	public IEnumerable<ISpriteDefinition> SpriteOptions => Source.Sprites;
+	public IEnumerableInfo<ISpriteDefinition> SpriteOptions => Source.Sprites;
 	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
 	public bool FlipHorizontal => Sprite.FlipHorizontal;

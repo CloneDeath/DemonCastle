@@ -7,6 +7,6 @@ public partial class MonsterVariableDeclarationDetails : VariableDeclarationDeta
 	public MonsterVariableDeclarationDetails(ProjectInfo project, MonsterVariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
 		Name = nameof(MonsterVariableDeclarationDetails);
 
-		AddMonsterReference("Default Value", variableDeclaration, v => v.DefaultValue, project.Monsters);
+		AddMonsterReference("Default Value", variableDeclaration, v => v.DefaultValue, new EnumerableInfoWrapper<MonsterInfo>(project.Monsters));
 	}
 }

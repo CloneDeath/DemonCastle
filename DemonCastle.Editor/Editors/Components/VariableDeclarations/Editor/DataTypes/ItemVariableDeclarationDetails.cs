@@ -7,6 +7,6 @@ public partial class ItemVariableDeclarationDetails : VariableDeclarationDetails
 	public ItemVariableDeclarationDetails(ProjectInfo project, ItemVariableDeclarationInfo variableDeclaration) : base(variableDeclaration) {
 		Name = nameof(ItemVariableDeclarationDetails);
 
-		AddItemReference("Default Value", variableDeclaration, v => v.DefaultValue, project.Items);
+		AddItemReference("Default Value", variableDeclaration, v => v.DefaultValue, new EnumerableInfoWrapper<ItemInfo>(project.Items));
 	}
 }

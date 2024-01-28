@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -94,7 +93,7 @@ public class FrameInfoProxy : InfoProxy<IFrameInfo>, IFrameInfo {
 	public AudioStream? AudioStream => Proxy?.AudioStream;
 
 	public ISpriteDefinition SpriteDefinition => Proxy?.SpriteDefinition ?? new NullSpriteDefinition();
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? Array.Empty<ISpriteDefinition>();
+	public IEnumerableInfo<ISpriteDefinition> SpriteDefinitions => Proxy?.SpriteDefinitions ?? new NullEnumerableInfo<ISpriteDefinition>();
 	public IEnumerableInfo<IFrameSlotInfo> Slots => Proxy?.Slots ?? new NullEnumerableInfo<IFrameSlotInfo>();
 
 	public void Delete() => Proxy?.Delete();

@@ -7,14 +7,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
 public partial class BaseEntityTabContainer : TabContainer {
-	private readonly VariableDeclarationsEditor _variables;
+	private readonly VariableCollectionEditor _variables;
 	private readonly AnimationsEditor _animations;
 	private readonly StatesEditor _states;
 
 	public BaseEntityTabContainer(ProjectInfo project, IFileInfo file) {
 		Name = nameof(BaseEntityTabContainer);
 
-		AddChild(_variables = new VariableDeclarationsEditor(project));
+		AddChild(_variables = new VariableCollectionEditor(project));
 		SetTabTitle(0, "Variables");
 		AddChild(_animations = new AnimationsEditor(file));
 		SetTabTitle(1, "Animations");

@@ -25,7 +25,5 @@ public partial class LevelDetailsPanel : VBoxContainer {
 		AddAreaButton.Pressed += AddAreaButtonOnPressed;
 	}
 
-	private void AddAreaButtonOnPressed() {
-		LevelInfo.CreateArea();
-	}
+	private void AddAreaButtonOnPressed() => LevelInfo.Areas.AppendNew();
 }

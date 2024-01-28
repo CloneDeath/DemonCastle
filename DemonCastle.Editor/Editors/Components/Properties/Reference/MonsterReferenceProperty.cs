@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
@@ -7,7 +6,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
 public partial class MonsterReferenceProperty : BaseReferenceProperty<MonsterInfo> {
-	public MonsterReferenceProperty(IPropertyBinding<Guid> binding, IEnumerable<MonsterInfo> options) : base(binding, options) {
+	public MonsterReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<MonsterInfo> options) : base(binding, options) {
 		Name = nameof(MonsterReferenceProperty);
 	}
 

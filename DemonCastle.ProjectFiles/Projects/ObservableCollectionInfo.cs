@@ -59,6 +59,8 @@ public abstract class ObservableCollectionInfo<TInfo, TData> : IEnumerableInfo<T
 		InfoItems.Move(oldIndex, newIndex);
 	}
 
+	public int IndexOf(TInfo option) => InfoItems.IndexOf(option);
+
 	public bool CanMoveUp(TInfo action) {
 		var index = InfoItems.IndexOf(action);
 		return index > 0;

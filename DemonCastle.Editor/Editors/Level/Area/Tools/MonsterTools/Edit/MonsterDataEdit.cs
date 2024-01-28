@@ -12,7 +12,7 @@ public partial class MonsterDataEdit : PropertyCollection {
 	}
 
 	public MonsterDataEdit(ProjectInfo project) {
-		AddMonsterReference("Monster", _proxy, p => p.MonsterId, project.Monsters);
+		AddMonsterReference("Monster", _proxy, p => p.MonsterId, new EnumerableInfoWrapper<MonsterInfo>(project.Monsters));
 		AddVector2("Position", _proxy, p => p.Position);
 	}
 

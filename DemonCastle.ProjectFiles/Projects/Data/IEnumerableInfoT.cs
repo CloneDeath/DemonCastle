@@ -9,4 +9,5 @@ public interface IEnumerableInfo<T> : IEnumerable<T>, INotifyCollectionChanged {
 	void Remove(T item);
 	void RemoveAt(int index);
 	void Move(int oldIndex, int newIndex);
+	int IndexOf(T option);
 }

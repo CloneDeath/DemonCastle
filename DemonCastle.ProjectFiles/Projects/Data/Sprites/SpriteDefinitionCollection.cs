@@ -23,6 +23,7 @@ public class SpriteDefinitionCollection<TInfo, TFile> : ObservableCollectionInfo
 	ISpriteDefinition IEnumerableInfo<ISpriteDefinition>.this[int index] => base[index];
 	ISpriteDefinition IEnumerableInfo<ISpriteDefinition>.AppendNew() => base.AppendNew();
 	void IEnumerableInfo<ISpriteDefinition>.Remove(ISpriteDefinition item) => base.Remove((TInfo)item);
+	int IEnumerableInfo<ISpriteDefinition>.IndexOf(ISpriteDefinition option) => base.IndexOf((TInfo)option);
 	#endregion
 }
 

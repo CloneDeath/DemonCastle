@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.Files.Common;
@@ -60,7 +59,7 @@ public class SpriteElementInfo : BaseInfo<SpriteElementData>, IElementInfo {
 	protected ISpriteSource SpriteSource => File.FileExists(Data.SpriteFile)
 												? File.GetSprite(Data.SpriteFile)
 												: new NullSpriteSource();
-	public IEnumerable<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
+	public IEnumerableInfo<ISpriteDefinition> SpriteDefinitions => SpriteSource.Sprites;
 	public ISpriteDefinition SpriteDefinition => SpriteSource.Sprites.FirstOrDefault(s => s.Id == Data.SpriteId)
 												 ?? new NullSpriteDefinition();
 }
