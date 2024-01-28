@@ -8,10 +8,11 @@ public class EntityStateTransitionEvent {
 	public AnimationEvent? Animation;
 	public RandomTimerExpires? RandomTimerExpires { get; set; }
 
-	public BooleanConditionData? Condition { get; set; }
+	public BooleanConditionData? Condition;
 }
 
 public class BooleanConditionData {
+	public BooleanConditionData? Not { get; set; }
 	public BooleanValueData? Value {get; set; }
 	// public BooleanConditionData[]? And { get; set; }
 	// public BooleanConditionData[]? Or { get; set; }

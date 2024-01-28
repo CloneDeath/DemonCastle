@@ -51,7 +51,7 @@ public partial class WhenEdit : HFlowContainer {
 		AddChild(new Label { Text = "When"});
 		AddChild(new ChoiceTree {
 			{
-				"this entity",
+				"this Entity",
 				when.Self != null,
 				c => {
 					when.Self ??= SelfEvent.Killed;
@@ -59,7 +59,7 @@ public partial class WhenEdit : HFlowContainer {
 				}
 			},
 			{
-				"this entity's animation",
+				"this Entity's Animation",
 				when.Animation != null,
 				c => {
 					when.Animation ??= AnimationEvent.Complete;
@@ -67,7 +67,7 @@ public partial class WhenEdit : HFlowContainer {
 				}
 			},
 			{
-				"a random timer",
+				"a Random Timer",
 				when.RandomTimerExpires.IsSet,
 				c => {
 					when.RandomTimerExpires.IsSet = true;
@@ -80,37 +80,50 @@ public partial class WhenEdit : HFlowContainer {
 				}
 			},
 			{
-				"condition",
+				"Condition",
 				when.Condition.IsSet,
 				c => {
 					when.Condition.IsSet = true;
+					SetupCondition(c, when.Condition);
+				}
+			}
+		});
+	}
 
-					c.AddChild(new ChoiceTree {
-						{
-							"value",
-							when.Condition.Value != null,
-							i => {
-								when.Condition.Value ??= true;
-								var binding = new CallbackBinding<bool>(
-									() => when.Condition.Value ?? false,
-									(b) => when.Condition.Value = b);
-								i.AddChild(new BooleanProperty(binding));
-							}
-						},
-						{
-							"variable",
-							when.Condition.Variable != null,
-							i => {
-								when.Condition.Variable ??= Guid.Empty;
+	private void SetupCondition(Node c, BooleanConditionInfo condition) {
+		if (Entity == null) return;
 
-								var variables = Entity.Variables.Concat(_project.Variables);
-								i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
-									variables.Where(v => v.Type == VariableType.Boolean),
-									v => when.Condition.Variable == v.Id,
-									v => when.Condition.Variable = v.Id));
-							}
-						}
-					});
+		c.AddChild(new ChoiceTree {
+			{
+				"Value",
+				condition.Value != null,
+				i => {
+					condition.Value ??= true;
+					var binding = new CallbackBinding<bool>(
+						() => condition.Value ?? false,
+						(b) => condition.Value = b);
+					i.AddChild(new BooleanProperty(binding));
+				}
+			},
+			{
+				"Variable",
+				condition.Variable != null,
+				i => {
+					condition.Variable ??= Guid.Empty;
+
+					var variables = Entity.Variables.Concat(_project.Variables);
+					i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
+						variables.Where(v => v.Type == VariableType.Boolean),
+						v => condition.Variable == v.Id,
+						v => condition.Variable = v.Id));
+				}
+			},
+			{
+				"Not",
+				condition.Not.IsSet,
+				i => {
+					condition.Not.IsSet = true;
+					SetupCondition(i, condition.Not);
 				}
 			}
 		});

@@ -6,10 +6,10 @@ using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
-public class WhenInfo : BaseInfo<EntityStateTransitionEvent> {
+public class WhenInfo : BaseInfo<EntityStateTransitionEvent>, IClearParent {
 	public WhenInfo(IFileNavigator file, EntityStateTransitionEvent data) : base(file, data) {
 		RandomTimerExpires = new RandomTimerExpiresInfo(File, data, this);
-		Condition = new BooleanConditionInfo(File, data, this);
+		Condition = new BooleanConditionInfo(File, () => data.Condition, v => data.Condition = v, nameof(data.Condition), this);
 	}
 
 	public SelfEvent? Self {
