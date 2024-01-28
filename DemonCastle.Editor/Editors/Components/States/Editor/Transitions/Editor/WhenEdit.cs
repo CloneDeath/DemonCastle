@@ -28,6 +28,7 @@ public partial class WhenEdit : HFlowContainer {
 		Name = nameof(WhenEdit);
 
 		AddChild(new Label { Text = "When"});
+
 		AddChild(Clause = new OptionButton {
 			Selected = -1
 		});

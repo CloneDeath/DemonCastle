@@ -1,14 +1,11 @@
-using System;
 using DemonCastle.Files.Actions.Values;
 using DemonCastle.Files.Conditions.Events;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace DemonCastle.Files.Conditions;
 
 public class EntityStateTransitionEvent {
-	public SelfEvent? Self { get; set; }
-	public AnimationEvent? Animation { get; set; }
+	public SelfEvent? Self;
+	public AnimationEvent? Animation;
 	public RandomTimerExpires? RandomTimerExpires { get; set; }
 
 	public BooleanConditionData? Condition { get; set; }
