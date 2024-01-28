@@ -20,14 +20,14 @@ public partial class StateEditor : VSplitContainer {
 		AddChild(TabContainer = new TabContainer());
 		TabContainer.AddChild(EventsEditor = new EventsEditor(project));
 		TabContainer.SetTabTitle(0, "Events");
-		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor());
+		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(project));
 		TabContainer.SetTabTitle(1, "Transitions");
 	}
 
 	public void LoadEntity(IBaseEntityInfo? entity) {
 		Details.Animations = entity?.Animations;
 		EventsEditor.Entity = entity;
-		TransitionsEditor.EntityStates = entity?.States;
+		TransitionsEditor.Entity = entity;
 	}
 
 	public void LoadState(EntityStateInfo? state) {

@@ -16,13 +16,18 @@ public partial class TransitionEdit : PropertyCollection {
 		}
 	}
 
+	public IBaseEntityInfo? Entity {
+		get => WhenEdit.Entity;
+		set => WhenEdit.Entity = value;
+	}
+
 	private WhenEdit WhenEdit { get; }
 
-	public TransitionEdit(IEnumerableInfo<EntityStateInfo> options) {
+	public TransitionEdit(ProjectInfo project, IEnumerableInfo<EntityStateInfo> options) {
 		Name = nameof(TransitionEdit);
 
 		AddString("Name", _proxy, t => t.Name);
-		AddChild(WhenEdit = new WhenEdit());
+		AddChild(WhenEdit = new WhenEdit(project));
 		AddStateReference("Transition to", _proxy, t => t.TargetState, options);
 	}
 }

@@ -1,11 +1,21 @@
-using DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor.WhenClauses;
+using System;
+using System.Linq;
+using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.Editor.Editors.Scene.Events.Conditions;
+using DemonCastle.Editor.Properties;
+using DemonCastle.Files.Conditions.Events;
+using DemonCastle.Files.Variables;
+using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor;
 
 public partial class WhenEdit : HFlowContainer {
+	private readonly ProjectInfo _project;
 	private readonly TransitionInfoProxy _proxy = new();
+	private IBaseEntityInfo? _entity;
 
 	public EntityStateTransitionInfo? Transition {
 		get => _proxy.Proxy;
@@ -15,74 +25,94 @@ public partial class WhenEdit : HFlowContainer {
 		}
 	}
 
-	protected OptionButton Clause { get; }
-	protected HBoxContainer ClauseParams { get; }
-
-	private static readonly IWhenClause[] Clauses = {
-		new ThisMonsterWhenClause(),
-		new ThisMonstersAnimationWhenClause(),
-		new ARandomTimerWhenClause()
-	};
-
-	public WhenEdit() {
-		Name = nameof(WhenEdit);
-
-		AddChild(new Label { Text = "When"});
-
-		AddChild(Clause = new OptionButton {
-			Selected = -1
-		});
-		Clause.ItemSelected += Clause_OnItemSelected;
-		foreach (var clause in Clauses) {
-			Clause.AddItem(clause.Clause);
+	public IBaseEntityInfo? Entity {
+		get => _entity;
+		set {
+			_entity = value;
+			Reload();
 		}
-
-		AddChild(ClauseParams = new HBoxContainer());
 	}
 
-	private void Clause_OnItemSelected(long index) {
-		foreach (var child in ClauseParams.GetChildren()) {
-			child.QueueFree();
-		}
-
-		var when = _proxy.When;
-		if (when == null) {
-			Clause.Selected = -1;
-			return;
-		}
-
-		for (var i = 0; i < Clauses.Length; i++) {
-			var clause = Clauses[i];
-			if (i == index) {
-				if (clause.IsSelected(when)) continue;
-				clause.MakeSelected(when);
-				ClauseParams.AddChild(clause.GetControl());
-			} else {
-				if (!clause.IsSelected(when)) continue;
-				clause.MakeUnselected(when);
-			}
-		}
+	public WhenEdit(ProjectInfo project) {
+		_project = project;
+		Name = nameof(WhenEdit);
 	}
 
 	private void Reload() {
-		foreach (var child in ClauseParams.GetChildren()) {
+		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
 
-		Clause.Selected = -1;
-		var when = _proxy.When;
-		if (when == null) {
-			return;
-		}
+		if (Entity == null) return;
 
-		for (var i = 0; i < Clauses.Length; i++) {
-			var clause = Clauses[i];
-			if (!clause.IsSelected(when)) continue;
+		var when = Transition?.When;
+		if (when == null) return;
 
-			clause.MakeSelected(when);
-			ClauseParams.AddChild(clause.GetControl());
-			Clause.Selected = i;
-			break;
-		}
+		AddChild(new Label { Text = "When"});
+		AddChild(new ChoiceTree {
+			{
+				"this entity",
+				when.Self != null,
+				c => {
+					when.Self ??= SelfEvent.Killed;
+					c.AddChild(new ChoiceEnum<SelfEvent>(when.Self, e => when.Self = e));
+				}
+			},
+			{
+				"this entity's animation",
+				when.Animation != null,
+				c => {
+					when.Animation ??= AnimationEvent.Complete;
+					c.AddChild(new ChoiceEnum<AnimationEvent>(when.Animation, e => when.Animation = e));
+				}
+			},
+			{
+				"a random timer",
+				when.RandomTimerExpires.IsSet,
+				c => {
+					when.RandomTimerExpires.IsSet = true;
+
+					c.AddChild(new Label { Text = "between" });
+					c.AddChild(new SpinBox { Value = 1 });
+					c.AddChild(new Label { Text = "and" });
+					c.AddChild(new SpinBox { Value = 2 });
+					c.AddChild(new Label { Text = "seconds expires" });
+				}
+			},
+			{
+				"condition",
+				when.Condition.IsSet,
+				c => {
+					when.Condition.IsSet = true;
+
+					c.AddChild(new ChoiceTree {
+						{
+							"value",
+							when.Condition.Value != null,
+							i => {
+								when.Condition.Value ??= true;
+								var binding = new CallbackBinding<bool>(
+									() => when.Condition.Value ?? false,
+									(b) => when.Condition.Value = b);
+								i.AddChild(new BooleanProperty(binding));
+							}
+						},
+						{
+							"variable",
+							when.Condition.Variable != null,
+							i => {
+								when.Condition.Variable ??= Guid.Empty;
+
+								var variables = Entity.Variables.Concat(_project.Variables);
+								i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
+									variables.Where(v => v.Type == VariableType.Boolean),
+									v => when.Condition.Variable == v.Id,
+									v => when.Condition.Variable = v.Id));
+							}
+						}
+					});
+				}
+			}
+		});
 	}
 }

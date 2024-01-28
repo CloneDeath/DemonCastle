@@ -15,15 +15,18 @@ public partial class TransitionsEditor : HSplitContainer {
 		set => _state.Proxy = value;
 	}
 
-	public IEnumerableInfo<EntityStateInfo>? EntityStates {
-		get => _entityStates.Proxy;
-		set => _entityStates.Proxy = value;
+	public IBaseEntityInfo? Entity {
+		get => TransitionEdit.Entity;
+		set {
+			TransitionEdit.Entity = value;
+			_entityStates.Proxy = value?.States;
+		}
 	}
 
 	private InfoCollectionEditor<EntityStateTransitionInfo> Transitions { get; }
 	private TransitionEdit TransitionEdit { get; }
 
-	public TransitionsEditor() {
+	public TransitionsEditor(ProjectInfo project) {
 		Name = nameof(TransitionsEditor);
 
 		AddChild(Transitions = new InfoCollectionEditor<EntityStateTransitionInfo>(_state.Transitions) {
@@ -31,7 +34,7 @@ public partial class TransitionsEditor : HSplitContainer {
 		});
 		Transitions.ItemSelected += Transitions_OnTransitionSelected;
 
-		AddChild(TransitionEdit = new TransitionEdit(_entityStates) {
+		AddChild(TransitionEdit = new TransitionEdit(project, _entityStates) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}
