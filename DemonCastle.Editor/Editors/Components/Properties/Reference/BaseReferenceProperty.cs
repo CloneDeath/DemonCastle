@@ -50,6 +50,7 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 	public override void _ExitTree() {
 		base._ExitTree();
 		Binding.Changed -= Binding_OnChanged;
+		if (_options != null) _options.CollectionChanged -= Options_OnCollectionChanged;
 	}
 
 	public void LoadOptions(IEnumerableInfo<T> options) {
@@ -62,7 +63,6 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 
 	private void Options_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		ReloadOptions();
-
 	}
 
 	private void ReloadOptions() {
