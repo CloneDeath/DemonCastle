@@ -14,15 +14,17 @@ public class EnumerableInfoProxy<T> : IEnumerableInfo<T>
 		get => _proxy;
 		set {
 			if (_proxy != null) {
-				_proxy.CollectionChanged -= CollectionChanged;
+				_proxy.CollectionChanged -= Proxy_OnCollectionChanged;
 			}
 			_proxy = value;
 			if (_proxy != null) {
-				_proxy.CollectionChanged += CollectionChanged;
+				_proxy.CollectionChanged += Proxy_OnCollectionChanged;
 			}
 			CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
 	}
+
+	private void Proxy_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => CollectionChanged?.Invoke(sender, e);
 
 	#region IEnumerable
 	public IEnumerator<T> GetEnumerator() => _proxy?.GetEnumerator() ?? new List<T>().GetEnumerator();
