@@ -1,3 +1,5 @@
+using DemonCastle.Files.Conditions.Events;
+
 namespace DemonCastle.Files.Conditions;
 
 public class EntityStateTransitionEvent {

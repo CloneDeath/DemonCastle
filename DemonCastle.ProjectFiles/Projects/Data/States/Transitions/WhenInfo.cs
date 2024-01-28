@@ -1,5 +1,6 @@
 using System;
 using DemonCastle.Files.Conditions;
+using DemonCastle.Files.Conditions.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 

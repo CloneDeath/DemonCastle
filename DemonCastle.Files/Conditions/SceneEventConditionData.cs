@@ -1,3 +1,4 @@
+using DemonCastle.Files.Conditions.Events;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,10 +35,4 @@ public enum PlayerAction {
 	Attack,
 	Accept,
 	Cancel
-}
-
-[JsonConverter(typeof(StringEnumConverter))]
-public enum SceneChangeEvent {
-	Enter,
-	Exit
 }
