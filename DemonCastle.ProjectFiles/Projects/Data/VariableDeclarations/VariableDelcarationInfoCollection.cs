@@ -24,6 +24,7 @@ public class VariableDeclarationInfoCollection : ObservableCollectionInfo<Variab
 	public IEnumerable<ItemVariableDeclarationInfo> Items => this.OfType<ItemVariableDeclarationInfo>();
 	public IEnumerable<MonsterVariableDeclarationInfo> Monsters => this.OfType<MonsterVariableDeclarationInfo>();
 	public IEnumerable<Vector2IVariableDeclarationInfo> Vector2I => this.OfType<Vector2IVariableDeclarationInfo>();
+	public IEnumerable<BooleanVariableDeclarationInfo> Boolean => this.OfType<BooleanVariableDeclarationInfo>();
 }
 
 public class VariableDeclarationInfoFactory : IInfoFactory<VariableDeclarationInfo, VariableDeclarationData> {

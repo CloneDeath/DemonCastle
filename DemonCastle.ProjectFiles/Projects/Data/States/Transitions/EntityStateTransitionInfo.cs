@@ -41,8 +41,8 @@ public class EntityStateTransitionInfo : BaseInfo<EntityStateTransitionData>, IL
 
 	public EntityStateInfo? TargetStateInfo => _states.RetrieveEntityStateInfo(TargetState);
 
-	public void CheckAndTriggerTransition(IEntityState entity) {
-		if (When.IsConditionMet(entity)) {
+	public void CheckAndTriggerTransition(IGameState game, IEntityState entity) {
+		if (When.IsConditionMet(game, entity)) {
 			entity.ChangeStateTo(TargetState);
 		}
 	}

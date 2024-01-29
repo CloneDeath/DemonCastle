@@ -24,7 +24,7 @@ public partial class GameRunner : Control {
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
 
-		var gameState = new GameState(this);
+		var gameState = new GameState(project, this);
 
 		AddChild(SceneStack = new SceneStack(gameState));
 

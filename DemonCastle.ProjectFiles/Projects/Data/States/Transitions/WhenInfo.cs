@@ -34,18 +34,18 @@ public class WhenInfo : BaseInfo<EntityStateTransitionEvent>, IClearParent {
 		if (dataName != nameof(Data.Condition)) Condition.IsSet = false;
 	}
 
-	public bool IsConditionMet(IEntityState entity) {
+	public bool IsConditionMet(IGameState game, IEntityState entity) {
 		if (Self != null) {
 			return entity.WasKilled;
 		}
 		if (Animation != null) {
 			throw new NotImplementedException();
 		}
-		if (RandomTimerExpires != null) {
+		if (RandomTimerExpires.IsSet) {
 			throw new NotImplementedException();
 		}
-		if (Condition != null) {
-			throw new NotImplementedException();
+		if (Condition.IsSet) {
+			return Condition.IsConditionMet(game, entity);
 		}
 		throw new NotSupportedException("No condition was set!");
 	}

@@ -1,7 +1,9 @@
 using System;
 using DemonCastle.Files.Actions.Values;
 using DemonCastle.Files.Conditions;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 
@@ -103,5 +105,20 @@ public class BooleanConditionInfo : BaseInfo, IClearParent {
 	public void ClearAllExcept(string dataName) {
 		if (dataName != nameof(Data.Not)) Not.IsSet = false;
 		if (dataName != nameof(Data.Value)) Value = null;
+	}
+
+	public bool IsConditionMet(IGameState game, IEntityState entity) {
+		if (Not.IsSet) {
+			return !Not.IsConditionMet(game, entity);
+		}
+		if (Value.HasValue) {
+			return Value.Value;
+		}
+		if (Variable.HasValue) {
+			return entity.Variables.TryGetBoolean(Variable.Value)
+				   ?? game.Variables.TryGetBoolean(Variable.Value)
+				   ?? throw new VariableNotFoundException(Variable.Value);
+		}
+		throw new IncompleteDataException(File.FilePath);
 	}
 }

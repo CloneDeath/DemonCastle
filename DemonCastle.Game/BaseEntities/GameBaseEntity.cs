@@ -10,7 +10,7 @@ namespace DemonCastle.Game.BaseEntities;
 
 public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState {
 	protected readonly LevelInfo Level;
-	private readonly BaseEntityVariables _variables;
+	private readonly VariableCollection _variables;
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 
@@ -30,7 +30,7 @@ public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState 
 		_animation.SetAnimation(entity.Animations);
 
 		AddChild(_stateMachine = new EntityStateMachine(game, this, entity.InitialState, entity.States));
-		_variables = new BaseEntityVariables(entity);
+		_variables = new VariableCollection(entity.Variables);
 	}
 
 	public override void _Process(double delta) {

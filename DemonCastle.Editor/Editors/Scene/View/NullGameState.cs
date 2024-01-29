@@ -14,6 +14,7 @@ namespace DemonCastle.Editor.Editors.Scene.View;
 public class NullGameState : IGameState {
 	public IPlayerState Player { get; } = new NullPlayerState();
 	public ICurrentArea? CurrentArea { get; } = new NullAreaState();
+	public IVariables Variables { get; } = new NullVariableCollection();
 
 	public void SetCharacter(CharacterInfo character) {	}
 	public void SetLevel(LevelInfo level) {	}
@@ -72,4 +73,14 @@ public class NullPlayerState : IPlayerState {
 
 public class NullAreaState : ICurrentArea {
 	public AreaPosition Position { get; } = new(Vector2I.Zero, Vector2I.One * 10, Vector2I.One * 16);
+}
+
+public class NullVariableCollection : IVariables {
+	public Guid GetGuid(Guid variableId) => Guid.NewGuid();
+
+	public Vector2I GetVector2I(Guid variableId) => Vector2I.Zero;
+
+	public bool HasBoolean(Guid variableId) => true;
+
+	public bool GetBoolean(Guid variableId) => true;
 }

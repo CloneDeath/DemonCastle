@@ -10,6 +10,8 @@ public interface IGameState {
 	IPlayerState Player { get; }
 	ICurrentArea? CurrentArea { get; }
 
+	IVariables Variables { get; }
+
 	void SetCharacter(CharacterInfo character);
 	void SetLevel(LevelInfo level);
 	void PushScene(SceneInfo scene);

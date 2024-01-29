@@ -27,7 +27,7 @@ public partial class EntityStateMachine : Node {
 		if (CurrentState == null) return;
 
 		CurrentState.OnUpdate.Execute(_game, _entity);
-		CurrentState.Transitions.CheckAndTriggerTransitions(_entity);
+		CurrentState.Transitions.CheckAndTriggerTransitions(_game, _entity);
 	}
 
 	private bool ProcessingShouldBeDisabled => CurrentState == null || !CurrentState.OnUpdate.Any() && !CurrentState.Transitions.Any();

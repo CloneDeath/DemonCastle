@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using DemonCastle.Game.Animations;
-using DemonCastle.Game.BaseEntities;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -15,7 +14,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 	private readonly LevelInfo _level;
 	private readonly TileInfo _tile;
 
-	private readonly BaseEntityVariables _variables;
+	private readonly VariableCollection _variables;
 	private readonly GameAnimation _animation;
 	private readonly EntityStateMachine _stateMachine;
 	private StaticBody2D? Body { get; set; }
@@ -34,7 +33,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		_animation.SetAnimation(tile.Animations);
 
 		AddChild(_stateMachine = new EntityStateMachine(game, this, tile.InitialState, tile.States));
-		_variables = new BaseEntityVariables(tile);
+		_variables = new VariableCollection(tile.Variables);
 
 		SetupCollisions(debug);
 		SetupStairs(debug);

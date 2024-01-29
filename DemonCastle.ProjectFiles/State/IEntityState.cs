@@ -11,7 +11,7 @@ public interface IEntityState {
 	void SetAnimation(Guid animationId);
 	void ChangeStateTo(Guid stateId);
 	void Despawn();
-	
+
 	void MoveLeft();
 	void MoveRight();
 	void MoveForward();
@@ -21,4 +21,7 @@ public interface IEntityState {
 public interface IVariables {
 	Guid GetGuid(Guid variableId);
 	Vector2I GetVector2I(Guid variableId);
+	bool HasBoolean(Guid variableId);
+	bool GetBoolean(Guid variableId);
+	public bool? TryGetBoolean(Guid variableId) => HasBoolean(variableId) ? GetBoolean(variableId) : null;
 }

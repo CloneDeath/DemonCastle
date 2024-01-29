@@ -9,12 +9,14 @@ namespace DemonCastle.Game.GameStates;
 public class GameState : IGameState {
 	private readonly GameRunner _runner;
 
-	public GameState(GameRunner runner) {
+	public GameState(ProjectInfo project, GameRunner runner) {
 		_runner = runner;
+		Variables = new VariableCollection(project.Variables);
 	}
 
 	public IPlayerState Player => _runner.GamePlayer.PlayerState;
 	public ICurrentArea? CurrentArea => _runner.CurrentArea != null ? new CurrentAreaState(_runner.CurrentArea) : null;
+	public IVariables Variables { get; }
 
 	public void SetCharacter(CharacterInfo character) => _runner.SetCharacter(character);
 	public void SetLevel(LevelInfo level) => _runner.SetLevel(level);
