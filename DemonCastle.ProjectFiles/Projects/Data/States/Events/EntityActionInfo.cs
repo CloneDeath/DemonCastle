@@ -87,6 +87,12 @@ public class EntityActionInfo : BaseInfo<EntityActionData>, IListableInfo {
 				case SelfAction.Despawn:
 					entity.Despawn();
 					break;
+				case SelfAction.EnableWorldCollisions:
+					entity.EnableWorldCollisions();
+					break;
+				case SelfAction.DisableWorldCollisions:
+					entity.DisableWorldCollisions();
+					break;
 				default:
 					throw new NotSupportedException();
 			}

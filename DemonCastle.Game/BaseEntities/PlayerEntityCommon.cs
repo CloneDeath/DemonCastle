@@ -59,5 +59,8 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 	public void MoveBackward() => _moveDirection = new Vector2(-Facing, 0);
 	public void StopMoving() => _moveDirection = Vector2.Zero;
 
+	public void EnableWorldCollisions() => CollisionMask = (uint)CollisionLayers.World;
+	public void DisableWorldCollisions() => CollisionMask = 0;
+
 	protected abstract void AlignAnimationNodes();
 }

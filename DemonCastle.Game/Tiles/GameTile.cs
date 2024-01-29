@@ -90,5 +90,14 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 	public void MoveLeft() => _moveDirection = Vector2.Left;
 	public void MoveForward() => _moveDirection = new Vector2(Facing, 0);
 	public void MoveBackward() => _moveDirection = new Vector2(-Facing, 0);
+
+	public void EnableWorldCollisions() {
+		if (Body != null) Body.CollisionLayer = (uint)CollisionLayers.World;
+	}
+
+	public void DisableWorldCollisions() {
+		if (Body != null) Body.CollisionLayer = 0;
+	}
+
 	public void StopMoving() => _moveDirection = Vector2.Zero;
 }

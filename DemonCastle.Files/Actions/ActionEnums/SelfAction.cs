@@ -5,5 +5,7 @@ namespace DemonCastle.Files.Actions.ActionEnums;
 
 [JsonConverter(typeof(StringEnumConverter))]
 public enum SelfAction {
-	Despawn
+	Despawn,
+	DisableWorldCollisions,
+	EnableWorldCollisions
 }

@@ -16,6 +16,8 @@ public interface IEntityState {
 	void MoveRight();
 	void MoveForward();
 	void MoveBackward();
+	void EnableWorldCollisions();
+	void DisableWorldCollisions();
 }
 
 public interface IVariables {
