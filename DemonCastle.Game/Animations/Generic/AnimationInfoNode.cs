@@ -55,6 +55,8 @@ public partial class AnimationInfoNode : Node2D {
 		}
 	}
 
+	public float Duration => Animation.Frames.Sum(f => f.Duration);
+
 	public Guid AnimationId => Animation.Id;
 
 	public IFrameInfo? CurrentFrame {

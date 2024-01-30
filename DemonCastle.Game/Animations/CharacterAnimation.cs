@@ -21,6 +21,8 @@ public partial class CharacterAnimation : Node2D {
 
 	public IFrameInfo? CurrentFrame => CurrentAnimation?.CurrentFrame;
 
+	public float CurrentAnimationDuration => CurrentAnimation?.Duration ?? 0;
+
 	public CharacterAnimation(IDamageable owner, DebugState debug) {
 		_owner = owner;
 		_debug = debug;
