@@ -12,7 +12,7 @@ public static class Serializer {
 		Converters = new List<JsonConverter> { new EnumTypeConverter(
 			new ElementTypeMapping(),
 			InfoFactory.VariableDeclarationMapping,
-			new VariableTypeMapping(typeof(SetVariableActionData), nameof(SetVariableActionData.Type))) }
+			InfoFactory.SetVariableMapping) }
 	};
 
 	public static string Serialize<T>(T data) {

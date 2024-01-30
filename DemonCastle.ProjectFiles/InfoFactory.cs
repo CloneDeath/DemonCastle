@@ -49,8 +49,14 @@ public static class InfoFactory {
 		return (ElementData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
 	}
 
-	public static readonly VariableTypeMapping VariableDeclarationMapping = new(typeof(VariableDeclarationData), nameof(VariableDeclarationData.Type));
+	public static readonly VariableTypeMapping SetVariableMapping = new(typeof(SetVariableActionData), nameof(SetVariableActionData.Type));
+	public static SetVariableActionData CreateSetVariableActionData(VariableType type) {
+		var dataType = SetVariableMapping.GetDataType(type);
+		if (dataType == null) throw new NotSupportedException();
+		return (SetVariableActionData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
+	}
 
+	public static readonly VariableTypeMapping VariableDeclarationMapping = new(typeof(VariableDeclarationData), nameof(VariableDeclarationData.Type));
 	public static VariableDeclarationData CreateData(VariableType type) {
 		var dataType = VariableDeclarationMapping.GetDataType(type);
 		if (dataType == null) throw new NotSupportedException();

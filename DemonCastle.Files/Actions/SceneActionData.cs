@@ -16,6 +16,7 @@ public class SceneActionData {
 		Scene = null;
 		SetCharacter = null;
 		SetLevel = null;
+		SetGlobalVariable = null;
 	}
 }
 
