@@ -6,6 +6,7 @@ using DemonCastle.Files;
 using DemonCastle.Files.Elements;
 using DemonCastle.Files.Variables;
 using DemonCastle.Files.Variables.VariableTypes;
+using DemonCastle.Files.Variables.VariableTypes.Boolean;
 using DemonCastle.ProjectFiles.Converters;
 using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data.Elements;
@@ -48,8 +49,10 @@ public static class InfoFactory {
 		return (ElementData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
 	}
 
+	public static readonly VariableTypeMapping VariableDeclarationMapping = new(typeof(VariableDeclarationData), nameof(VariableDeclarationData.Type));
+
 	public static VariableDeclarationData CreateData(VariableType type) {
-		var dataType = new VariableTypeMapping().GetDataType(type);
+		var dataType = VariableDeclarationMapping.GetDataType(type);
 		if (dataType == null) throw new NotSupportedException();
 		return (VariableDeclarationData?)Activator.CreateInstance(dataType) ?? throw new NullReferenceException();
 	}

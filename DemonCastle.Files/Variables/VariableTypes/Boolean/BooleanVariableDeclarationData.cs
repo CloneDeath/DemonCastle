@@ -1,4 +1,4 @@
-namespace DemonCastle.Files.Variables.VariableTypes;
+namespace DemonCastle.Files.Variables.VariableTypes.Boolean;
 
 [VariableType(VariableType.Boolean)]
 public class BooleanVariableDeclarationData : VariableDeclarationData {

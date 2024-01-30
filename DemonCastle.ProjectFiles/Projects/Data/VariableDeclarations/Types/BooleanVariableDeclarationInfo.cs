@@ -1,4 +1,4 @@
-using DemonCastle.Files.Variables.VariableTypes;
+using DemonCastle.Files.Variables.VariableTypes.Boolean;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;

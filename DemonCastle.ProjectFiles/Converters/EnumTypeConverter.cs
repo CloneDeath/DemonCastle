@@ -14,13 +14,13 @@ public class EnumTypeConverter : JsonConverter {
 
 	public override bool CanConvert(Type objectType) {
 		foreach (var mapping in _mappings) {
-			if (objectType == mapping.BaseDataType) return true;
+			if (mapping.BaseDataType == objectType) return true;
 		}
 		return false;
 	}
 
 	public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer) {
-		var mapping = _mappings.FirstOrDefault(m => m.BaseDataType == objectType) ?? throw new NullReferenceException();
+		var mapping = _mappings.First(m => m.BaseDataType == objectType);
 
 		var jsonObject = JObject.Load(reader);
 		var typeToken = jsonObject[mapping.NameOfEnumField];
@@ -36,7 +36,7 @@ public class EnumTypeConverter : JsonConverter {
 
 	public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) {
 		var type = value?.GetType() ?? throw new NullReferenceException();
-		var mapping = _mappings.FirstOrDefault(m => m.BaseDataType == type) ?? throw new NullReferenceException();
+		var mapping = _mappings.First(m => m.BaseDataType == type);
 
 		var enumValue = mapping.GetEnumValue(type);
 

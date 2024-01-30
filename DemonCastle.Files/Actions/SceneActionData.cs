@@ -1,3 +1,4 @@
+using DemonCastle.Files.Variables;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -8,6 +9,7 @@ public class SceneActionData {
 	public SceneChangeActionData? Scene { get; set; }
 	public string? SetCharacter { get; set; }
 	public string? SetLevel { get; set; }
+	public SetVariableActionData? SetGlobalVariable { get; set; }
 
 	public void Clear() {
 		Game = null;
