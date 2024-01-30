@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Converters;
 using Newtonsoft.Json;
 
