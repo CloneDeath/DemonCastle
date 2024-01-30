@@ -45,7 +45,7 @@ public class WhenInfo : BaseInfo<EntityStateTransitionEvent>, IClearParent {
 			throw new NotImplementedException();
 		}
 		if (Condition.IsSet) {
-			return Condition.IsConditionMet(game, entity);
+			return Condition.IsConditionMet(game, entity.Variables);
 		}
 		throw new NotSupportedException("No condition was set!");
 	}

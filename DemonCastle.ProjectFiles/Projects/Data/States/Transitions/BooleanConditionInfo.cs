@@ -107,15 +107,15 @@ public class BooleanConditionInfo : BaseInfo, IClearParent {
 		if (dataName != nameof(Data.Value)) Value = null;
 	}
 
-	public bool IsConditionMet(IGameState game, IEntityState entity) {
+	public bool IsConditionMet(IGameState game, IVariables entityVariables) {
 		if (Not.IsSet) {
-			return !Not.IsConditionMet(game, entity);
+			return !Not.IsConditionMet(game, entityVariables);
 		}
 		if (Value.HasValue) {
 			return Value.Value;
 		}
 		if (Variable.HasValue) {
-			return entity.Variables.TryGetBoolean(Variable.Value)
+			return entityVariables.TryGetBoolean(Variable.Value)
 				   ?? game.Variables.TryGetBoolean(Variable.Value)
 				   ?? throw new VariableNotFoundException(Variable.Value);
 		}

@@ -8,9 +8,11 @@ namespace DemonCastle.Editor.Editors.Scene;
 
 public partial class SceneItemEditor : Container {
 	private readonly IFileInfo _file;
+	private readonly ProjectInfo _project;
 
-	public SceneItemEditor(IFileInfo file) {
+	public SceneItemEditor(ProjectInfo project, IFileInfo file) {
 		_file = file;
+		_project = project;
 	}
 
 	public void Clear() {
@@ -22,7 +24,7 @@ public partial class SceneItemEditor : Container {
 	public void LoadElement(IElementInfo element) {
 		Clear();
 
-		var editor = ElementDetailsFactory.GetEditor(_file, element);
+		var editor = ElementDetailsFactory.GetEditor(_file, _project, element);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 	}
@@ -30,7 +32,7 @@ public partial class SceneItemEditor : Container {
 	public void LoadEvent(SceneEventInfo sceneEvent) {
 		Clear();
 
-		var editor = new SceneEventEditor(_file, sceneEvent);
+		var editor = new SceneEventEditor(_file, _project, sceneEvent);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 	}

@@ -25,5 +25,6 @@ public interface IVariables {
 	Vector2I GetVector2I(Guid variableId);
 	bool HasBoolean(Guid variableId);
 	bool GetBoolean(Guid variableId);
-	public bool? TryGetBoolean(Guid variableId) => HasBoolean(variableId) ? GetBoolean(variableId) : null;
+	void SetBoolean(Guid variableId, bool value);
+	bool? TryGetBoolean(Guid variableId) => HasBoolean(variableId) ? GetBoolean(variableId) : null;
 }

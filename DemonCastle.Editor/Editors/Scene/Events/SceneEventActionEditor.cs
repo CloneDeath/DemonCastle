@@ -1,12 +1,16 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.File;
+using DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
+using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
+using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene.Events;
@@ -20,7 +24,7 @@ public partial class SceneEventActionEditor : HBoxContainer {
 	private readonly Button MoveUpButton;
 	private readonly Button MoveDownButton;
 
-	public SceneEventActionEditor(IFileInfo file, SceneEventActionInfo action, SceneEventActionInfoCollection collection) {
+	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, SceneEventActionInfoCollection collection) {
 		_action = action;
 		_collection = collection;
 		Name = nameof(SceneEventActionEditor);
@@ -105,6 +109,30 @@ public partial class SceneEventActionEditor : HBoxContainer {
 					var binding = new CallbackBinding<string>(() => action.SetLevel, v => action.SetLevel = v);
 					c.AddChild(new FileProperty(binding, file.Directory, new[] { FileType.Level }) {
 						SizeFlagsHorizontal = SizeFlags.ExpandFill
+					});
+				}
+			},
+			{
+				"Set Global Variable",
+				action.SetGlobalVariable.IsSet,
+				c => {
+					action.SetGlobalVariable.IsSet = true;
+
+					var variables = project.Variables;
+					c.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
+						variables.Where(v => v.Type == VariableType.Boolean),
+						v => action.SetGlobalVariable.VariableId == v.Id,
+						v => action.SetGlobalVariable.VariableId = v.Id));
+
+					c.AddChild(new ChoiceTree {
+						{
+							"Boolean",
+							action.SetGlobalVariable.Type == VariableType.Boolean,
+							i => {
+								action.SetGlobalVariable.Type = VariableType.Boolean;
+								i.AddChild(new BooleanConditionTree(action.SetGlobalVariable.BooleanValue, project.Variables));
+							}
+						}
 					});
 				}
 			}

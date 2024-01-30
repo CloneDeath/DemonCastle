@@ -83,4 +83,6 @@ public class NullVariableCollection : IVariables {
 	public bool HasBoolean(Guid variableId) => true;
 
 	public bool GetBoolean(Guid variableId) => true;
+
+	public void SetBoolean(Guid variableId, bool value) {}
 }

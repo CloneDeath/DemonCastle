@@ -10,11 +10,13 @@ namespace DemonCastle.Editor.Editors.Scene.Elements.Types;
 
 public partial class OptionListElementDetails : ElementDetails {
 	private readonly IFileInfo _file;
+	private readonly ProjectInfo _project;
 	private readonly InfoCollectionEditor<OptionInfo> _options;
 	private OptionDetails? _details;
 
-	public OptionListElementDetails(IFileInfo file, OptionListElementInfo element) : base(element) {
+	public OptionListElementDetails(IFileInfo file, ProjectInfo project, OptionListElementInfo element) : base(element) {
 		_file = file;
+		_project = project;
 		Name = nameof(LabelElementDetails);
 
 		AddNullableFile("Font", element, file.Directory, e => e.FontFile, FileType.FontFiles);
@@ -37,7 +39,7 @@ public partial class OptionListElementDetails : ElementDetails {
 		_details = null;
 		if (obj == null) return;
 
-		_details = new OptionDetails(_file, obj) {
+		_details = new OptionDetails(_file, _project, obj) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		};
 		AddChild(_details);
@@ -45,9 +47,9 @@ public partial class OptionListElementDetails : ElementDetails {
 }
 
 public partial class OptionDetails : PropertyCollection {
-	public OptionDetails(IFileInfo file, OptionInfo option) {
+	public OptionDetails(IFileInfo file, ProjectInfo project, OptionInfo option) {
 		AddString("Text", option, o => o.Text);
-		AddChild(new SceneEventActionCollectionEditor(file, option.OnSelect) {
+		AddChild(new SceneEventActionCollectionEditor(file, project, option.OnSelect) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}

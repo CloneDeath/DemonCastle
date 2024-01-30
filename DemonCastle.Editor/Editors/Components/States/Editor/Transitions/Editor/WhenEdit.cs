@@ -1,13 +1,8 @@
-using System;
 using System.Linq;
-using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
-using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Conditions.Events;
-using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
-using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor;
@@ -84,46 +79,9 @@ public partial class WhenEdit : HFlowContainer {
 				when.Condition.IsSet,
 				c => {
 					when.Condition.IsSet = true;
-					SetupCondition(c, when.Condition);
-				}
-			}
-		});
-	}
-
-	private void SetupCondition(Node c, BooleanConditionInfo condition) {
-		if (Entity == null) return;
-
-		c.AddChild(new ChoiceTree {
-			{
-				"Value",
-				condition.Value != null,
-				i => {
-					condition.Value ??= true;
-					var binding = new CallbackBinding<bool>(
-						() => condition.Value ?? false,
-						(b) => condition.Value = b);
-					i.AddChild(new BooleanProperty(binding));
-				}
-			},
-			{
-				"Variable",
-				condition.Variable != null,
-				i => {
-					condition.Variable ??= Guid.Empty;
 
 					var variables = Entity.Variables.Concat(_project.Variables);
-					i.AddChild(new ChoiceReferenceList<VariableDeclarationInfo>(
-						variables.Where(v => v.Type == VariableType.Boolean),
-						v => condition.Variable == v.Id,
-						v => condition.Variable = v.Id));
-				}
-			},
-			{
-				"Not",
-				condition.Not.IsSet,
-				i => {
-					condition.Not.IsSet = true;
-					SetupCondition(i, condition.Not);
+					c.AddChild(new BooleanConditionTree(when.Condition, variables));
 				}
 			}
 		});

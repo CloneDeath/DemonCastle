@@ -7,12 +7,14 @@ namespace DemonCastle.Editor.Editors.Scene.Events;
 
 public partial class SceneEventActionCollectionEditor : VBoxContainer {
 	private readonly IFileInfo _file;
+	private readonly ProjectInfo _project;
 	private readonly SceneEventActionInfoCollection _then;
 	public VBoxContainer Actions { get; }
 	public Button AddActionButton { get; }
 
-	public SceneEventActionCollectionEditor(IFileInfo file, SceneEventActionInfoCollection then) {
+	public SceneEventActionCollectionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfoCollection then) {
 		_file = file;
+		_project = project;
 		_then = then;
 		Name = nameof(SceneEventActionCollectionEditor);
 
@@ -46,7 +48,7 @@ public partial class SceneEventActionCollectionEditor : VBoxContainer {
 		}
 
 		foreach (var action in _then) {
-			Actions.AddChild(new SceneEventActionEditor(_file, action, _then));
+			Actions.AddChild(new SceneEventActionEditor(_file, _project, action, _then));
 		}
 	}
 }

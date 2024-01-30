@@ -6,6 +6,7 @@ using DemonCastle.Files.Variables.VariableTypes.Boolean;
 using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data.States.Transitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents.Types;
 
@@ -64,4 +65,21 @@ public class SetVariableActionInfo : BaseInfo<SceneActionData>, IClearParent {
 	}
 
 	public void ClearAllExcept(string dataName) {}
+
+	public void TriggerAction(IGameState game) {
+		switch (Type) {
+			case VariableType.Boolean:
+				game.Variables.SetBoolean(VariableId, BooleanValue.IsConditionMet(game, new EmptyVariableCollection()));
+				break;
+
+			case VariableType.Integer:
+			case VariableType.Float:
+			case VariableType.String:
+			case VariableType.Monster:
+			case VariableType.Item:
+			case VariableType.Vector2I:
+			default:
+				throw new NotImplementedException();
+		}
+	}
 }

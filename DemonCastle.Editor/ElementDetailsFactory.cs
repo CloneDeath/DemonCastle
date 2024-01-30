@@ -9,14 +9,14 @@ using Godot;
 namespace DemonCastle.Editor;
 
 public static class ElementDetailsFactory {
-	public static Control GetEditor(IFileInfo file, IElementInfo element) {
+	public static Control GetEditor(IFileInfo file, ProjectInfo project, IElementInfo element) {
 		return element.Type switch {
 			ElementType.ColorRect => new ColorRectElementDetails((ColorRectElementInfo)element),
 			ElementType.HealthBar => new HealthBarElementDetails(file, (HealthBarElementInfo)element),
 			ElementType.Label => new LabelElementDetails(file, (LabelElementInfo)element),
 			ElementType.LevelView => new LevelViewElementDetails((LevelViewElementInfo)element),
 			ElementType.Sprite => new SpriteElementDetails(file, (SpriteElementInfo)element),
-			ElementType.OptionList => new OptionListElementDetails(file, (OptionListElementInfo)element),
+			ElementType.OptionList => new OptionListElementDetails(file, project, (OptionListElementInfo)element),
 			_ => throw new InvalidEnumValueException<ElementType>(element.Type)
 		};
 	}

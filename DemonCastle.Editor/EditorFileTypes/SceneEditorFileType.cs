@@ -15,5 +15,5 @@ public class SceneEditorFileType : SceneFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new SceneEditor(file.ToSceneInfo());
+	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new SceneEditor(project, file.ToSceneInfo());
 }

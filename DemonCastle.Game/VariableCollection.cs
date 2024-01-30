@@ -44,4 +44,5 @@ public class VariableCollection : IVariables {
 
 	public bool HasBoolean(Guid variableId) => _booleans.ContainsKey(variableId);
 	public bool GetBoolean(Guid variableId) => _booleans[variableId];
+	public void SetBoolean(Guid variableId, bool value) => _booleans[variableId] = value;
 }

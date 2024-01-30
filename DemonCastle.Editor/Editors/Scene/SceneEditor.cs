@@ -23,7 +23,7 @@ public partial class SceneEditor : BaseEditor {
 	private HSplitContainer Right { get; }
 	private SceneItemEditor SceneItemEditor { get; }
 
-	public SceneEditor(SceneInfo scene) {
+	public SceneEditor(ProjectInfo project, SceneInfo scene) {
 		TabText = scene.FileName;
 
 		AddChild(Split = new HSplitContainer());
@@ -54,7 +54,7 @@ public partial class SceneEditor : BaseEditor {
 
 		Split.AddChild(Right = new HSplitContainer());
 		{
-			Right.AddChild(SceneItemEditor = new SceneItemEditor(scene) {
+			Right.AddChild(SceneItemEditor = new SceneItemEditor(project, scene) {
 				CustomMinimumSize = new Vector2(425, 300)
 			});
 			Right.AddChild(new SceneView(scene) {

@@ -9,6 +9,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 public class SceneEventActionInfo : BaseInfo<SceneActionData> {
 	public SceneEventActionInfo(IFileNavigator file, SceneActionData data) : base(file, data) {
 		Scene = new SceneChangeActionInfo(file, data);
+		SetGlobalVariable = new SetVariableActionInfo(file, data);
 	}
 
 	public GameAction? Game {
@@ -43,6 +44,8 @@ public class SceneEventActionInfo : BaseInfo<SceneActionData> {
 		}
 	}
 
+	public SetVariableActionInfo SetGlobalVariable { get; }
+
 	public void TriggerAction(IGameState game) {
 		if (Scene.IsSet) Scene.TriggerAction(game);
 		else if (SetCharacter != null) game.SetCharacter(File.GetCharacter(SetCharacter));
@@ -58,6 +61,8 @@ public class SceneEventActionInfo : BaseInfo<SceneActionData> {
 				default:
 					throw new InvalidEnumValueException<GameAction>(Game.Value);
 			}
+		} else if (SetGlobalVariable.IsSet) {
+			SetGlobalVariable.TriggerAction(game);
 		}
 		else throw new IncompleteDataException(File.FilePath);
 	}
@@ -66,7 +71,8 @@ public class SceneEventActionInfo : BaseInfo<SceneActionData> {
 		return SetCharacter != null ? $"Set Character: {SetCharacter}"
 			   : SetLevel != null ? $"Set Level: {SetLevel}"
 			   : Scene.IsSet ? $"Scene: {Scene}"
-				: Game.HasValue ? $"Game: {Game}"
+			   : Game.HasValue ? $"Game: {Game}"
+			   : SetGlobalVariable.IsSet ? $"Set Global Variable: {SetGlobalVariable}"
 			   : "Invalid Action";
 	}
 }
