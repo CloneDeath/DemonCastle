@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
@@ -63,9 +64,17 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public Vector2I TileSize => Level.TileSize;
 
-	public TileInfo GetTileInfo(Guid tileId) => Level.GetTileInfo(tileId) ??
-												TileSetIds.SelectMany(id => File.GetTileSet(id).TileSet)
-														  .First(t => t.Id == tileId);
+	private readonly Dictionary<Guid, TileInfo> _tileCache = new();
+	public TileInfo GetTileInfo(Guid tileId) {
+		var cache = _tileCache.GetValueOrDefault(tileId);
+		if (cache != null) return cache;
+
+		var value = Level.GetTileInfo(tileId) ??
+					TileSetIds.SelectMany(id => File.GetTileSet(id).TileSet)
+							  .First(t => t.Id == tileId);
+		_tileCache[tileId] = value;
+		return value;
+	}
 
 	public void SetTile(Vector2I tileIndex, int zIndex, Guid tileId) {
 		var layer = GetOrCreateLayer(zIndex);
