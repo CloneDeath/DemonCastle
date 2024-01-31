@@ -37,7 +37,5 @@ public partial class TileView : SpriteDefinitionView {
 		}
 	}
 
-	private void LoadScale() {
-		Scale = Tile.TileScale * Tile.Size / Tile.Region.Size;
-	}
+	private void LoadScale() => Scale = Tile.TileScale * Tile.Size / Tile.Region.Size;
 }

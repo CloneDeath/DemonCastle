@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
 
@@ -7,6 +10,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 
 public partial class TileLayerView : Control {
 	private readonly TileMapLayerInfo _layer;
+	private readonly Godot.Collections.Dictionary<Vector2I, TileView> _tileMap = new();
 
 	public TileLayerView(TileMapLayerInfo layer) {
 		_layer = layer;
@@ -30,18 +34,38 @@ public partial class TileLayerView : Control {
 	}
 
 	private void TileMap_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
-		ReloadLayer();
+		AddTiles(e.NewItems?.Cast<TileMapInfo>() ?? Array.Empty<TileMapInfo>());
+		RemoveTiles(e.OldItems?.Cast<TileMapInfo>() ?? Array.Empty<TileMapInfo>());
 	}
 
 	private void ReloadLayer() {
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
-
-		foreach (var tile in _layer.TileMap) {
-			var tileView = new TileView(tile);
-			AddChild(tileView);
-		}
+		_tileMap.Clear();
 		ZIndex = _layer.ZIndex;
+
+		AddTiles(_layer.TileMap);
+	}
+
+	private void AddTiles(IEnumerable<TileMapInfo> tiles) {
+		foreach (var tile in tiles) {
+			AddTile(tile);
+		}
+	}
+
+	private void RemoveTiles(IEnumerable<TileMapInfo> tiles) {
+		foreach (var tile in tiles) {
+			var index = tile.Position.ToTileIndex();
+			var tileView = _tileMap[index];
+			tileView.QueueFree();
+			_tileMap.Remove(index);
+		}
+	}
+
+	private void AddTile(TileMapInfo tile) {
+		var tileView = new TileView(tile);
+		_tileMap[tile.Position.ToTileIndex()] = tileView;
+		AddChild(tileView);
 	}
 }

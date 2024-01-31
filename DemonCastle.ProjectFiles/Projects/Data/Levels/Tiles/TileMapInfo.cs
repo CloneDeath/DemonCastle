@@ -36,7 +36,18 @@ public class TileMapInfo : BaseInfo<TileMapData> {
 	public TilePosition Position => new(TileIndex, AreaInfo.PositionOfArea, TileScale);
 	public Guid TileId {
 		get => Data.TileId;
-		set => Data.TileId = value;
+		set {
+			if (Data.TileId == value) return;
+			Tile.PropertyChanged -= Tile_OnPropertyChanged;
+			Data.TileId = value;
+			Tile.PropertyChanged += Tile_OnPropertyChanged;
+			Save();
+			OnPropertyChanged();
+			OnPropertyChanged(nameof(Sprite));
+			OnPropertyChanged(nameof(Size));
+			OnPropertyChanged(nameof(Region));
+			OnPropertyChanged(nameof(Tile));
+		}
 	}
 
 	public Vector2I Size => Tile.Size;

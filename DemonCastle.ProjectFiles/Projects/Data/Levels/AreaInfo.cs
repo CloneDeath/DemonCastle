@@ -76,8 +76,6 @@ public class AreaInfo : BaseInfo<AreaData> {
 		});
 
 		info.TileId = tileId;
-
-		OnPropertyChanged(nameof(TileMap));
 	}
 
 	private TileMapLayerInfo GetOrCreateLayer(int zIndex) {
@@ -92,7 +90,5 @@ public class AreaInfo : BaseInfo<AreaData> {
 		var info = layer.TileMap.FirstOrDefault(info => info.Contains(tileIndex));
 		if (info == null) return;
 		layer.TileMap.Remove(info);
-
-		OnPropertyChanged(nameof(TileMap));
 	}
 }
