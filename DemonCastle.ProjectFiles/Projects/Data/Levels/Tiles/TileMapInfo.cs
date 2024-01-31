@@ -27,6 +27,11 @@ public class TileMapInfo : BaseInfo<TileMapData> {
 			case nameof(Tile.Size):
 				OnPropertyChanged(nameof(Size));
 				break;
+			case nameof(Tile.InitialState):
+				OnPropertyChanged(nameof(Sprite));
+				OnPropertyChanged(nameof(Size));
+				OnPropertyChanged(nameof(Region));
+				break;
 		}
 	}
 
