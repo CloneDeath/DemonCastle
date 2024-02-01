@@ -24,36 +24,34 @@ public class DirectoryNavigator {
 	}
 
 	public AudioStream GetAudioStream(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetAudioStream(path);
 	}
 
 	public CharacterInfo GetCharacter(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetCharacter(path);
 	}
 
 	public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
 
 	public Font GetFont(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetFont(path);
 	}
 
 	public LevelInfo GetLevel(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetLevel(path);
 	}
 
-	public IEnumerable<LevelInfo> GetLevels(IEnumerable<string> localPaths) => localPaths.Select(GetLevel);
-
 	public SceneInfo GetScene(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetScene(path);
 	}
 
 	public ISpriteSource GetSprite(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		if (path.ToLower().EndsWith(".dcsg")) {
 			return ProjectResources.GetSpriteGrid(path);
 		}
@@ -64,24 +62,24 @@ public class DirectoryNavigator {
 	}
 
 	public TextInfo GetText(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetText(path);
 	}
 
 	public TileSetInfo GetTileSet(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetTileSet(path);
 	}
 
 	public TileSetInfo GetTileSet(Guid tileSetId) => ProjectResources.GetTileSet(tileSetId);
 
 	public Texture2D GetTexture(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetTexture(path);
 	}
 
 	public WeaponInfo GetWeapon(string localPath) {
-		var path = Path.Combine(Directory, localPath);
+		var path = ToAbsolutePath(localPath);
 		return ProjectResources.GetWeapon(path);
 	}
 
@@ -101,7 +99,7 @@ public class DirectoryNavigator {
 	}
 
 	public void CreateDirectory(string directoryName) {
-		var fullPath = Path.Combine(Directory, directoryName);
+		var fullPath = ToAbsolutePath(directoryName);
 		System.IO.Directory.CreateDirectory(fullPath);
 	}
 
@@ -110,7 +108,7 @@ public class DirectoryNavigator {
 	public void RenameDirectory(string newName) {
 		var parent = System.IO.Directory.GetParent(Directory)
 					 ?? throw new NullReferenceException();
-		var fullPath = Path.Combine(parent.FullName, newName);
+		var fullPath = Path.GetFullPath(Path.Combine(parent.FullName, newName));
 		System.IO.Directory.Move(Directory, fullPath);
 		Directory = fullPath;
 	}
@@ -149,7 +147,7 @@ public class DirectoryNavigator {
 	}
 
 	protected void CreateFileWithContents(string fileName, string contents) {
-		var fullPath = Path.Combine(Directory, fileName);
+		var fullPath = ToAbsolutePath(fileName);
 		File.WriteAllText(fullPath, contents);
 	}
 
@@ -157,7 +155,13 @@ public class DirectoryNavigator {
 		if (string.IsNullOrWhiteSpace(fileName)) {
 			return false;
 		}
-		var fullPath = Path.Combine(Directory, fileName);
+
+		var fullPath = ToAbsolutePath(fileName);
 		return File.Exists(fullPath);
+	}
+
+	private string ToAbsolutePath(string fileName) {
+		var fullPath = Path.Combine(Directory, fileName);
+		return Path.GetFullPath(fullPath);
 	}
 }
