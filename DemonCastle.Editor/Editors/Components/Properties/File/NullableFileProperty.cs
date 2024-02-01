@@ -50,7 +50,7 @@ public partial class NullableFileProperty : NullableStringProperty {
 		var fullPath = string.Empty;
 		var directory = Directory;
 		if (PropertyValue != null) {
-			fullPath = Path.Combine(Directory, PropertyValue);
+			fullPath = Path.GetFullPath(Path.Combine(Directory, PropertyValue));
 			directory = Path.GetDirectoryName(fullPath);
 		}
 		OpenFileDialog.CurrentFile = fullPath;

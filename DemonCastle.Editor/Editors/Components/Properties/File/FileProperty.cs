@@ -39,7 +39,7 @@ public partial class FileProperty : StringProperty {
 	}
 
 	protected void OnClick() {
-		var fullPath = Path.Combine(Directory, PropertyValue);
+		var fullPath = Path.GetFullPath(Path.Combine(Directory, PropertyValue));
 		var directory = Path.GetDirectoryName(fullPath);
 		OpenFileDialog.CurrentDir = directory;
 		OpenFileDialog.CurrentFile = fullPath;
