@@ -6,7 +6,7 @@ namespace DemonCastle.Editor;
 public partial class EditorTopBar : HBoxContainer {
 	private Button PlayButton { get; }
 
-	public Action? PlayPressed;
+	public event Action? PlayPressed;
 
 	public EditorTopBar() {
 		Name = nameof(EditorTopBar);
@@ -17,7 +17,5 @@ public partial class EditorTopBar : HBoxContainer {
 		PlayButton.Pressed += PlayButtonOnPressed;
 	}
 
-	private void PlayButtonOnPressed() {
-		PlayPressed?.Invoke();
-	}
+	private void PlayButtonOnPressed() => PlayPressed?.Invoke();
 }
