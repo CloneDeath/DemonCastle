@@ -38,14 +38,14 @@ public class FileNavigator : DirectoryNavigator {
 	public WeaponInfo ToWeaponInfo() => ProjectResources.GetWeapon(FilePath);
 
 	public void RenameFile(string newName) {
-		var newPath = Path.Combine(Directory, newName);
+		var newPath = Path.GetFullPath(Path.Combine(Directory, newName));
 		File.Move(FilePath, newPath);
 		FilePath = newPath;
 		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
 	}
 
 	public void MoveTo(DirectoryNavigator directory) {
-		var newPath = Path.Combine(directory.Directory, FileName);
+		var newPath = Path.GetFullPath(Path.Combine(directory.Directory, FileName));
 		File.Move(FilePath, newPath);
 		FilePath = newPath;
 		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
