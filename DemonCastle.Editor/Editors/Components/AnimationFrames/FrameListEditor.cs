@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -10,12 +11,30 @@ namespace DemonCastle.Editor.Editors.Components.AnimationFrames;
 public partial class FrameListEditor : VBoxContainer {
 	private IAnimationInfo? _current;
 
-	private Dictionary<IFrameInfo, FrameItem> _frames = new();
+	private readonly Dictionary<IFrameInfo, FrameItem> _frames = new();
 
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
 
 	public event Action<IFrameInfo?>? FrameSelected;
+
+	private int SelectedFrameIndex {
+		get {
+			var frames = _frames.Values.ToList();
+			for (var i = 0; i < frames.Count; i++) {
+				var frame = frames[i];
+				if (frame.IsSelected) return i;
+			}
+			return -1;
+		}
+		set {
+			var frames = _frames.Values.ToList();
+			for (var i = 0; i < frames.Count; i++) {
+				var frame = frames[i];
+				frame.IsSelected = i == value;
+			}
+		}
+	}
 
 	public FrameListEditor() {
 		AddChild(FrameContainer = new HFlowContainer {
@@ -65,17 +84,27 @@ public partial class FrameListEditor : VBoxContainer {
 	}
 
 	private void ReloadFrames() {
+		var selectedIndex = SelectedFrameIndex;
 		foreach (var child in FrameContainer.GetChildren()) {
 			child.QueueFree();
 		}
 		_frames.Clear();
 
-		if (_current == null) return;
+		if (_current == null || !_current.Frames.Any()) {
+			FrameSelected?.Invoke(null);
+			return;
+		}
 		foreach (var frame in _current.Frames) {
 			var frameItem = new FrameItem(frame);
 			frameItem.Selected += FrameItem_OnSelected;
 			FrameContainer.AddChild(frameItem);
 			_frames[frame] = frameItem;
+		}
+		if (selectedIndex >= 0) {
+			if (selectedIndex < _current.Frames.Count()) SelectedFrameIndex = selectedIndex;
+			else SelectedFrameIndex = _current.Frames.Count() - 1;
+		} else {
+			SelectedFrameIndex = 0;
 		}
 	}
 
