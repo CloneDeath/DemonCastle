@@ -9,44 +9,56 @@ using Godot;
 namespace DemonCastle;
 
 public partial class Main : Control {
-    protected ProjectSelectionMenu ProjectSelectionMenu { get; }
-
     protected GameSetup? GameSetup { get; set; }
     protected EditorSpace? EditorSpace { get; set; }
 
-    public Main() {
-        AddChild(ProjectSelectionMenu = new ProjectSelectionMenu());
-        ProjectSelectionMenu.ProjectLoaded += OnProjectLoaded;
-        ProjectSelectionMenu.ProjectEdit += OnProjectEdit;
-    }
-
     public override void _Ready() {
         base._Ready();
+
+        LoadProjectMenuView();
 
         InputActions.RegisterActions();
         GetWindow().Mode = Window.ModeEnum.Maximized;
 
         var arguments = new CliArguments();
         var projectPath = arguments.ProjectPath;
-        if (projectPath != null) {
-            var fileNavigator = new FileNavigator<ProjectFile>(projectPath);
-            var projectInfo = new ProjectInfo(fileNavigator);
-            OnProjectLoaded(projectInfo);
-        }
+        if (projectPath == null) return;
+
+        var fileNavigator = new FileNavigator<ProjectFile>(projectPath);
+        var projectInfo = new ProjectInfo(fileNavigator);
+        LoadPlayProjectView(projectInfo);
     }
 
-    protected void OnProjectLoaded(ProjectInfo project) {
-        ProjectSelectionMenu.QueueFree();
+    private void LoadProjectMenuView() {
+        ClearChildren();
 
-        var gameRunner = new GameRunner(project);
-        AddChild(gameRunner);
+        GetWindow().Title = $"DemonCastle";
+        ProjectSelectionMenu projectSelectionMenu;
+        AddChild(projectSelectionMenu = new ProjectSelectionMenu());
+        projectSelectionMenu.ProjectLoaded += LoadPlayProjectView;
+        projectSelectionMenu.ProjectEdit += LoadEditProjectView;
+    }
+
+    protected void LoadPlayProjectView(ProjectInfo project) {
+        ClearChildren();
+
+        GetWindow().Title = $"DemonCastle - {project.Name}";
+        GameRunner gameRunner;
+        AddChild(gameRunner = new GameRunner(project));
         gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }
 
-    private void OnProjectEdit(ProjectInfo project) {
-        ProjectSelectionMenu.QueueFree();
+    private void LoadEditProjectView(ProjectInfo project) {
+        ClearChildren();
 
         GetWindow().Title = $"DemonCastle - {project.Name}";
         AddChild(EditorSpace = new EditorSpace(project));
+        EditorSpace.GoToProjectMenu += LoadProjectMenuView;
+    }
+
+    private void ClearChildren() {
+        foreach (var child in GetChildren()) {
+            child.QueueFree();
+        }
     }
 }

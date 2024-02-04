@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -6,9 +7,11 @@ using Godot;
 namespace DemonCastle.Editor;
 
 public partial class EditorSpace : CanvasLayer {
-	private EditorTopBar TopBar;
+	private EditorTopBar TopBar { get; }
 	protected ProjectInfo Project { get; }
 	protected Window PlayWindow;
+
+	public event Action? GoToProjectMenu;
 
 	public EditorSpace(ProjectInfo project) {
 		Name = nameof(EditorSpace);
@@ -29,6 +32,7 @@ public partial class EditorSpace : CanvasLayer {
 			OffsetLeft = 5
 		});
 		TopBar.PlayPressed += PlayPressed;
+		TopBar.ProjectMenuPressed += TopBar_OnProjectMenuPressed;
 		AddChild(new EditorWorkspace(project) {
 			AnchorRight = 1,
 			AnchorBottom = 1,
@@ -54,4 +58,6 @@ public partial class EditorSpace : CanvasLayer {
 		PlayWindow.AddChild(gameSetup);
 		PlayWindow.PopupCentered();
 	}
+
+	private void TopBar_OnProjectMenuPressed() => GoToProjectMenu?.Invoke();
 }
