@@ -21,6 +21,11 @@ public class AreaRegion {
 		return rect.HasPoint(areaIndex);
 	}
 
+	public bool ContainsTileIndex(Vector2I tileIndex) {
+		var rect = new Rect2I(Vector2I.Zero, _size.ToTileSize());
+		return rect.HasPoint(tileIndex);
+	}
+
 	public Rect2I ToPixelRegionInLevel() {
 		return new Rect2I(_position.ToPixelPositionInLevel(), _size.ToPixelSize());
 	}

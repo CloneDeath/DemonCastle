@@ -77,6 +77,7 @@ public class AreaInfo : BaseInfo<AreaData> {
 	}
 
 	public void SetTile(Vector2I tileIndex, int zIndex, Guid tileId) {
+		if (!Region.ContainsTileIndex(tileIndex)) return;
 		var layer = GetOrCreateLayer(zIndex);
 		var info = layer.TileMap.FirstOrDefault(info => info.Contains(tileIndex)) ?? layer.TileMap.Add(new TileMapData {
 			X = tileIndex.X,
