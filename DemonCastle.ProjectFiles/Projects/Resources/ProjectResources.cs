@@ -77,7 +77,7 @@ public class ProjectResources {
 	public AudioStream GetAudioStream(string path) => AudioStreams.Get(path);
 
 	protected ResourceCache<CharacterInfo> Characters { get; }
-	public CharacterInfo GetCharacter(FileNavigator path) => Characters.Get(path);
+	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
 
 	protected ResourceCache<ItemInfo> Items { get; }
 	public ItemInfo GetItem(string path) => Items.Get(path);
