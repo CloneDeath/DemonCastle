@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using DemonCastle.Editor.FileTreeView;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 using GetNameDialog = DemonCastle.Editor.FileTreeView.Popups.GetNameDialog;

@@ -7,12 +7,12 @@ namespace DemonCastle.Game.SetupScreen;
 public partial class GameSetup : VBoxContainer {
 	public event Action<DebugState>? GameStart;
 
-	protected CheckBox Debug_ShowPositions { get; }
-	protected CheckBox Debug_ShowCollisions { get; }
-	protected CheckBox Debug_ShowHitBoxes { get; }
-	protected CheckBox Debug_ShowHurtBoxes { get; }
-	protected CheckBox Debug_ShowFramesPerSecond { get; }
-	protected CheckBox Debug_LogStateChanges { get; }
+	protected CheckBox DebugShowPositions { get; }
+	protected CheckBox DebugShowCollisions { get; }
+	protected CheckBox DebugShowHitBoxes { get; }
+	protected CheckBox DebugShowHurtBoxes { get; }
+	protected CheckBox DebugShowFramesPerSecond { get; }
+	protected CheckBox DebugLogStateChanges { get; }
 
 	protected Button LaunchButton { get; }
 
@@ -20,27 +20,27 @@ public partial class GameSetup : VBoxContainer {
 	public GameSetup() {
 		Name = nameof(GameSetup);
 
-		AddChild(Debug_ShowPositions = new CheckBox {
+		AddChild(DebugShowPositions = new CheckBox {
 			Text = "Show Positions",
 			ButtonPressed = false
 		});
-		AddChild(Debug_ShowCollisions = new CheckBox {
+		AddChild(DebugShowCollisions = new CheckBox {
 			Text = "Show Collisions",
 			ButtonPressed = false
 		});
-		AddChild(Debug_ShowHitBoxes = new CheckBox {
+		AddChild(DebugShowHitBoxes = new CheckBox {
 			Text = "Show HitBoxes",
 			ButtonPressed = false
 		});
-		AddChild(Debug_ShowHurtBoxes = new CheckBox {
+		AddChild(DebugShowHurtBoxes = new CheckBox {
 			Text = "Show HurtBoxes",
 			ButtonPressed = false
 		});
-		AddChild(Debug_ShowFramesPerSecond = new CheckBox {
+		AddChild(DebugShowFramesPerSecond = new CheckBox {
 			Text = "Show Frames Per Second",
 			ButtonPressed = false
 		});
-		AddChild(Debug_LogStateChanges = new CheckBox {
+		AddChild(DebugLogStateChanges = new CheckBox {
 			Text = "Log State Changes",
 			ButtonPressed = false
 		});
@@ -53,12 +53,12 @@ public partial class GameSetup : VBoxContainer {
 
 	protected void OnLaunchButtonClicked() {
 		var debug = new DebugState {
-			ShowPositions = Debug_ShowPositions.ButtonPressed,
-			ShowCollisions = Debug_ShowCollisions.ButtonPressed,
-			ShowHitBoxes = Debug_ShowHitBoxes.ButtonPressed,
-			ShowHurtBoxes = Debug_ShowHurtBoxes.ButtonPressed,
-			ShowFramesPerSecond = Debug_ShowFramesPerSecond.ButtonPressed,
-			LogStateChanges = Debug_LogStateChanges.ButtonPressed
+			ShowPositions = DebugShowPositions.ButtonPressed,
+			ShowCollisions = DebugShowCollisions.ButtonPressed,
+			ShowHitBoxes = DebugShowHitBoxes.ButtonPressed,
+			ShowHurtBoxes = DebugShowHurtBoxes.ButtonPressed,
+			ShowFramesPerSecond = DebugShowFramesPerSecond.ButtonPressed,
+			LogStateChanges = DebugLogStateChanges.ButtonPressed
 		};
 		GameStart?.Invoke(debug);
 	}
