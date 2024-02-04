@@ -71,7 +71,7 @@ public class ProjectResources {
 			=> new WeaponInfo(GameFileMigrator.GetFile<WeaponFile>(path)));
 	}
 
-	protected FileNavigator GetTextFile(string path) => new(path);
+	protected static FileNavigator GetTextFile(string path) => new(path);
 
 	protected ResourceCache<AudioStream> AudioStreams { get; }
 	public AudioStream GetAudioStream(string path) => AudioStreams.Get(path);
