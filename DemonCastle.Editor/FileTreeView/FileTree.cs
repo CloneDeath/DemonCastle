@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.Editor.FileTreeView.Popups;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles;
@@ -11,11 +12,11 @@ namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
 	protected DirectoryNavigator Root { get; }
-	protected Popups.DirectoryPopupMenu DirectoryPopupMenu { get; }
-	protected Popups.FilePopupMenu FilePopupMenu { get; }
-	protected Popups.DeleteDialog ConfirmDelete { get; }
-	protected Popups.RenameDialog ConfirmRename { get; }
-	protected Popups.GetNameDialog GetNameDialog { get; }
+	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
+	protected FilePopupMenu FilePopupMenu { get; }
+	protected DeleteDialog ConfirmDelete { get; }
+	protected RenameDialog ConfirmRename { get; }
+	protected GetNameDialog GetNameDialog { get; }
 
 	public event Action<FileNavigator>? OnFileActivated;
 
@@ -27,15 +28,15 @@ public partial class FileTree : Tree {
 		Root = rootDirectory;
 		AllowRmbSelect = true;
 
-		AddChild(GetNameDialog = new Popups.GetNameDialog());
+		AddChild(GetNameDialog = new GetNameDialog());
 
-		AddChild(ConfirmRename = new Popups.RenameDialog());
+		AddChild(ConfirmRename = new RenameDialog());
 		ConfirmRename.Confirmed += OnRenameConfirmed;
 
-		AddChild(ConfirmDelete = new Popups.DeleteDialog());
+		AddChild(ConfirmDelete = new DeleteDialog());
 		ConfirmDelete.Confirmed += OnDeleteConfirmed;
 
-		AddChild(DirectoryPopupMenu = new Popups.DirectoryPopupMenu());
+		AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
 		DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
 		DirectoryPopupMenu.CreateEditorFile += OnCreateEditorFileSelected;
 		DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
@@ -43,7 +44,7 @@ public partial class FileTree : Tree {
 		DirectoryPopupMenu.RenameDirectory += OnRename;
 		DirectoryPopupMenu.DeleteDirectory += OnDelete;
 
-		AddChild(FilePopupMenu = new Popups.FilePopupMenu());
+		AddChild(FilePopupMenu = new FilePopupMenu());
 		FilePopupMenu.RenameFile += OnRename;
 		FilePopupMenu.DeleteFile += OnDelete;
 
