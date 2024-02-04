@@ -70,7 +70,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		set => _facing = value >= 0 ? 1 : -1;
 	}
 
-	protected Vector2 _moveDirection = Vector2.Zero;
+	protected Vector2 MoveDirection = Vector2.Zero;
 
 	#region IEntityState
 	public void SetFacing(int facing) => Facing = facing;
@@ -86,10 +86,10 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 	}
 	#endregion
 
-	public void MoveRight() => _moveDirection = Vector2.Right;
-	public void MoveLeft() => _moveDirection = Vector2.Left;
-	public void MoveForward() => _moveDirection = new Vector2(Facing, 0);
-	public void MoveBackward() => _moveDirection = new Vector2(-Facing, 0);
+	public void MoveRight() => MoveDirection = Vector2.Right;
+	public void MoveLeft() => MoveDirection = Vector2.Left;
+	public void MoveForward() => MoveDirection = new Vector2(Facing, 0);
+	public void MoveBackward() => MoveDirection = new Vector2(-Facing, 0);
 
 	public void EnableWorldCollisions() {
 		if (Body != null) Body.CollisionLayer = (uint)CollisionLayers.World;
@@ -99,5 +99,5 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		if (Body != null) Body.CollisionLayer = 0;
 	}
 
-	public void StopMoving() => _moveDirection = Vector2.Zero;
+	public void StopMoving() => MoveDirection = Vector2.Zero;
 }

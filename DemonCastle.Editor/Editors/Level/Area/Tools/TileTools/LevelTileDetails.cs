@@ -9,12 +9,12 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class LevelTileDetails : PropertyCollection {
-	private readonly TileProxy TileProxy = new();
+	private readonly TileProxy _tileProxy = new();
 
 	public TileInfo? Proxy {
-		get => TileProxy.Proxy;
+		get => _tileProxy.Proxy;
 		set {
-			TileProxy.Proxy = value;
+			_tileProxy.Proxy = value;
 			if (value == null) Disable();
 			else Enable();
 		}
@@ -24,22 +24,22 @@ public partial class LevelTileDetails : PropertyCollection {
 		Name = nameof(LevelTileDetails);
 		CustomMinimumSize = new Vector2I(160, 100);
 
-		AddString("Name", TileProxy, x => x.Name);
-		var spriteReference = AddSpriteDefinition(TileProxy, levelDirectory,
+		AddString("Name", _tileProxy, x => x.Name);
+		var spriteReference = AddSpriteDefinition(_tileProxy, levelDirectory,
 			e => e.SourceFile,
 			e => e.SpriteId,
 			t => t.SpriteOptions);
 		spriteReference.ItemSelected += SpriteIdProperty_OnItemSelected;
-		AddVector2I("Span", TileProxy, x => x.Size);
-		AddChild(new TileCollisionView(TileProxy));
-		AddChild(new TileStairView(TileProxy));
+		AddVector2I("Span", _tileProxy, x => x.Size);
+		AddChild(new TileCollisionView(_tileProxy));
+		AddChild(new TileStairView(_tileProxy));
 
 		Disable();
 	}
 
 	private void SpriteIdProperty_OnItemSelected(ISpriteDefinition obj) {
-		if (string.IsNullOrEmpty(TileProxy.Name)) {
-			TileProxy.Name = obj.Name;
+		if (string.IsNullOrEmpty(_tileProxy.Name)) {
+			_tileProxy.Name = obj.Name;
 		}
 	}
 }

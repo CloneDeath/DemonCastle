@@ -7,7 +7,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Animations.Editor.Frames;
 
 public partial class FrameInfoDetails : PropertyCollection {
-	protected readonly FrameInfoProxy _proxy = new();
+	protected readonly FrameInfoProxy Proxy = new();
 
 	protected FrameInfoView FrameInfoView { get; }
 	protected Button DeleteButton { get; }
@@ -15,8 +15,8 @@ public partial class FrameInfoDetails : PropertyCollection {
 	protected PropertyCollection AdditionalProperties { get; }
 
 	public IFrameInfo? FrameInfo {
-		get => _proxy.Proxy;
-		set => _proxy.Proxy = value;
+		get => Proxy.Proxy;
+		set => Proxy.Proxy = value;
 	}
 
 	public FrameInfoDetails(IFileInfo file) : this(file, new FrameInfoView()){
@@ -26,25 +26,25 @@ public partial class FrameInfoDetails : PropertyCollection {
 	protected FrameInfoDetails(IFileInfo file, FrameInfoView infoView) {
 		Name = nameof(FrameInfoDetails);
 
-		AddFloat("Duration", _proxy, p => p.Duration);
-		AddSpriteDefinition(_proxy, file.Directory,
+		AddFloat("Duration", Proxy, p => p.Duration);
+		AddSpriteDefinition(Proxy, file.Directory,
 			e => e.SourceFile,
 			e => e.SpriteId,
 			e => e.SpriteDefinitions);
-		AddOrigin("Origin", _proxy, p => p.Anchor, p => p.Offset);
+		AddOrigin("Origin", Proxy, p => p.Anchor, p => p.Offset);
 
 		AddChild(new HSeparator());
-		AddNullableRect2I("HitBox", _proxy, p => p.HitBox);
-		AddNullableRect2I("HurtBox", _proxy, p => p.HurtBox);
+		AddNullableRect2I("HitBox", Proxy, p => p.HitBox);
+		AddNullableRect2I("HurtBox", Proxy, p => p.HurtBox);
 		AddChild(new HSeparator());
 
-		AddNullableFile("Audio", _proxy, file.Directory, p => p.Audio, FileType.AudioSources);
+		AddNullableFile("Audio", Proxy, file.Directory, p => p.Audio, FileType.AudioSources);
 		AddChild(AdditionalProperties = new PropertyCollection());
 
 		FrameInfoView = infoView;
 		FrameInfoView.SizeFlagsVertical = SizeFlags.ExpandFill;
 		AddChild(FrameInfoView);
-		FrameInfoView.Load(_proxy);
+		FrameInfoView.Load(Proxy);
 
 		AddChild(DeleteButton = new Button {
 			Text = "Delete Frame"
@@ -53,7 +53,7 @@ public partial class FrameInfoDetails : PropertyCollection {
 	}
 
 	private void DeleteButton_OnPressed() {
-		_proxy.Delete();
+		Proxy.Delete();
 	}
 
 	public override void _Process(double delta) {

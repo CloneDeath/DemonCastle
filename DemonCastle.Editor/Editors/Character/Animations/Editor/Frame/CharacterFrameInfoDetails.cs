@@ -9,8 +9,8 @@ public partial class CharacterFrameInfoDetails : FrameInfoDetails {
 	public CharacterFrameInfoDetails(IFileInfo file) : base(file, new CharacterFrameInfoView()) {
 		Name = nameof(CharacterFrameInfoDetails);
 
-		AdditionalProperties.AddBoolean("Weapon Enabled", _proxy, p => p.WeaponEnabled);
-		AdditionalProperties.AddString("Weapon Animation", _proxy, p => p.WeaponAnimation);
-		AdditionalProperties.AddVector2I("Weapon Position", _proxy, p => p.WeaponPosition, new Vector2IPropertyOptions { AllowNegative = true });
+		AdditionalProperties.AddBoolean("Weapon Enabled", Proxy, p => p.WeaponEnabled);
+		AdditionalProperties.AddString("Weapon Animation", Proxy, p => p.WeaponAnimation);
+		AdditionalProperties.AddVector2I("Weapon Position", Proxy, p => p.WeaponPosition, new Vector2IPropertyOptions { AllowNegative = true });
 	}
 }
