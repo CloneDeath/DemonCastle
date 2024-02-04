@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Icons;
-using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
@@ -22,14 +21,6 @@ public partial class TextFileEditor : BaseEditor {
 		});
 		TextEdit.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 		TextEdit.TextChanged += TextEdit_OnTextChanged;
-	}
-
-	public override void _Input(InputEvent @event) {
-		base._Input(@event);
-		if (!@event.IsAction(InputActions.EditorSave, true)) return;
-
-		_textInfo.Save();
-		AcceptEvent();
 	}
 
 	private void TextEdit_OnTextChanged() {

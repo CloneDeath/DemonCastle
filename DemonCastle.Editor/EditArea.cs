@@ -35,8 +35,6 @@ public partial class EditArea : TabContainer {
 			OnTabCloseButtonPressed(CurrentTab);
 			AcceptEvent();
 		} else if (@event.IsAction(InputActions.EditorSave, true)) {
-			var navigator = GetFileNavigator(CurrentTab);
-			navigator?.Save();
 			AcceptEvent();
 		}
 	}

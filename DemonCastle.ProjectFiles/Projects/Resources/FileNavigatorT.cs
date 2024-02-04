@@ -16,8 +16,8 @@ public class FileNavigator<T> : FileNavigator, IFileNavigator {
 
 	public bool Saving => _saveTask.IsCompleted;
 
-	public override void Save() {
+	public void Save() {
 		var contents = Serializer.Serialize(Resource);
-		_saveTask = _saveTask.ContinueWith(_ => File.WriteAllTextAsync(FilePath, contents));
+		_saveTask = _saveTask.ContinueWith(_ => SaveContent(contents));
 	}
 }

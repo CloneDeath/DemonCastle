@@ -15,8 +15,6 @@ namespace DemonCastle.ProjectFiles.Projects.Resources;
 public class ProjectResources {
 	private DirectoryNavigator Root { get; }
 
-	protected TextFileNavigator GetTextFile(string path) => new(path, this);
-
 	public ProjectResources(string root) {
 		Root = new DirectoryNavigator(root);
 
@@ -72,6 +70,8 @@ public class ProjectResources {
 		Weapons = new ResourceCache<WeaponInfo>(path
 			=> new WeaponInfo(GameFileMigrator.GetFile<WeaponFile>(path)));
 	}
+
+	protected FileNavigator GetTextFile(string path) => new(path);
 
 	protected ResourceCache<AudioStream> AudioStreams { get; }
 	public AudioStream GetAudioStream(string path) => AudioStreams.Get(path);

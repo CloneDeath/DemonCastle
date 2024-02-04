@@ -46,5 +46,6 @@ public class FileNavigator : DirectoryNavigator {
 		Directory = Path.GetDirectoryName(FilePath) ?? throw new NullReferenceException();
 	}
 
-	public virtual void Save() {}
+	public string LoadContent() => File.ReadAllText(FilePath);
+	public void SaveContent(string content) => File.WriteAllText(FilePath, content);
 }

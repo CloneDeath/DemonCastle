@@ -1,19 +1,18 @@
-using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.Navigation;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public class TextInfo {
-	protected TextFileNavigator File { get; }
+	protected FileNavigator File { get; }
 
 	public string FileName => File.FileName;
+
 	public string Contents {
-		get => File.Resource;
-		set { File.Resource = value; File.Save(); }
+		get => File.LoadContent();
+		set => File.SaveContent(value);
 	}
 
-	public TextInfo(TextFileNavigator file) {
+	public TextInfo(FileNavigator file) {
 		File = file;
 	}
-
-	public void Save() => File.Save();
 }
