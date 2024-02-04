@@ -12,74 +12,42 @@ public class MonsterInfo : BaseEntityInfo<MonsterFile>, IFileInfo {
 
 	public int Health {
 		get => Data.Health;
-		set {
-			Data.Health = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Health, value);
 	}
 
 	public int Experience {
 		get => Data.Experience;
-		set {
-			Data.Experience = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Experience, value);
 	}
 
 	public int Attack {
 		get => Data.Attack;
-		set {
-			Data.Attack = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Attack, value);
 	}
 
 	public int PhysicalDefense {
 		get => Data.PhysicalDefense;
-		set {
-			Data.PhysicalDefense = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.PhysicalDefense, value);
 	}
 
 	public int MagicalDefense {
 		get => Data.MagicalDefense;
-		set {
-			Data.MagicalDefense = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.MagicalDefense, value);
 	}
 
 	public float MoveSpeed {
 		get => Data.MoveSpeed;
-		set {
-			Data.MoveSpeed = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.MoveSpeed, value);
 	}
 
 	public float JumpHeight {
 		get => Data.JumpHeight;
-		set {
-			Data.JumpHeight = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.JumpHeight, value);
 	}
 
 	public float Gravity {
 		get => Data.Gravity;
-		set {
-			Data.Gravity = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Gravity, value);
 	}
 
 	public bool DespawnOnDeath {

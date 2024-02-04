@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using DemonCastle.Editor.Properties;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -7,12 +9,13 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Reference;
 
-public abstract partial class BaseReferenceProperty<T> : BaseProperty {
+public abstract partial class BaseReferenceProperty<T> : BaseProperty where T : INotifyPropertyChanged {
 	protected abstract Texture2D? GetTexture(T option);
 	protected abstract Guid GetGuid(T option);
 	protected abstract string GetName(T option);
 
 	private IEnumerableInfo<T>? _options;
+	private List<T> _subscribed = new();
 
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }
@@ -37,7 +40,6 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		});
 		LoadOptions(options);
-		PropertyValue = binding.Get();
 
 		OptionButton.ItemSelected += OnItemSelected;
 	}
@@ -51,6 +53,11 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 		base._ExitTree();
 		Binding.Changed -= Binding_OnChanged;
 		if (_options != null) _options.CollectionChanged -= Options_OnCollectionChanged;
+		_options = null;
+		foreach (var item in _subscribed) {
+			item.PropertyChanged -= Item_OnPropertyChanged;
+		}
+		_subscribed.Clear();
 	}
 
 	public void LoadOptions(IEnumerableInfo<T> options) {
@@ -61,11 +68,19 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 		ReloadOptions();
 	}
 
+	private void Item_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		ReloadOptions();
+	}
+
 	private void Options_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		ReloadOptions();
 	}
 
 	private void ReloadOptions() {
+		foreach (var item in _subscribed) {
+			item.PropertyChanged -= Item_OnPropertyChanged;
+		}
+		_subscribed.Clear();
 		OptionButton.Clear();
 
 		if (_options == null) return;
@@ -80,6 +95,8 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty {
 			else {
 				OptionButton.AddItem(name, i);
 			}
+			option.PropertyChanged += Item_OnPropertyChanged;
+			_subscribed.Add(option);
 		}
 
 		PropertyValue = Binding.Get();
