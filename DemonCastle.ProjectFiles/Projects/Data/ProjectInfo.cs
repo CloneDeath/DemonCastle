@@ -47,15 +47,6 @@ public class ProjectInfo : FileInfo<ProjectFile>, IListableInfo {
 
 	public SceneInfo StartScene => File.GetScene(StartSceneFile);
 
-
-	public IEnumerable<CharacterInfo> Characters => File.GetFilesAndSubFiles()
-														.Where(f => f.Extension == FileType.Character.Extension)
-														.Select(f => f.ToCharacterInfo());
-
-	public IEnumerable<LevelInfo> Levels => File.GetFilesAndSubFiles()
-												.Where(f => f.Extension == FileType.Level.Extension)
-												.Select(f => f.ToLevelInfo());
-
 	public IEnumerable<MonsterInfo> Monsters => File.GetFilesAndSubFiles()
 												.Where(f => f.Extension == FileType.Monster.Extension)
 												.Select(f => f.ToMonsterInfo());
