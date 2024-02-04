@@ -52,10 +52,10 @@ public class DirectoryNavigator {
 
 	public ISpriteSource GetSprite(string localPath) {
 		var path = ToAbsolutePath(localPath);
-		if (path.ToLower().EndsWith(".dcsg")) {
+		if (path.ToLower().EndsWith(FileType.SpriteGrid.Extension)) {
 			return ProjectResources.GetSpriteGrid(path);
 		}
-		if (path.ToLower().EndsWith(".dcsa")) {
+		if (path.ToLower().EndsWith(FileType.SpriteAtlas.Extension)) {
 			return ProjectResources.GetSpriteAtlas(path);
 		}
 		throw new UnknownSpriteFileFormatException(path);
