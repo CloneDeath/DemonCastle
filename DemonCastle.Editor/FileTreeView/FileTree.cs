@@ -4,8 +4,8 @@ using System.Linq;
 using DemonCastle.Editor.FileTreeView.Popups;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Game;
+using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles;
-using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView;
@@ -160,7 +160,9 @@ public partial class FileTree : Tree {
 			name = name[..^fileType.Extension.Length];
 		}
 		var dirNav = DirectoryMap[selected];
-		dirNav.CreateFile(name, fileType.Extension, fileType.CreateFileInstance(name));
+		var data = fileType.CreateFileInstance(name);
+		var contents = Serializer.Serialize(data);
+		dirNav.CreateFile(name, fileType.Extension, contents);
 
 		CreateTree();
 	}

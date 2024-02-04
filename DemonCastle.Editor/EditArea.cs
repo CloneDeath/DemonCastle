@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using DemonCastle.Editor.Editors;
 using DemonCastle.Game;
+using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;

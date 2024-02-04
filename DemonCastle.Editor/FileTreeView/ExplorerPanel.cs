@@ -1,6 +1,6 @@
 using System;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.Navigation;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView;

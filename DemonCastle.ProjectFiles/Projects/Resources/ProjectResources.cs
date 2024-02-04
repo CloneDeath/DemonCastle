@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using DemonCastle.Files;
+using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
@@ -17,8 +18,7 @@ public class ProjectResources {
 	protected TextFileNavigator GetTextFile(string path) => new(path, this);
 
 	public ProjectResources(string root) {
-		Root = new DirectoryNavigator(root, this);
-		var migrator = new GameFileMigrator(this);
+		Root = new DirectoryNavigator(root);
 
 		AudioStreams = new ResourceCache<AudioStream>(path => {
 			var data = File.ReadAllBytes(path);
@@ -28,10 +28,10 @@ public class ProjectResources {
 		});
 
 		Characters = new ResourceCache<CharacterInfo>(path
-			=> new CharacterInfo(migrator.GetFile<CharacterFile>(path)));
+			=> new CharacterInfo(GameFileMigrator.GetFile<CharacterFile>(path)));
 
 		Items = new ResourceCache<ItemInfo>(path
-			=> new ItemInfo(migrator.GetFile<ItemFile>(path)));
+			=> new ItemInfo(GameFileMigrator.GetFile<ItemFile>(path)));
 
 		Fonts = new ResourceCache<Font>(path => {
 			var font = new FontFile();
@@ -40,28 +40,28 @@ public class ProjectResources {
 		});
 
 		Levels = new ResourceCache<LevelInfo>(path
-			=> new LevelInfo(migrator.GetFile<LevelFile>(path)));
+			=> new LevelInfo(GameFileMigrator.GetFile<LevelFile>(path)));
 
 		Monsters = new ResourceCache<MonsterInfo>(path
-			=> new MonsterInfo(migrator.GetFile<MonsterFile>(path)));
+			=> new MonsterInfo(GameFileMigrator.GetFile<MonsterFile>(path)));
 
 		Projects = new ResourceCache<ProjectInfo>(path
-			=> new ProjectInfo(migrator.GetFile<ProjectFile>(path)));
+			=> new ProjectInfo(GameFileMigrator.GetFile<ProjectFile>(path)));
 
 		Scenes = new ResourceCache<SceneInfo>(path
-			=> new SceneInfo(migrator.GetFile<SceneFile>(path)));
+			=> new SceneInfo(GameFileMigrator.GetFile<SceneFile>(path)));
 
 		SpriteGrids = new ResourceCache<SpriteGridInfo>(path
-			=> new SpriteGridInfo(migrator.GetFile<SpriteGridFile>(path)));
+			=> new SpriteGridInfo(GameFileMigrator.GetFile<SpriteGridFile>(path)));
 
 		SpriteAtlases = new ResourceCache<SpriteAtlasInfo>(path
-			=> new SpriteAtlasInfo(migrator.GetFile<SpriteAtlasFile>(path)));
+			=> new SpriteAtlasInfo(GameFileMigrator.GetFile<SpriteAtlasFile>(path)));
 
 		Texts = new ResourceCache<TextInfo>(path
 			=> new TextInfo(GetTextFile(path)));
 
 		TileSets = new ResourceCache<TileSetInfo>(path
-			=> new TileSetInfo(migrator.GetFile<TileSetFile>(path)));
+			=> new TileSetInfo(GameFileMigrator.GetFile<TileSetFile>(path)));
 
 		Textures = new ResourceCache<Texture2D>(path => {
 			var image = new Image();
@@ -70,14 +70,14 @@ public class ProjectResources {
 		});
 
 		Weapons = new ResourceCache<WeaponInfo>(path
-			=> new WeaponInfo(migrator.GetFile<WeaponFile>(path)));
+			=> new WeaponInfo(GameFileMigrator.GetFile<WeaponFile>(path)));
 	}
 
 	protected ResourceCache<AudioStream> AudioStreams { get; }
 	public AudioStream GetAudioStream(string path) => AudioStreams.Get(path);
 
 	protected ResourceCache<CharacterInfo> Characters { get; }
-	public CharacterInfo GetCharacter(string path) => Characters.Get(path);
+	public CharacterInfo GetCharacter(FileNavigator path) => Characters.Get(path);
 
 	protected ResourceCache<ItemInfo> Items { get; }
 	public ItemInfo GetItem(string path) => Items.Get(path);

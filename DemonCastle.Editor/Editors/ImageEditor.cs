@@ -1,6 +1,6 @@
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.Navigation;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;

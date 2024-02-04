@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Files;
+using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;

@@ -9,13 +9,8 @@ using Newtonsoft.Json.Linq;
 
 namespace DemonCastle.ProjectFiles.Projects.Migration;
 
-public class GameFileMigrator {
-	private readonly ProjectResources _resources;
-	public GameFileMigrator(ProjectResources resources) {
-		_resources = resources;
-	}
-
-	public FileNavigator<T> GetFile<T>(string path)
+public static class GameFileMigrator {
+	public static FileNavigator<T> GetFile<T>(string path)
 		where T : IGameFile, new() {
 		var file = Serializer.Deserialize<JObject>(File.ReadAllText(path));
 		var targetVersion = new T().FileVersion;
@@ -23,7 +18,7 @@ public class GameFileMigrator {
 		if (version < targetVersion) {
 			Migrate<T>(path, version, targetVersion);
 		}
-		return new FileNavigator<T>(path, _resources);
+		return new FileNavigator<T>(path);
 	}
 
 	private static void Migrate<T>(string path, int initialVersion, int targetVersion) {

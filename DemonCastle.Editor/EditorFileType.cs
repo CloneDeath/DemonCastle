@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using DemonCastle.Editor.EditorFileTypes;
 using DemonCastle.Editor.Editors;
+using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;
