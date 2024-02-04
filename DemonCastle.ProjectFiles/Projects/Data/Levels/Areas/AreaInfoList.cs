@@ -23,7 +23,14 @@ public class AreaInfoListFactory : IInfoFactory<AreaInfo, AreaData> {
 		_level = level;
 	}
 
-	public AreaInfo CreateInfo(AreaData data) => new AreaInfo(_file, data, _level);
+	public AreaInfo CreateInfo(AreaData data) => new(_file, data, _level);
 
-	public AreaData CreateData() => new();
+	public AreaData CreateData() => new() {
+		TileMapLayers = new List<TileMapLayerData> {
+			new() {
+				Name = "Default",
+				ZIndex = 0
+			}
+		}
+	};
 }
