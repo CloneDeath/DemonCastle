@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.Specialized;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -30,16 +30,16 @@ public partial class MinimapView : ControlView<ExpandingControl> {
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		_levelInfo.PropertyChanged += LevelInfoOnPropertyChanged;
+		_levelInfo.Areas.CollectionChanged += Areas_OnCollectionChanged;
 		Reload();
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
-		_levelInfo.PropertyChanged -= LevelInfoOnPropertyChanged;
+		_levelInfo.Areas.CollectionChanged -= Areas_OnCollectionChanged;
 	}
 
-	private void LevelInfoOnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+	private void Areas_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		Reload();
 	}
 
