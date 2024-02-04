@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView.Popups;
 
 public class PopupAction {
 	public string Text { get; set; } = string.Empty;

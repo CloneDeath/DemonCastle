@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView.Popups; 
 
 public partial class FilePopupMenu : PopupMenu {
 	public event Action? RenameFile;

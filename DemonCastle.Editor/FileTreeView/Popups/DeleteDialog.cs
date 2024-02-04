@@ -1,6 +1,6 @@
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView; 
+namespace DemonCastle.Editor.FileTreeView.Popups; 
 
 public partial class DeleteDialog : ConfirmationDialog {
 	public DeleteDialog() {

@@ -3,7 +3,7 @@ using System.Linq;
 using DemonCastle.Editor.Icons;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView;
+namespace DemonCastle.Editor.FileTreeView.Popups;
 
 public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action? AddDirectory;

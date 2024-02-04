@@ -11,11 +11,11 @@ namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
 	protected DirectoryNavigator Root { get; }
-	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
-	protected FilePopupMenu FilePopupMenu { get; }
-	protected DeleteDialog ConfirmDelete { get; }
-	protected RenameDialog ConfirmRename { get; }
-	protected GetNameDialog GetNameDialog { get; }
+	protected Popups.DirectoryPopupMenu DirectoryPopupMenu { get; }
+	protected Popups.FilePopupMenu FilePopupMenu { get; }
+	protected Popups.DeleteDialog ConfirmDelete { get; }
+	protected Popups.RenameDialog ConfirmRename { get; }
+	protected Popups.GetNameDialog GetNameDialog { get; }
 
 	public event Action<FileNavigator>? OnFileActivated;
 
@@ -27,15 +27,15 @@ public partial class FileTree : Tree {
 		Root = rootDirectory;
 		AllowRmbSelect = true;
 
-		AddChild(GetNameDialog = new GetNameDialog());
+		AddChild(GetNameDialog = new Popups.GetNameDialog());
 
-		AddChild(ConfirmRename = new RenameDialog());
+		AddChild(ConfirmRename = new Popups.RenameDialog());
 		ConfirmRename.Confirmed += OnRenameConfirmed;
 
-		AddChild(ConfirmDelete = new DeleteDialog());
+		AddChild(ConfirmDelete = new Popups.DeleteDialog());
 		ConfirmDelete.Confirmed += OnDeleteConfirmed;
 
-		AddChild(DirectoryPopupMenu = new DirectoryPopupMenu());
+		AddChild(DirectoryPopupMenu = new Popups.DirectoryPopupMenu());
 		DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
 		DirectoryPopupMenu.CreateEditorFile += OnCreateEditorFileSelected;
 		DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
@@ -43,7 +43,7 @@ public partial class FileTree : Tree {
 		DirectoryPopupMenu.RenameDirectory += OnRename;
 		DirectoryPopupMenu.DeleteDirectory += OnDelete;
 
-		AddChild(FilePopupMenu = new FilePopupMenu());
+		AddChild(FilePopupMenu = new Popups.FilePopupMenu());
 		FilePopupMenu.RenameFile += OnRename;
 		FilePopupMenu.DeleteFile += OnDelete;
 

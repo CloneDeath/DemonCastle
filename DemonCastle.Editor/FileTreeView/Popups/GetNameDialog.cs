@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Godot;
 
-namespace DemonCastle.Editor.FileTreeView;
+namespace DemonCastle.Editor.FileTreeView.Popups;
 
 public partial class GetNameDialog : ConfirmationDialog {
 	protected LineEdit LineEdit { get; }
