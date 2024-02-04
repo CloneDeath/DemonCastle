@@ -1,15 +1,15 @@
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Details;
 
 public partial class AreaDetails : PropertyCollection {
-	private readonly AreaProxy AreaProxy = new();
+	private readonly AreaProxy _areaProxy = new();
 
 	public AreaInfo? Area {
-		get => AreaProxy.Proxy;
+		get => _areaProxy.Proxy;
 		set {
-			AreaProxy.Proxy = value;
+			_areaProxy.Proxy = value;
 			if (value == null) {
 				Disable();
 			} else {
@@ -21,9 +21,9 @@ public partial class AreaDetails : PropertyCollection {
 	public AreaDetails() {
 		Name = nameof(AreaDetails);
 
-		AddString("Name", AreaProxy, x => x.Name);
-		AddVector2I("Position", AreaProxy, x => x.AreaPosition);
-		AddVector2I("Size", AreaProxy, x => x.Size);
+		AddString("Name", _areaProxy, x => x.Name);
+		AddVector2I("Position", _areaProxy, x => x.AreaPosition);
+		AddVector2I("Size", _areaProxy, x => x.Size);
 
 		Disable();
 	}

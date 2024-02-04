@@ -8,7 +8,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
-namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
+namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 
 public class AreaInfo : BaseInfo<AreaData> {
 	public LevelInfo Level { get; }

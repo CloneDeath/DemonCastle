@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;

@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.LevelOverview;

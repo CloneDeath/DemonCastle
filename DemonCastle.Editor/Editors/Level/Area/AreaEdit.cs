@@ -4,6 +4,7 @@ using DemonCastle.Editor.Editors.Level.Area.Tools;
 using DemonCastle.Editor.Editors.Level.Area.View;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area;

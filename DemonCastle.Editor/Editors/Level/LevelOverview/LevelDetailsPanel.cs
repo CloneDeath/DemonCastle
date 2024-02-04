@@ -22,8 +22,8 @@ public partial class LevelDetailsPanel : VBoxContainer {
 		Properties.AddVector2I("Starting Area Position", levelInfo, x => x.StartingPositionAreaCell);
 
 		AddChild(AddAreaButton = new Button { Text = "Add Area" });
-		AddAreaButton.Pressed += AddAreaButtonOnPressed;
+		AddAreaButton.Pressed += AddAreaButton_OnPressed;
 	}
 
-	private void AddAreaButtonOnPressed() => LevelInfo.Areas.AppendNew();
+	private void AddAreaButton_OnPressed() => LevelInfo.Areas.AppendNew();
 }

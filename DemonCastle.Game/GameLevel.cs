@@ -3,6 +3,7 @@ using System.Linq;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
@@ -15,7 +16,7 @@ public partial class GameLevel : Node2D {
 	private readonly DebugState _debug;
 
 	protected LevelInfo? Level { get; set; }
-	protected readonly Dictionary<AreaInfo, GameArea> _areaMap = new();
+	protected readonly Dictionary<AreaInfo, GameArea> AreaMap = new();
 
 	public Vector2 StartingLocation => Level?.StartingLocation ?? Vector2.Zero;
 
@@ -33,7 +34,7 @@ public partial class GameLevel : Node2D {
 
 	public GameArea? GetGameAreaAtPoint(Vector2I point) {
 		var areaInfo = GetAreaAtPoint(point);
-		return areaInfo == null ? null : _areaMap[areaInfo];
+		return areaInfo == null ? null : AreaMap[areaInfo];
 	}
 
 	public void LoadLevel(LevelInfo level) {
@@ -44,7 +45,7 @@ public partial class GameLevel : Node2D {
 			var gameArea = new GameArea(_game, _project, level, area, _logger, _debug) {
 				Position = area.PositionOfArea.ToPixelPositionInLevel()
 			};
-			_areaMap[area] = gameArea;
+			AreaMap[area] = gameArea;
 			AddChild(gameArea);
 		}
 	}
@@ -58,6 +59,6 @@ public partial class GameLevel : Node2D {
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
-		_areaMap.Clear();
+		AreaMap.Clear();
 	}
 }

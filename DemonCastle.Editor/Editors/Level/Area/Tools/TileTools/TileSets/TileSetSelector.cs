@@ -5,7 +5,7 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;

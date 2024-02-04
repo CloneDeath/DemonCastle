@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 

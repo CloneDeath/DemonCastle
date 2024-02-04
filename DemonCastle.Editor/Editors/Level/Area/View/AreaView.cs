@@ -4,7 +4,7 @@ using DemonCastle.Editor.Editors.Level.Area.View.Monsters;
 using DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 using DemonCastle.Game;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View;
@@ -16,8 +16,8 @@ public partial class AreaView : SelectableControl {
 	protected AreaTilesView Tiles { get; }
 	protected AreaMonstersView Monsters { get; }
 
-	private static readonly Color SelectedColor = new(Colors.White, 0.75f);
-	private static readonly Color DeselectedColor = new(Colors.White, 0.3f);
+	protected static readonly Color SelectedColor = new(Colors.White, 0.75f);
+	protected static readonly Color DeselectedColor = new(Colors.White, 0.3f);
 
 	public event Action<AreaInfo, Vector2I>? AreaTileSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileCleared;

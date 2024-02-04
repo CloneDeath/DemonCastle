@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
-using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;

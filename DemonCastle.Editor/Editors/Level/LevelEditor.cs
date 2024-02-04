@@ -3,6 +3,7 @@ using DemonCastle.Editor.Editors.Level.LevelOverview;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level;

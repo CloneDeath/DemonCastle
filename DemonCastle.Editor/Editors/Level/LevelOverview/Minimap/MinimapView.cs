@@ -4,6 +4,7 @@ using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 
 namespace DemonCastle.Editor.Editors.Level.LevelOverview.Minimap;
 

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.TileSets;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -12,7 +13,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels;
 public class LevelInfo : FileInfo<LevelFile>, IListableInfo {
 	public LevelInfo(FileNavigator<LevelFile> file) : base(file) {
 		TileSet = new TileInfoCollection(file, Resource.Tiles);
-		Areas = new InfoList<AreaInfo, AreaData>(file, Resource.Areas, area => new AreaInfo(file, area, this));
+		Areas = new AreaInfoList(file, Resource.Areas, this);
 	}
 
 	public string ListLabel => Name;
