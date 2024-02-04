@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -8,6 +9,8 @@ namespace DemonCastle.Editor.Editors.Components.AnimationFrames;
 
 public partial class FrameListEditor : VBoxContainer {
 	private IAnimationInfo? _current;
+
+	private Dictionary<IFrameInfo, FrameItem> _frames = new();
 
 	private Button AddFrameButton { get; }
 	private HFlowContainer FrameContainer { get; }
@@ -55,19 +58,24 @@ public partial class FrameListEditor : VBoxContainer {
 	}
 
 	private void AddFrameButton_OnPressed() {
-		_current?.Frames.AppendNew();
+		if (_current == null) return;
+		var frame = _current.Frames.AppendNew();
+		FrameSelected?.Invoke(frame);
+		_frames[frame].IsSelected = true;
 	}
 
 	private void ReloadFrames() {
 		foreach (var child in FrameContainer.GetChildren()) {
 			child.QueueFree();
 		}
+		_frames.Clear();
 
 		if (_current == null) return;
 		foreach (var frame in _current.Frames) {
-			var weaponFrameItem = new FrameItem(frame);
-			weaponFrameItem.Selected += FrameItem_OnSelected;
-			FrameContainer.AddChild(weaponFrameItem);
+			var frameItem = new FrameItem(frame);
+			frameItem.Selected += FrameItem_OnSelected;
+			FrameContainer.AddChild(frameItem);
+			_frames[frame] = frameItem;
 		}
 	}
 
