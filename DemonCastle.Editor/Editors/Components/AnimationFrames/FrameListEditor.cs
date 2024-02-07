@@ -70,6 +70,7 @@ public partial class FrameListEditor : VBoxContainer {
 		AddFrameButton.Disabled = _current == null;
 		ReloadFrames();
 		FrameSelected?.Invoke(null);
+		SelectedFrameIndex = -1;
 	}
 
 	private void Frames_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
