@@ -24,7 +24,7 @@ public partial class FileProperty : StringProperty {
 		AddChild(LoadButton = new Button {
 			Text = "..."
 		});
-		LoadButton.Pressed += OnClick;
+		LoadButton.Pressed += LoadButton_OnPressed;
 
 		AddChild(OpenFileDialog = new FileDialog {
 			Filters = fileTypes.Select(t => t.Filter).ToArray(),
@@ -38,11 +38,16 @@ public partial class FileProperty : StringProperty {
 		OpenFileDialog.FileSelected += OnFileSelected;
 	}
 
-	protected void OnClick() {
-		var fullPath = Path.GetFullPath(Path.Combine(Directory, PropertyValue));
-		var directory = Path.GetDirectoryName(fullPath);
-		OpenFileDialog.CurrentDir = directory;
-		OpenFileDialog.CurrentFile = fullPath;
+	protected void LoadButton_OnPressed() {
+		if (string.IsNullOrWhiteSpace(PropertyValue)) {
+			OpenFileDialog.CurrentDir = Directory;
+			OpenFileDialog.CurrentFile = string.Empty;
+		} else {
+			var fullPath = Path.GetFullPath(Path.Combine(Directory, PropertyValue));
+			var directory = Path.GetDirectoryName(fullPath);
+			OpenFileDialog.CurrentDir = directory;
+			OpenFileDialog.CurrentFile = Path.GetFileName(fullPath);
+		}
 		OpenFileDialog.Popup();
 	}
 
