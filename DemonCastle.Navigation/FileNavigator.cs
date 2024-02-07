@@ -33,4 +33,7 @@ public class FileNavigator : DirectoryNavigator {
 
 	public string LoadContent() => File.ReadAllText(FilePath);
 	public void SaveContent(string content) => File.WriteAllText(FilePath, content);
+	public byte[] ReadAllBytes() => File.ReadAllBytes(FilePath);
+
+	public bool FileExists() => File.Exists(FilePath);
 }

@@ -1,5 +1,5 @@
+using System.IO;
 using DemonCastle.Editor;
-using DemonCastle.Files;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -24,9 +24,9 @@ public partial class Main : Control {
         var projectPath = arguments.ProjectPath;
         if (projectPath == null) return;
 
-        var fileNavigator = new FileNavigator<ProjectFile>(projectPath);
-        var projectInfo = new ProjectInfo(fileNavigator);
-        LoadPlayProjectView(projectInfo);
+        var projectResources = new ProjectResources(Path.GetDirectoryName(projectPath) ?? throw new DirectoryNotFoundException());
+        var project = projectResources.GetProject(projectPath);
+        LoadPlayProjectView(project);
     }
 
     private void LoadProjectMenuView() {

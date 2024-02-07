@@ -15,66 +15,6 @@ public class DirectoryNavigator {
 		Directory = directory;
 	}
 
-	// public AudioStream GetAudioStream(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetAudioStream(path);
-	// }
-	//
-	// public CharacterInfo GetCharacter(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetCharacter(path);
-	// }
-	//
-	// public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
-	//
-	// public Font GetFont(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetFont(path);
-	// }
-	//
-	// public LevelInfo GetLevel(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetLevel(path);
-	// }
-	//
-	// public SceneInfo GetScene(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetScene(path);
-	// }
-	//
-	// public ISpriteSource GetSprite(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	if (path.ToLower().EndsWith(FileType.SpriteGrid.Extension)) {
-	// 		return ProjectResources.GetSpriteGrid(path);
-	// 	}
-	// 	if (path.ToLower().EndsWith(FileType.SpriteAtlas.Extension)) {
-	// 		return ProjectResources.GetSpriteAtlas(path);
-	// 	}
-	// 	throw new UnknownSpriteFileFormatException(path);
-	// }
-	//
-	// public TextInfo GetText(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetText(path);
-	// }
-	//
-	// public TileSetInfo GetTileSet(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetTileSet(path);
-	// }
-	//
-	// public TileSetInfo GetTileSet(Guid tileSetId) => ProjectResources.GetTileSet(tileSetId);
-	//
-	// public Texture2D GetTexture(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetTexture(path);
-	// }
-	//
-	// public WeaponInfo GetWeapon(string localPath) {
-	// 	var path = ToAbsolutePath(localPath);
-	// 	return ProjectResources.GetWeapon(path);
-	// }
-
 	public IEnumerable<FileNavigator> GetFilesAndSubFiles() {
 		var childSubFiles = GetDirectories().SelectMany(d => d.GetFilesAndSubFiles());
 		return GetFiles().Concat(childSubFiles);
@@ -151,8 +91,10 @@ public class DirectoryNavigator {
 		return File.Exists(fullPath);
 	}
 
-	private string ToAbsolutePath(string fileName) {
-		var fullPath = Path.Combine(Directory, fileName);
+	public bool DirectoryExists() => System.IO.Directory.Exists(Directory);
+
+	public string ToAbsolutePath(string relativePath) {
+		var fullPath = Path.Combine(Directory, relativePath);
 		return Path.GetFullPath(fullPath);
 	}
 }

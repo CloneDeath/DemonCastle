@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DemonCastle.Navigation;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
@@ -33,6 +37,67 @@ public class FileNavigator<T> : IFileNavigator {
 	public string FilePath => _navigator.FilePath;
 	public string FileName => _navigator.FileName;
 	public bool FileExists(string source) => _navigator.FileExists(source);
+	private string ToAbsolutePath(string relativePath) => _navigator.ToAbsolutePath(relativePath);
+
+	public AudioStream GetAudioStream(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetAudioStream(path);
+	}
+
+	public CharacterInfo GetCharacter(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetCharacter(path);
+	}
+
+	public IEnumerable<CharacterInfo> GetCharacters(IEnumerable<string> localPaths) => localPaths.Select(GetCharacter);
+
+	public Font GetFont(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetFont(path);
+	}
+
+	public LevelInfo GetLevel(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetLevel(path);
+	}
+
+	public SceneInfo GetScene(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetScene(path);
+	}
+
+	public ISpriteSource GetSprite(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		if (path.ToLower().EndsWith(FileType.SpriteGrid.Extension)) {
+			return _resources.GetSpriteGrid(path);
+		}
+		if (path.ToLower().EndsWith(FileType.SpriteAtlas.Extension)) {
+			return _resources.GetSpriteAtlas(path);
+		}
+		throw new UnknownSpriteFileFormatException(path);
+	}
+
+	public TextInfo GetText(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetText(path);
+	}
+
+	public TileSetInfo GetTileSet(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetTileSet(path);
+	}
+
+	public TileSetInfo GetTileSet(Guid tileSetId) => _resources.GetTileSet(tileSetId);
+
+	public Texture2D GetTexture(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetTexture(path);
+	}
+
+	public WeaponInfo GetWeapon(string localPath) {
+		var path = ToAbsolutePath(localPath);
+		return _resources.GetWeapon(path);
+	}
 
 	public AudioStream ToAudioStream() => _resources.GetAudioStream(FilePath);
 	public CharacterInfo ToCharacterInfo() => _resources.GetCharacter(FilePath);

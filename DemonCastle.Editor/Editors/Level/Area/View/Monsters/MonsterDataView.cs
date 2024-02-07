@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data;
