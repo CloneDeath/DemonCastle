@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Navigation;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView;
@@ -17,7 +18,7 @@ public partial class ExplorerPanel : VBoxContainer {
 		remove => FileTree.OnFileActivated -= value;
 	}
 
-	public ExplorerPanel(DirectoryNavigator directoryNavigator) {
+	public ExplorerPanel(ProjectResources resources) {
 		Name = nameof(ExplorerPanel);
 
 		AddChild(Controls = new HFlowContainer {
@@ -42,7 +43,7 @@ public partial class ExplorerPanel : VBoxContainer {
 			});
 			ExpandButton.Pressed += ExpandButton_OnPressed;
 		}
-		AddChild(FileTree = new FileTree(directoryNavigator) {
+		AddChild(FileTree = new FileTree(resources) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}

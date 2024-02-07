@@ -6,12 +6,14 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.Game;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
-	protected DirectoryNavigator Root { get; }
+	private readonly ProjectResources _resources;
+
 	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
 	protected FilePopupMenu FilePopupMenu { get; }
 	protected DeleteDialog ConfirmDelete { get; }
@@ -23,9 +25,9 @@ public partial class FileTree : Tree {
 	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 
-	public FileTree(DirectoryNavigator rootDirectory) {
+	public FileTree(ProjectResources resources) {
+		_resources = resources;
 		Name = nameof(FileTree);
-		Root = rootDirectory;
 		AllowRmbSelect = true;
 
 		AddChild(GetNameDialog = new GetNameDialog());
@@ -48,7 +50,7 @@ public partial class FileTree : Tree {
 		FilePopupMenu.RenameFile += OnRename;
 		FilePopupMenu.DeleteFile += OnDelete;
 
-		CreateTree();
+		ReloadTree();
 		ItemActivated += OnItemActivated;
 		ItemMouseSelected += OnItemSelected;
 	}
@@ -82,7 +84,7 @@ public partial class FileTree : Tree {
 		}
 	}
 
-	public void Refresh() => CreateTree();
+	public void Refresh() => ReloadTree();
 
 	public void Collapse() {
 		var root = GetRoot();
@@ -102,11 +104,11 @@ public partial class FileTree : Tree {
 		}
 	}
 
-	protected void CreateTree() {
+	protected void ReloadTree() {
 		Clear();
 		FileMap.Clear();
 		DirectoryMap.Clear();
-		CreateDirectory(null, Root);
+		CreateDirectory(null, _resources.GetRoot());
 	}
 
 	protected void CreateDirectory(TreeItem? parent, DirectoryNavigator directory) {
@@ -118,11 +120,11 @@ public partial class FileTree : Tree {
 		DirectoryMap[dir] = directory;
 
 		foreach (var subDirectory in directory.GetDirectories()) {
-			CreateDirectory(dir, subDirectory);
+			CreateDirectory(dir, _resources.GetDirectory(subDirectory));
 		}
 
 		foreach (var file in directory.GetFiles()) {
-			CreateFile(dir, file);
+			CreateFile(dir, _resources.GetFile(file));
 		}
 	}
 
@@ -146,7 +148,7 @@ public partial class FileTree : Tree {
 		if (name == null) return;
 		var dirNav = DirectoryMap[selected];
 		dirNav.CreateDirectory(name);
-		CreateTree();
+		ReloadTree();
 	}
 
 	public async void OnCreateEditorFileSelected(IEditorFileType fileType) {
@@ -164,7 +166,7 @@ public partial class FileTree : Tree {
 		var contents = Serializer.Serialize(data);
 		dirNav.CreateFile(name, fileType.Extension, contents);
 
-		CreateTree();
+		ReloadTree();
 	}
 
 
@@ -178,7 +180,7 @@ public partial class FileTree : Tree {
 		var dirNav = DirectoryMap[selected];
 		dirNav.CreateEmptyFile(name, FileType.Text.Extension);
 
-		CreateTree();
+		ReloadTree();
 	}
 
 	protected FileNavigator? SelectedFile {
@@ -217,7 +219,7 @@ public partial class FileTree : Tree {
 	protected void OnRenameConfirmed() {
 		SelectedFile?.RenameFile($"{ConfirmRename.Text}");
 		SelectedDirectory?.RenameDirectory($"{ConfirmRename.Text}");
-		CreateTree();
+		ReloadTree();
 	}
 
 	protected void OnDelete() {
@@ -228,7 +230,7 @@ public partial class FileTree : Tree {
 		SelectedFile?.DeleteFile();
 		SelectedDirectory?.DeleteDirectory();
 
-		CreateTree();
+		ReloadTree();
 	}
 
 	#region Drag-and-drop

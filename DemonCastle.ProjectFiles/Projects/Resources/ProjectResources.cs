@@ -166,4 +166,20 @@ public class ProjectResources {
 		ReloadFiles();
 		return Files;
 	}
+
+	public DirectoryNavigator GetRoot() => GetDirectory(Root);
+
+	public DirectoryNavigator GetDirectory(DirectoryNavigator dir) {
+		var existing = Directories.FirstOrDefault(d => d.Directory == dir.Directory);
+		if (existing != null) return existing;
+		Directories.Add(dir);
+		return dir;
+	}
+
+	public FileNavigator GetFile(FileNavigator file) {
+		var existing = Files.FirstOrDefault(f => f.FilePath == file.FilePath);
+		if (existing != null) return existing;
+		Files.Add(file);
+		return file;
+	}
 }
