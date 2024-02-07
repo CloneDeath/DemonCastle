@@ -13,7 +13,7 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public partial class GamePlayer : PlayerEntityCommon {
+public partial class GamePlayer : EntityCommon {
 	protected LevelInfo? Level { get; set; }
 	protected CharacterInfo? Character { get; set; }
 
@@ -39,7 +39,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 		: base(game, logger, debug) {
 		Name = nameof(GamePlayer);
 
-		State = new PlayerVariables(this);
+		State = new Variables(this);
 
 		AddChild(Weapon = new GameAnimation(this, debug));
 		AddChild(Animation = new CharacterAnimation(this, debug));
@@ -63,7 +63,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 		});
 	}
 
-	public PlayerVariables State { get; }
+	public Variables State { get; }
 	public Vector2 PositionInArea => GlobalPosition - (Game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
 
 	protected override bool ApplyDamage(int amount) {

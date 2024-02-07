@@ -18,6 +18,11 @@ public partial class ExplorerPanel : VBoxContainer {
 		remove => FileTree.OnFileActivated -= value;
 	}
 
+	public event Action TreeReloaded {
+		add => FileTree.TreeReloaded += value;
+		remove => FileTree.TreeReloaded -= value;
+	}
+
 	public ExplorerPanel(ProjectResources resources) {
 		Name = nameof(ExplorerPanel);
 

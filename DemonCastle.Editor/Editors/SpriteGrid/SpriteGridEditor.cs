@@ -10,7 +10,6 @@ namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.File.SpriteGridIcon;
-	public override string TabText { get; }
 
 	protected HSplitContainer SplitContainer { get; }
 	protected VBoxContainer LeftContainer { get; }
@@ -22,7 +21,6 @@ public partial class SpriteGridEditor : BaseEditor {
 
 	public SpriteGridEditor(SpriteGridInfo spriteGrid) {
 		Name = nameof(SpriteGridEditor);
-		TabText = spriteGrid.FileName;
 		CustomMinimumSize = new Vector2I(500, 350);
 
 		AddChild(SplitContainer = new HSplitContainer());

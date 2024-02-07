@@ -1,19 +1,16 @@
 using DemonCastle.Editor.Icons;
-using DemonCastle.Navigation;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
 public partial class AudioEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.File.SoundIcon;
-	public override string TabText { get; }
 
 	private readonly AudioStreamPlayer _player;
 	private readonly Button _playButton;
 
-	public AudioEditor(FileNavigator file, AudioStream audioStream) {
+	public AudioEditor(AudioStream audioStream) {
 		Name = nameof(ImageEditor);
-		TabText = file.FileName;
 
 		AddChild(_player = new AudioStreamPlayer {
 			Stream = audioStream

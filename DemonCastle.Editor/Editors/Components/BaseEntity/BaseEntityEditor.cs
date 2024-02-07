@@ -5,13 +5,10 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
 public abstract partial class BaseEntityEditor : BaseEditor {
-	public override string TabText { get; }
 	protected HSplitContainer SplitContainer { get; }
 	protected BaseEntityTabContainer Tabs { get; }
 
 	protected BaseEntityEditor(ProjectResources resources, ProjectInfo project, IFileInfo file, IBaseEntityInfo entity, Control detailsPanel) {
-		TabText = file.FileName;
-
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 

@@ -8,7 +8,7 @@ using Godot;
 
 namespace DemonCastle.Game.BaseEntities;
 
-public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState {
+public abstract partial class GameBaseEntity : EntityCommon, IEntityState {
 	protected readonly LevelInfo Level;
 	private readonly VariableCollection _variables;
 	private readonly GameAnimation _animation;

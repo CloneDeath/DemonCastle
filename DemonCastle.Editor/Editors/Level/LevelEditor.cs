@@ -10,7 +10,6 @@ namespace DemonCastle.Editor.Editors.Level;
 
 public partial class LevelEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.File.LevelIcon;
-	public override string TabText { get; }
 
 	protected LevelInfo Level { get; }
 
@@ -21,7 +20,6 @@ public partial class LevelEditor : BaseEditor {
 
 	public LevelEditor(ProjectResources resources, LevelInfo level) {
 		Name = nameof(LevelEditor);
-		TabText = level.FileName;
 		CustomMinimumSize = new Vector2I(600, 400);
 
 		Level = level;

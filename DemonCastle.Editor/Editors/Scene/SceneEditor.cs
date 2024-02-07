@@ -11,7 +11,6 @@ namespace DemonCastle.Editor.Editors.Scene;
 
 public partial class SceneEditor : BaseEditor {
 	public override Texture2D TabIcon => EditorFileType.Scene.Icon;
-	public override string TabText { get; }
 
 	private HSplitContainer Split { get; }
 
@@ -24,7 +23,7 @@ public partial class SceneEditor : BaseEditor {
 	private SceneItemEditor SceneItemEditor { get; }
 
 	public SceneEditor(ProjectInfo project, SceneInfo scene) {
-		TabText = scene.FileName;
+		Name = nameof(SceneEditor);
 
 		AddChild(Split = new HSplitContainer());
 		Split.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);

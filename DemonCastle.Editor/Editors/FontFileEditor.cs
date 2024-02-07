@@ -1,19 +1,16 @@
 using DemonCastle.Editor.Icons;
-using DemonCastle.Navigation;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
 public partial class FontFileEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.File.TextureIcon;
-	public override string TabText { get; }
 
 	protected ScrollContainer ScrollContainer { get; }
 	protected VBoxContainer Lines { get; }
 
-	public FontFileEditor(FileNavigator file, Font font) {
+	public FontFileEditor(Font font) {
 		Name = nameof(ImageEditor);
-		TabText = file.FileName;
 
 		AddChild(ScrollContainer = new ScrollContainer());
 		ScrollContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);

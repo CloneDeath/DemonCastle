@@ -13,5 +13,5 @@ public class JpgEditorFileType : JpgFileType, IEditorFileType {
 
 	public object CreateFileInstance(string name) => string.Empty;
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new ImageEditor(file, resources.GetTexture(file));
+	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new ImageEditor(resources.GetTexture(file));
 }

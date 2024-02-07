@@ -6,7 +6,7 @@ using Godot;
 
 namespace DemonCastle.Game.BaseEntities;
 
-public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable {
+public abstract partial class EntityCommon : CharacterBody2D, IDamageable {
 	public Guid Id { get; } = Guid.NewGuid();
 
 	protected readonly IGameState Game;
@@ -27,11 +27,11 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 
 	protected HitInvulnerabilityTracker InvulnerabilityTracker { get; }
 
-	protected PlayerEntityCommon(IGameState game, IGameLogger logger, DebugState debug) {
+	protected EntityCommon(IGameState game, IGameLogger logger, DebugState debug) {
 		Game = game;
 		Logger = logger;
 
-		Name = nameof(PlayerEntityCommon);
+		Name = nameof(EntityCommon);
 
 		AddChild(CollisionShape = new CollisionShape2D {
 			DebugColor = new Color(Colors.Green, 0.5f),

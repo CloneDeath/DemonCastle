@@ -21,7 +21,12 @@ public partial class EditorWorkspace : Control {
 			CustomMinimumSize = new Vector2(250, 0)
 		});
 		Explorer.FileActivated += ExplorerOnFileActivated;
+		Explorer.TreeReloaded += Explorer_OnTreeReloaded;
 		SplitContainer.AddChild(EditArea = new EditArea(resources, project));
+	}
+
+	private void Explorer_OnTreeReloaded() {
+		EditArea.ReloadTabNames();
 	}
 
 	protected void ExplorerOnFileActivated(FileNavigator file) {

@@ -16,7 +16,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public interface IBaseEntityInfo : IListableInfo, INotifyPropertyChanged {
 	public Guid Id { get; }
-	public string Name { get; }
+	public string Name { get; set; }
 	Guid InitialState { get; set; }
 	public Vector2I Size { get; }
 	public AnimationInfoCollection Animations { get; }

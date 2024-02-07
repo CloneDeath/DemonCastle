@@ -10,7 +10,6 @@ namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
     public override Texture2D TabIcon => IconTextures.File.SpriteAtlasIcon;
-    public override string TabText { get; }
 
     protected HSplitContainer SplitContainer { get; }
     protected VBoxContainer LeftContainer { get; }
@@ -20,7 +19,6 @@ public partial class SpriteAtlasEditor : BaseEditor {
 
     public SpriteAtlasEditor(SpriteAtlasInfo spriteAtlas) {
         Name = nameof(SpriteAtlasEditor);
-        TabText = spriteAtlas.FileName;
         CustomMinimumSize = new Vector2I(600, 300);
 
         AddChild(SplitContainer = new HSplitContainer());

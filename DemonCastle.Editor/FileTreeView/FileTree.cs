@@ -21,6 +21,7 @@ public partial class FileTree : Tree {
 	protected GetNameDialog GetNameDialog { get; }
 
 	public event Action<FileNavigator>? OnFileActivated;
+	public event Action? TreeReloaded;
 
 	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
@@ -109,6 +110,7 @@ public partial class FileTree : Tree {
 		FileMap.Clear();
 		DirectoryMap.Clear();
 		CreateDirectory(null, _resources.GetRoot());
+		TreeReloaded?.Invoke();
 	}
 
 	protected void CreateDirectory(TreeItem? parent, DirectoryNavigator directory) {

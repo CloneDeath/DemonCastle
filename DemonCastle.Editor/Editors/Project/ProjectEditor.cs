@@ -8,7 +8,6 @@ namespace DemonCastle.Editor.Editors.Project;
 
 public partial class ProjectEditor : BaseEditor {
 	public override Texture2D TabIcon => IconTextures.File.ProjectIcon;
-	public override string TabText { get; }
 
 	protected VBoxContainer Container { get; }
 	protected ProjectDetails Details { get; }
@@ -16,7 +15,6 @@ public partial class ProjectEditor : BaseEditor {
 
 	public ProjectEditor(ProjectResources resources, ProjectInfo project) {
 		Name = nameof(ProjectEditor);
-		TabText = project.FileName;
 
 		AddChild(Container = new VBoxContainer());
 		Container.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);

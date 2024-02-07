@@ -6,10 +6,10 @@ using Godot;
 
 namespace DemonCastle.Game;
 
-public class PlayerVariables : IPlayerState {
+public class Variables : IPlayerState {
 	private readonly GamePlayer _player;
 
-	public PlayerVariables(GamePlayer player) {
+	public Variables(GamePlayer player) {
 		_player = player;
 	}
 

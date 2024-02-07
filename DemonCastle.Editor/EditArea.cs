@@ -59,7 +59,7 @@ public partial class EditArea : TabContainer {
 		try {
 			var editor = GetEditor(file);
 			EditorFileMap[file] = editor;
-			ShowEditor(editor);
+			ShowEditor(file, editor);
 		}
 		catch (TargetInvocationException ex) {
 			ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.InnerException?.Message}";
@@ -73,11 +73,11 @@ public partial class EditArea : TabContainer {
 		}
 	}
 
-	public void ShowEditor(BaseEditor editor) {
+	public void ShowEditor(FileNavigator file, BaseEditor editor) {
 		AddChild(editor);
 		var index = editor.GetIndex();
 		SetTabIcon(index, editor.TabIcon);
-		SetTabTitle(index, editor.TabText);
+		SetTabTitle(index, file.FileName);
 		CurrentTab = index;
 	}
 
@@ -93,5 +93,12 @@ public partial class EditArea : TabContainer {
 		var fileNavigator = GetFileNavigator((int)tab);
 		if (fileNavigator != null) EditorFileMap.Remove(fileNavigator);
 		control.QueueFree();
+	}
+
+	public void ReloadTabNames() {
+		foreach (var pair in EditorFileMap) {
+			var index = pair.Value.GetIndex();
+			SetTabTitle(index, pair.Key.FileName);
+		}
 	}
 }
