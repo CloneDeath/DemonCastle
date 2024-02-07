@@ -11,12 +11,12 @@ public partial class AudioEditor : BaseEditor {
 	private readonly AudioStreamPlayer _player;
 	private readonly Button _playButton;
 
-	public AudioEditor(FileNavigator file) {
+	public AudioEditor(FileNavigator file, AudioStream audioStream) {
 		Name = nameof(ImageEditor);
 		TabText = file.FileName;
 
 		AddChild(_player = new AudioStreamPlayer {
-			Stream = file.ToAudioStream()
+			Stream = audioStream
 		});
 		AddChild(_playButton = new Button {
 			Text = "Play"

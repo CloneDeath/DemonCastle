@@ -1,16 +1,16 @@
 using System;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class TileToolsPanel : VBoxContainer {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	protected LevelInfo Level { get; }
 
 	protected readonly Layers.TileLayerEditor TileLayerEditor;
@@ -22,13 +22,13 @@ public partial class TileToolsPanel : VBoxContainer {
 
 	protected VBoxContainer AreaTiles { get; }
 
-	public TileToolsPanel(ProjectInfo project, LevelInfo level) {
-		_project = project;
+	public TileToolsPanel(ProjectResources resources, LevelInfo level) {
+		_resources = resources;
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
 		AddChild(TileLayerEditor = new Layers.TileLayerEditor());
-		AddChild(TileSetSelector = new TileSetSelector(project, level.Directory));
+		AddChild(TileSetSelector = new TileSetSelector(resources, level.Directory));
 		TileSetSelector.TileSetIdSelected += TileSetSelector_OnTileSetIdSelected;
 
 		AddChild(LevelTiles = new VBoxContainer {
@@ -47,13 +47,13 @@ public partial class TileToolsPanel : VBoxContainer {
 		});
 	}
 
-	private void TileSetSelector_OnTileSetIdSelected(Guid? id) {
-		LevelTiles.Visible = id == Guid.Empty;
+	private void TileSetSelector_OnTileSetIdSelected(Guid? tileSetId) {
+		LevelTiles.Visible = tileSetId == Guid.Empty;
 		foreach (var child in AreaTiles.GetChildren()) {
 			child.QueueFree();
 		}
-		if (id != Guid.Empty && id != null) {
-			var tileSet = _project.TileSets.FirstOrDefault(tileSet => tileSet.Id == id);
+		if (tileSetId != Guid.Empty && tileSetId != null) {
+			var tileSet = _resources.GetTileSet(tileSetId.Value);
 			if (tileSet != null) {
 				var tileScroll = new ScrollContainer {
 					VerticalScrollMode = ScrollContainer.ScrollMode.Auto,
@@ -69,7 +69,7 @@ public partial class TileToolsPanel : VBoxContainer {
 				tileSelector.TileSelected += TileSelector_OnTileSelected;
 			}
 		}
-		AreaTiles.Visible = id != Guid.Empty && id != null;
+		AreaTiles.Visible = tileSetId != Guid.Empty && tileSetId != null;
 	}
 
 	private void TileCollectionEditor_OnTileSelected(TileInfo? obj) {

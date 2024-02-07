@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors.Components.Animations;
 using DemonCastle.Editor.Editors.Components.States;
 using DemonCastle.Editor.Editors.Components.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
@@ -11,14 +12,14 @@ public partial class BaseEntityTabContainer : TabContainer {
 	private readonly AnimationsEditor _animations;
 	private readonly StatesEditor _states;
 
-	public BaseEntityTabContainer(ProjectInfo project, IFileInfo file) {
+	public BaseEntityTabContainer(ProjectResources resources, ProjectInfo project, IFileInfo file) {
 		Name = nameof(BaseEntityTabContainer);
 
-		AddChild(_variables = new VariableCollectionEditor(project));
+		AddChild(_variables = new VariableCollectionEditor(resources));
 		SetTabTitle(0, "Variables");
 		AddChild(_animations = new AnimationsEditor(file));
 		SetTabTitle(1, "Animations");
-		AddChild(_states = new StatesEditor(project));
+		AddChild(_states = new StatesEditor(resources, project));
 		SetTabTitle(2, "States");
 	}
 

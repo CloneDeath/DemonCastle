@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors.Components.States.Editor.Events;
 using DemonCastle.Editor.Editors.Components.States.Editor.Transitions;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor;
@@ -12,13 +13,13 @@ public partial class StateEditor : VSplitContainer {
 	private EventsEditor EventsEditor { get; }
 	private TransitionsEditor TransitionsEditor { get; }
 
-	public StateEditor(ProjectInfo project) {
+	public StateEditor(ProjectResources resources, ProjectInfo project) {
 		Name = nameof(StateEditor);
 
 		AddChild(Details = new StateDetails());
 
 		AddChild(TabContainer = new TabContainer());
-		TabContainer.AddChild(EventsEditor = new EventsEditor(project));
+		TabContainer.AddChild(EventsEditor = new EventsEditor(resources));
 		TabContainer.SetTabTitle(0, "Events");
 		TabContainer.AddChild(TransitionsEditor = new TransitionsEditor(project));
 		TabContainer.SetTabTitle(1, "Transitions");

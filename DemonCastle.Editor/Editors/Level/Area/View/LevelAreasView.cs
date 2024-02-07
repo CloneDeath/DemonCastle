@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View;
 
 public partial class LevelAreasView : ControlView<ExpandingControl> {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	private readonly LevelInfo _levelInfo;
 	private readonly Dictionary<AreaInfo, AreaView> _areaMap = new();
 
@@ -19,8 +19,8 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 	public event Action<AreaInfo, Vector2I>? AreaTileSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileCleared;
 
-	public LevelAreasView(ProjectInfo project, LevelInfo levelInfo) {
-		_project = project;
+	public LevelAreasView(ProjectResources resources, LevelInfo levelInfo) {
+		_resources = resources;
 		_levelInfo = levelInfo;
 		Name = nameof(LevelAreasView);
 		CellSize = levelInfo.TileSize;
@@ -51,7 +51,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 		_areaMap.Clear();
 
 		foreach (var area in _levelInfo.Areas) {
-			var areaView = new AreaView(_project, area) {
+			var areaView = new AreaView(_resources, area) {
 				MouseFilter = MouseFilterEnum.Pass
 			};
 			areaView.Selected += _ => AreaSelected?.Invoke(area);

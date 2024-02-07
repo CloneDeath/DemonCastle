@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Specialized;
 using System.Linq;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.List;
 
 public partial class MonsterDataList : VBoxContainer {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	public event Action<MonsterDataInfo?>? MonsterSelected;
 
 	private AreaInfo? _area;
@@ -19,8 +19,8 @@ public partial class MonsterDataList : VBoxContainer {
 	private ItemList Monsters { get; }
 	private Button RemoveMonster { get; }
 
-	public MonsterDataList(ProjectInfo project) {
-		_project = project;
+	public MonsterDataList(ProjectResources resources) {
+		_resources = resources;
 		Name = nameof(MonsterDataList);
 
 		AddChild(AddMonster = new Button { Text = "Add Monster"});
@@ -79,9 +79,9 @@ public partial class MonsterDataList : VBoxContainer {
 		Monsters.Clear();
 
 		if (_area == null) return;
-		foreach (var frame in _area.Monsters) {
-			var monster = _project.Monsters.FirstOrDefault(m => frame.MonsterId == m.Id);
-			var text = $"{monster?.Name ?? "<Empty>"} @ ({frame.Position.X}, {frame.Position.Y})";
+		foreach (var monsterData in _area.Monsters) {
+			var monster = _resources.GetMonster(monsterData.MonsterId);
+			var text = $"{monster?.Name ?? "<Empty>"} @ ({monsterData.Position.X}, {monsterData.Position.Y})";
 			var texture = monster?.PreviewTexture ?? new NullSpriteDefinition().Texture;
 			Monsters.AddItem(text, texture);
 		}

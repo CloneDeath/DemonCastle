@@ -3,8 +3,8 @@ using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Level.Area.View.Monsters;
 using DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 using DemonCastle.Game;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View;
@@ -24,7 +24,7 @@ public partial class AreaView : SelectableControl {
 	private Vector2I? _previousTriggeredPosition;
 	private bool? _previousTriggerWasSelect;
 
-	public AreaView(ProjectInfo project, AreaInfo area) {
+	public AreaView(ProjectResources resources, AreaInfo area) {
 		Area = area;
 
 		Name = nameof(AreaView);
@@ -39,7 +39,7 @@ public partial class AreaView : SelectableControl {
 		AddChild(Tiles = new AreaTilesView(area) {
 			MouseFilter = MouseFilterEnum.Pass
 		});
-		AddChild(Monsters = new AreaMonstersView(project, area) {
+		AddChild(Monsters = new AreaMonstersView(resources, area) {
 			MouseFilter = MouseFilterEnum.Pass
 		});
 	}

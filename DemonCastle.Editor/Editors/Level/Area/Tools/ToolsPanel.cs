@@ -1,9 +1,9 @@
 using DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools;
@@ -20,12 +20,12 @@ public partial class ToolsPanel : TabContainer {
 		}
 	}
 
-	public ToolsPanel(ProjectInfo project, LevelInfo level) {
+	public ToolsPanel(ProjectResources resources, LevelInfo level) {
 		Name = nameof(ToolsPanel);
 
-		AddChild(_tileToolsPanel = new TileToolsPanel(project, level));
+		AddChild(_tileToolsPanel = new TileToolsPanel(resources, level));
 		SetTabTitle(0, "Tiles");
-		AddChild(_monsterToolsPanel = new MonsterToolsPanel(project));
+		AddChild(_monsterToolsPanel = new MonsterToolsPanel(resources));
 		SetTabTitle(1, "Monsters");
 	}
 

@@ -11,12 +11,12 @@ public partial class ImageEditor : BaseEditor {
 
 	protected TextureView TextureView { get; }
 
-	public ImageEditor(FileNavigator texture) {
+	public ImageEditor(FileNavigator file, Texture2D texture) {
 		Name = nameof(ImageEditor);
-		TabText = texture.FileName;
+		TabText = file.FileName;
 
 		AddChild(TextureView = new TextureView {
-			Texture = texture.ToTexture()
+			Texture = texture
 		});
 		TextureView.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, LayoutPresetMode.Minsize, 5);
 	}

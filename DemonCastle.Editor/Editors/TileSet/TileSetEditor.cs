@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.TileSets;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.TileSet;
@@ -14,7 +15,7 @@ public partial class TileSetEditor : BaseEditor {
 	protected TileInfoCollectionEditor TileList { get; }
 	protected TileEditor TileEditor { get; }
 
-	public TileSetEditor(ProjectInfo project, TileSetInfo tileSet) {
+	public TileSetEditor(ProjectResources resources, ProjectInfo project, TileSetInfo tileSet) {
 		TabText = tileSet.FileName;
 
 		AddChild(SplitContainer = new HSplitContainer());
@@ -31,7 +32,7 @@ public partial class TileSetEditor : BaseEditor {
 			});
 			TileList.TileSelected += TileList_OnTileSelected;
 		}
-		SplitContainer.AddChild(TileEditor = new TileEditor(project, tileSet));
+		SplitContainer.AddChild(TileEditor = new TileEditor(resources, project, tileSet));
 	}
 
 	private void TileList_OnTileSelected(TileInfo? tile) => TileEditor.Load(tile);

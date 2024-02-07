@@ -1,19 +1,19 @@
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 using Container = Godot.Container;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View.Monsters;
 
 public partial class MonsterDataView : Container {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	private readonly MonsterDataInfo _monsterData;
 	private SpriteDefinitionView Sprite { get; }
 
-	public MonsterDataView(ProjectInfo project, MonsterDataInfo monsterData) {
-		_project = project;
+	public MonsterDataView(ProjectResources resources, MonsterDataInfo monsterData) {
+		_resources = resources;
 		_monsterData = monsterData;
 		Name = nameof(MonsterDataView);
 
@@ -38,7 +38,7 @@ public partial class MonsterDataView : Container {
 
 	private void Reload() {
 		Position = _monsterData.MonsterPosition.ToPixelPositionInArea();
-		var monster = _project.Monsters.FirstOrDefault(m => m.Id == _monsterData.MonsterId);
+		var monster = _resources.GetMonster(_monsterData.MonsterId);
 		Sprite.Load(monster?.PreviewSpriteDefinition);
 		Sprite.Position = -monster?.PreviewOrigin ?? Vector2.Zero;
 	}

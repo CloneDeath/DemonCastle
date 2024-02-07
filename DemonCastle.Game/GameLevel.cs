@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using DemonCastle.Game.DebugNodes;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GameLevel : Node2D {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	private readonly IGameState _game;
 	private readonly IGameLogger _logger;
 	private readonly DebugState _debug;
@@ -20,8 +20,8 @@ public partial class GameLevel : Node2D {
 
 	public Vector2 StartingLocation => Level?.StartingLocation ?? Vector2.Zero;
 
-	public GameLevel(ProjectInfo project, IGameState game, IGameLogger logger, DebugState debug) {
-		_project = project;
+	public GameLevel(ProjectResources resources, IGameState game, IGameLogger logger, DebugState debug) {
+		_resources = resources;
 		_game = game;
 		_logger = logger;
 		_debug = debug;
@@ -42,7 +42,7 @@ public partial class GameLevel : Node2D {
 		Level = level;
 
 		foreach (var area in Level.Areas) {
-			var gameArea = new GameArea(_game, _project, level, area, _logger, _debug) {
+			var gameArea = new GameArea(_resources, _game, level, area, _logger, _debug) {
 				Position = area.PositionOfArea.ToPixelPositionInLevel()
 			};
 			AreaMap[area] = gameArea;

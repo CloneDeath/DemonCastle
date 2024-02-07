@@ -1,19 +1,20 @@
 using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
 public partial class EntityActionCollectionEditor : HSplitContainer {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	private Control Left { get; }
 	private Control Right { get; }
 
 	public IBaseEntityInfo? Entity { get; set; }
 
-	public EntityActionCollectionEditor(ProjectInfo project) {
-		_project = project;
+	public EntityActionCollectionEditor(ProjectResources resources) {
+		_resources = resources;
 		Name = nameof(EntityActionCollectionEditor);
 
 		AddChild(Left = new MarginContainer {
@@ -47,7 +48,7 @@ public partial class EntityActionCollectionEditor : HSplitContainer {
 		if (obj == null) return;
 		if (Entity == null) return;
 
-		var editor = new EntityActionEditor(_project, Entity, obj);
+		var editor = new EntityActionEditor(_resources, Entity, obj);
 		Right.AddChild(editor);
 		editor.SetAnchorsPreset(LayoutPreset.FullRect);
 	}

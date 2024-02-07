@@ -1,9 +1,9 @@
 using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Level.LevelOverview;
 using DemonCastle.Editor.Icons;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level;
@@ -19,7 +19,7 @@ public partial class LevelEditor : BaseEditor {
 	protected Button ExpandCollapseButton { get; }
 	protected AreaEdit Area { get; }
 
-	public LevelEditor(ProjectInfo project, LevelInfo level) {
+	public LevelEditor(ProjectResources resources, LevelInfo level) {
 		Name = nameof(LevelEditor);
 		TabText = level.FileName;
 		CustomMinimumSize = new Vector2I(600, 400);
@@ -39,7 +39,7 @@ public partial class LevelEditor : BaseEditor {
 		});
 		ExpandCollapseButton.Pressed += ExpandCollapseButton_OnPressed;
 
-		bottom.AddChild(Area = new AreaEdit(project, level) {
+		bottom.AddChild(Area = new AreaEdit(resources, level) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 		Area.AreaSelected += Area_OnAreaSelected;

@@ -1,16 +1,16 @@
 using System.Collections.Specialized;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.View.Monsters;
 
 public partial class AreaMonstersView : Container {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	private readonly AreaInfo _area;
 
-	public AreaMonstersView(ProjectInfo project, AreaInfo area) {
-		_project = project;
+	public AreaMonstersView(ProjectResources resources, AreaInfo area) {
+		_resources = resources;
 		_area = area;
 		Reload();
 	}
@@ -35,7 +35,7 @@ public partial class AreaMonstersView : Container {
 		}
 
 		foreach (var monster in _area.Monsters) {
-			AddChild(new MonsterDataView(_project, monster));
+			AddChild(new MonsterDataView(_resources, monster));
 		}
 	}
 }

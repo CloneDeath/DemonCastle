@@ -1,6 +1,7 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Monsters;
 using DemonCastle.Editor.Editors.Components.Properties;
+using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools.Edit;
 
@@ -11,8 +12,8 @@ public partial class MonsterDataEdit : PropertyCollection {
 		set => _proxy.Proxy = value;
 	}
 
-	public MonsterDataEdit(ProjectInfo project) {
-		AddMonsterReference("Monster", _proxy, p => p.MonsterId, new EnumerableInfoWrapper<MonsterInfo>(project.Monsters));
+	public MonsterDataEdit(ProjectResources resources) {
+		AddMonsterReference("Monster", _proxy, p => p.MonsterId, new EnumerableInfoWrapper<MonsterInfo>(resources.Monsters));
 		AddVector2("Position", _proxy, p => p.Position);
 	}
 

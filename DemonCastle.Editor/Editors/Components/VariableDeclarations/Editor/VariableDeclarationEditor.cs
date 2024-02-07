@@ -1,18 +1,18 @@
 using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor.DataTypes;
 using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Exceptions;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations.Types;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
 
 public partial class VariableDeclarationEditor : Control {
-	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 
-	public VariableDeclarationEditor(ProjectInfo project) {
-		_project = project;
+	public VariableDeclarationEditor(ProjectResources resources) {
+		_resources = resources;
 	}
 
 	public void Clear() {
@@ -34,8 +34,8 @@ public partial class VariableDeclarationEditor : Control {
 			VariableType.Integer => new IntegerVariableDeclarationDetails((IntegerVariableDeclarationInfo)variableDeclaration),
 			VariableType.Float => new FloatVariableDeclarationDetails((FloatVariableDeclarationInfo)variableDeclaration),
 			VariableType.String => new StringVariableDeclarationDetails((StringVariableDeclarationInfo)variableDeclaration),
-			VariableType.Monster => new MonsterVariableDeclarationDetails(_project, (MonsterVariableDeclarationInfo)variableDeclaration),
-			VariableType.Item => new ItemVariableDeclarationDetails(_project, (ItemVariableDeclarationInfo)variableDeclaration),
+			VariableType.Monster => new MonsterVariableDeclarationDetails(_resources, (MonsterVariableDeclarationInfo)variableDeclaration),
+			VariableType.Item => new ItemVariableDeclarationDetails(_resources, (ItemVariableDeclarationInfo)variableDeclaration),
 			VariableType.Vector2I => new Vector2IVariableDeclarationDetails((Vector2IVariableDeclarationInfo)variableDeclaration),
 			_ => throw new InvalidEnumValueException<VariableType>(variableDeclaration.Type)
 		};

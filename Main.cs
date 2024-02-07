@@ -26,7 +26,7 @@ public partial class Main : Control {
 
         var projectResources = new ProjectResources(Path.GetDirectoryName(projectPath) ?? throw new DirectoryNotFoundException());
         var project = projectResources.GetProject(projectPath);
-        LoadPlayProjectView(project);
+        LoadPlayProjectView(projectResources, project);
     }
 
     private void LoadProjectMenuView() {
@@ -39,20 +39,20 @@ public partial class Main : Control {
         projectSelectionMenu.ProjectEdit += LoadEditProjectView;
     }
 
-    protected void LoadPlayProjectView(ProjectInfo project) {
+    protected void LoadPlayProjectView(ProjectResources resources, ProjectInfo project) {
         ClearChildren();
 
         GetWindow().Title = $"DemonCastle - {project.Name}";
         GameRunner gameRunner;
-        AddChild(gameRunner = new GameRunner(project));
+        AddChild(gameRunner = new GameRunner(resources, project));
         gameRunner.SetAnchorsPreset(LayoutPreset.FullRect);
     }
 
-    private void LoadEditProjectView(ProjectInfo project) {
+    private void LoadEditProjectView(ProjectResources resources, ProjectInfo project) {
         ClearChildren();
 
         GetWindow().Title = $"DemonCastle - {project.Name}";
-        AddChild(EditorSpace = new EditorSpace(project));
+        AddChild(EditorSpace = new EditorSpace(resources, project));
         EditorSpace.GoToProjectMenu += LoadProjectMenuView;
     }
 

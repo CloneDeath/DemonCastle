@@ -2,24 +2,28 @@ using System;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;
 
 public partial class EditorSpace : CanvasLayer {
+	private readonly ProjectResources _resources;
+	private readonly ProjectInfo _project;
+
 	private EditorTopBar TopBar { get; }
-	protected ProjectInfo Project { get; }
 	protected Window PlayWindow;
 
 	public event Action? GoToProjectMenu;
 
-	public EditorSpace(ProjectInfo project) {
+	public EditorSpace(ProjectResources resources, ProjectInfo project) {
+		_resources = resources;
+		_project = project;
 		Name = nameof(EditorSpace);
 
-		Project = project;
 		AddChild(PlayWindow = new Window {
 			Name = nameof(PlayWindow),
-			Title = Project.Name,
+			Title = _project.Name,
 			Visible = false,
 			MinSize = new Vector2I(800, 600),
 			Exclusive = true
@@ -33,7 +37,7 @@ public partial class EditorSpace : CanvasLayer {
 		});
 		TopBar.PlayPressed += PlayPressed;
 		TopBar.ProjectMenuPressed += TopBar_OnProjectMenuPressed;
-		AddChild(new EditorWorkspace(project) {
+		AddChild(new EditorWorkspace(resources, project) {
 			AnchorRight = 1,
 			AnchorBottom = 1,
 			OffsetRight = -5,
@@ -51,7 +55,7 @@ public partial class EditorSpace : CanvasLayer {
 		var gameSetup = new GameSetup();
 		gameSetup.GameStart += debug => {
 			gameSetup.QueueFree();
-			var runner = new GameRunner(Project, debug);
+			var runner = new GameRunner(_resources, _project, debug);
 			PlayWindow.AddChild(runner);
 			runner.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		};

@@ -5,6 +5,7 @@ using DemonCastle.Files;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.EditorFileTypes;
@@ -14,5 +15,5 @@ public class TileSetEditorFileType : TileSetFileType, IEditorFileType {
 	public object CreateFileInstance(string name) => new TileSetFile {
 		Name = name
 	};
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new TileSetEditor(project, file.ToTileSetInfo());
+	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new TileSetEditor(resources, project, resources.GetTileSet(file));
 }

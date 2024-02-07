@@ -1,5 +1,6 @@
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
@@ -27,7 +28,7 @@ public partial class EventsEditor : VBoxContainer {
 	private ItemList Events { get; }
 	private EntityActionCollectionEditor ActionList { get; }
 
-	public EventsEditor(ProjectInfo project) {
+	public EventsEditor(ProjectResources resources) {
 		Name = nameof(EventsEditor);
 
 		AddChild(Events = new ItemList {
@@ -38,7 +39,7 @@ public partial class EventsEditor : VBoxContainer {
 		Events.AddItem("OnExit");
 		Events.ItemSelected += Events_OnItemSelected;
 
-		AddChild(ActionList = new EntityActionCollectionEditor(project) {
+		AddChild(ActionList = new EntityActionCollectionEditor(resources) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}

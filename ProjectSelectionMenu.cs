@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle;
@@ -8,7 +9,7 @@ namespace DemonCastle;
 public partial class ProjectSelectionMenu : Container {
 	protected ProjectManager ProjectManager { get; } = new();
 
-	public event Action<ProjectInfo>? ProjectLoaded;
+	public event Action<ProjectResources, ProjectInfo>? ProjectLoaded;
 	public event Action<ProjectInfo>? ProjectEdit;
 
 	public override void _Ready() {

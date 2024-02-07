@@ -10,12 +10,13 @@ using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
 public partial class EntityActionEditor : MarginContainer {
-	public EntityActionEditor(ProjectInfo project, IBaseEntityInfo entity, EntityActionInfo entityAction) {
+	public EntityActionEditor(ProjectResources resources, IBaseEntityInfo entity, EntityActionInfo entityAction) {
 		Name = nameof(EntityActionEditor);
 
 		AddChild(new ChoiceTree {
@@ -48,7 +49,7 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnItem.IsSet,
 				c => {
 					entityAction.SpawnItem.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnItem, project.Items, entity, VariableType.Item);
+                    SetUpSpawnControls(c, entityAction.SpawnItem, resources.Items, entity, VariableType.Item);
 				}
 			},
 			{
@@ -56,7 +57,7 @@ public partial class EntityActionEditor : MarginContainer {
 				entityAction.SpawnMonster.IsSet,
 				c => {
 					entityAction.SpawnMonster.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnMonster, project.Monsters, entity, VariableType.Monster);
+                    SetUpSpawnControls(c, entityAction.SpawnMonster, resources.Monsters, entity, VariableType.Monster);
 				}
 			}
 		});

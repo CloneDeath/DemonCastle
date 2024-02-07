@@ -1,6 +1,7 @@
 using DemonCastle.Editor.FileTreeView;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;
@@ -10,7 +11,7 @@ public partial class EditorWorkspace : Control {
 	protected ExplorerPanel Explorer { get; }
 	protected EditArea EditArea { get; }
 
-	public EditorWorkspace(ProjectInfo project) {
+	public EditorWorkspace(ProjectResources resources, ProjectInfo project) {
 		Name = nameof(EditorWorkspace);
 
 		AddChild(SplitContainer = new HSplitContainer());
@@ -20,7 +21,7 @@ public partial class EditorWorkspace : Control {
 			CustomMinimumSize = new Vector2(250, 0)
 		});
 		Explorer.FileActivated += ExplorerOnFileActivated;
-		SplitContainer.AddChild(EditArea = new EditArea(project));
+		SplitContainer.AddChild(EditArea = new EditArea(resources, project));
 	}
 
 	protected void ExplorerOnFileActivated(FileNavigator file) {

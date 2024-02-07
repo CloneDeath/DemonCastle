@@ -4,6 +4,7 @@ using DemonCastle.Editor.Editors;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;
@@ -65,5 +66,5 @@ public static class EditorFileType {
 public interface IEditorFileType : IFileType {
 	Texture2D Icon { get; }
 	object CreateFileInstance(string name);
-	BaseEditor GetEditor(ProjectInfo project, FileNavigator file);
+	BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file);
 }

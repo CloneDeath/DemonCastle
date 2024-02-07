@@ -6,6 +6,7 @@ using DemonCastle.ProjectFiles.Locations;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
@@ -24,7 +25,7 @@ public partial class GameArea : Node2D {
 
 	private readonly List<Node> _spawned = new();
 
-	public GameArea(IGameState game, ProjectInfo project, LevelInfo level, AreaInfo area, IGameLogger logger, DebugState debug) {
+	public GameArea(ProjectResources resources, IGameState game, LevelInfo level, AreaInfo area, IGameLogger logger, DebugState debug) {
 		_game = game;
 		_level = level;
 		_area = area;
@@ -37,7 +38,7 @@ public partial class GameArea : Node2D {
 		}
 
 		foreach (var monsterData in area.Monsters) {
-			var monster = project.Monsters.FirstOrDefault(m => m.Id == monsterData.MonsterId);
+			var monster = resources.GetMonster(monsterData.MonsterId);
 			if (monster == null) continue;
 			var gameMonster = new GameMonster(game, level, monster, monsterData, logger, debug);
 			Monsters.Add(gameMonster);

@@ -2,6 +2,7 @@ using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
 using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.VariableDeclarations;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.VariableDeclarations;
@@ -10,7 +11,7 @@ public partial class VariableCollectionEditor : HSplitContainer {
 	protected InfoCollectionEditorByEnum<VariableDeclarationInfo, VariableType> VariableList { get; }
 	protected VariableDeclarationEditor VariableEditor { get; }
 
-	public VariableCollectionEditor(ProjectInfo project) {
+	public VariableCollectionEditor(ProjectResources resources) {
 		Name = nameof(VariableCollectionEditor);
 
 		AddChild(VariableList = new InfoCollectionEditorByEnum<VariableDeclarationInfo, VariableType> {
@@ -18,7 +19,7 @@ public partial class VariableCollectionEditor : HSplitContainer {
 		});
 		VariableList.ItemSelected += VariableList_OnItemSelected;
 
-		AddChild(VariableEditor = new VariableDeclarationEditor(project) {
+		AddChild(VariableEditor = new VariableDeclarationEditor(resources) {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 	}

@@ -4,17 +4,17 @@ using System.Linq;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;
 
 public partial class TileSetSelector : VBoxContainer {
+	private readonly ProjectResources _resources;
 	protected AddRemoveOptionButton Options { get; }
 	protected FileDialog OpenFileDialog { get; }
 
-	private readonly ProjectInfo _project;
 	private ObservableList<Guid>? _tileSets;
 
 	public event Action<Guid?>? TileSetIdSelected;
@@ -42,8 +42,8 @@ public partial class TileSetSelector : VBoxContainer {
 		}
 	}
 
-	public TileSetSelector(ProjectInfo project, string directory) {
-		_project = project;
+	public TileSetSelector(ProjectResources resources, string directory) {
+		_resources = resources;
 		Name = nameof(TileSetSelector);
 
 		AddChild(Options = new AddRemoveOptionButton {
@@ -76,8 +76,7 @@ public partial class TileSetSelector : VBoxContainer {
 
 	private void OpenFileDialog_OnFileSelected(string filePath) {
 		if (_tileSets == null) return;
-		var path = RelativePath.GetRelativePath(_project.Directory, filePath);
-		var tileSet = _project.FileNavigator.GetTileSet(path);
+		var tileSet = _resources.GetTileSet(filePath);
 		if (!_tileSets.Contains(tileSet.Id)) {
 			_tileSets.Add(tileSet.Id);
 		}
@@ -121,11 +120,10 @@ public partial class TileSetSelector : VBoxContainer {
 
 		if (_tileSets == null) return;
 
-		var tileSets = _project.TileSets.ToList();
-		foreach (var guid in _tileSets) {
-			var tileSet = tileSets.FirstOrDefault(t => t.Id == guid);
+		foreach (var tileSetIds in _tileSets) {
+			var tileSet = _resources.GetTileSet(tileSetIds);
 			Options.AddItem(tileSet?.Name ?? "[TileSet Not Found!]");
-			Options.SetItemMetadata(Options.ItemCount - 1, guid.ToString());
+			Options.SetItemMetadata(Options.ItemCount - 1, tileSetIds.ToString());
 		}
 	}
 }

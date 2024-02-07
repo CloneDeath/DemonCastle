@@ -2,9 +2,9 @@ using System;
 using DemonCastle.Editor.Editors.Level.Area.Details;
 using DemonCastle.Editor.Editors.Level.Area.Tools;
 using DemonCastle.Editor.Editors.Level.Area.View;
-using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area;
@@ -18,17 +18,17 @@ public partial class AreaEdit : HSplitContainer {
 
 	public event Action<AreaInfo>? AreaSelected;
 
-	public AreaEdit(ProjectInfo project, LevelInfo level) {
+	public AreaEdit(ProjectResources resources, LevelInfo level) {
 		Name = nameof(AreaEdit);
 
 		AddChild(LeftPanel = new VBoxContainer {
 			CustomMinimumSize = new Vector2(275, 0)
 		});
 		LeftPanel.AddChild(Details = new AreaDetails());
-		LeftPanel.AddChild(Tools = new ToolsPanel(project, level) {
+		LeftPanel.AddChild(Tools = new ToolsPanel(resources, level) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
-		AddChild(RightPanel = new LevelAreasView(project, level));
+		AddChild(RightPanel = new LevelAreasView(resources, level));
 		RightPanel.AreaSelected += LevelAreasView_OnAreaSelected;
 		RightPanel.AreaTileSelected += LevelAreasView_OnAreaTileSelected;
 		RightPanel.AreaTileCleared += LevelAreasView_OnAreaTileCleared;

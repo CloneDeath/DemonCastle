@@ -41,8 +41,8 @@ public class ProjectManager {
 	public static IEnumerable<ProjectInfo> GetProjects() {
 		var projectFiles = GetProjectFiles().Where(File.Exists).Distinct();
 		foreach (var projectFile in projectFiles) {
-			var fileNavigator = new FileNavigator<ProjectFile>(projectFile);
-			yield return new ProjectInfo(fileNavigator);
+			var resources = new ProjectResources(Path.GetDirectoryName(projectFile) ?? throw new DirectoryNotFoundException());
+			yield return resources.GetProject(projectFile);
 		}
 	}
 
@@ -76,7 +76,7 @@ public class ProjectManager {
 
         LocalProjectList.AddProject(projectFilePath);
 
-		var fileNavigator = new FileNavigator<ProjectFile>(projectFilePath);
-		return new ProjectInfo(fileNavigator);
+		var resources = new ProjectResources(Path.GetDirectoryName(projectFilePath) ?? throw new DirectoryNotFoundException());
+		return resources.GetProject(projectFilePath);
 	}
 }

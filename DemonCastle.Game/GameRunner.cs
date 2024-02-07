@@ -4,12 +4,14 @@ using DemonCastle.Game.GameStates;
 using DemonCastle.Game.Scenes;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Game;
 
 public partial class GameRunner : Control {
 	private readonly ProjectInfo _project;
+	private readonly ProjectResources _resources;
 	public SceneStack SceneStack { get; }
 	public GameLevel Level { get; }
 	public GamePlayer GamePlayer { get; }
@@ -17,8 +19,9 @@ public partial class GameRunner : Control {
 
 	public GameArea? CurrentArea { get; set; }
 
-	public GameRunner(ProjectInfo project, DebugState? debug = null) {
+	public GameRunner(ProjectResources resources, ProjectInfo project, DebugState? debug = null) {
 		_project = project;
+		_resources = resources;
 		debug ??= new DebugState();
 		Name = nameof(GameRunner);
 		TextureFilter = TextureFilterEnum.Nearest;
@@ -31,7 +34,7 @@ public partial class GameRunner : Control {
 			Name = "GameView"
 		});
 		var logger = new GameLogger(debug);
-		LevelViewport.AddChild(Level = new GameLevel(project, gameState, logger, debug));
+		LevelViewport.AddChild(Level = new GameLevel(resources, gameState, logger, debug));
 		LevelViewport.AddChild(GamePlayer = new GamePlayer(gameState, logger, debug) {
 			Position = Level.StartingLocation
 		});
@@ -79,7 +82,7 @@ public partial class GameRunner : Control {
 
 	public void SpawnItem(Guid itemId, Vector2 position) {
 		if (CurrentArea == null) return;
-		var item = _project.Items.First(i => i.Id == itemId);
+		var item = _resources.GetItem(itemId);
 		CurrentArea.SpawnItem(item, position);
 	}
 

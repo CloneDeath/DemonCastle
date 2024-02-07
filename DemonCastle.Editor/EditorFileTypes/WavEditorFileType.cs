@@ -3,6 +3,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.FileTypes;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor.EditorFileTypes;
@@ -12,5 +13,5 @@ public class WavEditorFileType : WavFileType, IEditorFileType {
 
 	public object CreateFileInstance(string name) => string.Empty;
 
-	public BaseEditor GetEditor(ProjectInfo project, FileNavigator file) => new AudioEditor(file);
+	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new AudioEditor(file, resources.GetAudioStream(file));
 }

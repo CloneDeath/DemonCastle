@@ -6,16 +6,19 @@ using DemonCastle.Editor.Editors;
 using DemonCastle.Game;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.Editor;
 
 public partial class EditArea : TabContainer {
+	private readonly ProjectResources _resources;
 	private readonly ProjectInfo _project;
 	protected Dictionary<FileNavigator, BaseEditor> EditorFileMap { get; } = new();
 	protected AcceptDialog ErrorWindow { get; }
 
-	public EditArea(ProjectInfo project) {
+	public EditArea(ProjectResources resources, ProjectInfo project) {
+		_resources = resources;
 		_project = project;
 		Name = nameof(EditArea);
 		DragToRearrangeEnabled = true;
@@ -79,7 +82,7 @@ public partial class EditArea : TabContainer {
 	}
 
 	protected virtual BaseEditor GetEditor(FileNavigator file) {
-		return EditorFileType.All.FirstOrDefault(t => t.Extension == file.Extension)?.GetEditor(_project, file) ??
+		return EditorFileType.All.FirstOrDefault(t => t.Extension == file.Extension)?.GetEditor(_resources, _project, file) ??
 		       throw new NotSupportedException($"No Editor for {file.Extension}");
 	}
 

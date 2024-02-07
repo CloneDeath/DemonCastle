@@ -11,9 +11,9 @@ public partial class FontFileEditor : BaseEditor {
 	protected ScrollContainer ScrollContainer { get; }
 	protected VBoxContainer Lines { get; }
 
-	public FontFileEditor(FileNavigator font) {
+	public FontFileEditor(FileNavigator file, Font font) {
 		Name = nameof(ImageEditor);
-		TabText = font.FileName;
+		TabText = file.FileName;
 
 		AddChild(ScrollContainer = new ScrollContainer());
 		ScrollContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
@@ -25,7 +25,7 @@ public partial class FontFileEditor : BaseEditor {
 
 		foreach (var size in sizes) {
 			var labelSettings = new LabelSettings {
-				Font = font.ToFont(),
+				Font = font,
 				FontSize = size
 			};
 			var textLine = $"{labelSettings.FontSize}: {previewText}";
