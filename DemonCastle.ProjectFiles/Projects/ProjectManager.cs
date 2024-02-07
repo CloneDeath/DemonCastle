@@ -38,11 +38,12 @@ public class ProjectManager {
 
 	public static bool ProjectsExist => GetProjects().Any();
 
-	public static IEnumerable<ProjectInfo> GetProjects() {
+	public static IEnumerable<ProjectWithResources> GetProjects() {
 		var projectFiles = GetProjectFiles().Where(File.Exists).Distinct();
 		foreach (var projectFile in projectFiles) {
 			var resources = new ProjectResources(Path.GetDirectoryName(projectFile) ?? throw new DirectoryNotFoundException());
-			yield return resources.GetProject(projectFile);
+			var project = resources.GetProject(projectFile);
+			yield return new ProjectWithResources(resources, project);
 		}
 	}
 
@@ -58,7 +59,7 @@ public class ProjectManager {
         LocalProjectList.RemoveProject(project.FilePath);
 	}
 
-	public static ProjectInfo CreateProject(string folderPath) {
+	public static ProjectWithResources CreateProject(string folderPath) {
 		if (!Directory.Exists(folderPath)) throw new Exception($"Folder '{folderPath}' does not exist.");
 		if (Directory.EnumerateFiles(folderPath).Any() || Directory.EnumerateDirectories(folderPath).Any()) {
 			throw new Exception("Folder must be empty.");
@@ -77,6 +78,7 @@ public class ProjectManager {
         LocalProjectList.AddProject(projectFilePath);
 
 		var resources = new ProjectResources(Path.GetDirectoryName(projectFilePath) ?? throw new DirectoryNotFoundException());
-		return resources.GetProject(projectFilePath);
+		var project = resources.GetProject(projectFilePath);
+		return new ProjectWithResources(resources, project);
 	}
 }

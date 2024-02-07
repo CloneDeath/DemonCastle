@@ -10,7 +10,7 @@ public partial class ProjectSelectionMenu : Container {
 	protected ProjectManager ProjectManager { get; } = new();
 
 	public event Action<ProjectResources, ProjectInfo>? ProjectLoaded;
-	public event Action<ProjectInfo>? ProjectEdit;
+	public event Action<ProjectResources, ProjectInfo>? ProjectEdit;
 
 	public override void _Ready() {
 		base._Ready();
@@ -25,8 +25,8 @@ public partial class ProjectSelectionMenu : Container {
 	public override void _Process(double delta) {
 		base._Process(delta);
 		LaunchButton.Disabled = !ProjectList.IsItemSelected;
-		RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
-		EditButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.IsImported);
+		RemoveButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.Project.IsImported);
+		EditButton.Disabled = !(ProjectList.IsItemSelected && ProjectList.SelectedItem.Project.IsImported);
 	}
 
 	protected async void DownloadProjects() {
@@ -39,9 +39,9 @@ public partial class ProjectSelectionMenu : Container {
 	}
 
 	protected void CreateProject(string folderPath) {
-		ProjectInfo project;
+		ProjectWithResources projectWithResources;
 		try {
-			project = ProjectManager.CreateProject(folderPath);
+			projectWithResources = ProjectManager.CreateProject(folderPath);
 		}
 		catch (Exception ex) {
 			ErrorPopup.DialogText = ex.Message;
@@ -50,7 +50,7 @@ public partial class ProjectSelectionMenu : Container {
 		}
 
 		ProjectList.Load(ProjectManager.GetProjects());
-		ProjectEdit?.Invoke(project);
+		ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
 	}
 
 	protected void OpenImportProject() {
@@ -63,17 +63,17 @@ public partial class ProjectSelectionMenu : Container {
 	}
 
 	protected void RemoveProject() {
-		ProjectManager.RemoveProject(ProjectList.SelectedItem);
+		ProjectManager.RemoveProject(ProjectList.SelectedItem.Project);
 		ProjectList.Load(ProjectManager.GetProjects());
 	}
 
 	protected void EditProject() {
-		var project = ProjectList.SelectedItem;
-		ProjectEdit?.Invoke(project);
+		var item = ProjectList.SelectedItem;
+		ProjectEdit?.Invoke(item.Resources, item.Project);
 	}
 
 	protected void LaunchSelectedProject() {
-		var project = ProjectList.SelectedItem;
-		ProjectLoaded?.Invoke(project);
+		var item = ProjectList.SelectedItem;
+		ProjectLoaded?.Invoke(item.Resources, item.Project);
 	}
 }

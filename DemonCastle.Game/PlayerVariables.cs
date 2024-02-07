@@ -14,28 +14,28 @@ public class PlayerVariables : IPlayerState {
 	}
 
 	private int _hp = 10;
-	public int HP {
+	public int Hp {
 		get => _hp;
 		set => SetField(ref _hp, value);
 	}
 
-	private int _maxHP = 10;
-	public int MaxHP {
-		get => _maxHP;
-		set => SetField(ref _maxHP, value);
+	private int _maxHp = 10;
+	public int MaxHp {
+		get => _maxHp;
+		set => SetField(ref _maxHp, value);
 	}
 
 	private int _mp = 8;
-	public int MP {
+	public int Mp {
 		get => _mp;
 		set => SetField(ref _mp, value);
 	}
 
-	private int _maxMP = 8;
-	public int MaxMP {
+	private int _maxMp = 8;
+	public int MaxMp {
 
-		get => _maxMP;
-		set => SetField(ref _maxMP, value);
+		get => _maxMp;
+		set => SetField(ref _maxMp, value);
 	}
 
 	private int _lives = 1;

@@ -14,8 +14,8 @@ public class InAirState : IState {
 
 		player.Animation.PlayJump();
 
-		var left = Input.IsActionPressed(InputActions.PlayerMoveLeft) ? 1 : 0;
-		var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
+		var left = Input.IsActionPressed(InputActions.MoveLeft) ? 1 : 0;
+		var right = Input.IsActionPressed(InputActions.MoveRight) ? 1 : 0;
 		if (right - left == 0) {
 			player.StopMoving();
 		}

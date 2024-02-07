@@ -19,10 +19,9 @@ public partial class SceneEventActionEditor : HBoxContainer {
 	private readonly SceneEventActionInfo _action;
 	private readonly SceneEventActionInfoCollection _collection;
 
-	private readonly Button DeleteButton;
-
-	private readonly Button MoveUpButton;
-	private readonly Button MoveDownButton;
+	private Button DeleteButton { get; }
+	private Button MoveUpButton { get; }
+	private Button MoveDownButton { get; }
 
 	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, SceneEventActionInfoCollection collection) {
 		_action = action;

@@ -4,19 +4,19 @@ using Godot;
 namespace DemonCastle.Game;
 
 public static class InputActions {
-	public const string PlayerMoveLeft = nameof(PlayerMoveLeft);
-	public const string PlayerMoveRight = nameof(PlayerMoveRight);
-	public const string PlayerMoveUp = nameof(PlayerMoveUp);
-	public const string PlayerMoveDown = nameof(PlayerMoveDown);
-	public const string PlayerJump = nameof(PlayerJump);
-	public const string PlayerAttack = nameof(PlayerAttack);
+	public const string MoveLeft = nameof(MoveLeft);
+	public const string MoveRight = nameof(MoveRight);
+	public const string MoveUp = nameof(MoveUp);
+	public const string MoveDown = nameof(MoveDown);
+	public const string Jump = nameof(Jump);
+	public const string Attack = nameof(Attack);
 
-	public const string PlayerAccept = nameof(PlayerAccept);
-	public const string PlayerCancel = nameof(PlayerCancel);
+	public const string Accept = nameof(Accept);
+	public const string Cancel = nameof(Cancel);
 
-	public static readonly string[] PlayerActions = {
-		PlayerMoveLeft, PlayerMoveRight, PlayerMoveUp, PlayerMoveDown, PlayerJump, PlayerAttack,
-		PlayerAccept, PlayerCancel
+	public static readonly string[] Actions = {
+		MoveLeft, MoveRight, MoveUp, MoveDown, Jump, Attack,
+		Accept, Cancel
 	};
 
 	public const string EditorSubmit = nameof(EditorSubmit);
@@ -27,14 +27,14 @@ public static class InputActions {
 	public const string EditorClose = nameof(EditorClose);
 
 	public static void RegisterActions() {
-		RegisterAction(PlayerMoveLeft, Key.Left, Key.A);
-		RegisterAction(PlayerMoveRight, Key.Right, Key.D);
-		RegisterAction(PlayerMoveUp, Key.Up, Key.W);
-		RegisterAction(PlayerMoveDown, Key.Down, Key.S);
-		RegisterAction(PlayerJump, Key.Space, Key.Z);
-		RegisterAction(PlayerAttack, Key.F, Key.X);
-		RegisterAction(PlayerAccept, Key.F, Key.X, Key.Enter, Key.KpEnter, Key.Space);
-		RegisterAction(PlayerCancel, Key.Q, Key.Z, Key.Backspace, Key.Escape);
+		RegisterAction(MoveLeft, Key.Left, Key.A);
+		RegisterAction(MoveRight, Key.Right, Key.D);
+		RegisterAction(MoveUp, Key.Up, Key.W);
+		RegisterAction(MoveDown, Key.Down, Key.S);
+		RegisterAction(Jump, Key.Space, Key.Z);
+		RegisterAction(Attack, Key.F, Key.X);
+		RegisterAction(Accept, Key.F, Key.X, Key.Enter, Key.KpEnter, Key.Space);
+		RegisterAction(Cancel, Key.Q, Key.Z, Key.Backspace, Key.Escape);
 
 		RegisterAction(EditorSubmit, Key.Enter, Key.KpEnter);
 		RegisterAction(EditorClick, MouseButton.Left);

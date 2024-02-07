@@ -24,13 +24,13 @@ public partial class GamePlayer : PlayerEntityCommon {
 	public Area2D FloorDetection { get; }
 	protected CollisionShape2D FloorShape { get; }
 
-	private IFrameInfo? PreviousFrame;
+	private IFrameInfo? _previousFrame;
 
 	public override float MoveSpeed => (Character?.WalkSpeed ?? 0) * (Level?.TileSize.X ?? 0);
 	protected override float Gravity => (Character?.Gravity ?? 0) * (Level?.TileSize.Y ?? 0);
 	public float JumpHeight => (Character?.JumpHeight ?? 0) * (Level?.TileSize.Y ?? 0);
 
-	private IState State = new NormalState();
+	private IState _state = new NormalState();
 
 	private bool _jump;
 	private bool _applyGravity = true;
@@ -39,7 +39,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 		: base(game, logger, debug) {
 		Name = nameof(GamePlayer);
 
-		PlayerState = new PlayerVariables(this);
+		State = new PlayerVariables(this);
 
 		AddChild(Weapon = new GameAnimation(this, debug));
 		AddChild(Animation = new CharacterAnimation(this, debug));
@@ -63,12 +63,12 @@ public partial class GamePlayer : PlayerEntityCommon {
 		});
 	}
 
-	public PlayerVariables PlayerState { get; }
+	public PlayerVariables State { get; }
 	public Vector2 PositionInArea => GlobalPosition - (Game.CurrentArea?.Position.ToPixelPositionInLevel() ?? Vector2.Zero);
 
 	protected override bool ApplyDamage(int amount) {
-		PlayerState.HP -= amount;
-		if (PlayerState.HP <= 0) {
+		State.Hp -= amount;
+		if (State.Hp <= 0) {
 			Visible = false;
 		}
 		return true;
@@ -76,7 +76,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 
 	public override void _EnterTree() {
 		base._EnterTree();
-		State.OnEnter(this);
+		_state.OnEnter(this);
 	}
 
 	public override void _Process(double delta) {
@@ -85,21 +85,21 @@ public partial class GamePlayer : PlayerEntityCommon {
 
 		AlignAnimationNodes();
 
-		if (PlayerState.HP <= 0) return;
+		if (State.Hp <= 0) return;
 
-		var nextState = State.Update(this, delta);
+		var nextState = _state.Update(this, delta);
 		if (nextState != null) {
-			State.OnExit(this);
-			State = nextState;
-			State.OnEnter(this);
-			Logger.StateChanged(State);
+			_state.OnExit(this);
+			_state = nextState;
+			_state.OnEnter(this);
+			Logger.StateChanged(_state);
 		}
 
 		if (_applyGravity) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
-			Velocity = new Vector2(_moveDirection.X * MoveSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+			Velocity = new Vector2(MoveDirection.X * MoveSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
 		} else {
-			Velocity = _moveDirection * MoveSpeed;
+			Velocity = MoveDirection * MoveSpeed;
 		}
 
 		StopMoving();
@@ -108,7 +108,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 		MoveAndSlide();
 
 		UpdateWeaponFrame();
-		PreviousFrame = Animation.CurrentFrame ?? null;
+		_previousFrame = Animation.CurrentFrame ?? null;
 
 		Animation.Scale = new Vector2(Facing, 1);
 		AlignAnimationNodes();
@@ -117,7 +117,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 	private void UpdateWeaponFrame() {
 		var characterFrame = Animation.CurrentFrame;
 		if (characterFrame == null) return;
-		if (characterFrame == PreviousFrame) return;
+		if (characterFrame == _previousFrame) return;
 
 		var weaponSlot = characterFrame.Slots.FirstOrDefault(s => s.Name == "Weapon");
 		if (weaponSlot == null) {
@@ -140,7 +140,7 @@ public partial class GamePlayer : PlayerEntityCommon {
 		Animation.GlobalPosition = GlobalPosition.Round();
 	}
 
-	public void MoveTowards(Vector2 target) => _moveDirection = (target - GlobalPosition).Normalized();
+	public void MoveTowards(Vector2 target) => MoveDirection = (target - GlobalPosition).Normalized();
 
 	public IEnumerable<Tiles.GameTileStairs> GetNearbyStairs() {
 		return StairsDetection.GetOverlappingAreas().Where(a => a is Tiles.GameTileStairs).Cast<Tiles.GameTileStairs>();

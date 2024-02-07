@@ -14,7 +14,7 @@ public partial class SpriteAtlasDefinitionCollection : VBoxContainer {
 	protected Button AddSpriteButton { get; }
 	protected SpriteSelectorPanel SpriteSelector { get; }
 	protected SpriteAtlasDataDetails SpriteAtlasDataDetails { get; }
-	private readonly Button DeleteButton;
+	private Button DeleteButton { get; }
 
 	public event Action<SpriteAtlasDataInfo?>? SpriteSelected;
 

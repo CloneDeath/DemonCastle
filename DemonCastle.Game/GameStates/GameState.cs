@@ -14,7 +14,7 @@ public class GameState : IGameState {
 		Variables = new VariableCollection(project.Variables);
 	}
 
-	public IPlayerState Player => _runner.GamePlayer.PlayerState;
+	public IPlayerState Player => _runner.GamePlayer.State;
 	public ICurrentArea? CurrentArea => _runner.CurrentArea != null ? new CurrentAreaState(_runner.CurrentArea) : null;
 	public IVariables Variables { get; }
 

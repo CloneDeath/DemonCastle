@@ -7,11 +7,11 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Animations.Editor.Frames;
 
 public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
-	protected readonly FrameInfoProxy _proxy = new();
+	protected readonly FrameInfoProxy Proxy = new();
 
 	protected IFrameInfo? Frame {
-		get => _proxy.Proxy;
-		set => _proxy.Proxy = value;
+		get => Proxy.Proxy;
+		set => Proxy.Proxy = value;
 	}
 
 	private PositionTarget OriginTarget { get; }
@@ -19,10 +19,10 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	public FrameInfoView() {
 		MainControl.Zoom = 8;
 		Inner.AddChild(OriginTarget = new PositionTarget());
-		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(_proxy, p => p.HurtBox)) {
+		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(Proxy, p => p.HurtBox)) {
 			Color = Colors.Orange
 		});
-		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(_proxy, p => p.HitBox)) {
+		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(Proxy, p => p.HitBox)) {
 			Color = Colors.Blue
 		});
 	}

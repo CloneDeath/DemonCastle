@@ -83,6 +83,7 @@ public partial class GameRunner : Control {
 	public void SpawnItem(Guid itemId, Vector2 position) {
 		if (CurrentArea == null) return;
 		var item = _resources.GetItem(itemId);
+		if (item == null) return;
 		CurrentArea.SpawnItem(item, position);
 	}
 

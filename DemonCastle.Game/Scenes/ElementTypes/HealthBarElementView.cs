@@ -33,12 +33,12 @@ public partial class HealthBarElementView : Container {
 	private void GamePlayer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
 		switch (_element.Source) {
 			case HealthBarSource.PlayerHP:
-				if (e.PropertyName is nameof(_game.Player.HP) or nameof(_game.Player.MaxHP)) {
+				if (e.PropertyName is nameof(_game.Player.Hp) or nameof(_game.Player.MaxHp)) {
 					Refresh();
 				}
 				break;
 			case HealthBarSource.PlayerMP:
-				if (e.PropertyName is nameof(_game.Player.MP) or nameof(_game.Player.MaxMP)) {
+				if (e.PropertyName is nameof(_game.Player.Mp) or nameof(_game.Player.MaxMp)) {
 					Refresh();
 				}
 				break;
@@ -65,8 +65,8 @@ public partial class HealthBarElementView : Container {
 	private int Value {
 		get {
 			return _element.Source switch {
-				HealthBarSource.PlayerHP => _game.Player.HP,
-				HealthBarSource.PlayerMP => _game.Player.MP,
+				HealthBarSource.PlayerHP => _game.Player.Hp,
+				HealthBarSource.PlayerMP => _game.Player.Mp,
 				HealthBarSource.PlayerLives => _game.Player.Lives,
 				_ => throw new InvalidEnumValueException<HealthBarSource>(_element.Source)
 			};
@@ -76,8 +76,8 @@ public partial class HealthBarElementView : Container {
 	private int? MaxValue {
 		get {
 			return _element.Source switch {
-				HealthBarSource.PlayerHP => _game.Player.MaxHP,
-				HealthBarSource.PlayerMP => _game.Player.MaxMP,
+				HealthBarSource.PlayerHP => _game.Player.MaxHp,
+				HealthBarSource.PlayerMP => _game.Player.MaxMp,
 				HealthBarSource.PlayerLives => _game.Player.MaxLives,
 				_ => throw new InvalidEnumValueException<HealthBarSource>(_element.Source)
 			};

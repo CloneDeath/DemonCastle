@@ -18,7 +18,7 @@ public partial class CharacterFrameInfoView : FrameInfoView {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		WeaponPosition.Visible = _proxy.WeaponEnabled;
-		WeaponPosition.Target = _proxy.WeaponPosition;
+		WeaponPosition.Visible = Proxy.WeaponEnabled;
+		WeaponPosition.Target = Proxy.WeaponPosition;
 	}
 }

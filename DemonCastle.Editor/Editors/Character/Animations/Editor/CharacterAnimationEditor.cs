@@ -7,14 +7,12 @@ using DemonCastle.ProjectFiles.Projects.Data;
 namespace DemonCastle.Editor.Editors.Character.Animations.Editor;
 
 public partial class CharacterAnimationEditor : VSplitContainer {
-	protected readonly CharacterInfo _character;
 	private VBoxContainer Top { get; }
 	private CharacterAnimationDetails Details { get; }
 	private FrameListEditor FrameList { get; }
 	private CharacterFrameInfoDetails FrameDetails { get; }
 
-	public CharacterAnimationEditor(CharacterInfo character) {
-		_character = character;
+	public CharacterAnimationEditor(IFileInfo file) {
 		Name = nameof(CharacterAnimationEditor);
 
 		AddChild(Top = new VBoxContainer());
@@ -22,7 +20,7 @@ public partial class CharacterAnimationEditor : VSplitContainer {
 		Top.AddChild(FrameList = new FrameListEditor());
 		FrameList.FrameSelected += FrameList_OnFrameSelected;
 
-		AddChild(FrameDetails = new CharacterFrameInfoDetails(character));
+		AddChild(FrameDetails = new CharacterFrameInfoDetails(file));
 	}
 
 	private void FrameList_OnFrameSelected(IFrameInfo? frame) {

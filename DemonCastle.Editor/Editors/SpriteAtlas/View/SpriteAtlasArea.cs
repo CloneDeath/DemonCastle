@@ -9,11 +9,11 @@ namespace DemonCastle.Editor.Editors.SpriteAtlas.View;
 
 public partial class SpriteAtlasArea : Control {
 	private const int EdgeMargin = 3;
-	private static readonly Color Color_NotSelected = new(Colors.Gray, 0.5f);
-	private static readonly Color Color_Selected = Colors.White;
+	private static readonly Color _colorNotSelected = new(Colors.Gray, 0.5f);
+	private static readonly Color _colorSelected = Colors.White;
 
-	private readonly Label SpriteName;
-	private readonly Outline Outline;
+	private Label SpriteName { get; }
+	private Outline Outline { get; }
 	private readonly DraggableRegion[] _draggableRegion = new DraggableRegion[9];
 
 	public SpriteAtlasDataInfo Sprite { get; }
@@ -174,8 +174,8 @@ public partial class SpriteAtlasArea : Control {
 		Size = Sprite.Size;
 		SpriteName.Text = Sprite.Name;
 		SpriteName.Position = new Vector2(Size.X / 2, Size.Y) - new Vector2(SpriteName.Size.X / 2, 0);
-		SpriteName.Modulate = IsSelected ? Color_Selected : Colors.Transparent;
-		Outline.Color = IsSelected ? Color_Selected : Color_NotSelected;
+		SpriteName.Modulate = IsSelected ? _colorSelected : Colors.Transparent;
+		Outline.Color = IsSelected ? _colorSelected : _colorNotSelected;
 	}
 
 	public void Select() {

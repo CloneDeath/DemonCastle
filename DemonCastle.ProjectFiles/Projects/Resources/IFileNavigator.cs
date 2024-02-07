@@ -19,5 +19,5 @@ public interface IFileNavigator {
 	LevelInfo GetLevel(string level);
 	SceneInfo GetScene(string source);
 	ISpriteSource GetSprite(string source);
-	TileSetInfo GetTileSet(Guid tileSetId);
+	TileSetInfo? GetTileSet(Guid tileSetId);
 }

@@ -70,8 +70,8 @@ public class AreaInfo : BaseInfo<AreaData> {
 		if (cache != null) return cache;
 
 		var value = Level.GetTileInfo(tileId) ??
-					TileSetIds.SelectMany(id => File.GetTileSet(id).TileSet)
-							  .First(t => t.Id == tileId);
+					TileSetIds.SelectMany(id => File.GetTileSet(id)?.TileSet ?? new NullEnumerableInfo<TileInfo>())
+							  .First(t =>t.Id == tileId);
 		_tileCache[tileId] = value;
 		return value;
 	}

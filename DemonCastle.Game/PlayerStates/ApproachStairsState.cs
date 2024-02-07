@@ -19,9 +19,9 @@ public class ApproachStairsState : IState {
 
 	public IState? Update(GamePlayer player, double delta) {
 		switch (_target.PointsUp) {
-			case true when !Input.IsActionPressed(InputActions.PlayerMoveUp):
+			case true when !Input.IsActionPressed(InputActions.MoveUp):
 				return new NormalState();
-			case false when !Input.IsActionPressed(InputActions.PlayerMoveDown):
+			case false when !Input.IsActionPressed(InputActions.MoveDown):
 				return new NormalState();
 		}
 

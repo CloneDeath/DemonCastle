@@ -87,7 +87,7 @@ public class FileNavigator<T> : IFileNavigator {
 		return _resources.GetTileSet(path);
 	}
 
-	public TileSetInfo GetTileSet(Guid tileSetId) => _resources.GetTileSet(tileSetId);
+	public TileSetInfo? GetTileSet(Guid tileSetId) => _resources.GetTileSet(tileSetId);
 
 	public Texture2D GetTexture(string localPath) {
 		var path = ToAbsolutePath(localPath);

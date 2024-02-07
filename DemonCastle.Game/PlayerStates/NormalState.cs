@@ -14,11 +14,11 @@ public class NormalState : IState {
 			return new InAirState();
 		}
 
-		if (Input.IsActionJustPressed(InputActions.PlayerJump)) {
+		if (Input.IsActionJustPressed(InputActions.Jump)) {
 			player.Jump();
 		}
 
-		if (Input.IsActionJustPressed(InputActions.PlayerAttack)) {
+		if (Input.IsActionJustPressed(InputActions.Attack)) {
 			return new NormalAttackState();
 		}
 
@@ -26,18 +26,18 @@ public class NormalState : IState {
 		foreach (var stair in stairs) {
 			var target = GetTargetInStairs(player, stair);
 			if (target == null) continue;
-			if (target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveUp) ||
-				!target.PointsUp && Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+			if (target.PointsUp && Input.IsActionPressed(InputActions.MoveUp) ||
+				!target.PointsUp && Input.IsActionPressed(InputActions.MoveDown)) {
 				return new ApproachStairsState(stair, target);
 			}
 		}
 
-		if (Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+		if (Input.IsActionPressed(InputActions.MoveDown)) {
 			return new CrouchState();
 		}
 
-		var left = Input.IsActionPressed(InputActions.PlayerMoveLeft) ? 1 : 0;
-		var right = Input.IsActionPressed(InputActions.PlayerMoveRight) ? 1 : 0;
+		var left = Input.IsActionPressed(InputActions.MoveLeft) ? 1 : 0;
+		var right = Input.IsActionPressed(InputActions.MoveRight) ? 1 : 0;
 		if (right - left == 0) {
 			player.StopMoving();
 			player.Animation.PlayIdle();

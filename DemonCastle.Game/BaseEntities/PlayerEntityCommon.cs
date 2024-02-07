@@ -23,7 +23,7 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 		set => _facing = value >= 0 ? 1 : -1;
 	}
 
-	protected Vector2 _moveDirection = Vector2.Zero;
+	protected Vector2 MoveDirection = Vector2.Zero;
 
 	protected HitInvulnerabilityTracker InvulnerabilityTracker { get; }
 
@@ -53,11 +53,11 @@ public abstract partial class PlayerEntityCommon : CharacterBody2D, IDamageable 
 
 	protected abstract bool ApplyDamage(int amount);
 
-	public void MoveRight() => _moveDirection = Vector2.Right;
-	public void MoveLeft() => _moveDirection = Vector2.Left;
-	public void MoveForward() => _moveDirection = new Vector2(Facing, 0);
-	public void MoveBackward() => _moveDirection = new Vector2(-Facing, 0);
-	public void StopMoving() => _moveDirection = Vector2.Zero;
+	public void MoveRight() => MoveDirection = Vector2.Right;
+	public void MoveLeft() => MoveDirection = Vector2.Left;
+	public void MoveForward() => MoveDirection = new Vector2(Facing, 0);
+	public void MoveBackward() => MoveDirection = new Vector2(-Facing, 0);
+	public void StopMoving() => MoveDirection = Vector2.Zero;
 
 	public void EnableWorldCollisions() => CollisionMask = (uint)CollisionLayers.World;
 	public void DisableWorldCollisions() => CollisionMask = 0;

@@ -3,14 +3,14 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Properties;
 
 public partial class NamedPropertyCollection : PropertyCollection {
-	private readonly Label Label;
+	private readonly Label _label;
 
 	public override string DisplayName {
-		get => Label.Text;
-		set => Label.Text = value;
+		get => _label.Text;
+		set => _label.Text = value;
 	}
 
 	public NamedPropertyCollection() {
-		AddChild(Label = new Label());
+		AddChild(_label = new Label());
 	}
 }

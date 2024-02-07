@@ -29,8 +29,8 @@ public class TextFinalizer {
 	}
 
 	public static readonly IReadOnlyDictionary<string, Func<IGameState, int>> IntegerValues = new Dictionary<string, Func<IGameState, int>> {
-		{ "Player.HP", state => state.Player.HP },
-		{ "Player.MP", state => state.Player.MP },
+		{ "Player.HP", state => state.Player.Hp },
+		{ "Player.MP", state => state.Player.Mp },
 		{ "Player.Lives", state => state.Player.Lives },
 		{ "Player.Score", state => state.Player.Score }
 	};

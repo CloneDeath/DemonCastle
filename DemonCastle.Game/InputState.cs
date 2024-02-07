@@ -25,14 +25,14 @@ public class InputState : IInputState {
 	}
 
 	private static string GetActionName(PlayerAction action) => action switch {
-		PlayerAction.Up => InputActions.PlayerMoveUp,
-		PlayerAction.Down => InputActions.PlayerMoveDown,
-		PlayerAction.Left => InputActions.PlayerMoveLeft,
-		PlayerAction.Right => InputActions.PlayerMoveRight,
-		PlayerAction.Jump => InputActions.PlayerJump,
-		PlayerAction.Attack => InputActions.PlayerAttack,
-		PlayerAction.Accept => InputActions.PlayerAccept,
-		PlayerAction.Cancel => InputActions.PlayerCancel,
+		PlayerAction.Up => InputActions.MoveUp,
+		PlayerAction.Down => InputActions.MoveDown,
+		PlayerAction.Left => InputActions.MoveLeft,
+		PlayerAction.Right => InputActions.MoveRight,
+		PlayerAction.Jump => InputActions.Jump,
+		PlayerAction.Attack => InputActions.Attack,
+		PlayerAction.Accept => InputActions.Accept,
+		PlayerAction.Cancel => InputActions.Cancel,
 		_ => throw new InvalidEnumValueException<PlayerAction>(action)
 	};
 }

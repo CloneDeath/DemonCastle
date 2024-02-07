@@ -5,7 +5,7 @@ namespace DemonCastle.Editor.Editors.Components.ControlViewComponent;
 public partial class ControlView<T> : Container where T : Control, new()  {
 	protected ControlViewToolbar Toolbar { get; }
 	protected ScrollableWrapper<T> MainControl { get; }
-	protected Grid MainControl_Grid { get; }
+	protected Grid MainControlGrid { get; }
 	protected ControlViewFooter Footer { get; }
 	protected T Inner => MainControl.Inner;
 
@@ -28,12 +28,12 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 		MainControl.Inner.MouseExited += MainControl_Inner_OnMouseExited;
 		MainControl.SetAnchorsPreset(LayoutPreset.FullRect, true);
 
-		MainControl.Inner.AddChild(MainControl_Grid = new Grid {
+		MainControl.Inner.AddChild(MainControlGrid = new Grid {
 			CellSize = Vector2I.One,
 			Color = new Color(Colors.White, 0.1f),
 			MouseFilter = MouseFilterEnum.Pass
 		}, false, InternalMode.Front );
-		MainControl_Grid.SetAnchorsPreset(LayoutPreset.FullRect);
+		MainControlGrid.SetAnchorsPreset(LayoutPreset.FullRect);
 
 		AddChild(Footer = new ControlViewFooter {
 			OffsetTop = -20
@@ -42,13 +42,13 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 	}
 
 	public Vector2I CellSize {
-		get => MainControl_Grid.CellSize;
-		set => MainControl_Grid.CellSize = value;
+		get => MainControlGrid.CellSize;
+		set => MainControlGrid.CellSize = value;
 	}
 
 	public Color GridColor {
-		get => MainControl_Grid.Color;
-		set => MainControl_Grid.Color = value;
+		get => MainControlGrid.Color;
+		set => MainControlGrid.Color = value;
 	}
 
 	public bool GridVisible {
@@ -77,6 +77,6 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 		Footer.SetSizeText((Vector2I)size);
 		var pixel = MainControl.Inner.GetLocalMousePosition().Floor() / CellSize;
 		Footer.SetMousePositionText((Vector2I)pixel);
-		MainControl_Grid.Visible = CellSize * (int)MainControl.Zoom >= Vector2I.One * 4 && Toolbar.ShowGrid;
+		MainControlGrid.Visible = CellSize * (int)MainControl.Zoom >= Vector2I.One * 4 && Toolbar.ShowGrid;
 	}
 }

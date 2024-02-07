@@ -3,18 +3,18 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class PositionTarget : Control {
-	private const int _length = 3;
+	private const int Length = 3;
 	private Color _color = Colors.White;
 
 	private ColorRect[] _lines = new ColorRect[4];
 
 	public Vector2 Target {
 		get {
-			var offset = new Vector2(_length + 1, _length + 1);
+			var offset = new Vector2(Length + 1, Length + 1);
 			return Position + offset;
 		}
 		set {
-			var offset = new Vector2(_length + 1, _length + 1);
+			var offset = new Vector2(Length + 1, Length + 1);
 			Position = value - offset;
 		}
 	}
@@ -31,12 +31,12 @@ public partial class PositionTarget : Control {
 
 	public PositionTarget() {
 		Name = nameof(PositionTarget);
-		CustomMinimumSize = new Vector2(_length * 2 + 3,  _length * 2 + 3);
+		CustomMinimumSize = new Vector2(Length * 2 + 3,  Length * 2 + 3);
 		MouseFilter = MouseFilterEnum.Pass;
 
 		// Top
 		AddChild(_lines[0] = new ColorRect {
-			Size = new Vector2(1, _length),
+			Size = new Vector2(1, Length),
 			Color = _color,
 			MouseFilter = MouseFilterEnum.Pass
 		});
@@ -45,16 +45,16 @@ public partial class PositionTarget : Control {
 
 		// Bottom
 		AddChild(_lines[1] = new ColorRect {
-			Size = new Vector2(1, _length),
+			Size = new Vector2(1, Length),
 			Color = _color,
 			MouseFilter = MouseFilterEnum.Pass
 		});
 		_lines[1].SetAnchorsPreset(LayoutPreset.CenterBottom);
-		_lines[1].Position = new Vector2(-1, -_length);
+		_lines[1].Position = new Vector2(-1, -Length);
 
 		// Left
 		AddChild(_lines[2] = new ColorRect {
-			Size = new Vector2(_length, 1),
+			Size = new Vector2(Length, 1),
 			Color = _color,
 			MouseFilter = MouseFilterEnum.Pass
 		});
@@ -64,11 +64,11 @@ public partial class PositionTarget : Control {
 
 		// Right
 		AddChild(_lines[3] = new ColorRect {
-			Size = new Vector2(_length, 1),
+			Size = new Vector2(Length, 1),
 			Color = _color,
 			MouseFilter = MouseFilterEnum.Pass
 		});
 		_lines[3].SetAnchorsPreset(LayoutPreset.CenterRight);
-		_lines[3].Position = new Vector2(-_length, -1);
+		_lines[3].Position = new Vector2(-Length, -1);
 	}
 }

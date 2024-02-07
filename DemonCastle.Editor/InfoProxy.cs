@@ -35,8 +35,8 @@ public abstract class InfoProxy<T> : INotifyPropertyChanged where T : INotifyPro
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
-	protected bool SetField<F>(ref F field, F value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<F>.Default.Equals(field, value)) return false;
+	protected bool SetField<TField>(ref TField field, TField value, [CallerMemberName] string? propertyName = null) {
+		if (EqualityComparer<TField>.Default.Equals(field, value)) return false;
 		field = value;
 		OnPropertyChanged(propertyName);
 		return true;

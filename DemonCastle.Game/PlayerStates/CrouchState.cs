@@ -8,7 +8,7 @@ public class CrouchState : IState {
 	}
 
 	public IState? Update(GamePlayer player, double delta) {
-		if (!Input.IsActionPressed(InputActions.PlayerMoveDown)) {
+		if (!Input.IsActionPressed(InputActions.MoveDown)) {
 			return new NormalState();
 		}
 

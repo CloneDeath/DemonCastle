@@ -5,8 +5,8 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.AnimationFrames;
 
 public partial class FrameItem : SelectableControl {
-	private static readonly Color SelectedColor = Colors.White;
-	private static readonly Color DeselectedColor = new(Colors.White, 0.25f);
+	private static readonly Color _selectedColor = Colors.White;
+	private static readonly Color _deselectedColor = new(Colors.White, 0.25f);
 
 	public IFrameInfo Frame { get; }
 
@@ -44,7 +44,7 @@ public partial class FrameItem : SelectableControl {
 
 	public override void _Process(double delta) {
 		base._Process(delta);
-		Outline.Color = IsSelected ? SelectedColor : DeselectedColor;
+		Outline.Color = IsSelected ? _selectedColor : _deselectedColor;
 	}
 
 	protected override void OnSelected() {

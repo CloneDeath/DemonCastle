@@ -36,7 +36,7 @@ public abstract partial class GameBaseEntity : PlayerEntityCommon, IEntityState 
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Velocity = _moveDirection * MoveSpeed;
+		Velocity = MoveDirection * MoveSpeed;
 		StopMoving();
 		if (!IsImmobile) MoveAndSlide();
 
