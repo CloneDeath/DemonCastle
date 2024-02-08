@@ -33,20 +33,22 @@ public class TileInfoFactory : IInfoFactory<TileInfo, TileData> {
 
 	public TileData CreateData() {
 		var lastTile = _data.LastOrDefault();
-		if (lastTile == null) return new TileData();
+
+		var previousState = lastTile?.States.FirstOrDefault(s => s.Id == lastTile.InitialState);
+		var previousAnimation = lastTile?.Animations.FirstOrDefault(a => a.Id == previousState?.Animation);
+		var previousFrame = previousAnimation?.Frames.FirstOrDefault();
 
 		var tileData = new TileData();
-		var previousState = lastTile.States.FirstOrDefault(s => s.Id == lastTile.InitialState);
-		var previousAnimation = lastTile.Animations.FirstOrDefault(a => a.Id == previousState?.Animation);
-		var previousFrame = previousAnimation?.Frames.FirstOrDefault();
-		var animation = new AnimationData();
+		var animation = new AnimationData {
+			Name = previousAnimation?.Name ?? "Default"
+		};
 		tileData.Animations.Add(animation);
 		animation.Frames.Add(new FrameData {
 			Source = previousFrame?.Source ?? string.Empty,
 			SpriteId = previousFrame?.SpriteId ?? Guid.Empty
 		});
-
 		var state = new EntityStateData {
+			Name = previousState?.Name ?? "Default",
 			Animation = animation.Id
 		};
 		tileData.States.Add(state);

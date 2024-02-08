@@ -16,6 +16,7 @@ public class TileSetFile : IGameFile {
 
 public class TileData : BaseEntityFile {
 	public TileData() {
+		Name = "Tile";
 		Size = new Size(1, 1);
 	}
 
