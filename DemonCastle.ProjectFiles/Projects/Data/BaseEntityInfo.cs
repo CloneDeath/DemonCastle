@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using DemonCastle.Files.BaseEntity;
@@ -27,10 +28,16 @@ public interface IBaseEntityInfo : IListableInfo, INotifyPropertyChanged {
 public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, IEntityStateInfoRetriever
 	where TData : BaseEntityFile {
 
+	private EntityStateInfo? _currentState;
+	private IAnimationInfo? _currentAnimation;
+	private IFrameInfo? _currentFrame;
+
 	protected BaseEntityInfo(IFileNavigator file, TData data) : base(file, data) {
 		Animations = new AnimationInfoCollection(file, Data.Animations);
 		States = new EntityStateInfoCollection(file, this, Data.States);
 		Variables = new VariableDeclarationInfoCollection(file, Data.Variables);
+
+		LoadStateAndAnimationHooks();
 	}
 
 	public Guid Id => Data.Id;
@@ -48,9 +55,53 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 		get => Data.InitialState;
 		set {
 			if (!SaveField(ref Data.InitialState, value)) return;
+			LoadStateAndAnimationHooks();
 			OnPropertyChanged(nameof(PreviewSpriteDefinition));
 			OnPropertyChanged(nameof(PreviewTexture));
 		}
+	}
+
+	private void LoadStateAndAnimationHooks() {
+		if (_currentState != null) _currentState.PropertyChanged -= State_OnPropertyChanged;
+		_currentState = States.Get(InitialState);
+		if (_currentState != null) _currentState.PropertyChanged += State_OnPropertyChanged;
+
+		LoadAnimationHooks();
+	}
+
+	private void LoadAnimationHooks() {
+		if (_currentAnimation != null) _currentAnimation.Frames.CollectionChanged -= AnimationFrames_OnCollectionChanged;
+		_currentAnimation = Animations.Get(_currentState?.Animation ?? Guid.Empty);
+		if (_currentAnimation != null) _currentAnimation.Frames.CollectionChanged += AnimationFrames_OnCollectionChanged;
+
+		LoadFrameHooks();
+	}
+
+	private void LoadFrameHooks() {
+		if (_currentFrame != null) _currentFrame.PropertyChanged -= Frame_OnPropertyChanged;
+		_currentFrame = _currentAnimation?.Frames.FirstOrDefault();
+		if (_currentFrame != null) _currentFrame.PropertyChanged += Frame_OnPropertyChanged;
+		OnPropertyChanged(nameof(PreviewSpriteDefinition));
+		OnPropertyChanged(nameof(PreviewTexture));
+	}
+
+	private void State_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName != nameof(EntityStateInfo.Animation)) return;
+		LoadAnimationHooks();
+		OnPropertyChanged(nameof(PreviewSpriteDefinition));
+		OnPropertyChanged(nameof(PreviewTexture));
+	}
+
+	private void AnimationFrames_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		LoadFrameHooks();
+		OnPropertyChanged(nameof(PreviewSpriteDefinition));
+		OnPropertyChanged(nameof(PreviewTexture));
+	}
+
+	private void Frame_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		if (e.PropertyName != nameof(IFrameInfo.SpriteDefinition)) return;
+		OnPropertyChanged(nameof(PreviewSpriteDefinition));
+		OnPropertyChanged(nameof(PreviewTexture));
 	}
 
 	public Vector2I Size {

@@ -16,6 +16,7 @@ public class AnimationInfoCollection : ObservableCollectionInfo<IAnimationInfo, 
 	protected override void Save() => _file.Save();
 
 	public Guid GetAnimationId(string animationName) => InfoItems.FirstOrDefault(a => a.Name == animationName)?.Id ?? Guid.Empty;
+	public IAnimationInfo? Get(Guid id) => InfoItems.FirstOrDefault(a => a.Id == id);
 }
 
 public class AnimationInfoCollectionFactory : IInfoFactory<IAnimationInfo, AnimationData> {
