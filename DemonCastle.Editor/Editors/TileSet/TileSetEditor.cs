@@ -20,10 +20,10 @@ public partial class TileSetEditor : BaseEditor {
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
 
-		var leftSide = new VBoxContainer {
+		VBoxContainer leftSide;
+		SplitContainer.AddChild(leftSide = new VBoxContainer {
 			CustomMinimumSize = new Vector2(100, 0)
-		};
-		SplitContainer.AddChild(leftSide);
+		});
 		{
 			leftSide.AddChild(new TileSetDetails(tileSet));
 			leftSide.AddChild(TileList = new TileInfoCollectionEditor(tileSet.TileSet) {
