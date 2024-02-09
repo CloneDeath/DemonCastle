@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
 using DemonCastle.Files.Variables;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -25,11 +26,16 @@ public partial class VariableCollectionEditor : HSplitContainer {
 	}
 
 	public void Load(IEnumerableInfoByEnum<VariableDeclarationInfo, VariableType>? variables) {
+		var selected = VariableList.SelectedItem;
 		VariableList.Load(variables);
+		var newSelection = variables?.FirstOrDefault(v => v.Name == selected?.Name)
+						   ?? variables?.FirstOrDefault(a => a.Name.ToLower() == "default")
+						   ?? variables?.FirstOrDefault();
+		VariableList.SelectedItem = newSelection;
+		VariableEditor.VariableDeclaration = newSelection;
 	}
 
 	protected void VariableList_OnItemSelected(VariableDeclarationInfo? variableDeclaration) {
-		if (variableDeclaration != null) VariableEditor.Load(variableDeclaration);
-		else VariableEditor.Clear();
+		VariableEditor.VariableDeclaration = variableDeclaration;
 	}
 }

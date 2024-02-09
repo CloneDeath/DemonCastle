@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.Animations.Editor;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
@@ -28,7 +29,13 @@ public partial class AnimationsEditor : HSplitContainer {
 	}
 
 	public void Load(IEnumerableInfo<IAnimationInfo>? animations) {
+		var selected = AnimationList.SelectedItem;
 		AnimationList.Load(animations);
+		var newSelected = animations?.FirstOrDefault(a => a.Name == selected?.Name)
+						  ?? animations?.FirstOrDefault(a => a.Name.ToLower() == "default")
+						  ?? animations?.FirstOrDefault();
+		AnimationList.SelectedItem = newSelected;
+		AnimationEditor.LoadAnimation(newSelected);
 	}
 
 	private void AnimationList_OnItemSelected(IAnimationInfo? animation) {

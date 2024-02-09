@@ -10,15 +10,25 @@ namespace DemonCastle.Editor.Editors.Components.VariableDeclarations.Editor;
 
 public partial class VariableDeclarationEditor : Control {
 	private readonly ProjectResources _resources;
+	private VariableDeclarationInfo? _variableDeclaration;
 
 	public VariableDeclarationEditor(ProjectResources resources) {
 		_resources = resources;
+	}
+
+	public VariableDeclarationInfo? VariableDeclaration {
+		get => _variableDeclaration;
+		set {
+			if (value != null) Load(value);
+			else Clear();
+		}
 	}
 
 	public void Clear() {
 		foreach (var child in GetChildren()) {
 			child.QueueFree();
 		}
+		_variableDeclaration = null;
 	}
 	public void Load(VariableDeclarationInfo variableDeclaration) {
 		Clear();
@@ -26,6 +36,7 @@ public partial class VariableDeclarationEditor : Control {
 		var editor = GetEditor(variableDeclaration);
 		AddChild(editor);
 		editor.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+		_variableDeclaration = variableDeclaration;
 	}
 
 	private VariableDeclarationDetails GetEditor(VariableDeclarationInfo variableDeclaration) {

@@ -21,6 +21,7 @@ public partial class BaseEntityTabContainer : TabContainer {
 		SetTabTitle(1, "Animations");
 		AddChild(_states = new StatesEditor(resources, project));
 		SetTabTitle(2, "States");
+		CurrentTab = 1;
 	}
 
 	public void Load(IBaseEntityInfo? entity) {

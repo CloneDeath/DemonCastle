@@ -84,7 +84,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		RemoveButton.Disabled = !anythingSelected;
 	}
 
-	protected int? SelectedIndex {
+	public int? SelectedIndex {
 		get {
 			var selected = ItemList.GetSelectedItems();
 			return selected.Any() ? selected[0] : null;
@@ -96,6 +96,11 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 				ItemList.Select(value.Value);
 			}
 		}
+	}
+
+	public TInfo? SelectedItem {
+		get => SelectedIndex == null ? null : _data?[SelectedIndex.Value];
+		set => SelectedIndex = value == null ? null : _data?.IndexOf(value);
 	}
 
 	protected virtual void AppendAddButton(Control parent) => parent.AddChild(AddButton);

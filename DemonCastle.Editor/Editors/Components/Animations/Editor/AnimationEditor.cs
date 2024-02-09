@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.AnimationFrames;
 using DemonCastle.Editor.Editors.Components.Animations.Editor.Frames;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -30,5 +31,6 @@ public partial class AnimationEditor : VSplitContainer {
 	public void LoadAnimation(IAnimationInfo? animation) {
 		Details.Animation = animation;
 		FrameList.Load(animation);
+		FrameDetails.FrameInfo = animation?.Frames.FirstOrDefault();
 	}
 }

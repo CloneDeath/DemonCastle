@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Components.States.Editor;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States;
@@ -24,8 +25,14 @@ public partial class StatesEditor : HSplitContainer {
 	}
 
 	public void Load(IBaseEntityInfo? entity) {
+		var selected = StateList.SelectedItem;
 		StateList.Load(entity?.States);
 		StateEditor.LoadEntity(entity);
+		var newSelected = entity?.States.FirstOrDefault(a => a.Name == selected?.Name)
+						  ?? entity?.States.FirstOrDefault(a => a.Name.ToLower() == "default")
+						  ?? entity?.States.FirstOrDefault();
+		StateList.SelectedItem = newSelected;
+		StateEditor.LoadState(newSelected);
 	}
 
 	protected void StateList_OnItemSelected(EntityStateInfo? stateInfo) {
