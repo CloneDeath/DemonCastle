@@ -30,7 +30,7 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	}
 
 	public InfoCollectionEditor(IEnumerableInfo<TInfo> data) : this() {
-		_data = data;
+		Load(data);
 	}
 
 	public InfoCollectionEditor() {
@@ -121,12 +121,6 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		OnItemSelected(item);
 	}
 
-	public override void _EnterTree() {
-		base._EnterTree();
-		if (_data != null) _data.CollectionChanged += Data_OnCollectionChanged;
-		ReloadItems();
-	}
-
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (_data != null) _data.CollectionChanged -= Data_OnCollectionChanged;
@@ -177,14 +171,14 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		ReloadItems();
 	}
 
-	public virtual void Load(IEnumerableInfo<TInfo>? data) {
+	public void Load(IEnumerableInfo<TInfo>? data) {
 		if (_data != null) _data.CollectionChanged -= Data_OnCollectionChanged;
 		_data = data;
 		if (_data != null) _data.CollectionChanged += Data_OnCollectionChanged;
 		ReloadItems();
 	}
 
-	protected virtual void ReloadItems() {
+	protected void ReloadItems() {
 		foreach (var item in _subscribed) {
 			item.PropertyChanged -= InfoItem_OnPropertyChanged;
 		}
