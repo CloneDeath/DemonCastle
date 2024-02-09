@@ -60,20 +60,12 @@ public class TileInfo : BaseEntityInfo<TileData> {
 
 	public Vector2[] Collision {
 		get => Data.Collision.Select(c => new Vector2(c.X, c.Y)).ToArray();
-		set {
-			Data.Collision = value.ToList();
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Collision, value.ToList());
 	}
 
 	public StairData? Stairs {
 		get => Data.Stairs;
-		set {
-			Data.Stairs = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Stairs, value);
 	}
 
 	protected ISpriteSource Source => File.FileExists(SourceFile) ? File.GetSprite(SourceFile) : new NullSpriteSource();

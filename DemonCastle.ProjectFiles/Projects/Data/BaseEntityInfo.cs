@@ -39,9 +39,7 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 	public string Name {
 		get => Data.Name;
 		set {
-			Data.Name = value;
-			Save();
-			OnPropertyChanged();
+			if (!SaveField(ref Data.Name, value)) return;
 			OnPropertyChanged(nameof(ListLabel));
 		}
 	}
@@ -49,20 +47,15 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 	public Guid InitialState {
 		get => Data.InitialState;
 		set {
-			if (SaveField(ref Data.InitialState, value)) {
-				OnPropertyChanged(nameof(PreviewSpriteDefinition));
-				OnPropertyChanged(nameof(PreviewTexture));
-			}
+			if (!SaveField(ref Data.InitialState, value)) return;
+			OnPropertyChanged(nameof(PreviewSpriteDefinition));
+			OnPropertyChanged(nameof(PreviewTexture));
 		}
 	}
 
 	public Vector2I Size {
 		get => Data.Size.ToVector2I();
-		set {
-			Data.Size = value.ToSize();
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Size, value.ToSize());
 	}
 
 	public AnimationInfoCollection Animations { get; }

@@ -12,9 +12,9 @@ public abstract class BaseEntityFile {
 	public Guid Id { get; set; } = Guid.NewGuid();
 
 	[JsonProperty(Order = -2)]
-	public string Name { get; set; } = string.Empty;
+	public string Name = string.Empty;
 
-	public Size Size { get; set; } = new();
+	public Size Size = new();
 
 	public Guid InitialState = Guid.Empty;
 

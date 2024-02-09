@@ -20,8 +20,8 @@ public class TileData : BaseEntityFile {
 		Size = new Size(1, 1);
 	}
 
-	public List<Vector2> Collision { get; set; } = new();
-	public StairData? Stairs { get; set; }
+	public List<Vector2> Collision = new();
+	public StairData? Stairs;
 }
 
 public class StairData {
