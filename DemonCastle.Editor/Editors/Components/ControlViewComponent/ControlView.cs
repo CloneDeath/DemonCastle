@@ -30,9 +30,8 @@ public partial class ControlView<T> : Container where T : Control, new()  {
 
 		MainControl.Inner.AddChild(MainControlGrid = new Grid {
 			CellSize = Vector2I.One,
-			Color = new Color(Colors.White, 0.1f),
-			MouseFilter = MouseFilterEnum.Pass
-		}, false, InternalMode.Front );
+			Color = new Color(Colors.White, 0.1f)
+		}, @internal: InternalMode.Back );
 		MainControlGrid.SetAnchorsPreset(LayoutPreset.FullRect);
 
 		AddChild(Footer = new ControlViewFooter {

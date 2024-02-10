@@ -35,6 +35,7 @@ public partial class Grid : Control {
 	}
 
 	public Grid() {
+		MouseFilter = MouseFilterEnum.Ignore;
 		Resized += OnResized;
 	}
 
