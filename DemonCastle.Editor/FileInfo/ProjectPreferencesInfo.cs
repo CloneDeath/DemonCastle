@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DemonCastle.Editor.Files;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
