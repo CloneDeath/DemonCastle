@@ -17,7 +17,7 @@ public partial class FrameInfoView : ControlView<SpriteDefinitionView> {
 	private PositionTarget OriginTarget { get; }
 
 	public FrameInfoView() {
-		MainControl.Zoom = 8;
+		Toolbar.Zoom = MainControl.Zoom = 8;
 		Inner.AddChild(OriginTarget = new PositionTarget());
 		Inner.AddChild(new NullableRect2IView(new PropertyBinding<FrameInfoProxy,Rect2I?>(Proxy, p => p.HurtBox)) {
 			Color = Colors.Orange
