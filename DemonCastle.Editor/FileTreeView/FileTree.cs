@@ -57,6 +57,17 @@ public partial class FileTree : Tree {
 		ReloadTree();
 		ItemActivated += OnItemActivated;
 		ItemMouseSelected += OnItemSelected;
+
+		ItemCollapsed += OnItemCollapsed;
+	}
+
+	private void OnItemCollapsed(TreeItem item) {
+		if (!DirectoryMap.TryGetValue(item, out var dir)) return;
+		if (item.Collapsed) {
+			_preferences.ExpandedDirectories.Remove(dir.Directory);
+		} else {
+			_preferences.ExpandedDirectories.Add(dir.Directory);
+		}
 	}
 
 	public override void _GuiInput(InputEvent @event) {
