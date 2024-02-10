@@ -97,6 +97,7 @@ public partial class GameArea : Node2D {
 		foreach (var entity in _spawned) {
 			entity.QueueFree();
 		}
+		_spawned.Clear();
 	}
 
 	public void OnPlayerExit() {

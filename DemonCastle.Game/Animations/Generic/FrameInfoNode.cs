@@ -9,8 +9,15 @@ public partial class FrameInfoNode : TemporalNode {
 	private HitBoxNode? _hitBox;
 
 	private AudioStreamPlayer? _audioPlayer;
+	private bool _animationActive;
 
-	public bool AnimationActive { get; set; }
+	public bool AnimationActive {
+		get => _animationActive;
+		set {
+			_animationActive = value;
+			OnCurrentTimeChanged();
+		}
+	}
 
 	public FrameInfoNode(IFrameInfo frame, IDamageable owner, DebugState debug) {
 		Name = nameof(FrameInfoNode);
