@@ -29,8 +29,10 @@ public partial class HurtBoxNode : Area2D {
 	public override void _Process(double delta) {
 		base._Process(delta);
 		if (!Active) return;
-		foreach (var hitBox in GetOverlappingAreas().Cast<HitBoxNode>()) {
-			if (hitBox.OwnerId == _source.Id) continue;
+		var otherHitBoxes = GetOverlappingAreas().Cast<HitBoxNode>()
+												 .Where(n => n.OwnerId != _source.Id)
+												 .Where(n => n.Active);
+		foreach (var hitBox in otherHitBoxes) {
 			hitBox.TakeDamage(1);
 		}
 	}

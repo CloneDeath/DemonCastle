@@ -76,8 +76,14 @@ public partial class AnimationInfoNode : Node2D {
 	}
 
 	public void Play() {
-		if (Frames == null) return;
-		Frames.CurrentTime = 0;
-		Frames.Play();
+		if (Frames != null) {
+			Frames.CurrentTime = 0;
+			Frames.Play();
+		} else {
+			foreach (var frame in FrameNodes) {
+				frame.AnimationActive = true;
+				frame.CurrentTime = 0;
+			}
+		}
 	}
 }

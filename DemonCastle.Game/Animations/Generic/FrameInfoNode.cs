@@ -13,6 +13,8 @@ public partial class FrameInfoNode : TemporalNode {
 	public bool AnimationActive { get; set; }
 
 	public FrameInfoNode(IFrameInfo frame, IDamageable owner, DebugState debug) {
+		Name = nameof(FrameInfoNode);
+
 		AddChild(new SpriteDefinitionNode(frame.SpriteDefinition, frame.Origin));
 		if (frame.HitBox.HasValue) AddChild(_hitBox = new HitBoxNode(frame.HitBox.Value, frame.Origin, owner, debug));
 		if (frame.HurtBox.HasValue) AddChild(_hurtBox = new HurtBoxNode(frame.HurtBox.Value, frame.Origin, owner, debug));
