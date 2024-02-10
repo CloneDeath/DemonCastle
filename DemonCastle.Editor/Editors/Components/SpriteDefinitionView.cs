@@ -5,14 +5,11 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components;
 
-public partial class SpriteDefinitionView : CenterContainer {
+public partial class SpriteDefinitionView : TextureRect {
 	private ISpriteDefinition? _definition;
-	private TextureRect Rect { get; set; }
 
 	public SpriteDefinitionView() {
-		AddChild(Rect = new TextureRect {
-			StretchMode = TextureRect.StretchModeEnum.KeepCentered
-		});
+		StretchMode = StretchModeEnum.KeepCentered;
 	}
 
 	public SpriteDefinitionView(ISpriteDefinition definition) : this() {
@@ -43,10 +40,10 @@ public partial class SpriteDefinitionView : CenterContainer {
 			_definition.PropertyChanged += DefinitionNotify_OnPropertyChanged;
 		}
 
-		Rect.Texture = _definition?.ToTexture();
-		Rect.TextureFilter = TextureFilterEnum.Nearest;
-		Rect.FlipH = _definition?.FlipHorizontal ?? false;
-		Rect.Material = new TransparentColorSpriteShader {
+		Texture = _definition?.ToTexture();
+		TextureFilter = TextureFilterEnum.Nearest;
+		FlipH = _definition?.FlipHorizontal ?? false;
+		Material = new TransparentColorSpriteShader {
 			TransparentColor = definition?.TransparentColor ?? Colors.Magenta,
 			Threshold = definition?.TransparentColorThreshold ?? 0.01f
 		};
