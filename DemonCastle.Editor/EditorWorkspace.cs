@@ -20,7 +20,7 @@ public partial class EditorWorkspace : Control {
 		AddChild(SplitContainer = new HSplitContainer());
 		SplitContainer.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
 
-		SplitContainer.AddChild(Explorer = new ExplorerPanel(resources) {
+		SplitContainer.AddChild(Explorer = new ExplorerPanel(resources, preferences) {
 			CustomMinimumSize = new Vector2(250, 0)
 		});
 		Explorer.FileActivated += ExplorerOnFileActivated;

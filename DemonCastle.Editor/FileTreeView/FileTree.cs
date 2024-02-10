@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.Editor.FileInfo;
 using DemonCastle.Editor.FileTreeView.Popups;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Game;
@@ -13,6 +14,7 @@ namespace DemonCastle.Editor.FileTreeView;
 
 public partial class FileTree : Tree {
 	private readonly ProjectResources _resources;
+	private readonly ProjectPreferencesInfo _preferences;
 
 	protected DirectoryPopupMenu DirectoryPopupMenu { get; }
 	protected FilePopupMenu FilePopupMenu { get; }
@@ -26,8 +28,9 @@ public partial class FileTree : Tree {
 	protected Dictionary<TreeItem, FileNavigator> FileMap { get; } = new();
 	protected Dictionary<TreeItem, DirectoryNavigator> DirectoryMap { get; } = new();
 
-	public FileTree(ProjectResources resources) {
+	public FileTree(ProjectResources resources, ProjectPreferencesInfo preferences) {
 		_resources = resources;
+		_preferences = preferences;
 		Name = nameof(FileTree);
 		AllowRmbSelect = true;
 
@@ -68,8 +71,13 @@ public partial class FileTree : Tree {
 		if (selected == null) return;
 		if (FileMap.TryGetValue(selected, out var value)) {
 			OnFileActivated?.Invoke(value);
-		} else if (DirectoryMap.ContainsKey(selected)) {
+		} else if (DirectoryMap.TryGetValue(selected, out var dir)) {
 			selected.Collapsed = !selected.Collapsed;
+			if (selected.Collapsed) {
+				_preferences.ExpandedDirectories.Remove(dir.Directory);
+			} else {
+				_preferences.ExpandedDirectories.Add(dir.Directory);
+			}
 		}
 	}
 
@@ -90,6 +98,7 @@ public partial class FileTree : Tree {
 	public void Collapse() {
 		var root = GetRoot();
 		root.Collapsed = false;
+		_preferences.ExpandedDirectories.Clear();
 
 		foreach (var child in root.GetChildren()) {
 			child.SetCollapsedRecursive(true);
@@ -103,6 +112,10 @@ public partial class FileTree : Tree {
 		foreach (var child in root.GetChildren()) {
 			child.SetCollapsedRecursive(false);
 		}
+
+		_preferences.ExpandedDirectories.Clear();
+		var directories = DirectoryMap.Values.Select(d => d.Directory);
+		_preferences.ExpandedDirectories.AddRange(directories);
 	}
 
 	protected void ReloadTree() {
@@ -120,6 +133,11 @@ public partial class FileTree : Tree {
 		dir.SetText(0, directory.DirectoryName);
 		dir.SetIcon(0, IconTextures.FolderIcon);
 		DirectoryMap[dir] = directory;
+		if (parent == null || _preferences.ExpandedDirectories.Contains(directory.Directory)) {
+			dir.Collapsed = false;
+		} else {
+			dir.Collapsed = true;
+		}
 
 		foreach (var subDirectory in directory.GetDirectories()) {
 			CreateDirectory(dir, _resources.GetDirectory(subDirectory));

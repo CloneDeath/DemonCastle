@@ -1,4 +1,5 @@
 using System;
+using DemonCastle.Editor.FileInfo;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -23,7 +24,7 @@ public partial class ExplorerPanel : VBoxContainer {
 		remove => FileTree.TreeReloaded -= value;
 	}
 
-	public ExplorerPanel(ProjectResources resources) {
+	public ExplorerPanel(ProjectResources resources, ProjectPreferencesInfo preferences) {
 		Name = nameof(ExplorerPanel);
 
 		AddChild(Controls = new HFlowContainer {
@@ -48,7 +49,7 @@ public partial class ExplorerPanel : VBoxContainer {
 			});
 			ExpandButton.Pressed += ExpandButton_OnPressed;
 		}
-		AddChild(FileTree = new FileTree(resources) {
+		AddChild(FileTree = new FileTree(resources, preferences) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
 	}
