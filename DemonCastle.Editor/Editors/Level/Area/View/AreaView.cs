@@ -33,7 +33,8 @@ public partial class AreaView : SelectableControl {
 
 		AddChild(Outline = new Outline {
 			MouseFilter = MouseFilterEnum.Ignore,
-			Color = DeselectedColor
+			Color = DeselectedColor,
+			ZIndex = 10
 		});
 		Outline.SetAnchorsPreset(LayoutPreset.FullRect, true);
 		AddChild(Tiles = new AreaTilesView(area) {
