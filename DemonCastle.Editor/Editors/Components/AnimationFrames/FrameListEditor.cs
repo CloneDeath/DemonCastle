@@ -82,6 +82,7 @@ public partial class FrameListEditor : VBoxContainer {
 		var frame = _current.Frames.AppendNew();
 		FrameSelected?.Invoke(frame);
 		_frames[frame].IsSelected = true;
+		AddFrameButton.ReleaseFocus();
 	}
 
 	private void ReloadFrames() {
