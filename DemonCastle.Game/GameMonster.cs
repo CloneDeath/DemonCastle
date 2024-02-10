@@ -41,5 +41,5 @@ public partial class GameMonster : GameBaseEntity {
 		base.Reset();
 	}
 
-	public override bool WasKilled => Hp < 0;
+	public override bool WasKilled => Hp <= 0;
 }
