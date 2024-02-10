@@ -25,6 +25,7 @@ public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 			Resource.File = value;
 			Save();
 			OnPropertyChanged();
+			OnPropertyChanged(nameof(Texture));
 		}
 	}
 

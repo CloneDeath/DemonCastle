@@ -45,5 +45,6 @@ public partial class SpriteGridEditor : BaseEditor {
 
 	private void SpriteCollection_OnSpriteSelected(SpriteGridDataInfo? data) {
 		SpriteDetails.Proxy = data;
+		TextureView.SelectedSprite = data;
 	}
 }
