@@ -1,3 +1,4 @@
+using DemonCastle.Editor.FileInfo;
 using DemonCastle.Editor.FileTreeView;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -7,11 +8,13 @@ using Godot;
 namespace DemonCastle.Editor;
 
 public partial class EditorWorkspace : Control {
+	private readonly ProjectPreferencesInfo _preferences;
 	protected HSplitContainer SplitContainer { get; }
 	protected ExplorerPanel Explorer { get; }
 	protected EditArea EditArea { get; }
 
-	public EditorWorkspace(ProjectResources resources, ProjectInfo project) {
+	public EditorWorkspace(ProjectResources resources, ProjectInfo project, ProjectPreferencesInfo preferences) {
+		_preferences = preferences;
 		Name = nameof(EditorWorkspace);
 
 		AddChild(SplitContainer = new HSplitContainer());
@@ -23,6 +26,13 @@ public partial class EditorWorkspace : Control {
 		Explorer.FileActivated += ExplorerOnFileActivated;
 		Explorer.TreeReloaded += Explorer_OnTreeReloaded;
 		SplitContainer.AddChild(EditArea = new EditArea(resources, project));
+
+		SplitContainer.SplitOffset = preferences.ExplorerPanelWidth - (int)Explorer.CustomMinimumSize.X;
+		SplitContainer.Dragged += SplitContainer_OnDragged;
+	}
+
+	private void SplitContainer_OnDragged(long offset) {
+		_preferences.ExplorerPanelWidth = SplitContainer.SplitOffset + (int)Explorer.CustomMinimumSize.X;
 	}
 
 	private void Explorer_OnTreeReloaded() {

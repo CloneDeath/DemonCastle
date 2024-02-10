@@ -15,6 +15,11 @@ public class FileNavigator : DirectoryNavigator {
 		FilePath = filePath;
 	}
 
+	public void CreateFile(string contents) {
+		System.IO.Directory.CreateDirectory(Directory);
+		File.WriteAllText(FilePath, contents);
+	}
+
 	public void DeleteFile() => File.Delete(FilePath);
 
 	public void RenameFile(string newName) {

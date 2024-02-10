@@ -91,7 +91,17 @@ public class DirectoryNavigator {
 		return File.Exists(fullPath);
 	}
 
+	public bool DirectoryExists(string directoryName) {
+		var fullPath = ToAbsolutePath(directoryName);
+		return System.IO.Directory.Exists(fullPath);
+	}
+
 	public bool DirectoryExists() => System.IO.Directory.Exists(Directory);
+
+	public FileNavigator GetFile(string relativePath) {
+		var fullPath = ToAbsolutePath(relativePath);
+		return new FileNavigator(fullPath);
+	}
 
 	public string ToAbsolutePath(string relativePath) {
 		var fullPath = Path.Combine(Directory, relativePath);

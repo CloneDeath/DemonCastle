@@ -1,4 +1,5 @@
 using System;
+using DemonCastle.Editor.FileInfo;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -16,7 +17,7 @@ public partial class EditorSpace : CanvasLayer {
 
 	public event Action? GoToProjectMenu;
 
-	public EditorSpace(ProjectResources resources, ProjectInfo project) {
+	public EditorSpace(ProjectResources resources, ProjectInfo project, ProjectPreferencesInfo projectPreferences) {
 		_resources = resources;
 		_project = project;
 		Name = nameof(EditorSpace);
@@ -37,7 +38,7 @@ public partial class EditorSpace : CanvasLayer {
 		});
 		TopBar.PlayPressed += PlayPressed;
 		TopBar.ProjectMenuPressed += TopBar_OnProjectMenuPressed;
-		AddChild(new EditorWorkspace(resources, project) {
+		AddChild(new EditorWorkspace(resources, project, projectPreferences) {
 			AnchorRight = 1,
 			AnchorBottom = 1,
 			OffsetRight = -5,

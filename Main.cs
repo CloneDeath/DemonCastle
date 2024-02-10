@@ -1,5 +1,6 @@
 using System.IO;
 using DemonCastle.Editor;
+using DemonCastle.Editor.FileInfo;
 using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -52,8 +53,18 @@ public partial class Main : Control {
         ClearChildren();
 
         GetWindow().Title = $"DemonCastle - {project.Name}";
-        AddChild(EditorSpace = new EditorSpace(resources, project));
+        var projectPreferences = LoadProjectPreferences(resources);
+        AddChild(EditorSpace = new EditorSpace(resources, project, projectPreferences));
         EditorSpace.GoToProjectMenu += LoadProjectMenuView;
+    }
+
+    private static ProjectPreferencesInfo LoadProjectPreferences(ProjectResources resources) {
+        var root = resources.GetRoot();
+        var preferencesFile = root.GetFile(".demoncastle/preferences.json");
+        if (!preferencesFile.FileExists()) {
+            preferencesFile.CreateFile("{}");
+        }
+        return ProjectPreferencesInfo.Load(preferencesFile, resources);
     }
 
     private void ClearChildren() {
