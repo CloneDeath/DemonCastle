@@ -24,6 +24,7 @@ public static class IconTextures {
 	}
 	public static Texture2D AddFrameIcon { get; } = LoadTexture(nameof(AddFrameIcon));
 	public static Texture2D AddIcon { get; } = LoadTexture(nameof(AddIcon));
+	public static Texture2D AllLayersIcon { get; } = LoadTexture(nameof(AllLayersIcon));
 	public static Texture2D CollapseIcon { get; } = LoadTexture(nameof(CollapseIcon));
 	public static Texture2D ColorRectElementIcon { get; } = LoadTexture(nameof(ColorRectElementIcon));
 	public static Texture2D DeleteIcon { get; } = LoadTexture(nameof(DeleteIcon));
@@ -39,6 +40,7 @@ public static class IconTextures {
 	public static Texture2D OneToOneIcon { get; } = LoadTexture(nameof(OneToOneIcon));
 	public static Texture2D OptionListElementIcon { get; } = LoadTexture(nameof(OptionListElementIcon));
 	public static Texture2D RefreshIcon { get; } = LoadTexture(nameof(RefreshIcon));
+	public static Texture2D SingleLayerIcon { get; } = LoadTexture(nameof(SingleLayerIcon));
 	public static Texture2D SpriteElementIcon { get; } = LoadTexture(nameof(SpriteElementIcon));
 	public static Texture2D UpIcon { get; } = LoadTexture(nameof(UpIcon));
 
