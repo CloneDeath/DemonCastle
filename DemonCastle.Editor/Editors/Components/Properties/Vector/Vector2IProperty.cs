@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties.Vector;
 
-public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
+public partial class Vector2IProperty : BoxContainer, IBaseProperty {
 	protected Label Label { get; }
 	protected IPropertyBinding<Vector2I> Binding { get; }
 	protected BoxContainer BoxContainer { get; }
@@ -29,19 +29,25 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 	public Vector2IProperty(IPropertyBinding<Vector2I> binding, Vector2IPropertyOptions options) {
 		Name = nameof(BooleanProperty);
 		Binding = binding;
+		Vertical = !options.InlineLabel;
 
 		AddChild(Label = new Label {
 			Visible = false
 		});
 
-		AddChild(BoxContainer = options.Vertical ? new VBoxContainer() : new HBoxContainer());
+		AddChild(BoxContainer = options.Vertical ? new VBoxContainer() : new HBoxContainer {
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
+		});
 
 		var xContainer = new HBoxContainer {
 			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		};
 		BoxContainer.AddChild(xContainer);
 		{
-			xContainer.AddChild(new Label { Text = "X" });
+			xContainer.AddChild(new Label {
+				Text = "X",
+				Modulate = Colors.LightGreen
+			});
 			xContainer.AddChild(XBox = new SpinBox {
 				CustomMinimumSize = new Vector2(20, 20),
 				SizeFlagsHorizontal = SizeFlags.ExpandFill,
@@ -58,7 +64,11 @@ public partial class Vector2IProperty : VBoxContainer, IBaseProperty {
 		};
 		BoxContainer.AddChild(yContainer);
 		{
-			yContainer.AddChild(new Label { Text = "Y" });
+			yContainer.AddChild(new Label {
+				Text = "Y",
+				Modulate = Godot.Color.Color8(0xee, 0x90, 0x90, 0xff)
+			});
+
 			yContainer.AddChild(YBox = new SpinBox {
 				CustomMinimumSize = new Vector2(20, 20),
 				SizeFlagsHorizontal = SizeFlags.ExpandFill,
