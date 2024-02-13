@@ -66,7 +66,7 @@ public partial class Vector2IProperty : BoxContainer, IBaseProperty {
 		{
 			yContainer.AddChild(new Label {
 				Text = "Y",
-				Modulate = Godot.Color.Color8(0xee, 0x90, 0x90, 0xff)
+				Modulate = Godot.Color.Color8(0xee, 0x90, 0x90)
 			});
 
 			yContainer.AddChild(YBox = new SpinBox {
