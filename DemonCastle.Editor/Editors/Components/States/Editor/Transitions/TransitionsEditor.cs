@@ -12,7 +12,10 @@ public partial class TransitionsEditor : HSplitContainer {
 
 	public EntityStateInfo? State {
 		get => _state.Proxy;
-		set => _state.Proxy = value;
+		set {
+			_state.Proxy = value;
+			TransitionEdit.Transition = null;
+		}
 	}
 
 	public IBaseEntityInfo? Entity {
