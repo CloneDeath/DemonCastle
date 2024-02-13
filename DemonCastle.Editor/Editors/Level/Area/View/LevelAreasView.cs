@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.ControlViewComponent;
+using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -14,19 +15,57 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 	private readonly ProjectResources _resources;
 	private readonly LevelInfo _levelInfo;
 	private readonly Dictionary<AreaInfo, AreaView> _areaMap = new();
+	private bool _showSingleLayer;
+	private int _selectedLayerIndex;
+
+	private Button ToggleLayersButton { get; }
 
 	public event Action<AreaInfo>? AreaSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileSelected;
 	public event Action<AreaInfo, Vector2I>? AreaTileCleared;
 
+	public bool ShowSingleLayer {
+		get => _showSingleLayer;
+		set {
+			_showSingleLayer = value;
+			foreach (var areaView in _areaMap.Values) {
+				areaView.ShowSingleLayer = value;
+			}
+		}
+	}
+
+	public int SelectedLayerIndex {
+		get => _selectedLayerIndex;
+		set {
+			_selectedLayerIndex = value;
+			foreach (var areaView in _areaMap.Values) {
+				areaView.SelectedLayerIndex = value;
+			}
+		}
+	}
+
 	public LevelAreasView(ProjectResources resources, LevelInfo levelInfo) {
 		_resources = resources;
 		_levelInfo = levelInfo;
 		Name = nameof(LevelAreasView);
+
+		Toolbar.AddChild(ToggleLayersButton = new Button {
+			Icon = IconTextures.AllLayersIcon,
+			ToggleMode = true
+		});
+		ToggleLayersButton.Pressed += ToggleLayersButtonOnPressed;
+
 		CellSize = levelInfo.TileSize;
 		GridVisible = true;
 		MainControl.Inner.MouseDefaultCursorShape = CursorShape.Arrow;
 		ReloadAreas();
+	}
+
+	private void ToggleLayersButtonOnPressed() {
+		ToggleLayersButton.Icon = ToggleLayersButton.ButtonPressed
+			? IconTextures.SingleLayerIcon
+			: IconTextures.AllLayersIcon;
+		ShowSingleLayer = ToggleLayersButton.ButtonPressed;
 	}
 
 	public override void _EnterTree() {

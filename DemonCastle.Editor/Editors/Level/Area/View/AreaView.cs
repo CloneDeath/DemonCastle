@@ -16,6 +16,16 @@ public partial class AreaView : SelectableControl {
 	protected AreaTilesView Tiles { get; }
 	protected AreaMonstersView Monsters { get; }
 
+	public bool ShowSingleLayer {
+		get => Tiles.ShowSingleLayer;
+		set => Tiles.ShowSingleLayer = value;
+	}
+
+	public int SelectedLayerIndex {
+		get => Tiles.SelectedLayerIndex;
+		set => Tiles.SelectedLayerIndex = value;
+	}
+
 	protected static readonly Color SelectedColor = new(Colors.White, 0.75f);
 	protected static readonly Color DeselectedColor = new(Colors.White, 0.3f);
 

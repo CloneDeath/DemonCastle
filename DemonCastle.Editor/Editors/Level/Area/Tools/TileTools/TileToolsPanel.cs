@@ -1,4 +1,5 @@
 using System;
+using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Layers;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.TileSets;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -11,9 +12,11 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
 public partial class TileToolsPanel : VBoxContainer {
 	private readonly ProjectResources _resources;
+	public event Action<int>? SelectedLayerIndexChanged;
+
 	protected LevelInfo Level { get; }
 
-	protected readonly Layers.TileLayerEditor TileLayerEditor;
+	protected readonly TileLayerEditor TileLayerEditor;
 	protected TileSetSelector TileSetSelector { get; }
 
 	protected VBoxContainer LevelTiles { get; }
@@ -27,7 +30,8 @@ public partial class TileToolsPanel : VBoxContainer {
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
-		AddChild(TileLayerEditor = new Layers.TileLayerEditor());
+		AddChild(TileLayerEditor = new TileLayerEditor());
+		TileLayerEditor.SelectedLayerIndexChanged += index => SelectedLayerIndexChanged?.Invoke(index);
 		AddChild(TileSetSelector = new TileSetSelector(resources, level.Directory));
 		TileSetSelector.TileSetIdSelected += TileSetSelector_OnTileSetIdSelected;
 

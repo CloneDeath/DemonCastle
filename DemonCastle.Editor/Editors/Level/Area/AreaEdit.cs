@@ -32,6 +32,8 @@ public partial class AreaEdit : HSplitContainer {
 		RightPanel.AreaSelected += LevelAreasView_OnAreaSelected;
 		RightPanel.AreaTileSelected += LevelAreasView_OnAreaTileSelected;
 		RightPanel.AreaTileCleared += LevelAreasView_OnAreaTileCleared;
+
+		Tools.SelectedLayerIndexChanged += index => RightPanel.SelectedLayerIndex = index;
 	}
 
 	public AreaInfo? SelectedArea {

@@ -12,6 +12,8 @@ public partial class TileLayerView : Control {
 	private readonly TileMapLayerInfo _layer;
 	private readonly Godot.Collections.Dictionary<Vector2I, TileView> _tileMap = new();
 
+	public int LayerIndex => _layer.ZIndex;
+
 	public TileLayerView(TileMapLayerInfo layer) {
 		_layer = layer;
 		ReloadLayer();

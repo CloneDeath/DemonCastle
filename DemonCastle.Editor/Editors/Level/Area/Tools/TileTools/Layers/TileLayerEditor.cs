@@ -13,6 +13,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools.Layers;
 public partial class TileLayerEditor : VBoxContainer {
 	private IEnumerableInfo<TileMapLayerInfo>? _layers;
 	private readonly List<TileMapLayerInfo> _observed = new();
+	public event Action<int>? SelectedLayerIndexChanged;
 
 	private AddRemoveOptionButton _options;
 	private readonly TileLayerDetails _details;
@@ -40,18 +41,21 @@ public partial class TileLayerEditor : VBoxContainer {
 
 	private void Options_OnItemSelected(long index) {
 		_details.Layer = SelectedLayer;
+		SelectedLayerIndexChanged?.Invoke(SelectedLayer?.ZIndex ?? 0);
 	}
 
 	private void Options_OnAddPressed() {
 		var layer = _layers?.AppendNew();
 		_details.Layer = layer;
 		_options.Selected = layer == null ? -1 : _observed.IndexOf(layer);
+		SelectedLayerIndexChanged?.Invoke(SelectedLayer?.ZIndex ?? 0);
 	}
 
 	private void Options_OnRemovePressed() {
 		if (SelectedLayer == null) return;
 		_layers?.Remove(SelectedLayer);
 		_details.Layer = null;
+		SelectedLayerIndexChanged?.Invoke(SelectedLayer?.ZIndex ?? 0);
 	}
 
 	public override void _ExitTree() {
@@ -100,6 +104,7 @@ public partial class TileLayerEditor : VBoxContainer {
 			_options.Selected = layer == null ? -1 : _observed.IndexOf(layer);
 			_details.Layer = layer;
 		}
+		SelectedLayerIndexChanged?.Invoke(SelectedLayer?.ZIndex ?? 0);
 	}
 
 	private void Layer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {

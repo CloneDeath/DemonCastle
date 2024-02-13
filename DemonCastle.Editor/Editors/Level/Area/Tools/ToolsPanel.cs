@@ -1,3 +1,4 @@
+using System;
 using DemonCastle.Editor.Editors.Level.Area.Tools.MonsterTools;
 using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -11,6 +12,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.Tools;
 public partial class ToolsPanel : TabContainer {
 	private readonly TileToolsPanel _tileToolsPanel;
 	private readonly MonsterToolsPanel _monsterToolsPanel;
+	public event Action<int>? SelectedLayerIndexChanged;
 
 	public AreaInfo? Area {
 		get => _monsterToolsPanel.Area;
@@ -24,6 +26,7 @@ public partial class ToolsPanel : TabContainer {
 		Name = nameof(ToolsPanel);
 
 		AddChild(_tileToolsPanel = new TileToolsPanel(resources, level));
+		_tileToolsPanel.SelectedLayerIndexChanged += index => SelectedLayerIndexChanged?.Invoke(index);
 		SetTabTitle(0, "Tiles");
 		AddChild(_monsterToolsPanel = new MonsterToolsPanel(resources));
 		SetTabTitle(1, "Monsters");
