@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmkel15d6a2tt"
-path="res://.godot/imported/TileSetIcon.png-97f98086f480d7c2ecf25838c6ea440b.ctex"
+path="res://.godot/imported/TileSetIcon.png-e38f1863cd420b8209415a9efc771bb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DemonCastle.Editor/Icons/TileSetIcon.png"
-dest_files=["res://.godot/imported/TileSetIcon.png-97f98086f480d7c2ecf25838c6ea440b.ctex"]
+source_file="res://DemonCastle.Editor/Icons/File/TileSetIcon.png"
+dest_files=["res://.godot/imported/TileSetIcon.png-e38f1863cd420b8209415a9efc771bb1.ctex"]
 
 [params]
 

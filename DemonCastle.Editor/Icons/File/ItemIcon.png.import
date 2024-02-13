@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bv3oo77c7klwl"
-path="res://.godot/imported/ItemIcon.png-a742d994903b0bb39af8b9b81e691329.ctex"
+path="res://.godot/imported/ItemIcon.png-84e5f10c68b743b814815e5e6f4e4353.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DemonCastle.Editor/Icons/ItemIcon.png"
-dest_files=["res://.godot/imported/ItemIcon.png-a742d994903b0bb39af8b9b81e691329.ctex"]
+source_file="res://DemonCastle.Editor/Icons/File/ItemIcon.png"
+dest_files=["res://.godot/imported/ItemIcon.png-84e5f10c68b743b814815e5e6f4e4353.ctex"]
 
 [params]
 

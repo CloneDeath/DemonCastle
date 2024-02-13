@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://osgj0id1iamm"
-path="res://.godot/imported/SpriteAtlasIcon.png-6289b3d54e8637de29a72974de799ff9.ctex"
+path="res://.godot/imported/SpriteAtlasIcon.png-12af0c76c993e5dc86e3e35ef59c7f10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://DemonCastle.Editor/Icons/SpriteAtlasIcon.png"
-dest_files=["res://.godot/imported/SpriteAtlasIcon.png-6289b3d54e8637de29a72974de799ff9.ctex"]
+source_file="res://DemonCastle.Editor/Icons/File/SpriteAtlasIcon.png"
+dest_files=["res://.godot/imported/SpriteAtlasIcon.png-12af0c76c993e5dc86e3e35ef59c7f10.ctex"]
 
 [params]
 
