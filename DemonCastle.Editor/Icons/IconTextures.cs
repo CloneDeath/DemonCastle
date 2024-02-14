@@ -25,11 +25,13 @@ public static class IconTextures {
 	public static Texture2D AddFrameIcon { get; } = LoadTexture(nameof(AddFrameIcon));
 	public static Texture2D AddIcon { get; } = LoadTexture(nameof(AddIcon));
 	public static Texture2D AllLayersIcon { get; } = LoadTexture(nameof(AllLayersIcon));
+	public static Texture2D BrushToolIcon { get; } = LoadTexture(nameof(BrushToolIcon));
 	public static Texture2D CollapseIcon { get; } = LoadTexture(nameof(CollapseIcon));
 	public static Texture2D ColorRectElementIcon { get; } = LoadTexture(nameof(ColorRectElementIcon));
 	public static Texture2D DeleteIcon { get; } = LoadTexture(nameof(DeleteIcon));
 	public static Texture2D DownIcon { get; } = LoadTexture(nameof(DownIcon));
 	public static Texture2D ExpandIcon { get; } = LoadTexture(nameof(ExpandIcon));
+	public static Texture2D FillToolIcon { get; } = LoadTexture(nameof(FillToolIcon));
 	public static Texture2D FolderIcon { get; } = LoadTexture(nameof(FolderIcon));
 	public static Texture2D GridIcon { get; } = LoadTexture(nameof(GridIcon));
 	public static Texture2D HealthBarElementIcon { get; } = LoadTexture(nameof(HealthBarElementIcon));

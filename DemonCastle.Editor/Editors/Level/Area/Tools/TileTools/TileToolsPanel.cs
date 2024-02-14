@@ -10,7 +10,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 
-public partial class TileToolsPanel : VBoxContainer {
+public partial class TileToolsPanel : HBoxContainer {
 	private readonly ProjectResources _resources;
 	public event Action<int>? SelectedLayerIndexChanged;
 
@@ -24,31 +24,40 @@ public partial class TileToolsPanel : VBoxContainer {
 	protected LevelTileDetails TileDetails { get; }
 
 	protected VBoxContainer AreaTiles { get; }
+	protected ToolStrip ToolStrip { get; }
 
 	public TileToolsPanel(ProjectResources resources, LevelInfo level) {
 		_resources = resources;
 		Name = nameof(TileToolsPanel);
 		Level = level;
 
-		AddChild(TileLayerEditor = new TileLayerEditor());
-		TileLayerEditor.SelectedLayerIndexChanged += index => SelectedLayerIndexChanged?.Invoke(index);
-		AddChild(TileSetSelector = new TileSetSelector(resources, level.Directory));
-		TileSetSelector.TileSetIdSelected += TileSetSelector_OnTileSetIdSelected;
-
-		AddChild(LevelTiles = new VBoxContainer {
-			SizeFlagsVertical = SizeFlags.ExpandFill,
-			Visible = false
+		VBoxContainer left;
+		AddChild(left = new VBoxContainer {
+			SizeFlagsHorizontal = SizeFlags.ExpandFill
 		});
 		{
-			LevelTiles.AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
-			TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
-			LevelTiles.AddChild(TileDetails = new LevelTileDetails(level.Directory));
+			left.AddChild(TileLayerEditor = new TileLayerEditor());
+			TileLayerEditor.SelectedLayerIndexChanged += index => SelectedLayerIndexChanged?.Invoke(index);
+			left.AddChild(TileSetSelector = new TileSetSelector(resources, level.Directory));
+			TileSetSelector.TileSetIdSelected += TileSetSelector_OnTileSetIdSelected;
+
+			left.AddChild(LevelTiles = new VBoxContainer {
+				SizeFlagsVertical = SizeFlags.ExpandFill,
+				Visible = false
+			});
+			{
+				LevelTiles.AddChild(TileCollectionEditor = new TileInfoCollectionEditor(level.TileSet));
+				TileCollectionEditor.TileSelected += TileCollectionEditor_OnTileSelected;
+				LevelTiles.AddChild(TileDetails = new LevelTileDetails(level.Directory));
+			}
+
+			left.AddChild(AreaTiles = new VBoxContainer {
+				SizeFlagsVertical = SizeFlags.ExpandFill,
+				Visible = false
+			});
 		}
 
-		AddChild(AreaTiles = new VBoxContainer {
-			SizeFlagsVertical = SizeFlags.ExpandFill,
-			Visible = false
-		});
+		AddChild(ToolStrip = new ToolStrip());
 	}
 
 	private void TileSetSelector_OnTileSetIdSelected(Guid? tileSetId) {
