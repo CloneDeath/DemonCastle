@@ -60,6 +60,8 @@ public partial class TileToolsPanel : HBoxContainer {
 		AddChild(ToolStrip = new ToolStrip());
 	}
 
+	public TileTool SelectedTool => ToolStrip.SelectedTool;
+
 	private void TileSetSelector_OnTileSetIdSelected(Guid? tileSetId) {
 		LevelTiles.Visible = tileSetId == Guid.Empty;
 		foreach (var child in AreaTiles.GetChildren()) {

@@ -1,6 +1,7 @@
 using System;
 using DemonCastle.Editor.Editors.Level.Area.Details;
 using DemonCastle.Editor.Editors.Level.Area.Tools;
+using DemonCastle.Editor.Editors.Level.Area.Tools.TileTools;
 using DemonCastle.Editor.Editors.Level.Area.View;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
@@ -62,7 +63,16 @@ public partial class AreaEdit : HSplitContainer {
 		var selectedLayer = Tools.SelectedLayer;
 		if (selectedLayer == null) return;
 
-		area.SetTile(cell, selectedLayer.ZIndex, selectedTile.Id);
+		switch (Tools.SelectedTool) {
+			case TileTool.Brush:
+				area.SetTile(cell, selectedLayer.ZIndex, selectedTile.Id);
+				break;
+			case TileTool.Fill:
+				area.FloodFillTile(cell, selectedLayer.ZIndex, selectedTile.Id);
+				return;
+			default:
+				throw new NotSupportedException();
+		}
 	}
 
 	private void LevelAreasView_OnAreaTileCleared(AreaInfo area, Vector2I cell) {

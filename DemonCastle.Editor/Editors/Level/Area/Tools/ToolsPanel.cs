@@ -22,6 +22,8 @@ public partial class ToolsPanel : TabContainer {
 		}
 	}
 
+	public TileTool SelectedTool => _tileToolsPanel.SelectedTool;
+
 	public ToolsPanel(ProjectResources resources, LevelInfo level) {
 		Name = nameof(ToolsPanel);
 

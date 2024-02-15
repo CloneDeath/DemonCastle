@@ -88,6 +88,32 @@ public class AreaInfo : BaseInfo<AreaData> {
 		info.TileId = tileId;
 	}
 
+	public void FloodFillTile(Vector2I cell, int selectedLayerZIndex, Guid selectedTileId) {
+		var layer = TileMapLayers.FirstOrDefault(l => l.ZIndex == selectedLayerZIndex);
+		if (layer == null) return;
+
+		var tileId = layer.TileMap.FirstOrDefault(info => info.Contains(cell))?.TileId;
+		if (tileId == selectedTileId) return;
+
+		var stack = new Stack<Vector2I>();
+		stack.Push(cell);
+
+		while (stack.Any()) {
+			var current = stack.Pop();
+			if (!Region.ContainsTileIndex(current)) continue;
+
+			var currentTile = layer.TileMap.FirstOrDefault(info => info.Contains(current));
+			if (currentTile?.TileId != tileId) continue;
+
+			SetTile(current, selectedLayerZIndex, selectedTileId);
+
+			stack.Push(current + Vector2I.Up);
+			stack.Push(current + Vector2I.Down);
+			stack.Push(current + Vector2I.Left);
+			stack.Push(current + Vector2I.Right);
+		}
+	}
+
 	private TileMapLayerInfo GetOrCreateLayer(int zIndex) {
 		return TileMapLayers.FirstOrDefault(l => l.ZIndex == zIndex) ?? TileMapLayers.Add(new TileMapLayerData {
 			Name = zIndex == 0 ? "Default" : "Layer",
