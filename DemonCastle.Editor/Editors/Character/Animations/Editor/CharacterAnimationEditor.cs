@@ -1,3 +1,4 @@
+using System.Linq;
 using DemonCastle.Editor.Editors.Character.Animations.Editor.Frame;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using Godot;
@@ -30,5 +31,6 @@ public partial class CharacterAnimationEditor : VSplitContainer {
 	public void LoadAnimation(IAnimationInfo? animation) {
 		Details.CharacterAnimation = animation;
 		FrameList.Load(animation);
+		FrameDetails.FrameInfo = animation?.Frames.FirstOrDefault();
 	}
 }
