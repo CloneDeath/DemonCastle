@@ -65,7 +65,8 @@ public class SpriteGridInfoFactory : IInfoFactory<SpriteGridDataInfo, SpriteGrid
 		return new SpriteGridData {
 			X = lastSprite?.X + 1 ?? 0,
 			Y = lastSprite?.Y ?? 0,
-			FlipHorizontal = lastSprite?.FlipHorizontal ?? false
+			FlipHorizontal = lastSprite?.FlipHorizontal ?? false,
+			FlipVertical = lastSprite?.FlipVertical ?? false
 		};
 	}
 }
