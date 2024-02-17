@@ -5,6 +5,7 @@ using DemonCastle.Files;
 using DemonCastle.Files.Animations;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
+using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.TileSets;
@@ -43,9 +44,10 @@ public class TileInfoFactory : IInfoFactory<TileInfo, TileData> {
 			Name = previousAnimation?.Name ?? "Default"
 		};
 		tileData.Animations.Add(animation);
+		var nextSprite = GetNextSprite(previousFrame);
 		animation.Frames.Add(new FrameData {
 			Source = previousFrame?.Source ?? string.Empty,
-			SpriteId = previousFrame?.SpriteId ?? Guid.Empty
+			SpriteId = nextSprite?.Id ?? Guid.Empty
 		});
 		var state = new EntityStateData {
 			Name = previousState?.Name ?? "Default",
@@ -53,6 +55,18 @@ public class TileInfoFactory : IInfoFactory<TileInfo, TileData> {
 		};
 		tileData.States.Add(state);
 		tileData.InitialState = state.Id;
+		tileData.Name = nextSprite?.Name ?? tileData.Name;
 		return tileData;
+	}
+
+	private ISpriteDefinition? GetNextSprite(FrameData? previousFrame) {
+		if (previousFrame == null) return null;
+		if (!_file.FileExists(previousFrame.Source)) return null;
+
+		var sprite = _file.GetSprite(previousFrame.Source);
+		var sprites = sprite.Sprites.ToList();
+		var index = sprites.FindIndex(s => s.Id == previousFrame.SpriteId);
+		if (index == -1 || index >= sprites.Count - 1) return null;
+		return sprites[index + 1];
 	}
 }
