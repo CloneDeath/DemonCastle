@@ -50,6 +50,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 		Name = nameof(LevelAreasView);
 
 		Toolbar.AddChild(ToggleLayersButton = new Button {
+			Name = nameof(ToggleLayersButton),
 			Icon = IconTextures.AllLayersIcon,
 			ToggleMode = true
 		});

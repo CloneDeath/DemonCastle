@@ -16,6 +16,8 @@ public partial class ControlViewToolbar : HBoxContainer {
 	public event Action<float>? ZoomLevelChanged;
 
 	public ControlViewToolbar() {
+		Name = nameof(ControlViewToolbar);
+
 		AddChild(ToggleGrid = new Button {
 			Icon = IconTextures.GridIcon,
 			TooltipText = "Toggle Grid"

@@ -23,6 +23,7 @@ public partial class AreaEdit : HSplitContainer {
 		Name = nameof(AreaEdit);
 
 		AddChild(LeftPanel = new VBoxContainer {
+			Name = nameof(LeftPanel),
 			CustomMinimumSize = new Vector2(275, 0)
 		});
 		LeftPanel.AddChild(Details = new AreaDetails());
