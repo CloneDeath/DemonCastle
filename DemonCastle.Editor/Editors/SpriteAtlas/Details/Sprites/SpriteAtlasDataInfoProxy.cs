@@ -58,6 +58,13 @@ public class SpriteAtlasDataInfoProxy : ISpriteDefinition {
 		}
 	}
 
+	public bool FlipVertical {
+		get => _proxy?.FlipVertical ?? false;
+		set {
+			if (_proxy != null) _proxy.FlipVertical = value;
+		}
+	}
+
 	public Color TransparentColor => _proxy?.TransparentColor ?? Colors.Transparent;
 	public float TransparentColorThreshold => _proxy?.TransparentColorThreshold ?? 0.01f;
 
