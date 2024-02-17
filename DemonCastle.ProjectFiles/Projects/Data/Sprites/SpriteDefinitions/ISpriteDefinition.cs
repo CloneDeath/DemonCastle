@@ -10,6 +10,7 @@ public interface ISpriteDefinition : INotifyPropertyChanged {
 	Texture2D Texture { get; }
 	Rect2I Region { get; }
 	bool FlipHorizontal { get; }
+	bool FlipVertical { get; }
 	Color TransparentColor { get; }
 	float TransparentColorThreshold { get; }
 }
