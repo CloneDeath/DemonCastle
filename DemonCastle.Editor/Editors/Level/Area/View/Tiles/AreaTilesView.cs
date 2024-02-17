@@ -12,6 +12,8 @@ public partial class AreaTilesView : Control {
 	private bool _showSingleLayer;
 
 	public AreaTilesView(AreaInfo area) {
+		Name = nameof(AreaTilesView);
+
 		_area = area;
 		ReloadArea();
 	}

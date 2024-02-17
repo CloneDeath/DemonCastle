@@ -10,6 +10,8 @@ public partial class AreaMonstersView : Container {
 	private readonly AreaInfo _area;
 
 	public AreaMonstersView(ProjectResources resources, AreaInfo area) {
+		Name = nameof(AreaMonstersView);
+
 		_resources = resources;
 		_area = area;
 		Reload();

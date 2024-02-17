@@ -4,6 +4,10 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components;
 
 public partial class ExpandingControl : Control {
+	public ExpandingControl() {
+		Name = nameof(ExpandingControl);
+	}
+
 	public override void _Process(double delta) {
 		base._Process(delta);
 

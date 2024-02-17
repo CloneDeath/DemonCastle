@@ -16,4 +16,6 @@ public partial class AreaPosition {
 	public Vector2I ToPixelPositionInLevel() {
 		return AreaIndex * _areaScaleInTiles * _tileScaleInPixels;
 	}
+
+	public override string ToString() => AreaIndex.ToString();
 }

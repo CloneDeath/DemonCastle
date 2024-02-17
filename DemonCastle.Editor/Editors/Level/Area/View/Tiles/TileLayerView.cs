@@ -15,6 +15,7 @@ public partial class TileLayerView : Control {
 	public int LayerIndex => _layer.ZIndex;
 
 	public TileLayerView(TileMapLayerInfo layer) {
+		Name = $"{nameof(TileLayerView)}@{layer.ZIndex} ({layer.Name})";
 		_layer = layer;
 		ReloadLayer();
 	}

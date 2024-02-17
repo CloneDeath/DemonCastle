@@ -38,6 +38,8 @@ public partial class Outline : Control {
 	private ColorRect[] _rects = new ColorRect[4];
 
 	public Outline() {
+		Name = nameof(Outline);
+
 		// Top
 		AddChild(_rects[0] = new ColorRect { MouseFilter = MouseFilterEnum.Pass });
 		_rects[0].SetAnchorsPreset(LayoutPreset.TopWide);

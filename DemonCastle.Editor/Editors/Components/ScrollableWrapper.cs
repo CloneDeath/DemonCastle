@@ -35,7 +35,9 @@ public partial class ScrollableWrapper<T> : ScrollContainer where T : Control, n
 	public ScrollableWrapper() {
 		Name = nameof(ScrollableWrapper<T>);
 
-		AddChild(ControlHolder = new Control());
+		AddChild(ControlHolder = new Control {
+			Name = nameof(ControlHolder)
+		});
 
 		ControlHolder.AddChild(Inner = new T());
 	}

@@ -37,7 +37,7 @@ public partial class AreaView : SelectableControl {
 	public AreaView(ProjectResources resources, AreaInfo area) {
 		Area = area;
 
-		Name = nameof(AreaView);
+		Name = $"{nameof(AreaView)}@{area.PositionOfArea}";
 		SelectedCursorShape = CursorShape.Cross;
 		DefaultCursorShape = CursorShape.PointingHand;
 
