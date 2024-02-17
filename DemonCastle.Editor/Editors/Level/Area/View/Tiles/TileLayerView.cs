@@ -11,6 +11,7 @@ namespace DemonCastle.Editor.Editors.Level.Area.View.Tiles;
 public partial class TileLayerView : Control {
 	private readonly TileMapLayerInfo _layer;
 	private readonly Godot.Collections.Dictionary<Vector2I, TileView> _tileMap = new();
+	public event Action<TileLayerView>? LayerIndexChanged;
 
 	public int LayerIndex => _layer.ZIndex;
 
@@ -33,7 +34,9 @@ public partial class TileLayerView : Control {
 	}
 
 	private void Layer_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
-		ReloadLayer();
+		if (e.PropertyName == nameof(_layer.ZIndex)) {
+			LayerIndexChanged?.Invoke(this);
+		}
 	}
 
 	private void TileMap_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
@@ -46,8 +49,6 @@ public partial class TileLayerView : Control {
 			child.QueueFree();
 		}
 		_tileMap.Clear();
-		ZIndex = _layer.ZIndex;
-
 		AddTiles(_layer.TileMap);
 	}
 

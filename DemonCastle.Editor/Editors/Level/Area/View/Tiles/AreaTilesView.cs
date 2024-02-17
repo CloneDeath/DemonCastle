@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using Godot;
 
@@ -49,20 +50,27 @@ public partial class AreaTilesView : Control {
 	}
 
 	private void ReloadArea() {
-		foreach (var child in GetChildren()) {
+		foreach (var child in _layers) {
+			child.LayerIndexChanged -= Child_OnLayerIndexChanged;
 			child.QueueFree();
 		}
 		_layers.Clear();
 
-		foreach (var layer in _area.TileMapLayers) {
+		foreach (var layer in _area.TileMapLayers.OrderBy(l => l.ZIndex)) {
 			var tileLayerView = new TileLayerView(layer) {
 				MouseFilter = MouseFilterEnum.Pass
 			};
+			tileLayerView.LayerIndexChanged += Child_OnLayerIndexChanged;
 			AddChild(tileLayerView);
 			_layers.Add(tileLayerView);
 		}
 
 		RefreshLayerVisibility();
+	}
+
+	private void Child_OnLayerIndexChanged(TileLayerView layer) {
+		var newIndex = _layers.OrderBy(l => l.ZIndex).Where(l => l != layer).ToList().FindIndex(l => l.LayerIndex > layer.LayerIndex);
+		MoveChild(layer, newIndex);
 	}
 
 	private void RefreshLayerVisibility() {
