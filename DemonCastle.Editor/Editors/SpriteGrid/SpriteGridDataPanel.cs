@@ -1,3 +1,4 @@
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;
@@ -19,9 +20,7 @@ public partial class SpriteGridDataPanel : PanelContainer {
 		Properties.AddInteger("Y", spriteData, x => x.Y);
 		Properties.AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
 		Properties.AddBoolean("Flip Vertical", spriteData, x => x.FlipVertical);
-		Properties.AddChild(Preview = new TextureRect {
-			Texture  = spriteData.ToTexture(),
-			FlipH = spriteData.FlipHorizontal,
+		Properties.AddChild(Preview = new SpriteDefinitionView(spriteData) {
 			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered
 		});
 		Properties.AddChild(DeleteButton = new Button {
@@ -40,11 +39,5 @@ public partial class SpriteGridDataPanel : PanelContainer {
 	protected void OnDeleteConfirmed() {
 		SpriteData.Remove();
 		QueueFree();
-	}
-
-	public override void _Process(double delta) {
-		base._Process(delta);
-		Preview.FlipH = SpriteData.FlipHorizontal;
-		Preview.Texture = SpriteData.ToTexture();
 	}
 }

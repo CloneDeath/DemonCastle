@@ -19,6 +19,7 @@ public partial class SpriteDefinitionNode : Sprite2D {
 		Texture = definition.Texture;
 		RegionRect = definition.Region;
 		FlipH = definition.FlipHorizontal;
+		FlipV = definition.FlipVertical;
 		TransparentColorSpriteShader.TransparentColor = definition.TransparentColor;
 		TransparentColorSpriteShader.Threshold = definition.TransparentColorThreshold;
 	}

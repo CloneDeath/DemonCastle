@@ -43,6 +43,7 @@ public partial class SpriteDefinitionView : TextureRect {
 		Texture = _definition?.ToTexture();
 		TextureFilter = TextureFilterEnum.Nearest;
 		FlipH = _definition?.FlipHorizontal ?? false;
+		FlipV = _definition?.FlipVertical ?? false;
 		Material = new TransparentColorSpriteShader {
 			TransparentColor = definition?.TransparentColor ?? Colors.Magenta,
 			Threshold = definition?.TransparentColorThreshold ?? 0.01f
