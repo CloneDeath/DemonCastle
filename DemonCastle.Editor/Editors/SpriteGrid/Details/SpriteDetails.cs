@@ -23,6 +23,7 @@ public partial class SpriteDetails : PropertyCollection {
 		AddInteger("X", _proxy, x => x.X);
 		AddInteger("Y", _proxy, x => x.Y);
 		AddBoolean("Flip Horizontal", _proxy, x => x.FlipHorizontal);
+		AddBoolean("Flip Vertical", _proxy, x => x.FlipVertical);
 
 		AddChild(new SpriteDefinitionView(_proxy));
 	}

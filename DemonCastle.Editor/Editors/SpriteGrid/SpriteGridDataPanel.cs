@@ -18,6 +18,7 @@ public partial class SpriteGridDataPanel : PanelContainer {
 		Properties.AddInteger("X", spriteData, x => x.X);
 		Properties.AddInteger("Y", spriteData, x => x.Y);
 		Properties.AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
+		Properties.AddBoolean("Flip Vertical", spriteData, x => x.FlipVertical);
 		Properties.AddChild(Preview = new TextureRect {
 			Texture  = spriteData.ToTexture(),
 			FlipH = spriteData.FlipHorizontal,

@@ -28,6 +28,7 @@ public class SpriteAtlasDataInfoProxy : ISpriteDefinition {
 			OnPropertyChanged(nameof(Texture));
 			OnPropertyChanged(nameof(Region));
 			OnPropertyChanged(nameof(FlipHorizontal));
+			OnPropertyChanged(nameof(FlipVertical));
 			OnPropertyChanged(nameof(TransparentColor));
 			OnPropertyChanged(nameof(TransparentColorThreshold));
 		}

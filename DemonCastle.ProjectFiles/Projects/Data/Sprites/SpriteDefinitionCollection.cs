@@ -44,7 +44,8 @@ public class SpriteAtlasInfoFactory : IInfoFactory<SpriteAtlasDataInfo, SpriteAt
 			Y = lastSprite?.Y ?? 0,
 			Height = lastSprite?.Height ?? 16,
 			Width = lastSprite?.Width ?? 16,
-			FlipHorizontal = lastSprite?.FlipHorizontal ?? false
+			FlipHorizontal = lastSprite?.FlipHorizontal ?? false,
+			FlipVertical = lastSprite?.FlipVertical ?? false
 		};
 	}
 }

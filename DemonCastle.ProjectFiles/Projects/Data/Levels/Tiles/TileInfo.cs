@@ -72,7 +72,5 @@ public class TileInfo : BaseEntityInfo<TileData> {
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == SpriteId)
 										  ?? new NullSpriteDefinition();
 	public IEnumerableInfo<ISpriteDefinition> SpriteOptions => Source.Sprites;
-	public Texture2D Texture => Sprite.Texture;
 	public Rect2 Region => Sprite.Region;
-	public bool FlipHorizontal => Sprite.FlipHorizontal;
 }

@@ -10,6 +10,7 @@ public partial class SpriteAtlasDataDetails : PropertyCollection {
 		AddString("Name", spriteData, x => x.Name);
 		AddRect2I("Region", spriteData, x => x.Region);
 		AddBoolean("Flip Horizontal", spriteData, x => x.FlipHorizontal);
+		AddBoolean("Flip Vertical", spriteData, x => x.FlipVertical);
 		AddChild(new SpriteDefinitionView(spriteData));
 	}
 }
