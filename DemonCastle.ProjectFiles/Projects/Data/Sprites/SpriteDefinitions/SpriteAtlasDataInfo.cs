@@ -1,18 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
-public class SpriteAtlasDataInfo : ISpriteDefinition {
-	public SpriteAtlasData Data { get; }
-
-	public SpriteAtlasDataInfo(SpriteAtlasInfo spriteAtlas, SpriteAtlasData data) {
+public class SpriteAtlasDataInfo : BaseInfo<SpriteAtlasData>, ISpriteDefinition {
+	public SpriteAtlasDataInfo(IFileNavigator file, SpriteAtlasData data, SpriteAtlasInfo spriteAtlas) : base(file, data) {
 		SpriteAtlas = spriteAtlas;
-		Data = data;
 	}
 
 	protected SpriteAtlasInfo SpriteAtlas { get; }
@@ -21,19 +16,13 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 
 	public string Name {
 		get => Data.Name;
-		set {
-			Data.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Name, value);
 	}
 
 	public int X {
 		get => Data.X;
 		set {
-			Data.X = value;
-			Save();
-			OnPropertyChanged();
+			if (!SaveField(ref Data.X, value)) return;
 			OnPropertyChanged(nameof(Position));
 			OnPropertyChanged(nameof(Region));
 		}
@@ -42,9 +31,7 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 	public int Y {
 		get => Data.Y;
 		set {
-			Data.Y = value;
-			Save();
-			OnPropertyChanged();
+			if (!SaveField(ref Data.Y, value)) return;
 			OnPropertyChanged(nameof(Position));
 			OnPropertyChanged(nameof(Region));
 		}
@@ -53,21 +40,18 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 	public Vector2I Position {
 		get => new(Data.X, Data.Y);
 		set {
-			if (!SetField(ref Data.X, value.X, nameof(X)) && !SetField(ref Data.Y, value.Y, nameof(Y))) {
+			if (!SaveField(ref Data.X, value.X, nameof(X)) && !SaveField(ref Data.Y, value.Y, nameof(Y))) {
 				return;
 			}
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(Region));
-			Save();
 		}
 	}
 
 	public int Width {
 		get => Data.Width;
 		set {
-			Data.Width = value;
-			Save();
-			OnPropertyChanged();
+			if (!SaveField(ref Data.Width, value)) return;
 			OnPropertyChanged(nameof(Size));
 			OnPropertyChanged(nameof(Region));
 		}
@@ -76,9 +60,7 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 	public int Height {
 		get => Data.Height;
 		set {
-			Data.Height = value;
-			Save();
-			OnPropertyChanged();
+			if (!SaveField(ref Data.Height, value)) return;
 			OnPropertyChanged(nameof(Size));
 			OnPropertyChanged(nameof(Region));
 		}
@@ -117,32 +99,16 @@ public class SpriteAtlasDataInfo : ISpriteDefinition {
 
 	public bool FlipHorizontal {
 		get => Data.FlipHorizontal;
-		set {
-			Data.FlipHorizontal = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.FlipHorizontal, value);
+	}
+
+	public bool FlipVertical {
+		get => Data.FlipVertical;
+		set => SaveField(ref Data.FlipVertical, value);
 	}
 
 	public Texture2D Texture => SpriteAtlas.Texture;
 
 	public Color TransparentColor => SpriteAtlas.TransparentColor;
 	public float TransparentColorThreshold => 0.001f;
-
-	protected void Save() => SpriteAtlas.Save();
-
-	#region INotifyPropertyChanged
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-	}
-
-	protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-		if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-		field = value;
-		OnPropertyChanged(propertyName);
-		return true;
-	}
-	#endregion
 }

@@ -28,13 +28,15 @@ public class SpriteDefinitionCollection<TInfo, TFile> : ObservableCollectionInfo
 }
 
 public class SpriteAtlasInfoFactory : IInfoFactory<SpriteAtlasDataInfo, SpriteAtlasData> {
+	private readonly IFileNavigator _file;
 	private readonly SpriteAtlasInfo _spriteAtlas;
 
-	public SpriteAtlasInfoFactory(SpriteAtlasInfo spriteAtlas) {
+	public SpriteAtlasInfoFactory(IFileNavigator file, SpriteAtlasInfo spriteAtlas) {
+		_file = file;
 		_spriteAtlas = spriteAtlas;
 	}
 
-	public SpriteAtlasDataInfo CreateInfo(SpriteAtlasData data) => new(_spriteAtlas, data);
+	public SpriteAtlasDataInfo CreateInfo(SpriteAtlasData data) => new(_file, data, _spriteAtlas);
 	public SpriteAtlasData CreateData() {
 		var lastSprite = _spriteAtlas.Sprites.LastOrDefault() as SpriteAtlasDataInfo;
 		return new SpriteAtlasData {
@@ -48,13 +50,15 @@ public class SpriteAtlasInfoFactory : IInfoFactory<SpriteAtlasDataInfo, SpriteAt
 }
 
 public class SpriteGridInfoFactory : IInfoFactory<SpriteGridDataInfo, SpriteGridData> {
+	private readonly IFileNavigator _file;
 	private readonly SpriteGridInfo _spriteGrid;
 
-	public SpriteGridInfoFactory(SpriteGridInfo spriteGrid) {
+	public SpriteGridInfoFactory(IFileNavigator file, SpriteGridInfo spriteGrid) {
+		_file = file;
 		_spriteGrid = spriteGrid;
 	}
 
-	public SpriteGridDataInfo CreateInfo(SpriteGridData data) => new(_spriteGrid, data);
+	public SpriteGridDataInfo CreateInfo(SpriteGridData data) => new(_file, data, _spriteGrid);
 	public SpriteGridData CreateData() {
 		var lastSprite = _spriteGrid.Sprites.LastOrDefault() as SpriteGridDataInfo;
 		return new SpriteGridData {

@@ -8,7 +8,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class SpriteAtlasInfo : FileInfo<SpriteAtlasFile>, ISpriteSource {
 	public SpriteAtlasInfo(FileNavigator<SpriteAtlasFile> file) : base(file) {
-		AtlasSprites = new SpriteDefinitionCollection<SpriteAtlasDataInfo, SpriteAtlasData>(file, new SpriteAtlasInfoFactory(this), Resource.Sprites);
+		AtlasSprites = new SpriteDefinitionCollection<SpriteAtlasDataInfo, SpriteAtlasData>(file, new SpriteAtlasInfoFactory(file, this), Resource.Sprites);
 	}
 
 	public SpriteDefinitionCollection<SpriteAtlasDataInfo, SpriteAtlasData> AtlasSprites { get; }

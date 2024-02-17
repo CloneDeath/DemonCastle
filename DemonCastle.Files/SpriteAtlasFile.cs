@@ -23,4 +23,5 @@ public class SpriteAtlasData {
 	public int Width;
 	public int Height;
 	public bool FlipHorizontal;
+	public bool FlipVertical;
 }

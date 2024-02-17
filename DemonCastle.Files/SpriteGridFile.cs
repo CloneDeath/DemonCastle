@@ -17,8 +17,9 @@ public class SpriteGridFile : IGameFile {
 
 public class SpriteGridData {
 	public Guid Id { get; set; } = Guid.NewGuid();
-	public int X { get; set; }
-	public int Y { get; set; }
-	public string Name { get; set; } = string.Empty;
-	public bool FlipHorizontal { get; set; }
+	public int X;
+	public int Y;
+	public string Name = string.Empty;
+	public bool FlipHorizontal;
+	public bool FlipVertical;
 }

@@ -7,7 +7,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Sprites;
 
 public class SpriteGridInfo : FileInfo<SpriteGridFile>, ISpriteSource {
 	public SpriteGridInfo(FileNavigator<SpriteGridFile> file) : base(file) {
-		GridSprites = new SpriteDefinitionCollection<SpriteGridDataInfo, SpriteGridData>(file, new SpriteGridInfoFactory(this), Resource.Sprites);
+		GridSprites = new SpriteDefinitionCollection<SpriteGridDataInfo, SpriteGridData>(file, new SpriteGridInfoFactory(file, this), Resource.Sprites);
 	}
 
 	public SpriteDefinitionCollection<SpriteGridDataInfo, SpriteGridData> GridSprites { get; }
