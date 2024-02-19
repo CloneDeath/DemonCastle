@@ -32,7 +32,6 @@ public partial class LevelTileDetails : PropertyCollection {
 		spriteReference.ItemSelected += SpriteIdProperty_OnItemSelected;
 		AddVector2I("Span", _tileProxy, x => x.Size);
 		AddChild(new TileCollisionView(_tileProxy));
-		AddChild(new TileStairView(_tileProxy));
 
 		Disable();
 	}

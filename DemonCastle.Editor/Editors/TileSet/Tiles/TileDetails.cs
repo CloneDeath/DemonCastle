@@ -6,6 +6,7 @@ using DemonCastle.Editor.Editors.TileSet.Tiles.Stairs;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.States;
+using Godot;
 
 namespace DemonCastle.Editor.Editors.TileSet.Tiles;
 
@@ -29,7 +30,8 @@ public partial class TileDetails : PropertyCollection {
 		AddString("Name", _tile, m => m.Name, InternalMode.Front);
 		AddVector2I("Size", _tile, p => p.Size);
 		AddChild(new TileCollisionView(_tile));
+		_stateReference = AddStateReference("Initial State", _tile, m => m.InitialState, new EnumerableInfoWrapper<EntityStateInfo>(new List<EntityStateInfo>()));
+		AddChild(new HSeparator());
 		AddChild(new TileStairView(_tile));
-		_stateReference = AddStateReference("Initial State", _tile, m => m.InitialState, new EnumerableInfoWrapper<EntityStateInfo>(new List<EntityStateInfo>()), InternalMode.Back);
 	}
 }
