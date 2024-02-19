@@ -10,14 +10,9 @@ public abstract class InfoProxy<T> : INotifyPropertyChanged where T : INotifyPro
 	public T? Proxy {
 		get => _proxy;
 		set {
-			if (_proxy != null) {
-				_proxy.PropertyChanged -= Proxy_OnPropertyChanged;
-			}
+			if (_proxy != null) _proxy.PropertyChanged -= Proxy_OnPropertyChanged;
 			_proxy = value;
-			if (_proxy != null) {
-				_proxy.PropertyChanged += Proxy_OnPropertyChanged;
-			}
-
+			if (_proxy != null) _proxy.PropertyChanged += Proxy_OnPropertyChanged;
 			NotifyProxyChanged();
 		}
 	}
