@@ -1,4 +1,3 @@
-using System.Linq;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -6,50 +5,46 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
-public partial class EntityActionCollectionEditor : HSplitContainer {
+public partial class EntityActionCollectionEditor : VBoxContainer {
 	private readonly ProjectResources _resources;
-	private Control Left { get; }
-	private Control Right { get; }
-
+	private EntityActionInfoCollection? _actionSet;
 	public IBaseEntityInfo? Entity { get; set; }
+
+	public VBoxContainer Actions { get; }
+	public Button AddActionButton { get; }
 
 	public EntityActionCollectionEditor(ProjectResources resources) {
 		_resources = resources;
 		Name = nameof(EntityActionCollectionEditor);
 
-		AddChild(Left = new MarginContainer {
-			CustomMinimumSize = new Vector2(300, 300)
-		});
-		AddChild(Right = new MarginContainer {
-			CustomMinimumSize = new Vector2(300, 300)
-		});
+		AddChild(Actions = new VBoxContainer());
+		AddChild(AddActionButton = new Button { Text = "Add Action" });
+		AddActionButton.Pressed += AddActionButton_OnPressed;
 	}
 
-	public void Load(EntityActionInfoCollection actionSet) {
-		Clear();
+	private void AddActionButton_OnPressed() => _actionSet?.AppendNew();
 
-		var list = new InfoCollectionEditor<EntityActionInfo>(actionSet);
-		Left.AddChild(list);
-		list.SetAnchorsPreset(LayoutPreset.FullRect);
-		list.ItemSelected += List_OnItemSelected;
+	public void Load(EntityActionInfoCollection? actionSet) {
+		_actionSet = actionSet;
+		Clear();
+		if (actionSet == null) return;
+
+		foreach (var action in actionSet) {
+			AddAction(action);
+		}
 	}
 
 	public void Clear() {
-		foreach (var child in Left.GetChildren().Concat(Right.GetChildren())) {
+		foreach (var child in Actions.GetChildren()) {
 			child.QueueFree();
 		}
 	}
 
-	private void List_OnItemSelected(EntityActionInfo? obj) {
-		foreach (var child in Right.GetChildren()) {
-			child.QueueFree();
-		}
-
-		if (obj == null) return;
+	private void AddAction(EntityActionInfo action) {
 		if (Entity == null) return;
 
-		var editor = new EntityActionEditor(_resources, Entity, obj);
-		Right.AddChild(editor);
+		var editor = new EntityActionEditor(_resources, Entity, action);
+		Actions.AddChild(editor);
 		editor.SetAnchorsPreset(LayoutPreset.FullRect);
 	}
 }
