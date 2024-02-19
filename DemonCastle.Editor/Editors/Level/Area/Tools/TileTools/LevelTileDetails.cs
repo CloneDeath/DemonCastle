@@ -1,7 +1,6 @@
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.TileSet.Tiles;
 using DemonCastle.Editor.Editors.TileSet.Tiles.Collision;
-using DemonCastle.Editor.Editors.TileSet.Tiles.Stairs;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using Godot;

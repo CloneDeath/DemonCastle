@@ -11,7 +11,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.Properties;
 
-public partial class AnimationNameProperty : BaseProperty {
+public partial class AnimationReferenceProperty : BaseProperty {
 	private readonly List<IAnimationInfo> _boundItems = new();
 	private readonly IEnumerableInfo<IAnimationInfo> _options;
 
@@ -28,9 +28,9 @@ public partial class AnimationNameProperty : BaseProperty {
 		}
 	}
 
-	public AnimationNameProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<IAnimationInfo> options) {
+	public AnimationReferenceProperty(IPropertyBinding<Guid> binding, IEnumerableInfo<IAnimationInfo> options) {
 		_options = options;
-		Name = nameof(AnimationNameProperty);
+		Name = nameof(AnimationReferenceProperty);
 		Binding = binding;
 
 		AddChild(OptionButton = new OptionButton {

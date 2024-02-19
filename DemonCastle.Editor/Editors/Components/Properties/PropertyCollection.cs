@@ -38,8 +38,8 @@ public partial class PropertyCollection : BoxContainer, IBaseProperty {
 		Vertical = true;
 	}
 
-	public AnimationNameProperty AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
-		var animationNameProperty = new AnimationNameProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
+	public AnimationReferenceProperty AddAnimationReference<T>(string name, T target, Expression<Func<T, Guid>> propertyExpression, IEnumerableInfo<IAnimationInfo> options) where T : INotifyPropertyChanged {
+		var animationNameProperty = new AnimationReferenceProperty(new PropertyBinding<T, Guid>(target, propertyExpression), options) {
 			DisplayName = name
 		};
 		AddChild(animationNameProperty);
