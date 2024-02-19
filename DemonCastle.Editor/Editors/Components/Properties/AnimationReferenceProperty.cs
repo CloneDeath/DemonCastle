@@ -81,6 +81,7 @@ public partial class AnimationReferenceProperty : BaseProperty {
 		Binding.Changed += Binding_OnChanged;
 		_options.CollectionChanged += Options_OnCollectionChanged;
 		ReloadOptions();
+		PropertyValue = Binding.Get();
 	}
 
 	public override void _ExitTree() {
