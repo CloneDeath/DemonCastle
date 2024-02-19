@@ -56,7 +56,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 	}
 
 	private void SetupStairs(DebugState debug) {
-		if (_tile.Stairs == null) return;
+		if (!_tile.Stairs.Enabled) return;
 
 		AddChild(Stairs = new GameTileStairs(_level, _tile, _tile.Stairs, debug));
 	}

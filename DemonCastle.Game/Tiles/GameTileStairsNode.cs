@@ -1,13 +1,13 @@
-using DemonCastle.Files;
+using DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 using Godot;
 
 namespace DemonCastle.Game.Tiles;
 
 public partial class GameTileStairsNode : Node2D {
-	private readonly StairData _stairs;
+	private readonly StairInfo _stairs;
 	private readonly bool _start;
 
-	public GameTileStairsNode(StairData stairs, bool start) {
+	public GameTileStairsNode(StairInfo stairs, bool start) {
 		_stairs = stairs;
 		_start = start;
 	}

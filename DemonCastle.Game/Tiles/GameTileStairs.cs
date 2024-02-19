@@ -1,4 +1,3 @@
-using DemonCastle.Files;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -11,7 +10,7 @@ public partial class GameTileStairs : Area2D {
 	public GameTileStairsNode Start { get; }
 	public GameTileStairsNode End { get; }
 
-	public GameTileStairs(LevelInfo level, TileInfo tile, StairData tileStairs, DebugState debug) {
+	public GameTileStairs(LevelInfo level, TileInfo tile, StairInfo tileStairs, DebugState debug) {
 		Name = nameof(GameTileStairs);
 
 		CollisionLayer = (uint)CollisionLayers.World;

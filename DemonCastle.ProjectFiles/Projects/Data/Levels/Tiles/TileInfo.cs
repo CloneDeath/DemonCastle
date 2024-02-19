@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
@@ -13,6 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
 public class TileInfo : BaseEntityInfo<TileData> {
 	public TileInfo(IFileNavigator file, TileData tileData) : base(file, tileData) {
+		Stairs = new StairInfo(file, tileData);
 	}
 
 	public string SourceFile {
@@ -63,10 +63,7 @@ public class TileInfo : BaseEntityInfo<TileData> {
 		set => SaveField(ref Data.Collision, value.ToList());
 	}
 
-	public StairData? Stairs {
-		get => Data.Stairs;
-		set => SaveField(ref Data.Stairs, value);
-	}
+	public StairInfo Stairs { get; }
 
 	protected ISpriteSource Source => File.FileExists(SourceFile) ? File.GetSprite(SourceFile) : new NullSpriteSource();
 	public ISpriteDefinition Sprite => Source.Sprites.FirstOrDefault(s => s.Id == SpriteId)

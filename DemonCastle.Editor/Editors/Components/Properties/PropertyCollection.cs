@@ -21,8 +21,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Properties;
 
 public partial class PropertyCollection : BoxContainer, IBaseProperty {
-	public virtual string DisplayName { get; set; } = string.Empty;
-
 	public void Enable() {
 		foreach (var child in GetChildren().Where(c => c is IBaseProperty).Cast<IBaseProperty>()) {
 			child.Enable();

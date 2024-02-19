@@ -3,7 +3,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.Properties;
 
 public interface IBaseProperty {
-	string DisplayName { get; set; }
 	void Enable();
 	void Disable();
 }
