@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -25,12 +26,23 @@ public partial class EntityActionCollectionEditor : VBoxContainer {
 	private void AddActionButton_OnPressed() => _actionSet?.AppendNew();
 
 	public void Load(EntityActionInfoCollection? actionSet) {
+		if (_actionSet != null) _actionSet.CollectionChanged -= ActionSet_OnCollectionChanged;
 		_actionSet = actionSet;
-		Clear();
-		if (actionSet == null) return;
+		if (_actionSet != null) _actionSet.CollectionChanged += ActionSet_OnCollectionChanged;
 
-		foreach (var action in actionSet) {
-			AddAction(action, actionSet);
+		Reload();
+	}
+
+	private void ActionSet_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		Reload();
+	}
+
+	private void Reload() {
+		Clear();
+		if (_actionSet == null) return;
+
+		foreach (var action in _actionSet) {
+			AddAction(action);
 		}
 	}
 
@@ -40,10 +52,11 @@ public partial class EntityActionCollectionEditor : VBoxContainer {
 		}
 	}
 
-	private void AddAction(EntityActionInfo action, EntityActionInfoCollection actionSet) {
+	private void AddAction(EntityActionInfo action) {
 		if (Entity == null) return;
+		if (_actionSet == null) return;
 
-		var editor = new EntityActionEditor(_resources, Entity, action, actionSet);
+		var editor = new EntityActionEditor(_resources, Entity, action, _actionSet);
 		Actions.AddChild(editor);
 		editor.SetAnchorsPreset(LayoutPreset.FullRect);
 	}
