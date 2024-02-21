@@ -20,6 +20,14 @@ public class NullEnumerableInfo<T> : IEnumerableInfo<T> {
 	}
 
 	public void RemoveAt(int index) {}
+	public bool CanMoveUp(T item) => false;
+
+	public bool CanMoveDown(T item) => false;
+
+	public void MoveUp(T item) {}
+
+	public void MoveDown(T item) {}
+
 	public void Move(int oldIndex, int newIndex) => throw new Exception("Cannot move items in a null enumerable.");
 	public int IndexOf(T option) => -1;
 }

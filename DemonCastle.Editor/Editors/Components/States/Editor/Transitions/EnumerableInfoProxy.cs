@@ -36,6 +36,11 @@ public class EnumerableInfoProxy<T> : IEnumerableInfo<T>
 	public T AppendNew() => _proxy?.AppendNew() ?? throw new Exception("Can not add transition to null proxy");
 	public void Remove(T item) => _proxy?.Remove(item);
 	public void RemoveAt(int index) => _proxy?.RemoveAt(index);
+	public bool CanMoveUp(T item) => _proxy?.CanMoveUp(item) ?? false;
+	public bool CanMoveDown(T item) => _proxy?.CanMoveDown(item) ?? false;
+	public void MoveUp(T item) => _proxy?.MoveUp(item);
+	public void MoveDown(T item) => _proxy?.MoveDown(item);
+
 	public void Move(int oldIndex, int newIndex) => _proxy?.Move(oldIndex, newIndex);
 	public int IndexOf(T option) => _proxy?.IndexOf(option) ?? -1;
 }

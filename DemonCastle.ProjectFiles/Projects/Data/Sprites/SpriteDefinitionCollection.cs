@@ -24,6 +24,10 @@ public class SpriteDefinitionCollection<TInfo, TFile> : ObservableCollectionInfo
 	ISpriteDefinition IEnumerableInfo<ISpriteDefinition>.AppendNew() => base.AppendNew();
 	void IEnumerableInfo<ISpriteDefinition>.Remove(ISpriteDefinition item) => base.Remove((TInfo)item);
 	int IEnumerableInfo<ISpriteDefinition>.IndexOf(ISpriteDefinition option) => base.IndexOf((TInfo)option);
+	bool IEnumerableInfo<ISpriteDefinition>.CanMoveUp(ISpriteDefinition option) => base.CanMoveUp((TInfo)option);
+	bool IEnumerableInfo<ISpriteDefinition>.CanMoveDown(ISpriteDefinition option) => base.CanMoveDown((TInfo)option);
+	void IEnumerableInfo<ISpriteDefinition>.MoveUp(ISpriteDefinition option) => base.MoveUp((TInfo)option);
+	void IEnumerableInfo<ISpriteDefinition>.MoveDown(ISpriteDefinition option) => base.MoveDown((TInfo)option);
 	#endregion
 }
 

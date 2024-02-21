@@ -25,6 +25,13 @@ public class EnumerableInfoWrapper<T> : IEnumerableInfo<T> {
 	public void Remove(T item) => throw new NotSupportedException();
 
 	public void RemoveAt(int index) => throw new NotSupportedException();
+	public bool CanMoveUp(T item) => false;
+
+	public bool CanMoveDown(T item) => false;
+
+	public void MoveUp(T item) => throw new NotSupportedException();
+
+	public void MoveDown(T item) => throw new NotSupportedException();
 
 	public void Move(int oldIndex, int newIndex) => throw new NotSupportedException();
 

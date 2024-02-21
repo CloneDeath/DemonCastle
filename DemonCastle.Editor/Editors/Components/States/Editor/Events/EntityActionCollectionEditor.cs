@@ -30,7 +30,7 @@ public partial class EntityActionCollectionEditor : VBoxContainer {
 		if (actionSet == null) return;
 
 		foreach (var action in actionSet) {
-			AddAction(action);
+			AddAction(action, actionSet);
 		}
 	}
 
@@ -40,10 +40,10 @@ public partial class EntityActionCollectionEditor : VBoxContainer {
 		}
 	}
 
-	private void AddAction(EntityActionInfo action) {
+	private void AddAction(EntityActionInfo action, EntityActionInfoCollection actionSet) {
 		if (Entity == null) return;
 
-		var editor = new EntityActionEditor(_resources, Entity, action);
+		var editor = new EntityActionEditor(_resources, Entity, action, actionSet);
 		Actions.AddChild(editor);
 		editor.SetAnchorsPreset(LayoutPreset.FullRect);
 	}

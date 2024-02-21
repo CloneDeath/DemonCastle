@@ -1,9 +1,9 @@
 using System.Linq;
+using DemonCastle.Editor.Editors.Components;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.File;
 using DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
-using DemonCastle.Editor.Icons;
 using DemonCastle.Editor.Properties;
 using DemonCastle.Files.Actions;
 using DemonCastle.Files.Variables;
@@ -15,24 +15,9 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene.Events;
 
-public partial class SceneEventActionEditor : HBoxContainer {
-	private readonly SceneEventActionInfo _action;
-	private readonly SceneEventActionInfoCollection _collection;
-
-	private Button DeleteButton { get; }
-	private Button MoveUpButton { get; }
-	private Button MoveDownButton { get; }
-
-	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, SceneEventActionInfoCollection collection) {
-		_action = action;
-		_collection = collection;
+public partial class SceneEventActionEditor : ActionEditor<SceneEventActionInfo> {
+	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, SceneEventActionInfoCollection collection) : base(collection, action) {
 		Name = nameof(SceneEventActionEditor);
-
-		AddChild(DeleteButton = new Button {
-			Icon = IconTextures.DeleteIcon,
-			TooltipText = "Delete Action"
-		});
-		DeleteButton.Pressed += DeleteButton_OnPressed;
 
 		AddChild(new ChoiceTree {
 			{
@@ -136,30 +121,5 @@ public partial class SceneEventActionEditor : HBoxContainer {
 				}
 			}
 		});
-
-		VBoxContainer moveButtons;
-		AddChild(moveButtons = new VBoxContainer());
-
-		moveButtons.AddChild(MoveUpButton = new Button {
-			Icon = IconTextures.UpIcon,
-			TooltipText = "Move Up"
-		});
-		MoveUpButton.Pressed += MoveUpButton_OnPressed;
-		MoveUpButton.Disabled = !_collection.CanMoveUp(_action);
-
-		moveButtons.AddChild(MoveDownButton = new Button {
-			Icon = IconTextures.DownIcon,
-			TooltipText = "Move Down"
-		});
-		MoveDownButton.Pressed += MoveDownButton_OnPressed;
-		MoveDownButton.Disabled = !_collection.CanMoveDown(_action);
 	}
-
-	private void DeleteButton_OnPressed() {
-		_collection.Remove(_action);
-		QueueFree();
-	}
-
-	private void MoveUpButton_OnPressed() => _collection.MoveUp(_action);
-	private void MoveDownButton_OnPressed() => _collection.MoveDown(_action);
 }

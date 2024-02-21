@@ -15,49 +15,49 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
-public partial class EntityActionEditor : MarginContainer {
-	public EntityActionEditor(ProjectResources resources, IBaseEntityInfo entity, EntityActionInfo entityAction) {
+public partial class EntityActionEditor : ActionEditor<EntityActionInfo> {
+	public EntityActionEditor(ProjectResources resources, IBaseEntityInfo entity, EntityActionInfo action, EntityActionInfoCollection actionSet) : base(actionSet, action) {
 		Name = nameof(EntityActionEditor);
 
 		AddChild(new ChoiceTree {
 			{
-				nameof(entityAction.Face),
-				entityAction.Face != null,
+				nameof(action.Face),
+				action.Face != null,
 				c => {
-					entityAction.Face ??= FaceAction.TowardsClosestPlayer;
-					c.AddChild(new ChoiceEnum<FaceAction>(entityAction.Face, v => entityAction.Face = v));
+					action.Face ??= FaceAction.TowardsClosestPlayer;
+					c.AddChild(new ChoiceEnum<FaceAction>(action.Face, v => action.Face = v));
 				}
 			},
 			{
-				nameof(entityAction.Move),
-				entityAction.Move != null,
+				nameof(action.Move),
+				action.Move != null,
 				c => {
-					entityAction.Move ??= MoveAction.Forward;
-					c.AddChild(new ChoiceEnum<MoveAction>(entityAction.Move, v => entityAction.Move = v));
+					action.Move ??= MoveAction.Forward;
+					c.AddChild(new ChoiceEnum<MoveAction>(action.Move, v => action.Move = v));
 				}
 			},
 			{
-				nameof(entityAction.Self),
-				entityAction.Self != null,
+				nameof(action.Self),
+				action.Self != null,
 				c => {
-					entityAction.Self ??= SelfAction.Despawn;
-					c.AddChild(new ChoiceEnum<SelfAction>(entityAction.Self, v => entityAction.Self = v));
+					action.Self ??= SelfAction.Despawn;
+					c.AddChild(new ChoiceEnum<SelfAction>(action.Self, v => action.Self = v));
 				}
 			},
 			{
-				nameof(entityAction.SpawnItem),
-				entityAction.SpawnItem.IsSet,
+				nameof(action.SpawnItem),
+				action.SpawnItem.IsSet,
 				c => {
-					entityAction.SpawnItem.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnItem, resources.Items, entity, VariableType.Item);
+					action.SpawnItem.IsSet = true;
+                    SetUpSpawnControls(c, action.SpawnItem, resources.Items, entity, VariableType.Item);
 				}
 			},
 			{
-				nameof(entityAction.SpawnMonster),
-				entityAction.SpawnMonster.IsSet,
+				nameof(action.SpawnMonster),
+				action.SpawnMonster.IsSet,
 				c => {
-					entityAction.SpawnMonster.IsSet = true;
-                    SetUpSpawnControls(c, entityAction.SpawnMonster, resources.Monsters, entity, VariableType.Monster);
+					action.SpawnMonster.IsSet = true;
+                    SetUpSpawnControls(c, action.SpawnMonster, resources.Monsters, entity, VariableType.Monster);
 				}
 			}
 		});
