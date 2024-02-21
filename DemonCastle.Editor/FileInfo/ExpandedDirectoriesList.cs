@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DemonCastle.Editor.Files;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
@@ -17,21 +18,26 @@ public class ExpandedDirectoriesList {
 
 	public void Clear() {
 		_resource.ExpandedDirectories.Clear();
-		_file.Save();
+		Save();
 	}
 
 	public void Add(string directory) {
 		_resource.ExpandedDirectories.Add(directory);
-		_file.Save();
+		Save();
 	}
 
 	public void AddRange(IEnumerable<string> directories) {
 		_resource.ExpandedDirectories.AddRange(directories);
-		_file.Save();
+		Save();
 	}
 
 	public void Remove(string directory) {
-		_resource.ExpandedDirectories.Remove(directory);
+		_resource.ExpandedDirectories.RemoveAll(d => d == directory);
+		Save();
+	}
+
+	private void Save() {
+		_resource.ExpandedDirectories = _resource.ExpandedDirectories.Distinct().ToList();
 		_file.Save();
 	}
 }
