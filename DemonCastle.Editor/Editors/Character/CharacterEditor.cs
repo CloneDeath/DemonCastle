@@ -1,13 +1,10 @@
 using DemonCastle.Editor.Editors.Character.Animations;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Character;
 
 public partial class CharacterEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.CharacterIcon;
-
 	protected HSplitContainer SplitContainer { get; }
 
 	public CharacterEditor(CharacterInfo character) {

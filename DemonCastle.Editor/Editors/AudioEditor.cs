@@ -1,11 +1,8 @@
-using DemonCastle.Editor.Icons;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
 public partial class AudioEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.SoundIcon;
-
 	private readonly AudioStreamPlayer _player;
 	private readonly Button _playButton;
 

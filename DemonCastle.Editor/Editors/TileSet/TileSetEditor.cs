@@ -8,8 +8,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.TileSet;
 
 public partial class TileSetEditor : BaseEditor {
-	public override Texture2D TabIcon => EditorFileType.TileSet.Icon;
-
 	protected HSplitContainer SplitContainer { get; }
 	protected TileInfoCollectionEditor TileList { get; }
 	protected TileEditor TileEditor { get; }

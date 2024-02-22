@@ -1,5 +1,4 @@
 using DemonCastle.Editor.Editors.Components.VariableDeclarations;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
 using Godot;
@@ -7,8 +6,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Project;
 
 public partial class ProjectEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.ProjectIcon;
-
 	protected VBoxContainer Container { get; }
 	protected ProjectDetails Details { get; }
 	protected VariableCollectionEditor Variables { get; }

@@ -1,6 +1,5 @@
 using DemonCastle.Editor.Editors.SpriteAtlas.Details;
 using DemonCastle.Editor.Editors.SpriteAtlas.View;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using DemonCastle.Editor.Editors.Components.Properties;
@@ -9,8 +8,6 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
 public partial class SpriteAtlasEditor : BaseEditor {
-    public override Texture2D TabIcon => IconTextures.File.SpriteAtlasIcon;
-
     protected HSplitContainer SplitContainer { get; }
     protected VBoxContainer LeftContainer { get; }
     protected PropertyCollection SpriteAtlasDetails { get; }

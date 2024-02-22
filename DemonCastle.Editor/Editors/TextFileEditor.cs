@@ -1,11 +1,9 @@
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
 public partial class TextFileEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.TextFileIcon;
 	private readonly TextInfo _textInfo;
 
 	protected TextEdit TextEdit { get; }

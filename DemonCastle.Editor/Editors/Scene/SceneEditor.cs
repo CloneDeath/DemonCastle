@@ -10,8 +10,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Scene;
 
 public partial class SceneEditor : BaseEditor {
-	public override Texture2D TabIcon => EditorFileType.Scene.Icon;
-
 	private HSplitContainer Split { get; }
 
 	private VBoxContainer Left { get; }

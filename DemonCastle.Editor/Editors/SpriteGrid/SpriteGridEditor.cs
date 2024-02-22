@@ -1,6 +1,5 @@
 using DemonCastle.Editor.Editors.SpriteGrid.Details;
 using DemonCastle.Editor.Editors.SpriteGrid.View;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using Godot;
 using DemonCastle.Editor.Editors.Components.Properties;
@@ -9,8 +8,6 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 
 public partial class SpriteGridEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.SpriteGridIcon;
-
 	protected HSplitContainer SplitContainer { get; }
 	protected VBoxContainer LeftContainer { get; }
 	protected PropertyCollection SpriteGridDetails { get; }

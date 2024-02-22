@@ -57,9 +57,10 @@ public partial class EditArea : TabContainer {
 		}
 
 		try {
-			var editor = GetEditor(file);
+			var editorFileType = GetEditorFileType(file);
+			var editor = editorFileType.GetEditor(_resources, _project, file);
 			EditorFileMap[file] = editor;
-			ShowEditor(file, editor);
+			ShowEditor(file, editor, editorFileType);
 		}
 		catch (TargetInvocationException ex) {
 			ErrorWindow.DialogText = $"Error: Could not open {file.FileName}.\nDetails: {ex.InnerException?.Message}";
@@ -73,16 +74,16 @@ public partial class EditArea : TabContainer {
 		}
 	}
 
-	public void ShowEditor(FileNavigator file, BaseEditor editor) {
+	public void ShowEditor(FileNavigator file, BaseEditor editor, IEditorFileType fileType) {
 		AddChild(editor);
 		var index = editor.GetIndex();
-		SetTabIcon(index, editor.TabIcon);
+		SetTabIcon(index, fileType.Icon);
 		SetTabTitle(index, file.FileName);
 		CurrentTab = index;
 	}
 
-	protected virtual BaseEditor GetEditor(FileNavigator file) {
-		return EditorFileType.All.FirstOrDefault(t => t.Extension == file.Extension)?.GetEditor(_resources, _project, file) ??
+	protected virtual IEditorFileType GetEditorFileType(FileNavigator file) {
+		return EditorFileType.All.FirstOrDefault(t => t.Extension == file.Extension) ??
 		       throw new NotSupportedException($"No Editor for {file.Extension}");
 	}
 

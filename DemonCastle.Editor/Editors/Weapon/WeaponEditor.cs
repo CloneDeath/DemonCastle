@@ -1,14 +1,11 @@
 using DemonCastle.Editor.Editors.Components.Animations;
 using DemonCastle.Editor.Editors.Weapon.Details;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon;
 
 public partial class WeaponEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.WeaponIcon;
-
 	protected HSplitContainer SplitContainer { get; }
 
 	public WeaponEditor(WeaponInfo weapon) {

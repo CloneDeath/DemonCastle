@@ -1,11 +1,8 @@
-using DemonCastle.Editor.Icons;
 using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
 public partial class FontFileEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.TextureIcon;
-
 	protected ScrollContainer ScrollContainer { get; }
 	protected VBoxContainer Lines { get; }
 

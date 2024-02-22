@@ -1,6 +1,5 @@
 using DemonCastle.Editor.Editors.Level.Area;
 using DemonCastle.Editor.Editors.Level.LevelOverview;
-using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
 using DemonCastle.ProjectFiles.Projects.Data.Levels.Areas;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -9,8 +8,6 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Level;
 
 public partial class LevelEditor : BaseEditor {
-	public override Texture2D TabIcon => IconTextures.File.LevelIcon;
-
 	protected LevelInfo Level { get; }
 
 	protected VSplitContainer SplitContainer { get; }
