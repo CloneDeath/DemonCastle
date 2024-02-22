@@ -7,6 +7,7 @@ public static class IconTextures {
 		public static Texture2D AsepriteIcon { get; } = LoadTexture(nameof(File), nameof(AsepriteIcon));
 		public static Texture2D CharacterIcon { get; } = LoadTexture(nameof(File), nameof(CharacterIcon));
 		public static Texture2D FontIcon { get; } = LoadTexture(nameof(File), nameof(FontIcon));
+		public static Texture2D GitIcon { get; } = LoadTexture(nameof(File), nameof(GitIcon));
 		public static Texture2D ItemIcon { get; } = LoadTexture(nameof(File), nameof(ItemIcon));
 		public static Texture2D LevelIcon { get; } = LoadTexture(nameof(File), nameof(LevelIcon));
 		public static Texture2D MonsterIcon { get; } = LoadTexture(nameof(File), nameof(MonsterIcon));

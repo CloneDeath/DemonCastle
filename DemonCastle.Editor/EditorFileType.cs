@@ -12,6 +12,7 @@ namespace DemonCastle.Editor;
 public static class EditorFileType {
 	public static IEditorFileType Aseprite { get; } = new AsepriteEditorFileType();
 	public static IEditorFileType Character { get; } = new CharacterEditorFileType();
+	public static IEditorFileType GitIgnore { get; } = new GitIgnoreEditorFileType();
 	public static IEditorFileType Item { get; } = new ItemEditorFileType();
 	public static IEditorFileType Jpeg { get; } = new JpegEditorFileType();
 	public static IEditorFileType Jpg { get; } = new JpgEditorFileType();
@@ -44,6 +45,7 @@ public static class EditorFileType {
 	public static IEnumerable<IEditorFileType> All { get; } = new[] {
 		Aseprite,
 		Character,
+		GitIgnore,
 		Item,
 		Jpeg,
 		Jpg,
