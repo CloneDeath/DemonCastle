@@ -10,7 +10,7 @@ namespace DemonCastle.Game.Animations;
 public partial class GameAnimation : Node2D {
 	private readonly IDamageable _owner;
 	private readonly DebugState _debug;
-	protected AnimationInfoCollection? AnimationCollection;
+	protected IAnimationInfoCollection? AnimationCollection;
 	protected Dictionary<Guid, AnimationInfoNode> Animations { get; } = new();
 
 	protected AnimationInfoNode? CurrentAnimation;
@@ -40,7 +40,7 @@ public partial class GameAnimation : Node2D {
 		CurrentAnimation.Play();
 	}
 
-	public void SetAnimation(AnimationInfoCollection? animations) {
+	public void SetAnimation(IAnimationInfoCollection? animations) {
 		foreach (var animation in Animations.Values) {
 			animation.QueueFree();
 		}

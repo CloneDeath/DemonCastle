@@ -4,10 +4,10 @@ using Godot;
 namespace DemonCastle.Game.Tiles;
 
 public partial class GameTileStairsNode : Node2D {
-	private readonly StairInfo _stairs;
+	private readonly IStairInfo _stairs;
 	private readonly bool _start;
 
-	public GameTileStairsNode(StairInfo stairs, bool start) {
+	public GameTileStairsNode(IStairInfo stairs, bool start) {
 		_stairs = stairs;
 		_start = start;
 	}

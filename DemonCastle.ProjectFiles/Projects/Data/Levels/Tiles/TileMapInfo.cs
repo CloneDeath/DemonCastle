@@ -12,7 +12,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 public class TileMapInfo : BaseInfo<TileMapData> {
 	protected AreaInfo AreaInfo { get; }
 
-	public TileInfo Tile => AreaInfo.GetTileInfo(TileId);
+	public ITileInfo Tile => AreaInfo.GetTileInfo(TileId);
 	public ISpriteDefinition Sprite => Tile.Sprite;
 
 	public TileMapInfo(IFileNavigator file, TileMapData data, AreaInfo areaInfo) : base(file, data) {

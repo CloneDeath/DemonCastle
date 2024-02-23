@@ -5,7 +5,13 @@ using TileData = DemonCastle.Files.TileData;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Levels.Tiles;
 
-public class StairInfo : BaseInfo<TileData> {
+public interface IStairInfo {
+	bool Enabled { get; }
+	Vector2 Start { get; }
+	Vector2 End { get; }
+}
+
+public class StairInfo : BaseInfo<TileData>, IStairInfo {
 	public StairInfo(IFileNavigator file, TileData tileData) : base(file, tileData) {
 	}
 
@@ -50,4 +56,10 @@ public class StairInfo : BaseInfo<TileData> {
 			OnPropertyChanged(nameof(Start));
 		}
 	}
+}
+
+public class NullStairInfo : IStairInfo {
+	public bool Enabled => false;
+	public Vector2 Start => Vector2.Down;
+	public Vector2 End => Vector2.Right;
 }

@@ -6,7 +6,12 @@ using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Animations;
 
-public class AnimationInfoCollection : ObservableCollectionInfo<IAnimationInfo, AnimationData> {
+public interface IAnimationInfoCollection : IEnumerableInfo<IAnimationInfo> {
+	Guid GetAnimationId(string animationName);
+	IAnimationInfo? Get(Guid id);
+}
+
+public class AnimationInfoCollection : ObservableCollectionInfo<IAnimationInfo, AnimationData>, IAnimationInfoCollection {
 	private readonly IFileNavigator _file;
 
 	public AnimationInfoCollection(IFileNavigator file, List<AnimationData> animations) : base(new AnimationInfoCollectionFactory(file), animations) {
@@ -29,4 +34,10 @@ public class AnimationInfoCollectionFactory : IInfoFactory<IAnimationInfo, Anima
 	public IAnimationInfo CreateInfo(AnimationData data) => new AnimationInfo(_file, data);
 
 	public AnimationData CreateData() => new();
+}
+
+public class NullAnimationInfoCollection : NullEnumerableInfo<IAnimationInfo>, IAnimationInfoCollection {
+	public Guid GetAnimationId(string animationName) => Guid.Empty;
+
+	public IAnimationInfo? Get(Guid id) => null;
 }

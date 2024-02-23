@@ -7,13 +7,13 @@ using Godot;
 namespace DemonCastle.Game;
 
 public class VariableCollection : IVariables {
-	private readonly VariableDeclarationInfoCollection _variables;
+	private readonly IVariableDeclarationInfoCollection _variables;
 
 	private readonly Dictionary<Guid, Guid> _guids = new();
 	private readonly Dictionary<Guid, Vector2I> _vector2Is = new();
 	private readonly Dictionary<Guid, bool> _booleans = new();
 
-	public VariableCollection(VariableDeclarationInfoCollection variables) {
+	public VariableCollection(IVariableDeclarationInfoCollection variables) {
 		_variables = variables;
 		Reset();
 	}

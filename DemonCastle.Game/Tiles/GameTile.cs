@@ -12,7 +12,7 @@ namespace DemonCastle.Game.Tiles;
 
 public partial class GameTile : Node2D, IDamageable, IEntityState {
 	private readonly LevelInfo _level;
-	private readonly TileInfo _tile;
+	private readonly ITileInfo _tile;
 
 	private readonly VariableCollection _variables;
 	private readonly GameAnimation _animation;
@@ -20,7 +20,7 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 	private StaticBody2D? Body { get; set; }
 	private GameTileStairs? Stairs { get; set; }
 
-	public GameTile(IGameState game, LevelInfo level, TileInfo tile, DebugState debug) {
+	public GameTile(IGameState game, LevelInfo level, ITileInfo tile, DebugState debug) {
 		_level = level;
 		_tile = tile;
 

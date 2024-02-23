@@ -17,12 +17,12 @@ namespace DemonCastle.ProjectFiles.Projects.Data;
 
 public interface IBaseEntityInfo : IListableInfo, INotifyPropertyChanged {
 	public Guid Id { get; }
-	public string Name { get; set; }
-	Guid InitialState { get; set; }
+	public string Name { get; }
+	Guid InitialState { get; }
 	public Vector2I Size { get; }
-	public AnimationInfoCollection Animations { get; }
-	public EntityStateInfoCollection States { get; }
-	public VariableDeclarationInfoCollection Variables { get; }
+	public IAnimationInfoCollection Animations { get; }
+	public IEntityStateInfoCollection States { get; }
+	public IVariableDeclarationInfoCollection Variables { get; }
 }
 
 public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, IEntityStateInfoRetriever
@@ -109,9 +109,9 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 		set => SaveField(ref Data.Size, value.ToSize());
 	}
 
-	public AnimationInfoCollection Animations { get; }
-	public EntityStateInfoCollection States { get; }
-	public VariableDeclarationInfoCollection Variables { get; }
+	public IAnimationInfoCollection Animations { get; }
+	public IEntityStateInfoCollection States { get; }
+	public IVariableDeclarationInfoCollection Variables { get; }
 
 	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
 

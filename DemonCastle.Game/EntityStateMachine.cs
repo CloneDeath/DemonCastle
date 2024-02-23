@@ -10,12 +10,12 @@ public partial class EntityStateMachine : Node {
 	private readonly IGameState _game;
 	private readonly IEntityState _entity;
 	private readonly Guid _initialState;
-	private readonly EntityStateInfoCollection _states;
+	private readonly IEntityStateInfoCollection _states;
 	private Guid _currentStateId;
 
 	private EntityStateInfo? CurrentState => _states.Get(_currentStateId);
 
-	public EntityStateMachine(IGameState game, IEntityState entity, Guid initialState, EntityStateInfoCollection states) {
+	public EntityStateMachine(IGameState game, IEntityState entity, Guid initialState, IEntityStateInfoCollection states) {
 		_game = game;
 		_entity = entity;
 		_initialState = initialState;

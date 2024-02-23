@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using DemonCastle.Files;
 using DemonCastle.ProjectFiles.Locations;
@@ -19,17 +20,19 @@ public class AreaInfo : BaseInfo<AreaData> {
 		TileSetIds = new ObservableList<Guid>(file, area.TileSetIds);
 		Monsters = new MonsterDataInfoCollection(file, this, area.Monsters);
 		TileMapLayers = new InfoList<TileMapLayerInfo, TileMapLayerData>(file, area.TileMapLayers, data => new TileMapLayerInfo(file, data, this));
+
+		TileSetIds.CollectionChanged += TileSetIds_OnCollectionChanged;
+	}
+
+	private void TileSetIds_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		_tileCache.Clear();
 	}
 
 	public Guid Id => Data.Id;
 
 	public string Name {
 		get => Data.Name;
-		set {
-			Data.Name = value;
-			Save();
-			OnPropertyChanged();
-		}
+		set => SaveField(ref Data.Name, value);
 	}
 
 	public ObservableList<Guid> TileSetIds { get; }
@@ -64,14 +67,16 @@ public class AreaInfo : BaseInfo<AreaData> {
 
 	public Vector2I TileSize => Level.TileSize;
 
-	private readonly Dictionary<Guid, TileInfo> _tileCache = new();
-	public TileInfo GetTileInfo(Guid tileId) {
+	private readonly Dictionary<Guid, ITileInfo> _tileCache = new();
+	public ITileInfo GetTileInfo(Guid tileId) {
 		var cache = _tileCache.GetValueOrDefault(tileId);
 		if (cache != null) return cache;
 
-		var value = Level.GetTileInfo(tileId) ??
-					TileSetIds.SelectMany(id => File.GetTileSet(id)?.TileSet ?? new NullEnumerableInfo<TileInfo>())
-							  .First(t =>t.Id == tileId);
+		var value = (ITileInfo?)Level.GetTileInfo(tileId)
+					?? TileSetIds.SelectMany(id =>
+									 File.GetTileSet(id)?.TileSet ?? new NullEnumerableInfo<TileInfo>())
+								 .FirstOrDefault(t => t.Id == tileId);
+		if (value == null) return new NullTileInfo(tileId);
 		_tileCache[tileId] = value;
 		return value;
 	}
