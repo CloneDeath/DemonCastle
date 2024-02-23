@@ -95,8 +95,8 @@ public class NullTileInfo : ITileInfo {
 	public Rect2 Region => Sprite.Region;
 	public Vector2[] Collision { get; } = Array.Empty<Vector2>();
 	public IStairInfo Stairs { get; } = new NullStairInfo();
-	public string Name => "<NULL>";
-	public Guid InitialState => Guid.Empty;
+	public string Name { get; set; } = "<NULL>";
+	public Guid InitialState { get; set; } = Guid.Empty;
 	public Vector2I Size { get; } = Vector2I.One;
 	public IAnimationInfoCollection Animations { get; } = new NullAnimationInfoCollection();
 	public IEntityStateInfoCollection States { get; } = new NullEntityStateInfoCollection();

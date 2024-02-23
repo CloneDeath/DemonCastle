@@ -38,14 +38,21 @@ public partial class AreaTilesView : Control {
 	public override void _EnterTree() {
 		base._EnterTree();
 		_area.TileMapLayers.CollectionChanged += TileMapLayers_OnCollectionChanged;
+		_area.TileSetIds.CollectionChanged += TileSetIds_OnCollectionChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 		_area.TileMapLayers.CollectionChanged -= TileMapLayers_OnCollectionChanged;
+		_area.TileSetIds.CollectionChanged -= TileSetIds_OnCollectionChanged;
+
 	}
 
 	private void TileMapLayers_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
+		ReloadArea();
+	}
+
+	private void TileSetIds_OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 		ReloadArea();
 	}
 

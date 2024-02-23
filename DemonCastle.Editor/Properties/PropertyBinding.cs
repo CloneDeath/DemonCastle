@@ -18,6 +18,8 @@ public class PropertyBinding<TObject, TProperty> : IPropertyBinding<TProperty>
 		Target = target;
 		PropertyExpression = propertyExpression;
 		Target.PropertyChanged += Target_OnPropertyChanged;
+
+		if (Property.SetMethod == null) throw new Exception("Property must have a setter.");
 	}
 
 	public TProperty Get() {
