@@ -22,7 +22,8 @@ public partial class GameMonster : GameBaseEntity {
 	}
 
 	public override float MoveSpeed => _monster.MoveSpeed * Level.TileSize.X;
-	protected override float Gravity => _monster.Gravity;
+	public override float JumpHeight => _monster.JumpHeight * Level.TileSize.Y;
+	protected override float Gravity => _monster.Gravity * Level.TileSize.Y;
 
 	protected override bool ApplyDamage(int amount) {
 		Hp -= amount;

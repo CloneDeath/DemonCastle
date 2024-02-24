@@ -28,12 +28,9 @@ public partial class GamePlayer : EntityCommon {
 
 	public override float MoveSpeed => (Character?.WalkSpeed ?? 0) * (Level?.TileSize.X ?? 0);
 	protected override float Gravity => (Character?.Gravity ?? 0) * (Level?.TileSize.Y ?? 0);
-	public float JumpHeight => (Character?.JumpHeight ?? 0) * (Level?.TileSize.Y ?? 0);
+	public override float JumpHeight => (Character?.JumpHeight ?? 0) * (Level?.TileSize.Y ?? 0);
 
 	private IState _state = new NormalState();
-
-	private bool _jump;
-	private bool _applyGravity = true;
 
 	public GamePlayer(IGameState game, IGameLogger logger, DebugState debug)
 		: base(game, logger, debug) {
@@ -95,15 +92,15 @@ public partial class GamePlayer : EntityCommon {
 			Logger.StateChanged(_state);
 		}
 
-		if (_applyGravity) {
+		if (GravityEnabled) {
 			Velocity += new Vector2(0, (float)(Gravity * delta));
-			Velocity = new Vector2(MoveDirection.X * MoveSpeed, _jump ? -GetJumpSpeed() : Velocity.Y);
+			Velocity = new Vector2(MoveDirection.X * MoveSpeed, MoveJump ? -GetJumpSpeed() : Velocity.Y);
 		} else {
 			Velocity = MoveDirection * MoveSpeed;
 		}
 
 		StopMoving();
-		_jump = false;
+		MoveJump = false;
 
 		MoveAndSlide();
 
@@ -131,11 +128,6 @@ public partial class GamePlayer : EntityCommon {
 		Weapon.Scale = new Vector2(Facing, 1);
 	}
 
-	private float GetJumpSpeed() {
-		var time = Mathf.Sqrt(JumpHeight * 2 / Gravity);
-		return time * Gravity;
-	}
-
 	protected override void AlignAnimationNodes() {
 		Animation.GlobalPosition = GlobalPosition.Round();
 	}
@@ -146,21 +138,7 @@ public partial class GamePlayer : EntityCommon {
 		return StairsDetection.GetOverlappingAreas().Where(a => a is Tiles.GameTileStairs).Cast<Tiles.GameTileStairs>();
 	}
 
-	public void Jump() => _jump = true;
-
-	public void EnableGravity() {
-		if (_applyGravity) return;
-
-		Velocity = Vector2.Zero;
-		_applyGravity = true;
-	}
-
-	public void DisableGravity() {
-		if (!_applyGravity) return;
-
-		Velocity = Vector2.Zero;
-		_applyGravity = false;
-	}
+	public void Jump() => MoveJump = true;
 
 	public bool IsStandingOnFloor() => FloorDetection.GetOverlappingBodies().Any();
 

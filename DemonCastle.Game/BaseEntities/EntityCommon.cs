@@ -15,7 +15,24 @@ public abstract partial class EntityCommon : CharacterBody2D, IDamageable {
 	protected CollisionShape2D CollisionShape { get; }
 
 	public abstract float MoveSpeed { get; }
+	public abstract float JumpHeight { get; }
+
 	protected abstract float Gravity { get; }
+	protected bool GravityEnabled { get; set; } = true;
+
+	public void EnableGravity() {
+		if (GravityEnabled) return;
+
+		Velocity = Vector2.Zero;
+		GravityEnabled = true;
+	}
+
+	public void DisableGravity() {
+		if (!GravityEnabled) return;
+
+		Velocity = Vector2.Zero;
+		GravityEnabled = false;
+	}
 
 	private int _facing = 1;
 	public int Facing {
@@ -24,6 +41,7 @@ public abstract partial class EntityCommon : CharacterBody2D, IDamageable {
 	}
 
 	protected Vector2 MoveDirection = Vector2.Zero;
+	protected bool MoveJump;
 
 	protected HitInvulnerabilityTracker InvulnerabilityTracker { get; }
 
@@ -61,6 +79,11 @@ public abstract partial class EntityCommon : CharacterBody2D, IDamageable {
 
 	public void EnableWorldCollisions() => CollisionMask = (uint)CollisionLayers.World;
 	public void DisableWorldCollisions() => CollisionMask = 0;
+
+	protected float GetJumpSpeed() {
+		var time = Mathf.Sqrt(JumpHeight * 2 / Gravity);
+		return time * Gravity;
+	}
 
 	protected abstract void AlignAnimationNodes();
 }

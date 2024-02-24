@@ -36,8 +36,15 @@ public abstract partial class GameBaseEntity : EntityCommon, IEntityState {
 	public override void _Process(double delta) {
 		base._Process(delta);
 
-		Velocity = MoveDirection * MoveSpeed;
+		if (GravityEnabled) {
+			Velocity += new Vector2(0, (float)(Gravity * delta));
+			Velocity = new Vector2(MoveDirection.X * MoveSpeed, MoveJump ? -GetJumpSpeed() : Velocity.Y);
+		} else {
+			Velocity = MoveDirection * MoveSpeed;
+		}
+
 		StopMoving();
+
 		if (!IsImmobile) MoveAndSlide();
 
 		_animation.Scale = new Vector2(Facing, 1);
