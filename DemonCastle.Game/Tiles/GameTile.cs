@@ -44,7 +44,8 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		if (!_tile.Collision.Any()) return;
 		AddChild(Body = new StaticBody2D {
 			Name = "CollisionBody",
-			CollisionLayer = (uint)CollisionLayers.World
+			CollisionLayer = (uint)CollisionLayers.World,
+			DisableMode = CollisionObject2D.DisableModeEnum.MakeStatic
 		});
 		Body.AddChild(new CollisionShape2D {
 			Shape = new ConvexPolygonShape2D {

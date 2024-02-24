@@ -15,6 +15,7 @@ public partial class GameTileStairs : Area2D {
 
 		CollisionLayer = (uint)CollisionLayers.World;
 		CollisionMask = (uint)CollisionLayers.Player;
+		ProcessMode = ProcessModeEnum.Always;
 
 		var size = level.TileSize * tile.Size;
 		AddChild(new CollisionShape2D {
