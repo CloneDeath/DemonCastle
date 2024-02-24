@@ -15,13 +15,15 @@ public partial class BaseEntityTabContainer : TabContainer {
 	public BaseEntityTabContainer(ProjectResources resources, ProjectInfo project, IFileInfo file) {
 		Name = nameof(BaseEntityTabContainer);
 
-		AddChild(_variables = new VariableCollectionEditor(resources));
-		SetTabTitle(0, "Variables");
-		AddChild(_animations = new AnimationsEditor(file));
-		SetTabTitle(1, "Animations");
-		AddChild(_states = new StatesEditor(resources, project));
-		SetTabTitle(2, "States");
-		CurrentTab = 1;
+		AddTab("Variables", _variables = new VariableCollectionEditor(resources));
+		AddTab("Animations", _animations = new AnimationsEditor(file));
+		AddTab("States", _states = new StatesEditor(resources, project));
+		CurrentTab = _animations.GetIndex();
+	}
+
+	public void AddTab(string title, Control control) {
+		AddChild(control);
+		SetTabTitle(control.GetIndex(), title);
 	}
 
 	public void Load(IBaseEntityInfo? entity) {

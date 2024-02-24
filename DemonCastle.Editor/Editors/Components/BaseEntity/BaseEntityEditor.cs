@@ -16,5 +16,6 @@ public abstract partial class BaseEntityEditor : Control {
 		detailsPanel.CustomMinimumSize = new Vector2(300, 300);
 		SplitContainer.AddChild(Tabs = new BaseEntityTabContainer(resources, project, file));
 		Tabs.Load(entity);
+		Tabs.AddTab("Events", new Label{Text = "Events"});
 	}
 }

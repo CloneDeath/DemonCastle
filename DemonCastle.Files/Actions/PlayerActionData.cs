@@ -1,5 +1,5 @@
 namespace DemonCastle.Files.Actions;
 
 public class PlayerActionData {
-	public int? RecoverMP { get; set; }
+	public int? RecoverMp { get; set; }
 }
