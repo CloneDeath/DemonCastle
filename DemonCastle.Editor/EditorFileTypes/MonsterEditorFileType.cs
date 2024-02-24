@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Monster;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -16,5 +15,5 @@ public class MonsterEditorFileType : MonsterFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new MonsterEditor(resources, project, resources.GetMonster(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new MonsterEditor(resources, project, resources.GetMonster(file));
 }

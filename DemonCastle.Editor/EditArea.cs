@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DemonCastle.Editor.Editors;
 using DemonCastle.Game;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -14,7 +13,7 @@ namespace DemonCastle.Editor;
 public partial class EditArea : TabContainer {
 	private readonly ProjectResources _resources;
 	private readonly ProjectInfo _project;
-	protected Dictionary<FileNavigator, BaseEditor> EditorFileMap { get; } = new();
+	protected Dictionary<FileNavigator, Control> EditorFileMap { get; } = new();
 	protected AcceptDialog ErrorWindow { get; }
 
 	public EditArea(ProjectResources resources, ProjectInfo project) {
@@ -74,7 +73,7 @@ public partial class EditArea : TabContainer {
 		}
 	}
 
-	public void ShowEditor(FileNavigator file, BaseEditor editor, IEditorFileType fileType) {
+	public void ShowEditor(FileNavigator file, Control editor, IEditorFileType fileType) {
 		AddChild(editor);
 		var index = editor.GetIndex();
 		SetTabIcon(index, fileType.Icon);

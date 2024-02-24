@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DemonCastle.Editor.EditorFileTypes;
-using DemonCastle.Editor.Editors;
 using DemonCastle.Navigation;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data;
@@ -68,5 +67,5 @@ public static class EditorFileType {
 public interface IEditorFileType : IFileType {
 	Texture2D Icon { get; }
 	object CreateFileInstance(string name);
-	BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file);
+	Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file);
 }

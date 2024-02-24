@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.SpriteAtlas;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -13,5 +12,5 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class SpriteAtlasEditorFileType : SpriteAtlasFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.SpriteAtlasIcon;
 	public object CreateFileInstance(string name) => new SpriteAtlasFile();
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SpriteAtlasEditor(resources.GetSpriteAtlas(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SpriteAtlasEditor(resources.GetSpriteAtlas(file));
 }

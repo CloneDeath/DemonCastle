@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Scene;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -16,5 +15,5 @@ public class SceneEditorFileType : SceneFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SceneEditor(project, resources.GetScene(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SceneEditor(project, resources.GetScene(file));
 }

@@ -11,5 +11,5 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class TtfEditorFileType : TtfFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.FontIcon;
 	public object CreateFileInstance(string name) => string.Empty;
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new FontFileEditor(resources.GetFont(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new FontFileEditor(resources.GetFont(file));
 }

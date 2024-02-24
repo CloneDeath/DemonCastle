@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Weapon;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -16,5 +15,5 @@ public class WeaponEditorFileType : WeaponFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new WeaponEditor(resources.GetWeapon(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new WeaponEditor(resources.GetWeapon(file));
 }

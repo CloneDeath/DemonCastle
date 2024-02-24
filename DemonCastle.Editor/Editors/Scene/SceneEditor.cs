@@ -9,7 +9,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene;
 
-public partial class SceneEditor : BaseEditor {
+public partial class SceneEditor : Control {
 	private HSplitContainer Split { get; }
 
 	private VBoxContainer Left { get; }

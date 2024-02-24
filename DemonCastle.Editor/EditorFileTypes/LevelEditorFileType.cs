@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Level;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -16,5 +15,5 @@ public class LevelEditorFileType : LevelFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new LevelEditor(resources, resources.GetLevel(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new LevelEditor(resources, resources.GetLevel(file));
 }

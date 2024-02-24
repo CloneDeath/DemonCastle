@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.TileSet;
 
-public partial class TileSetEditor : BaseEditor {
+public partial class TileSetEditor : Control {
 	protected HSplitContainer SplitContainer { get; }
 	protected TileInfoCollectionEditor TileList { get; }
 	protected TileEditor TileEditor { get; }

@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Project;
 
-public partial class ProjectEditor : BaseEditor {
+public partial class ProjectEditor : Control {
 	protected VBoxContainer Container { get; }
 	protected ProjectDetails Details { get; }
 	protected VariableCollectionEditor Variables { get; }

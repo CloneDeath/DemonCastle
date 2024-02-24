@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.Project;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -17,5 +16,5 @@ public class ProjectEditorFileType : ProjectFileType, IEditorFileType {
 		Name = name
 	};
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new ProjectEditor(resources, resources.GetProject(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new ProjectEditor(resources, resources.GetProject(file));
 }

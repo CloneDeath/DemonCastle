@@ -4,7 +4,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Character;
 
-public partial class CharacterEditor : BaseEditor {
+public partial class CharacterEditor : Control {
 	protected HSplitContainer SplitContainer { get; }
 
 	public CharacterEditor(CharacterInfo character) {

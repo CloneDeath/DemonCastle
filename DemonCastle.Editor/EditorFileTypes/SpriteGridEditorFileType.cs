@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.SpriteGrid;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -13,5 +12,5 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class SpriteGridEditorFileType : SpriteGridFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.SpriteGridIcon;
 	public object CreateFileInstance(string name) => new SpriteGridFile();
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SpriteGridEditor(resources.GetSpriteGrid(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new SpriteGridEditor(resources.GetSpriteGrid(file));
 }

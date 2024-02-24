@@ -7,7 +7,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
 namespace DemonCastle.Editor.Editors.SpriteGrid;
 
-public partial class SpriteGridEditor : BaseEditor {
+public partial class SpriteGridEditor : Control {
 	protected HSplitContainer SplitContainer { get; }
 	protected VBoxContainer LeftContainer { get; }
 	protected PropertyCollection SpriteGridDetails { get; }

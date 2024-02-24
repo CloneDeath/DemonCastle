@@ -11,5 +11,5 @@ namespace DemonCastle.Editor.EditorFileTypes;
 public class TextEditorFileType : TextFileType, IEditorFileType {
 	public Texture2D Icon => IconTextures.File.TextFileIcon;
 	public object CreateFileInstance(string name) => string.Empty;
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new TextFileEditor(resources.GetText(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new TextFileEditor(resources.GetText(file));
 }

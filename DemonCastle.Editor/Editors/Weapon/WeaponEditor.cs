@@ -5,7 +5,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Weapon;
 
-public partial class WeaponEditor : BaseEditor {
+public partial class WeaponEditor : Control {
 	protected HSplitContainer SplitContainer { get; }
 
 	public WeaponEditor(WeaponInfo weapon) {

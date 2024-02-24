@@ -4,7 +4,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
-public abstract partial class BaseEntityEditor : BaseEditor {
+public abstract partial class BaseEntityEditor : Control {
 	protected HSplitContainer SplitContainer { get; }
 	protected BaseEntityTabContainer Tabs { get; }
 

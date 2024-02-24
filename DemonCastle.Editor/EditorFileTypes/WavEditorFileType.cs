@@ -13,5 +13,5 @@ public class WavEditorFileType : WavFileType, IEditorFileType {
 
 	public object CreateFileInstance(string name) => string.Empty;
 
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new AudioEditor(resources.GetAudioStream(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new AudioEditor(resources.GetAudioStream(file));
 }

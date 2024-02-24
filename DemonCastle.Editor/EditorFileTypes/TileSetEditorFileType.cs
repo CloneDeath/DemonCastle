@@ -1,4 +1,3 @@
-using DemonCastle.Editor.Editors;
 using DemonCastle.Editor.Editors.TileSet;
 using DemonCastle.Editor.Icons;
 using DemonCastle.Files;
@@ -15,5 +14,5 @@ public class TileSetEditorFileType : TileSetFileType, IEditorFileType {
 	public object CreateFileInstance(string name) => new TileSetFile {
 		Name = name
 	};
-	public BaseEditor GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new TileSetEditor(resources, project, resources.GetTileSet(file));
+	public Control GetEditor(ProjectResources resources, ProjectInfo project, FileNavigator file) => new TileSetEditor(resources, project, resources.GetTileSet(file));
 }

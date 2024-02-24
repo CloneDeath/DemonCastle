@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
-public partial class TextFileEditor : BaseEditor {
+public partial class TextFileEditor : Control {
 	private readonly TextInfo _textInfo;
 
 	protected TextEdit TextEdit { get; }

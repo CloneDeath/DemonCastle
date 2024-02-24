@@ -7,7 +7,7 @@ using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 
 namespace DemonCastle.Editor.Editors.SpriteAtlas;
 
-public partial class SpriteAtlasEditor : BaseEditor {
+public partial class SpriteAtlasEditor : Control {
     protected HSplitContainer SplitContainer { get; }
     protected VBoxContainer LeftContainer { get; }
     protected PropertyCollection SpriteAtlasDetails { get; }

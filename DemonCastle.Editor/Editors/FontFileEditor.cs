@@ -2,7 +2,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
-public partial class FontFileEditor : BaseEditor {
+public partial class FontFileEditor : Control {
 	protected ScrollContainer ScrollContainer { get; }
 	protected VBoxContainer Lines { get; }
 

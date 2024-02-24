@@ -7,7 +7,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Level;
 
-public partial class LevelEditor : BaseEditor {
+public partial class LevelEditor : Control {
 	protected LevelInfo Level { get; }
 
 	protected VSplitContainer SplitContainer { get; }

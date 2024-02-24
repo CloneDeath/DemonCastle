@@ -3,7 +3,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors;
 
-public partial class ImageEditor : BaseEditor {
+public partial class ImageEditor : Control {
 	protected TextureView TextureView { get; }
 
 	public ImageEditor(Texture2D texture) {
