@@ -9,9 +9,7 @@ using Godot;
 
 namespace DemonCastle.Editor.Editors.Scene;
 
-public partial class SceneEditor : Control {
-	private HSplitContainer Split { get; }
-
+public partial class SceneEditor : HSplitContainer {
 	private VBoxContainer Left { get; }
 	private TabContainer LeftTabs { get; }
 	private InfoCollectionEditorByEnum<IElementInfo, ElementType> ElementList { get; }
@@ -23,10 +21,7 @@ public partial class SceneEditor : Control {
 	public SceneEditor(ProjectInfo project, SceneInfo scene) {
 		Name = nameof(SceneEditor);
 
-		AddChild(Split = new HSplitContainer());
-		Split.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
-
-		Split.AddChild(Left = new VBoxContainer {
+		AddChild(Left = new VBoxContainer {
 			CustomMinimumSize = new Vector2(300, 300)
 		});
 		{
@@ -49,7 +44,7 @@ public partial class SceneEditor : Control {
 			LeftTabs.SetTabTitle(1, "Events");
 		}
 
-		Split.AddChild(Right = new HSplitContainer());
+		AddChild(Right = new HSplitContainer());
 		{
 			Right.AddChild(SceneItemEditor = new SceneItemEditor(project, scene) {
 				CustomMinimumSize = new Vector2(425, 300)

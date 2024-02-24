@@ -21,6 +21,19 @@ public partial class EditArea : TabContainer {
 		_project = project;
 		Name = nameof(EditArea);
 		DragToRearrangeEnabled = true;
+		Theme = new Theme();
+		Theme.SetStylebox("panel", nameof(TabContainer), new StyleBoxFlat {
+			BgColor = Color.FromHsv(0, 0, 0.2f),
+			CornerRadiusBottomLeft = 5,
+			CornerRadiusBottomRight = 5,
+			CornerRadiusTopRight = 5,
+			CornerRadiusTopLeft = 5,
+			ContentMarginBottom = 5,
+			ContentMarginLeft = 5,
+			ContentMarginRight = 5,
+			ContentMarginTop = 5
+		});
+
 		AddToGroup(nameof(EditArea));
 
 		GetChild<TabBar>(0, true).TabCloseDisplayPolicy = TabBar.CloseButtonDisplayPolicy.ShowActiveOnly;
