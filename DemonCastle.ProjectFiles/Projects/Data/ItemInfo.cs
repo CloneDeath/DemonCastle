@@ -7,6 +7,16 @@ public class ItemInfo : BaseEntityInfo<ItemFile>, IFileInfo {
 	public ItemInfo(FileNavigator<ItemFile> file) : base(file, file.Resource) {
 	}
 
+	public float MoveSpeed {
+		get => Data.MoveSpeed;
+		set => SaveField(ref Data.MoveSpeed, value);
+	}
+
+	public float Gravity {
+		get => Data.Gravity;
+		set => SaveField(ref Data.Gravity, value);
+	}
+
 	public string FileName => File.FileName;
 	public string Directory => File.Directory;
 	void IFileInfo.Save() => base.Save();
