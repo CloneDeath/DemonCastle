@@ -5,10 +5,10 @@ using DemonCastle.ProjectFiles.Projects.Data;
 namespace DemonCastle.Editor.Editors.Components.BaseEntity;
 
 public partial class BaseEntityDetails : PropertyCollection {
-	public BaseEntityDetails(IBaseEntityInfo item) {
+	public BaseEntityDetails(IBaseEntityInfo entity) {
 		Name = nameof(MonsterDetails);
 
-		AddString("Name", item, m => m.Name, InternalMode.Front);
-		AddStateReference("Initial State", item, m => m.InitialState, item.States, InternalMode.Back);
+		AddString("Name", entity, e => e.Name, InternalMode.Front);
+		AddStateReference("Initial State", entity, e => e.InitialState, entity.States, InternalMode.Back);
 	}
 }
