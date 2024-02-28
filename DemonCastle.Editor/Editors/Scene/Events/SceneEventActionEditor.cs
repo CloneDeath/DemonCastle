@@ -1,5 +1,5 @@
 using System.Linq;
-using DemonCastle.Editor.Editors.Components;
+using DemonCastle.Editor.Editors.Components.Actions;
 using DemonCastle.Editor.Editors.Components.Properties;
 using DemonCastle.Editor.Editors.Components.Properties.File;
 using DemonCastle.Editor.Editors.Components.States.Editor.Transitions.Editor;
@@ -16,7 +16,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Scene.Events;
 
 public partial class SceneEventActionEditor : ActionEditor<SceneEventActionInfo> {
-	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, SceneEventActionInfoCollection collection) : base(collection, action) {
+	public SceneEventActionEditor(IFileInfo file, ProjectInfo project, SceneEventActionInfo action, IEnumerableInfo<SceneEventActionInfo> collection) : base(collection, action) {
 		Name = nameof(SceneEventActionEditor);
 
 		AddChild(new ChoiceTree {

@@ -2,7 +2,7 @@ using DemonCastle.Editor.Icons;
 using DemonCastle.ProjectFiles.Projects.Data;
 using Godot;
 
-namespace DemonCastle.Editor.Editors.Components;
+namespace DemonCastle.Editor.Editors.Components.Actions;
 
 public partial class ActionEditor<T> : HBoxContainer {
 	protected readonly IEnumerableInfo<T> Collection;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DemonCastle.Editor.Editors.Components.Actions;
 using DemonCastle.Editor.Editors.Components.Properties.Vector;
 using DemonCastle.Editor.Editors.Scene.Events.Conditions;
 using DemonCastle.Editor.Properties;
@@ -16,7 +17,7 @@ using Godot;
 namespace DemonCastle.Editor.Editors.Components.States.Editor.Events;
 
 public partial class EntityActionEditor : ActionEditor<EntityActionInfo> {
-	public EntityActionEditor(ProjectResources resources, IBaseEntityInfo entity, EntityActionInfo action, EntityActionInfoCollection actionSet) : base(actionSet, action) {
+	public EntityActionEditor(ProjectResources resources, IBaseEntityInfo entity, EntityActionInfo action, IEnumerableInfo<EntityActionInfo> actionSet) : base(actionSet, action) {
 		Name = nameof(EntityActionEditor);
 
 		AddChild(new ChoiceTree {

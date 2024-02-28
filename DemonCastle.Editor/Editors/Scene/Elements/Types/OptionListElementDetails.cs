@@ -49,6 +49,7 @@ public partial class OptionListElementDetails : ElementDetails {
 public partial class OptionDetails : PropertyCollection {
 	public OptionDetails(IFileInfo file, ProjectInfo project, OptionInfo option) {
 		AddString("Text", option, o => o.Text);
+		AddChild(new Label { Text = "Then" });
 		AddChild(new SceneEventActionCollectionEditor(file, project, option.OnSelect) {
 			SizeFlagsVertical = SizeFlags.ExpandFill
 		});
