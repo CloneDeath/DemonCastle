@@ -1,5 +1,7 @@
 using DemonCastle.Files.Actions;
+using DemonCastle.ProjectFiles.Exceptions;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -12,6 +14,11 @@ public class ItemActionInfo : BaseInfo<ItemActionData>, IListableInfo {
 								   : "<Empty>";
 
 	public PlayerActionInfo Player { get; }
+
+	public void Execute(IGameState game) {
+		if (Player.IsSet) Player.Execute(game);
+		else throw new IncompleteDataException(File.FilePath);
+	}
 }
 
 public class PlayerActionInfo : BaseInfo<ItemActionData>, IListableInfo {
@@ -62,5 +69,11 @@ public class PlayerActionInfo : BaseInfo<ItemActionData>, IListableInfo {
 			OnPropertyChanged();
 			OnPropertyChanged(nameof(ListLabel));
 		}
+	}
+
+	public void Execute(IGameState game) {
+		if (RecoverHp.HasValue) game.Player.RecoverHp(RecoverHp.Value);
+		else if (RecoverMp.HasValue) game.Player.RecoverMp(RecoverMp.Value);
+		else throw new IncompleteDataException(File.FilePath);
 	}
 }

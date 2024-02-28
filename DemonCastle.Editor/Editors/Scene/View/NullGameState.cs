@@ -48,8 +48,12 @@ public class NullInputState : IInputState {
 public class NullPlayerState : IPlayerState {
 	public int Hp => 9;
 	public int MaxHp => 9;
+	public void RecoverHp(int amount) { }
+
 	public int Mp => 9;
 	public int MaxMp => 9;
+	public void RecoverMp(int amount) { }
+
 	public int Lives => 3;
 	public int? MaxLives => 9;
 	public int Score => 42;

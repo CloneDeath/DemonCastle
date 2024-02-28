@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -25,17 +26,23 @@ public class Variables : IPlayerState {
 		set => SetField(ref _maxHp, value);
 	}
 
-	private int _mp = 8;
+	public void RecoverHp(int amount) {
+		Hp = Math.Min(MaxHp, Hp + amount);
+	}
+
+	private int _mp = 0;
 	public int Mp {
 		get => _mp;
 		set => SetField(ref _mp, value);
 	}
 
-	private int _maxMp = 8;
+	private int _maxMp = 100;
 	public int MaxMp {
-
 		get => _maxMp;
 		set => SetField(ref _maxMp, value);
+	}
+	public void RecoverMp(int amount) {
+		Mp = Math.Min(MaxMp, Mp + amount);
 	}
 
 	private int _lives = 1;

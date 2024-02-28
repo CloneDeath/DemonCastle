@@ -8,11 +8,11 @@ namespace DemonCastle.Game.Scenes.ElementTypes;
 
 public partial class LabelElementView : Label {
 	private readonly LabelElementInfo _element;
-	private readonly IGameState _gameState;
+	private readonly IGameState _game;
 
-	public LabelElementView(LabelElementInfo element, IGameState gameState) {
+	public LabelElementView(LabelElementInfo element, IGameState game) {
 		_element = element;
-		_gameState = gameState;
+		_game = game;
 		Name = nameof(LabelElementView);
 		LabelSettings = new LabelSettings();
 		Refresh();
@@ -21,11 +21,17 @@ public partial class LabelElementView : Label {
 	public override void _EnterTree() {
 		base._EnterTree();
 		_element.PropertyChanged += Element_OnPropertyChanged;
+		_game.Player.PropertyChanged += Player_OnPropertyChanged;
 	}
 
 	public override void _ExitTree() {
 		base._ExitTree();
 		_element.PropertyChanged -= Element_OnPropertyChanged;
+		_game.Player.PropertyChanged -= Element_OnPropertyChanged;
+	}
+
+	private void Player_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
+		Refresh();
 	}
 
 	private void Element_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
@@ -35,7 +41,7 @@ public partial class LabelElementView : Label {
 	private void Refresh() {
 		Position = _element.Region.Position;
 		Size = _element.Region.Size;
-		Text = new TextFinalizer(_gameState, _element.TextTransform).Finalize(_element.Text);
+		Text = new TextFinalizer(_game, _element.TextTransform).Finalize(_element.Text);
 
 		HorizontalAlignment = _element.HorizontalAlignment switch {
 			Files.Elements.HorizontalAlignment.Left => HorizontalAlignment.Left,

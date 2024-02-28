@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DemonCastle.Files.Actions;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data;
 
@@ -12,6 +13,12 @@ public class ItemActionInfoCollection : ObservableCollectionInfo<ItemActionInfo,
 	}
 
 	protected override void Save() => _file.Save();
+
+	public void Execute(IGameState game) {
+		foreach (var action in this) {
+			action.Execute(game);
+		}
+	}
 }
 
 public class ItemActionInfoFactory : IInfoFactory<ItemActionInfo, ItemActionData> {
