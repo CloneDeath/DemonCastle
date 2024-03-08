@@ -237,13 +237,14 @@ public partial class FileTree : Tree {
 
 	protected void OnOpenFolderInTerminal() {
 		var folder = SelectedDirectory?.Directory ?? throw new Exception("No Directory Selected");
-		OS.ShellOpen(folder);
+		//OS.Execute("ls", new string[0], new Array(), false, true);
+		//OS.Execute("bash", new[]{"/c", "start", "cmd", "/k", $"cd /d {folder}"});
+		//OS.Execute("CMD.exe", new[]{"/c", "start", "cmd", "/k", $"cd /d {folder}"});
 	}
 
 	protected void OnOpenFolderInVisualStudioCode() {
 		var folder = SelectedDirectory?.Directory ?? throw new Exception("No Directory Selected");
 		OS.Execute("code", new[]{folder});
-		OS.ShellShowInFileManager(folder);
 	}
 
 	protected void OnRename() {
