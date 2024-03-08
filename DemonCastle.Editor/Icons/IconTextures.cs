@@ -21,8 +21,14 @@ public static class IconTextures {
 		public static Texture2D TileSetIcon { get; } = LoadTexture(nameof(File), nameof(TileSetIcon));
 		public static Texture2D UnknownIcon { get; } = LoadTexture(nameof(File), nameof(UnknownIcon));
 		public static Texture2D WeaponIcon { get; } = LoadTexture(nameof(File), nameof(WeaponIcon));
-
 	}
+
+	public static class OpenFolder {
+		public static Texture2D InExplorerIcon { get; } = LoadTexture(nameof(OpenFolder), nameof(InExplorerIcon));
+		public static Texture2D InTerminalIcon { get; } = LoadTexture(nameof(OpenFolder), nameof(InTerminalIcon));
+		public static Texture2D InVisualStudioCodeIcon { get; } = LoadTexture(nameof(OpenFolder), nameof(InVisualStudioCodeIcon));
+	}
+
 	public static Texture2D AddFrameIcon { get; } = LoadTexture(nameof(AddFrameIcon));
 	public static Texture2D AddIcon { get; } = LoadTexture(nameof(AddIcon));
 	public static Texture2D AllLayersIcon { get; } = LoadTexture(nameof(AllLayersIcon));

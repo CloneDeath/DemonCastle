@@ -46,7 +46,7 @@ public partial class FileTree : Tree {
 		DirectoryPopupMenu.AddDirectory += OnAddDirectorySelected;
 		DirectoryPopupMenu.CreateEditorFile += OnCreateEditorFileSelected;
 		DirectoryPopupMenu.CreateTextFile += OnCreateTextFileSelected;
-		DirectoryPopupMenu.OpenFolder += OnOpenFolder;
+		DirectoryPopupMenu.OpenFolderInExplorer += OnOpenFolderInExplorer;
 		DirectoryPopupMenu.RenameDirectory += OnRename;
 		DirectoryPopupMenu.DeleteDirectory += OnDelete;
 
@@ -228,7 +228,7 @@ public partial class FileTree : Tree {
 		}
 	}
 
-	protected void OnOpenFolder() {
+	protected void OnOpenFolderInExplorer() {
 		var folder = SelectedDirectory?.Directory ?? throw new Exception("No Directory Selected");
 		OS.ShellShowInFileManager(folder);
 	}

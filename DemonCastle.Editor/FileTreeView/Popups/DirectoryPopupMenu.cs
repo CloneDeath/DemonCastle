@@ -11,7 +11,9 @@ public partial class DirectoryPopupMenu : PopupMenu {
 	public event Action<IEditorFileType>? CreateEditorFile;
 
 	public event Action? CreateTextFile;
-	public event Action? OpenFolder;
+	public event Action? OpenFolderInExplorer;
+	public event Action? OpenFolderInTerminal;
+	public event Action? OpenFolderInVisualStudioCode;
 	public event Action? RenameDirectory;
 	public event Action? DeleteDirectory;
 
@@ -41,8 +43,24 @@ public partial class DirectoryPopupMenu : PopupMenu {
 				 Action = () => CreateTextFile?.Invoke()
 			 },
 			 new PopupAction {
-				 Text = "Open Folder...",
-				 Action = () => OpenFolder?.Invoke()
+				 Text = "Open In",
+				 Children = new[] {
+					 new PopupAction {
+						 Text = "Explorer",
+						 Icon = IconTextures.OpenFolder.InExplorerIcon,
+						 Action = () => OpenFolderInExplorer?.Invoke()
+					 },
+					 new PopupAction {
+						 Text = "Terminal",
+						 Icon = IconTextures.OpenFolder.InTerminalIcon,
+						 Action = () => OpenFolderInTerminal?.Invoke()
+					 },
+					 new PopupAction {
+						 Text = "Visual Studio Code",
+						 Icon = IconTextures.OpenFolder.InVisualStudioCodeIcon,
+						 Action = () => OpenFolderInVisualStudioCode?.Invoke()
+					 }
+				 }
 			 },
 			 new PopupAction {
 				 Text = "Rename...",
@@ -54,22 +72,34 @@ public partial class DirectoryPopupMenu : PopupMenu {
 			 }
 		 }).ToArray();
 
-
-		for (var i = 0; i < Actions.Length; i++) {
-			var action = Actions[i];
-			AddItem(action.Text, i);
-			if (action.Icon != null) SetItemIcon(i, action.Icon);
-		}
-
-		IdPressed += OnIdPressed;
+        AddPopupActionsToMenu(this, Actions);
 	}
 
-	protected void OnIdPressed(long id) {
-		if (id > Actions.Length) {
+	protected static void AddPopupActionsToMenu(PopupMenu target, PopupAction[] actions) {
+		for (var i = 0; i < actions.Length; i++) {
+			var action = actions[i];
+
+			if (!action.Children.Any()) target.AddItem(action.Text, i);
+			else {
+				PopupMenu child;
+				target.AddChild(child = new PopupMenu {
+					Name = $"{action.Text}_Submenu ({Guid.NewGuid()})"
+				});
+				target.AddSubmenuItem(action.Text, child.Name, i);
+				AddPopupActionsToMenu(child, action.Children);
+			}
+			if (action.Icon != null) target.SetItemIcon(i, action.Icon);
+		}
+
+		target.IdPressed += id => OnIdPressed(actions, id);
+	}
+
+	protected static void OnIdPressed(PopupAction[] actions, long id) {
+		if (id > actions.Length) {
 			throw new NotSupportedException($"Id {id} not handled in DirectoryPopupMenu.");
 		}
 
-		var action = Actions[id];
+		var action = actions[id];
 		action.Action();
 	}
 }
