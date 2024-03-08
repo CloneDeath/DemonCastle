@@ -30,7 +30,7 @@ public class Variables : IPlayerState {
 		Hp = Math.Min(MaxHp, Hp + amount);
 	}
 
-	private int _mp = 0;
+	private int _mp;
 	public int Mp {
 		get => _mp;
 		set => SetField(ref _mp, value);
