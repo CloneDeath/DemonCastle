@@ -8,7 +8,6 @@ public class ClimbingStairsState : IState {
 
 	public ClimbingStairsState(Tiles.GameTileStairs stairs) {
 		_stairs = stairs;
-		GD.Print("New Stairs Target: " + _stairs.GlobalPosition);
 	}
 
 	public void OnEnter(GamePlayer player) {
