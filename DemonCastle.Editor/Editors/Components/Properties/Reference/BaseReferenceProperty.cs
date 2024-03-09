@@ -15,7 +15,7 @@ public abstract partial class BaseReferenceProperty<T> : BaseProperty where T : 
 	protected abstract string GetName(T option);
 
 	private IEnumerableInfo<T>? _options;
-	private List<T> _subscribed = new();
+	private readonly List<T> _subscribed = new();
 
 	protected IPropertyBinding<Guid> Binding { get; }
 	protected OptionButton OptionButton { get; }

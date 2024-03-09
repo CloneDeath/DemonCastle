@@ -33,7 +33,7 @@ public partial class Main : Control {
     private void LoadProjectMenuView() {
         ClearChildren();
 
-        GetWindow().Title = $"DemonCastle";
+        GetWindow().Title = "DemonCastle";
         ProjectSelectionMenu projectSelectionMenu;
         AddChild(projectSelectionMenu = new ProjectSelectionMenu());
         projectSelectionMenu.ProjectLoaded += LoadPlayProjectView;

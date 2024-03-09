@@ -19,7 +19,7 @@ public partial class BooleanConditionTree : ChoiceTree {
 				condition.Value ??= true;
 				var binding = new CallbackBinding<bool>(
 					() => condition.Value ?? false,
-					(b) => condition.Value = b);
+					b => condition.Value = b);
 				i.AddChild(new BooleanProperty(binding));
 			}
 		);

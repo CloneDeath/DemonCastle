@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -8,7 +7,7 @@ namespace DemonCastle.Editor.FileTreeView;
 public static class OpenTerminal {
 	// Ported from Godot source
 	// https://github.com/Calinou/godot/blob/0e97acff84ca6c859b48b22a6d42c4680ef1c432/editor/filesystem_dock.cpp#L2145
-	public static void Open(string fpath) {
+	public static void Open(string path) {
 		var terminal_emulators = new List<string>();
 		if (OS.HasFeature("windows")) {
 			terminal_emulators.Add("powershell");
@@ -27,37 +26,38 @@ public static class OpenTerminal {
 
 		// NOTE: This default value is ignored further below if the terminal executable is `powershell` or `cmd`,
 		// due to these terminals requiring nonstandard syntax to start in a specified folder.
-		var arguments = "{directory}";
+		const string arguments = "{directory}";
 
-		string chosen_terminal_emulator = "";
+		var chosen_terminal_emulator = "";
 		if (OS.HasFeature("linux")) {
 			foreach (var terminal_emulator in terminal_emulators) {
-				var test_args = new List<string>();
-				test_args.Add("-v");
-				test_args.Add(terminal_emulator);
-				// Silence command name being printed when found. (stderr is already silenced by `OS::execute()` by default.)
-				// FIXME: This doesn't appear to silence stdout.
-				test_args.Add(">");
-				test_args.Add("/dev/null");
+				var test_args = new List<string> {
+					"-v",
+					terminal_emulator,
+					// Silence command name being printed when found. (stderr is already silenced by `OS::execute()` by default.)
+					// FIXME: This doesn't appear to silence stdout.
+					">",
+					"/dev/null"
+				};
 				var exitCode = OS.Execute("command", test_args.ToArray());
-				if (exitCode == 0) {
-					chosen_terminal_emulator = terminal_emulator;
-					break;
-				}
+				if (exitCode != 0) continue;
+
+				chosen_terminal_emulator = terminal_emulator;
+				break;
 			}
 		} else {
 			// On Windows and macOS, the first (and only) terminal emulator in the list is always available.
 			chosen_terminal_emulator = terminal_emulators[0];
 		}
 
-		List<String> terminal_emulator_args = new List<string>(); // Required for `execute()`, as it doesn't accept `Vector<String>`.
+		var terminal_emulator_args = new List<string>(); // Required for `execute()`, as it doesn't accept `Vector<String>`.
 		if (OS.HasFeature("linuxbsd")) {
 			if (chosen_terminal_emulator.EndsWith("konsole")) {
 				terminal_emulator_args.Add("--workdir");
 			}
 		}
 
-		bool append_default_args = true;
+		var append_default_args = true;
 		if (OS.HasFeature("windows")) {
 			// Prepend default arguments based on the terminal emulator name.
 			// Use `String.get_basename().to_lower()` to handle Windows' case-insensitive paths
@@ -74,42 +74,27 @@ public static class OpenTerminal {
 			}
 		}
 
-		List<String> arguments_array = arguments.Split(" ").ToList();
-		foreach (var argument in arguments_array) {
-			if (!append_default_args && argument == "{directory}") {
-				// Prevent appending a `{directory}` placeholder twice when using powershell or cmd.
-				// This allows users to enter the path to cmd or PowerShell in the custom terminal emulator path,
-				// and make it work without having to enter custom arguments.
-				continue;
-			}
-			terminal_emulator_args.Add(argument);
-		}
+		var arguments_array = arguments.Split(" ").ToList();
+		terminal_emulator_args.AddRange(arguments_array.Where(argument => append_default_args || argument != "{directory}"));
 
-		bool is_directory = fpath.EndsWith("/");
-		for (int i = 0; i < terminal_emulator_args.Count; i++) {
+		var is_directory = path.EndsWith("/");
+		for (var i = 0; i < terminal_emulator_args.Count; i++) {
 			if (is_directory) {
-				terminal_emulator_args[i] = terminal_emulator_args[i].Replace("{directory}", ProjectSettings.GlobalizePath(fpath));
+				terminal_emulator_args[i] = terminal_emulator_args[i].Replace("{directory}", ProjectSettings.GlobalizePath(path));
 			} else {
-				terminal_emulator_args[i] = terminal_emulator_args[i].Replace("{directory}", ProjectSettings.GlobalizePath(fpath).GetBaseDir());
+				terminal_emulator_args[i] = terminal_emulator_args[i].Replace("{directory}", ProjectSettings.GlobalizePath(path).GetBaseDir());
 			}
 		}
 
 		if (OS.IsStdOutVerbose()) {
-			// Print full command line to help with troubleshooting.
-			String command_string = chosen_terminal_emulator;
-			foreach (var arg in terminal_emulator_args) {
-				command_string += " " + arg;
-			}
+			var command_string = chosen_terminal_emulator + string.Join(" ", terminal_emulator_args);
 			GD.Print("Opening terminal emulator:", command_string);
 		}
 
-		int err = OS.CreateProcess(chosen_terminal_emulator, Enumerable.ToArray(terminal_emulator_args), true);
-		if (err != 0) {
-			String args_string = "";
-			for (int i = 0; i < terminal_emulator_args.Count; i++) {
-				args_string += terminal_emulator_args[i];
-			}
-			GD.PrintErr($"Couldn't run external terminal program (error code {err}): {chosen_terminal_emulator} {args_string}");
-		}
+		var err = OS.CreateProcess(chosen_terminal_emulator, Enumerable.ToArray(terminal_emulator_args), true);
+		if (err == 0) return;
+
+		var args_string = string.Join(" ", terminal_emulator_args);
+		GD.PrintErr($"Couldn't run external terminal program (error code {err}): {chosen_terminal_emulator} {args_string}");
 	}
 }

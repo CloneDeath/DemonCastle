@@ -24,7 +24,7 @@ public partial class ItemActionEditor : ActionEditor<ItemActionInfo> {
 								action.Player.RecoverHp ??= 1;
 								var binding = new CallbackBinding<int>(
 									() => action.Player.RecoverHp ?? 0,
-									(value) => action.Player.RecoverHp = value);
+									value => action.Player.RecoverHp = value);
 								p.AddChild(new IntegerProperty(binding));
 							}
 						},
@@ -35,7 +35,7 @@ public partial class ItemActionEditor : ActionEditor<ItemActionInfo> {
 								action.Player.RecoverMp ??= 1;
 								var binding = new CallbackBinding<int>(
 									() => action.Player.RecoverMp ?? 0,
-									(value) => action.Player.RecoverMp = value);
+									value => action.Player.RecoverMp = value);
 								p.AddChild(new IntegerProperty(binding));
 							}
 						}
