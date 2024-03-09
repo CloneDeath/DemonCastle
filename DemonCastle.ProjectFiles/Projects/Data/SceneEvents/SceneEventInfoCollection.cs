@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DemonCastle.Files.SceneEvents;
+using DemonCastle.Files.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;

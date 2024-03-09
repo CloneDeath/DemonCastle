@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DemonCastle.Files.Animations;
 using DemonCastle.Files.Common;
+using DemonCastle.Files.Events;
 using DemonCastle.Files.Variables;
 using Newtonsoft.Json;
 
@@ -21,4 +22,5 @@ public abstract class BaseEntityFile {
 	public List<AnimationData> Animations { get; set; } = new();
 	public List<EntityStateData> States { get; set; } = new();
 	public List<VariableDeclarationData> Variables { get; set; } = new();
+	public List<EntityEventData> Events { get; set; } = new();
 }

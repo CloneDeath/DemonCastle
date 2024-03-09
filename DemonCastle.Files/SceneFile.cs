@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DemonCastle.Files.Common;
-using DemonCastle.Files.SceneEvents;
+using DemonCastle.Files.Events;
 using Godot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
