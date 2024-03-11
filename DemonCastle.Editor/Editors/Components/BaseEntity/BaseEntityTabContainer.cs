@@ -20,7 +20,7 @@ public partial class BaseEntityTabContainer : TabContainer {
 		AddTab("Variables", _variables = new VariableCollectionEditor(resources));
 		AddTab("Animations", _animations = new AnimationsEditor(file));
 		AddTab("States", _states = new StatesEditor(resources, project));
-		AddTab("Events", _events = new EventsEditor());
+		AddTab("Events", _events = new EventsEditor(resources));
 		CurrentTab = _animations.GetIndex();
 	}
 

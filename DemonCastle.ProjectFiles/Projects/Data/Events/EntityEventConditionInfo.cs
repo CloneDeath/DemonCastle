@@ -6,7 +6,7 @@ namespace DemonCastle.ProjectFiles.Projects.Data.Events;
 public class EntityEventConditionInfo : BaseInfo<EntityEventConditionData> {
 	public EntityEventConditionInfo(IFileNavigator file, EntityEventConditionData data) : base(file, data) { }
 
-	public PlayerPositionTransition? AnyInput {
+	public PlayerPositionTransition? OnPlayer {
 		get => Data.OnPlayer;
 		set {
 			Data.Clear();
