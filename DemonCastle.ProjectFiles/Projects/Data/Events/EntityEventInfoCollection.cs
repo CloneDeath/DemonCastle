@@ -26,7 +26,9 @@ public class EntityEventInfoCollectionFactory : IInfoFactory<EntityEventInfo, En
 
 	public EntityEventInfo CreateInfo(EntityEventData data) => new(_file, data);
 
-	public EntityEventData CreateData() => new();
+	public EntityEventData CreateData() => new() {
+		Name = "Event"
+	};
 }
 
 public class NullEntityEventInfoCollection : NullEnumerableInfo<EntityEventInfo>, IEntityEventInfoCollection {
