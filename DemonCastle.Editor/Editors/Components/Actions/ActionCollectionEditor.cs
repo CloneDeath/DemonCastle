@@ -19,12 +19,6 @@ public abstract partial class ActionCollectionEditor<TInfo> : VBoxContainer {
 
 	private void AddActionButton_OnPressed() => _actionSet?.AppendNew();
 
-	public override void _EnterTree() {
-		base._EnterTree();
-		if (_actionSet != null) _actionSet.CollectionChanged += ActionSet_OnCollectionChanged;
-		Reload();
-	}
-
 	public override void _ExitTree() {
 		base._ExitTree();
 		if (_actionSet != null) _actionSet.CollectionChanged -= ActionSet_OnCollectionChanged;
