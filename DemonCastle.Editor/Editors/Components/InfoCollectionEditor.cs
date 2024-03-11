@@ -184,6 +184,10 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 		}
 		_subscribed.Clear();
 		ItemList.Clear();
+		AddButton.Disabled = _data == null;
+		RemoveButton.Disabled = _data == null;
+		MoveUpButton.Disabled = _data == null;
+		MoveDownButton.Disabled = _data == null;
 		if (_data == null) return;
 
 		foreach (var item in _data) {
