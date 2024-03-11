@@ -9,13 +9,6 @@ namespace DemonCastle.ProjectFiles.Projects.Data.SceneEvents;
 public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	public SceneEventConditionInfo(IFileNavigator file, SceneEventConditionData data) : base(file, data) { }
 
-	private void Clear() {
-		//Data.And = null;
-		//Data.Or = null;
-		Data.AnyInput = null;
-		Data.Input = null;
-	}
-
 	/*
 	public SceneEventConditionInfoCollection And {
 		get => Data.And;
@@ -42,7 +35,7 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	public KeyState? AnyInput {
 		get => Data.AnyInput;
 		set {
-			Clear();
+			Data.Clear();
 			Data.AnyInput = value;
 			Save();
 			OnPropertyChanged();
@@ -52,7 +45,7 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	public InputConditionData? Input {
 		get => Data.Input;
 		set {
-			Clear();
+			Data.Clear();
 			Data.Input = value;
 			Save();
 			OnPropertyChanged();
@@ -62,7 +55,7 @@ public class SceneEventConditionInfo : BaseInfo<SceneEventConditionData> {
 	public SceneChangeEvent? ThisScene {
 		get => Data.ThisScene;
 		set {
-			Clear();
+			Data.Clear();
 			Data.ThisScene = value;
 			Save();
 			OnPropertyChanged();

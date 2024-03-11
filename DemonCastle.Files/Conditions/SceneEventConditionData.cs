@@ -10,6 +10,12 @@ public class SceneEventConditionData {
 	public KeyState? AnyInput { get; set; }
 	public InputConditionData? Input { get; set; }
 	public SceneChangeEvent? ThisScene { get; set; }
+
+	public void Clear() {
+		AnyInput = null;
+		Input = null;
+		ThisScene = null;
+	}
 }
 
 [JsonConverter(typeof(StringEnumConverter))]

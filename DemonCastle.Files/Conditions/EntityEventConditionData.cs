@@ -1,10 +1,14 @@
 namespace DemonCastle.Files.Conditions;
 
 public class EntityEventConditionData {
-	public PlayerPosition? OnPlayer;
+	public PlayerPositionTransition? OnPlayer;
+
+	public void Clear() {
+		OnPlayer = null;
+	}
 }
 
-public enum PlayerPosition {
+public enum PlayerPositionTransition {
 	Enter,
 	Exit
 }

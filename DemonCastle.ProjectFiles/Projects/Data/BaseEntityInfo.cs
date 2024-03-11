@@ -5,6 +5,7 @@ using System.Linq;
 using DemonCastle.Files.BaseEntity;
 using DemonCastle.Files.Common;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Data.Events;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
@@ -23,6 +24,7 @@ public interface IBaseEntityInfo : IListableInfo, INotifyPropertyChanged {
 	public IAnimationInfoCollection Animations { get; }
 	public IEntityStateInfoCollection States { get; }
 	public IVariableDeclarationInfoCollection Variables { get; }
+	public IEntityEventInfoCollection Events { get; }
 }
 
 public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, IEntityStateInfoRetriever
@@ -36,6 +38,7 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 		Animations = new AnimationInfoCollection(file, Data.Animations);
 		States = new EntityStateInfoCollection(file, this, Data.States);
 		Variables = new VariableDeclarationInfoCollection(file, Data.Variables);
+		Events = new EntityEventInfoCollection(file, Data.Events);
 
 		LoadStateAndAnimationHooks();
 	}
@@ -112,6 +115,7 @@ public abstract class BaseEntityInfo<TData> : BaseInfo<TData>, IBaseEntityInfo, 
 	public IAnimationInfoCollection Animations { get; }
 	public IEntityStateInfoCollection States { get; }
 	public IVariableDeclarationInfoCollection Variables { get; }
+	public IEntityEventInfoCollection Events { get; }
 
 	public ISpriteDefinition PreviewSpriteDefinition => PreviewFrame?.SpriteDefinition ?? new NullSpriteDefinition();
 

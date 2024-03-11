@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using DemonCastle.ProjectFiles.Projects.Data.Animations;
+using DemonCastle.ProjectFiles.Projects.Data.Events;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites;
 using DemonCastle.ProjectFiles.Projects.Data.Sprites.SpriteDefinitions;
 using DemonCastle.ProjectFiles.Projects.Data.States;
@@ -101,6 +102,7 @@ public class NullTileInfo : ITileInfo {
 	public IAnimationInfoCollection Animations { get; } = new NullAnimationInfoCollection();
 	public IEntityStateInfoCollection States { get; } = new NullEntityStateInfoCollection();
 	public IVariableDeclarationInfoCollection Variables { get; } = new NullVariableDeclarationInfoCollection();
+	public IEntityEventInfoCollection Events { get; } = new NullEntityEventInfoCollection();
 	public string ListLabel => Name;
 
 	#region INotifyPropertyChanged
