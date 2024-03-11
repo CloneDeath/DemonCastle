@@ -194,7 +194,8 @@ public partial class InfoCollectionEditor<TInfo> : VBoxContainer
 	}
 
 	protected virtual int AddItemListItem(TInfo item) {
-		return ItemList.AddItem(item.ListLabel);
+		var label = !string.IsNullOrWhiteSpace(item.ListLabel) ? item.ListLabel : "<Empty>";
+		return ItemList.AddItem(label);
 	}
 
 	private void InfoItem_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
