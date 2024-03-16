@@ -30,7 +30,6 @@ public partial class GameItem : GameBaseEntity {
 			Visible = debug.ShowCollisions
 		});
 		_playerDetector.BodyEntered += PlayerDetector_OnBodyEntered;
-
 	}
 
 	private void PlayerDetector_OnBodyEntered(Node2D body) {

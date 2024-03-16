@@ -4,7 +4,7 @@ using DemonCastle.ProjectFiles.Projects.Data.States;
 using DemonCastle.ProjectFiles.State;
 using Godot;
 
-namespace DemonCastle.Game;
+namespace DemonCastle.Game.BaseEntities;
 
 public partial class EntityStateMachine : Node {
 	private readonly IGameState _game;

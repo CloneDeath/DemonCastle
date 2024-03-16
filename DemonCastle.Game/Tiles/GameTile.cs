@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DemonCastle.Game.Animations;
+using DemonCastle.Game.BaseEntities;
 using DemonCastle.Game.DebugNodes;
 using DemonCastle.ProjectFiles;
 using DemonCastle.ProjectFiles.Projects.Data.Levels;
@@ -34,6 +35,14 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 
 		AddChild(_stateMachine = new EntityStateMachine(game, this, tile.InitialState, tile.States));
 		_variables = new VariableCollection(tile.Variables);
+
+		if (tile.Events.Any()) {
+			AddChild(new EventManager(game, this, tile));
+			AddChild(new EntityDetectionArea(debug) {
+				Size = tile.Size * level.TileSize,
+				Center = tile.Size * level.TileSize / 2
+			});
+		}
 
 		SetupCollisions(debug);
 		SetupStairs(debug);

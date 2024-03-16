@@ -1,6 +1,8 @@
+using System;
 using DemonCastle.Files.Events;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectFiles.State;
 
 namespace DemonCastle.ProjectFiles.Projects.Data.Events;
 
