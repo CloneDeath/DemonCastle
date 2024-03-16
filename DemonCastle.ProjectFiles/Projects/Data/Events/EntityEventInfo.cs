@@ -1,4 +1,3 @@
-using System;
 using DemonCastle.Files.Events;
 using DemonCastle.ProjectFiles.Projects.Data.States.Events;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -26,4 +25,10 @@ public class EntityEventInfo : BaseInfo<EntityEventData>, IListableInfo {
 
 	public EntityEventConditionInfo When { get; }
 	public EntityActionInfoCollection Then { get; }
+
+	public void CheckAndTriggerEvent(IGameState game, IEntityState entity, EventDetails details) {
+		if (When.IsConditionMet(details)) {
+			Then.Execute(game, entity);
+		}
+	}
 }

@@ -37,11 +37,16 @@ public partial class GameTile : Node2D, IDamageable, IEntityState {
 		_variables = new VariableCollection(tile.Variables);
 
 		if (tile.Events.Any()) {
-			AddChild(new EventManager(game, this, tile));
-			AddChild(new EntityDetectionArea(debug) {
+			var eventManager = new EventManager(game, this, tile);
+			AddChild(eventManager);
+
+			var entityDetector = new EntityDetectionArea(debug) {
 				Size = tile.Size * level.TileSize,
 				Center = tile.Size * level.TileSize / 2
-			});
+			};
+			AddChild(entityDetector);
+			entityDetector.PlayerEnter += eventManager.OnPlayerEnter;
+			entityDetector.PlayerExit += eventManager.OnPlayerExit;
 		}
 
 		SetupCollisions(debug);
