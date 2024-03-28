@@ -4,6 +4,8 @@ Demon Castle transcends singular formity; That is to say: it makes itself. It is
 
 With Demon Castle, anyone can make entire worlds for others to discover and explore. With Demon Castle, anyone can play the role of the Hero: mighty, brave, curious, wise... malefactor... sycophant...
 
+![alt](./content/Cover_20240327_054118.png)
+
 # Chapter 2 - How to Build Demon Castle
 
 Demon Castle is built using an artefact known as [Godot](https://godotengine.org/). Godot is the basis of Demon Castle. As such, their essense is the same; it is both the editor and the player. The Godot editor is created using Godot.
