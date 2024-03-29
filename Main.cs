@@ -19,7 +19,6 @@ public partial class Main : Control {
         LoadProjectMenuView();
 
         InputActions.RegisterActions();
-        GetWindow().Mode = Window.ModeEnum.Maximized;
 
         var arguments = new CliArguments();
         var projectPath = arguments.ProjectPath;
@@ -33,6 +32,7 @@ public partial class Main : Control {
     private void LoadProjectMenuView() {
         ClearChildren();
 
+        GetWindow().Mode = Window.ModeEnum.Windowed;
         GetWindow().Title = "DemonCastle";
         ProjectSelectionMenu projectSelectionMenu;
         AddChild(projectSelectionMenu = new ProjectSelectionMenu());
@@ -43,6 +43,7 @@ public partial class Main : Control {
     protected void LoadPlayProjectView(ProjectResources resources, ProjectInfo project) {
         ClearChildren();
 
+        GetWindow().Mode = Window.ModeEnum.Maximized;
         GetWindow().Title = $"DemonCastle - {project.Name}";
         GameRunner gameRunner;
         AddChild(gameRunner = new GameRunner(resources, project));
@@ -52,6 +53,7 @@ public partial class Main : Control {
     private void LoadEditProjectView(ProjectResources resources, ProjectInfo project) {
         ClearChildren();
 
+        GetWindow().Mode = Window.ModeEnum.Maximized;
         GetWindow().Title = $"DemonCastle - {project.Name}";
         var projectPreferences = LoadProjectPreferences(resources);
         AddChild(EditorSpace = new EditorSpace(resources, project, projectPreferences));
