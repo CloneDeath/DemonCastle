@@ -14,7 +14,7 @@ To go on a brief tangent: Godot is written in the languge C++, which must be com
 
 I appologize... back on track: To build Demon Castle, one must merely follow these steps, in the order presented:
 
-1. Acquire and install the .NET version of `4.1.1-stable`. It can be found [here](https://godotengine.org/download/archive/4.1.1-stable/).
+1. Acquire and install the .NET version of `4.2.1-stable`. It can be found [here](https://godotengine.org/download/archive/4.2.1-stable/).
 
 2. Clone (or Download) this Demon Castle repository.
 
