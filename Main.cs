@@ -5,6 +5,7 @@ using DemonCastle.Game;
 using DemonCastle.Game.SetupScreen;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
+using DemonCastle.ProjectSelection;
 using Godot;
 
 namespace DemonCastle;
@@ -36,7 +37,8 @@ public partial class Main : Control {
         GetWindow().Title = "DemonCastle";
         ProjectSelectionMenu projectSelectionMenu;
         AddChild(projectSelectionMenu = new ProjectSelectionMenu());
-        projectSelectionMenu.ProjectLoaded += LoadPlayProjectView;
+        projectSelectionMenu.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect, margin: 5);
+        projectSelectionMenu.ProjectRun += LoadPlayProjectView;
         projectSelectionMenu.ProjectEdit += LoadEditProjectView;
     }
 

@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DemonCastle.ProjectFiles;
+using DemonCastle.ProjectFiles.Projects;
 
-namespace DemonCastle.ProjectFiles.Projects;
+namespace DemonCastle;
 
-public class LocalProjectList {
-	protected static string GodotPath => "user://ProjectList.json";
-	protected static string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
+public static class LocalProjectList {
+	private static string GodotPath => "user://ProjectList.json";
+	private static string GlobalPath => Godot.ProjectSettings.GlobalizePath(GodotPath);
 
-	protected static ProjectListFile GetProjectList() {
+	private static ProjectListFile GetProjectList() {
 		if (!File.Exists(GlobalPath)) return new ProjectListFile();
 
 		var contents = File.ReadAllText(GlobalPath);
