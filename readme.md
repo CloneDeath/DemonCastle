@@ -10,11 +10,11 @@ With Demon Castle, anyone can make entire worlds for others to discover and expl
 
 Demon Castle is built using an artefact known as [Godot](https://godotengine.org/). Godot is the basis of Demon Castle. As such, their essense is the same; it is both the editor and the player. The Godot editor is created using Godot.
 
-To go on a brief tangent: Godot is written in the languge C++, which must be compiled. Those compilers are written in C++, which are compiled by themselves. "It is turtles, all the way down..."
+To go on a brief tangent: Godot is written in the languge C++, which must be compiled. Those compilers are written in C++, which are they themselves compiled by an earlier version of themselves, if not a different compiler, still written in C++, etc and so forth. "It is turtles, all the way down..."
 
 I appologize... back on track: To build Demon Castle, one must merely follow these steps, in the order presented:
 
-1. Acquire and install the .NET version of `4.2.1-stable`. It can be found [here](https://godotengine.org/download/archive/4.2.1-stable/).
+1. Acquire and install the .NET version of Godot `4.2.1-stable`. It can be found [here](https://godotengine.org/download/archive/4.2.1-stable/).
 
 2. Clone (or Download) this Demon Castle repository.
 
@@ -22,3 +22,4 @@ I appologize... back on track: To build Demon Castle, one must merely follow the
 
 4. Open the "DemonCastle" project in Godot, and click "Run Project (F5)" in the top right. This will build and launch Demon Castle.
 
+# Chapter 3 - 
