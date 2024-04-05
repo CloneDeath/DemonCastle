@@ -19,6 +19,7 @@ public partial class ProjectTopBar : HBoxContainer {
 	protected FileDialog OpenFolderDialog { get; }
 	protected FileDialog OpenFileDialog { get; }
 	protected AcceptDialog ErrorPopup { get; }
+	protected AcceptDialog InfoPopup { get; }
 
 	public ProjectTopBar() {
 		Name = nameof(ProjectTopBar);
@@ -60,6 +61,7 @@ public partial class ProjectTopBar : HBoxContainer {
 		OpenFileDialog.FileSelected += ImportProject;
 
 		AddChild(ErrorPopup = new AcceptDialog { Title = "Error" });
+		AddChild(InfoPopup = new AcceptDialog { Title = "Info" });
 	}
 
 	private void NewProjectButton_OnPressed() {
@@ -92,15 +94,19 @@ public partial class ProjectTopBar : HBoxContainer {
 					throw new Exception("Folder must be empty.");
 				}
 
+				InfoPopup.DialogText = "Downloading Sample Project...";
+				InfoPopup.Popup();
 				var projectWithResources = await sample.DownloadProject(dir);
+				InfoPopup.Hide();
 
 				LocalProjectList.AddProject(projectWithResources.Project.FilePath);
 				ReloadProjects?.Invoke();
 				ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
 			}
 			catch (Exception ex) {
+				InfoPopup.Hide();
 				ErrorPopup.DialogText = ex.Message;
-				ErrorPopup.Show();
+				ErrorPopup.Popup();
 			}
 			finally {
 				sampleFolderDialog.QueueFree();
