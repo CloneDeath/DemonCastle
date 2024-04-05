@@ -25,13 +25,52 @@ public class SampleProject {
 		Url = url;
 	}
 
-	public async Task DownloadProject(string destination) {
+	public async Task<ProjectWithResources> DownloadProject(string destination) {
+		var zipFile = await DownloadRepoAsZipFile();
+		var unZipDir = UnzipFile(zipFile);
+		File.Delete(zipFile);
+
+		// at this point, unZipDir contains a single folder, named like 'PixelPlatformerExample-master'.
+		// we need to copy the contents of that folder to the destination folder
+		var subDir = GetFirstSubDirIn(unZipDir);
+		CopyAllFilesFromTo(subDir, destination);
+
+		var projectFilePath = Path.GetFullPath(Path.Combine(destination, ProjectFile));
+		var resources = new ProjectResources(Path.GetDirectoryName(projectFilePath) ?? throw new DirectoryNotFoundException());
+		var project = resources.GetProject(projectFilePath);
+		return new ProjectWithResources(resources, project);
+	}
+
+	private async Task<string> DownloadRepoAsZipFile() {
 		var zipFile = Path.GetTempFileName();
-		using (var httpClient = new HttpClient()) {
-			var responseBytes = await httpClient.GetByteArrayAsync(Url);
-			await File.WriteAllBytesAsync(zipFile, responseBytes);
-		}
-		ZipFile.ExtractToDirectory(zipFile, destination);
+		using var httpClient = new HttpClient();
+		var responseBytes = await httpClient.GetByteArrayAsync(Url);
+		await File.WriteAllBytesAsync(zipFile, responseBytes);
+		return zipFile;
+	}
+
+	private static string UnzipFile(string zipFile) {
+		var unZipDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+		ZipFile.ExtractToDirectory(zipFile, unZipDir);
+		return unZipDir;
+	}
+
+	private static string GetFirstSubDirIn(string dir) {
+		var subDirs = Directory.EnumerateDirectories(dir);
+		return subDirs.First();
+	}
+
+	private static void CopyAllFilesFromTo(string source, string destination) {
+		var sourceDir = Directory.CreateDirectory(source);
+		var destDir = Directory.CreateDirectory(destination);
+		CopyFilesRecursively(sourceDir, destDir);
+	}
+
+	public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target) {
+		foreach (var dir in source.GetDirectories())
+			CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+		foreach (var file in source.GetFiles())
+			file.CopyTo(Path.Combine(target.FullName, file.Name));
 	}
 }
 

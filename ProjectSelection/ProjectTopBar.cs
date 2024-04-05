@@ -12,9 +12,10 @@ public partial class ProjectTopBar : HBoxContainer {
 
 	protected Button NewProjectButton { get; }
 	protected Button ImportButton { get; }
+	protected MenuButton SampleButton { get; }
 
-	protected FileDialog OpenFileDialog { get; }
 	protected FileDialog OpenFolderDialog { get; }
+	protected FileDialog OpenFileDialog { get; }
 	protected AcceptDialog ErrorPopup { get; }
 
 	public ProjectTopBar() {
@@ -25,6 +26,15 @@ public partial class ProjectTopBar : HBoxContainer {
 
 		AddChild(ImportButton = new Button { Text = "Import Project" });
 		ImportButton.Pressed += ImportButton_OnPressed;
+
+		AddChild(SampleButton = new MenuButton {
+			Text = "New Project from Sample",
+			Flat = false
+		});
+		foreach (var sampleProject in ProjectManager.SampleProjects) {
+			SampleButton.GetPopup().AddItem(sampleProject.Name);
+		}
+		SampleButton.GetPopup().IdPressed += SampleButton_OnIdPressed;
 
 		AddChild(OpenFolderDialog = new FileDialog {
 			FileMode = FileDialog.FileModeEnum.OpenDir,
@@ -58,6 +68,34 @@ public partial class ProjectTopBar : HBoxContainer {
 		OpenFileDialog.Popup();
 	}
 
+	private void SampleButton_OnIdPressed(long id) {
+		if (id >= ProjectManager.SampleProjects.Count) {
+			throw new IndexOutOfRangeException();
+		}
+
+		var sample = ProjectManager.SampleProjects[(int)id];
+
+		FileDialog sampleFolderDialog;
+		AddChild(sampleFolderDialog = new FileDialog {
+			FileMode = FileDialog.FileModeEnum.OpenDir,
+			Exclusive = true,
+			Access = FileDialog.AccessEnum.Filesystem,
+			Size = new Vector2I(800, 600),
+			Unresizable = false,
+			Title = "New Sample Project"
+		});
+		sampleFolderDialog.DirSelected += async dir => {
+			var projectWithResources = await sample.DownloadProject(dir);
+
+			LocalProjectList.AddProject(projectWithResources.Project.FilePath);
+			ReloadProjects?.Invoke();
+			ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
+
+			sampleFolderDialog.QueueFree();
+		};
+		sampleFolderDialog.Popup();
+	}
+
 	protected void CreateProject(string folderPath) {
 		ProjectWithResources projectWithResources;
 		try {
@@ -72,7 +110,6 @@ public partial class ProjectTopBar : HBoxContainer {
 		ReloadProjects?.Invoke();
 		ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
 	}
-
 
 	protected void ImportProject(string filePath) {
 		ProjectManager.ImportProject(filePath);
