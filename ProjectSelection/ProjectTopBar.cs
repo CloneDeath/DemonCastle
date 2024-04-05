@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Linq;
 using DemonCastle.ProjectFiles.Projects;
 using DemonCastle.ProjectFiles.Projects.Data;
 using DemonCastle.ProjectFiles.Projects.Resources;
@@ -85,13 +87,24 @@ public partial class ProjectTopBar : HBoxContainer {
 			Title = "New Sample Project"
 		});
 		sampleFolderDialog.DirSelected += async dir => {
-			var projectWithResources = await sample.DownloadProject(dir);
+			try {
+				if (Directory.EnumerateFiles(dir).Any() || Directory.EnumerateDirectories(dir).Any()) {
+					throw new Exception("Folder must be empty.");
+				}
 
-			LocalProjectList.AddProject(projectWithResources.Project.FilePath);
-			ReloadProjects?.Invoke();
-			ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
+				var projectWithResources = await sample.DownloadProject(dir);
 
-			sampleFolderDialog.QueueFree();
+				LocalProjectList.AddProject(projectWithResources.Project.FilePath);
+				ReloadProjects?.Invoke();
+				ProjectEdit?.Invoke(projectWithResources.Resources, projectWithResources.Project);
+			}
+			catch (Exception ex) {
+				ErrorPopup.DialogText = ex.Message;
+				ErrorPopup.Show();
+			}
+			finally {
+				sampleFolderDialog.QueueFree();
+			}
 		};
 		sampleFolderDialog.Popup();
 	}
