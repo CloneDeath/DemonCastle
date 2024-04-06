@@ -24,7 +24,7 @@ public abstract partial class ActionCollectionEditor<TInfo> : VBoxContainer {
 		if (_actionSet != null) _actionSet.CollectionChanged -= ActionSet_OnCollectionChanged;
 	}
 
-	public virtual void Load(IEnumerableInfo<TInfo>? actionSet) {
+	public void Load(IEnumerableInfo<TInfo>? actionSet) {
 		if (_actionSet != null) _actionSet.CollectionChanged -= ActionSet_OnCollectionChanged;
 		_actionSet = actionSet;
 		if (_actionSet != null) _actionSet.CollectionChanged += ActionSet_OnCollectionChanged;

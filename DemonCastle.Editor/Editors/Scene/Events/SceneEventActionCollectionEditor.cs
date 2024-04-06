@@ -13,7 +13,7 @@ public partial class SceneEventActionCollectionEditor : ActionCollectionEditor<S
 		_project = project;
 		Name = nameof(SceneEventActionCollectionEditor);
 
-		_actionSet = then;
+		Load(then);
 	}
 
 	protected override void AddAction(SceneEventActionInfo action) {
