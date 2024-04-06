@@ -27,7 +27,7 @@ public partial class LabelElementView : Label {
 	public override void _ExitTree() {
 		base._ExitTree();
 		_element.PropertyChanged -= Element_OnPropertyChanged;
-		_game.Player.PropertyChanged -= Element_OnPropertyChanged;
+		_game.Player.PropertyChanged -= Player_OnPropertyChanged;
 	}
 
 	private void Player_OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
