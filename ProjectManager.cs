@@ -80,6 +80,8 @@ public class ProjectManager {
 			"https://github.com/CloneDeath/DevilCastleDracula1/archive/refs/heads/master.zip"),
 		new SampleProject("Pixel Platformer Example", "PixelPlatformer.dcp",
 			"https://github.com/CloneDeath/PixelPlatformerExample/archive/refs/heads/master.zip"),
+		new SampleProject("Two Worlds Theory", "TwoWorldsTheory.dcp",
+			"https://github.com/CloneDeath/TwoWorldsTheory/archive/refs/heads/master.zip"),
 		new SampleProject("Harmony of Despair", "HarmonyOfDespair.dcp",
 			"https://github.com/CloneDeath/HarmonyOfDespair/archive/refs/heads/master.zip")
 	};
