@@ -1,0 +1,155 @@
+name: Deploy Game
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+env:
+  BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IS_MASTER: ${{contains(github.ref, 'master')}}
+  #DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
+  PROJECT_NAME: "Demon Castle"
+  ITCH_PROJECT_NAME: "demon-castle"
+  ITCH_USERNAME: "clonedeath"
+
+jobs:
+  BuildAndPublish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download + Authorize Godot
+        run: |
+          curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/3.2.3/Godot_v3.2.3-stable_linux_headless.64.zip
+          unzip godot.zip
+          mv Godot_v3.2.3-stable_linux_headless.64 godot
+          ls
+          chmod +x godot
+      - name: Download Export Templates
+        run: |
+          curl -L -o export_templates.zip https://downloads.tuxfamily.org/godotengine/3.2.3/Godot_v3.2.3-stable_export_templates.tpz
+          unzip export_templates.zip
+      - name: Install Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/templates/3.2.3.stable
+          mv ./templates/* ~/.local/share/godot/templates/3.2.3.stable
+      - name: Make Exports Folder
+        run: |
+          mkdir exports
+      - name: Export Windows Port
+        run: |
+          mkdir ./exports/windows
+          ./godot --path ./project.godot --export "Windows" ./exports/windows/$PROJECT_NAME.exe
+      - name: Export Mac Port
+        run: |
+          mkdir ./exports/mac
+          ./godot --path ./project.godot --export "Mac" ./exports/mac/$PROJECT_NAME.zip
+      - name: Export Linux Port
+        run: |
+          mkdir ./exports/linux
+          ./godot --path ./project.godot --export "Linux" ./exports/linux/$PROJECT_NAME.x86_64
+      - name: Add Version Number to Exports
+        run: |
+          cp ./VERSION ./exports/VERSION
+      - name: Publish Export Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: exports
+          path: exports
+  CreateNewGithubRelease:
+    needs: BuildAndPublish
+    if: ${{ contains(github.ref, 'master') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download Exports
+        uses: actions/download-artifact@v2
+        with:
+          name: exports
+          path: exports
+      - name: Zip Exports
+        run: zip -r exports.zip exports
+      - name: Read Version Number
+        id: version_number
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./VERSION
+      - name: Test Release Variables
+        run: |
+          echo "Version Number $VERSION_NUMBER"
+          echo "Commit Message $COMMIT_MESSAGE"
+          echo "Project Name $PROJECT_NAME"
+        env:
+          VERSION_NUMBER: ${{ steps.version_number.outputs.content }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+      - name: Create New Release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          tag_name: ${{ steps.version_number.outputs.content }}
+          release_name: Release ${{ steps.version_number.outputs.content }}
+          body: ${{ github.event.head_commit.message }}
+          draft: false
+          prerelease: false
+      - name: Upload Exports
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./exports.zip
+          asset_name: exports.zip
+          asset_content_type: application/zip
+  PushExportsToItch:
+    needs: BuildAndPublish
+    if: ${{ contains(github.ref, 'master') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Exports
+        uses: actions/download-artifact@v2
+        with:
+          name: exports
+          path: exports
+      - name: Download + Authorize Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+          ./butler -V
+      - name: Login To Butler
+        run: ./butler login
+      - name: Push Windows Export To Itch
+        run: ./butler push ./exports/windows/$PROJECT_NAME.exe $ITCH_USERNAME/$ITCH_PROJECT_NAME:win --userversion-file ./exports/VERSION
+      - name: Push Mac Export To Itch
+        run: ./butler push ./exports/mac/$PROJECT_NAME.zip $ITCH_USERNAME/$ITCH_PROJECT_NAME:mac --userversion-file ./exports/VERSION
+      - name: Push Linux Export To Itch
+        run: ./butler push ./exports/linux/$PROJECT_NAME.x86_64 $ITCH_USERNAME/$ITCH_PROJECT_NAME:linux --userversion-file ./exports/VERSION
+#  AlertPipelineResult:
+#    needs: [BuildAndPublish, CreateNewGithubRelease, PushExportsToItch]
+#    if: ${{ always() }}
+#    env:
+#      DID_PREV_JOBS_SUCCEED: ${{ contains(needs.BuildAndPublish.result, 'success' ) && contains(needs.CreateNewGithubRelease.result, 'success' ) && contains(needs.PushExportsToItch.result, 'success' ) }}
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Send Discord Success Message
+#        if: ${{ env.IS_MASTER && env.DID_PREV_JOBS_SUCCEED == 'true' }}
+#        run: |
+#          curl --location --request POST $DISCORD_WEBHOOK \
+#            --header 'Content-Type: application/json' \
+#            --data-raw "{\"content\": \"$PROJECT_NAME has successfully released and deployed!\"}"
+#      - name: Send Discord Failure Message
+#        if: ${{ env.IS_MASTER && env.DID_PREV_JOBS_SUCCEED != 'true' }}
+#        run: |
+#          curl --location --request POST $DISCORD_WEBHOOK \
+#            --header 'Content-Type: application/json' \
+#            --data-raw "{\"content\": \"$PROJECT_NAME release and/or deployment has failed!\"}"
