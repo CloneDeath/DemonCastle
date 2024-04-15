@@ -29,7 +29,7 @@ jobs:
         run: |
           curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64.zip
           unzip godot.zip
-          mv Godot_v${GODOT_VERSION}-stable_mono_linux.x86_64 godot
+          mv Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64 godot
           ls
           chmod +x godot
       - name: Download Export Templates
