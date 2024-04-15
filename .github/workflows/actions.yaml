@@ -11,6 +11,7 @@ env:
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   IS_MASTER: ${{contains(github.ref, 'master')}}
+  GODOT_VERSION: "4.2.1"
   #DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
   PROJECT_NAME: "Demon Castle"
   ITCH_PROJECT_NAME: "demon-castle"
@@ -26,19 +27,19 @@ jobs:
           fetch-depth: 0
       - name: Download + Authorize Godot
         run: |
-          curl -L -o godot.zip https://downloads.tuxfamily.org/godotengine/3.2.3/Godot_v3.2.3-stable_linux_headless.64.zip
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64.zip
           unzip godot.zip
-          mv Godot_v3.2.3-stable_linux_headless.64 godot
+          mv Godot_v${GODOT_VERSION}-stable_mono_linux.x86_64 godot
           ls
           chmod +x godot
       - name: Download Export Templates
         run: |
-          curl -L -o export_templates.zip https://downloads.tuxfamily.org/godotengine/3.2.3/Godot_v3.2.3-stable_export_templates.tpz
+          curl -L -o export_templates.zip https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_export_templates.tpz
           unzip export_templates.zip
       - name: Install Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/templates/3.2.3.stable
-          mv ./templates/* ~/.local/share/godot/templates/3.2.3.stable
+          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+          mv ./templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Make Exports Folder
         run: |
           mkdir exports
