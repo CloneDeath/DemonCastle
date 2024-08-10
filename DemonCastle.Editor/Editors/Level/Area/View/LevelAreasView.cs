@@ -103,8 +103,7 @@ public partial class LevelAreasView : ControlView<ExpandingControl> {
 	}
 
 	public void SelectArea(AreaInfo area) {
-		if (!_areaMap.ContainsKey(area)) return;
-		var areaView = _areaMap[area];
+		if (!_areaMap.TryGetValue(area, out var areaView)) return;
 		areaView.IsSelected = true;
 
 		var region = area.Region.ToPixelRegionInLevel();
